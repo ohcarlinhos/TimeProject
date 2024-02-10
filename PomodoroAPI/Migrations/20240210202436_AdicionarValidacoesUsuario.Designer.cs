@@ -12,8 +12,8 @@ using PomodoroAPI.Data;
 namespace PomodoroAPI.Migrations
 {
     [DbContext(typeof(ProjetoContext))]
-    [Migration("20240210193945_Initial")]
-    partial class Initial
+    [Migration("20240210202436_AdicionarValidacoesUsuario")]
+    partial class AdicionarValidacoesUsuario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,8 @@ namespace PomodoroAPI.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Categorias");
                 });
@@ -71,6 +73,8 @@ namespace PomodoroAPI.Migrations
 
                     b.HasIndex("TempoFocadoId");
 
+                    b.HasIndex("UsuarioId");
+
                     b.ToTable("EventosDeFoco");
                 });
 
@@ -96,6 +100,10 @@ namespace PomodoroAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("UsuarioId");
+
                     b.ToTable("TemposFocado");
                 });
 
@@ -113,7 +121,8 @@ namespace PomodoroAPI.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -124,6 +133,17 @@ namespace PomodoroAPI.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("PomodoroAPI.Models.Categoria", b =>
+                {
+                    b.HasOne("PomodoroAPI.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("PomodoroAPI.Models.EventoDeFoco", b =>
                 {
                     b.HasOne("PomodoroAPI.Models.TempoFocado", null)
@@ -131,6 +151,33 @@ namespace PomodoroAPI.Migrations
                         .HasForeignKey("TempoFocadoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("PomodoroAPI.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>
+                {
+                    b.HasOne("PomodoroAPI.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PomodoroAPI.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>

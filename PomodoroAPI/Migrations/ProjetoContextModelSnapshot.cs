@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using PomodoroAPI.Context;
+using PomodoroAPI.Data;
 
 #nullable disable
 
@@ -31,6 +31,7 @@ namespace PomodoroAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Nome")
+                        .HasMaxLength(120)
                         .HasColumnType("integer");
 
                     b.Property<int>("UsuarioId")
@@ -40,7 +41,7 @@ namespace PomodoroAPI.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("categorias");
                 });
 
             modelBuilder.Entity("PomodoroAPI.Models.EventoDeFoco", b =>
@@ -72,7 +73,7 @@ namespace PomodoroAPI.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("EventosDeFoco");
+                    b.ToTable("eventos_de_foco");
                 });
 
             modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>
@@ -90,7 +91,9 @@ namespace PomodoroAPI.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("integer");
@@ -101,7 +104,7 @@ namespace PomodoroAPI.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("TemposFocado");
+                    b.ToTable("tempos_focado");
                 });
 
             modelBuilder.Entity("PomodoroAPI.Models.Usuario", b =>
@@ -118,15 +121,17 @@ namespace PomodoroAPI.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("usuarios");
                 });
 
             modelBuilder.Entity("PomodoroAPI.Models.Categoria", b =>

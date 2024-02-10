@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Models;
 
-namespace PomodoroAPI.Context;
+namespace PomodoroAPI.Data;
 
 public class ProjetoContext : DbContext
 {

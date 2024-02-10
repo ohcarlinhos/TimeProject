@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PomodoroAPI.Context;
+using PomodoroAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
