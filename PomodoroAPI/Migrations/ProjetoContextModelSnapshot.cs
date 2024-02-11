@@ -107,7 +107,7 @@ namespace PomodoroAPI.Migrations
                     b.ToTable("tempos_focado");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.Usuario", b =>
+            modelBuilder.Entity("PomodoroAPI.Modules.Usuario.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,8 @@ namespace PomodoroAPI.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -131,12 +132,15 @@ namespace PomodoroAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("usuarios");
                 });
 
             modelBuilder.Entity("PomodoroAPI.Models.Categoria", b =>
                 {
-                    b.HasOne("PomodoroAPI.Models.Usuario", "Usuario")
+                    b.HasOne("PomodoroAPI.Modules.Usuario.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -153,7 +157,7 @@ namespace PomodoroAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PomodoroAPI.Models.Usuario", "Usuario")
+                    b.HasOne("PomodoroAPI.Modules.Usuario.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -170,7 +174,7 @@ namespace PomodoroAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PomodoroAPI.Models.Usuario", "Usuario")
+                    b.HasOne("PomodoroAPI.Modules.Usuario.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)

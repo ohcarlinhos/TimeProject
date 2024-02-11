@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Models;
 

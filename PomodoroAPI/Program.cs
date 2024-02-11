@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
-using PomodoroAPI.Repositories;
-using PomodoroAPI.Repositories.Interfaces;
+
+using PomodoroAPI.Modules.Usuario.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Models;
+using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Data;
 
