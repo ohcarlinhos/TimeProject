@@ -13,6 +13,6 @@ namespace PomodoroAPI.Models
         [Required, EmailAddress]
         public string Email { get; set; }
         [Required, MinLength(8), MaxLength(32)]
-        public string Senha { get; set; }
+        public string? Senha { get; set; }
     }
 }
