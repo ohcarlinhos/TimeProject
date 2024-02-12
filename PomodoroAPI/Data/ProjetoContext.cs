@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PomodoroAPI.Models;
 using PomodoroAPI.Modules.Usuario.Models;
+using PomodoroAPI.Modules.RegistroDeTempo.Models;
+using PomodoroAPI.Modules.Categoria.Models;
 
 namespace PomodoroAPI.Data;
 
@@ -10,8 +11,8 @@ public class ProjetoContext : DbContext
     {
     }
 
-    public DbSet<Usuario> Usuarios { get; set; }
-    public DbSet<TempoFocado> TemposFocado { get; set; }
-    public DbSet<EventoDeFoco> EventosDeFoco { get; set; }
-    public DbSet<Categoria> Categorias { get; set; }
+    public DbSet<UsuarioModel> Usuarios { get; set; }
+    public DbSet<RegistroDeTempoModel> RegistrosDeTempo { get; set; }
+    public DbSet<EventoModel> Eventos { get; set; }
+    public DbSet<CategoriaModel> Categorias { get; set; }
 }
