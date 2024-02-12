@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
-
 using PomodoroAPI.Modules.Usuario.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,9 +20,11 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseExceptionHandler("/error-development");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else app.UseExceptionHandler("/error");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
