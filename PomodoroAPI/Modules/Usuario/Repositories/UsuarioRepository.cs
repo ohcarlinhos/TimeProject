@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Modules.Usuario.Repositories
 {
     public partial class UsuarioRepository : IUsuarioRepository
     {
-        public async Task<Models.Usuario> Adicionar(Models.Usuario usuario)
+        public async Task<UsuarioModel> Adicionar(UsuarioModel usuario)
         {
             await ValidaEmailDisponivel(usuario.Email);
             _dbContext.Usuarios.Add(usuario);
@@ -12,7 +13,7 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
             return usuario;
         }
 
-        public async Task<Models.Usuario> Atualizar(int id, Models.Usuario usuario)
+        public async Task<UsuarioModel> Atualizar(int id, UsuarioModel usuario)
         {
             await ValidaEmailDisponivel(usuario.Email, id);
             
@@ -26,7 +27,7 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
             _dbContext.Usuarios.Update(usuarioDb);
             await _dbContext.SaveChangesAsync();
 
-            return usuario;
+            return usuarioDb;
         }
 
         public async Task<bool> Apagar(int id)

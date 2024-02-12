@@ -1,9 +1,11 @@
-﻿namespace PomodoroAPI.Modules.Usuario.Repositories
+﻿using PomodoroAPI.Modules.Usuario.Models;
+
+namespace PomodoroAPI.Modules.Usuario.Repositories
 {
     public interface IUsuarioRepository
     {
-        Task<Models.Usuario> Adicionar (Models.Usuario usuario);
-        Task<Models.Usuario> Atualizar (int id, Models.Usuario usuario);
+        Task<UsuarioModel> Adicionar(UsuarioModel usuario);
+        Task<UsuarioModel> Atualizar(int id, UsuarioModel usuario);
         Task<bool> Apagar(int id);
     }
 }

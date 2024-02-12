@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
+using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Modules.Usuario.Repositories;
 
@@ -12,12 +13,12 @@ public partial class UsuarioRepository
         _dbContext = dbContext;
     }
 
-    private async Task<Models.Usuario?> BuscarPorId(int id)
+    private async Task<UsuarioModel?> BuscarPorId(int id)
     {
         return await _dbContext.Usuarios.FirstOrDefaultAsync(i => i.Id == id);
     }
 
-    private async Task<Models.Usuario> BuscaPorIdOuErro(int id)
+    private async Task<UsuarioModel> BuscaPorIdOuErro(int id)
     {
         return await BuscarPorId(id)
                ?? throw new Exception($"Usuário com id \"{id}\" não encontrado.");
