@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
+using PomodoroAPI.Modules.Categoria.Repositories;
 using PomodoroAPI.Modules.Usuario.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjetoContext>(
 );
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
 var app = builder.Build();
 
