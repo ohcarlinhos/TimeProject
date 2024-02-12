@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using PomodoroAPI.Enums;
+using PomodoroAPI.Modules.RegistroDeTempo.Enums;
 using PomodoroAPI.Modules.Usuario.Models;
 
-namespace PomodoroAPI.Models;
+namespace PomodoroAPI.Modules.RegistroDeTempo.Models;
 
-[Table("eventos_de_foco")]
-public class EventoDeFoco
+[Table("eventos_dos_registros")]
+public class EventoModel
 {
     public int Id { get; set; }
     public int UsuarioId { get; set; }
-    public virtual Usuario? Usuario { get; set; }
+    public virtual UsuarioModel? Usuario { get; set; }
     public int TempoFocadoId { get; set; }
     public DateTime DataDeRegistro { get; set; }
-    public TipoDeEventoDeFoco Tipo { get; set; }
+    public TipoDeEvento Tipo { get; set; }
     [Required]
     public int Posicao { get; set; }
 }
