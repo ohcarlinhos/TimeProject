@@ -15,9 +15,21 @@ public class UsuarioController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult<Models.Usuario>> Adicionar([FromBody] Models.Usuario usuario)
+    public async Task<ActionResult<Models.Usuario>> Adicionar([FromBody] Models.Usuario usuarioBody)
     {
-        await _usuarioRepository.Adicionar(usuario);
-        return Ok(usuario);
+        return Ok(await _usuarioRepository.Adicionar(usuarioBody));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<Models.Usuario>> Atualizar(int id, [FromBody] Models.Usuario usuarioBody)
+    {
+        return Ok(await _usuarioRepository.Atualizar(id, usuarioBody));
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Apagar(int id)
+    {
+        await _usuarioRepository.Apagar(id);
+        return NoContent();
     }
 }

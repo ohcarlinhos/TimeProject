@@ -48,13 +48,14 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
             return usuario;
         }
 
-        public async void Apagar(int id)
+        public async Task<bool> Apagar(int id)
         {
             var usuario = await BuscarPorId(id)
                           ?? throw new Exception($"Usuário com id \"{id}\" não encontrado.");
 
             _dbContext.Usuarios.Remove(usuario);
             await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

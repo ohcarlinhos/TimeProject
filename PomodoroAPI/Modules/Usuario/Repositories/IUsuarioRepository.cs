@@ -4,6 +4,6 @@
     {
         Task<Models.Usuario> Adicionar (Models.Usuario usuario);
         Task<Models.Usuario> Atualizar (int id, Models.Usuario usuario);
-        void Apagar(int id);
+        Task<bool> Apagar(int id);
     }
 }
