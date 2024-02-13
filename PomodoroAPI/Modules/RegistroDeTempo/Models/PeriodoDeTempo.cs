@@ -1,0 +1,18 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using PomodoroAPI.Modules.Usuario.Models;
+
+namespace PomodoroAPI.Modules.RegistroDeTempo.Models;
+
+[Table("periodos_de_tempo")]
+public class PeriodoDeTempo
+{
+    [Key] public int Id { get; set; }
+    [Required] public int UsuarioId { get; set; }
+    [Required] public int RegistroDeTempoId { get; set; }
+    [Required] public DateTime Inicio { get; set; }
+    [Required] public DateTime Fim { get; set; }
+
+    public virtual UsuarioModel? Usuario { get; set; }
+    public virtual RegistroDeTempoModel? RegistroDeTempo { get; set; }
+}
