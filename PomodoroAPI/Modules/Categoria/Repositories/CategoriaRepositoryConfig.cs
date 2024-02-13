@@ -32,7 +32,7 @@ public partial class CategoriaRepository
         return await _dbContext.Categorias.Where(c => c.Nome == nome).FirstOrDefaultAsync();
     }
 
-    private async Task ValidaNomeDisponivel(string nome)
+    private async Task ValidarNomeDisponivel(string nome)
     {
         if (await BuscarPorNome(nome) != null)
             throw new Exception($"Já existe uma categoria com o nome \"{nome}\"");

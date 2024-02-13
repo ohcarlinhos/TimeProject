@@ -11,7 +11,7 @@ public partial class CategoriaRepository : ICategoriaRepository
 
     public async Task<CategoriaModel> Adicionar(CategoriaModel categoria)
     {
-        await ValidaNomeDisponivel(categoria.Nome);
+        await ValidarNomeDisponivel(categoria.Nome);
         _dbContext.Categorias.Add(categoria);
         await _dbContext.SaveChangesAsync();
         return categoria;
@@ -19,7 +19,7 @@ public partial class CategoriaRepository : ICategoriaRepository
 
     public async Task<CategoriaModel> Atualizar(int id, CategoriaModel categoria)
     {
-        await ValidaNomeDisponivel(categoria.Nome);
+        await ValidarNomeDisponivel(categoria.Nome);
         var categoriaDb = await BuscarPorIdOuErro(id);
         categoriaDb.Nome = categoria.Nome;
 
