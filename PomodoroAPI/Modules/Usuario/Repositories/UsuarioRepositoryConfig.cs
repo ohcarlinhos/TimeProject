@@ -24,7 +24,7 @@ public partial class UsuarioRepository
                ?? throw new Exception($"Usuário com id \"{id}\" não encontrado.");
     }
 
-    private async Task ValidaEmailDisponivel(string email)
+    private async Task ValidarEmailDisponivel(string email)
     {
         var usuarioDb = await _dbContext.Usuarios
             .Where(u => u.Email == email)
@@ -34,7 +34,7 @@ public partial class UsuarioRepository
             throw new Exception($"Já existe um usuário utilizando o email {email}");
     }
 
-    private async Task ValidaEmailDisponivel(string email, int usuarioId)
+    private async Task ValidarEmailDisponivel(string email, int usuarioId)
     {
         var usuarioDb = await _dbContext.Usuarios
             .Where(u => u.Email == email)

@@ -7,7 +7,7 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
     {
         public async Task<UsuarioModel> Adicionar(UsuarioModel usuario)
         {
-            await ValidaEmailDisponivel(usuario.Email);
+            await ValidarEmailDisponivel(usuario.Email);
             _dbContext.Usuarios.Add(usuario);
             await _dbContext.SaveChangesAsync();
             return usuario;
@@ -15,7 +15,7 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
 
         public async Task<UsuarioModel> Atualizar(int id, UsuarioModel usuario)
         {
-            await ValidaEmailDisponivel(usuario.Email, id);
+            await ValidarEmailDisponivel(usuario.Email, id);
             
             var usuarioDb = await BuscaPorIdOuErro(id);
             usuarioDb.Nome = usuario.Nome;
