@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PomodoroAPI.Data;
@@ -11,9 +12,11 @@ using PomodoroAPI.Data;
 namespace PomodoroAPI.Migrations
 {
     [DbContext(typeof(ProjetoContext))]
-    partial class ProjetoContextModelSnapshot : ModelSnapshot
+    [Migration("20240213000404_ModificacaoParaPeriodosDeTempo")]
+    partial class ModificacaoParaPeriodosDeTempo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +61,9 @@ namespace PomodoroAPI.Migrations
 
                     b.Property<DateTime>("Inicio")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Posicao")
+                        .HasColumnType("integer");
 
                     b.Property<int>("RegistroDeTempoId")
                         .HasColumnType("integer");
