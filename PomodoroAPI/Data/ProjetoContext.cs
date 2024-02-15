@@ -13,6 +13,6 @@ public class ProjetoContext : DbContext
 
     public DbSet<UsuarioModel> Usuarios { get; set; }
     public DbSet<RegistroDeTempoModel> RegistrosDeTempo { get; set; }
-    public DbSet<PeriodoDeTempo> PeriodosDeTempo { get; set; }
+    public DbSet<PeriodoDeTempoModel> PeriodosDeTempo { get; set; }
     public DbSet<CategoriaModel> Categorias { get; set; }
 }

@@ -45,7 +45,7 @@ namespace PomodoroAPI.Migrations
                     b.ToTable("categorias");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Modules.RegistroDeTempo.Models.PeriodoDeTempo", b =>
+            modelBuilder.Entity("PomodoroAPI.Modules.RegistroDeTempo.Models.PeriodoDeTempoModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,7 +147,7 @@ namespace PomodoroAPI.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Modules.RegistroDeTempo.Models.PeriodoDeTempo", b =>
+            modelBuilder.Entity("PomodoroAPI.Modules.RegistroDeTempo.Models.PeriodoDeTempoModel", b =>
                 {
                     b.HasOne("PomodoroAPI.Modules.RegistroDeTempo.Models.RegistroDeTempoModel", "RegistroDeTempo")
                         .WithMany("Periodos")
