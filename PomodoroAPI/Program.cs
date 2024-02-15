@@ -1,12 +1,15 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
 using PomodoroAPI.Modules.Categoria.Repositories;
+using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 using PomodoroAPI.Modules.Usuario.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
+// TODO: verificar uma forma de remover "$id" da resposta da API.
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -16,6 +19,8 @@ builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjetoContext>(
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<IRegistroDeTempoRepository, RegistroDeTempoRepository>();
+builder.Services.AddScoped<IPeriodoDeTempoRepository, PeriodoDeTempoRepository>();
 
 var app = builder.Build();
 
