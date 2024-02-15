@@ -1,16 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
+using PomodoroAPI.Modules.Categoria.Repositories;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
+using PomodoroAPI.Modules.Usuario.Repositories;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class RegistroDeTempoRepository
 {
     private readonly ProjetoContext _dbContext;
+    private readonly IUsuarioRepository _usuarioRepository;
+    private readonly ICategoriaRepository _categoriaRepository;
+    private readonly IPeriodoDeTempoRepository _periodoDeTempoRepository;
 
-    public RegistroDeTempoRepository(ProjetoContext dbContext)
+    public RegistroDeTempoRepository(ProjetoContext dbContext, IUsuarioRepository usuarioRepository,
+        ICategoriaRepository categoriaRepository, IPeriodoDeTempoRepository periodoDeTempoRepository)
     {
         _dbContext = dbContext;
+        _usuarioRepository = usuarioRepository;
+        _categoriaRepository = categoriaRepository;
+        _periodoDeTempoRepository = periodoDeTempoRepository;
     }
 
     private async Task<RegistroDeTempoModel?> BuscarPorId(int id)
@@ -20,10 +29,10 @@ public partial class RegistroDeTempoRepository
 
     private async Task<RegistroDeTempoModel> BuscarPorIdOuErro(int id)
     {
-        var categoriaDb = await BuscarPorId(id);
-        if (categoriaDb == null)
-            throw new Exception($"Não foi encontrada um registro de tempo com o id \"{id}\"");
+        var registroDb = await BuscarPorId(id);
+        if (registroDb == null)
+            throw new Exception($"Não foi encontrado um registro de tempo com o id \"{id}\"");
 
-        return categoriaDb;
+        return registroDb;
     }
 }
