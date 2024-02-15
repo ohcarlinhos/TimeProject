@@ -8,4 +8,5 @@ public interface ICategoriaRepository
     Task<CategoriaModel> Adicionar(CategoriaModel categoria);
     Task<CategoriaModel> Atualizar(int id, CategoriaModel categoria);
     Task<bool> Apagar(int id);
+    Task<CategoriaModel> BuscarPorIdOuErro(int id);
 }

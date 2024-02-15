@@ -18,7 +18,7 @@ public partial class UsuarioRepository
         return await _dbContext.Usuarios.FirstOrDefaultAsync(i => i.Id == id);
     }
 
-    private async Task<UsuarioModel> BuscaPorIdOuErro(int id)
+    public async Task<UsuarioModel> BuscarPorIdOuErro(int id)
     {
         return await BuscarPorId(id)
                ?? throw new Exception($"Usuário com id \"{id}\" não encontrado.");

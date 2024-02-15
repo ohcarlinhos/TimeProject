@@ -7,5 +7,6 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
         Task<UsuarioModel> Adicionar(UsuarioModel usuario);
         Task<UsuarioModel> Atualizar(int id, UsuarioModel usuario);
         Task<bool> Apagar(int id);
+        Task<UsuarioModel> BuscarPorIdOuErro(int id);
     }
 }

@@ -17,7 +17,7 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
         {
             await ValidarEmailDisponivel(usuario.Email, id);
             
-            var usuarioDb = await BuscaPorIdOuErro(id);
+            var usuarioDb = await BuscarPorIdOuErro(id);
             usuarioDb.Nome = usuario.Nome;
             usuarioDb.Email = usuario.Email;
 
@@ -32,7 +32,7 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
 
         public async Task<bool> Apagar(int id)
         {
-            var usuarioDb = await BuscaPorIdOuErro(id);
+            var usuarioDb = await BuscarPorIdOuErro(id);
             _dbContext.Usuarios.Remove(usuarioDb);
             await _dbContext.SaveChangesAsync();
             return true;
