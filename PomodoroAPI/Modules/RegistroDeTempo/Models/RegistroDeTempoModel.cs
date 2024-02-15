@@ -15,7 +15,7 @@ public class RegistroDeTempoModel
     [Required, MaxLength(120)] public string? Titulo { get; set; }
 
     [Required] public DateTime DataDoRegistro { get; set; }
-    public PeriodoDeTempo[] Periodos { get; set; }
+    public List<PeriodoDeTempoModel> Periodos { get; set; }
 
     public virtual UsuarioModel? Usuario { get; set; }
     public virtual CategoriaModel? Categoria { get; set; }

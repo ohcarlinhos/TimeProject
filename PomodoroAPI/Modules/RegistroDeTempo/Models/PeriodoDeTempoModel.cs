@@ -5,7 +5,7 @@ using PomodoroAPI.Modules.Usuario.Models;
 namespace PomodoroAPI.Modules.RegistroDeTempo.Models;
 
 [Table("periodos_de_tempo")]
-public class PeriodoDeTempo
+public class PeriodoDeTempoModel
 {
     [Key] public int Id { get; set; }
     [Required] public int UsuarioId { get; set; }
