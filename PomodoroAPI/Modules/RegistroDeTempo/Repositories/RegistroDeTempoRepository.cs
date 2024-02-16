@@ -52,6 +52,7 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
         registroDb.CategoriaId = registro.CategoriaId;
         registroDb.DataDoRegistro = registro.DataDoRegistro;
 
+        // TODO: criar rota de atualizar períodos e adicionar ao registro
         _dbContext.RegistrosDeTempo.Update(registroDb);
         await _dbContext.SaveChangesAsync();
         return registroDb;
