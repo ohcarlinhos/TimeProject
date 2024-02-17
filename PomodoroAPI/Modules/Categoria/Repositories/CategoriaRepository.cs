@@ -4,23 +4,35 @@ namespace PomodoroAPI.Modules.Categoria.Repositories;
 
 public partial class CategoriaRepository : ICategoriaRepository
 {
-    public List<CategoriaModel> Index(int page = 0, int perPage = 12)
+    public List<CategoriaModel> Index(int usuarioId, int page = 0, int perPage = 12)
     {
-        return _dbContext.Categorias.Skip(page * perPage).Take(perPage).ToList();
+        return _dbContext.Categorias
+            .Skip(page * perPage)
+            .Take(perPage)
+            .Where(categoria => categoria.UsuarioId == usuarioId)
+            .ToList();
     }
 
-    public async Task<CategoriaModel> Create(CategoriaModel categoria)
+    public async Task<CategoriaModel> Create(CategoriaViewModel categoria, int usuarioId)
     {
-        await ValidateNomeAvailability(categoria.Nome);
-        _dbContext.Categorias.Add(categoria);
+        await ValidateNomeAvailability(categoria.Nome, usuarioId);
+        var categoriaDb = new CategoriaModel
+        {
+            UsuarioId = usuarioId,
+            Nome = categoria.Nome,
+        };
+        _dbContext.Categorias.Add(categoriaDb);
         await _dbContext.SaveChangesAsync();
-        return categoria;
+        return categoriaDb;
     }
 
-    public async Task<CategoriaModel> Update(int id, CategoriaModel categoria)
+    public async Task<CategoriaModel> Update(int id, CategoriaViewModel categoria, int usuarioId)
     {
-        await ValidateNomeAvailability(categoria.Nome);
         var categoriaDb = await FindByIdOrError(id);
+
+        ValidateUsuarioId(categoriaDb, usuarioId);
+        await ValidateNomeAvailability(categoria.Nome, usuarioId);
+
         categoriaDb.Nome = categoria.Nome;
 
         _dbContext.Categorias.Update(categoriaDb);
@@ -29,9 +41,10 @@ public partial class CategoriaRepository : ICategoriaRepository
         return categoriaDb;
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int usuarioId)
     {
         var categoriaDb = await FindByIdOrError(id);
+        ValidateUsuarioId(categoriaDb, usuarioId);
         _dbContext.Categorias.Remove(categoriaDb);
         await _dbContext.SaveChangesAsync();
         return true;

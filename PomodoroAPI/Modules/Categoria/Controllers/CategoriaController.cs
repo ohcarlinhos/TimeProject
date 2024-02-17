@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PomodoroAPI.Infrastructure.Services;
 using PomodoroAPI.Modules.Categoria.Models;
 using PomodoroAPI.Modules.Categoria.Repositories;
 
@@ -15,36 +17,32 @@ public class CategoriaController : ControllerBase
         _categoriaRepository = categoriaRepository;
     }
 
-    [HttpGet]
+    [HttpGet, Authorize]
     public ActionResult<List<CategoriaModel>> Index(int page = 0, int perPage = 12)
     {
-        return Ok(_categoriaRepository.Index(page, perPage));
+        return Ok(_categoriaRepository.Index(AuthorizeService.GetUsuarioId(User), page, perPage));
     }
 
-    [HttpPost]
+    [HttpPost, Authorize]
     public async Task<ActionResult<CategoriaModel>> Create([FromBody] CategoriaViewModel categoria)
     {
-        return Ok(await _categoriaRepository.Create(
-            new CategoriaModel()
-                { Nome = categoria.Nome, UsuarioId = categoria.UsuarioId }
-        ));
+        return Ok(await _categoriaRepository
+            .Create(categoria, AuthorizeService.GetUsuarioId(User))
+        );
     }
 
-    [HttpPut]
-    [Route("{id}")]
+    [HttpPut, Route("{id}"), Authorize]
     public async Task<ActionResult<CategoriaModel>> Update(int id, [FromBody] CategoriaViewModel categoria)
     {
-        return Ok(await _categoriaRepository.Update(id,
-            new CategoriaModel()
-                { Nome = categoria.Nome }
-        ));
+        return Ok(
+            await _categoriaRepository.Update(id, categoria, AuthorizeService.GetUsuarioId(User))
+        );
     }
 
-    [HttpDelete]
-    [Route("{id}")]
+    [HttpDelete, Route("{id}"), Authorize]
     public async Task<ActionResult> Delete(int id)
     {
-        await _categoriaRepository.Delete(id);
+        await _categoriaRepository.Delete(id, AuthorizeService.GetUsuarioId(User));
         return NoContent();
     }
 }

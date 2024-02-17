@@ -22,19 +22,27 @@ public partial class CategoriaRepository
     {
         var categoriaDb = await FindById(id);
         if (categoriaDb == null)
-            throw new Exception($"Não foi encontrada uma categoria com o id \"{id}\"");
+            throw new Exception($"Não foi encontrada uma categoria com o id \"{id}\".");
 
         return categoriaDb;
     }
 
-    private async Task<CategoriaModel?> FindByNome(string nome)
+    private async Task<CategoriaModel?> FindByNomeAndUsuarioId(string nome, int usuarioId)
     {
-        return await _dbContext.Categorias.Where(c => c.Nome == nome).FirstOrDefaultAsync();
+        return await _dbContext.Categorias
+            .Where(categoria => categoria.Nome == nome && categoria.UsuarioId == usuarioId)
+            .FirstOrDefaultAsync();
     }
 
-    private async Task ValidateNomeAvailability(string nome)
+    private async Task ValidateNomeAvailability(string nome, int usuarioId)
     {
-        if (await FindByNome(nome) != null)
-            throw new Exception($"Já existe uma categoria com o nome \"{nome}\"");
+        if (await FindByNomeAndUsuarioId(nome, usuarioId) != null)
+            throw new Exception($"Já existe uma categoria com o nome \"{nome}\".");
+    }
+
+    public void ValidateUsuarioId(CategoriaModel categoria, int usuarioId)
+    {
+        if (categoria.UsuarioId != usuarioId)
+            throw new Exception($"Você não possui permissão para executar essa ação.");
     }
 }
