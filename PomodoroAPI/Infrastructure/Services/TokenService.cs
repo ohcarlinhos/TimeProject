@@ -5,28 +5,26 @@ using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Infrastructure.Services;
 
-public class TokenService
+public static class TokenService
 {
     public static object GenerateBearerJwt(UsuarioModel usuario)
     {
-        // chave para a criação do token
-        var key = Keys.Jwt;
-
         // configurações do token
         var tokenSubject = new ClaimsIdentity(new[]
         {
-            new Claim("usuarioId", usuario.Id.ToString())
+            new Claim (ClaimTypes.Sid, usuario.Id.ToString()),
+            new Claim (ClaimTypes.Email, usuario.Email),
         });
 
         var tokenExpires = DateTime.UtcNow.AddHours(3);
 
         var tokenSigningCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(key),
+            new SymmetricSecurityKey(Keys.Jwt),
             SecurityAlgorithms.HmacSha256Signature
         );
 
         // descrição do token
-        var tokenConfig = new SecurityTokenDescriptor()
+        var tokenDescriptor = new SecurityTokenDescriptor()
         {
             Subject = tokenSubject,
             Expires = tokenExpires,
@@ -35,7 +33,7 @@ public class TokenService
 
         // geração do token
         var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.CreateToken(tokenConfig);
+        var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);
 
         return new
