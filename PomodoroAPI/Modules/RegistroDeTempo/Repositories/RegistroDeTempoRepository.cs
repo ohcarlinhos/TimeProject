@@ -18,7 +18,7 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
     {
         await _usuarioRepository.FindByIdOrError(registro.UsuarioId);
         if (registro.CategoriaId != null)
-            await _categoriaRepository.BuscarPorIdOuErro((int)registro.CategoriaId);
+            await _categoriaRepository.FindByIdOrError((int)registro.CategoriaId);
 
         var novoRegistro = new RegistroDeTempoModel
         {
@@ -51,8 +51,7 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
         registroDb.Titulo = registro.Titulo;
         registroDb.CategoriaId = registro.CategoriaId;
         registroDb.DataDoRegistro = registro.DataDoRegistro;
-
-        // TODO: criar rota de atualizar períodos e adicionar ao registro
+        
         _dbContext.RegistrosDeTempo.Update(registroDb);
         await _dbContext.SaveChangesAsync();
         return registroDb;

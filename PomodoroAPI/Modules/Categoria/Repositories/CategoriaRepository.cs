@@ -4,23 +4,23 @@ namespace PomodoroAPI.Modules.Categoria.Repositories;
 
 public partial class CategoriaRepository : ICategoriaRepository
 {
-    public List<CategoriaModel> Listar(int page = 0, int perPage = 12)
+    public List<CategoriaModel> Index(int page = 0, int perPage = 12)
     {
         return _dbContext.Categorias.Skip(page * perPage).Take(perPage).ToList();
     }
 
-    public async Task<CategoriaModel> Adicionar(CategoriaModel categoria)
+    public async Task<CategoriaModel> Create(CategoriaModel categoria)
     {
-        await ValidarNomeDisponivel(categoria.Nome);
+        await ValidateNomeAvailability(categoria.Nome);
         _dbContext.Categorias.Add(categoria);
         await _dbContext.SaveChangesAsync();
         return categoria;
     }
 
-    public async Task<CategoriaModel> Atualizar(int id, CategoriaModel categoria)
+    public async Task<CategoriaModel> Update(int id, CategoriaModel categoria)
     {
-        await ValidarNomeDisponivel(categoria.Nome);
-        var categoriaDb = await BuscarPorIdOuErro(id);
+        await ValidateNomeAvailability(categoria.Nome);
+        var categoriaDb = await FindByIdOrError(id);
         categoriaDb.Nome = categoria.Nome;
 
         _dbContext.Categorias.Update(categoriaDb);
@@ -29,9 +29,9 @@ public partial class CategoriaRepository : ICategoriaRepository
         return categoriaDb;
     }
 
-    public async Task<bool> Apagar(int id)
+    public async Task<bool> Delete(int id)
     {
-        var categoriaDb = await BuscarPorIdOuErro(id);
+        var categoriaDb = await FindByIdOrError(id);
         _dbContext.Categorias.Remove(categoriaDb);
         await _dbContext.SaveChangesAsync();
         return true;

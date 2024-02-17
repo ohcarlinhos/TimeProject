@@ -5,7 +5,7 @@ using PomodoroAPI.Modules.Categoria.Repositories;
 namespace PomodoroAPI.Modules.Categoria.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/categoria")]
 public class CategoriaController : ControllerBase
 {
     private readonly ICategoriaRepository _categoriaRepository;
@@ -18,13 +18,13 @@ public class CategoriaController : ControllerBase
     [HttpGet]
     public ActionResult<List<CategoriaModel>> Index(int page = 0, int perPage = 12)
     {
-        return Ok(_categoriaRepository.Listar(page, perPage));
+        return Ok(_categoriaRepository.Index(page, perPage));
     }
 
     [HttpPost]
-    public async Task<ActionResult<CategoriaModel>> Adicionar([FromBody] CategoriaViewModel categoria)
+    public async Task<ActionResult<CategoriaModel>> Create([FromBody] CategoriaViewModel categoria)
     {
-        return Ok(await _categoriaRepository.Adicionar(
+        return Ok(await _categoriaRepository.Create(
             new CategoriaModel()
                 { Nome = categoria.Nome, UsuarioId = categoria.UsuarioId }
         ));
@@ -32,9 +32,9 @@ public class CategoriaController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult<CategoriaModel>> Atualizar(int id, [FromBody] CategoriaViewModel categoria)
+    public async Task<ActionResult<CategoriaModel>> Update(int id, [FromBody] CategoriaViewModel categoria)
     {
-        return Ok(await _categoriaRepository.Atualizar(id,
+        return Ok(await _categoriaRepository.Update(id,
             new CategoriaModel()
                 { Nome = categoria.Nome }
         ));
@@ -42,9 +42,9 @@ public class CategoriaController : ControllerBase
 
     [HttpDelete]
     [Route("{id}")]
-    public async Task<ActionResult> Apagar(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-        await _categoriaRepository.Apagar(id);
+        await _categoriaRepository.Delete(id);
         return NoContent();
     }
 }

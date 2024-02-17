@@ -13,28 +13,28 @@ public partial class CategoriaRepository
         _dbContext = dbContext;
     }
 
-    private async Task<CategoriaModel?> BuscarPorId(int id)
+    private async Task<CategoriaModel?> FindById(int id)
     {
         return await _dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<CategoriaModel> BuscarPorIdOuErro(int id)
+    public async Task<CategoriaModel> FindByIdOrError(int id)
     {
-        var categoriaDb = await BuscarPorId(id);
+        var categoriaDb = await FindById(id);
         if (categoriaDb == null)
             throw new Exception($"Não foi encontrada uma categoria com o id \"{id}\"");
 
         return categoriaDb;
     }
 
-    private async Task<CategoriaModel?> BuscarPorNome(string nome)
+    private async Task<CategoriaModel?> FindByNome(string nome)
     {
         return await _dbContext.Categorias.Where(c => c.Nome == nome).FirstOrDefaultAsync();
     }
 
-    private async Task ValidarNomeDisponivel(string nome)
+    private async Task ValidateNomeAvailability(string nome)
     {
-        if (await BuscarPorNome(nome) != null)
+        if (await FindByNome(nome) != null)
             throw new Exception($"Já existe uma categoria com o nome \"{nome}\"");
     }
 }
