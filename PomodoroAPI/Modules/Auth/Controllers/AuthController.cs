@@ -19,7 +19,7 @@ public class AuthController : ControllerBase
     [HttpPost, Route("login")]
     public async Task<IActionResult> Login([FromBody] CredenciaisDeAcesso credenciais)
     {
-        var usuarioDb = await _usuarioRepository.BuscarPorEmail(credenciais.Email);
+        var usuarioDb = await _usuarioRepository.FindByEmail(credenciais.Email);
 
         if (usuarioDb == null || usuarioDb.Senha != credenciais.Senha)
             throw new Exception($"Email ou senha incorretos");

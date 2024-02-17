@@ -16,7 +16,7 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
 
     public async Task<RegistroDeTempoModel> Adicionar(RegistroDeTempoModelView registro)
     {
-        await _usuarioRepository.BuscarPorIdOuErro(registro.UsuarioId);
+        await _usuarioRepository.FindByIdOrError(registro.UsuarioId);
         if (registro.CategoriaId != null)
             await _categoriaRepository.BuscarPorIdOuErro((int)registro.CategoriaId);
 

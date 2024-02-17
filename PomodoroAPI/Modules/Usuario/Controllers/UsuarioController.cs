@@ -6,7 +6,7 @@ using PomodoroAPI.Modules.Usuario.Repositories;
 namespace PomodoroAPI.Modules.Usuario.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/usuario")]
 public class UsuarioController : ControllerBase
 {
     private readonly IUsuarioRepository _usuarioRepository;
@@ -17,23 +17,23 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<UsuarioModel>> Adicionar([FromBody] UsuarioModel usuarioBody)
+    public async Task<ActionResult<UsuarioModel>> Create([FromBody] UsuarioModel usuarioBody)
     {
-        return Ok(await _usuarioRepository.Adicionar(usuarioBody));
+        return Ok(await _usuarioRepository.Create(usuarioBody));
     }
 
     [Authorize]
     [HttpPut("{id}")]
-    public async Task<ActionResult<UsuarioModel>> Atualizar(int id, [FromBody] UsuarioModel usuarioBody)
+    public async Task<ActionResult<UsuarioModel>> Update(int id, [FromBody] UsuarioModel usuarioBody)
     {
-        return Ok(await _usuarioRepository.Atualizar(id, usuarioBody));
+        return Ok(await _usuarioRepository.Update(id, usuarioBody));
     }
 
     [Authorize]
     [HttpDelete("{id}")]
-    public async Task<ActionResult> Apagar(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-        await _usuarioRepository.Apagar(id);
+        await _usuarioRepository.Delete(id);
         return NoContent();
     }
 }
