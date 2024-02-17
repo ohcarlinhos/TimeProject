@@ -24,22 +24,22 @@ public partial class UsuarioRepository
                ?? throw new Exception($"Usuário com id \"{id}\" não encontrado.");
     }
 
-    private async Task ValidarEmailDisponivel(string email)
+    public async Task<UsuarioModel?> BuscarPorEmail(string email)
     {
-        var usuarioDb = await _dbContext.Usuarios
+        return await _dbContext.Usuarios
             .Where(u => u.Email == email)
             .FirstOrDefaultAsync();
+    }
 
-        if (usuarioDb != null)
+    private async Task ValidarEmailDisponivel(string email)
+    {
+        if (await BuscarPorEmail(email) != null)
             throw new Exception($"Já existe um usuário utilizando o email {email}");
     }
 
     private async Task ValidarEmailDisponivel(string email, int usuarioId)
     {
-        var usuarioDb = await _dbContext.Usuarios
-            .Where(u => u.Email == email)
-            .FirstOrDefaultAsync();
-
+        var usuarioDb = await BuscarPorEmail(email);
         if (usuarioDb != null && usuarioDb.Id != usuarioId)
             throw new Exception($"Já existe um usuário utilizando o email {email}");
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PomodoroAPI.Modules.Usuario.Models;
 using PomodoroAPI.Modules.Usuario.Repositories;
 
@@ -21,12 +22,14 @@ public class UsuarioController : ControllerBase
         return Ok(await _usuarioRepository.Adicionar(usuarioBody));
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<ActionResult<UsuarioModel>> Atualizar(int id, [FromBody] UsuarioModel usuarioBody)
     {
         return Ok(await _usuarioRepository.Atualizar(id, usuarioBody));
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> Apagar(int id)
     {
