@@ -13,13 +13,18 @@ namespace PomodoroAPI.Modules.Usuario.Repositories
             return usuario;
         }
 
-        public async Task<UsuarioModel> Update(int id, UsuarioModel usuario)
+        public async Task<UsuarioModel> Update(int id, UpdateUsuarioViewModel usuario)
         {
-            await ValidateEmailAvailability(usuario.Email, id);
-            
+            if (usuario.Email != null)
+                await ValidateEmailAvailability(usuario.Email, id);
+
             var usuarioDb = await FindByIdOrError(id);
-            usuarioDb.Nome = usuario.Nome;
-            usuarioDb.Email = usuario.Email;
+
+            if (usuario.Nome != null)
+                usuarioDb.Nome = usuario.Nome;
+
+            if (usuario.Email != null)
+                usuarioDb.Email = usuario.Email;
 
             if (usuario.Senha != null)
                 usuarioDb.Senha = usuario.Senha;
