@@ -17,7 +17,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost, Route("login")]
-    public async Task<IActionResult> Login([FromBody] CredenciaisDeAcesso credenciais)
+    public async Task<IActionResult> Login([FromBody] CredenciaisModelView credenciais)
     {
         var usuarioDb = await _usuarioRepository.FindByEmail(credenciais.Email);
 
