@@ -22,14 +22,14 @@ public partial class RegistroDeTempoRepository
         _periodoDeTempoRepository = periodoDeTempoRepository;
     }
 
-    private async Task<RegistroDeTempoModel?> BuscarPorId(int id)
+    private async Task<RegistroDeTempoModel?> FindById(int id)
     {
         return await _dbContext.RegistrosDeTempo.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    private async Task<RegistroDeTempoModel> BuscarPorIdOuErro(int id)
+    private async Task<RegistroDeTempoModel> FindByIdOrError(int id)
     {
-        var registroDb = await BuscarPorId(id);
+        var registroDb = await FindById(id);
         if (registroDb == null)
             throw new Exception($"Não foi encontrado um registro de tempo com o id \"{id}\"");
 

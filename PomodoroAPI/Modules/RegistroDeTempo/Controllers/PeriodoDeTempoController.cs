@@ -5,7 +5,7 @@ using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 namespace PomodoroAPI.Modules.RegistroDeTempo.Controllers;
 
 [ApiController]
-[Route("/api/[controller]")]
+[Route("/api/periodo-de-tempo")]
 public class PeriodoDeTempoController : ControllerBase
 {
     private readonly IPeriodoDeTempoRepository _periodoDeTempoRepository;
@@ -17,17 +17,17 @@ public class PeriodoDeTempoController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult<PeriodoDeTempoModel>> Atualizar(int id, [FromBody] PeriodoDeTempoModelView periodo)
+    public async Task<ActionResult<PeriodoDeTempoModel>> Update(int id, [FromBody] PeriodoDeTempoModelView periodo)
     {
-        return Ok(await _periodoDeTempoRepository.Atualizar(id,
+        return Ok(await _periodoDeTempoRepository.Update(id,
             new PeriodoDeTempoModel() { Inicio = periodo.Inicio, Fim = periodo.Fim }
         ));
     }
 
     [HttpDelete]
     [Route("{id}")]
-    public async Task<ActionResult<PeriodoDeTempoModel>> Apagar(int id)
+    public async Task<ActionResult<PeriodoDeTempoModel>> Delete(int id)
     {
-        return Ok(await _periodoDeTempoRepository.Apagar(id));
+        return Ok(await _periodoDeTempoRepository.Delete(id));
     }
 }

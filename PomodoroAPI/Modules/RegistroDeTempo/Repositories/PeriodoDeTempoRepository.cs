@@ -4,28 +4,28 @@ namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
 {
-    public List<PeriodoDeTempoModel> Listar(int registroId)
+    public List<PeriodoDeTempoModel> Index(int registroId)
     {
         return _dbContext.PeriodosDeTempo.Where(p => p.RegistroDeTempoId == registroId).ToList();
     }
 
-    public async Task<PeriodoDeTempoModel> Adicionar(PeriodoDeTempoModel periodo)
+    public async Task<PeriodoDeTempoModel> Create(PeriodoDeTempoModel periodo)
     {
         _dbContext.PeriodosDeTempo.Add(periodo);
         await _dbContext.SaveChangesAsync();
         return periodo;
     }
 
-    public async Task<List<PeriodoDeTempoModel>> AdicionarLista(List<PeriodoDeTempoModel> periodos)
+    public async Task<List<PeriodoDeTempoModel>> CreateByList(List<PeriodoDeTempoModel> periodos)
     {
         _dbContext.PeriodosDeTempo.AddRange(periodos);
         await _dbContext.SaveChangesAsync();
         return periodos;
     }
 
-    public async Task<PeriodoDeTempoModel> Atualizar(int id, PeriodoDeTempoModel periodo)
+    public async Task<PeriodoDeTempoModel> Update(int id, PeriodoDeTempoModel periodo)
     {
-        var periodoDb = await BuscarPorIdOuErro(id);
+        var periodoDb = await FindByIdOrError(id);
         periodoDb.Inicio = periodo.Inicio;
         periodoDb.Fim = periodo.Fim;
 
@@ -34,15 +34,15 @@ public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
         return periodoDb;
     }
 
-    public async Task<bool> Apagar(int id)
+    public async Task<bool> Delete(int id)
     {
-        var periodoDb = await BuscarPorIdOuErro(id);
+        var periodoDb = await FindByIdOrError(id);
         _dbContext.PeriodosDeTempo.Remove(periodoDb);
         await _dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<bool> ApagarListaPorRegistroId(int registroId)
+    public async Task<bool> DeleteAllByRegistroId(int registroId)
     {
         var listaDePeriodos = _dbContext.PeriodosDeTempo
             .Where(p => p.RegistroDeTempoId == registroId).ToList();

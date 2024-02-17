@@ -5,7 +5,7 @@ namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
 {
-    public List<RegistroDeTempoModel> Listar(int page, int perPage)
+    public List<RegistroDeTempoModel> Index(int page, int perPage)
     {
         return _dbContext.RegistrosDeTempo
             .Include(r => r.Periodos)
@@ -14,7 +14,7 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
             .ToList();
     }
 
-    public async Task<RegistroDeTempoModel> Adicionar(RegistroDeTempoModelView registro)
+    public async Task<RegistroDeTempoModel> Create(RegistroDeTempoModelView registro)
     {
         await _usuarioRepository.FindByIdOrError(registro.UsuarioId);
         if (registro.CategoriaId != null)
@@ -40,14 +40,14 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
                 RegistroDeTempoId = novoRegistro.Id, Inicio = p.Inicio, Fim = p.Fim
             }));
 
-        await _periodoDeTempoRepository.AdicionarLista(periodos);
+        await _periodoDeTempoRepository.CreateByList(periodos);
 
         return novoRegistro;
     }
 
-    public async Task<RegistroDeTempoModel> Atualizar(int id, RegistroDeTempoModelView registro)
+    public async Task<RegistroDeTempoModel> Update(int id, RegistroDeTempoModelView registro)
     {
-        var registroDb = await BuscarPorIdOuErro(id);
+        var registroDb = await FindByIdOrError(id);
         registroDb.Titulo = registro.Titulo;
         registroDb.CategoriaId = registro.CategoriaId;
         registroDb.DataDoRegistro = registro.DataDoRegistro;
@@ -57,9 +57,9 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
         return registroDb;
     }
 
-    public async Task<bool> Apagar(int id)
+    public async Task<bool> Delete(int id)
     {
-        var registroDb = await BuscarPorIdOuErro(id);
+        var registroDb = await FindByIdOrError(id);
         _dbContext.RegistrosDeTempo.Remove(registroDb);
         await _dbContext.SaveChangesAsync();
         return true;
