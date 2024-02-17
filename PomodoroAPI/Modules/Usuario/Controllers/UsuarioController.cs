@@ -28,7 +28,7 @@ public class UsuarioController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<UsuarioModel>> Update(int id, [FromBody] UpdateUsuarioViewModel usuarioBody)
     {
-        if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
+        if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
         return Ok(await _usuarioRepository.Update(id, usuarioBody));
     }
 
@@ -36,7 +36,7 @@ public class UsuarioController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
+        if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
         await _usuarioRepository.Delete(id);
         return NoContent();
     }
