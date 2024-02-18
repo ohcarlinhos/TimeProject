@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PomodoroAPI.Infrastructure.Http;
 using PomodoroAPI.Infrastructure.Services;
 using PomodoroAPI.Modules.Auth.Models;
 using PomodoroAPI.Modules.Auth.Services;
@@ -14,7 +15,7 @@ public class AuthController(IAuthService authService) : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
         var result = await authService.Login(model);
-        if (result.HasError) return BadRequest(result.Message);
+        if (result.HasError) return BadRequest(new ErrorResponse { Message = result.Message });
         return Ok(result.Data);
     }
 }
