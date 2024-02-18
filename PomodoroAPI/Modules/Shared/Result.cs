@@ -2,8 +2,8 @@
 
 public class Result<T>
 {
-    public bool IsValid { get; set; }
-    public bool HasError => !IsValid;
+    public bool IsValid => !HasError;
+    public bool HasError { get; set; }
     public string? Message { get; set; }
     public T? Data;
 }

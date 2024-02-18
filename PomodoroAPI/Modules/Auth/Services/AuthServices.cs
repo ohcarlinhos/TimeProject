@@ -15,7 +15,7 @@ public class AuthServices(IUsuarioRepository usuarioRepository) : IAuthService
         if (usuario == null || usuario.Senha != request.Senha)
         {
             result.Message = "Email ou senha incorretos.";
-            result.IsValid = false;
+            result.HasError = true;
             return result;
         }
 
