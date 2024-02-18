@@ -9,6 +9,7 @@ using PomodoroAPI.Modules.Auth.Services;
 using PomodoroAPI.Modules.Usuario.Repositories;
 using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 using PomodoroAPI.Modules.Categoria.Repositories;
+using PomodoroAPI.Modules.Usuario.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +85,7 @@ builder.Services.AddScoped<IPeriodoDeTempoRepository, PeriodoDeTempoRepository>(
 
 // services
 builder.Services.AddScoped<IAuthService, AuthServices>();
+builder.Services.AddScoped<IUsuarioServices, UsuarioServices>();
 
 // build da aplicação
 var app = builder.Build();

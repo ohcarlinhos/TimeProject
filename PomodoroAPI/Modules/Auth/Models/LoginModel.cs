@@ -2,7 +2,7 @@
 
 namespace PomodoroAPI.Modules.Auth.Models;
 
-public class LoginRequest
+public class LoginModel
 {
     [EmailAddress]
     public string Email { get; set; }

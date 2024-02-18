@@ -1,13 +1,14 @@
-﻿using PomodoroAPI.Modules.Usuario.Models;
+﻿using PomodoroAPI.Modules.Usuario.Entities;
+using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Modules.Usuario.Repositories
 {
     public interface IUsuarioRepository
     {
-        Task<UsuarioModel> Create(UsuarioModel usuario);
-        Task<UsuarioModel> Update(int id, UpdateUsuarioViewModel usuario);
+        Task<UsuarioEntity> Create(UsuarioEntity entity);
+        Task<UsuarioEntity> Update(UsuarioEntity entity);
         Task<bool> Delete(int id);
-        Task<UsuarioModel> FindByIdOrError(int id);
-        Task<UsuarioModel?> FindByEmail(string email);
+        Task<UsuarioEntity?> FindById(int id);
+        Task<UsuarioEntity?> FindByEmail(string email);
     }
 }

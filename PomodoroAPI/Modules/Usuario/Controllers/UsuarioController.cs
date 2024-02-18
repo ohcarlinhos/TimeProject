@@ -1,9 +1,12 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PomodoroAPI.Infrastructure.Http;
 using PomodoroAPI.Infrastructure.Services;
+using PomodoroAPI.Modules.Usuario.Entities;
 using PomodoroAPI.Modules.Usuario.Models;
 using PomodoroAPI.Modules.Usuario.Repositories;
+using PomodoroAPI.Modules.Usuario.Services;
 
 namespace PomodoroAPI.Modules.Usuario.Controllers;
 
@@ -12,32 +15,36 @@ namespace PomodoroAPI.Modules.Usuario.Controllers;
 public class UsuarioController : ControllerBase
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUsuarioServices _usuarioServices;
 
-    public UsuarioController(IUsuarioRepository usuarioRepository)
+    public UsuarioController(IUsuarioRepository usuarioRepository, IUsuarioServices usuarioServices)
     {
         _usuarioRepository = usuarioRepository;
+        _usuarioServices = usuarioServices;
     }
 
     [HttpPost]
-    public async Task<ActionResult<UsuarioModel>> Create([FromBody] UsuarioModel usuarioBody)
+    public async Task<ActionResult<UsuarioEntity>> Create([FromBody] CreateUsuarioModel model)
     {
-        return Ok(await _usuarioRepository.Create(usuarioBody));
+        var result = await _usuarioServices.Create(model);
+        if (result.HasError) return BadRequest(new ErrorResponse { Message = result.Message });
+        return Ok(result.Data);
     }
 
-    [Authorize]
-    [HttpPut("{id}")]
-    public async Task<ActionResult<UsuarioModel>> Update(int id, [FromBody] UpdateUsuarioViewModel usuarioBody)
+    [HttpPut("{id}"), Authorize]
+    public async Task<ActionResult<UsuarioEntity>> Update([FromRoute] int id, [FromBody] UpdateUsuarioModel model)
     {
         if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
-        return Ok(await _usuarioRepository.Update(id, usuarioBody));
+        var result = await _usuarioServices.Update(id, model);
+        if (result.HasError) BadRequest(new ErrorResponse { Message = result.Message });
+        return Ok(result.Data);
     }
 
-    [Authorize]
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> Delete(int id)
+    [HttpDelete("{id}"), Authorize]
+    public async Task<ActionResult> Delete([FromRoute] int id)
     {
         if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
-        await _usuarioRepository.Delete(id);
+        await _usuarioServices.Delete(id);
         return NoContent();
     }
 }

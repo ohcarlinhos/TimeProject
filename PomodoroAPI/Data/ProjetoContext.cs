@@ -2,6 +2,7 @@
 using PomodoroAPI.Modules.Usuario.Models;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 using PomodoroAPI.Modules.Categoria.Models;
+using PomodoroAPI.Modules.Usuario.Entities;
 
 namespace PomodoroAPI.Data;
 
@@ -11,7 +12,7 @@ public class ProjetoContext : DbContext
     {
     }
 
-    public DbSet<UsuarioModel> Usuarios { get; set; }
+    public DbSet<UsuarioEntity> Usuarios { get; set; }
     public DbSet<RegistroDeTempoModel> RegistrosDeTempo { get; set; }
     public DbSet<PeriodoDeTempoModel> PeriodosDeTempo { get; set; }
     public DbSet<CategoriaModel> Categorias { get; set; }

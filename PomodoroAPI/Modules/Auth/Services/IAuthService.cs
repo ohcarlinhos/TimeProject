@@ -5,5 +5,5 @@ namespace PomodoroAPI.Modules.Auth.Services;
 
 public interface IAuthService
 {
-    Task<Result<object>> Login(LoginRequest request);
+    Task<Result<object>> Login(LoginModel model);
 }

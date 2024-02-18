@@ -1,13 +1,14 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using PomodoroAPI.Modules.Usuario.Entities;
 using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Infrastructure.Services;
 
 public static class TokenService
 {
-    public static object GenerateBearerJwt(UsuarioModel usuario)
+    public static object GenerateBearerJwt(UsuarioEntity usuario)
     {
         // configurações do token
         var tokenSubject = new ClaimsIdentity(new[]

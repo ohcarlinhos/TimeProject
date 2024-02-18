@@ -6,4 +6,11 @@ public class Result<T>
     public bool HasError { get; set; }
     public string? Message { get; set; }
     public T? Data;
+
+    public Result<T> SetError(string? message)
+    {
+        HasError = true;
+        Message = message;
+        return this;
+    }
 }

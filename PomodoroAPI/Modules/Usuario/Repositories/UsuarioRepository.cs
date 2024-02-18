@@ -1,46 +1,46 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PomodoroAPI.Data;
+using PomodoroAPI.Modules.Usuario.Entities;
 using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Modules.Usuario.Repositories
 {
-    public partial class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository(ProjetoContext dbContext) : IUsuarioRepository
     {
-        public async Task<UsuarioModel> Create(UsuarioModel usuario)
+        public async Task<UsuarioEntity> Create(UsuarioEntity entity)
         {
-            await ValidateEmailAvailability(usuario.Email);
-            _dbContext.Usuarios.Add(usuario);
-            await _dbContext.SaveChangesAsync();
-            return usuario;
+            dbContext.Usuarios.Add(entity);
+            await dbContext.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task<UsuarioModel> Update(int id, UpdateUsuarioViewModel usuario)
+        public async Task<UsuarioEntity> Update(UsuarioEntity entity)
         {
-            if (usuario.Email != null)
-                await ValidateEmailAvailability(usuario.Email, id);
-
-            var usuarioDb = await FindByIdOrError(id);
-
-            if (usuario.Nome != null)
-                usuarioDb.Nome = usuario.Nome;
-
-            if (usuario.Email != null)
-                usuarioDb.Email = usuario.Email;
-
-            if (usuario.Senha != null)
-                usuarioDb.Senha = usuario.Senha;
-
-            _dbContext.Usuarios.Update(usuarioDb);
-            await _dbContext.SaveChangesAsync();
-
-            return usuarioDb;
+            dbContext.Usuarios.Update(entity);
+            await dbContext.SaveChangesAsync();
+            return entity;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var usuarioDb = await FindByIdOrError(id);
-            _dbContext.Usuarios.Remove(usuarioDb);
-            await _dbContext.SaveChangesAsync();
+            var entity = await FindById(id);
+            if (entity == null) return true;
+
+            dbContext.Usuarios.Remove(entity);
+            await dbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<UsuarioEntity?> FindById(int id)
+        {
+            return await dbContext.Usuarios.FirstOrDefaultAsync(i => i.Id == id);
+        }
+
+        public async Task<UsuarioEntity?> FindByEmail(string email)
+        {
+            return await dbContext.Usuarios
+                .Where(u => u.Email == email)
+                .FirstOrDefaultAsync();
         }
     }
 }

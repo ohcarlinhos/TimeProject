@@ -7,12 +7,12 @@ namespace PomodoroAPI.Modules.Auth.Services;
 
 public class AuthServices(IUsuarioRepository usuarioRepository) : IAuthService
 {
-    public async Task<Result<object>> Login(LoginRequest request)
+    public async Task<Result<object>> Login(LoginModel model)
     {
         var result = new Result<object>();
-        var usuario = await usuarioRepository.FindByEmail(request.Email);
+        var usuario = await usuarioRepository.FindByEmail(model.Email);
 
-        if (usuario == null || usuario.Senha != request.Senha)
+        if (usuario == null || usuario.Senha != model.Senha)
         {
             result.Message = "Email ou senha incorretos.";
             result.HasError = true;
