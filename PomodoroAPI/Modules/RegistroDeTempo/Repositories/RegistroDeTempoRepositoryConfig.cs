@@ -8,12 +8,12 @@ namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class RegistroDeTempoRepository
 {
-    private readonly ProjetoContext _dbContext;
+    private readonly ProjectContext _dbContext;
     private readonly IUsuarioRepository _usuarioRepository;
     private readonly ICategoriaRepository _categoriaRepository;
     private readonly IPeriodoDeTempoRepository _periodoDeTempoRepository;
 
-    public RegistroDeTempoRepository(ProjetoContext dbContext, IUsuarioRepository usuarioRepository,
+    public RegistroDeTempoRepository(ProjectContext dbContext, IUsuarioRepository usuarioRepository,
         ICategoriaRepository categoriaRepository, IPeriodoDeTempoRepository periodoDeTempoRepository)
     {
         _dbContext = dbContext;

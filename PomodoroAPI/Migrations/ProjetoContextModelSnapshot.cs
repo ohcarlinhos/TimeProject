@@ -10,7 +10,7 @@ using PomodoroAPI.Data;
 
 namespace PomodoroAPI.Migrations
 {
-    [DbContext(typeof(ProjetoContext))]
+    [DbContext(typeof(ProjectContext))]
     partial class ProjetoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

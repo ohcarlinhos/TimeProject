@@ -11,7 +11,7 @@ using PomodoroAPI.Data;
 
 namespace PomodoroAPI.Migrations
 {
-    [DbContext(typeof(ProjetoContext))]
+    [DbContext(typeof(ProjectContext))]
     [Migration("20240211150033_Usuario")]
     partial class Usuario
     {

@@ -11,7 +11,7 @@ using PomodoroAPI.Data;
 
 namespace PomodoroAPI.Migrations
 {
-    [DbContext(typeof(ProjetoContext))]
+    [DbContext(typeof(ProjectContext))]
     [Migration("20240210203528_AtualizacaoDosSchemas")]
     partial class AtualizacaoDosSchemas
     {

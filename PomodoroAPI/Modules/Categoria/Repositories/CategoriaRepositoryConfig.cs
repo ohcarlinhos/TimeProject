@@ -6,9 +6,9 @@ namespace PomodoroAPI.Modules.Categoria.Repositories;
 
 public partial class CategoriaRepository
 {
-    private readonly ProjetoContext _dbContext;
+    private readonly ProjectContext _dbContext;
 
-    public CategoriaRepository(ProjetoContext dbContext)
+    public CategoriaRepository(ProjectContext dbContext)
     {
         _dbContext = dbContext;
     }

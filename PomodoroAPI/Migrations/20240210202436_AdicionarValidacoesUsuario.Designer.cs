@@ -11,7 +11,7 @@ using PomodoroAPI.Data;
 
 namespace PomodoroAPI.Migrations
 {
-    [DbContext(typeof(ProjetoContext))]
+    [DbContext(typeof(ProjectContext))]
     [Migration("20240210202436_AdicionarValidacoesUsuario")]
     partial class AdicionarValidacoesUsuario
     {

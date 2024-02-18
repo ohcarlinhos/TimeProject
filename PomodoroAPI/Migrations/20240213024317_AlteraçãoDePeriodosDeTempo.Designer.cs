@@ -11,7 +11,7 @@ using PomodoroAPI.Data;
 
 namespace PomodoroAPI.Migrations
 {
-    [DbContext(typeof(ProjetoContext))]
+    [DbContext(typeof(ProjectContext))]
     [Migration("20240213024317_AlteraçãoDePeriodosDeTempo")]
     partial class AlteraçãoDePeriodosDeTempo
     {

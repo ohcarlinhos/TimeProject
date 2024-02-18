@@ -73,7 +73,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 // Configuração par utilização do Postgres
-builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjetoContext>(
+builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjectContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("DataBase"))
 );
 

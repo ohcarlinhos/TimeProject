@@ -6,12 +6,8 @@ using PomodoroAPI.Modules.Usuario.Entities;
 
 namespace PomodoroAPI.Data;
 
-public class ProjetoContext : DbContext
+public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
 {
-    public ProjetoContext(DbContextOptions<ProjetoContext> options) : base(options)
-    {
-    }
-
     public DbSet<UsuarioEntity> Usuarios { get; set; }
     public DbSet<RegistroDeTempoModel> RegistrosDeTempo { get; set; }
     public DbSet<PeriodoDeTempoModel> PeriodosDeTempo { get; set; }

@@ -5,7 +5,7 @@ using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Modules.Usuario.Repositories
 {
-    public class UsuarioRepository(ProjetoContext dbContext) : IUsuarioRepository
+    public class UsuarioRepository(ProjectContext dbContext) : IUsuarioRepository
     {
         public async Task<UsuarioEntity> Create(UsuarioEntity entity)
         {
