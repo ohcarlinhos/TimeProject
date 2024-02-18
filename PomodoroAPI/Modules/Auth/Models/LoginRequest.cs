@@ -2,7 +2,7 @@
 
 namespace PomodoroAPI.Modules.Auth.Models;
 
-public class CredenciaisModelView
+public class LoginRequest
 {
     [EmailAddress]
     public string Email { get; set; }

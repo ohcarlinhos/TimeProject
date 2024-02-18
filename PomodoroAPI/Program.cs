@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PomodoroAPI.Data;
 using PomodoroAPI.Infrastructure;
+using PomodoroAPI.Modules.Auth.Services;
 using PomodoroAPI.Modules.Usuario.Repositories;
 using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 using PomodoroAPI.Modules.Categoria.Repositories;
@@ -80,6 +81,9 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IRegistroDeTempoRepository, RegistroDeTempoRepository>();
 builder.Services.AddScoped<IPeriodoDeTempoRepository, PeriodoDeTempoRepository>();
+
+// services
+builder.Services.AddScoped<IAuthService, AuthServices>();
 
 // build da aplicação
 var app = builder.Build();
