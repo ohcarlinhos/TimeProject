@@ -34,9 +34,9 @@ builder.Services
         };
     });
 
-// Adição de suporte a retornos de arrays nos JSONs, inclui os $id
+// Adição de suporte a retornos de arrays nos JSONs
 builder.Services.AddControllers()
-    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddEndpointsApiExplorer();
 
