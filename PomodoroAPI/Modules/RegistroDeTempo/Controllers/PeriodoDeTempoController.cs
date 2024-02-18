@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PomodoroAPI.Infrastructure.Services;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
@@ -15,19 +17,15 @@ public class PeriodoDeTempoController : ControllerBase
         _periodoDeTempoRepository = periodoDeTempoRepository;
     }
 
-    [HttpPut]
-    [Route("{id}")]
+    [HttpPut, Authorize, Route("{id}")]
     public async Task<ActionResult<PeriodoDeTempoModel>> Update(int id, [FromBody] PeriodoDeTempoModelView periodo)
     {
-        return Ok(await _periodoDeTempoRepository.Update(id,
-            new PeriodoDeTempoModel() { Inicio = periodo.Inicio, Fim = periodo.Fim }
-        ));
+        return Ok(await _periodoDeTempoRepository.Update(id, periodo, AuthorizeService.GetUsuarioId(User)));
     }
 
-    [HttpDelete]
-    [Route("{id}")]
+    [HttpDelete, Authorize, Route("{id}")]
     public async Task<ActionResult<PeriodoDeTempoModel>> Delete(int id)
     {
-        return Ok(await _periodoDeTempoRepository.Delete(id));
+        return Ok(await _periodoDeTempoRepository.Delete(id, AuthorizeService.GetUsuarioId(User)));
     }
 }

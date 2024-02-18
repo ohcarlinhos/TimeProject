@@ -5,61 +5,55 @@ namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
 {
-    public List<RegistroDeTempoModel> Index(int page, int perPage)
+    public List<RegistroDeTempoModel> Index(int usuarioId, int page, int perPage)
     {
         return _dbContext.RegistrosDeTempo
+            .Where(registro => registro.UsuarioId == usuarioId)
             .Include(r => r.Periodos)
             .Skip(page * perPage)
             .Take(perPage)
             .ToList();
     }
 
-    public async Task<RegistroDeTempoModel> Create(RegistroDeTempoModelView registro)
+    public async Task<RegistroDeTempoModel> Create(RegistroDeTempoModelView registro, int usuarioId)
     {
-        await _usuarioRepository.FindByIdOrError(registro.UsuarioId);
         if (registro.CategoriaId != null)
-            await _categoriaRepository.FindByIdOrError((int)registro.CategoriaId);
+            await _categoriaRepository.FindByIdOrError((int)registro.CategoriaId, usuarioId);
 
-        var novoRegistro = new RegistroDeTempoModel
+        var registroDb = new RegistroDeTempoModel
         {
-            UsuarioId = registro.UsuarioId,
+            UsuarioId = usuarioId,
             CategoriaId = registro.CategoriaId,
             Titulo = registro.Titulo,
             DataDoRegistro = registro.DataDoRegistro
         };
 
-        await _dbContext.RegistrosDeTempo.AddAsync(novoRegistro);
+        await _dbContext.RegistrosDeTempo.AddAsync(registroDb);
         await _dbContext.SaveChangesAsync();
+        
+        await _periodoDeTempoRepository.CreateByList(registro.Periodos, registroDb.Id, usuarioId);
 
-        List<PeriodoDeTempoModel> periodos = [];
-
-        periodos.AddRange(registro.Periodos!
-            .Select(p => new PeriodoDeTempoModel()
-            {
-                UsuarioId = novoRegistro.UsuarioId,
-                RegistroDeTempoId = novoRegistro.Id, Inicio = p.Inicio, Fim = p.Fim
-            }));
-
-        await _periodoDeTempoRepository.CreateByList(periodos);
-
-        return novoRegistro;
+        return registroDb;
     }
 
-    public async Task<RegistroDeTempoModel> Update(int id, RegistroDeTempoModelView registro)
+    public async Task<RegistroDeTempoModel> Update(int id, RegistroDeTempoModelView registro, int usuarioId)
     {
-        var registroDb = await FindByIdOrError(id);
+        var registroDb = await FindByIdOrError(id, usuarioId);
+        
         registroDb.Titulo = registro.Titulo;
         registroDb.CategoriaId = registro.CategoriaId;
         registroDb.DataDoRegistro = registro.DataDoRegistro;
-        
+
         _dbContext.RegistrosDeTempo.Update(registroDb);
         await _dbContext.SaveChangesAsync();
         return registroDb;
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int usuarioId)
     {
-        var registroDb = await FindByIdOrError(id);
+        var registroDb = await FindByIdOrError(id, usuarioId);
+        ValidateUsuarioId(registroDb, usuarioId);
+        
         _dbContext.RegistrosDeTempo.Remove(registroDb);
         await _dbContext.SaveChangesAsync();
         return true;

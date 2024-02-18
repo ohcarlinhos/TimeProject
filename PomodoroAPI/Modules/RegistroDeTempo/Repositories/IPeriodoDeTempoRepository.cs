@@ -4,10 +4,10 @@ namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public interface IPeriodoDeTempoRepository
 {
-    List<PeriodoDeTempoModel> Index(int registroId);
-    Task<PeriodoDeTempoModel> Create(PeriodoDeTempoModel periodo);
-    Task<List<PeriodoDeTempoModel>> CreateByList(List<PeriodoDeTempoModel> periodos);
-    Task<PeriodoDeTempoModel> Update(int id, PeriodoDeTempoModel registro);
-    Task<bool> Delete(int id);
-    Task<bool> DeleteAllByRegistroId(int registroId);
+    List<PeriodoDeTempoModel> Index(int registroId, int usuarioId);
+    Task<PeriodoDeTempoModel> Create(PeriodoDeTempoModelView periodo, int registroId, int usuarioId);
+    Task<List<PeriodoDeTempoModel>> CreateByList(List<PeriodoDeTempoModelView> periodos, int registroId, int usuarioId);
+    Task<PeriodoDeTempoModel> Update(int id, PeriodoDeTempoModelView registro, int usuarioId);
+    Task<bool> Delete(int id, int usuarioId);
+    Task<bool> DeleteAllByRegistroId(int registroId, int usuarioId);
 }

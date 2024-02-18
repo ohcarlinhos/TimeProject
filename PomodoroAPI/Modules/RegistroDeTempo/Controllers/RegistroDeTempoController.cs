@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PomodoroAPI.Infrastructure.Services;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
@@ -15,29 +17,27 @@ public class RegistroDeTempoController : ControllerBase
         _registroDeTempoRepository = registroDeTempoRepository;
     }
 
-    [HttpGet]
+    [HttpGet, Authorize]
     public ActionResult<List<RegistroDeTempoModel>> Index(int page, int perPage = 12)
     {
-        return Ok(_registroDeTempoRepository.Index(page, perPage));
+        return Ok(_registroDeTempoRepository.Index(AuthorizeService.GetUsuarioId(User), page, perPage));
     }
 
-    [HttpPost]
+    [HttpPost, Authorize]
     public async Task<ActionResult<RegistroDeTempoModel>> Create([FromBody] RegistroDeTempoModelView registro)
     {
-        return Ok(await _registroDeTempoRepository.Create(registro));
+        return Ok(await _registroDeTempoRepository.Create(registro, AuthorizeService.GetUsuarioId(User)));
     }
 
-    [HttpPut]
-    [Route("{id}")]
+    [HttpPut, Authorize, Route("{id}")]
     public async Task<ActionResult<RegistroDeTempoModel>> Update(int id, [FromBody] RegistroDeTempoModelView registro)
     {
-        return Ok(await _registroDeTempoRepository.Update(id, registro));
+        return Ok(await _registroDeTempoRepository.Update(id, registro, AuthorizeService.GetUsuarioId(User)));
     }
-    
-    [HttpDelete]
-    [Route("{id}")]
+
+    [HttpDelete, Authorize, Route("{id}")]
     public async Task<ActionResult<RegistroDeTempoModel>> Delete(int id)
     {
-        return Ok(await _registroDeTempoRepository.Delete(id));
+        return Ok(await _registroDeTempoRepository.Delete(id, AuthorizeService.GetUsuarioId(User)));
     }
 }

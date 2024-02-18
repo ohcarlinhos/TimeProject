@@ -22,17 +22,24 @@ public partial class RegistroDeTempoRepository
         _periodoDeTempoRepository = periodoDeTempoRepository;
     }
 
-    private async Task<RegistroDeTempoModel?> FindById(int id)
+    private async Task<RegistroDeTempoModel?> FindById(int id, int usuarioId)
     {
-        return await _dbContext.RegistrosDeTempo.FirstOrDefaultAsync(c => c.Id == id);
+        return await _dbContext.RegistrosDeTempo
+            .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == usuarioId);
     }
 
-    private async Task<RegistroDeTempoModel> FindByIdOrError(int id)
+    private async Task<RegistroDeTempoModel> FindByIdOrError(int id, int usuarioId)
     {
-        var registroDb = await FindById(id);
+        var registroDb = await FindById(id, usuarioId);
         if (registroDb == null)
             throw new Exception($"Não foi encontrado um registro de tempo com o id \"{id}\"");
 
         return registroDb;
+    }
+
+    public void ValidateUsuarioId(RegistroDeTempoModel registro, int usuarioId)
+    {
+        if (registro.UsuarioId != usuarioId)
+            throw new Exception($"Você não possui permissão para executar essa ação.");
     }
 }

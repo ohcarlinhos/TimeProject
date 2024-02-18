@@ -4,28 +4,53 @@ namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
 {
-    public List<PeriodoDeTempoModel> Index(int registroId)
+    public List<PeriodoDeTempoModel> Index(int registroId, int usuarioId)
     {
-        return _dbContext.PeriodosDeTempo.Where(p => p.RegistroDeTempoId == registroId).ToList();
+        return _dbContext.PeriodosDeTempo
+            .Where(periodo => periodo.RegistroDeTempoId == registroId && periodo.UsuarioId == usuarioId)
+            .ToList();
     }
 
-    public async Task<PeriodoDeTempoModel> Create(PeriodoDeTempoModel periodo)
+    public async Task<PeriodoDeTempoModel> Create(PeriodoDeTempoModelView periodo, int registroId, int usuarioId)
     {
-        _dbContext.PeriodosDeTempo.Add(periodo);
+        var periodoDb = new PeriodoDeTempoModel
+        {
+            UsuarioId = usuarioId,
+            RegistroDeTempoId = registroId,
+            Inicio = periodo.Inicio,
+            Fim = periodo.Fim,
+        };
+
+        _dbContext.PeriodosDeTempo.Add(periodoDb);
         await _dbContext.SaveChangesAsync();
-        return periodo;
+        return periodoDb;
     }
 
-    public async Task<List<PeriodoDeTempoModel>> CreateByList(List<PeriodoDeTempoModel> periodos)
+    public async Task<List<PeriodoDeTempoModel>> CreateByList(
+        List<PeriodoDeTempoModelView> periodos,
+        int registroId,
+        int usuarioId
+    )
     {
-        _dbContext.PeriodosDeTempo.AddRange(periodos);
+        List<PeriodoDeTempoModel> periodosDb = [];
+
+        periodosDb.AddRange(periodos!
+            .Select(p => new PeriodoDeTempoModel()
+            {
+                UsuarioId = usuarioId,
+                RegistroDeTempoId = registroId,
+                Inicio = p.Inicio,
+                Fim = p.Fim
+            }));
+
+        _dbContext.PeriodosDeTempo.AddRange(periodosDb);
         await _dbContext.SaveChangesAsync();
-        return periodos;
+        return periodosDb;
     }
 
-    public async Task<PeriodoDeTempoModel> Update(int id, PeriodoDeTempoModel periodo)
+    public async Task<PeriodoDeTempoModel> Update(int id, PeriodoDeTempoModelView periodo, int usuarioId)
     {
-        var periodoDb = await FindByIdOrError(id);
+        var periodoDb = await FindByIdOrError(id, usuarioId);
         periodoDb.Inicio = periodo.Inicio;
         periodoDb.Fim = periodo.Fim;
 
@@ -34,20 +59,21 @@ public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
         return periodoDb;
     }
 
-    public async Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id, int usuarioId)
     {
-        var periodoDb = await FindByIdOrError(id);
+        var periodoDb = await FindByIdOrError(id, usuarioId);
         _dbContext.PeriodosDeTempo.Remove(periodoDb);
         await _dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<bool> DeleteAllByRegistroId(int registroId)
+    public async Task<bool> DeleteAllByRegistroId(int registroId, int usuarioId)
     {
-        var listaDePeriodos = _dbContext.PeriodosDeTempo
-            .Where(p => p.RegistroDeTempoId == registroId).ToList();
+        var periodosList = _dbContext.PeriodosDeTempo
+            .Where(periodo => periodo.RegistroDeTempoId == registroId && periodo.UsuarioId == usuarioId)
+            .ToList();
 
-        _dbContext.PeriodosDeTempo.RemoveRange(listaDePeriodos);
+        _dbContext.PeriodosDeTempo.RemoveRange(periodosList);
         await _dbContext.SaveChangesAsync();
         return true;
     }
