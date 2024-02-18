@@ -7,9 +7,9 @@ public partial class CategoriaRepository : ICategoriaRepository
     public List<CategoriaModel> Index(int usuarioId, int page = 0, int perPage = 12)
     {
         return _dbContext.Categorias
+            .Where(categoria => categoria.UsuarioId == usuarioId)
             .Skip(page * perPage)
             .Take(perPage)
-            .Where(categoria => categoria.UsuarioId == usuarioId)
             .ToList();
     }
 
@@ -28,7 +28,7 @@ public partial class CategoriaRepository : ICategoriaRepository
 
     public async Task<CategoriaModel> Update(int id, CategoriaViewModel categoria, int usuarioId)
     {
-        var categoriaDb = await FindByIdOrError(id);
+        var categoriaDb = await FindByIdOrError(id, usuarioId);
 
         ValidateUsuarioId(categoriaDb, usuarioId);
         await ValidateNomeAvailability(categoria.Nome, usuarioId);
@@ -43,7 +43,7 @@ public partial class CategoriaRepository : ICategoriaRepository
 
     public async Task<bool> Delete(int id, int usuarioId)
     {
-        var categoriaDb = await FindByIdOrError(id);
+        var categoriaDb = await FindByIdOrError(id, usuarioId);
         ValidateUsuarioId(categoriaDb, usuarioId);
         _dbContext.Categorias.Remove(categoriaDb);
         await _dbContext.SaveChangesAsync();

@@ -8,6 +8,6 @@ public interface ICategoriaRepository
     Task<CategoriaModel> Create(CategoriaViewModel categoria, int usuarioId);
     Task<CategoriaModel> Update(int id, CategoriaViewModel categoria, int usuarioId);
     Task<bool> Delete(int id,  int usuarioId);
-    Task<CategoriaModel> FindByIdOrError(int id);
+    Task<CategoriaModel> FindByIdOrError(int id, int usuarioId);
     void ValidateUsuarioId(CategoriaModel categoria, int usuarioId);
 }

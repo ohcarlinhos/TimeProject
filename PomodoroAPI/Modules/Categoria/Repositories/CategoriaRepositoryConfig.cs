@@ -18,7 +18,7 @@ public partial class CategoriaRepository
         return await _dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<CategoriaModel> FindByIdOrError(int id)
+    public async Task<CategoriaModel> FindByIdOrError(int id, int usuarioId)
     {
         var categoriaDb = await FindById(id);
         if (categoriaDb == null)
