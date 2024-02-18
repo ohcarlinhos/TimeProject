@@ -36,7 +36,7 @@ public class UsuarioController : ControllerBase
     {
         if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
         var result = await _usuarioServices.Update(id, model);
-        if (result.HasError) BadRequest(new ErrorResponse { Message = result.Message });
+        if (result.HasError) return BadRequest(new ErrorResponse { Message = result.Message });
         return Ok(result.Data);
     }
 
@@ -45,6 +45,6 @@ public class UsuarioController : ControllerBase
     {
         if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
         await _usuarioServices.Delete(id);
-        return NoContent();
+        return Ok();
     }
 }
