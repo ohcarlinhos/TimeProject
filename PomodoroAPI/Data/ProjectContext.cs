@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.Usuario.Models;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
-using PomodoroAPI.Modules.Categoria.Models;
 using PomodoroAPI.Modules.RegistroDeTempo.Entities;
 using PomodoroAPI.Modules.Usuario.Entities;
 
