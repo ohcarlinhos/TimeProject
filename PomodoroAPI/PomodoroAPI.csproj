@@ -28,4 +28,9 @@
     <None Remove=".env" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20240215030009_AtualizarRegistrosDeTempo.cs" />
+    <Compile Remove="Migrations\20240215030009_AtualizarRegistrosDeTempo.Designer.cs" />
+  </ItemGroup>
+
 </Project>

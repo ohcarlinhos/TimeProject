@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PomodoroAPI.Modules.RegistroDeTempo.Entities;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
 {
-    public List<RegistroDeTempoModel> Index(int usuarioId, int page, int perPage)
+    public List<RegistroDeTempoEntity> Index(int usuarioId, int page, int perPage)
     {
         return _dbContext.RegistrosDeTempo
             .Where(registro => registro.UsuarioId == usuarioId)
@@ -15,12 +16,12 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
             .ToList();
     }
 
-    public async Task<RegistroDeTempoModel> Create(RegistroDeTempoModelView registro, int usuarioId)
+    public async Task<RegistroDeTempoEntity> Create(RegistroDeTempoModel registro, int usuarioId)
     {
         // if (registro.CategoriaId != null)
         //     await _categoriaRepository.FindByIdOrError((int)registro.CategoriaId, usuarioId);
 
-        var registroDb = new RegistroDeTempoModel
+        var registroDb = new RegistroDeTempoEntity
         {
             UsuarioId = usuarioId,
             // CategoriaId = registro.CategoriaId,
@@ -36,7 +37,7 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
         return registroDb;
     }
 
-    public async Task<RegistroDeTempoModel> Update(int id, RegistroDeTempoModelView registro, int usuarioId)
+    public async Task<RegistroDeTempoEntity> Update(int id, RegistroDeTempoModel registro, int usuarioId)
     {
         var registroDb = await FindByIdOrError(id, usuarioId);
         

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
 using PomodoroAPI.Modules.Categoria.Repositories;
+using PomodoroAPI.Modules.RegistroDeTempo.Entities;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 using PomodoroAPI.Modules.Usuario.Repositories;
 
@@ -22,13 +23,13 @@ public partial class RegistroDeTempoRepository
         _periodoDeTempoRepository = periodoDeTempoRepository;
     }
 
-    private async Task<RegistroDeTempoModel?> FindById(int id, int usuarioId)
+    private async Task<RegistroDeTempoEntity?> FindById(int id, int usuarioId)
     {
         return await _dbContext.RegistrosDeTempo
             .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == usuarioId);
     }
 
-    private async Task<RegistroDeTempoModel> FindByIdOrError(int id, int usuarioId)
+    private async Task<RegistroDeTempoEntity> FindByIdOrError(int id, int usuarioId)
     {
         var registroDb = await FindById(id, usuarioId);
         if (registroDb == null)
@@ -37,7 +38,7 @@ public partial class RegistroDeTempoRepository
         return registroDb;
     }
 
-    public void ValidateUsuarioId(RegistroDeTempoModel registro, int usuarioId)
+    public void ValidateUsuarioId(RegistroDeTempoEntity registro, int usuarioId)
     {
         if (registro.UsuarioId != usuarioId)
             throw new Exception($"Você não possui permissão para executar essa ação.");

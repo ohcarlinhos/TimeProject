@@ -1,12 +1,13 @@
-﻿using PomodoroAPI.Modules.RegistroDeTempo.Models;
+﻿using PomodoroAPI.Modules.RegistroDeTempo.Entities;
+using PomodoroAPI.Modules.RegistroDeTempo.Models;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public interface IRegistroDeTempoRepository
 {
-    List<RegistroDeTempoModel> Index(int usuarioId, int page, int perPage);
-    Task<RegistroDeTempoModel> Create(RegistroDeTempoModelView registro, int usuarioId);
-    Task<RegistroDeTempoModel> Update(int id, RegistroDeTempoModelView registro, int usuarioId);
+    List<RegistroDeTempoEntity> Index(int usuarioId, int page, int perPage);
+    Task<RegistroDeTempoEntity> Create(RegistroDeTempoModel registro, int usuarioId);
+    Task<RegistroDeTempoEntity> Update(int id, RegistroDeTempoModel registro, int usuarioId);
     Task<bool> Delete(int id, int usuarioId);
-    void ValidateUsuarioId(RegistroDeTempoModel registro, int usuarioId);
+    void ValidateUsuarioId(RegistroDeTempoEntity registro, int usuarioId);
 }

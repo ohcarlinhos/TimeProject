@@ -1,19 +1,20 @@
-﻿using PomodoroAPI.Modules.RegistroDeTempo.Models;
+﻿using PomodoroAPI.Modules.RegistroDeTempo.Entities;
+using PomodoroAPI.Modules.RegistroDeTempo.Models;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
 public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
 {
-    public List<PeriodoDeTempoModel> Index(int registroId, int usuarioId)
+    public List<PeriodoDeTempoEntity> Index(int registroId, int usuarioId)
     {
         return _dbContext.PeriodosDeTempo
             .Where(periodo => periodo.RegistroDeTempoId == registroId && periodo.UsuarioId == usuarioId)
             .ToList();
     }
 
-    public async Task<PeriodoDeTempoModel> Create(PeriodoDeTempoModelView periodo, int registroId, int usuarioId)
+    public async Task<PeriodoDeTempoEntity> Create(PeriodoDeTempoModel periodo, int registroId, int usuarioId)
     {
-        var periodoDb = new PeriodoDeTempoModel
+        var periodoDb = new PeriodoDeTempoEntity
         {
             UsuarioId = usuarioId,
             RegistroDeTempoId = registroId,
@@ -26,16 +27,16 @@ public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
         return periodoDb;
     }
 
-    public async Task<List<PeriodoDeTempoModel>> CreateByList(
-        List<PeriodoDeTempoModelView> periodos,
+    public async Task<List<PeriodoDeTempoEntity>> CreateByList(
+        List<PeriodoDeTempoModel> periodos,
         int registroId,
         int usuarioId
     )
     {
-        List<PeriodoDeTempoModel> periodosDb = [];
+        List<PeriodoDeTempoEntity> periodosDb = [];
 
         periodosDb.AddRange(periodos!
-            .Select(p => new PeriodoDeTempoModel()
+            .Select(p => new PeriodoDeTempoEntity()
             {
                 UsuarioId = usuarioId,
                 RegistroDeTempoId = registroId,
@@ -48,7 +49,7 @@ public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
         return periodosDb;
     }
 
-    public async Task<PeriodoDeTempoModel> Update(int id, PeriodoDeTempoModelView periodo, int usuarioId)
+    public async Task<PeriodoDeTempoEntity> Update(int id, PeriodoDeTempoModel periodo, int usuarioId)
     {
         var periodoDb = await FindByIdOrError(id, usuarioId);
         periodoDb.Inicio = periodo.Inicio;
