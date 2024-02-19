@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PomodoroAPI.Data;
 using PomodoroAPI.Modules.Usuario.Entities;
-using PomodoroAPI.Modules.Usuario.Models;
 
 namespace PomodoroAPI.Modules.Usuario.Repositories
 {
