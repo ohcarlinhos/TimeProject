@@ -1,13 +1,14 @@
-﻿using PomodoroAPI.Modules.Categoria.Models;
+﻿using PomodoroAPI.Modules.Categoria.Entities;
+using PomodoroAPI.Modules.Categoria.Models;
 
 namespace PomodoroAPI.Modules.Categoria.Repositories;
 
 public interface ICategoriaRepository
 {
-    List<CategoriaModel> Index(int usuarioId, int page, int perPage);
-    Task<CategoriaModel> Create(CategoriaViewModel categoria, int usuarioId);
-    Task<CategoriaModel> Update(int id, CategoriaViewModel categoria, int usuarioId);
-    Task<bool> Delete(int id,  int usuarioId);
-    Task<CategoriaModel> FindByIdOrError(int id, int usuarioId);
-    void ValidateUsuarioId(CategoriaModel categoria, int usuarioId);
+    List<CategoriaEntity> Index(int usuarioId, int page, int perPage);
+    Task<CategoriaEntity> Create(CategoriaEntity entity);
+    Task<CategoriaEntity> Update(CategoriaEntity entity);
+    Task<bool> Delete(CategoriaEntity entity);
+    Task<CategoriaEntity?> FindById(int id);
+    Task<CategoriaEntity?> FindByNomeAndUsuarioId(string nome, int usuarioId);
 }

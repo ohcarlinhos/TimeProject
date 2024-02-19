@@ -1,48 +1,68 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PomodoroAPI.Infrastructure.Http;
 using PomodoroAPI.Infrastructure.Services;
+using PomodoroAPI.Modules.Categoria.Entities;
 using PomodoroAPI.Modules.Categoria.Models;
-using PomodoroAPI.Modules.Categoria.Repositories;
+using PomodoroAPI.Modules.Categoria.Services;
 
 namespace PomodoroAPI.Modules.Categoria.Controllers;
 
-[ApiController]
-[Route("api/categoria")]
-public class CategoriaController : ControllerBase
+[ApiController, Route("api/categoria"), Authorize]
+public class CategoriaController(ICategoriaServices categoriaServices)
+    : ControllerBase
 {
-    private readonly ICategoriaRepository _categoriaRepository;
-
-    public CategoriaController(ICategoriaRepository categoriaRepository)
+    [HttpGet]
+    public ActionResult<List<CategoriaEntity>> Index(int page = 0, int perPage = 12)
     {
-        _categoriaRepository = categoriaRepository;
+        var result = categoriaServices
+            .Index(AuthorizeService.GetUsuarioId(User), page, perPage);
+
+        return Ok(result.Data);
     }
 
-    [HttpGet, Authorize]
-    public ActionResult<List<CategoriaModel>> Index(int page = 0, int perPage = 12)
+    [HttpPost]
+    public async Task<ActionResult<CategoriaEntity>> Create([FromBody] CategoriaModel model)
     {
-        return Ok(_categoriaRepository.Index(AuthorizeService.GetUsuarioId(User), page, perPage));
+        var result = await categoriaServices
+            .Create(model, AuthorizeService.GetUsuarioId(User));
+
+        if (result.HasError)
+            return BadRequest(new ErrorResponse { Message = result.Message });
+
+        return Ok(result.Data);
     }
 
-    [HttpPost, Authorize]
-    public async Task<ActionResult<CategoriaModel>> Create([FromBody] CategoriaViewModel categoria)
+    [HttpPut, Route("{id}")]
+    public async Task<ActionResult<CategoriaEntity>> Update(int id, [FromBody] CategoriaModel model)
     {
-        return Ok(await _categoriaRepository
-            .Create(categoria, AuthorizeService.GetUsuarioId(User))
-        );
+        var result = await categoriaServices
+            .Update(id, model, AuthorizeService.GetUsuarioId(User));
+
+        if (result.HasError)
+        {
+            var errorResponse = new ErrorResponse { Message = result.Message };
+            if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
+            if (result.Message!.Contains("unauthorized")) return Unauthorized();
+            return BadRequest(errorResponse);
+        }
+
+        return Ok(result.Data);
     }
 
-    [HttpPut, Route("{id}"), Authorize]
-    public async Task<ActionResult<CategoriaModel>> Update(int id, [FromBody] CategoriaViewModel categoria)
-    {
-        return Ok(
-            await _categoriaRepository.Update(id, categoria, AuthorizeService.GetUsuarioId(User))
-        );
-    }
-
-    [HttpDelete, Route("{id}"), Authorize]
+    [HttpDelete, Route("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        await _categoriaRepository.Delete(id, AuthorizeService.GetUsuarioId(User));
-        return NoContent();
+        var result = await categoriaServices
+            .Delete(id, AuthorizeService.GetUsuarioId(User));
+
+        if (result.HasError)
+        {
+            var errorResponse = new ErrorResponse { Message = result.Message };
+            if (result.Message!.Contains("unauthorized")) return Unauthorized();
+            return NotFound(errorResponse);
+        }
+
+        return Ok();
     }
 }

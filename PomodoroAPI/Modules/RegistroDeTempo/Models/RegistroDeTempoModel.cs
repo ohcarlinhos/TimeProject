@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using PomodoroAPI.Modules.Categoria.Entities;
 using PomodoroAPI.Modules.Categoria.Models;
 using PomodoroAPI.Modules.Usuario.Entities;
 using PomodoroAPI.Modules.Usuario.Models;
@@ -19,5 +20,5 @@ public class RegistroDeTempoModel
     public List<PeriodoDeTempoModel> Periodos { get; set; }
 
     public virtual UsuarioEntity? Usuario { get; set; }
-    public virtual CategoriaModel? Categoria { get; set; }
+    public virtual CategoriaEntity? Categoria { get; set; }
 }

@@ -17,13 +17,13 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
 
     public async Task<RegistroDeTempoModel> Create(RegistroDeTempoModelView registro, int usuarioId)
     {
-        if (registro.CategoriaId != null)
-            await _categoriaRepository.FindByIdOrError((int)registro.CategoriaId, usuarioId);
+        // if (registro.CategoriaId != null)
+        //     await _categoriaRepository.FindByIdOrError((int)registro.CategoriaId, usuarioId);
 
         var registroDb = new RegistroDeTempoModel
         {
             UsuarioId = usuarioId,
-            CategoriaId = registro.CategoriaId,
+            // CategoriaId = registro.CategoriaId,
             Titulo = registro.Titulo,
             DataDoRegistro = registro.DataDoRegistro
         };
