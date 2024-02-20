@@ -30,7 +30,7 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
         // TODO: considerar criar uma classe para lidar com as respostas, já que essa estrutura se repete.
         if (result.HasError)
         {
-            var errorResponse = new ErrorResponse { Message = result.Message };
+            var errorResponse = new HttpErrorResponse { Message = result.Message };
             if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
             return BadRequest(errorResponse);
         }
@@ -46,7 +46,7 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
 
         if (result.HasError)
         {
-            var errorResponse = new ErrorResponse { Message = result.Message };
+            var errorResponse = new HttpErrorResponse { Message = result.Message };
             if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
             return BadRequest(errorResponse);
         }
@@ -62,7 +62,7 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
 
         if (result.HasError)
         {
-            var errorResponse = new ErrorResponse { Message = result.Message };
+            var errorResponse = new HttpErrorResponse { Message = result.Message };
             if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
             return BadRequest(errorResponse);
         }

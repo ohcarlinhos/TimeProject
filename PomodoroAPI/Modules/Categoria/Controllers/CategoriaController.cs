@@ -28,7 +28,7 @@ public class CategoriaController(ICategoriaServices categoriaServices)
             .Create(model, AuthorizeService.GetUsuarioId(User));
 
         if (result.HasError)
-            return BadRequest(new ErrorResponse { Message = result.Message });
+            return BadRequest(new HttpErrorResponse { Message = result.Message });
 
         return Ok(result.Data);
     }
@@ -41,7 +41,7 @@ public class CategoriaController(ICategoriaServices categoriaServices)
 
         if (result.HasError)
         {
-            var errorResponse = new ErrorResponse { Message = result.Message };
+            var errorResponse = new HttpErrorResponse { Message = result.Message };
             if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
             if (result.Message!.Contains("unauthorized")) return Unauthorized();
             return BadRequest(errorResponse);
@@ -58,7 +58,7 @@ public class CategoriaController(ICategoriaServices categoriaServices)
 
         if (result.HasError)
         {
-            var errorResponse = new ErrorResponse { Message = result.Message };
+            var errorResponse = new HttpErrorResponse { Message = result.Message };
             if (result.Message!.Contains("unauthorized")) return Unauthorized();
             return NotFound(errorResponse);
         }

@@ -1,6 +1,6 @@
 ﻿namespace PomodoroAPI.Infrastructure.Http;
 
-public class ErrorResponse
+public class HttpErrorResponse
 {
     public string? Message { get; set; }
 }

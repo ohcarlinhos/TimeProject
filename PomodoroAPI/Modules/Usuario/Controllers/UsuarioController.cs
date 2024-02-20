@@ -17,7 +17,7 @@ public class UsuarioController(IUsuarioServices usuarioServices) : ControllerBas
     public async Task<ActionResult<UsuarioEntity>> Create([FromBody] CreateUsuarioModel model)
     {
         var result = await usuarioServices.Create(model);
-        if (result.HasError) return BadRequest(new ErrorResponse { Message = result.Message });
+        if (result.HasError) return BadRequest(new HttpErrorResponse { Message = result.Message });
         return Ok(result.Data);
     }
 
@@ -26,7 +26,7 @@ public class UsuarioController(IUsuarioServices usuarioServices) : ControllerBas
     {
         if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
         var result = await usuarioServices.Update(id, model);
-        if (result.HasError) return BadRequest(new ErrorResponse { Message = result.Message });
+        if (result.HasError) return BadRequest(new HttpErrorResponse { Message = result.Message });
         return Ok(result.Data);
     }
 

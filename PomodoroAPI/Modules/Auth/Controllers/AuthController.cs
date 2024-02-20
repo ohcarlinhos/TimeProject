@@ -15,7 +15,7 @@ public class AuthController(IAuthService authService) : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
         var result = await authService.Login(model);
-        if (result.HasError) return BadRequest(new ErrorResponse { Message = result.Message });
+        if (result.HasError) return BadRequest(new HttpErrorResponse { Message = result.Message });
         return Ok(result.Data);
     }
 }
