@@ -1,32 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using PomodoroAPI.Infrastructure.Services;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
-using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
+﻿using Microsoft.AspNetCore.Mvc;
+using PomodoroAPI.Modules.RegistroDeTempo.Services;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Controllers;
 
 [ApiController]
 [Route("/api/periodo-de-tempo")]
-public class PeriodoDeTempoController : ControllerBase
+public class PeriodoDeTempoController(IPeriodoDeTempoServices periodoDeTempoServices) : ControllerBase
 {
-    private readonly IPeriodoDeTempoRepository _periodoDeTempoRepository;
-
-    public PeriodoDeTempoController(IPeriodoDeTempoRepository periodoDeTempoRepository)
-    {
-        _periodoDeTempoRepository = periodoDeTempoRepository;
-    }
-
-    [HttpPut, Authorize, Route("{id}")]
-    public async Task<ActionResult<PeriodoDeTempoEntity>> Update(int id, [FromBody] PeriodoDeTempoModel periodo)
-    {
-        return Ok(await _periodoDeTempoRepository.Update(id, periodo, AuthorizeService.GetUsuarioId(User)));
-    }
-
-    [HttpDelete, Authorize, Route("{id}")]
-    public async Task<ActionResult<PeriodoDeTempoEntity>> Delete(int id)
-    {
-        return Ok(await _periodoDeTempoRepository.Delete(id, AuthorizeService.GetUsuarioId(User)));
-    }
+    // TODO: adicionar métodos de CRUD
 }

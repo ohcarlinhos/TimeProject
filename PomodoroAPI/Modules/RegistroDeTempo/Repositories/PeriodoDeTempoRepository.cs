@@ -1,81 +1,56 @@
-﻿using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PomodoroAPI.Data;
+using PomodoroAPI.Modules.RegistroDeTempo.Entities;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
-public partial class PeriodoDeTempoRepository : IPeriodoDeTempoRepository
+public class PeriodoDeTempoRepository(ProjectContext dbContext) : IPeriodoDeTempoRepository
 {
     public List<PeriodoDeTempoEntity> Index(int registroId, int usuarioId)
     {
-        return _dbContext.PeriodosDeTempo
+        return dbContext.PeriodosDeTempo
             .Where(periodo => periodo.RegistroDeTempoId == registroId && periodo.UsuarioId == usuarioId)
             .ToList();
     }
 
-    public async Task<PeriodoDeTempoEntity> Create(PeriodoDeTempoModel periodo, int registroId, int usuarioId)
+    public async Task<PeriodoDeTempoEntity> Create(PeriodoDeTempoEntity entity)
     {
-        var periodoDb = new PeriodoDeTempoEntity
-        {
-            UsuarioId = usuarioId,
-            RegistroDeTempoId = registroId,
-            Inicio = periodo.Inicio,
-            Fim = periodo.Fim,
-        };
-
-        _dbContext.PeriodosDeTempo.Add(periodoDb);
-        await _dbContext.SaveChangesAsync();
-        return periodoDb;
+        dbContext.PeriodosDeTempo.Add(entity);
+        await dbContext.SaveChangesAsync();
+        return entity;
     }
 
-    public async Task<List<PeriodoDeTempoEntity>> CreateByList(
-        List<PeriodoDeTempoModel> periodos,
-        int registroId,
-        int usuarioId
-    )
+    public async Task<List<PeriodoDeTempoEntity>> CreateByList(List<PeriodoDeTempoEntity> entityList)
     {
-        List<PeriodoDeTempoEntity> periodosDb = [];
-
-        periodosDb.AddRange(periodos!
-            .Select(p => new PeriodoDeTempoEntity()
-            {
-                UsuarioId = usuarioId,
-                RegistroDeTempoId = registroId,
-                Inicio = p.Inicio,
-                Fim = p.Fim
-            }));
-
-        _dbContext.PeriodosDeTempo.AddRange(periodosDb);
-        await _dbContext.SaveChangesAsync();
-        return periodosDb;
+        dbContext.PeriodosDeTempo.AddRange(entityList);
+        await dbContext.SaveChangesAsync();
+        return entityList;
     }
 
-    public async Task<PeriodoDeTempoEntity> Update(int id, PeriodoDeTempoModel periodo, int usuarioId)
+    public async Task<PeriodoDeTempoEntity> Update(PeriodoDeTempoEntity entity)
     {
-        var periodoDb = await FindByIdOrError(id, usuarioId);
-        periodoDb.Inicio = periodo.Inicio;
-        periodoDb.Fim = periodo.Fim;
-
-        _dbContext.PeriodosDeTempo.Update(periodoDb);
-        await _dbContext.SaveChangesAsync();
-        return periodoDb;
+        dbContext.PeriodosDeTempo.Update(entity);
+        await dbContext.SaveChangesAsync();
+        return entity;
     }
 
-    public async Task<bool> Delete(int id, int usuarioId)
+    public async Task<bool> Delete(PeriodoDeTempoEntity entity)
     {
-        var periodoDb = await FindByIdOrError(id, usuarioId);
-        _dbContext.PeriodosDeTempo.Remove(periodoDb);
-        await _dbContext.SaveChangesAsync();
+        dbContext.PeriodosDeTempo.Remove(entity);
+        await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<bool> DeleteAllByRegistroId(int registroId, int usuarioId)
+    public async Task<bool> DeleteAllByRegistroId(IEnumerable<PeriodoDeTempoEntity> entityList)
     {
-        var periodosList = _dbContext.PeriodosDeTempo
-            .Where(periodo => periodo.RegistroDeTempoId == registroId && periodo.UsuarioId == usuarioId)
-            .ToList();
-
-        _dbContext.PeriodosDeTempo.RemoveRange(periodosList);
-        await _dbContext.SaveChangesAsync();
+        dbContext.PeriodosDeTempo.RemoveRange(entityList);
+        await dbContext.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<PeriodoDeTempoEntity?> FindById(int id, int usuarioId)
+    {
+        return await dbContext.PeriodosDeTempo
+            .FirstOrDefaultAsync(periodo => periodo.Id == id && periodo.UsuarioId == usuarioId);
     }
 }

@@ -10,5 +10,6 @@ public interface ICategoriaRepository
     Task<CategoriaEntity> Update(CategoriaEntity entity);
     Task<bool> Delete(CategoriaEntity entity);
     Task<CategoriaEntity?> FindById(int id);
+    Task<CategoriaEntity?> FindById(int id, int usuarioId);
     Task<CategoriaEntity?> FindByNomeAndUsuarioId(string nome, int usuarioId);
 }

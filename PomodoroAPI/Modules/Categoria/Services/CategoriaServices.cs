@@ -33,7 +33,7 @@ public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICate
         var result = new Result<CategoriaEntity>();
         var categoria = await categoriaRepository.FindById(id);
 
-        if (categoria == null) return result.SetError("not_found: Categoria inexistente.");
+        if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
 
         if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
 
@@ -50,7 +50,8 @@ public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICate
         var result = new Result<bool>();
         var categoria = await categoriaRepository.FindById(id);
 
-        if (categoria == null) return result.SetError("not_found: Categoria inexistente.");
+        if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
+        
         if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
 
         result.Data = await categoriaRepository.Delete(categoria);

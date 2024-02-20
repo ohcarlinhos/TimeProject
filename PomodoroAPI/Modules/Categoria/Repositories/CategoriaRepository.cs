@@ -42,6 +42,11 @@ public partial class CategoriaRepository(ProjectContext dbContext) : ICategoriaR
         return await dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
     }
 
+    public async Task<CategoriaEntity?> FindById(int id, int usuarioId)
+    {
+        return await dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == usuarioId);
+    }
+
     public async Task<CategoriaEntity?> FindByNomeAndUsuarioId(string nome, int usuarioId)
     {
         return await dbContext.Categorias

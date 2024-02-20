@@ -13,4 +13,10 @@ public class Result<T>
         Message = message;
         return this;
     }
+
+    public Result<T> SetData(T data)
+    {
+        Data = data;
+        return this;
+    }
 }

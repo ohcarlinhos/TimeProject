@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PomodoroAPI.Data;
 using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
 
-public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
+public class RegistroDeTempoRepository(ProjectContext dbContext) : IRegistroDeTempoRepository
 {
     public List<RegistroDeTempoEntity> Index(int usuarioId, int page, int perPage)
     {
-        return _dbContext.RegistrosDeTempo
+        return dbContext.RegistrosDeTempo
             .Where(registro => registro.UsuarioId == usuarioId)
             .Include(r => r.Periodos)
             .Skip(page * perPage)
@@ -16,47 +16,30 @@ public partial class RegistroDeTempoRepository : IRegistroDeTempoRepository
             .ToList();
     }
 
-    public async Task<RegistroDeTempoEntity> Create(RegistroDeTempoModel registro, int usuarioId)
+    public async Task<RegistroDeTempoEntity> Create(RegistroDeTempoEntity entity)
     {
-        // if (registro.CategoriaId != null)
-        //     await _categoriaRepository.FindByIdOrError((int)registro.CategoriaId, usuarioId);
-
-        var registroDb = new RegistroDeTempoEntity
-        {
-            UsuarioId = usuarioId,
-            // CategoriaId = registro.CategoriaId,
-            Titulo = registro.Titulo,
-            DataDoRegistro = registro.DataDoRegistro
-        };
-
-        await _dbContext.RegistrosDeTempo.AddAsync(registroDb);
-        await _dbContext.SaveChangesAsync();
-        
-        await _periodoDeTempoRepository.CreateByList(registro.Periodos, registroDb.Id, usuarioId);
-
-        return registroDb;
+        await dbContext.RegistrosDeTempo.AddAsync(entity);
+        await dbContext.SaveChangesAsync();
+        return entity;
     }
 
-    public async Task<RegistroDeTempoEntity> Update(int id, RegistroDeTempoModel registro, int usuarioId)
+    public async Task<RegistroDeTempoEntity> Update(RegistroDeTempoEntity entity)
     {
-        var registroDb = await FindByIdOrError(id, usuarioId);
-        
-        registroDb.Titulo = registro.Titulo;
-        registroDb.CategoriaId = registro.CategoriaId;
-        registroDb.DataDoRegistro = registro.DataDoRegistro;
-
-        _dbContext.RegistrosDeTempo.Update(registroDb);
-        await _dbContext.SaveChangesAsync();
-        return registroDb;
+        dbContext.RegistrosDeTempo.Update(entity);
+        await dbContext.SaveChangesAsync();
+        return entity;
     }
 
-    public async Task<bool> Delete(int id, int usuarioId)
+    public async Task<bool> Delete(RegistroDeTempoEntity entity)
     {
-        var registroDb = await FindByIdOrError(id, usuarioId);
-        ValidateUsuarioId(registroDb, usuarioId);
-        
-        _dbContext.RegistrosDeTempo.Remove(registroDb);
-        await _dbContext.SaveChangesAsync();
+        dbContext.RegistrosDeTempo.Remove(entity);
+        await dbContext.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<RegistroDeTempoEntity?> FindById(int id, int usuarioId)
+    {
+        return await dbContext.RegistrosDeTempo
+            .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == usuarioId);
     }
 }
