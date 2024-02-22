@@ -19,17 +19,15 @@ public class RegistroDeTempoServices(
             { Data = registroDeTempoRepository.Index(usuarioId, page, perPage) };
     }
 
-    public async Task<Result<RegistroDeTempoEntity>> Create(RegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDeTempoEntity>> Create(CreateRegistroDeTempoModel model, int usuarioId)
     {
         var result = new Result<RegistroDeTempoEntity>();
         var transaction = await dbContext.Database.BeginTransactionAsync();
 
         if (model.CategoriaId != null)
         {
-            // TODO: modificar repositório de find by id para considerar usuario id e não precisar verificar o "dono"
-            var categoria = await categoriaRepository.FindById((int)model.CategoriaId);
+            var categoria = await categoriaRepository.FindById((int)model.CategoriaId, usuarioId);
             if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
-            if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
         }
 
         var registro = await registroDeTempoRepository.Create(new RegistroDeTempoEntity
@@ -60,7 +58,7 @@ public class RegistroDeTempoServices(
         return result.SetData(registro);
     }
 
-    public async Task<Result<RegistroDeTempoEntity>> Update(int id, RegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDeTempoEntity>> Update(int id, UpdateRegistroDeTempoModel model, int usuarioId)
     {
         var result = new Result<RegistroDeTempoEntity>();
 
@@ -72,16 +70,16 @@ public class RegistroDeTempoServices(
 
         if (model.CategoriaId != null)
         {
-            // TODO: modificar depois de resolver o TODO acima.
-            var categoria = await categoriaRepository.FindById((int)model.CategoriaId);
+            var categoria = await categoriaRepository.FindById((int)model.CategoriaId, usuarioId);
             if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
-            if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
-
             registro.CategoriaId = model.CategoriaId;
         }
 
-        registro.Titulo = model.Titulo;
-        registro.DataDoRegistro = model.DataDoRegistro;
+        if (model.Titulo != null)
+            registro.Titulo = model.Titulo;
+
+        if (model.DataDoRegistro != null) 
+            registro.DataDoRegistro = model.DataDoRegistro;
 
         return result.SetData(await registroDeTempoRepository.Update(registro));
     }

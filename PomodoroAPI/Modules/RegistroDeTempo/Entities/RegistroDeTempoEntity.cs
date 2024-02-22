@@ -14,7 +14,7 @@ public class RegistroDeTempoEntity
 
     [Required, MaxLength(120)] public string? Titulo { get; set; }
 
-    [Required] public DateTime DataDoRegistro { get; set; }
+    [Required] public DateTime? DataDoRegistro { get; set; }
     public List<PeriodoDeTempoEntity> Periodos { get; set; }
 
     public virtual UsuarioEntity? Usuario { get; set; }

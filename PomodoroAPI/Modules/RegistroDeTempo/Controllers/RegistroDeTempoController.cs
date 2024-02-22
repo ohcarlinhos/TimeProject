@@ -5,12 +5,13 @@ using PomodoroAPI.Infrastructure.Services;
 using PomodoroAPI.Modules.RegistroDeTempo.Entities;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 using PomodoroAPI.Modules.RegistroDeTempo.Services;
+using PomodoroAPI.Modules.Shared.Controllers;
 
 namespace PomodoroAPI.Modules.RegistroDeTempo.Controllers;
 
 [ApiController]
 [Route("api/registro-de-tempo")]
-public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoServices) : ControllerBase
+public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoServices) : CustomController
 {
     [HttpGet, Authorize]
     public ActionResult<List<RegistroDeTempoEntity>> Index(int page, int perPage = 12)
@@ -18,55 +19,33 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
         var result = registroDeTempoServices
             .Index(AuthorizeService.GetUsuarioId(User), page, perPage);
 
-        return Ok(result.Data);
+        return HandleResponse(result);
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult<RegistroDeTempoEntity>> Create([FromBody] RegistroDeTempoModel model)
+    public async Task<ActionResult<RegistroDeTempoEntity>> Create([FromBody] CreateRegistroDeTempoModel model)
     {
         var result = await registroDeTempoServices
             .Create(model, AuthorizeService.GetUsuarioId(User));
 
-        // TODO: considerar criar uma classe para lidar com as respostas, já que essa estrutura se repete.
-        if (result.HasError)
-        {
-            var errorResponse = new HttpErrorResponse { Message = result.Message };
-            if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
-            return BadRequest(errorResponse);
-        }
-
-        return Ok(result.Data);
+        return HandleResponse(result);
     }
 
     [HttpPut, Authorize, Route("{id}")]
-    public async Task<ActionResult<RegistroDeTempoEntity>> Update(int id, [FromBody] RegistroDeTempoModel model)
+    public async Task<ActionResult<RegistroDeTempoEntity>> Update(int id, [FromBody] UpdateRegistroDeTempoModel model)
     {
         var result = await registroDeTempoServices
             .Update(id, model, AuthorizeService.GetUsuarioId(User));
 
-        if (result.HasError)
-        {
-            var errorResponse = new HttpErrorResponse { Message = result.Message };
-            if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
-            return BadRequest(errorResponse);
-        }
-
-        return Ok(result.Data);
+        return HandleResponse(result);
     }
 
     [HttpDelete, Authorize, Route("{id}")]
-    public async Task<ActionResult<RegistroDeTempoEntity>> Delete(int id)
+    public async Task<ActionResult<bool>> Delete(int id)
     {
         var result = await registroDeTempoServices
             .Delete(id, AuthorizeService.GetUsuarioId(User));
 
-        if (result.HasError)
-        {
-            var errorResponse = new HttpErrorResponse { Message = result.Message };
-            if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
-            return BadRequest(errorResponse);
-        }
-
-        return Ok(result.Data);
+        return HandleResponse(result);
     }
 }
