@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PomodoroAPI.Data;
 using PomodoroAPI.Infrastructure;
+using PomodoroAPI.Infrastructure.Mapping;
 using PomodoroAPI.Modules.Auth.Services;
 using PomodoroAPI.Modules.Usuario.Repositories;
 using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
@@ -91,6 +92,8 @@ builder.Services.AddScoped<IUsuarioServices, UsuarioServices>();
 builder.Services.AddScoped<ICategoriaServices, CategoriaServices>();
 builder.Services.AddScoped<IRegistroDeTempoServices, RegistroDeTempoServices>();
 builder.Services.AddScoped<IPeriodoDeTempoServices, PeriodoDeTempoServices>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // build da aplicação
 var app = builder.Build();
