@@ -1,9 +1,8 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PomodoroAPI.Infrastructure.Http;
 using PomodoroAPI.Infrastructure.Services;
-using PomodoroAPI.Modules.Usuario.Entities;
+using PomodoroAPI.Modules.Shared.Controllers;
+using PomodoroAPI.Modules.Usuario.DTO;
 using PomodoroAPI.Modules.Usuario.Models;
 using PomodoroAPI.Modules.Usuario.Services;
 
@@ -11,30 +10,38 @@ namespace PomodoroAPI.Modules.Usuario.Controllers;
 
 [ApiController]
 [Route("api/usuario")]
-public class UsuarioController(IUsuarioServices usuarioServices) : ControllerBase
+public class UsuarioController(IUsuarioServices usuarioServices) : CustomController
 {
     [HttpPost]
-    public async Task<ActionResult<UsuarioEntity>> Create([FromBody] CreateUsuarioModel model)
+    public async Task<ActionResult<UsuarioDTO>> Create([FromBody] CreateUsuarioModel model)
     {
-        var result = await usuarioServices.Create(model);
-        if (result.HasError) return BadRequest(new HttpErrorResponse { Message = result.Message });
-        return Ok(result.Data);
+        return HandleResponse(await usuarioServices.Create(model));
     }
 
     [HttpPut("{id}"), Authorize]
-    public async Task<ActionResult<UsuarioEntity>> Update([FromRoute] int id, [FromBody] UpdateUsuarioModel model)
+    public async Task<ActionResult<UsuarioDTO>> Update([FromRoute] int id, [FromBody] UpdateUsuarioModel model)
     {
         if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
-        var result = await usuarioServices.Update(id, model);
-        if (result.HasError) return BadRequest(new HttpErrorResponse { Message = result.Message });
-        return Ok(result.Data);
+        return HandleResponse(await usuarioServices.Update(id, model));
     }
 
     [HttpDelete("{id}"), Authorize]
-    public async Task<ActionResult> Delete([FromRoute] int id)
+    public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
         if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
-        await usuarioServices.Delete(id);
-        return Ok();
+        return HandleResponse(await usuarioServices.Delete(id));
+    }
+
+    [HttpGet, Authorize, Route("{id}")]
+    public async Task<ActionResult<UsuarioDTO>> Get(int id)
+    {
+        return HandleResponse(await usuarioServices.Get(id));
+    }
+
+    [HttpGet, Authorize, Route("myself")]
+    public async Task<ActionResult<UsuarioDTO>> Myself()
+    {
+        return HandleResponse(await usuarioServices
+            .Get(AuthorizeService.GetUsuarioId(User)));
     }
 }

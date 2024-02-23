@@ -1,15 +1,24 @@
-﻿using PomodoroAPI.Modules.Shared;
+﻿using AutoMapper;
+using PomodoroAPI.Modules.Shared;
+using PomodoroAPI.Modules.Usuario.DTO;
 using PomodoroAPI.Modules.Usuario.Entities;
 using PomodoroAPI.Modules.Usuario.Models;
 using PomodoroAPI.Modules.Usuario.Repositories;
 
 namespace PomodoroAPI.Modules.Usuario.Services;
 
-public class UsuarioServices(IUsuarioRepository usuarioRepository) : IUsuarioServices
+public class UsuarioServices(IUsuarioRepository usuarioRepository, IMapper mapper) : IUsuarioServices
 {
-    public async Task<Result<UsuarioEntity>> Create(CreateUsuarioModel model)
+    public async Task<Result<UsuarioDTO>> Get(int id)
     {
-        var result = new Result<UsuarioEntity>();
+        var result = new Result<UsuarioDTO>();
+        var entity = await usuarioRepository.FindById(id);
+        return result.SetData(mapper.Map<UsuarioDTO>(entity));
+    }
+
+    public async Task<Result<UsuarioDTO>> Create(CreateUsuarioModel model)
+    {
+        var result = new Result<UsuarioDTO>();
 
         if (await EmailNotAvailability(model.Email))
         {
@@ -18,7 +27,7 @@ public class UsuarioServices(IUsuarioRepository usuarioRepository) : IUsuarioSer
             return result;
         }
 
-        result.Data = await usuarioRepository
+        var entity = await usuarioRepository
             .Create(new UsuarioEntity
             {
                 Nome = model.Nome,
@@ -26,12 +35,14 @@ public class UsuarioServices(IUsuarioRepository usuarioRepository) : IUsuarioSer
                 Senha = model.Senha
             });
 
+        result.Data = mapper.Map<UsuarioDTO>(entity);
+
         return result;
     }
 
-    public async Task<Result<UsuarioEntity>> Update(int id, UpdateUsuarioModel model)
+    public async Task<Result<UsuarioDTO>> Update(int id, UpdateUsuarioModel model)
     {
-        var result = new Result<UsuarioEntity>();
+        var result = new Result<UsuarioDTO>();
         var usuario = await usuarioRepository.FindById(id);
 
         if (usuario == null)
@@ -55,7 +66,9 @@ public class UsuarioServices(IUsuarioRepository usuarioRepository) : IUsuarioSer
             usuario.Senha = model.Senha;
         }
 
-        result.Data = await usuarioRepository.Update(usuario);
+        var entity = await usuarioRepository.Update(usuario);
+
+        result.Data = mapper.Map<UsuarioDTO>(entity);
         return result;
     }
 
