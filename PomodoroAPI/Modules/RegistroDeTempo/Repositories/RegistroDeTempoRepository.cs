@@ -11,6 +11,7 @@ public class RegistroDeTempoRepository(ProjectContext dbContext) : IRegistroDeTe
         return dbContext.RegistrosDeTempo
             .Where(registro => registro.UsuarioId == usuarioId)
             .Include(r => r.Periodos)
+            .Include(r => r.Categoria)
             .Skip(page * perPage)
             .Take(perPage)
             .ToList();
