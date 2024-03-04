@@ -9,13 +9,13 @@ public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICate
 {
     public Result<List<CategoriaEntity>> Index(int usuarioId, int page, int perPage)
     {
-        return new Result<List<CategoriaEntity>>() { Data = categoriaRepository.Index(usuarioId, page, perPage) };
+        return new Result<List<CategoriaEntity>>() { Data = categoriaRepository.Index(usuarioId) };
     }
 
     public async Task<Result<CategoriaEntity>> Create(CategoriaModel model, int usuarioId)
     {
         var result = new Result<CategoriaEntity>();
-        var categoria = await categoriaRepository.FindByNomeAndUsuarioId(model.Nome, usuarioId);
+        var categoria = await categoriaRepository.FindByNome(model.Nome, usuarioId);
 
         if (categoria != null)
             return result.SetError($"bad_request: Você já possui uma categoria '{model.Nome}'.");
@@ -37,7 +37,7 @@ public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICate
 
         if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
 
-        if (await categoriaRepository.FindByNomeAndUsuarioId(model.Nome, usuarioId) != null)
+        if (await categoriaRepository.FindByNome(model.Nome, usuarioId) != null)
             return result.SetError($"bad_request: Você já possui uma categoria '{model.Nome}'.");
 
         categoria.Nome = model.Nome;

@@ -7,12 +7,10 @@ namespace PomodoroAPI.Modules.Categoria.Repositories;
 
 public partial class CategoriaRepository(ProjectContext dbContext) : ICategoriaRepository
 {
-    public List<CategoriaEntity> Index(int usuarioId, int page = 0, int perPage = 12)
+    public List<CategoriaEntity> Index(int usuarioId)
     {
         return dbContext.Categorias
             .Where(categoria => categoria.UsuarioId == usuarioId)
-            .Skip(page * perPage)
-            .Take(perPage)
             .ToList();
     }
 
@@ -41,13 +39,13 @@ public partial class CategoriaRepository(ProjectContext dbContext) : ICategoriaR
     {
         return await dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
     }
-
+    
     public async Task<CategoriaEntity?> FindById(int id, int usuarioId)
     {
         return await dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == usuarioId);
     }
 
-    public async Task<CategoriaEntity?> FindByNomeAndUsuarioId(string nome, int usuarioId)
+    public async Task<CategoriaEntity?> FindByNome(string nome, int usuarioId)
     {
         return await dbContext.Categorias
             .Where(categoria => categoria.Nome == nome && categoria.UsuarioId == usuarioId)
