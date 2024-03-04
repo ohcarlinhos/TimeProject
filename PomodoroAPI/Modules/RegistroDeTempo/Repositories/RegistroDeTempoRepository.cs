@@ -12,7 +12,7 @@ public class RegistroDeTempoRepository(ProjectContext dbContext) : IRegistroDeTe
             .Where(registro => registro.UsuarioId == usuarioId)
             .Include(r => r.Periodos)
             .Include(r => r.Categoria)
-            .Skip(page * perPage)
+            .Skip(page > 0 ? page - 1 : page * perPage)
             .Take(perPage)
             .ToList();
     }
