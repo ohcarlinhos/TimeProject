@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PomodoroAPI.Infrastructure.Http;
 using PomodoroAPI.Infrastructure.Services;
+using PomodoroAPI.Modules.RegistroDeTempo.DTO;
 using PomodoroAPI.Modules.RegistroDeTempo.Entities;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 using PomodoroAPI.Modules.RegistroDeTempo.Services;
@@ -14,7 +15,7 @@ namespace PomodoroAPI.Modules.RegistroDeTempo.Controllers;
 public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoServices) : CustomController
 {
     [HttpGet, Authorize]
-    public ActionResult<List<RegistroDeTempoEntity>> Index(int page, int perPage = 12)
+    public ActionResult<List<RegistroDeTempoDTO>> Index(int page = 1, int perPage = 12)
     {
         var result = registroDeTempoServices
             .Index(AuthorizeService.GetUsuarioId(User), page, perPage);
@@ -23,7 +24,7 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult<RegistroDeTempoEntity>> Create([FromBody] CreateRegistroDeTempoModel model)
+    public async Task<ActionResult<RegistroDeTempoDTO>> Create([FromBody] CreateRegistroDeTempoModel model)
     {
         var result = await registroDeTempoServices
             .Create(model, AuthorizeService.GetUsuarioId(User));
@@ -32,7 +33,7 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
     }
 
     [HttpPut, Authorize, Route("{id}")]
-    public async Task<ActionResult<RegistroDeTempoEntity>> Update(int id, [FromBody] UpdateRegistroDeTempoModel model)
+    public async Task<ActionResult<RegistroDeTempoDTO>> Update(int id, [FromBody] UpdateRegistroDeTempoModel model)
     {
         var result = await registroDeTempoServices
             .Update(id, model, AuthorizeService.GetUsuarioId(User));

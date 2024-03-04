@@ -1,5 +1,7 @@
-﻿using PomodoroAPI.Data;
+﻿using AutoMapper;
+using PomodoroAPI.Data;
 using PomodoroAPI.Modules.Categoria.Repositories;
+using PomodoroAPI.Modules.RegistroDeTempo.DTO;
 using PomodoroAPI.Modules.RegistroDeTempo.Entities;
 using PomodoroAPI.Modules.RegistroDeTempo.Models;
 using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
@@ -11,17 +13,21 @@ public class RegistroDeTempoServices(
     ProjectContext dbContext,
     IRegistroDeTempoRepository registroDeTempoRepository,
     ICategoriaRepository categoriaRepository,
-    IPeriodoDeTempoServices periodoDeTempoServices) : IRegistroDeTempoServices
+    IPeriodoDeTempoServices periodoDeTempoServices,
+    IMapper mapper
+) : IRegistroDeTempoServices
 {
-    public Result<List<RegistroDeTempoEntity>> Index(int usuarioId, int page, int perPage)
+    public Result<List<RegistroDeTempoDTO>> Index(int usuarioId, int page, int perPage)
     {
-        return new Result<List<RegistroDeTempoEntity>>()
-            { Data = registroDeTempoRepository.Index(usuarioId, page, perPage) };
+        return new Result<List<RegistroDeTempoDTO>>()
+        {
+            Data = MapData(registroDeTempoRepository.Index(usuarioId, page, perPage))
+        };
     }
 
-    public async Task<Result<RegistroDeTempoEntity>> Create(CreateRegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDeTempoDTO>> Create(CreateRegistroDeTempoModel model, int usuarioId)
     {
-        var result = new Result<RegistroDeTempoEntity>();
+        var result = new Result<RegistroDeTempoDTO>();
         var transaction = await dbContext.Database.BeginTransactionAsync();
 
         if (model.CategoriaId != null)
@@ -55,12 +61,12 @@ public class RegistroDeTempoServices(
         }
 
         await transaction.CommitAsync();
-        return result.SetData(registro);
+        return result.SetData(MapData(registro));
     }
 
-    public async Task<Result<RegistroDeTempoEntity>> Update(int id, UpdateRegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDeTempoDTO>> Update(int id, UpdateRegistroDeTempoModel model, int usuarioId)
     {
-        var result = new Result<RegistroDeTempoEntity>();
+        var result = new Result<RegistroDeTempoDTO>();
 
         var registro = await registroDeTempoRepository
             .FindById(id, usuarioId);
@@ -78,10 +84,10 @@ public class RegistroDeTempoServices(
         if (model.Titulo != null)
             registro.Titulo = model.Titulo;
 
-        if (model.DataDoRegistro != null) 
+        if (model.DataDoRegistro != null)
             registro.DataDoRegistro = model.DataDoRegistro;
 
-        return result.SetData(await registroDeTempoRepository.Update(registro));
+        return result.SetData(MapData(await registroDeTempoRepository.Update(registro)));
     }
 
     public async Task<Result<bool>> Delete(int id, int usuarioId)
@@ -95,5 +101,15 @@ public class RegistroDeTempoServices(
             return result.SetError("not_found: Não foi encontrado um registro com esse id.");
 
         return result.SetData(await registroDeTempoRepository.Delete(registro));
+    }
+
+    private RegistroDeTempoDTO MapData(RegistroDeTempoEntity entity)
+    {
+        return mapper.Map<RegistroDeTempoEntity, RegistroDeTempoDTO>(entity);
+    }
+
+    private List<RegistroDeTempoDTO> MapData(List<RegistroDeTempoEntity> entities)
+    {
+        return mapper.Map<List<RegistroDeTempoEntity>, List<RegistroDeTempoDTO>>(entities);
     }
 }
