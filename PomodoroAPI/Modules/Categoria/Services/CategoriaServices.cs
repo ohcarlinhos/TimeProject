@@ -18,7 +18,7 @@ public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICate
         var categoria = await categoriaRepository.FindByNome(model.Nome, usuarioId);
 
         if (categoria != null)
-            return result.SetError($"bad_request: Você já possui uma categoria '{model.Nome}'.");
+            return result.SetData(categoria);
 
         result.Data = await categoriaRepository.Create(new CategoriaEntity
         {
@@ -51,7 +51,7 @@ public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICate
         var categoria = await categoriaRepository.FindById(id);
 
         if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
-        
+
         if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
 
         result.Data = await categoriaRepository.Delete(categoria);
