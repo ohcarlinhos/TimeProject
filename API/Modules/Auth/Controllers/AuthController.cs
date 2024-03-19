@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PomodoroAPI.Modules.Auth.Models;
-using PomodoroAPI.Modules.Auth.Services;
-using PomodoroAPI.Modules.Shared.Controllers;
+﻿using API.Modules.Auth.Models;
+using API.Modules.Auth.Services;
+using API.Modules.Shared.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace PomodoroAPI.Modules.Auth.Controllers;
+namespace API.Modules.Auth.Controllers;
 
 [ApiController]
 [Route("api/auth")]

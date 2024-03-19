@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using API.Infrastructure.Services;
+using API.Modules.Shared.Controllers;
+using API.Modules.Usuario.DTO;
+using API.Modules.Usuario.Models;
+using API.Modules.Usuario.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PomodoroAPI.Infrastructure.Services;
-using PomodoroAPI.Modules.Shared.Controllers;
-using PomodoroAPI.Modules.Usuario.DTO;
-using PomodoroAPI.Modules.Usuario.Models;
-using PomodoroAPI.Modules.Usuario.Services;
 
-namespace PomodoroAPI.Modules.Usuario.Controllers;
+namespace API.Modules.Usuario.Controllers;
 
 [ApiController]
 [Route("api/usuario")]

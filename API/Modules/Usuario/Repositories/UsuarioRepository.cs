@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PomodoroAPI.Data;
-using PomodoroAPI.Modules.Usuario.Entities;
+﻿using API.Data;
+using API.Modules.Usuario.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace PomodoroAPI.Modules.Usuario.Repositories
+namespace API.Modules.Usuario.Repositories
 {
     public class UsuarioRepository(ProjectContext dbContext) : IUsuarioRepository
     {

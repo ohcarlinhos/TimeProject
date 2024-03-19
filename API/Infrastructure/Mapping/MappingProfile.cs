@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using PomodoroAPI.Modules.RegistroDeTempo.DTO;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.Usuario.DTO;
-using PomodoroAPI.Modules.Usuario.Entities;
+﻿using API.Modules.RegistroDeTempo.DTO;
+using API.Modules.RegistroDeTempo.Entities;
+using API.Modules.Usuario.DTO;
+using API.Modules.Usuario.Entities;
+using AutoMapper;
 
-namespace PomodoroAPI.Infrastructure.Mapping;
+namespace API.Infrastructure.Mapping;
 
 public class MappingProfile : Profile
 {

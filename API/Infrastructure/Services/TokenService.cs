@@ -1,10 +1,10 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using API.Modules.Usuario.Entities;
 using Microsoft.IdentityModel.Tokens;
-using PomodoroAPI.Modules.Usuario.Entities;
-using PomodoroAPI.Modules.Usuario.Models;
+using API.Modules.Usuario.Models;
 
-namespace PomodoroAPI.Infrastructure.Services;
+namespace API.Infrastructure.Services;
 
 public static class TokenService
 {

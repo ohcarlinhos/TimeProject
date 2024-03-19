@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace PomodoroAPI.Migrations
+namespace API.Migrations
 {
     /// <inheritdoc />
     public partial class AdicionarValidacoesUsuario : Migration

@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace PomodoroAPI.Infrastructure.Services;
+namespace API.Infrastructure.Services;
 
 public static class AuthorizeService
 {

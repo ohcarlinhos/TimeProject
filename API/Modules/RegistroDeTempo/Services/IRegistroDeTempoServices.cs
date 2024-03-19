@@ -1,9 +1,9 @@
-﻿using PomodoroAPI.Modules.RegistroDeTempo.DTO;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
-using PomodoroAPI.Modules.Shared;
+﻿using API.Modules.RegistroDeTempo.DTO;
+using API.Modules.RegistroDeTempo.Models;
+using API.Modules.Shared;
+using API.Modules.RegistroDeTempo.Entities;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Services;
+namespace API.Modules.RegistroDeTempo.Services;
 
 public interface IRegistroDeTempoServices
 {

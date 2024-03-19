@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-using PomodoroAPI.Data;
-using PomodoroAPI.Infrastructure;
-using PomodoroAPI.Infrastructure.Config;
-using PomodoroAPI.Infrastructure.Mapping;
+using API.Data;
+using API.Infrastructure;
+using API.Infrastructure.Config;
+using API.Infrastructure.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 

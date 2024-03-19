@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PomodoroAPI.Data;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
+﻿using API.Data;
+using API.Modules.RegistroDeTempo.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
+namespace API.Modules.RegistroDeTempo.Repositories;
 
 public class PeriodoDeTempoRepository(ProjectContext dbContext) : IPeriodoDeTempoRepository
 {

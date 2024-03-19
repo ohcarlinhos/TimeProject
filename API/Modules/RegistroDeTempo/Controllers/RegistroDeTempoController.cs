@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using API.Infrastructure.Services;
+using API.Modules.RegistroDeTempo.DTO;
+using API.Modules.RegistroDeTempo.Models;
+using API.Modules.RegistroDeTempo.Services;
+using API.Modules.Shared.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PomodoroAPI.Infrastructure.Http;
-using PomodoroAPI.Infrastructure.Services;
-using PomodoroAPI.Modules.RegistroDeTempo.DTO;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
-using PomodoroAPI.Modules.RegistroDeTempo.Services;
-using PomodoroAPI.Modules.Shared.Controllers;
+using API.Infrastructure.Http;
+using API.Modules.RegistroDeTempo.Entities;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Controllers;
+namespace API.Modules.RegistroDeTempo.Controllers;
 
 [ApiController]
 [Route("api/registro-de-tempo")]

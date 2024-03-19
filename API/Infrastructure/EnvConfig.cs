@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Infrastructure;
+﻿namespace API.Infrastructure;
 
 public static class EnvConfig
 {

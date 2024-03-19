@@ -1,9 +1,9 @@
-﻿using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.Categoria.Models;
-using PomodoroAPI.Modules.Categoria.Repositories;
-using PomodoroAPI.Modules.Shared;
+﻿using API.Modules.Categoria.Entities;
+using API.Modules.Categoria.Models;
+using API.Modules.Categoria.Repositories;
+using API.Modules.Shared;
 
-namespace PomodoroAPI.Modules.Categoria.Services;
+namespace API.Modules.Categoria.Services;
 
 public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICategoriaServices
 {

@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Modules.Shared;
+﻿namespace API.Modules.Shared;
 
 public class Result<T>
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PomodoroAPI.Modules.Shared.Controllers;
+namespace API.Modules.Shared.Controllers;
 
 [ApiExplorerSettings(IgnoreApi = true)]
 public class ErrorController : ControllerBase

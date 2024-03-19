@@ -1,7 +1,7 @@
-﻿using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.Categoria.Models;
+﻿using API.Modules.Categoria.Entities;
+using API.Modules.Categoria.Models;
 
-namespace PomodoroAPI.Modules.Categoria.Repositories;
+namespace API.Modules.Categoria.Repositories;
 
 public interface ICategoriaRepository
 {

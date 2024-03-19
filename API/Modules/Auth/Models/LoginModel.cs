@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PomodoroAPI.Modules.Auth.Models;
+namespace API.Modules.Auth.Models;
 
 public class LoginModel
 {

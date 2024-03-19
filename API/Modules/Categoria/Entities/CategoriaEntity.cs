@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using PomodoroAPI.Modules.Usuario.Entities;
+using API.Modules.Usuario.Entities;
 
-namespace PomodoroAPI.Modules.Categoria.Entities;
+namespace API.Modules.Categoria.Entities;
 
 [Table("categorias")]
 public class CategoriaEntity

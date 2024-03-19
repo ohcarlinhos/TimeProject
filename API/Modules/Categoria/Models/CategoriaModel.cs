@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Modules.Categoria.Models;
+﻿namespace API.Modules.Categoria.Models;
 
 public class CategoriaModel
 {

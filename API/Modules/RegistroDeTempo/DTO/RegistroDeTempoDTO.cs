@@ -1,7 +1,7 @@
-﻿using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
+﻿using API.Modules.Categoria.Entities;
+using API.Modules.RegistroDeTempo.Entities;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.DTO;
+namespace API.Modules.RegistroDeTempo.DTO;
 
 public class RegistroDeTempoDTO
 {

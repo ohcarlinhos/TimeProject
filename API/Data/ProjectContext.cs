@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.Usuario.Entities;
+﻿using API.Modules.Categoria.Entities;
+using API.Modules.RegistroDeTempo.Entities;
+using API.Modules.Usuario.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace PomodoroAPI.Data;
+namespace API.Data;
 
 public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
 {

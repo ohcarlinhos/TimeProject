@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Models;
+namespace API.Modules.RegistroDeTempo.Models;
 
 public class PeriodoDeTempoModel
 {

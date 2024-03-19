@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Modules.Categoria.DTO;
+﻿namespace API.Modules.Categoria.DTO;
 
 public class CategoriaDTO
 {

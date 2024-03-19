@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace PomodoroAPI.Infrastructure.Config;
+namespace API.Infrastructure.Config;
 
 public class SwaggerBuilderConfig
 {

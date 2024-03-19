@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PomodoroAPI.Data;
-using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.Categoria.Models;
+﻿using API.Data;
+using API.Modules.Categoria.Entities;
+using Microsoft.EntityFrameworkCore;
+using API.Modules.Categoria.Models;
 
-namespace PomodoroAPI.Modules.Categoria.Repositories;
+namespace API.Modules.Categoria.Repositories;
 
 public partial class CategoriaRepository(ProjectContext dbContext) : ICategoriaRepository
 {

@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Modules.Usuario.DTO;
+﻿namespace API.Modules.Usuario.DTO;
 
 public class UsuarioDTO
 {

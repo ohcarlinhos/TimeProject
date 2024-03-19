@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using PomodoroAPI.Data;
-using PomodoroAPI.Modules.Categoria.Repositories;
-using PomodoroAPI.Modules.RegistroDeTempo.DTO;
-using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
-using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
-using PomodoroAPI.Modules.Shared;
+﻿using API.Data;
+using API.Modules.Categoria.Repositories;
+using API.Modules.RegistroDeTempo.DTO;
+using API.Modules.RegistroDeTempo.Entities;
+using API.Modules.RegistroDeTempo.Models;
+using API.Modules.RegistroDeTempo.Repositories;
+using API.Modules.Shared;
+using AutoMapper;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Services;
+namespace API.Modules.RegistroDeTempo.Services;
 
 public class RegistroDeTempoServices(
     ProjectContext dbContext,

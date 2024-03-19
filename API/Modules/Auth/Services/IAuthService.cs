@@ -1,7 +1,7 @@
-﻿using PomodoroAPI.Modules.Shared;
-using PomodoroAPI.Modules.Auth.Models;
+﻿using API.Modules.Auth.Models;
+using API.Modules.Shared;
 
-namespace PomodoroAPI.Modules.Auth.Services;
+namespace API.Modules.Auth.Services;
 
 public interface IAuthService
 {

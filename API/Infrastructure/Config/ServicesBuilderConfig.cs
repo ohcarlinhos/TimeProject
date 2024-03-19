@@ -1,9 +1,9 @@
-﻿using PomodoroAPI.Modules.Auth.Services;
-using PomodoroAPI.Modules.Categoria.Services;
-using PomodoroAPI.Modules.RegistroDeTempo.Services;
-using PomodoroAPI.Modules.Usuario.Services;
+﻿using API.Modules.Auth.Services;
+using API.Modules.Categoria.Services;
+using API.Modules.RegistroDeTempo.Services;
+using API.Modules.Usuario.Services;
 
-namespace PomodoroAPI.Infrastructure.Config;
+namespace API.Infrastructure.Config;
 
 public static class ServicesBuilderConfig
 {

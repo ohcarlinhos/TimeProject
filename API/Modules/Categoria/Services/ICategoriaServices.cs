@@ -1,8 +1,8 @@
-﻿using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.Categoria.Models;
-using PomodoroAPI.Modules.Shared;
+﻿using API.Modules.Categoria.Entities;
+using API.Modules.Categoria.Models;
+using API.Modules.Shared;
 
-namespace PomodoroAPI.Modules.Categoria.Services;
+namespace API.Modules.Categoria.Services;
 
 public interface ICategoriaServices
 {

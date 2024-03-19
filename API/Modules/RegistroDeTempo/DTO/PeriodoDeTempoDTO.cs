@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Modules.RegistroDeTempo.DTO;
+﻿namespace API.Modules.RegistroDeTempo.DTO;
 
 public class PeriodoDeTempoDTO
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Models;
+namespace API.Modules.RegistroDeTempo.Models;
 
 public class UpdateRegistroDeTempoModel
 {

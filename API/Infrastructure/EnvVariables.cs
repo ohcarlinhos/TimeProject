@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace PomodoroAPI.Infrastructure;
+namespace API.Infrastructure;
 
 public static class EnvVariables
 {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace PomodoroAPI.Modules.Usuario.Entities;
+namespace API.Modules.Usuario.Entities;
 
 [Table("usuarios"), Index(nameof(Email), IsUnique = true)]
 public class UsuarioEntity

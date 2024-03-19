@@ -1,7 +1,7 @@
-﻿using PomodoroAPI.Modules.Usuario.Entities;
-using PomodoroAPI.Modules.Usuario.Models;
+﻿using API.Modules.Usuario.Entities;
+using API.Modules.Usuario.Models;
 
-namespace PomodoroAPI.Modules.Usuario.Repositories
+namespace API.Modules.Usuario.Repositories
 {
     public interface IUsuarioRepository
     {

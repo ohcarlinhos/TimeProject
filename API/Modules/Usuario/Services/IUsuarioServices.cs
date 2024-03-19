@@ -1,8 +1,8 @@
-﻿using PomodoroAPI.Modules.Shared;
-using PomodoroAPI.Modules.Usuario.DTO;
-using PomodoroAPI.Modules.Usuario.Models;
+﻿using API.Modules.Shared;
+using API.Modules.Usuario.DTO;
+using API.Modules.Usuario.Models;
 
-namespace PomodoroAPI.Modules.Usuario.Services;
+namespace API.Modules.Usuario.Services;
 
 public interface IUsuarioServices
 {

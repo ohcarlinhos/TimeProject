@@ -1,10 +1,10 @@
-﻿using PomodoroAPI.Modules.RegistroDeTempo.Entities;
-using PomodoroAPI.Modules.RegistroDeTempo.Models;
-using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
-using PomodoroAPI.Modules.RegistroDeTempo.Util;
-using PomodoroAPI.Modules.Shared;
+﻿using API.Modules.RegistroDeTempo.Entities;
+using API.Modules.RegistroDeTempo.Models;
+using API.Modules.RegistroDeTempo.Repositories;
+using API.Modules.RegistroDeTempo.Util;
+using API.Modules.Shared;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Services;
+namespace API.Modules.RegistroDeTempo.Services;
 
 public class PeriodoDeTempoServices(
     IPeriodoDeTempoRepository periodoDeTempoRepository,

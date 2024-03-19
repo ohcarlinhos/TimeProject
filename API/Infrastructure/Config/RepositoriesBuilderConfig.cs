@@ -1,8 +1,8 @@
-﻿using PomodoroAPI.Modules.Categoria.Repositories;
-using PomodoroAPI.Modules.RegistroDeTempo.Repositories;
-using PomodoroAPI.Modules.Usuario.Repositories;
+﻿using API.Modules.Categoria.Repositories;
+using API.Modules.RegistroDeTempo.Repositories;
+using API.Modules.Usuario.Repositories;
 
-namespace PomodoroAPI.Infrastructure.Config;
+namespace API.Infrastructure.Config;
 
 public static class RepositoriesBuilderConfig
 {

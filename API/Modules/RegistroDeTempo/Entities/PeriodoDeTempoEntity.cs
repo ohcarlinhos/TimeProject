@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using PomodoroAPI.Modules.Usuario.Entities;
+using API.Modules.Usuario.Entities;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Entities;
+namespace API.Modules.RegistroDeTempo.Entities;
 
 [Table("periodos_de_tempo")]
 public class PeriodoDeTempoEntity

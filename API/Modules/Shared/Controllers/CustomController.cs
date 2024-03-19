@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PomodoroAPI.Infrastructure.Http;
+﻿using API.Infrastructure.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace PomodoroAPI.Modules.Shared.Controllers;
+namespace API.Modules.Shared.Controllers;
 
 public class CustomController : ControllerBase
 {

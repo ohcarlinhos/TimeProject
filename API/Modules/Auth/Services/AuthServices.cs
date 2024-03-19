@@ -1,9 +1,9 @@
-﻿using PomodoroAPI.Infrastructure.Services;
-using PomodoroAPI.Modules.Auth.Models;
-using PomodoroAPI.Modules.Shared;
-using PomodoroAPI.Modules.Usuario.Repositories;
+﻿using API.Infrastructure.Services;
+using API.Modules.Auth.Models;
+using API.Modules.Shared;
+using API.Modules.Usuario.Repositories;
 
-namespace PomodoroAPI.Modules.Auth.Services;
+namespace API.Modules.Auth.Services;
 
 public class AuthServices(IUsuarioRepository usuarioRepository) : IAuthService
 {

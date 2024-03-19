@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PomodoroAPI.Modules.Usuario.Models;
+namespace API.Modules.Usuario.Models;
 
 public class CreateUsuarioModel
 {

@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Infrastructure.Http;
+﻿namespace API.Infrastructure.Http;
 
 public class HttpErrorResponse
 {

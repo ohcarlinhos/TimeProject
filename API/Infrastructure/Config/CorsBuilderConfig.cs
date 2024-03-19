@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Infrastructure.Config;
+﻿namespace API.Infrastructure.Config;
 
 public class CorsBuilderConfig
 {

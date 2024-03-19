@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace PomodoroAPI.Infrastructure.Config;
+namespace API.Infrastructure.Config;
 
 public class JwtBuilderConfig
 {

@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using API.Infrastructure.Services;
+using API.Modules.Categoria.Entities;
+using API.Modules.Categoria.Models;
+using API.Modules.Categoria.Services;
+using API.Modules.Shared.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PomodoroAPI.Infrastructure.Services;
-using PomodoroAPI.Modules.Categoria.Entities;
-using PomodoroAPI.Modules.Categoria.Models;
-using PomodoroAPI.Modules.Categoria.Services;
-using PomodoroAPI.Modules.Shared.Controllers;
 
-namespace PomodoroAPI.Modules.Categoria.Controllers;
+namespace API.Modules.Categoria.Controllers;
 
 [ApiController, Route("api/categoria"), Authorize]
 public class CategoriaController(ICategoriaServices categoriaServices)

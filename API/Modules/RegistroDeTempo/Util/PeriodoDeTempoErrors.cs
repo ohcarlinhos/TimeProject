@@ -1,4 +1,4 @@
-﻿namespace PomodoroAPI.Modules.RegistroDeTempo.Util;
+﻿namespace API.Modules.RegistroDeTempo.Util;
 
 public static class PeriodoDeTempoErrors
 {

@@ -1,6 +1,6 @@
-﻿using PomodoroAPI.Modules.RegistroDeTempo.Entities;
+﻿using API.Modules.RegistroDeTempo.Entities;
 
-namespace PomodoroAPI.Modules.RegistroDeTempo.Repositories;
+namespace API.Modules.RegistroDeTempo.Repositories;
 
 public interface IRegistroDeTempoRepository
 {
