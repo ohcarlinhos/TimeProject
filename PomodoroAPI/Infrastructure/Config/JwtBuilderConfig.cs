@@ -22,7 +22,7 @@ public class JwtBuilderConfig
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Keys.Jwt),
+                    IssuerSigningKey = new SymmetricSecurityKey(EnvVariables.Jwt),
                 };
             });
     }

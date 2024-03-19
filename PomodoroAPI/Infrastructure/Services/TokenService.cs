@@ -17,10 +17,10 @@ public static class TokenService
             new Claim (ClaimTypes.Email, usuario.Email),
         });
 
-        var tokenExpires = DateTime.UtcNow.AddHours(12);
+        var tokenExpires = DateTime.UtcNow.AddHours(EnvVariables.JwtTokenExpires);
 
         var tokenSigningCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(Keys.Jwt),
+            new SymmetricSecurityKey(EnvVariables.Jwt),
             SecurityAlgorithms.HmacSha256Signature
         );
 
