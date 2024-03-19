@@ -1,6 +1,6 @@
 ﻿namespace PomodoroAPI.Infrastructure;
 
-public class EnvConfig
+public static class EnvConfig
 {
     public static void Load(string path)
     {
