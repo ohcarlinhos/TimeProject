@@ -12,8 +12,8 @@ using PomodoroAPI.Data;
 namespace PomodoroAPI.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240211150033_Usuario")]
-    partial class Usuario
+    [Migration("20240213000404_ModificacaoParaPeriodosDeTempo")]
+    partial class ModificacaoParaPeriodosDeTempo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace PomodoroAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("PomodoroAPI.Models.Categoria", b =>
+            modelBuilder.Entity("API.Modules.Categoria.Models.CategoriaModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,9 +33,10 @@ namespace PomodoroAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Nome")
+                    b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("integer");
+                        .HasColumnType("character varying(120)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("integer");
@@ -47,7 +48,7 @@ namespace PomodoroAPI.Migrations
                     b.ToTable("categorias");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.EventoDeFoco", b =>
+            modelBuilder.Entity("API.Modules.RegistroDeTempo.Models.PeriodoDeTempo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,16 +56,16 @@ namespace PomodoroAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DataDeRegistro")
+                    b.Property<DateTime>("Fim")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Inicio")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Posicao")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TempoFocadoId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Tipo")
+                    b.Property<int>("RegistroDeTempoId")
                         .HasColumnType("integer");
 
                     b.Property<int>("UsuarioId")
@@ -72,14 +73,14 @@ namespace PomodoroAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TempoFocadoId");
+                    b.HasIndex("RegistroDeTempoId");
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("eventos_de_foco");
+                    b.ToTable("periodos_de_tempo");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>
+            modelBuilder.Entity("API.Modules.RegistroDeTempo.Models.RegistroDeTempoModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,10 +88,10 @@ namespace PomodoroAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoriaId")
+                    b.Property<int?>("CategoriaId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DataDeRegistro")
+                    b.Property<DateTime>("DataDoRegistro")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Titulo")
@@ -107,10 +108,10 @@ namespace PomodoroAPI.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("tempos_focado");
+                    b.ToTable("registros_de_tempo");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Modules.Usuario.Models.Usuario", b =>
+            modelBuilder.Entity("API.Modules.Usuario.Models.UsuarioModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -141,9 +142,9 @@ namespace PomodoroAPI.Migrations
                     b.ToTable("usuarios");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.Categoria", b =>
+            modelBuilder.Entity("API.Modules.Categoria.Models.CategoriaModel", b =>
                 {
-                    b.HasOne("PomodoroAPI.Modules.Usuario.Models.Usuario", "Usuario")
+                    b.HasOne("API.Modules.Usuario.Models.UsuarioModel", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -152,32 +153,32 @@ namespace PomodoroAPI.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.EventoDeFoco", b =>
+            modelBuilder.Entity("API.Modules.RegistroDeTempo.Models.PeriodoDeTempo", b =>
                 {
-                    b.HasOne("PomodoroAPI.Models.TempoFocado", null)
-                        .WithMany("Eventos")
-                        .HasForeignKey("TempoFocadoId")
+                    b.HasOne("API.Modules.RegistroDeTempo.Models.RegistroDeTempoModel", "RegistroDeTempo")
+                        .WithMany("Periodos")
+                        .HasForeignKey("RegistroDeTempoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PomodoroAPI.Modules.Usuario.Models.Usuario", "Usuario")
+                    b.HasOne("API.Modules.Usuario.Models.UsuarioModel", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("RegistroDeTempo");
+
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>
+            modelBuilder.Entity("API.Modules.RegistroDeTempo.Models.RegistroDeTempoModel", b =>
                 {
-                    b.HasOne("PomodoroAPI.Models.Categoria", "Categoria")
+                    b.HasOne("API.Modules.Categoria.Models.CategoriaModel", "Categoria")
                         .WithMany()
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoriaId");
 
-                    b.HasOne("PomodoroAPI.Modules.Usuario.Models.Usuario", "Usuario")
+                    b.HasOne("API.Modules.Usuario.Models.UsuarioModel", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -188,9 +189,9 @@ namespace PomodoroAPI.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>
+            modelBuilder.Entity("API.Modules.RegistroDeTempo.Models.RegistroDeTempoModel", b =>
                 {
-                    b.Navigation("Eventos");
+                    b.Navigation("Periodos");
                 });
 #pragma warning restore 612, 618
         }

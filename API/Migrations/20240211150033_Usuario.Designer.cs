@@ -12,8 +12,8 @@ using PomodoroAPI.Data;
 namespace PomodoroAPI.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240210193945_Initial")]
-    partial class Initial
+    [Migration("20240211150033_Usuario")]
+    partial class Usuario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace PomodoroAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("PomodoroAPI.Models.Categoria", b =>
+            modelBuilder.Entity("API.Models.Categoria", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,6 +34,7 @@ namespace PomodoroAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Nome")
+                        .HasMaxLength(120)
                         .HasColumnType("integer");
 
                     b.Property<int>("UsuarioId")
@@ -41,10 +42,12 @@ namespace PomodoroAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("categorias");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.EventoDeFoco", b =>
+            modelBuilder.Entity("API.Models.EventoDeFoco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,10 +74,12 @@ namespace PomodoroAPI.Migrations
 
                     b.HasIndex("TempoFocadoId");
 
-                    b.ToTable("EventosDeFoco");
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("eventos_de_foco");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>
+            modelBuilder.Entity("API.Models.TempoFocado", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,17 +94,23 @@ namespace PomodoroAPI.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TemposFocado");
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("tempos_focado");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.Usuario", b =>
+            modelBuilder.Entity("API.Modules.Usuario.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,31 +120,75 @@ namespace PomodoroAPI.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("usuarios");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.EventoDeFoco", b =>
+            modelBuilder.Entity("API.Models.Categoria", b =>
                 {
-                    b.HasOne("PomodoroAPI.Models.TempoFocado", null)
+                    b.HasOne("API.Modules.Usuario.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("API.Models.EventoDeFoco", b =>
+                {
+                    b.HasOne("API.Models.TempoFocado", null)
                         .WithMany("Eventos")
                         .HasForeignKey("TempoFocadoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("API.Modules.Usuario.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("PomodoroAPI.Models.TempoFocado", b =>
+            modelBuilder.Entity("API.Models.TempoFocado", b =>
+                {
+                    b.HasOne("API.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Modules.Usuario.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("API.Models.TempoFocado", b =>
                 {
                     b.Navigation("Eventos");
                 });
