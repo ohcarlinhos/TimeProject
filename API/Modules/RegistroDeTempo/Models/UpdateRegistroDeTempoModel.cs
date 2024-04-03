@@ -4,7 +4,6 @@ namespace API.Modules.RegistroDeTempo.Models;
 
 public class UpdateRegistroDeTempoModel
 {
-    [MaxLength(120)] public string? Titulo { get; set; }
-    public DateTime? DataDoRegistro { get; set; }
+    [MaxLength(120)] public string? Descricao { get; set; }
     public int? CategoriaId { get; set; }
 }

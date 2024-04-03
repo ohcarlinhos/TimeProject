@@ -1,18 +1,17 @@
 ﻿using API.Modules.Categoria.Entities;
-using API.Modules.RegistroDeTempo.Entities;
 
 namespace API.Modules.RegistroDeTempo.DTO;
 
-public class RegistroDeTempoDTO
+public class RegistroDeTempoDto
 {
     public int Id { get; set; }
-    public string? Titulo { get; set; }
+    public string? Descricao { get; set; }
     public int UsuarioId { get; set; }
-    public DateTime? DataDoRegistro { get; set; }
-    public string? NomeDaCategoria => Categoria?.Nome;
+    public string? CategoriaNome => Categoria?.Nome;
     public int? CategoriaId { get; set; }
 
-    public List<PeriodoDeTempoDTO> Periodos { get; set; }
+    public List<PeriodoDeTempoDto> Periodos { get; set; }
+    public DateTime? RegistroDate => Periodos.Count > 0 ? Periodos[0].Inicio : null;
     public int PeriodosCount => Periodos.Count;
 
     private TimeSpan PeriodosCalc

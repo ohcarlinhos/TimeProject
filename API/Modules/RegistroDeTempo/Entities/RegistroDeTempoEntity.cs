@@ -11,9 +11,7 @@ public class RegistroDeTempoEntity
     [Key] public int Id { get; set; }
     [Required] public int UsuarioId { get; set; }
     public int? CategoriaId { get; set; }
-    [Required, MaxLength(120)] public string? Titulo { get; set; }
-
-    [Required] public DateTime? DataDoRegistro { get; set; }
+    [MaxLength(120)] public string? Descricao { get; set; }
     public List<PeriodoDeTempoEntity> Periodos { get; set; }
 
     public virtual UsuarioEntity? Usuario { get; set; }

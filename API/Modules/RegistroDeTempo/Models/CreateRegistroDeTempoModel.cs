@@ -4,8 +4,7 @@ namespace API.Modules.RegistroDeTempo.Models;
 
 public class CreateRegistroDeTempoModel
 {
-    [Required, MaxLength(120)] public string? Titulo { get; set; }
-    [Required] public DateTime DataDoRegistro { get; set; }
-    [Required] public List<PeriodoDeTempoModel>? Periodos { get; set; }
     public int? CategoriaId { get; set; }
+    [MaxLength(120)] public string? Descricao { get; set; }
+    [Required] public List<PeriodoDeTempoModel>? Periodos { get; set; }
 }
