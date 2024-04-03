@@ -17,17 +17,17 @@ public class RegistroDeTempoServices(
     IMapper mapper
 ) : IRegistroDeTempoServices
 {
-    public Result<List<RegistroDeTempoDTO>> Index(int usuarioId, int page, int perPage)
+    public Result<List<RegistroDeTempoDto>> Index(int usuarioId, int page, int perPage)
     {
-        return new Result<List<RegistroDeTempoDTO>>()
+        return new Result<List<RegistroDeTempoDto>>()
         {
             Data = MapData(registroDeTempoRepository.Index(usuarioId, page, perPage))
         };
     }
 
-    public async Task<Result<RegistroDeTempoDTO>> Create(CreateRegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDeTempoDto>> Create(CreateRegistroDeTempoModel model, int usuarioId)
     {
-        var result = new Result<RegistroDeTempoDTO>();
+        var result = new Result<RegistroDeTempoDto>();
         var transaction = await dbContext.Database.BeginTransactionAsync();
 
         if (model.CategoriaId != null)
@@ -40,8 +40,7 @@ public class RegistroDeTempoServices(
         {
             UsuarioId = usuarioId,
             CategoriaId = model.CategoriaId,
-            Titulo = model.Titulo,
-            DataDoRegistro = model.DataDoRegistro
+            Descricao = model.Descricao,
         });
 
         try
@@ -64,9 +63,9 @@ public class RegistroDeTempoServices(
         return result.SetData(MapData(registro));
     }
 
-    public async Task<Result<RegistroDeTempoDTO>> Update(int id, UpdateRegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDeTempoDto>> Update(int id, UpdateRegistroDeTempoModel model, int usuarioId)
     {
-        var result = new Result<RegistroDeTempoDTO>();
+        var result = new Result<RegistroDeTempoDto>();
 
         var registro = await registroDeTempoRepository
             .FindById(id, usuarioId);
@@ -81,12 +80,9 @@ public class RegistroDeTempoServices(
             registro.CategoriaId = model.CategoriaId;
         }
 
-        if (model.Titulo != null)
-            registro.Titulo = model.Titulo;
-
-        if (model.DataDoRegistro != null)
-            registro.DataDoRegistro = model.DataDoRegistro;
-
+        if (model.Descricao != null)
+            registro.Descricao = model.Descricao;
+        
         return result.SetData(MapData(await registroDeTempoRepository.Update(registro)));
     }
 
@@ -103,13 +99,13 @@ public class RegistroDeTempoServices(
         return result.SetData(await registroDeTempoRepository.Delete(registro));
     }
 
-    private RegistroDeTempoDTO MapData(RegistroDeTempoEntity entity)
+    private RegistroDeTempoDto MapData(RegistroDeTempoEntity entity)
     {
-        return mapper.Map<RegistroDeTempoEntity, RegistroDeTempoDTO>(entity);
+        return mapper.Map<RegistroDeTempoEntity, RegistroDeTempoDto>(entity);
     }
 
-    private List<RegistroDeTempoDTO> MapData(List<RegistroDeTempoEntity> entities)
+    private List<RegistroDeTempoDto> MapData(List<RegistroDeTempoEntity> entities)
     {
-        return mapper.Map<List<RegistroDeTempoEntity>, List<RegistroDeTempoDTO>>(entities);
+        return mapper.Map<List<RegistroDeTempoEntity>, List<RegistroDeTempoDto>>(entities);
     }
 }

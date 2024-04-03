@@ -11,7 +11,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<UsuarioEntity, UsuarioDTO>();
-        CreateMap<RegistroDeTempoEntity, RegistroDeTempoDTO>();
-        CreateMap<PeriodoDeTempoEntity, PeriodoDeTempoDTO>();
+        CreateMap<RegistroDeTempoEntity, RegistroDeTempoDto>();
+        CreateMap<PeriodoDeTempoEntity, PeriodoDeTempoDto>();
     }
 }

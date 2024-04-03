@@ -5,8 +5,6 @@ using API.Modules.RegistroDeTempo.Services;
 using API.Modules.Shared.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using API.Infrastructure.Http;
-using API.Modules.RegistroDeTempo.Entities;
 
 namespace API.Modules.RegistroDeTempo.Controllers;
 
@@ -15,7 +13,7 @@ namespace API.Modules.RegistroDeTempo.Controllers;
 public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoServices) : CustomController
 {
     [HttpGet, Authorize]
-    public ActionResult<List<RegistroDeTempoDTO>> Index(int page = 1, int perPage = 12)
+    public ActionResult<List<RegistroDeTempoDto>> Index(int page = 1, int perPage = 12)
     {
         var result = registroDeTempoServices
             .Index(AuthorizeService.GetUsuarioId(User), page, perPage);
@@ -24,7 +22,7 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult<RegistroDeTempoDTO>> Create([FromBody] CreateRegistroDeTempoModel model)
+    public async Task<ActionResult<RegistroDeTempoDto>> Create([FromBody] CreateRegistroDeTempoModel model)
     {
         var result = await registroDeTempoServices
             .Create(model, AuthorizeService.GetUsuarioId(User));
@@ -33,7 +31,7 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
     }
 
     [HttpPut, Authorize, Route("{id}")]
-    public async Task<ActionResult<RegistroDeTempoDTO>> Update(int id, [FromBody] UpdateRegistroDeTempoModel model)
+    public async Task<ActionResult<RegistroDeTempoDto>> Update(int id, [FromBody] UpdateRegistroDeTempoModel model)
     {
         var result = await registroDeTempoServices
             .Update(id, model, AuthorizeService.GetUsuarioId(User));
