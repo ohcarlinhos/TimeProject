@@ -1,33 +1,32 @@
 ﻿using API.Data;
 using API.Modules.Categoria.Repositories;
-using API.Modules.RegistroDeTempo.DTO;
-using API.Modules.RegistroDeTempo.Entities;
-using API.Modules.RegistroDeTempo.Models;
-using API.Modules.RegistroDeTempo.Repositories;
+using API.Modules.Periodo.Interfaces;
+using API.Modules.Registro.Interfaces;
+using API.Modules.Registro.Models;
 using API.Modules.Shared;
 using AutoMapper;
 
-namespace API.Modules.RegistroDeTempo.Services;
+namespace API.Modules.Registro;
 
-public class RegistroDeTempoServices(
+public class RegistroServices(
     ProjectContext dbContext,
-    IRegistroDeTempoRepository registroDeTempoRepository,
+    IRegistroRepository registroRepository,
     ICategoriaRepository categoriaRepository,
-    IPeriodoDeTempoServices periodoDeTempoServices,
+    IPeriodoServices periodoServices,
     IMapper mapper
-) : IRegistroDeTempoServices
+) : IRegistroServices
 {
-    public Result<List<RegistroDeTempoDto>> Index(int usuarioId, int page, int perPage)
+    public Result<List<RegistroDto>> Index(int usuarioId, int page, int perPage)
     {
-        return new Result<List<RegistroDeTempoDto>>()
+        return new Result<List<RegistroDto>>()
         {
-            Data = MapData(registroDeTempoRepository.Index(usuarioId, page, perPage))
+            Data = MapData(registroRepository.Index(usuarioId, page, perPage))
         };
     }
 
-    public async Task<Result<RegistroDeTempoDto>> Create(CreateRegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDto>> Create(CreateRegistroModel model, int usuarioId)
     {
-        var result = new Result<RegistroDeTempoDto>();
+        var result = new Result<RegistroDto>();
         var transaction = await dbContext.Database.BeginTransactionAsync();
 
         if (model.CategoriaId != null)
@@ -36,7 +35,7 @@ public class RegistroDeTempoServices(
             if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
         }
 
-        var registro = await registroDeTempoRepository.Create(new RegistroDeTempoEntity
+        var registro = await registroRepository.Create(new RegistroEntity
         {
             UsuarioId = usuarioId,
             CategoriaId = model.CategoriaId,
@@ -47,7 +46,7 @@ public class RegistroDeTempoServices(
         {
             if (model.Periodos != null)
             {
-                var periodosResult = await periodoDeTempoServices
+                var periodosResult = await periodoServices
                     .CreateByList(model.Periodos, registro.Id, usuarioId);
 
                 if (periodosResult.HasError) throw new Exception(periodosResult.Message);
@@ -63,11 +62,11 @@ public class RegistroDeTempoServices(
         return result.SetData(MapData(registro));
     }
 
-    public async Task<Result<RegistroDeTempoDto>> Update(int id, UpdateRegistroDeTempoModel model, int usuarioId)
+    public async Task<Result<RegistroDto>> Update(int id, UpdateRegistroModel model, int usuarioId)
     {
-        var result = new Result<RegistroDeTempoDto>();
+        var result = new Result<RegistroDto>();
 
-        var registro = await registroDeTempoRepository
+        var registro = await registroRepository
             .FindById(id, usuarioId);
 
         if (registro == null)
@@ -83,14 +82,14 @@ public class RegistroDeTempoServices(
         if (model.Descricao != null)
             registro.Descricao = model.Descricao;
         
-        return result.SetData(MapData(await registroDeTempoRepository.Update(registro)));
+        return result.SetData(MapData(await registroRepository.Update(registro)));
     }
     
-    public async Task<Result<RegistroDeTempoDto>> Details(int id, int usuarioId)
+    public async Task<Result<RegistroDto>> Details(int id, int usuarioId)
     {
-        var result = new Result<RegistroDeTempoDto>();
+        var result = new Result<RegistroDto>();
 
-        var registro = await registroDeTempoRepository
+        var registro = await registroRepository
             .Details(id, usuarioId);
 
         if (registro == null)
@@ -103,22 +102,22 @@ public class RegistroDeTempoServices(
     {
         var result = new Result<bool>();
 
-        var registro = await registroDeTempoRepository
+        var registro = await registroRepository
             .FindById(id, usuarioId);
 
         if (registro == null)
             return result.SetError("not_found: Não foi encontrado um registro com esse id.");
 
-        return result.SetData(await registroDeTempoRepository.Delete(registro));
+        return result.SetData(await registroRepository.Delete(registro));
     }
 
-    private RegistroDeTempoDto MapData(RegistroDeTempoEntity entity)
+    private RegistroDto MapData(RegistroEntity entity)
     {
-        return mapper.Map<RegistroDeTempoEntity, RegistroDeTempoDto>(entity);
+        return mapper.Map<RegistroEntity, RegistroDto>(entity);
     }
 
-    private List<RegistroDeTempoDto> MapData(List<RegistroDeTempoEntity> entities)
+    private List<RegistroDto> MapData(List<RegistroEntity> entities)
     {
-        return mapper.Map<List<RegistroDeTempoEntity>, List<RegistroDeTempoDto>>(entities);
+        return mapper.Map<List<RegistroEntity>, List<RegistroDto>>(entities);
     }
 }

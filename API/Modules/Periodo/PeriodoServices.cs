@@ -1,0 +1,109 @@
+﻿using API.Modules.Periodo.Interfaces;
+using API.Modules.Periodo.Models;
+using API.Modules.Registro.Interfaces;
+using API.Modules.Shared;
+
+namespace API.Modules.Periodo;
+
+public class PeriodoServices(
+    IPeriodoRepository periodoRepository,
+    IRegistroRepository registroRepository
+) : IPeriodoServices
+{
+    private static void ValidateInicioAndFim<T>(
+        DateTime inicio,
+        DateTime fim,
+        Result<T> result
+    )
+    {
+        if (inicio.CompareTo(fim) > 0)
+            result.SetError(PeriodoErrors.DataFinalMaiorQueInicial);
+    }
+
+    public async Task<Result<PeriodoEntity>> Create(
+        CreatePeriodoModel model,
+        int usuarioId
+    )
+    {
+        var result = new Result<PeriodoEntity>();
+
+        ValidateInicioAndFim(model.Inicio, model.Fim, result);
+        if (result.HasError) return result;
+
+        if (model.Inicio.CompareTo(model.Fim) > 0)
+            return result.SetError(PeriodoErrors.DataFinalMaiorQueInicial);
+
+        var registro = await registroRepository.FindById(model.RegistroId, usuarioId);
+
+        if (registro == null)
+            return result.SetError(PeriodoErrors.RegistroIdValido);
+
+        return result.SetData(await periodoRepository
+            .Create(new PeriodoEntity
+                {
+                    UsuarioId = usuarioId,
+                    RegistroDeTempoId = model.RegistroId,
+                    Inicio = model.Inicio,
+                    Fim = model.Fim
+                }
+            )
+        );
+    }
+
+    public async Task<Result<List<PeriodoEntity>>> CreateByList(
+        List<PeriodoModel> model,
+        int registroId,
+        int usuarioId
+    )
+    {
+        var result = new Result<List<PeriodoEntity>>();
+        List<PeriodoEntity> list = [];
+
+        foreach (var periodo in model)
+        {
+            ValidateInicioAndFim(periodo.Inicio, periodo.Fim, result);
+            if (result.HasError)
+                break;
+
+            list.Add(new PeriodoEntity()
+            {
+                UsuarioId = usuarioId,
+                RegistroDeTempoId = registroId,
+                Inicio = periodo.Inicio,
+                Fim = periodo.Fim
+            });
+        }
+
+        return result.IsValid
+            ? result.SetData(await periodoRepository.CreateByList(list))
+            : result;
+    }
+
+    public async Task<Result<PeriodoEntity>> Update(int id, PeriodoModel model, int usuarioId)
+    {
+        var result = new Result<PeriodoEntity>();
+
+        ValidateInicioAndFim(model.Inicio, model.Fim, result);
+        if (result.HasError) return result;
+
+        var dataDb = await periodoRepository.FindById(id, usuarioId);
+        if (dataDb == null) return result.SetError(PeriodoErrors.NaoEncontrado);
+
+        dataDb.Inicio = model.Inicio;
+        dataDb.Fim = model.Fim;
+
+        return result.SetData(await periodoRepository.Update(dataDb));
+    }
+
+    public async Task<Result<bool>> Delete(int id, int usuarioId)
+    {
+        var result = new Result<bool>();
+        var dataDb = await periodoRepository
+            .FindById(id, usuarioId);
+
+        if (dataDb == null)
+            return result.SetError(PeriodoErrors.NaoEncontrado);
+
+        return result.SetData(await periodoRepository.Delete(dataDb));
+    }
+}

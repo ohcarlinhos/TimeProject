@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Modules.Registro;
 using API.Modules.Usuario.Entities;
 
-namespace API.Modules.RegistroDeTempo.Entities;
+namespace API.Modules.Periodo;
 
 [Table("periodos_de_tempo")]
-public class PeriodoDeTempoEntity
+public class PeriodoEntity
 {
     [Key] public int Id { get; set; }
     [Required] public int UsuarioId { get; set; }
@@ -14,5 +15,5 @@ public class PeriodoDeTempoEntity
     [Required] public DateTime Fim { get; set; }
 
     public virtual UsuarioEntity? Usuario { get; set; }
-    public virtual RegistroDeTempoEntity? RegistroDeTempo { get; set; }
+    public virtual RegistroEntity? RegistroDeTempo { get; set; }
 }

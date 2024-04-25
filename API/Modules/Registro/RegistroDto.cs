@@ -1,8 +1,9 @@
 ﻿using API.Modules.Categoria.Entities;
+using API.Modules.Periodo;
 
-namespace API.Modules.RegistroDeTempo.DTO;
+namespace API.Modules.Registro;
 
-public class RegistroDeTempoDto
+public class RegistroDto
 {
     public int Id { get; set; }
     public string? Descricao { get; set; }
@@ -10,7 +11,7 @@ public class RegistroDeTempoDto
     public string? CategoriaNome => Categoria?.Nome;
     public int? CategoriaId { get; set; }
 
-    public List<PeriodoDeTempoDto> Periodos { get; set; }
+    public List<PeriodoDto> Periodos { get; set; }
     public DateTime? RegistroDate => Periodos.Count > 0 ? Periodos[0].Inicio : null;
     public int PeriodosCount => Periodos.Count;
 

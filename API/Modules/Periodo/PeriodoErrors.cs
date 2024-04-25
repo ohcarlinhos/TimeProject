@@ -1,6 +1,6 @@
-﻿namespace API.Modules.RegistroDeTempo.Util;
+﻿namespace API.Modules.Periodo;
 
-public static class PeriodoDeTempoErrors
+public static class PeriodoErrors
 {
     public static readonly string DataFinalMaiorQueInicial =
         "bad_request: A data final do período deve ser maior que a inicial.";

@@ -1,6 +1,6 @@
-﻿namespace API.Modules.RegistroDeTempo.DTO;
+﻿namespace API.Modules.Periodo;
 
-public class PeriodoDeTempoDto
+public class PeriodoDto
 {
     public int Id { get; set; }
     public DateTime Inicio { get; set; }
