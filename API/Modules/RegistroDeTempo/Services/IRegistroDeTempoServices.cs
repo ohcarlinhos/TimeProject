@@ -10,5 +10,6 @@ public interface IRegistroDeTempoServices
     Result<List<RegistroDeTempoDto>> Index(int usuarioId, int page, int perPage);
     Task<Result<RegistroDeTempoDto>> Create(CreateRegistroDeTempoModel model, int usuarioId);
     Task<Result<RegistroDeTempoDto>> Update(int id, UpdateRegistroDeTempoModel model, int usuarioId);
+    Task<Result<RegistroDeTempoDto>> Details(int id, int usuarioId);
     Task<Result<bool>> Delete(int id, int usuarioId); 
 }

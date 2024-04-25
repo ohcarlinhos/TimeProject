@@ -38,6 +38,16 @@ public class RegistroDeTempoController(IRegistroDeTempoServices registroDeTempoS
 
         return HandleResponse(result);
     }
+    
+    [HttpGet, Authorize, Route("{id}")]
+    public async Task<ActionResult<RegistroDeTempoDto>> Details(int id)
+    {
+        
+        var result = await registroDeTempoServices
+            .Details(id, AuthorizeService.GetUsuarioId(User));
+
+        return HandleResponse(result);
+    }
 
     [HttpDelete, Authorize, Route("{id}")]
     public async Task<ActionResult<bool>> Delete(int id)

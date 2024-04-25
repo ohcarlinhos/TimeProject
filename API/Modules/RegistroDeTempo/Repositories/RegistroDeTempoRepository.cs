@@ -43,4 +43,11 @@ public class RegistroDeTempoRepository(ProjectContext dbContext) : IRegistroDeTe
         return await dbContext.RegistrosDeTempo
             .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == usuarioId);
     }
+
+    public async Task<RegistroDeTempoEntity?> Details(int id, int usuarioId)
+    {
+        return await dbContext.RegistrosDeTempo
+            .Include(r => r.Periodos)
+            .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == usuarioId);
+    }
 }

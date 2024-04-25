@@ -9,4 +9,5 @@ public interface IRegistroDeTempoRepository
     Task<RegistroDeTempoEntity> Update(RegistroDeTempoEntity entity);
     Task<bool> Delete(RegistroDeTempoEntity entity);
     Task<RegistroDeTempoEntity?> FindById(int id, int usuarioId);
+    Task<RegistroDeTempoEntity?> Details(int id, int usuarioId);
 }

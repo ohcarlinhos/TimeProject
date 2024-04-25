@@ -85,6 +85,19 @@ public class RegistroDeTempoServices(
         
         return result.SetData(MapData(await registroDeTempoRepository.Update(registro)));
     }
+    
+    public async Task<Result<RegistroDeTempoDto>> Details(int id, int usuarioId)
+    {
+        var result = new Result<RegistroDeTempoDto>();
+
+        var registro = await registroDeTempoRepository
+            .Details(id, usuarioId);
+
+        if (registro == null)
+            return result.SetError("not_found: Não foi encontrado um registro com esse id.");
+        
+        return result.SetData(MapData(registro));
+    }
 
     public async Task<Result<bool>> Delete(int id, int usuarioId)
     {
