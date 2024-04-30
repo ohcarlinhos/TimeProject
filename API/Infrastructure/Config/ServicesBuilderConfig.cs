@@ -1,6 +1,5 @@
 ﻿using API.Modules.Auth.Services;
 using API.Modules.Categoria.Services;
-using API.Modules.Periodo.Interfaces;
 using API.Modules.Periodo.Services;
 using API.Modules.Registro.Services;
 using API.Modules.Usuario.Services;

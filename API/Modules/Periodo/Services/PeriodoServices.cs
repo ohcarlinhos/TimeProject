@@ -1,7 +1,7 @@
 ﻿using API.Modules.Periodo.Entities;
 using API.Modules.Periodo.Errors;
-using API.Modules.Periodo.Interfaces;
 using API.Modules.Periodo.Models;
+using API.Modules.Periodo.Repositories;
 using API.Modules.Registro.Repositories;
 using API.Modules.Shared;
 

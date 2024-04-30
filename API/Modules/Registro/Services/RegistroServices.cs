@@ -1,6 +1,6 @@
 ﻿using API.Data;
 using API.Modules.Categoria.Repositories;
-using API.Modules.Periodo.Interfaces;
+using API.Modules.Periodo.Services;
 using API.Modules.Registro.DTO;
 using API.Modules.Registro.Entities;
 using API.Modules.Registro.Models;

@@ -1,6 +1,5 @@
 ﻿using API.Data;
 using API.Modules.Periodo.Entities;
-using API.Modules.Periodo.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Modules.Periodo.Repositories;

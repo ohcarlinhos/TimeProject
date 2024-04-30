@@ -1,6 +1,6 @@
 ﻿using API.Modules.Periodo.Entities;
 
-namespace API.Modules.Periodo.Interfaces;
+namespace API.Modules.Periodo.Repositories;
 
 public interface IPeriodoRepository
 {
