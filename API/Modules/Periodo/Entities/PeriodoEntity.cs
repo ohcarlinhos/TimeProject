@@ -10,10 +10,10 @@ public class PeriodoEntity
 {
     [Key] public int Id { get; set; }
     [Required] public int UsuarioId { get; set; }
-    [Required] public int RegistroDeTempoId { get; set; }
+    [Required] public int RegistroId { get; set; }
     [Required] public DateTime Inicio { get; set; }
     [Required] public DateTime Fim { get; set; }
 
     public virtual UsuarioEntity? Usuario { get; set; }
-    public virtual RegistroEntity? RegistroDeTempo { get; set; }
+    public virtual RegistroEntity? Registro { get; set; }
 }

@@ -9,7 +9,7 @@ public class PeriodoRepository(ProjectContext dbContext) : IPeriodoRepository
     public List<PeriodoEntity> Index(int registroId, int usuarioId)
     {
         return dbContext.Periodos
-            .Where(periodo => periodo.RegistroDeTempoId == registroId && periodo.UsuarioId == usuarioId)
+            .Where(periodo => periodo.RegistroId == registroId && periodo.UsuarioId == usuarioId)
             .ToList();
     }
 

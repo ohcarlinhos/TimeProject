@@ -44,7 +44,7 @@ public class PeriodoServices(
             .Create(new PeriodoEntity
                 {
                     UsuarioId = usuarioId,
-                    RegistroDeTempoId = model.RegistroId,
+                    RegistroId = model.RegistroId,
                     Inicio = model.Inicio,
                     Fim = model.Fim
                 }
@@ -70,7 +70,7 @@ public class PeriodoServices(
             list.Add(new PeriodoEntity()
             {
                 UsuarioId = usuarioId,
-                RegistroDeTempoId = registroId,
+                RegistroId = registroId,
                 Inicio = periodo.Inicio,
                 Fim = periodo.Fim
             });
