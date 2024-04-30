@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using API.Modules.Registro;
+using API.Modules.Registro.Entities;
 using API.Modules.Usuario.Entities;
 
-namespace API.Modules.Periodo;
+namespace API.Modules.Periodo.Entities;
 
 [Table("periodos_de_tempo")]
 public class PeriodoEntity

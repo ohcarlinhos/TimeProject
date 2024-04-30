@@ -1,4 +1,5 @@
-﻿using API.Modules.Periodo.Models;
+﻿using API.Modules.Periodo.Entities;
+using API.Modules.Periodo.Models;
 using API.Modules.Shared;
 
 namespace API.Modules.Periodo.Interfaces;

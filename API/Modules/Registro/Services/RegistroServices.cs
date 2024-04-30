@@ -1,12 +1,14 @@
 ﻿using API.Data;
 using API.Modules.Categoria.Repositories;
 using API.Modules.Periodo.Interfaces;
-using API.Modules.Registro.Interfaces;
+using API.Modules.Registro.DTO;
+using API.Modules.Registro.Entities;
 using API.Modules.Registro.Models;
+using API.Modules.Registro.Repositories;
 using API.Modules.Shared;
 using AutoMapper;
 
-namespace API.Modules.Registro;
+namespace API.Modules.Registro.Services;
 
 public class RegistroServices(
     ProjectContext dbContext,

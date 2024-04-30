@@ -1,7 +1,8 @@
 ﻿using API.Modules.Categoria.Entities;
 using API.Modules.Periodo;
+using API.Modules.Periodo.DTO;
 
-namespace API.Modules.Registro;
+namespace API.Modules.Registro.DTO;
 
 public class RegistroDto
 {

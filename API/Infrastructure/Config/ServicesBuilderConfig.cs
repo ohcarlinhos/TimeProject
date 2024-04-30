@@ -1,9 +1,8 @@
 ﻿using API.Modules.Auth.Services;
 using API.Modules.Categoria.Services;
-using API.Modules.Periodo;
 using API.Modules.Periodo.Interfaces;
-using API.Modules.Registro;
-using API.Modules.Registro.Interfaces;
+using API.Modules.Periodo.Services;
+using API.Modules.Registro.Services;
 using API.Modules.Usuario.Services;
 
 namespace API.Infrastructure.Config;

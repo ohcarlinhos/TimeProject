@@ -1,7 +1,8 @@
-﻿using API.Modules.Registro.Models;
+﻿using API.Modules.Registro.DTO;
+using API.Modules.Registro.Models;
 using API.Modules.Shared;
 
-namespace API.Modules.Registro.Interfaces;
+namespace API.Modules.Registro.Services;
 
 public interface IRegistroServices
 {

@@ -1,4 +1,6 @@
-﻿namespace API.Modules.Periodo.Interfaces;
+﻿using API.Modules.Periodo.Entities;
+
+namespace API.Modules.Periodo.Interfaces;
 
 public interface IPeriodoRepository
 {

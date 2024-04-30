@@ -1,8 +1,7 @@
 ﻿using API.Modules.Categoria.Repositories;
-using API.Modules.Periodo;
 using API.Modules.Periodo.Interfaces;
-using API.Modules.Registro;
-using API.Modules.Registro.Interfaces;
+using API.Modules.Periodo.Repositories;
+using API.Modules.Registro.Repositories;
 using API.Modules.Usuario.Repositories;
 
 namespace API.Infrastructure.Config;

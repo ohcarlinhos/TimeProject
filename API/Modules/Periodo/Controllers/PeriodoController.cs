@@ -1,11 +1,12 @@
 ﻿using API.Infrastructure.Services;
+using API.Modules.Periodo.Entities;
 using API.Modules.Periodo.Interfaces;
 using API.Modules.Periodo.Models;
 using API.Modules.Shared.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Modules.Periodo;
+namespace API.Modules.Periodo.Controllers;
 
 [ApiController]
 [Route("/api/periodo")]

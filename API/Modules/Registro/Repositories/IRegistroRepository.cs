@@ -1,4 +1,6 @@
-﻿namespace API.Modules.Registro.Interfaces;
+﻿using API.Modules.Registro.Entities;
+
+namespace API.Modules.Registro.Repositories;
 
 public interface IRegistroRepository
 {

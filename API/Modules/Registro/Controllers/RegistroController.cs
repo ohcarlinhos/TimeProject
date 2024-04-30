@@ -1,11 +1,12 @@
 ﻿using API.Infrastructure.Services;
-using API.Modules.Registro.Interfaces;
+using API.Modules.Registro.DTO;
 using API.Modules.Registro.Models;
+using API.Modules.Registro.Services;
 using API.Modules.Shared.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Modules.Registro;
+namespace API.Modules.Registro.Controllers;
 
 [ApiController]
 [Route("api/registro")]

@@ -1,4 +1,4 @@
-﻿namespace API.Modules.Periodo;
+﻿namespace API.Modules.Periodo.Errors;
 
 public static class PeriodoErrors
 {

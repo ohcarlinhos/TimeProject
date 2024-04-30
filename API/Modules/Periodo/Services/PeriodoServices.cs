@@ -1,9 +1,11 @@
-﻿using API.Modules.Periodo.Interfaces;
+﻿using API.Modules.Periodo.Entities;
+using API.Modules.Periodo.Errors;
+using API.Modules.Periodo.Interfaces;
 using API.Modules.Periodo.Models;
-using API.Modules.Registro.Interfaces;
+using API.Modules.Registro.Repositories;
 using API.Modules.Shared;
 
-namespace API.Modules.Periodo;
+namespace API.Modules.Periodo.Services;
 
 public class PeriodoServices(
     IPeriodoRepository periodoRepository,

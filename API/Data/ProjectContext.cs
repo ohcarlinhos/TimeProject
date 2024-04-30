@@ -1,8 +1,8 @@
-﻿using API.Modules.Categoria.Entities;
-using API.Modules.Periodo;
-using API.Modules.Registro;
+﻿using Microsoft.EntityFrameworkCore;
+using API.Modules.Categoria.Entities;
+using API.Modules.Periodo.Entities;
+using API.Modules.Registro.Entities;
 using API.Modules.Usuario.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 

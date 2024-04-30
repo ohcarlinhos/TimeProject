@@ -1,8 +1,8 @@
 ﻿using API.Data;
-using API.Modules.Registro.Interfaces;
+using API.Modules.Registro.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modules.Registro;
+namespace API.Modules.Registro.Repositories;
 
 public class RegistroRepository(ProjectContext dbContext) : IRegistroRepository
 {

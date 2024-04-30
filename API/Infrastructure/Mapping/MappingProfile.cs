@@ -1,5 +1,7 @@
-﻿using API.Modules.Periodo;
-using API.Modules.Registro;
+﻿using API.Modules.Periodo.DTO;
+using API.Modules.Periodo.Entities;
+using API.Modules.Registro.DTO;
+using API.Modules.Registro.Entities;
 using API.Modules.Usuario.DTO;
 using API.Modules.Usuario.Entities;
 using AutoMapper;
