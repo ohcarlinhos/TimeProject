@@ -5,21 +5,21 @@ using API.Modules.Usuario.Repositories;
 
 namespace API.Modules.Auth.Services;
 
-public class AuthServices(IUsuarioRepository usuarioRepository) : IAuthService
+public class AuthServices(IUsuarioRepository userRepository) : IAuthService
 {
     public async Task<Result<object>> Login(LoginModel model)
     {
         var result = new Result<object>();
-        var usuario = await usuarioRepository.FindByEmail(model.Email);
+        var user = await userRepository.FindByEmail(model.Email);
 
-        if (usuario == null || usuario.Senha != model.Password)
+        if (user == null || user.Senha != model.Password)
         {
             result.Message = "Email ou senha incorretos.";
             result.HasError = true;
             return result;
         }
 
-        result.Data = TokenService.GenerateBearerJwt(usuario);
+        result.Data = TokenService.GenerateBearerJwt(user);
         return result;
     }
 }

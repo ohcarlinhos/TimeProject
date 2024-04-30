@@ -28,28 +28,28 @@ public class RegistroServices(
         return mapper.Map<List<RegistroEntity>, List<RegistroDto>>(entities);
     }
     
-    public Result<List<RegistroDto>> Index(int usuarioId, int page, int perPage)
+    public Result<List<RegistroDto>> Index(int userId, int page, int perPage)
     {
         return new Result<List<RegistroDto>>()
         {
-            Data = MapData(registroRepository.Index(usuarioId, page, perPage))
+            Data = MapData(registroRepository.Index(userId, page, perPage))
         };
     }
 
-    public async Task<Result<RegistroDto>> Create(CreateRegistroModel model, int usuarioId)
+    public async Task<Result<RegistroDto>> Create(CreateRegistroModel model, int userId)
     {
         var result = new Result<RegistroDto>();
         var transaction = await dbContext.Database.BeginTransactionAsync();
 
         if (model.CategoriaId != null)
         {
-            var categoria = await categoriaRepository.FindById((int)model.CategoriaId, usuarioId);
+            var categoria = await categoriaRepository.FindById((int)model.CategoriaId, userId);
             if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
         }
 
         var registro = await registroRepository.Create(new RegistroEntity
         {
-            UsuarioId = usuarioId,
+            UsuarioId = userId,
             CategoriaId = model.CategoriaId,
             Descricao = model.Descricao,
         });
@@ -59,7 +59,7 @@ public class RegistroServices(
             if (model.Periodos != null)
             {
                 var periodosResult = await periodoServices
-                    .CreateByList(model.Periodos, registro.Id, usuarioId);
+                    .CreateByList(model.Periodos, registro.Id, userId);
 
                 if (periodosResult.HasError) throw new Exception(periodosResult.Message);
             }
@@ -74,19 +74,19 @@ public class RegistroServices(
         return result.SetData(MapData(registro));
     }
 
-    public async Task<Result<RegistroDto>> Update(int id, UpdateRegistroModel model, int usuarioId)
+    public async Task<Result<RegistroDto>> Update(int id, UpdateRegistroModel model, int userId)
     {
         var result = new Result<RegistroDto>();
 
         var registro = await registroRepository
-            .FindById(id, usuarioId);
+            .FindById(id, userId);
 
         if (registro == null)
             return result.SetError("not_found: Não foi encontrado um registro com esse id.");
 
         if (model.CategoriaId != null)
         {
-            var categoria = await categoriaRepository.FindById((int)model.CategoriaId, usuarioId);
+            var categoria = await categoriaRepository.FindById((int)model.CategoriaId, userId);
             if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
             registro.CategoriaId = model.CategoriaId;
         }
@@ -97,12 +97,12 @@ public class RegistroServices(
         return result.SetData(MapData(await registroRepository.Update(registro)));
     }
     
-    public async Task<Result<RegistroDto>> Details(int id, int usuarioId)
+    public async Task<Result<RegistroDto>> Details(int id, int userId)
     {
         var result = new Result<RegistroDto>();
 
         var registro = await registroRepository
-            .Details(id, usuarioId);
+            .Details(id, userId);
 
         if (registro == null)
             return result.SetError("not_found: Não foi encontrado um registro com esse id.");
@@ -110,12 +110,12 @@ public class RegistroServices(
         return result.SetData(MapData(registro));
     }
 
-    public async Task<Result<bool>> Delete(int id, int usuarioId)
+    public async Task<Result<bool>> Delete(int id, int userId)
     {
         var result = new Result<bool>();
 
         var registro = await registroRepository
-            .FindById(id, usuarioId);
+            .FindById(id, userId);
 
         if (registro == null)
             return result.SetError("not_found: Não foi encontrado um registro com esse id.");

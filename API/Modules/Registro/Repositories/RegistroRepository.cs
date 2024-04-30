@@ -6,10 +6,10 @@ namespace API.Modules.Registro.Repositories;
 
 public class RegistroRepository(ProjectContext dbContext) : IRegistroRepository
 {
-    public List<RegistroEntity> Index(int usuarioId, int page, int perPage)
+    public List<RegistroEntity> Index(int userId, int page, int perPage)
     {
         return dbContext.Registros
-            .Where(registro => registro.UsuarioId == usuarioId)
+            .Where(registro => registro.UsuarioId == userId)
             .Include(r => r.Periodos)
             .Include(r => r.Categoria)
             .Skip(page > 0 ? page - 1 : page * perPage)
@@ -38,16 +38,16 @@ public class RegistroRepository(ProjectContext dbContext) : IRegistroRepository
         return true;
     }
 
-    public async Task<RegistroEntity?> FindById(int id, int usuarioId)
+    public async Task<RegistroEntity?> FindById(int id, int userId)
     {
         return await dbContext.Registros
-            .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == usuarioId);
+            .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == userId);
     }
 
-    public async Task<RegistroEntity?> Details(int id, int usuarioId)
+    public async Task<RegistroEntity?> Details(int id, int userId)
     {
         return await dbContext.Registros
             .Include(r => r.Periodos)
-            .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == usuarioId);
+            .FirstOrDefaultAsync(registro => registro.Id == id && registro.UsuarioId == userId);
     }
 }

@@ -7,10 +7,10 @@ namespace API.Modules.Categoria.Repositories;
 
 public partial class CategoriaRepository(ProjectContext dbContext) : ICategoriaRepository
 {
-    public List<CategoriaEntity> Index(int usuarioId)
+    public List<CategoriaEntity> Index(int userId)
     {
         return dbContext.Categorias
-            .Where(categoria => categoria.UsuarioId == usuarioId)
+            .Where(categoria => categoria.UsuarioId == userId)
             .ToList();
     }
 
@@ -40,15 +40,15 @@ public partial class CategoriaRepository(ProjectContext dbContext) : ICategoriaR
         return await dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
     }
     
-    public async Task<CategoriaEntity?> FindById(int id, int usuarioId)
+    public async Task<CategoriaEntity?> FindById(int id, int userId)
     {
-        return await dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == usuarioId);
+        return await dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id && c.UsuarioId == userId);
     }
 
-    public async Task<CategoriaEntity?> FindByNome(string nome, int usuarioId)
+    public async Task<CategoriaEntity?> FindByNome(string nome, int userId)
     {
         return await dbContext.Categorias
-            .Where(categoria => categoria.Nome == nome && categoria.UsuarioId == usuarioId)
+            .Where(categoria => categoria.Nome == nome && categoria.UsuarioId == userId)
             .FirstOrDefaultAsync();
     }
 }

@@ -16,7 +16,7 @@ public class RegistroController(IRegistroServices registroServices) : CustomCont
     public ActionResult<List<RegistroDto>> Index(int page = 1, int perPage = 12)
     {
         var result = registroServices
-            .Index(AuthorizeService.GetUsuarioId(User), page, perPage);
+            .Index(AuthorizeService.GetUserId(User), page, perPage);
 
         return HandleResponse(result);
     }
@@ -25,7 +25,7 @@ public class RegistroController(IRegistroServices registroServices) : CustomCont
     public async Task<ActionResult<RegistroDto>> Create([FromBody] CreateRegistroModel model)
     {
         var result = await registroServices
-            .Create(model, AuthorizeService.GetUsuarioId(User));
+            .Create(model, AuthorizeService.GetUserId(User));
 
         return HandleResponse(result);
     }
@@ -34,7 +34,7 @@ public class RegistroController(IRegistroServices registroServices) : CustomCont
     public async Task<ActionResult<RegistroDto>> Update(int id, [FromBody] UpdateRegistroModel model)
     {
         var result = await registroServices
-            .Update(id, model, AuthorizeService.GetUsuarioId(User));
+            .Update(id, model, AuthorizeService.GetUserId(User));
 
         return HandleResponse(result);
     }
@@ -44,7 +44,7 @@ public class RegistroController(IRegistroServices registroServices) : CustomCont
     {
         
         var result = await registroServices
-            .Details(id, AuthorizeService.GetUsuarioId(User));
+            .Details(id, AuthorizeService.GetUserId(User));
 
         return HandleResponse(result);
     }
@@ -53,7 +53,7 @@ public class RegistroController(IRegistroServices registroServices) : CustomCont
     public async Task<ActionResult<bool>> Delete(int id)
     {
         var result = await registroServices
-            .Delete(id, AuthorizeService.GetUsuarioId(User));
+            .Delete(id, AuthorizeService.GetUserId(User));
 
         return HandleResponse(result);
     }

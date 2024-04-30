@@ -8,13 +8,13 @@ namespace API.Infrastructure.Services;
 
 public static class TokenService
 {
-    public static object GenerateBearerJwt(UsuarioEntity usuario)
+    public static object GenerateBearerJwt(UsuarioEntity user)
     {
         // configurações do token
         var tokenSubject = new ClaimsIdentity(new[]
         {
-            new Claim (ClaimTypes.Sid, usuario.Id.ToString()),
-            new Claim (ClaimTypes.Email, usuario.Email),
+            new Claim (ClaimTypes.Sid, user.Id.ToString()),
+            new Claim (ClaimTypes.Email, user.Email),
         });
 
         var tokenExpires = DateTime.UtcNow.AddHours(EnvVariables.JwtTokenExpires);

@@ -6,10 +6,10 @@ namespace API.Modules.Periodo.Repositories;
 
 public class PeriodoRepository(ProjectContext dbContext) : IPeriodoRepository
 {
-    public List<PeriodoEntity> Index(int registroId, int usuarioId, int page, int perPage)
+    public List<PeriodoEntity> Index(int registroId, int userId, int page, int perPage)
     {
         return dbContext.Periodos
-            .Where(periodo => periodo.RegistroId == registroId && periodo.UsuarioId == usuarioId)
+            .Where(periodo => periodo.RegistroId == registroId && periodo.UsuarioId == userId)
             .ToList();
     }
 
@@ -48,9 +48,9 @@ public class PeriodoRepository(ProjectContext dbContext) : IPeriodoRepository
         return true;
     }
 
-    public async Task<PeriodoEntity?> FindById(int id, int usuarioId)
+    public async Task<PeriodoEntity?> FindById(int id, int userId)
     {
         return await dbContext.Periodos
-            .FirstOrDefaultAsync(periodo => periodo.Id == id && periodo.UsuarioId == usuarioId);
+            .FirstOrDefaultAsync(periodo => periodo.Id == id && periodo.UsuarioId == userId);
     }
 }

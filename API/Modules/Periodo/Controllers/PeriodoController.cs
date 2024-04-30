@@ -17,7 +17,7 @@ public class PeriodoController(IPeriodoServices periodoServices) : CustomControl
     public ActionResult<List<PeriodoDto>> Index(int registroId, int page = 1, int perPage = 12)
     {
         var result = periodoServices
-            .Index(registroId, AuthorizeService.GetUsuarioId(User), page, perPage);
+            .Index(registroId, AuthorizeService.GetUserId(User), page, perPage);
 
         return HandleResponse(result);
     }
@@ -26,7 +26,7 @@ public class PeriodoController(IPeriodoServices periodoServices) : CustomControl
     public async Task<ActionResult<PeriodoEntity>> Create([FromBody] CreatePeriodoModel model)
     {
         var result = await periodoServices
-            .Create(model, AuthorizeService.GetUsuarioId(User));
+            .Create(model, AuthorizeService.GetUserId(User));
 
         return HandleResponse(result);
     }
@@ -35,7 +35,7 @@ public class PeriodoController(IPeriodoServices periodoServices) : CustomControl
     public async Task<ActionResult<PeriodoEntity>> Update(int id, [FromBody] PeriodoModel model)
     {
         var result = await periodoServices
-            .Update(id, model, AuthorizeService.GetUsuarioId(User));
+            .Update(id, model, AuthorizeService.GetUserId(User));
 
         return HandleResponse(result);
     }
@@ -44,7 +44,7 @@ public class PeriodoController(IPeriodoServices periodoServices) : CustomControl
     public async Task<ActionResult<bool>> Delete(int id)
     {
         var result = await periodoServices
-            .Delete(id, AuthorizeService.GetUsuarioId(User));
+            .Delete(id, AuthorizeService.GetUserId(User));
 
         return HandleResponse(result);
     }

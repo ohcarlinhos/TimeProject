@@ -25,17 +25,17 @@ public class PeriodoServices(
         return mapper.Map<List<PeriodoEntity>, List<PeriodoDto>>(entity);
     }
     
-    public Result<List<PeriodoDto>> Index(int registroId, int usuarioId, int page, int perPage)
+    public Result<List<PeriodoDto>> Index(int registroId, int userId, int page, int perPage)
     {
         return new Result<List<PeriodoDto>>()
         {
-            Data = MapData(periodoRepository.Index(registroId, usuarioId, page, perPage))
+            Data = MapData(periodoRepository.Index(registroId, userId, page, perPage))
         };
     }
     
     public async Task<Result<PeriodoEntity>> Create(
         CreatePeriodoModel model,
-        int usuarioId
+        int userId
     )
     {
         var result = new Result<PeriodoEntity>();
@@ -46,7 +46,7 @@ public class PeriodoServices(
         if (model.Inicio.CompareTo(model.Fim) > 0)
             return result.SetError(PeriodoErrors.DataFinalMaiorQueInicial);
 
-        var registro = await registroRepository.FindById(model.RegistroId, usuarioId);
+        var registro = await registroRepository.FindById(model.RegistroId, userId);
 
         if (registro == null)
             return result.SetError(PeriodoErrors.RegistroIdValido);
@@ -54,7 +54,7 @@ public class PeriodoServices(
         return result.SetData(await periodoRepository
             .Create(new PeriodoEntity
                 {
-                    UsuarioId = usuarioId,
+                    UsuarioId = userId,
                     RegistroId = model.RegistroId,
                     Inicio = model.Inicio,
                     Fim = model.Fim
@@ -66,7 +66,7 @@ public class PeriodoServices(
     public async Task<Result<List<PeriodoEntity>>> CreateByList(
         List<PeriodoModel> model,
         int registroId,
-        int usuarioId
+        int userId
     )
     {
         var result = new Result<List<PeriodoEntity>>();
@@ -80,7 +80,7 @@ public class PeriodoServices(
 
             list.Add(new PeriodoEntity()
             {
-                UsuarioId = usuarioId,
+                UsuarioId = userId,
                 RegistroId = registroId,
                 Inicio = periodo.Inicio,
                 Fim = periodo.Fim
@@ -92,14 +92,14 @@ public class PeriodoServices(
             : result;
     }
 
-    public async Task<Result<PeriodoEntity>> Update(int id, PeriodoModel model, int usuarioId)
+    public async Task<Result<PeriodoEntity>> Update(int id, PeriodoModel model, int userId)
     {
         var result = new Result<PeriodoEntity>();
 
         ValidateInicioAndFim(model.Inicio, model.Fim, result);
         if (result.HasError) return result;
 
-        var dataDb = await periodoRepository.FindById(id, usuarioId);
+        var dataDb = await periodoRepository.FindById(id, userId);
         if (dataDb == null) return result.SetError(PeriodoErrors.NaoEncontrado);
 
         dataDb.Inicio = model.Inicio;
@@ -108,11 +108,11 @@ public class PeriodoServices(
         return result.SetData(await periodoRepository.Update(dataDb));
     }
 
-    public async Task<Result<bool>> Delete(int id, int usuarioId)
+    public async Task<Result<bool>> Delete(int id, int userId)
     {
         var result = new Result<bool>();
         var dataDb = await periodoRepository
-            .FindById(id, usuarioId);
+            .FindById(id, userId);
 
         if (dataDb == null)
             return result.SetError(PeriodoErrors.NaoEncontrado);

@@ -7,37 +7,37 @@ namespace API.Modules.Categoria.Services;
 
 public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICategoriaServices
 {
-    public Result<List<CategoriaEntity>> Index(int usuarioId, int page, int perPage)
+    public Result<List<CategoriaEntity>> Index(int userId, int page, int perPage)
     {
-        return new Result<List<CategoriaEntity>>() { Data = categoriaRepository.Index(usuarioId) };
+        return new Result<List<CategoriaEntity>>() { Data = categoriaRepository.Index(userId) };
     }
 
-    public async Task<Result<CategoriaEntity>> Create(CategoriaModel model, int usuarioId)
+    public async Task<Result<CategoriaEntity>> Create(CategoriaModel model, int userId)
     {
         var result = new Result<CategoriaEntity>();
-        var categoria = await categoriaRepository.FindByNome(model.Nome, usuarioId);
+        var categoria = await categoriaRepository.FindByNome(model.Nome, userId);
 
         if (categoria != null)
             return result.SetData(categoria);
 
         result.Data = await categoriaRepository.Create(new CategoriaEntity
         {
-            UsuarioId = usuarioId,
+            UsuarioId = userId,
             Nome = model.Nome
         });
         return result;
     }
 
-    public async Task<Result<CategoriaEntity>> Update(int id, CategoriaModel model, int usuarioId)
+    public async Task<Result<CategoriaEntity>> Update(int id, CategoriaModel model, int userId)
     {
         var result = new Result<CategoriaEntity>();
         var categoria = await categoriaRepository.FindById(id);
 
         if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
 
-        if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
+        if (categoria.UsuarioId != userId) return result.SetError("unauthorized");
 
-        if (await categoriaRepository.FindByNome(model.Nome, usuarioId) != null)
+        if (await categoriaRepository.FindByNome(model.Nome, userId) != null)
             return result.SetError($"bad_request: Você já possui uma categoria '{model.Nome}'.");
 
         categoria.Nome = model.Nome;
@@ -45,14 +45,14 @@ public class CategoriaServices(ICategoriaRepository categoriaRepository) : ICate
         return result;
     }
 
-    public async Task<Result<bool>> Delete(int id, int usuarioId)
+    public async Task<Result<bool>> Delete(int id, int userId)
     {
         var result = new Result<bool>();
         var categoria = await categoriaRepository.FindById(id);
 
         if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
 
-        if (categoria.UsuarioId != usuarioId) return result.SetError("unauthorized");
+        if (categoria.UsuarioId != userId) return result.SetError("unauthorized");
 
         result.Data = await categoriaRepository.Delete(categoria);
         return result;

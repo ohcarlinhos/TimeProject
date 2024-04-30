@@ -4,8 +4,8 @@ namespace API.Infrastructure.Services;
 
 public static class AuthorizeService
 {
-    public static int GetUsuarioId(ClaimsPrincipal user)
+    public static int GetUserId(ClaimsPrincipal userClaimsPrincipal)
     {
-        return int.Parse(user.Claims.First(claim => claim.Type == ClaimTypes.Sid).Value);
+        return int.Parse(userClaimsPrincipal.Claims.First(claim => claim.Type == ClaimTypes.Sid).Value);
     }
 }

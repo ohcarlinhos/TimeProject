@@ -4,10 +4,10 @@ namespace API.Modules.Registro.Repositories;
 
 public interface IRegistroRepository
 {
-    List<RegistroEntity> Index(int usuarioId, int page, int perPage);
+    List<RegistroEntity> Index(int userId, int page, int perPage);
     Task<RegistroEntity> Create(RegistroEntity entity);
     Task<RegistroEntity> Update(RegistroEntity entity);
     Task<bool> Delete(RegistroEntity entity);
-    Task<RegistroEntity?> FindById(int id, int usuarioId);
-    Task<RegistroEntity?> Details(int id, int usuarioId);
+    Task<RegistroEntity?> FindById(int id, int userId);
+    Task<RegistroEntity?> Details(int id, int userId);
 }

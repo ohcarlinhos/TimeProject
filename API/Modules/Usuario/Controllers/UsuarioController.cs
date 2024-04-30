@@ -21,14 +21,14 @@ public class UsuarioController(IUsuarioServices usuarioServices) : CustomControl
     [HttpPut("{id}"), Authorize]
     public async Task<ActionResult<UsuarioDTO>> Update([FromRoute] int id, [FromBody] UpdateUsuarioModel model)
     {
-        if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
+        if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
         return HandleResponse(await usuarioServices.Update(id, model));
     }
 
     [HttpDelete("{id}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
-        if (AuthorizeService.GetUsuarioId(User) != id) return Unauthorized();
+        if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
         return HandleResponse(await usuarioServices.Delete(id));
     }
 
@@ -42,6 +42,6 @@ public class UsuarioController(IUsuarioServices usuarioServices) : CustomControl
     public async Task<ActionResult<UsuarioDTO>> Myself()
     {
         return HandleResponse(await usuarioServices
-            .Get(AuthorizeService.GetUsuarioId(User)));
+            .Get(AuthorizeService.GetUserId(User)));
     }
 }

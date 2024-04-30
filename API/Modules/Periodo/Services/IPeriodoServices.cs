@@ -7,20 +7,20 @@ namespace API.Modules.Periodo.Services;
 
 public interface IPeriodoServices
 {
-    public Result<List<PeriodoDto>> Index(int registroId, int usuarioId, int page, int perPage);
+    public Result<List<PeriodoDto>> Index(int registroId, int userId, int page, int perPage);
 
     Task<Result<PeriodoEntity>> Create(
         CreatePeriodoModel model,
-        int usuarioId
+        int userId
     );
 
     Task<Result<List<PeriodoEntity>>> CreateByList(
         List<PeriodoModel> model,
         int registroId,
-        int usuarioId
+        int userId
     );
 
-    Task<Result<PeriodoEntity>> Update(int id, PeriodoModel model, int usuarioId);
+    Task<Result<PeriodoEntity>> Update(int id, PeriodoModel model, int userId);
 
-    Task<Result<bool>> Delete(int id, int usuarioId);
+    Task<Result<bool>> Delete(int id, int userId);
 }
