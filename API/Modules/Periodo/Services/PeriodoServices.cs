@@ -1,27 +1,38 @@
-﻿using API.Modules.Periodo.Entities;
+﻿using API.Modules.Periodo.DTO;
+using API.Modules.Periodo.Entities;
 using API.Modules.Periodo.Errors;
 using API.Modules.Periodo.Models;
 using API.Modules.Periodo.Repositories;
 using API.Modules.Registro.Repositories;
 using API.Modules.Shared;
+using AutoMapper;
 
 namespace API.Modules.Periodo.Services;
 
 public class PeriodoServices(
     IPeriodoRepository periodoRepository,
-    IRegistroRepository registroRepository
+    IRegistroRepository registroRepository,
+    IMapper mapper
 ) : IPeriodoServices
 {
-    private static void ValidateInicioAndFim<T>(
-        DateTime inicio,
-        DateTime fim,
-        Result<T> result
-    )
+    private PeriodoDto MapData(PeriodoEntity entity)
     {
-        if (inicio.CompareTo(fim) > 0)
-            result.SetError(PeriodoErrors.DataFinalMaiorQueInicial);
+        return mapper.Map<PeriodoEntity, PeriodoDto>(entity);
     }
-
+    
+    private List<PeriodoDto> MapData(List<PeriodoEntity> entity)
+    {
+        return mapper.Map<List<PeriodoEntity>, List<PeriodoDto>>(entity);
+    }
+    
+    public Result<List<PeriodoDto>> Index(int registroId, int usuarioId, int page, int perPage)
+    {
+        return new Result<List<PeriodoDto>>()
+        {
+            Data = MapData(periodoRepository.Index(registroId, usuarioId, page, perPage))
+        };
+    }
+    
     public async Task<Result<PeriodoEntity>> Create(
         CreatePeriodoModel model,
         int usuarioId
@@ -107,5 +118,15 @@ public class PeriodoServices(
             return result.SetError(PeriodoErrors.NaoEncontrado);
 
         return result.SetData(await periodoRepository.Delete(dataDb));
+    }
+    
+    private static void ValidateInicioAndFim<T>(
+        DateTime inicio,
+        DateTime fim,
+        Result<T> result
+    )
+    {
+        if (inicio.CompareTo(fim) > 0)
+            result.SetError(PeriodoErrors.DataFinalMaiorQueInicial);
     }
 }

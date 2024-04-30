@@ -1,4 +1,5 @@
-﻿using API.Modules.Periodo.Entities;
+﻿using API.Modules.Periodo.DTO;
+using API.Modules.Periodo.Entities;
 using API.Modules.Periodo.Models;
 using API.Modules.Shared;
 
@@ -6,6 +7,8 @@ namespace API.Modules.Periodo.Services;
 
 public interface IPeriodoServices
 {
+    public Result<List<PeriodoDto>> Index(int registroId, int usuarioId, int page, int perPage);
+
     Task<Result<PeriodoEntity>> Create(
         CreatePeriodoModel model,
         int usuarioId

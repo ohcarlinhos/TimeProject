@@ -6,7 +6,7 @@ namespace API.Modules.Periodo.Repositories;
 
 public class PeriodoRepository(ProjectContext dbContext) : IPeriodoRepository
 {
-    public List<PeriodoEntity> Index(int registroId, int usuarioId)
+    public List<PeriodoEntity> Index(int registroId, int usuarioId, int page, int perPage)
     {
         return dbContext.Periodos
             .Where(periodo => periodo.RegistroId == registroId && periodo.UsuarioId == usuarioId)

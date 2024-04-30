@@ -4,7 +4,7 @@ namespace API.Modules.Periodo.Repositories;
 
 public interface IPeriodoRepository
 {
-    List<PeriodoEntity> Index(int registroId, int usuarioId);
+    List<PeriodoEntity> Index(int registroId, int usuarioId, int page, int perPage);
     Task<PeriodoEntity> Create(PeriodoEntity entity);
     Task<List<PeriodoEntity>> CreateByList(List<PeriodoEntity> entityList);
     Task<PeriodoEntity> Update(PeriodoEntity entity);

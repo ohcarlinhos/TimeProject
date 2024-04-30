@@ -1,4 +1,5 @@
 ﻿using API.Infrastructure.Services;
+using API.Modules.Periodo.DTO;
 using API.Modules.Periodo.Entities;
 using API.Modules.Periodo.Models;
 using API.Modules.Periodo.Services;
@@ -12,6 +13,15 @@ namespace API.Modules.Periodo.Controllers;
 [Route("/api/periodo")]
 public class PeriodoController(IPeriodoServices periodoServices) : CustomController
 {
+    [HttpGet, Authorize, Route("{registroId}")]
+    public ActionResult<List<PeriodoDto>> Index(int registroId, int page = 1, int perPage = 12)
+    {
+        var result = periodoServices
+            .Index(registroId, AuthorizeService.GetUsuarioId(User), page, perPage);
+
+        return HandleResponse(result);
+    }
+
     [HttpPost, Authorize]
     public async Task<ActionResult<PeriodoEntity>> Create([FromBody] CreatePeriodoModel model)
     {
@@ -20,7 +30,7 @@ public class PeriodoController(IPeriodoServices periodoServices) : CustomControl
 
         return HandleResponse(result);
     }
-    
+
     [HttpPut, Authorize, Route("{id}")]
     public async Task<ActionResult<PeriodoEntity>> Update(int id, [FromBody] PeriodoModel model)
     {
