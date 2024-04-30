@@ -1,17 +1,17 @@
-﻿using API.Modules.Registro.Repositories;
-using API.Modules.Shared;
+﻿using API.Modules.Shared;
 using API.Modules.TimePeriod.DTO;
 using API.Modules.TimePeriod.Entities;
 using API.Modules.TimePeriod.Errors;
 using API.Modules.TimePeriod.Models;
 using API.Modules.TimePeriod.Repositories;
+using API.Modules.TimeRecord.Repositories;
 using AutoMapper;
 
 namespace API.Modules.TimePeriod.Services;
 
 public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,
-    IRegistroRepository registroRepository,
+    ITimeRecordRepository timeRecordRepository,
     IMapper mapper
 ) : ITimePeriodServices
 {
@@ -46,9 +46,9 @@ public class TimePeriodServices(
         if (model.Start.CompareTo(model.End) > 0)
             return result.SetError(TimePeriodErrors.EndDateIsBiggerThenStartDate);
 
-        var registro = await registroRepository.FindById(model.TimeRecordId, userId);
+        var timeRecord = await timeRecordRepository.FindById(model.TimeRecordId, userId);
 
-        if (registro == null)
+        if (timeRecord == null)
             return result.SetError(TimePeriodErrors.WrongTimeRecordId);
 
         return result.SetData(await timePeriodRepository
@@ -65,7 +65,7 @@ public class TimePeriodServices(
 
     public async Task<Result<List<TimePeriodEntity>>> CreateByList(
         List<TimePeriodModel> model,
-        int registroId,
+        int timeRecordId,
         int userId
     )
     {
@@ -81,7 +81,7 @@ public class TimePeriodServices(
             list.Add(new TimePeriodEntity()
             {
                 UserId = userId,
-                TimerRecordId = registroId,
+                TimerRecordId = timeRecordId,
                 Start = timePeriod.Start,
                 End = timePeriod.End
             });

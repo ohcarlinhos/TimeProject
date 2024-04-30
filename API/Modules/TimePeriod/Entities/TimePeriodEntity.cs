@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using API.Modules.Registro.Entities;
+using API.Modules.TimeRecord.Entities;
 using API.Modules.User.Entities;
 
 namespace API.Modules.TimePeriod.Entities;
@@ -15,5 +15,5 @@ public class TimePeriodEntity
     [Required] public DateTime End { get; set; }
 
     public virtual UserEntity? User { get; set; }
-    public virtual RegistroEntity? TimeRecord { get; set; }
+    public virtual TimeRecordEntity? TimeRecord { get; set; }
 }

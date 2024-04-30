@@ -9,6 +9,6 @@ public interface ITimePeriodRepository
     Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entityList);
     Task<TimePeriodEntity> Update(TimePeriodEntity entity);
     Task<bool> Delete(TimePeriodEntity entity);
-    Task<bool> DeleteAllByRegistroId(IEnumerable<TimePeriodEntity> entityList);
+    Task<bool> DeleteAllByTimeRecordId(IEnumerable<TimePeriodEntity> entityList);
     Task<TimePeriodEntity?> FindById(int id, int userId);
 }

@@ -1,6 +1,6 @@
 ﻿using API.Modules.Categoria.Repositories;
-using API.Modules.Registro.Repositories;
 using API.Modules.TimePeriod.Repositories;
+using API.Modules.TimeRecord.Repositories;
 using API.Modules.User.Repositories;
 
 namespace API.Infrastructure.Config;
@@ -11,7 +11,7 @@ public static class RepositoriesBuilderConfig
     {
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-        builder.Services.AddScoped<IRegistroRepository, RegistroRepository>();
+        builder.Services.AddScoped<ITimeRecordRepository, TimeRecordRepository>();
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
     }
 }
