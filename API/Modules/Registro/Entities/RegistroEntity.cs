@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using API.Modules.Categoria.Entities;
 using API.Modules.Periodo;
-using API.Modules.Periodo.Entities;
+using API.Modules.TimePeriod.Entities;
 using API.Modules.User.Entities;
 
 namespace API.Modules.Registro.Entities;
@@ -14,7 +14,7 @@ public class RegistroEntity
     [Required] public int UsuarioId { get; set; }
     public int? CategoriaId { get; set; }
     [MaxLength(120)] public string? Descricao { get; set; }
-    public List<PeriodoEntity> Periodos { get; set; }
+    public List<TimePeriodEntity> Periodos { get; set; }
 
     public virtual UserEntity? Usuario { get; set; }
     public virtual CategoriaEntity? Categoria { get; set; }

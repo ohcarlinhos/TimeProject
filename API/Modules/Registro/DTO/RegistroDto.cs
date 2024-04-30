@@ -1,6 +1,5 @@
 ﻿using API.Modules.Categoria.Entities;
-using API.Modules.Periodo;
-using API.Modules.Periodo.DTO;
+using API.Modules.TimePeriod.DTO;
 
 namespace API.Modules.Registro.DTO;
 
@@ -12,8 +11,8 @@ public class RegistroDto
     public string? CategoriaNome => Categoria?.Nome;
     public int? CategoriaId { get; set; }
 
-    public List<PeriodoDto> Periodos { get; set; }
-    public DateTime? RegistroDate => Periodos.Count > 0 ? Periodos[0].Inicio : null;
+    public List<TimePeriodDto> Periodos { get; set; }
+    public DateTime? RegistroDate => Periodos.Count > 0 ? Periodos[0].Start : null;
     public int PeriodosCount => Periodos.Count;
 
     private TimeSpan PeriodosCalc
@@ -23,7 +22,7 @@ public class RegistroDto
             var total = new TimeSpan();
             return Periodos
                 .Aggregate(total, (current, periodo) =>
-                    current.Add(periodo.Fim.Subtract(periodo.Inicio)));
+                    current.Add(periodo.End.Subtract(periodo.Start)));
         }
     }
 

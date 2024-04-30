@@ -1,11 +1,11 @@
 ﻿using API.Data;
 using API.Modules.Categoria.Repositories;
-using API.Modules.Periodo.Services;
 using API.Modules.Registro.DTO;
 using API.Modules.Registro.Entities;
 using API.Modules.Registro.Models;
 using API.Modules.Registro.Repositories;
 using API.Modules.Shared;
+using API.Modules.TimePeriod.Services;
 using AutoMapper;
 
 namespace API.Modules.Registro.Services;
@@ -14,7 +14,7 @@ public class RegistroServices(
     ProjectContext dbContext,
     IRegistroRepository registroRepository,
     ICategoriaRepository categoriaRepository,
-    IPeriodoServices periodoServices,
+    ITimePeriodServices timePeriodServices,
     IMapper mapper
 ) : IRegistroServices
 {
@@ -58,7 +58,7 @@ public class RegistroServices(
         {
             if (model.Periodos != null)
             {
-                var periodosResult = await periodoServices
+                var periodosResult = await timePeriodServices
                     .CreateByList(model.Periodos, registro.Id, userId);
 
                 if (periodosResult.HasError) throw new Exception(periodosResult.Message);

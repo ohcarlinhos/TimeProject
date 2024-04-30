@@ -1,7 +1,7 @@
-﻿using API.Modules.Periodo.DTO;
-using API.Modules.Periodo.Entities;
-using API.Modules.Registro.DTO;
+﻿using API.Modules.Registro.DTO;
 using API.Modules.Registro.Entities;
+using API.Modules.TimePeriod.DTO;
+using API.Modules.TimePeriod.Entities;
 using API.Modules.User.DTO;
 using API.Modules.User.Entities;
 using AutoMapper;
@@ -14,6 +14,6 @@ public class MappingProfile : Profile
     {
         CreateMap<UserEntity, UserDto>();
         CreateMap<RegistroEntity, RegistroDto>();
-        CreateMap<PeriodoEntity, PeriodoDto>();
+        CreateMap<TimePeriodEntity, TimePeriodDto>();
     }
 }
