@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Modules.Usuario.Models;
+namespace API.Modules.User.Models;
 
 public class CreateUsuarioModel
 {

@@ -2,7 +2,7 @@
 using API.Modules.Categoria.Services;
 using API.Modules.Periodo.Services;
 using API.Modules.Registro.Services;
-using API.Modules.Usuario.Services;
+using API.Modules.User.Services;
 
 namespace API.Infrastructure.Config;
 

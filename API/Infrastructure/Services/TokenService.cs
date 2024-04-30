@@ -1,8 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using API.Modules.Usuario.Entities;
+using API.Modules.User.Entities;
 using Microsoft.IdentityModel.Tokens;
-using API.Modules.Usuario.Models;
 
 namespace API.Infrastructure.Services;
 

@@ -1,7 +1,6 @@
-﻿using API.Modules.Usuario.Entities;
-using API.Modules.Usuario.Models;
+﻿using API.Modules.User.Entities;
 
-namespace API.Modules.Usuario.Repositories
+namespace API.Modules.User.Repositories
 {
     public interface IUsuarioRepository
     {

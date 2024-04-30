@@ -1,8 +1,8 @@
 ﻿using API.Modules.Shared;
-using API.Modules.Usuario.DTO;
-using API.Modules.Usuario.Models;
+using API.Modules.User.DTO;
+using API.Modules.User.Models;
 
-namespace API.Modules.Usuario.Services;
+namespace API.Modules.User.Services;
 
 public interface IUsuarioServices
 {

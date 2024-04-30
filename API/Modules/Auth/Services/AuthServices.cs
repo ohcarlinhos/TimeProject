@@ -1,7 +1,7 @@
 ﻿using API.Infrastructure.Services;
 using API.Modules.Auth.Models;
 using API.Modules.Shared;
-using API.Modules.Usuario.Repositories;
+using API.Modules.User.Repositories;
 
 namespace API.Modules.Auth.Services;
 

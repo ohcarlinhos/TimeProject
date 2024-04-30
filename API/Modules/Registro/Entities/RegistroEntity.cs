@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using API.Modules.Categoria.Entities;
 using API.Modules.Periodo;
 using API.Modules.Periodo.Entities;
-using API.Modules.Usuario.Entities;
+using API.Modules.User.Entities;
 
 namespace API.Modules.Registro.Entities;
 

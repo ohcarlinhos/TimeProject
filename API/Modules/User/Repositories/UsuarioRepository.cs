@@ -1,8 +1,8 @@
 ﻿using API.Data;
-using API.Modules.Usuario.Entities;
+using API.Modules.User.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modules.Usuario.Repositories
+namespace API.Modules.User.Repositories
 {
     public class UsuarioRepository(ProjectContext dbContext) : IUsuarioRepository
     {

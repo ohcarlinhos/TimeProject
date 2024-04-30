@@ -1,11 +1,11 @@
 ﻿using API.Modules.Shared;
-using API.Modules.Usuario.DTO;
-using API.Modules.Usuario.Entities;
-using API.Modules.Usuario.Models;
-using API.Modules.Usuario.Repositories;
+using API.Modules.User.DTO;
+using API.Modules.User.Entities;
+using API.Modules.User.Models;
+using API.Modules.User.Repositories;
 using AutoMapper;
 
-namespace API.Modules.Usuario.Services;
+namespace API.Modules.User.Services;
 
 public class UsuarioServices(IUsuarioRepository usuarioRepository, IMapper mapper) : IUsuarioServices
 {

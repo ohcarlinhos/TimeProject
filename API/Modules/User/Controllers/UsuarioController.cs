@@ -1,12 +1,12 @@
 ﻿using API.Infrastructure.Services;
 using API.Modules.Shared.Controllers;
-using API.Modules.Usuario.DTO;
-using API.Modules.Usuario.Models;
-using API.Modules.Usuario.Services;
+using API.Modules.User.DTO;
+using API.Modules.User.Models;
+using API.Modules.User.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Modules.Usuario.Controllers;
+namespace API.Modules.User.Controllers;
 
 [ApiController]
 [Route("api/usuario")]

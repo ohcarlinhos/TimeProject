@@ -2,8 +2,8 @@
 using API.Modules.Periodo.Entities;
 using API.Modules.Registro.DTO;
 using API.Modules.Registro.Entities;
-using API.Modules.Usuario.DTO;
-using API.Modules.Usuario.Entities;
+using API.Modules.User.DTO;
+using API.Modules.User.Entities;
 using AutoMapper;
 
 namespace API.Infrastructure.Mapping;

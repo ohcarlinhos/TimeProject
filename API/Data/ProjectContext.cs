@@ -2,7 +2,7 @@
 using API.Modules.Categoria.Entities;
 using API.Modules.Periodo.Entities;
 using API.Modules.Registro.Entities;
-using API.Modules.Usuario.Entities;
+using API.Modules.User.Entities;
 
 namespace API.Data;
 

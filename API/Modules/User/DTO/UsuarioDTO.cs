@@ -1,4 +1,4 @@
-﻿namespace API.Modules.Usuario.DTO;
+﻿namespace API.Modules.User.DTO;
 
 public class UsuarioDTO
 {
