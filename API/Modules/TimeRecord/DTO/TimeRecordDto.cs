@@ -1,4 +1,4 @@
-﻿using API.Modules.Categoria.Entities;
+﻿using API.Modules.Category.Entities;
 using API.Modules.TimePeriod.DTO;
 
 namespace API.Modules.TimeRecord.DTO;
@@ -8,7 +8,7 @@ public class TimeRecordDto
     public int Id { get; set; }
     public string? Description { get; set; }
     public int UserId { get; set; }
-    public string? CategoryName => Category?.Nome;
+    public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
     public List<TimePeriodDto> TimePeriods { get; set; }
@@ -60,5 +60,5 @@ public class TimeRecordDto
             }
             : null;
 
-    public CategoriaEntity? Category { private get; set; }
+    public CategoryEntity? Category { private get; set; }
 }

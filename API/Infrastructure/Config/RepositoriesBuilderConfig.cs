@@ -1,4 +1,4 @@
-﻿using API.Modules.Categoria.Repositories;
+﻿using API.Modules.Category.Repositories;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Repositories;
 using API.Modules.User.Repositories;
@@ -10,7 +10,7 @@ public static class RepositoriesBuilderConfig
     public static void Apply(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IUserRepository, UserRepository>();
-        builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<ITimeRecordRepository, TimeRecordRepository>();
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
     }

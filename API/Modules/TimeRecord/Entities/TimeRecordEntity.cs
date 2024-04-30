@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using API.Modules.Categoria.Entities;
+using API.Modules.Category.Entities;
 using API.Modules.TimePeriod.Entities;
 using API.Modules.User.Entities;
 
@@ -16,5 +16,5 @@ public class TimeRecordEntity
     public List<TimePeriodEntity>? TimePeriods { get; set; }
 
     public virtual UserEntity? User { get; set; }
-    public virtual CategoriaEntity? Category { get; set; }
+    public virtual CategoryEntity? Category { get; set; }
 }

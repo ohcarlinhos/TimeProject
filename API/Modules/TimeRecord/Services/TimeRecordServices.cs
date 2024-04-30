@@ -1,5 +1,5 @@
 ﻿using API.Data;
-using API.Modules.Categoria.Repositories;
+using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.DTO;
@@ -13,7 +13,7 @@ namespace API.Modules.TimeRecord.Services;
 public class TimeRecordServices(
     ProjectContext dbContext,
     ITimeRecordRepository timeRecordRepository,
-    ICategoriaRepository categoriaRepository,
+    ICategoryRepository categoryRepository,
     ITimePeriodServices timePeriodServices,
     IMapper mapper
 ) : ITimeRecordServices
@@ -43,8 +43,8 @@ public class TimeRecordServices(
 
         if (model.CategoryId != null)
         {
-            var categoria = await categoriaRepository.FindById((int)model.CategoryId, userId);
-            if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
+            var category = await categoryRepository.FindById((int)model.CategoryId, userId);
+            if (category == null) return result.SetError("not_found: Categoria não encontrada.");
         }
 
         var timeRecord = await timeRecordRepository.Create(new TimeRecordEntity
@@ -86,8 +86,8 @@ public class TimeRecordServices(
 
         if (model.CategoryId != null)
         {
-            var categoria = await categoriaRepository.FindById((int)model.CategoryId, userId);
-            if (categoria == null) return result.SetError("not_found: Categoria não encontrada.");
+            var category = await categoryRepository.FindById((int)model.CategoryId, userId);
+            if (category == null) return result.SetError("not_found: Categoria não encontrada.");
             timeRecord.CategoryId = model.CategoryId;
         }
 

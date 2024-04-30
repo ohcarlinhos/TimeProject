@@ -2,15 +2,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using API.Modules.User.Entities;
 
-namespace API.Modules.Categoria.Entities;
+namespace API.Modules.Category.Entities;
 
-[Table("categorias")]
-public class CategoriaEntity
+[Table("categories")]
+public class CategoryEntity
 {
     [Key]
     public int Id { get; set; }
-    public int UsuarioId { get; set; }
+    public int UserId { get; set; }
     [Required, MinLength(3), MaxLength(120)]
-    public string Nome { get; set; }
-    public virtual UserEntity? Usuario { get; set; }
+    public string Name { get; set; }
+    public virtual UserEntity? User { get; set; }
 }
