@@ -18,6 +18,16 @@ public class RegistroServices(
     IMapper mapper
 ) : IRegistroServices
 {
+    private RegistroDto MapData(RegistroEntity entity)
+    {
+        return mapper.Map<RegistroEntity, RegistroDto>(entity);
+    }
+
+    private List<RegistroDto> MapData(List<RegistroEntity> entities)
+    {
+        return mapper.Map<List<RegistroEntity>, List<RegistroDto>>(entities);
+    }
+    
     public Result<List<RegistroDto>> Index(int usuarioId, int page, int perPage)
     {
         return new Result<List<RegistroDto>>()
@@ -111,15 +121,5 @@ public class RegistroServices(
             return result.SetError("not_found: Não foi encontrado um registro com esse id.");
 
         return result.SetData(await registroRepository.Delete(registro));
-    }
-
-    private RegistroDto MapData(RegistroEntity entity)
-    {
-        return mapper.Map<RegistroEntity, RegistroDto>(entity);
-    }
-
-    private List<RegistroDto> MapData(List<RegistroEntity> entities)
-    {
-        return mapper.Map<List<RegistroEntity>, List<RegistroDto>>(entities);
     }
 }
