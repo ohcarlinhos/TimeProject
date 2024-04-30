@@ -8,7 +8,7 @@ namespace API.Data;
 
 public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
 {
-    public DbSet<UsuarioEntity> Usuarios { get; set; }
+    public DbSet<UserEntity> Users { get; set; }
     public DbSet<RegistroEntity> Registros { get; set; }
     public DbSet<PeriodoEntity> Periodos { get; set; }
     public DbSet<CategoriaEntity> Categorias { get; set; }

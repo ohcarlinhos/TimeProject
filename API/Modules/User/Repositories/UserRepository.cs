@@ -4,18 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Modules.User.Repositories
 {
-    public class UsuarioRepository(ProjectContext dbContext) : IUsuarioRepository
+    public class UserRepository(ProjectContext dbContext) : IUserRepository
     {
-        public async Task<UsuarioEntity> Create(UsuarioEntity entity)
+        public async Task<UserEntity> Create(UserEntity entity)
         {
-            dbContext.Usuarios.Add(entity);
+            dbContext.Users.Add(entity);
             await dbContext.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<UsuarioEntity> Update(UsuarioEntity entity)
+        public async Task<UserEntity> Update(UserEntity entity)
         {
-            dbContext.Usuarios.Update(entity);
+            dbContext.Users.Update(entity);
             await dbContext.SaveChangesAsync();
             return entity;
         }
@@ -25,19 +25,19 @@ namespace API.Modules.User.Repositories
             var entity = await FindById(id);
             if (entity == null) return true;
 
-            dbContext.Usuarios.Remove(entity);
+            dbContext.Users.Remove(entity);
             await dbContext.SaveChangesAsync();
             return true;
         }
 
-        public async Task<UsuarioEntity?> FindById(int id)
+        public async Task<UserEntity?> FindById(int id)
         {
-            return await dbContext.Usuarios.FirstOrDefaultAsync(i => i.Id == id);
+            return await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<UsuarioEntity?> FindByEmail(string email)
+        public async Task<UserEntity?> FindByEmail(string email)
         {
-            return await dbContext.Usuarios
+            return await dbContext.Users
                 .Where(u => u.Email == email)
                 .FirstOrDefaultAsync();
         }

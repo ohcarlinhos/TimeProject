@@ -5,14 +5,14 @@ using API.Modules.User.Repositories;
 
 namespace API.Modules.Auth.Services;
 
-public class AuthServices(IUsuarioRepository userRepository) : IAuthService
+public class AuthServices(IUserRepository userRepository) : IAuthService
 {
     public async Task<Result<object>> Login(LoginModel model)
     {
         var result = new Result<object>();
         var user = await userRepository.FindByEmail(model.Email);
 
-        if (user == null || user.Senha != model.Password)
+        if (user == null || user.Password != model.Password)
         {
             result.Message = "Email ou senha incorretos.";
             result.HasError = true;

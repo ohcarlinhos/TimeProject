@@ -9,39 +9,39 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Modules.User.Controllers;
 
 [ApiController]
-[Route("api/usuario")]
-public class UsuarioController(IUsuarioServices usuarioServices) : CustomController
+[Route("api/user")]
+public class UserController(IUserServices userServices) : CustomController
 {
     [HttpPost]
-    public async Task<ActionResult<UsuarioDTO>> Create([FromBody] CreateUsuarioModel model)
+    public async Task<ActionResult<UserDto>> Create([FromBody] CreateUserModel model)
     {
-        return HandleResponse(await usuarioServices.Create(model));
+        return HandleResponse(await userServices.Create(model));
     }
 
     [HttpPut("{id}"), Authorize]
-    public async Task<ActionResult<UsuarioDTO>> Update([FromRoute] int id, [FromBody] UpdateUsuarioModel model)
+    public async Task<ActionResult<UserDto>> Update([FromRoute] int id, [FromBody] UpdateUserModel model)
     {
         if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
-        return HandleResponse(await usuarioServices.Update(id, model));
+        return HandleResponse(await userServices.Update(id, model));
     }
 
     [HttpDelete("{id}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
         if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
-        return HandleResponse(await usuarioServices.Delete(id));
+        return HandleResponse(await userServices.Delete(id));
     }
 
     [HttpGet, Authorize, Route("{id}")]
-    public async Task<ActionResult<UsuarioDTO>> Get(int id)
+    public async Task<ActionResult<UserDto>> Get(int id)
     {
-        return HandleResponse(await usuarioServices.Get(id));
+        return HandleResponse(await userServices.Get(id));
     }
 
     [HttpGet, Authorize, Route("myself")]
-    public async Task<ActionResult<UsuarioDTO>> Myself()
+    public async Task<ActionResult<UserDto>> Myself()
     {
-        return HandleResponse(await usuarioServices
+        return HandleResponse(await userServices
             .Get(AuthorizeService.GetUserId(User)));
     }
 }

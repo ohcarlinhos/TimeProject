@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Modules.User.Entities;
 
-[Table("usuarios"), Index(nameof(Email), IsUnique = true)]
-public class UsuarioEntity
+[Table("users"), Index(nameof(Email), IsUnique = true)]
+public class UserEntity
 {
     [Key] public int Id { get; set; }
 
     [Required, MinLength(3), MaxLength(120)]
-    public string Nome { get; set; }
+    public string Name { get; set; }
 
     [Required, EmailAddress, MinLength(8), MaxLength(64)]
     public string Email { get; set; }
 
     [Required, MinLength(8), MaxLength(32)]
-    public string? Senha { get; set; }
+    public string? Password { get; set; }
 }

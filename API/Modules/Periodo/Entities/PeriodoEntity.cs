@@ -14,6 +14,6 @@ public class PeriodoEntity
     [Required] public DateTime Inicio { get; set; }
     [Required] public DateTime Fim { get; set; }
 
-    public virtual UsuarioEntity? Usuario { get; set; }
+    public virtual UserEntity? Usuario { get; set; }
     public virtual RegistroEntity? Registro { get; set; }
 }

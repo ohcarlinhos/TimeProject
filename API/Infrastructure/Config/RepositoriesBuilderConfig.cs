@@ -9,7 +9,7 @@ public static class RepositoriesBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         builder.Services.AddScoped<IRegistroRepository, RegistroRepository>();
         builder.Services.AddScoped<IPeriodoRepository, PeriodoRepository>();

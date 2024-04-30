@@ -12,7 +12,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<UsuarioEntity, UsuarioDTO>();
+        CreateMap<UserEntity, UserDto>();
         CreateMap<RegistroEntity, RegistroDto>();
         CreateMap<PeriodoEntity, PeriodoDto>();
     }

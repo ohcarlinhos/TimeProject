@@ -7,7 +7,7 @@ namespace API.Infrastructure.Services;
 
 public static class TokenService
 {
-    public static object GenerateBearerJwt(UsuarioEntity user)
+    public static object GenerateBearerJwt(UserEntity user)
     {
         // configurações do token
         var tokenSubject = new ClaimsIdentity(new[]

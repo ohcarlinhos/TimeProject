@@ -12,5 +12,5 @@ public class CategoriaEntity
     public int UsuarioId { get; set; }
     [Required, MinLength(3), MaxLength(120)]
     public string Nome { get; set; }
-    public virtual UsuarioEntity? Usuario { get; set; }
+    public virtual UserEntity? Usuario { get; set; }
 }

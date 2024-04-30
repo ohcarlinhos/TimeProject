@@ -16,6 +16,6 @@ public class RegistroEntity
     [MaxLength(120)] public string? Descricao { get; set; }
     public List<PeriodoEntity> Periodos { get; set; }
 
-    public virtual UsuarioEntity? Usuario { get; set; }
+    public virtual UserEntity? Usuario { get; set; }
     public virtual CategoriaEntity? Categoria { get; set; }
 }
