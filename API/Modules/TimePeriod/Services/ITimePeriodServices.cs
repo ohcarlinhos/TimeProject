@@ -7,7 +7,7 @@ namespace API.Modules.TimePeriod.Services;
 
 public interface ITimePeriodServices
 {
-    public Result<List<TimePeriodDto>> Index(int timeRecordId, int userId, int page, int perPage);
+    public Task<Result<Pagination<TimePeriodDto>>> Index(int timeRecordId, int userId, int page, int perPage);
 
     Task<Result<TimePeriodEntity>> Create(
         CreateTimePeriodModel model,

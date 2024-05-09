@@ -19,20 +19,24 @@ public class TimePeriodServices(
     {
         return mapper.Map<TimePeriodEntity, TimePeriodDto>(entity);
     }
-    
+
     private List<TimePeriodDto> MapData(List<TimePeriodEntity> entity)
     {
         return mapper.Map<List<TimePeriodEntity>, List<TimePeriodDto>>(entity);
     }
-    
-    public Result<List<TimePeriodDto>> Index(int timeRecordId, int userId, int page, int perPage)
+
+    public async Task<Result<Pagination<TimePeriodDto>>> Index(int timeRecordId, int userId, int page, int perPage)
     {
-        return new Result<List<TimePeriodDto>>()
+        var totalItems = await timePeriodRepository.GetTotalItems(timeRecordId, userId);
+        var data = MapData(timePeriodRepository.Index(timeRecordId, userId, page, perPage));
+        return new Result<Pagination<TimePeriodDto>>()
         {
-            Data = MapData(timePeriodRepository.Index(timeRecordId, userId, page, perPage))
+            Data = Pagination<TimePeriodDto>.Handle(
+                data, page, perPage,
+                totalItems)
         };
     }
-    
+
     public async Task<Result<TimePeriodEntity>> Create(
         CreateTimePeriodModel model,
         int userId
@@ -55,7 +59,7 @@ public class TimePeriodServices(
             .Create(new TimePeriodEntity
                 {
                     UserId = userId,
-                    TimerRecordId = model.TimeRecordId,
+                    TimeRecordId = model.TimeRecordId,
                     Start = model.Start,
                     End = model.End
                 }
@@ -81,7 +85,7 @@ public class TimePeriodServices(
             list.Add(new TimePeriodEntity()
             {
                 UserId = userId,
-                TimerRecordId = timeRecordId,
+                TimeRecordId = timeRecordId,
                 Start = timePeriod.Start,
                 End = timePeriod.End
             });
@@ -119,7 +123,7 @@ public class TimePeriodServices(
 
         return result.SetData(await timePeriodRepository.Delete(dataDb));
     }
-    
+
     private static void ValidateInicioAndFim<T>(
         DateTime inicio,
         DateTime fim,

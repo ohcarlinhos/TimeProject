@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Modules.Shared;
 using API.Modules.TimePeriod.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +10,17 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
     public List<TimePeriodEntity> Index(int timeRecordId, int userId, int page, int perPage)
     {
         return dbContext.TimePeriods
-            .Where(timePeriod => timePeriod.TimerRecordId == timeRecordId && timePeriod.UserId == userId)
+            .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
+            .Skip((page - 1) * perPage)
+            .Take(perPage)
             .ToList();
+    }
+    
+    public async Task<int> GetTotalItems(int timeRecordId, int userId)
+    {
+        return await dbContext.TimePeriods
+            .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
+            .CountAsync();
     }
 
     public async Task<TimePeriodEntity> Create(TimePeriodEntity entity)

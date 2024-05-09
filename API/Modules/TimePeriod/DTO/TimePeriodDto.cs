@@ -15,4 +15,22 @@ public class TimePeriodDto
         Hours = Calc.Hours,
         Days = Calc.Days,
     };
+    
+    public string FormattedTime
+    {
+        get
+        {
+            var ft = "";
+            if (Calc.Days > 0)
+                ft += $"{Calc.Days}d ";
+            if (Calc.Hours > 0)
+                ft += $"{Calc.Hours}h ";
+            if (Calc.Minutes > 0)
+                ft += $"{Calc.Minutes}m ";
+            if (Calc.Seconds > 0)
+                ft += $"{Calc.Seconds}s ";
+
+            return ft.Trim();
+        }
+    }
 }

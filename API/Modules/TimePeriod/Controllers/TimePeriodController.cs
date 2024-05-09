@@ -1,4 +1,5 @@
 ﻿using API.Infrastructure.Services;
+using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using API.Modules.TimePeriod.DTO;
 using API.Modules.TimePeriod.Entities;
@@ -14,9 +15,9 @@ namespace API.Modules.TimePeriod.Controllers;
 public class TimePeriodController(ITimePeriodServices timePeriodServices) : CustomController
 {
     [HttpGet, Authorize, Route("{timeRecordId}")]
-    public ActionResult<List<TimePeriodDto>> Index(int timeRecordId, int page = 1, int perPage = 12)
+    public async Task<ActionResult<Pagination<TimePeriodDto>>> Index(int timeRecordId, int page = 1, int perPage = 12)
     {
-        var result = timePeriodServices
+        var result = await timePeriodServices
             .Index(timeRecordId, AuthorizeService.GetUserId(User), page, perPage);
 
         return HandleResponse(result);
