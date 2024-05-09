@@ -80,10 +80,9 @@ namespace API.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(type: "integer", nullable: false),
-                    TimerRecordId = table.Column<int>(type: "integer", nullable: false),
+                    TimeRecordId = table.Column<int>(type: "integer", nullable: false),
                     Start = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    End = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    TimeRecordId = table.Column<int>(type: "integer", nullable: true)
+                    End = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,7 +91,8 @@ namespace API.Migrations
                         name: "FK_time_periods_time_records_TimeRecordId",
                         column: x => x.TimeRecordId,
                         principalTable: "time_records",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_time_periods_users_UserId",
                         column: x => x.UserId,

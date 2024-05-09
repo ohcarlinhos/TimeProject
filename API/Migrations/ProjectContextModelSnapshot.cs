@@ -59,10 +59,7 @@ namespace API.Migrations
                     b.Property<DateTime>("Start")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("TimeRecordId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TimerRecordId")
+                    b.Property<int>("TimeRecordId")
                         .HasColumnType("integer");
 
                     b.Property<int>("UserId")
@@ -150,7 +147,9 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Modules.TimeRecord.Entities.TimeRecordEntity", "TimeRecord")
                         .WithMany("TimePeriods")
-                        .HasForeignKey("TimeRecordId");
+                        .HasForeignKey("TimeRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Modules.User.Entities.UserEntity", "User")
                         .WithMany()
