@@ -10,11 +10,18 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     {
         return dbContext.TimeRecords
             .Where(timeRecord => timeRecord.UserId == userId)
+            .Skip((page - 1) * perPage)
+            .Take(perPage)
             .Include(r => r.TimePeriods)
             .Include(r => r.Category)
-            .Skip(page > 0 ? page - 1 : page * perPage)
-            .Take(perPage)
             .ToList();
+    }
+
+    public async Task<int> GetTotalItems(int userId)
+    {
+        return await dbContext.TimeRecords
+            .Where(timeRecord => timeRecord.UserId == userId)
+            .CountAsync();
     }
 
     public async Task<TimeRecordEntity> Create(TimeRecordEntity entity)
@@ -48,6 +55,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     {
         return await dbContext.TimeRecords
             .Include(r => r.TimePeriods)
+            .Include(r => r.Category)
             .FirstOrDefaultAsync(timeRecord => timeRecord.Id == id && timeRecord.UserId == userId);
     }
 }

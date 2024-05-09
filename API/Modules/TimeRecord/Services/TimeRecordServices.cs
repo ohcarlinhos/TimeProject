@@ -28,11 +28,13 @@ public class TimeRecordServices(
         return mapper.Map<List<TimeRecordEntity>, List<TimeRecordDto>>(entities);
     }
 
-    public Result<List<TimeRecordDto>> Index(int userId, int page, int perPage)
+    public async Task<Result<Pagination<TimeRecordDto>>> Index(int userId, int page, int perPage)
     {
-        return new Result<List<TimeRecordDto>>()
+        var data = MapData(timeRecordRepository.Index(userId, page, perPage));
+        var totalItems = await timeRecordRepository.GetTotalItems(userId);
+        return new Result<Pagination<TimeRecordDto>>()
         {
-            Data = MapData(timeRecordRepository.Index(userId, page, perPage))
+            Data = Pagination<TimeRecordDto>.Handle(data, page, perPage, totalItems)
         };
     }
 

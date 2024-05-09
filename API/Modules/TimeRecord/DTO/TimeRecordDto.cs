@@ -25,27 +25,24 @@ public class TimeRecordDto
                     current.Add(timePeriod.End.Subtract(timePeriod.Start)));
         }
     }
-
-    private double Seconds => TimePeriodsCalc.Seconds;
-    private double Minutes => TimePeriodsCalc.Minutes;
-    private double Hours => TimePeriodsCalc.Hours;
-    private double Days => TimePeriodsCalc.Days;
-
+    
     public string FormattedTime
     {
         get
         {
-            var formattedTime = "";
-            if (Days > 0)
-                formattedTime += $"{Days}d ";
-            if (Hours > 0)
-                formattedTime += $"{Hours}h ";
-            if (Minutes > 0)
-                formattedTime += $"{Minutes}m ";
-            if (Seconds > 0)
-                formattedTime += $"{Seconds}s ";
+            var tpc = TimePeriodsCalc;
+            var ft = "";
+            
+            if (tpc.Days > 0)
+                ft += $"{tpc.Days}d ";
+            if (tpc.Hours > 0)
+                ft += $"{tpc.Hours}h ";
+            if (tpc.Minutes > 0)
+                ft += $"{tpc.Minutes}m ";
+            if (tpc.Seconds > 0)
+                ft += $"{tpc.Seconds}s ";
 
-            return formattedTime.Trim();
+            return ft.Trim();
         }
     }
 
@@ -53,10 +50,10 @@ public class TimeRecordDto
         TimePeriods.Count > 0
             ? new
             {
-                Segundos = Seconds,
-                Minutos = Minutes,
-                Horas = Hours,
-                Dias = Days,
+                Days = TimePeriodsCalc.Days,
+                Hours = TimePeriodsCalc.Hours,
+                Minutes = TimePeriodsCalc.Minutes,
+                Seconds = TimePeriodsCalc.Seconds,
             }
             : null;
 

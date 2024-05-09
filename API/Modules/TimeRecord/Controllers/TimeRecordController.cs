@@ -1,4 +1,5 @@
 ﻿using API.Infrastructure.Services;
+using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using API.Modules.TimeRecord.DTO;
 using API.Modules.TimeRecord.Models;
@@ -13,9 +14,9 @@ namespace API.Modules.TimeRecord.Controllers;
 public class TimeRecordController(ITimeRecordServices timeRecordServices) : CustomController
 {
     [HttpGet, Authorize]
-    public ActionResult<List<TimeRecordDto>> Index(int page = 1, int perPage = 12)
+    public async Task<ActionResult<Pagination<TimeRecordDto>>> Index(int page = 1, int perPage = 12)
     {
-        var result = timeRecordServices
+        var result = await timeRecordServices
             .Index(AuthorizeService.GetUserId(User), page, perPage);
 
         return HandleResponse(result);
