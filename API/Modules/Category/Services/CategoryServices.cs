@@ -1,15 +1,36 @@
-﻿using API.Modules.Category.Entities;
+﻿using API.Modules.Category.DTO;
+using API.Modules.Category.Entities;
 using API.Modules.Category.Models;
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;
+using AutoMapper;
 
 namespace API.Modules.Category.Services;
 
-public class CategoryServices(ICategoryRepository categoryRepository) : ICategoryServices
+public class CategoryServices(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryServices
 {
-    public Result<List<CategoryEntity>> Index(int userId, int page, int perPage)
+    private CategoryDto MapData(CategoryEntity entity)
     {
-        return new Result<List<CategoryEntity>>() { Data = categoryRepository.Index(userId) };
+        return mapper.Map<CategoryEntity, CategoryDto>(entity);
+    }
+    
+    private List<CategoryDto> MapData(List<CategoryEntity> entities)
+    {
+        return mapper.Map<List<CategoryEntity>, List<CategoryDto>>(entities);
+    }
+
+    public Result<List<CategoryDto>> Index(int userId)
+    {
+        return new Result<List<CategoryDto>>()
+            { Data = MapData(categoryRepository.Index(userId)) };
+    }
+
+    public async Task<Result<Pagination<CategoryDto>>> Index(int userId, int page, int perPage)
+    {
+        var data = MapData(categoryRepository.Index(userId, page, perPage));
+        var totalItems = await categoryRepository.GetTotalItems(userId);
+        return new Result<Pagination<CategoryDto>>()
+            { Data = Pagination<CategoryDto>.Handle(data, page, perPage, totalItems) };
     }
 
     public async Task<Result<CategoryEntity>> Create(CategoryModel model, int userId)

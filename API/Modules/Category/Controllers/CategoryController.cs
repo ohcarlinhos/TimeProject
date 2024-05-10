@@ -1,7 +1,9 @@
 ﻿using API.Infrastructure.Services;
+using API.Modules.Category.DTO;
 using API.Modules.Category.Entities;
 using API.Modules.Category.Models;
 using API.Modules.Category.Services;
+using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +15,17 @@ public class CategoryController(ICategoryServices categoryServices)
     : CustomController
 {
     [HttpGet]
-    public ActionResult<List<CategoryEntity>> Index(int page = 0, int perPage = 12)
+    public async Task<ActionResult<Pagination<CategoryDto>>> Index(int page = 0, int perPage = 12)
+    {
+        return HandleResponse(await categoryServices
+            .Index(AuthorizeService.GetUserId(User), page, perPage));
+    }
+
+    [HttpGet, Route("all")]
+    public ActionResult<List<CategoryDto>> Index()
     {
         return HandleResponse(categoryServices
-            .Index(AuthorizeService.GetUserId(User), page, perPage));
+            .Index(AuthorizeService.GetUserId(User)));
     }
 
     [HttpPost]

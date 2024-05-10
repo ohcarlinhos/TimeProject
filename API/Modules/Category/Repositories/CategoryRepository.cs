@@ -13,6 +13,22 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
             .ToList();
     }
 
+    public List<CategoryEntity> Index(int userId, int page, int perPage)
+    {
+        return dbContext.Categories
+            .Where(category => category.UserId == userId)
+            .Skip((page - 1) * perPage)
+            .Take(perPage)
+            .ToList();
+    }
+
+    public async Task<int> GetTotalItems(int userId)
+    {
+        return await dbContext.TimeRecords
+            .Where(timeRecord => timeRecord.UserId == userId)
+            .CountAsync();
+    }
+
     public async Task<CategoryEntity> Create(CategoryEntity entity)
     {
         dbContext.Categories.Add(entity);
@@ -38,7 +54,7 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
     {
         return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
     }
-    
+
     public async Task<CategoryEntity?> FindById(int id, int userId)
     {
         return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);

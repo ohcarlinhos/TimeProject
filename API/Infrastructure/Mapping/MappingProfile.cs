@@ -1,4 +1,6 @@
-﻿using API.Modules.TimePeriod.DTO;
+﻿using API.Modules.Category.DTO;
+using API.Modules.Category.Entities;
+using API.Modules.TimePeriod.DTO;
 using API.Modules.TimePeriod.Entities;
 using API.Modules.TimeRecord.DTO;
 using API.Modules.TimeRecord.Entities;
@@ -15,5 +17,6 @@ public class MappingProfile : Profile
         CreateMap<UserEntity, UserDto>();
         CreateMap<TimeRecordEntity, TimeRecordDto>();
         CreateMap<TimePeriodEntity, TimePeriodDto>();
+        CreateMap<CategoryEntity, CategoryDto>();
     }
 }
