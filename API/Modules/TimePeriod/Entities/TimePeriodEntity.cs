@@ -13,7 +13,6 @@ public class TimePeriodEntity
     [Required] public int TimeRecordId { get; set; }
     [Required] public DateTime Start { get; set; }
     [Required] public DateTime End { get; set; }
-
-    public virtual UserEntity? User { get; set; }
+    
     public virtual TimeRecordEntity? TimeRecord { get; set; }
 }

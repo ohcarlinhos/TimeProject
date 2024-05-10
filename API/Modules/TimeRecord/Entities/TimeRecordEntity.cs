@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using API.Modules.Category.Entities;
 using API.Modules.TimePeriod.Entities;
-using API.Modules.User.Entities;
 
 namespace API.Modules.TimeRecord.Entities;
 
@@ -14,7 +13,5 @@ public class TimeRecordEntity
     public int? CategoryId { get; set; }
     [MaxLength(120)] public string? Description { get; set; }
     public List<TimePeriodEntity>? TimePeriods { get; set; }
-
-    public virtual UserEntity? User { get; set; }
     public virtual CategoryEntity? Category { get; set; }
 }
