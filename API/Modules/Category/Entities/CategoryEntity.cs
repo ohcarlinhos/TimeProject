@@ -12,5 +12,4 @@ public class CategoryEntity
     public int UserId { get; set; }
     [Required, MinLength(3), MaxLength(120)]
     public string Name { get; set; }
-    public virtual UserEntity? User { get; set; }
 }
