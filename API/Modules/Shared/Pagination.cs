@@ -7,8 +7,18 @@ public class Pagination<T>
     public int TotalPages { get; set; }
     public int TotalItems { get; set; }
     public List<T>? Data { get; set; }
+    public string? Search { get; set; }
+    public string? OrderBy { get; set; }
+    public string? Sort { get; set; }
 
-    public static Pagination<T> Handle(List<T> data, int page, int perPage, int totalItems)
+    public static Pagination<T> Handle(
+        List<T> data, 
+        int page, 
+        int perPage, 
+        int totalItems, 
+        string search = "",
+        string orderBy = "", 
+        string sort = "")
     {
         return new Pagination<T>()
         {
@@ -16,6 +26,9 @@ public class Pagination<T>
             PerPage = perPage,
             TotalItems = totalItems,
             TotalPages = (int)Math.Ceiling((float)totalItems / perPage),
+            Search = search,
+            OrderBy = orderBy,
+            Sort = sort,
             Data = data
         };
     }
