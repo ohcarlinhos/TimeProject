@@ -14,10 +14,11 @@ namespace API.Modules.TimeRecord.Controllers;
 public class TimeRecordController(ITimeRecordServices timeRecordServices) : CustomController
 {
     [HttpGet, Authorize]
-    public async Task<ActionResult<Pagination<TimeRecordDto>>> Index(int page = 1, int perPage = 12)
+    public async Task<ActionResult<Pagination<TimeRecordDto>>> Index(int page = 1, int perPage = 4,
+        string search = "", string orderBy = "", string sort = "DESC")
     {
         var result = await timeRecordServices
-            .Index(AuthorizeService.GetUserId(User), page, perPage);
+            .Index(AuthorizeService.GetUserId(User), page, perPage, search, orderBy, sort);
 
         return HandleResponse(result);
     }
@@ -39,11 +40,10 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
 
         return HandleResponse(result);
     }
-    
+
     [HttpGet, Authorize, Route("{id}")]
     public async Task<ActionResult<TimeRecordDto>> Details(int id)
     {
-        
         var result = await timeRecordServices
             .Details(id, AuthorizeService.GetUserId(User));
 

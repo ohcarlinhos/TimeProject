@@ -6,10 +6,21 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordRepository
 {
-    public List<TimeRecordEntity> Index(int userId, int page, int perPage)
+    public List<TimeRecordEntity> Index(int userId, int page, int perPage, string search, string orderBy, string sort)
     {
-        return dbContext.TimeRecords
-            .Where(timeRecord => timeRecord.UserId == userId)
+        IQueryable<TimeRecordEntity> query = dbContext.TimeRecords;
+
+        query = query.Where(timeRecord => timeRecord.UserId == userId);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            query = query.Where(t => t.Description != null && t.Description.Contains(search));
+
+        if (!string.IsNullOrWhiteSpace(sort) || sort.ToLower() == "desc")
+            query = query.OrderByDescending(tr => tr.TimePeriods.FirstOrDefault().Start);
+        else
+            query = query.OrderBy(tr => tr.TimePeriods.FirstOrDefault().Start);
+        
+        return query
             .Skip((page - 1) * perPage)
             .Take(perPage)
             .Include(r => r.TimePeriods)
@@ -17,11 +28,16 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             .ToList();
     }
 
-    public async Task<int> GetTotalItems(int userId)
+    public async Task<int> GetTotalItems(int userId, string search)
     {
-        return await dbContext.TimeRecords
-            .Where(timeRecord => timeRecord.UserId == userId)
-            .CountAsync();
+        IQueryable<TimeRecordEntity> query = dbContext.TimeRecords;
+
+        query = query.Where(timeRecord => timeRecord.UserId == userId);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            query = query.Where(t => t.Description != null && t.Description.Contains(search));
+
+        return await query.CountAsync();
     }
 
     public async Task<TimeRecordEntity> Create(TimeRecordEntity entity)
