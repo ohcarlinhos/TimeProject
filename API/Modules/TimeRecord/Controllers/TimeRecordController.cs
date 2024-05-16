@@ -15,7 +15,7 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
 {
     [HttpGet, Authorize]
     public async Task<ActionResult<Pagination<TimeRecordDto>>> Index(int page = 1, int perPage = 4,
-        string search = "", string orderBy = "", string sort = "DESC")
+        string search = "", string orderBy = "", string sort = "desc")
     {
         var result = await timeRecordServices
             .Index(AuthorizeService.GetUserId(User), page, perPage, search, orderBy, sort);

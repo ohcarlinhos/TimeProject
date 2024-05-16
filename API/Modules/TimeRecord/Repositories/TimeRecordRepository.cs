@@ -10,12 +10,12 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     {
         IQueryable<TimeRecordEntity> query = dbContext.TimeRecords;
 
-        query = query.Where(timeRecord => timeRecord.UserId == userId);
+        query = query.Where(tr => tr.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(t => t.Description != null && t.Description.Contains(search));
+            query = query.Where(tr => tr.Description != null && tr.Description.Contains(search));
 
-        if (!string.IsNullOrWhiteSpace(sort) || sort.ToLower() == "desc")
+        if (string.IsNullOrWhiteSpace(sort) || sort == "desc")
             query = query.OrderByDescending(tr => tr.TimePeriods.FirstOrDefault().Start);
         else
             query = query.OrderBy(tr => tr.TimePeriods.FirstOrDefault().Start);
