@@ -18,21 +18,21 @@ public class UserController(IUserServices userServices) : CustomController
         return HandleResponse(await userServices.Create(model));
     }
 
-    [HttpPut("{id}"), Authorize]
+    [HttpPut("{id:int}"), Authorize]
     public async Task<ActionResult<UserDto>> Update([FromRoute] int id, [FromBody] UpdateUserModel model)
     {
         if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
         return HandleResponse(await userServices.Update(id, model));
     }
 
-    [HttpDelete("{id}"), Authorize]
+    [HttpDelete("{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
         if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
         return HandleResponse(await userServices.Delete(id));
     }
 
-    [HttpGet, Authorize, Route("{id}")]
+    [HttpGet, Authorize, Route("{id:int}")]
     public async Task<ActionResult<UserDto>> Get(int id)
     {
         return HandleResponse(await userServices.Get(id));

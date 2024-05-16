@@ -1,6 +1,7 @@
 ﻿using API.Modules.Shared;
 using API.Modules.User.DTO;
 using API.Modules.User.Entities;
+using API.Modules.User.Errors;
 using API.Modules.User.Models;
 using API.Modules.User.Repositories;
 using AutoMapper;
@@ -22,7 +23,7 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
 
         if (await EmailNotAvailability(model.Email))
         {
-            result.Message = "Já existe um usuário utilizando o email informado.";
+            result.Message = UserErrors.EmailAlreadyInUse;
             result.HasError = true;
             return result;
         }
@@ -46,12 +47,12 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
         var user = await userRepository.FindById(id);
 
         if (user == null)
-            return result.SetError("Usuário não encontrado.");
+            return result.SetError(UserErrors.NotFound);
 
         if (model.Email != null && user.Email != model.Email)
         {
             if (await EmailNotAvailability(model.Email))
-                return result.SetError("Já existe um usuário utilizando o email informado.");
+                return result.SetError(UserErrors.EmailAlreadyInUse);
 
             user.Email = model.Email;
         }
@@ -61,7 +62,7 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
         if (model.Password != null)
         {
             if (model.OldPassword != user.Password)
-                return result.SetError("A senha antiga não confere.");
+                return result.SetError(UserErrors.DifferentPassword);
 
             user.Password = model.Password;
         }
