@@ -12,8 +12,9 @@ public static class TokenService
         // configurações do token
         var tokenSubject = new ClaimsIdentity(new[]
         {
-            new Claim (ClaimTypes.Sid, user.Id.ToString()),
+            new Claim (ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim (ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, "")
         });
 
         var tokenExpires = DateTime.UtcNow.AddHours(EnvVariables.JwtTokenExpires);
