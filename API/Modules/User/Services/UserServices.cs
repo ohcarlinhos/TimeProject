@@ -49,7 +49,7 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
         if (user == null)
             return result.SetError(UserErrors.NotFound);
 
-        if (model.Email != null && user.Email != model.Email)
+        if (!string.IsNullOrWhiteSpace(model.Email) && user.Email != model.Email)
         {
             if (await EmailNotAvailability(model.Email))
                 return result.SetError(UserErrors.EmailAlreadyInUse);
@@ -57,9 +57,10 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
             user.Email = model.Email;
         }
 
-        if (model.Name != null) user.Name = model.Name;
+        if (!string.IsNullOrWhiteSpace(model.Name) && user.Name != model.Name) 
+            user.Name = model.Name;
 
-        if (model.Password != null)
+        if (!string.IsNullOrWhiteSpace(model.Password))
         {
             if (model.OldPassword != user.Password)
                 return result.SetError(UserErrors.DifferentPassword);
