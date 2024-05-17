@@ -9,11 +9,15 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     public List<TimeRecordEntity> Index(int userId, int page, int perPage, string search, string orderBy, string sort)
     {
         IQueryable<TimeRecordEntity> query = dbContext.TimeRecords;
-
         query = query.Where(tr => tr.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(tr => tr.Description != null && tr.Description.Contains(search));
+            query = query.Where(tr =>
+                tr.Description != null &&
+                EF.Functions.Like(
+                    tr.Description.ToLower(),
+                    $"%{search.ToLower()}%")
+            );
 
         if (string.IsNullOrWhiteSpace(sort) || sort == "desc")
             query = query.OrderByDescending(tr => tr.TimePeriods.FirstOrDefault().Start);
@@ -31,11 +35,15 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     public async Task<int> GetTotalItems(int userId, string search)
     {
         IQueryable<TimeRecordEntity> query = dbContext.TimeRecords;
-
         query = query.Where(timeRecord => timeRecord.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(t => t.Description != null && t.Description.Contains(search));
+            query = query.Where(tr =>
+                tr.Description != null &&
+                EF.Functions.Like(
+                    tr.Description.ToLower(),
+                    $"%{search.ToLower()}%")
+            );
 
         return await query.CountAsync();
     }

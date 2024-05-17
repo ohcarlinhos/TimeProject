@@ -19,7 +19,11 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(c => c.Name.Contains(search));
+            query = query.Where(c =>
+                EF.Functions.Like(
+                    c.Name.ToLower(),
+                    $"%{search.ToLower()}%")
+            );
 
         if (string.IsNullOrWhiteSpace(sort) || sort == "asc")
             query = query.OrderBy(c => c.Name);
@@ -32,11 +36,19 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
             .ToList();
     }
 
-    public async Task<int> GetTotalItems(int userId, string search)
+    public Task<int> GetTotalItems(int userId, string search)
     {
-        return await dbContext.Categories
-            .Where(c => c.UserId == userId)
-            .CountAsync();
+        IQueryable<CategoryEntity> query = dbContext.Categories;
+        query = query.Where(c => c.UserId == userId);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            query = query.Where(c =>
+                EF.Functions.Like(
+                    c.Name.ToLower(),
+                    $"%{search.ToLower()}%")
+            );
+
+        return query.CountAsync();
     }
 
     public async Task<CategoryEntity> Create(CategoryEntity entity)
