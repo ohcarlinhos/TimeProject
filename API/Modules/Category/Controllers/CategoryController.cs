@@ -19,34 +19,34 @@ public class CategoryController(ICategoryServices categoryServices)
         string sort = "asc")
     {
         return HandleResponse(await categoryServices
-            .Index(AuthorizeService.GetUserId(User), page, perPage, search, sort));
+            .Index(UserSession.Id(User), page, perPage, search, sort));
     }
 
     [HttpGet, Route("all")]
     public ActionResult<List<CategoryDto>> Index()
     {
         return HandleResponse(categoryServices
-            .Index(AuthorizeService.GetUserId(User)));
+            .Index(UserSession.Id(User)));
     }
 
     [HttpPost]
     public async Task<ActionResult<CategoryEntity>> Create([FromBody] CategoryModel model)
     {
         return HandleResponse(await categoryServices
-            .Create(model, AuthorizeService.GetUserId(User)));
+            .Create(model, UserSession.Id(User)));
     }
 
     [HttpPut, Route("{id}")]
     public async Task<ActionResult<CategoryEntity>> Update(int id, [FromBody] CategoryModel model)
     {
         return HandleResponse(await categoryServices
-            .Update(id, model, AuthorizeService.GetUserId(User)));
+            .Update(id, model, UserSession.Id(User)));
     }
 
     [HttpDelete, Route("{id}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
         return HandleResponse(await categoryServices
-            .Delete(id, AuthorizeService.GetUserId(User)));
+            .Delete(id, UserSession.Id(User)));
     }
 }

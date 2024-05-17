@@ -1,4 +1,5 @@
 ﻿using API.Infrastructure.Services;
+using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using API.Modules.User.DTO;
 using API.Modules.User.Models;
@@ -21,14 +22,14 @@ public class UserController(IUserServices userServices) : CustomController
     [HttpPut("{id:int}"), Authorize]
     public async Task<ActionResult<UserDto>> Update([FromRoute] int id, [FromBody] UpdateUserModel model)
     {
-        if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
+        if (UserSession.Id(User) != id) return Unauthorized();
         return HandleResponse(await userServices.Update(id, model));
     }
 
     [HttpDelete("{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
-        if (AuthorizeService.GetUserId(User) != id) return Unauthorized();
+        if (UserSession.Id(User) != id) return Unauthorized();
         return HandleResponse(await userServices.Delete(id));
     }
 
@@ -42,6 +43,6 @@ public class UserController(IUserServices userServices) : CustomController
     public async Task<ActionResult<UserDto>> Myself()
     {
         return HandleResponse(await userServices
-            .Get(AuthorizeService.GetUserId(User)));
+            .Get(UserSession.Id(User)));
     }
 }

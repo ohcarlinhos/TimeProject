@@ -18,7 +18,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<Pagination<TimePeriodDto>>> Index(int timeRecordId, int page = 1, int perPage = 12)
     {
         var result = await timePeriodServices
-            .Index(timeRecordId, AuthorizeService.GetUserId(User), page, perPage);
+            .Index(timeRecordId, UserSession.Id(User), page, perPage);
 
         return HandleResponse(result);
     }
@@ -27,7 +27,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<TimePeriodEntity>> Create([FromBody] CreateTimePeriodModel model)
     {
         var result = await timePeriodServices
-            .Create(model, AuthorizeService.GetUserId(User));
+            .Create(model, UserSession.Id(User));
 
         return HandleResponse(result);
     }
@@ -36,7 +36,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<TimePeriodEntity>> Update(int id, [FromBody] TimePeriodModel model)
     {
         var result = await timePeriodServices
-            .Update(id, model, AuthorizeService.GetUserId(User));
+            .Update(id, model, UserSession.Id(User));
 
         return HandleResponse(result);
     }
@@ -45,7 +45,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<bool>> Delete(int id)
     {
         var result = await timePeriodServices
-            .Delete(id, AuthorizeService.GetUserId(User));
+            .Delete(id, UserSession.Id(User));
 
         return HandleResponse(result);
     }

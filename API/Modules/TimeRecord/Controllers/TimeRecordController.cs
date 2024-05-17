@@ -18,7 +18,7 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
         string search = "", string orderBy = "", string sort = "desc")
     {
         var result = await timeRecordServices
-            .Index(AuthorizeService.GetUserId(User), page, perPage, search, orderBy, sort);
+            .Index(UserSession.Id(User), page, perPage, search, orderBy, sort);
 
         return HandleResponse(result);
     }
@@ -27,7 +27,7 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
     public async Task<ActionResult<TimeRecordDto>> Create([FromBody] CreateTimeRecordModel model)
     {
         var result = await timeRecordServices
-            .Create(model, AuthorizeService.GetUserId(User));
+            .Create(model, UserSession.Id(User));
 
         return HandleResponse(result);
     }
@@ -36,7 +36,7 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
     public async Task<ActionResult<TimeRecordDto>> Update(int id, [FromBody] UpdateTimeRecordModel model)
     {
         var result = await timeRecordServices
-            .Update(id, model, AuthorizeService.GetUserId(User));
+            .Update(id, model, UserSession.Id(User));
 
         return HandleResponse(result);
     }
@@ -45,7 +45,7 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
     public async Task<ActionResult<TimeRecordDto>> Details(int id)
     {
         var result = await timeRecordServices
-            .Details(id, AuthorizeService.GetUserId(User));
+            .Details(id, UserSession.Id(User));
 
         return HandleResponse(result);
     }
@@ -54,7 +54,7 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
     public async Task<ActionResult<bool>> Delete(int id)
     {
         var result = await timeRecordServices
-            .Delete(id, AuthorizeService.GetUserId(User));
+            .Delete(id, UserSession.Id(User));
 
         return HandleResponse(result);
     }
