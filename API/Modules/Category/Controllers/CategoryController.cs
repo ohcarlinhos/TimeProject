@@ -15,10 +15,11 @@ public class CategoryController(ICategoryServices categoryServices)
     : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<CategoryDto>>> Index(int page = 0, int perPage = 12)
+    public async Task<ActionResult<Pagination<CategoryDto>>> Index(int page = 1, int perPage = 10, string search = "",
+        string sort = "asc")
     {
         return HandleResponse(await categoryServices
-            .Index(AuthorizeService.GetUserId(User), page, perPage));
+            .Index(AuthorizeService.GetUserId(User), page, perPage, search, sort));
     }
 
     [HttpGet, Route("all")]

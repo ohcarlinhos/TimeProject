@@ -25,12 +25,12 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
             { Data = MapData(categoryRepository.Index(userId)) };
     }
 
-    public async Task<Result<Pagination<CategoryDto>>> Index(int userId, int page, int perPage)
+    public async Task<Result<Pagination<CategoryDto>>> Index(int userId, int page, int perPage, string search, string sort)
     {
-        var data = MapData(categoryRepository.Index(userId, page, perPage));
-        var totalItems = await categoryRepository.GetTotalItems(userId);
+        var data = MapData(categoryRepository.Index(userId, page, perPage, search, sort));
+        var totalItems = await categoryRepository.GetTotalItems(userId, search);
         return new Result<Pagination<CategoryDto>>()
-            { Data = Pagination<CategoryDto>.Handle(data, page, perPage, totalItems) };
+            { Data = Pagination<CategoryDto>.Handle(data, page, perPage, totalItems, search, "", sort) };
     }
 
     public async Task<Result<CategoryEntity>> Create(CategoryModel model, int userId)

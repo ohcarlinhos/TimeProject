@@ -13,19 +13,29 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
             .ToList();
     }
 
-    public List<CategoryEntity> Index(int userId, int page, int perPage)
+    public List<CategoryEntity> Index(int userId, int page, int perPage, string search, string sort)
     {
-        return dbContext.Categories
-            .Where(category => category.UserId == userId)
+        IQueryable<CategoryEntity> query = dbContext.Categories;
+        query = query.Where(c => c.UserId == userId);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            query = query.Where(c => c.Name.Contains(search));
+
+        if (string.IsNullOrWhiteSpace(sort) || sort == "asc")
+            query = query.OrderBy(c => c.Name);
+        else
+            query = query.OrderByDescending(c => c.Name);
+
+        return query
             .Skip((page - 1) * perPage)
             .Take(perPage)
             .ToList();
     }
 
-    public async Task<int> GetTotalItems(int userId)
+    public async Task<int> GetTotalItems(int userId, string search)
     {
-        return await dbContext.TimeRecords
-            .Where(timeRecord => timeRecord.UserId == userId)
+        return await dbContext.Categories
+            .Where(c => c.UserId == userId)
             .CountAsync();
     }
 
