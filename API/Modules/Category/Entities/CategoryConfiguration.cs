@@ -1,0 +1,27 @@
+﻿using API.Modules.TimeRecord.Entities;
+using API.Modules.User.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace API.Modules.Category.Entities;
+
+public class CategoryConfiguration: IEntityTypeConfiguration<CategoryEntity>
+{
+    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
+    {
+        builder.ToTable("categories");
+        builder.HasKey(e => e.Id);
+
+        builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(e => e.Name).HasMaxLength(20).IsRequired();
+        
+        builder.Property(e => e.UserId).IsRequired();
+        
+        builder.Property(e => e.CreatedAt).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
+        
+        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasMany<TimeRecordEntity>().WithOne().HasForeignKey(e => e.CategoryId)
+            .OnDelete(DeleteBehavior.SetNull);
+    }
+}

@@ -20,9 +20,9 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             );
 
         if (string.IsNullOrWhiteSpace(sort) || sort == "desc")
-            query = query.OrderByDescending(tr => tr.TimePeriods.FirstOrDefault().Start);
+            query = query.OrderByDescending(tr => tr.TimePeriods!.FirstOrDefault()!.Start);
         else
-            query = query.OrderBy(tr => tr.TimePeriods.FirstOrDefault().Start);
+            query = query.OrderBy(tr => tr.TimePeriods!.FirstOrDefault()!.Start);
         
         return query
             .Skip((page - 1) * perPage)

@@ -12,4 +12,12 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     public DbSet<TimeRecordEntity> TimeRecords { get; set; }
     public DbSet<TimePeriodEntity> TimePeriods { get; set; }
     public DbSet<CategoryEntity> Categories { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder mb)
+    {
+        mb.ApplyConfiguration(new UserConfiguration());
+        mb.ApplyConfiguration(new TimeRecordConfiguration());
+        mb.ApplyConfiguration(new TimePeriodConfiguration());
+        mb.ApplyConfiguration(new CategoryConfiguration());
+    }
 }
