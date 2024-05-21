@@ -13,5 +13,5 @@ public class TimePeriod
     public DateTimeOffset? CreatedAt { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }
     
-    public virtual TimeRecord.Entities.TimeRecord? TimeRecord { get; set; }
+    public TimeRecord.Entities.TimeRecord TimeRecord { get; set; }
 }
