@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Modules.TimeRecord.Entities;
 
-public class TimeRecordConfiguration: IEntityTypeConfiguration<TimeRecordEntity>
+public class TimeRecordConfiguration: IEntityTypeConfiguration<TimeRecord>
 {
-    public void Configure(EntityTypeBuilder<TimeRecordEntity> builder)
+    public void Configure(EntityTypeBuilder<TimeRecord> builder)
     {
         builder.ToTable("time_records");
         builder.HasKey(e => e.Id);

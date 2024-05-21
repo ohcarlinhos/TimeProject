@@ -21,7 +21,7 @@ public class CategoryConfiguration: IEntityTypeConfiguration<CategoryEntity>
         builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
         
         builder.HasOne<User.Entities.User>().WithMany().HasForeignKey(e => e.UserId);
-        builder.HasMany<TimeRecordEntity>().WithOne().HasForeignKey(e => e.CategoryId)
+        builder.HasMany<TimeRecord.Entities.TimeRecord>().WithOne().HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
     }
 }

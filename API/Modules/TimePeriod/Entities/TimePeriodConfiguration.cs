@@ -23,6 +23,6 @@ public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriodEntity
         builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
         
         builder.HasOne<User.Entities.User>().WithMany().HasForeignKey(e => e.UserId);
-        builder.HasOne<TimeRecordEntity>().WithMany().HasForeignKey(e => e.TimeRecordId);
+        builder.HasOne<TimeRecord.Entities.TimeRecord>().WithMany().HasForeignKey(e => e.TimeRecordId);
     }
 }

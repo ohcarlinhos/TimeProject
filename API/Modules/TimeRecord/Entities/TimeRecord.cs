@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using API.Modules.Category.Entities;
+﻿using API.Modules.Category.Entities;
 using API.Modules.TimePeriod.Entities;
 
 namespace API.Modules.TimeRecord.Entities;
 
-public class TimeRecordEntity
+public class TimeRecord
 {
     public int Id { get; set; }
     public string? Description { get; set; }

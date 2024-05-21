@@ -18,14 +18,14 @@ public class TimeRecordServices(
     IMapper mapper
 ) : ITimeRecordServices
 {
-    private TimeRecordDto MapData(TimeRecordEntity entity)
+    private TimeRecordDto MapData(Entities.TimeRecord entity)
     {
-        return mapper.Map<TimeRecordEntity, TimeRecordDto>(entity);
+        return mapper.Map<Entities.TimeRecord, TimeRecordDto>(entity);
     }
 
-    private List<TimeRecordDto> MapData(List<TimeRecordEntity> entities)
+    private List<TimeRecordDto> MapData(List<Entities.TimeRecord> entities)
     {
-        return mapper.Map<List<TimeRecordEntity>, List<TimeRecordDto>>(entities);
+        return mapper.Map<List<Entities.TimeRecord>, List<TimeRecordDto>>(entities);
     }
 
     public async Task<Result<Pagination<TimeRecordDto>>> Index(int userId, int page, int perPage, string search, string orderBy, string sort)
@@ -50,7 +50,7 @@ public class TimeRecordServices(
             if (category == null) return result.SetError("not_found: Categoria não encontrada.");
         }
 
-        var timeRecord = await timeRecordRepository.Create(new TimeRecordEntity
+        var timeRecord = await timeRecordRepository.Create(new Entities.TimeRecord
         {
             UserId = userId,
             CategoryId = model.CategoryId,

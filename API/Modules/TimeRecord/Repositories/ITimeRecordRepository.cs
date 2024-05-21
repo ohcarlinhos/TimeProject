@@ -4,11 +4,11 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public interface ITimeRecordRepository
 {
-    List<TimeRecordEntity> Index(int userId, int page, int perPage, string search, string orderBy, string sort);
+    List<Entities.TimeRecord> Index(int userId, int page, int perPage, string search, string orderBy, string sort);
     Task<int> GetTotalItems(int userId, string search);
-    Task<TimeRecordEntity> Create(TimeRecordEntity entity);
-    Task<TimeRecordEntity> Update(TimeRecordEntity entity);
-    Task<bool> Delete(TimeRecordEntity entity);
-    Task<TimeRecordEntity?> FindById(int id, int userId);
-    Task<TimeRecordEntity?> Details(int id, int userId);
+    Task<Entities.TimeRecord> Create(Entities.TimeRecord entity);
+    Task<Entities.TimeRecord> Update(Entities.TimeRecord entity);
+    Task<bool> Delete(Entities.TimeRecord entity);
+    Task<Entities.TimeRecord?> FindById(int id, int userId);
+    Task<Entities.TimeRecord?> Details(int id, int userId);
 }

@@ -15,7 +15,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<User, UserDto>();
-        CreateMap<TimeRecordEntity, TimeRecordDto>();
+        CreateMap<TimeRecord, TimeRecordDto>();
         CreateMap<TimePeriodEntity, TimePeriodDto>();
         CreateMap<CategoryEntity, CategoryDto>();
     }

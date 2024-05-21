@@ -6,9 +6,9 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordRepository
 {
-    public List<TimeRecordEntity> Index(int userId, int page, int perPage, string search, string orderBy, string sort)
+    public List<Entities.TimeRecord> Index(int userId, int page, int perPage, string search, string orderBy, string sort)
     {
-        IQueryable<TimeRecordEntity> query = dbContext.TimeRecords;
+        IQueryable<Entities.TimeRecord> query = dbContext.TimeRecords;
         query = query.Where(tr => tr.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
@@ -34,7 +34,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
 
     public async Task<int> GetTotalItems(int userId, string search)
     {
-        IQueryable<TimeRecordEntity> query = dbContext.TimeRecords;
+        IQueryable<Entities.TimeRecord> query = dbContext.TimeRecords;
         query = query.Where(timeRecord => timeRecord.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
@@ -48,34 +48,34 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         return await query.CountAsync();
     }
 
-    public async Task<TimeRecordEntity> Create(TimeRecordEntity entity)
+    public async Task<Entities.TimeRecord> Create(Entities.TimeRecord entity)
     {
         await dbContext.TimeRecords.AddAsync(entity);
         await dbContext.SaveChangesAsync();
         return entity;
     }
 
-    public async Task<TimeRecordEntity> Update(TimeRecordEntity entity)
+    public async Task<Entities.TimeRecord> Update(Entities.TimeRecord entity)
     {
         dbContext.TimeRecords.Update(entity);
         await dbContext.SaveChangesAsync();
         return entity;
     }
 
-    public async Task<bool> Delete(TimeRecordEntity entity)
+    public async Task<bool> Delete(Entities.TimeRecord entity)
     {
         dbContext.TimeRecords.Remove(entity);
         await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<TimeRecordEntity?> FindById(int id, int userId)
+    public async Task<Entities.TimeRecord?> FindById(int id, int userId)
     {
         return await dbContext.TimeRecords
             .FirstOrDefaultAsync(timeRecord => timeRecord.Id == id && timeRecord.UserId == userId);
     }
 
-    public async Task<TimeRecordEntity?> Details(int id, int userId)
+    public async Task<Entities.TimeRecord?> Details(int id, int userId)
     {
         return await dbContext.TimeRecords
             .Include(r => r.TimePeriods)
