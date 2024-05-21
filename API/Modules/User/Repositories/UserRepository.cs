@@ -6,14 +6,14 @@ namespace API.Modules.User.Repositories
 {
     public class UserRepository(ProjectContext dbContext) : IUserRepository
     {
-        public async Task<UserEntity> Create(UserEntity entity)
+        public async Task<Entities.User> Create(Entities.User entity)
         {
             dbContext.Users.Add(entity);
             await dbContext.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<UserEntity> Update(UserEntity entity)
+        public async Task<Entities.User> Update(Entities.User entity)
         {
             dbContext.Users.Update(entity);
             await dbContext.SaveChangesAsync();
@@ -30,12 +30,12 @@ namespace API.Modules.User.Repositories
             return true;
         }
 
-        public async Task<UserEntity?> FindById(int id)
+        public async Task<Entities.User?> FindById(int id)
         {
             return await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<UserEntity?> FindByEmail(string email)
+        public async Task<Entities.User?> FindByEmail(string email)
         {
             return await dbContext.Users
                 .Where(u => u.Email == email)

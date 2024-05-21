@@ -29,7 +29,7 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
         }
 
         var entity = await userRepository
-            .Create(new UserEntity
+            .Create(new Entities.User
             {
                 Name = model.Name,
                 Email = model.Email,

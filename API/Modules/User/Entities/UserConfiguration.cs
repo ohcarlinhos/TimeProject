@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Modules.User.Entities;
 
-public class UserConfiguration: IEntityTypeConfiguration<UserEntity>
+public class UserConfiguration: IEntityTypeConfiguration<User>
 {
-    public void Configure(EntityTypeBuilder<UserEntity> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("users");
         builder.HasKey(e => e.Id);

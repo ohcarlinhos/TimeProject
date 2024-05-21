@@ -22,7 +22,7 @@ public class TimeRecordConfiguration: IEntityTypeConfiguration<TimeRecordEntity>
         builder.Property(e => e.CreatedAt).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
         
-        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User.Entities.User>().WithMany().HasForeignKey(e => e.UserId);
         builder.HasOne<CategoryEntity>().WithMany().HasForeignKey(e => e.CategoryId);
         builder.HasMany<TimePeriodEntity>(e => e.TimePeriods).WithOne();
     }
