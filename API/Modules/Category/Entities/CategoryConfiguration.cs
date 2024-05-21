@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Modules.Category.Entities;
 
-public class CategoryConfiguration: IEntityTypeConfiguration<CategoryEntity>
+public class CategoryConfiguration: IEntityTypeConfiguration<Category>
 {
-    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
+    public void Configure(EntityTypeBuilder<Category> builder)
     {
         builder.ToTable("categories");
         builder.HasKey(e => e.Id);

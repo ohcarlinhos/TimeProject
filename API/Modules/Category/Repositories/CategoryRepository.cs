@@ -6,16 +6,16 @@ namespace API.Modules.Category.Repositories;
 
 public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 {
-    public List<CategoryEntity> Index(int userId)
+    public List<Entities.Category> Index(int userId)
     {
         return dbContext.Categories
             .Where(category => category.UserId == userId)
             .ToList();
     }
 
-    public List<CategoryEntity> Index(int userId, int page, int perPage, string search, string sort)
+    public List<Entities.Category> Index(int userId, int page, int perPage, string search, string sort)
     {
-        IQueryable<CategoryEntity> query = dbContext.Categories;
+        IQueryable<Entities.Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
@@ -38,7 +38,7 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
 
     public Task<int> GetTotalItems(int userId, string search)
     {
-        IQueryable<CategoryEntity> query = dbContext.Categories;
+        IQueryable<Entities.Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
@@ -51,38 +51,38 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
         return query.CountAsync();
     }
 
-    public async Task<CategoryEntity> Create(CategoryEntity entity)
+    public async Task<Entities.Category> Create(Entities.Category entity)
     {
         dbContext.Categories.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity;
     }
 
-    public async Task<CategoryEntity> Update(CategoryEntity entity)
+    public async Task<Entities.Category> Update(Entities.Category entity)
     {
         dbContext.Categories.Update(entity);
         await dbContext.SaveChangesAsync();
         return entity;
     }
 
-    public async Task<bool> Delete(CategoryEntity entity)
+    public async Task<bool> Delete(Entities.Category entity)
     {
         dbContext.Categories.Remove(entity);
         await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<CategoryEntity?> FindById(int id)
+    public async Task<Entities.Category?> FindById(int id)
     {
         return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<CategoryEntity?> FindById(int id, int userId)
+    public async Task<Entities.Category?> FindById(int id, int userId)
     {
         return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
     }
 
-    public async Task<CategoryEntity?> FindByName(string name, int userId)
+    public async Task<Entities.Category?> FindByName(string name, int userId)
     {
         return await dbContext.Categories
             .Where(category => category.Name == name && category.UserId == userId)

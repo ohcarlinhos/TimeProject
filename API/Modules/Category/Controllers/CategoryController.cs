@@ -30,14 +30,14 @@ public class CategoryController(ICategoryServices categoryServices)
     }
 
     [HttpPost]
-    public async Task<ActionResult<CategoryEntity>> Create([FromBody] CategoryModel model)
+    public async Task<ActionResult<Entities.Category>> Create([FromBody] CategoryModel model)
     {
         return HandleResponse(await categoryServices
             .Create(model, UserSession.Id(User)));
     }
 
     [HttpPut, Route("{id}")]
-    public async Task<ActionResult<CategoryEntity>> Update(int id, [FromBody] CategoryModel model)
+    public async Task<ActionResult<Entities.Category>> Update(int id, [FromBody] CategoryModel model)
     {
         return HandleResponse(await categoryServices
             .Update(id, model, UserSession.Id(User)));

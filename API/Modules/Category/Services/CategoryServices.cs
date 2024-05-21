@@ -9,14 +9,14 @@ namespace API.Modules.Category.Services;
 
 public class CategoryServices(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryServices
 {
-    private CategoryDto MapData(CategoryEntity entity)
+    private CategoryDto MapData(Entities.Category entity)
     {
-        return mapper.Map<CategoryEntity, CategoryDto>(entity);
+        return mapper.Map<Entities.Category, CategoryDto>(entity);
     }
     
-    private List<CategoryDto> MapData(List<CategoryEntity> entities)
+    private List<CategoryDto> MapData(List<Entities.Category> entities)
     {
-        return mapper.Map<List<CategoryEntity>, List<CategoryDto>>(entities);
+        return mapper.Map<List<Entities.Category>, List<CategoryDto>>(entities);
     }
 
     public Result<List<CategoryDto>> Index(int userId)
@@ -33,15 +33,15 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
             { Data = Pagination<CategoryDto>.Handle(data, page, perPage, totalItems, search, "", sort) };
     }
 
-    public async Task<Result<CategoryEntity>> Create(CategoryModel model, int userId)
+    public async Task<Result<Entities.Category>> Create(CategoryModel model, int userId)
     {
-        var result = new Result<CategoryEntity>();
+        var result = new Result<Entities.Category>();
         var category = await categoryRepository.FindByName(model.Name, userId);
 
         if (category != null)
             return result.SetData(category);
 
-        result.Data = await categoryRepository.Create(new CategoryEntity
+        result.Data = await categoryRepository.Create(new Entities.Category
         {
             UserId = userId,
             Name = model.Name
@@ -49,9 +49,9 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
         return result;
     }
 
-    public async Task<Result<CategoryEntity>> Update(int id, CategoryModel model, int userId)
+    public async Task<Result<Entities.Category>> Update(int id, CategoryModel model, int userId)
     {
-        var result = new Result<CategoryEntity>();
+        var result = new Result<Entities.Category>();
         var category = await categoryRepository.FindById(id);
 
         if (category == null) return result.SetError("not_found: Categoria não encontrada.");

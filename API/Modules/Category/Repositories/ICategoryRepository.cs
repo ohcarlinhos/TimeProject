@@ -4,13 +4,13 @@ namespace API.Modules.Category.Repositories;
 
 public interface ICategoryRepository
 {
-    List<CategoryEntity> Index(int userId);
-    List<CategoryEntity> Index(int userId, int page, int perPage, string search, string sort);
+    List<Entities.Category> Index(int userId);
+    List<Entities.Category> Index(int userId, int page, int perPage, string search, string sort);
     Task<int> GetTotalItems(int userId, string search);
-    Task<CategoryEntity> Create(CategoryEntity entity);
-    Task<CategoryEntity> Update(CategoryEntity entity);
-    Task<bool> Delete(CategoryEntity entity);
-    Task<CategoryEntity?> FindById(int id);
-    Task<CategoryEntity?> FindById(int id, int userId);
-    Task<CategoryEntity?> FindByName(string name, int userId);
+    Task<Entities.Category> Create(Entities.Category entity);
+    Task<Entities.Category> Update(Entities.Category entity);
+    Task<bool> Delete(Entities.Category entity);
+    Task<Entities.Category?> FindById(int id);
+    Task<Entities.Category?> FindById(int id, int userId);
+    Task<Entities.Category?> FindByName(string name, int userId);
 }

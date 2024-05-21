@@ -57,5 +57,5 @@ public class TimeRecordDto
             }
             : null;
 
-    public CategoryEntity? Category { private get; set; }
+    public Category.Entities.Category? Category { private get; set; }
 }
