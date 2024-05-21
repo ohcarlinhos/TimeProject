@@ -1,13 +1,11 @@
-﻿using API.Modules.TimeRecord.Entities;
-using API.Modules.User.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Modules.TimePeriod.Entities;
 
-public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriodEntity>
+public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
 {
-    public void Configure(EntityTypeBuilder<TimePeriodEntity> builder)
+    public void Configure(EntityTypeBuilder<TimePeriod> builder)
     {
         builder.ToTable("time_periods");
         builder.HasKey(e => e.Id);

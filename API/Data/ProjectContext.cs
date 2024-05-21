@@ -10,7 +10,7 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
 {
     public DbSet<User> Users { get; set; }
     public DbSet<TimeRecord> TimeRecords { get; set; }
-    public DbSet<TimePeriodEntity> TimePeriods { get; set; }
+    public DbSet<TimePeriod> TimePeriods { get; set; }
     public DbSet<CategoryEntity> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder mb)

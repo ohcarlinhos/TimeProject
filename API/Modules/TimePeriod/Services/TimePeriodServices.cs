@@ -15,14 +15,14 @@ public class TimePeriodServices(
     IMapper mapper
 ) : ITimePeriodServices
 {
-    private TimePeriodDto MapData(TimePeriodEntity entity)
+    private TimePeriodDto MapData(Entities.TimePeriod entity)
     {
-        return mapper.Map<TimePeriodEntity, TimePeriodDto>(entity);
+        return mapper.Map<Entities.TimePeriod, TimePeriodDto>(entity);
     }
 
-    private List<TimePeriodDto> MapData(List<TimePeriodEntity> entity)
+    private List<TimePeriodDto> MapData(List<Entities.TimePeriod> entity)
     {
-        return mapper.Map<List<TimePeriodEntity>, List<TimePeriodDto>>(entity);
+        return mapper.Map<List<Entities.TimePeriod>, List<TimePeriodDto>>(entity);
     }
 
     public async Task<Result<Pagination<TimePeriodDto>>> Index(int timeRecordId, int userId, int page, int perPage)
@@ -37,12 +37,12 @@ public class TimePeriodServices(
         };
     }
 
-    public async Task<Result<TimePeriodEntity>> Create(
+    public async Task<Result<Entities.TimePeriod>> Create(
         CreateTimePeriodModel model,
         int userId
     )
     {
-        var result = new Result<TimePeriodEntity>();
+        var result = new Result<Entities.TimePeriod>();
 
         ValidateInicioAndFim(model.Start, model.End, result);
         if (result.HasError) return result;
@@ -56,7 +56,7 @@ public class TimePeriodServices(
             return result.SetError(TimePeriodErrors.WrongTimeRecordId);
 
         return result.SetData(await timePeriodRepository
-            .Create(new TimePeriodEntity
+            .Create(new Entities.TimePeriod
                 {
                     UserId = userId,
                     TimeRecordId = model.TimeRecordId,
@@ -67,14 +67,14 @@ public class TimePeriodServices(
         );
     }
 
-    public async Task<Result<List<TimePeriodEntity>>> CreateByList(
+    public async Task<Result<List<Entities.TimePeriod>>> CreateByList(
         List<TimePeriodModel> model,
         int timeRecordId,
         int userId
     )
     {
-        var result = new Result<List<TimePeriodEntity>>();
-        List<TimePeriodEntity> list = [];
+        var result = new Result<List<Entities.TimePeriod>>();
+        List<Entities.TimePeriod> list = [];
 
         foreach (var timePeriod in model)
         {
@@ -82,7 +82,7 @@ public class TimePeriodServices(
             if (result.HasError)
                 break;
 
-            list.Add(new TimePeriodEntity()
+            list.Add(new Entities.TimePeriod()
             {
                 UserId = userId,
                 TimeRecordId = timeRecordId,
@@ -96,9 +96,9 @@ public class TimePeriodServices(
             : result;
     }
 
-    public async Task<Result<TimePeriodEntity>> Update(int id, TimePeriodModel model, int userId)
+    public async Task<Result<Entities.TimePeriod>> Update(int id, TimePeriodModel model, int userId)
     {
-        var result = new Result<TimePeriodEntity>();
+        var result = new Result<Entities.TimePeriod>();
 
         ValidateInicioAndFim(model.Start, model.End, result);
         if (result.HasError) return result;

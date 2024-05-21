@@ -24,6 +24,6 @@ public class TimeRecordConfiguration: IEntityTypeConfiguration<TimeRecord>
         
         builder.HasOne<User.Entities.User>().WithMany().HasForeignKey(e => e.UserId);
         builder.HasOne<CategoryEntity>().WithMany().HasForeignKey(e => e.CategoryId);
-        builder.HasMany<TimePeriodEntity>(e => e.TimePeriods).WithOne();
+        builder.HasMany<TimePeriod.Entities.TimePeriod>(e => e.TimePeriods).WithOne();
     }
 }

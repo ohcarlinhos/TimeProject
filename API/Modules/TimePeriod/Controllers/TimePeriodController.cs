@@ -24,7 +24,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult<TimePeriodEntity>> Create([FromBody] CreateTimePeriodModel model)
+    public async Task<ActionResult<Entities.TimePeriod>> Create([FromBody] CreateTimePeriodModel model)
     {
         var result = await timePeriodServices
             .Create(model, UserSession.Id(User));
@@ -33,7 +33,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPut, Authorize, Route("{id}")]
-    public async Task<ActionResult<TimePeriodEntity>> Update(int id, [FromBody] TimePeriodModel model)
+    public async Task<ActionResult<Entities.TimePeriod>> Update(int id, [FromBody] TimePeriodModel model)
     {
         var result = await timePeriodServices
             .Update(id, model, UserSession.Id(User));

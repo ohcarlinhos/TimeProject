@@ -9,18 +9,18 @@ public interface ITimePeriodServices
 {
     public Task<Result<Pagination<TimePeriodDto>>> Index(int timeRecordId, int userId, int page, int perPage);
 
-    Task<Result<TimePeriodEntity>> Create(
+    Task<Result<Entities.TimePeriod>> Create(
         CreateTimePeriodModel model,
         int userId
     );
 
-    Task<Result<List<TimePeriodEntity>>> CreateByList(
+    Task<Result<List<Entities.TimePeriod>>> CreateByList(
         List<TimePeriodModel> model,
         int timeRecord,
         int userId
     );
 
-    Task<Result<TimePeriodEntity>> Update(int id, TimePeriodModel model, int userId);
+    Task<Result<Entities.TimePeriod>> Update(int id, TimePeriodModel model, int userId);
 
     Task<Result<bool>> Delete(int id, int userId);
 }

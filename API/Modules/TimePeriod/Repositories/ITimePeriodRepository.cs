@@ -4,12 +4,12 @@ namespace API.Modules.TimePeriod.Repositories;
 
 public interface ITimePeriodRepository
 {
-    List<TimePeriodEntity> Index(int timeRecordId, int userId, int page, int perPage);
+    List<Entities.TimePeriod> Index(int timeRecordId, int userId, int page, int perPage);
     Task<int> GetTotalItems(int timeRecordId, int userId);
-    Task<TimePeriodEntity> Create(TimePeriodEntity entity);
-    Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entityList);
-    Task<TimePeriodEntity> Update(TimePeriodEntity entity);
-    Task<bool> Delete(TimePeriodEntity entity);
-    Task<bool> DeleteAllByTimeRecordId(IEnumerable<TimePeriodEntity> entityList);
-    Task<TimePeriodEntity?> FindById(int id, int userId);
+    Task<Entities.TimePeriod> Create(Entities.TimePeriod entity);
+    Task<List<Entities.TimePeriod>> CreateByList(List<Entities.TimePeriod> entityList);
+    Task<Entities.TimePeriod> Update(Entities.TimePeriod entity);
+    Task<bool> Delete(Entities.TimePeriod entity);
+    Task<bool> DeleteAllByTimeRecordId(IEnumerable<Entities.TimePeriod> entityList);
+    Task<Entities.TimePeriod?> FindById(int id, int userId);
 }

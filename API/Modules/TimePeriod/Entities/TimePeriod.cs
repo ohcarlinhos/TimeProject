@@ -1,8 +1,6 @@
-﻿using API.Modules.TimeRecord.Entities;
+﻿namespace API.Modules.TimePeriod.Entities;
 
-namespace API.Modules.TimePeriod.Entities;
-
-public class TimePeriodEntity
+public class TimePeriod
 {
     public int Id { get; set; }
 
