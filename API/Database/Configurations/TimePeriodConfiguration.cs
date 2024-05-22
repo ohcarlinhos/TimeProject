@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace API.Modules.TimePeriod.Entities;
+namespace API.Database.Configurations;
 
 public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
 {
@@ -19,7 +20,7 @@ public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
         builder.Property(e => e.CreatedAt).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
 
-        builder.HasOne<User.Entities.User>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
         builder.HasOne(e => e.TimeRecord).WithMany(e => e.TimePeriods)
             .HasForeignKey(e => e.TimeRecordId);
     }

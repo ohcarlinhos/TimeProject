@@ -1,6 +1,4 @@
-﻿using API.Modules.TimePeriod.Entities;
-
-namespace API.Modules.TimePeriod.Repositories;
+﻿namespace API.Modules.TimePeriod.Repositories;
 
 public interface ITimePeriodRepository
 {

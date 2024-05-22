@@ -1,6 +1,5 @@
 ﻿using API.Modules.Shared;
 using API.Modules.TimePeriod.DTO;
-using API.Modules.TimePeriod.Entities;
 using API.Modules.TimePeriod.Models;
 
 namespace API.Modules.TimePeriod.Services;

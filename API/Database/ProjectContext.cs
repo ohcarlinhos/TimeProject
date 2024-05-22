@@ -1,10 +1,8 @@
-﻿using API.Modules.Category.Entities;
+﻿using API.Database.Configurations;
+using Entities;
 using Microsoft.EntityFrameworkCore;
-using API.Modules.TimePeriod.Entities;
-using API.Modules.TimeRecord.Entities;
-using API.Modules.User.Entities;
 
-namespace API.Data;
+namespace API.Database;
 
 public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
 {

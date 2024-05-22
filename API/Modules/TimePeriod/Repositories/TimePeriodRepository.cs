@@ -1,6 +1,5 @@
-﻿using API.Data;
+﻿using API.Database;
 using API.Modules.Shared;
-using API.Modules.TimePeriod.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Modules.TimePeriod.Repositories;

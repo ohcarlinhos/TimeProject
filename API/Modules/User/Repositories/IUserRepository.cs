@@ -1,6 +1,4 @@
-﻿using API.Modules.User.Entities;
-
-namespace API.Modules.User.Repositories
+﻿namespace API.Modules.User.Repositories
 {
     public interface IUserRepository
     {

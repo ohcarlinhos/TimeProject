@@ -1,13 +1,12 @@
-﻿using API.Modules.TimeRecord.Entities;
-using API.Modules.User.Entities;
+﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace API.Modules.Category.Entities;
+namespace API.Database.Configurations;
 
-public class CategoryConfiguration: IEntityTypeConfiguration<Category>
+public class CategoryConfiguration: IEntityTypeConfiguration<Entities.Category>
 {
-    public void Configure(EntityTypeBuilder<Category> builder)
+    public void Configure(EntityTypeBuilder<Entities.Category> builder)
     {
         builder.ToTable("categories");
         builder.HasKey(e => e.Id);
@@ -20,6 +19,6 @@ public class CategoryConfiguration: IEntityTypeConfiguration<Category>
         builder.Property(e => e.CreatedAt).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
         
-        builder.HasOne<User.Entities.User>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
     }
 }

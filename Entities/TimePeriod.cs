@@ -1,4 +1,4 @@
-﻿namespace API.Modules.TimePeriod.Entities;
+﻿namespace Entities;
 
 public class TimePeriod
 {
@@ -13,5 +13,5 @@ public class TimePeriod
     public DateTimeOffset? CreatedAt { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }
     
-    public TimeRecord.Entities.TimeRecord TimeRecord { get; set; }
+    public TimeRecord TimeRecord { get; set; }
 }

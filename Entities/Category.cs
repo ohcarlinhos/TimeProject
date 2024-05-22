@@ -1,4 +1,4 @@
-﻿namespace API.Modules.Category.Entities;
+﻿namespace Entities;
 
 public class Category
 {

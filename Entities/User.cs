@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Modules.User.Entities;
+namespace Entities;
 
 public enum UserRole
 {

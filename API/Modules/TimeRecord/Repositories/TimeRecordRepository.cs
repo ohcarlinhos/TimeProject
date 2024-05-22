@@ -1,5 +1,4 @@
-﻿using API.Data;
-using API.Modules.TimeRecord.Entities;
+﻿using API.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Modules.TimeRecord.Repositories;

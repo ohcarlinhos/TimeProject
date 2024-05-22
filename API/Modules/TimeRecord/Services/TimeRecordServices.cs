@@ -1,9 +1,8 @@
-﻿using API.Data;
+﻿using API.Database;
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.DTO;
-using API.Modules.TimeRecord.Entities;
 using API.Modules.TimeRecord.Models;
 using API.Modules.TimeRecord.Repositories;
 using AutoMapper;

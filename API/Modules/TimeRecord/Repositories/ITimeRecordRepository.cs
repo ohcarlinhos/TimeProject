@@ -1,6 +1,4 @@
-﻿using API.Modules.TimeRecord.Entities;
-
-namespace API.Modules.TimeRecord.Repositories;
+﻿namespace API.Modules.TimeRecord.Repositories;
 
 public interface ITimeRecordRepository
 {

@@ -1,5 +1,4 @@
 ﻿using API.Modules.Category.DTO;
-using API.Modules.Category.Entities;
 using API.Modules.Category.Models;
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;

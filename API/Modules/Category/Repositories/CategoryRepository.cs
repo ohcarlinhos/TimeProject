@@ -1,5 +1,4 @@
-﻿using API.Data;
-using API.Modules.Category.Entities;
+﻿using API.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Modules.Category.Repositories;

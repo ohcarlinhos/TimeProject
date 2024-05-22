@@ -1,12 +1,9 @@
 ﻿using API.Modules.Category.DTO;
-using API.Modules.Category.Entities;
 using API.Modules.TimePeriod.DTO;
-using API.Modules.TimePeriod.Entities;
 using API.Modules.TimeRecord.DTO;
-using API.Modules.TimeRecord.Entities;
 using API.Modules.User.DTO;
-using API.Modules.User.Entities;
 using AutoMapper;
+using Entities;
 
 namespace API.Infrastructure.Mapping;
 

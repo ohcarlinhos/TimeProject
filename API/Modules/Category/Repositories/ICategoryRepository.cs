@@ -1,6 +1,4 @@
-﻿using API.Modules.Category.Entities;
-
-namespace API.Modules.Category.Repositories;
+﻿namespace API.Modules.Category.Repositories;
 
 public interface ICategoryRepository
 {

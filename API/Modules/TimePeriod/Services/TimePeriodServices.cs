@@ -1,6 +1,5 @@
 ﻿using API.Modules.Shared;
 using API.Modules.TimePeriod.DTO;
-using API.Modules.TimePeriod.Entities;
 using API.Modules.TimePeriod.Errors;
 using API.Modules.TimePeriod.Models;
 using API.Modules.TimePeriod.Repositories;

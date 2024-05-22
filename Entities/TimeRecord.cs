@@ -1,7 +1,4 @@
-﻿using API.Modules.Category.Entities;
-using API.Modules.TimePeriod.Entities;
-
-namespace API.Modules.TimeRecord.Entities;
+﻿namespace Entities;
 
 public class TimeRecord
 {
@@ -14,6 +11,6 @@ public class TimeRecord
     public DateTimeOffset? CreatedAt { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }
 
-    public IEnumerable<TimePeriod.Entities.TimePeriod> TimePeriods { get; set; }
-    public Category.Entities.Category? Category { get; set; }
+    public IEnumerable<TimePeriod> TimePeriods { get; set; }
+    public Category? Category { get; set; }
 }

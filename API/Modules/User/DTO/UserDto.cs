@@ -1,4 +1,4 @@
-﻿using API.Modules.User.Entities;
+﻿using Entities;
 
 namespace API.Modules.User.DTO;
 

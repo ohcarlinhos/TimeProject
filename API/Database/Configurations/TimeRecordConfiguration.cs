@@ -1,14 +1,11 @@
-﻿using API.Modules.Category.Entities;
-using API.Modules.TimePeriod.Entities;
-using API.Modules.User.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace API.Modules.TimeRecord.Entities;
+namespace API.Database.Configurations;
 
-public class TimeRecordConfiguration : IEntityTypeConfiguration<TimeRecord>
+public class TimeRecordConfiguration : IEntityTypeConfiguration<Entities.TimeRecord>
 {
-    public void Configure(EntityTypeBuilder<TimeRecord> builder)
+    public void Configure(EntityTypeBuilder<Entities.TimeRecord> builder)
     {
         builder.ToTable("time_records");
         builder.HasKey(e => e.Id);
@@ -22,7 +19,7 @@ public class TimeRecordConfiguration : IEntityTypeConfiguration<TimeRecord>
         builder.Property(e => e.CreatedAt).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
 
-        builder.HasOne<User.Entities.User>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<Entities.User>().WithMany().HasForeignKey(e => e.UserId);
         builder.HasOne(e => e.Category).WithMany().HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
 

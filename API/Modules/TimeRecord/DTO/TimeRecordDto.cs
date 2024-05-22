@@ -1,5 +1,4 @@
-﻿using API.Modules.Category.Entities;
-using API.Modules.TimePeriod.DTO;
+﻿using API.Modules.TimePeriod.DTO;
 
 namespace API.Modules.TimeRecord.DTO;
 
@@ -57,5 +56,5 @@ public class TimeRecordDto
             }
             : null;
 
-    public Category.Entities.Category? Category { private get; set; }
+    public Entities.Category? Category { private get; set; }
 }

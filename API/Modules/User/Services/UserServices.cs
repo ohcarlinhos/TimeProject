@@ -1,6 +1,5 @@
 ﻿using API.Modules.Shared;
 using API.Modules.User.DTO;
-using API.Modules.User.Entities;
 using API.Modules.User.Errors;
 using API.Modules.User.Models;
 using API.Modules.User.Repositories;
