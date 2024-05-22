@@ -8,6 +8,7 @@ public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
 {
     public void Configure(EntityTypeBuilder<TimePeriod> builder)
     {
+        builder.ToTable("time_periods");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
