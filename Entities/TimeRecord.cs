@@ -8,8 +8,8 @@ public class TimeRecord
     public int UserId { get; set; }
     public int? CategoryId { get; set; }
 
-    public DateTimeOffset? CreatedAt { get; set; }
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     public IEnumerable<TimePeriod> TimePeriods { get; set; }
     public Category? Category { get; set; }

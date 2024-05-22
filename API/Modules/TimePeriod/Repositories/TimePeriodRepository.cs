@@ -14,7 +14,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
             .Take(perPage)
             .ToList();
     }
-    
+
     public async Task<int> GetTotalItems(int timeRecordId, int userId)
     {
         return await dbContext.TimePeriods
@@ -24,6 +24,10 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
 
     public async Task<Entities.TimePeriod> Create(Entities.TimePeriod entity)
     {
+        var now = DateTime.Now.ToUniversalTime();
+        entity.CreatedAt = now;
+        entity.UpdatedAt = now;
+
         dbContext.TimePeriods.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity;
@@ -31,6 +35,14 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
 
     public async Task<List<Entities.TimePeriod>> CreateByList(List<Entities.TimePeriod> entityList)
     {
+        var now = DateTime.Now.ToUniversalTime();
+        
+        foreach (var entity in entityList)
+        {
+            entity.CreatedAt = now;
+            entity.UpdatedAt = now;
+        }
+
         dbContext.TimePeriods.AddRange(entityList);
         await dbContext.SaveChangesAsync();
         return entityList;
@@ -38,6 +50,8 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
 
     public async Task<Entities.TimePeriod> Update(Entities.TimePeriod entity)
     {
+        entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+        
         dbContext.TimePeriods.Update(entity);
         await dbContext.SaveChangesAsync();
         return entity;

@@ -17,8 +17,8 @@ public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
         builder.Property(e => e.UserId).IsRequired();
         builder.Property(e => e.TimeRecordId).IsRequired();
 
-        builder.Property(e => e.CreatedAt).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
+        builder.Property(e => e.CreatedAt).IsRequired();
+        builder.Property(e => e.UpdatedAt).IsRequired();
 
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
         builder.HasOne(e => e.TimeRecord).WithMany(e => e.TimePeriods)

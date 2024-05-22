@@ -49,6 +49,10 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
 
     public async Task<Entities.TimeRecord> Create(Entities.TimeRecord entity)
     {
+        var now = DateTime.Now.ToUniversalTime();
+        entity.CreatedAt = now;
+        entity.UpdatedAt = now;
+        
         await dbContext.TimeRecords.AddAsync(entity);
         await dbContext.SaveChangesAsync();
         return entity;
@@ -56,6 +60,8 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
 
     public async Task<Entities.TimeRecord> Update(Entities.TimeRecord entity)
     {
+        entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+
         dbContext.TimeRecords.Update(entity);
         await dbContext.SaveChangesAsync();
         return entity;

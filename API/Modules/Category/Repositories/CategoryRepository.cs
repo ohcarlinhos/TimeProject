@@ -52,6 +52,10 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
 
     public async Task<Entities.Category> Create(Entities.Category entity)
     {
+        var now = DateTime.Now.ToUniversalTime();
+        entity.CreatedAt = now;
+        entity.UpdatedAt = now;
+        
         dbContext.Categories.Add(entity);
         await dbContext.SaveChangesAsync();
         return entity;
@@ -59,6 +63,8 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
 
     public async Task<Entities.Category> Update(Entities.Category entity)
     {
+        entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+
         dbContext.Categories.Update(entity);
         await dbContext.SaveChangesAsync();
         return entity;

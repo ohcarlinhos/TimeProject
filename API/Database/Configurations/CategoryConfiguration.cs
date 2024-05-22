@@ -16,8 +16,8 @@ public class CategoryConfiguration: IEntityTypeConfiguration<Entities.Category>
         
         builder.Property(e => e.UserId).IsRequired();
         
-        builder.Property(e => e.CreatedAt).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(e => e.UpdatedAt).ValueGeneratedOnAddOrUpdate().IsRequired();
+        builder.Property(e => e.CreatedAt).IsRequired();
+        builder.Property(e => e.UpdatedAt).IsRequired();
         
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
     }

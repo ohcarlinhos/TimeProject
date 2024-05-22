@@ -7,6 +7,10 @@ namespace API.Modules.User.Repositories
     {
         public async Task<Entities.User> Create(Entities.User entity)
         {
+            var now = DateTime.Now.ToUniversalTime();
+            entity.CreatedAt = now;
+            entity.UpdatedAt = now;
+            
             dbContext.Users.Add(entity);
             await dbContext.SaveChangesAsync();
             return entity;
@@ -14,6 +18,8 @@ namespace API.Modules.User.Repositories
 
         public async Task<Entities.User> Update(Entities.User entity)
         {
+            entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+            
             dbContext.Users.Update(entity);
             await dbContext.SaveChangesAsync();
             return entity;

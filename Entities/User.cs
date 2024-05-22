@@ -24,6 +24,6 @@ public class User
     public string Password { get; set; } = null!;
     public UserRole UserRole { get; set; } = UserRole.NormalUser;
     
-    public DateTimeOffset? CreatedAt { get; set; }
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }
