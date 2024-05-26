@@ -27,12 +27,14 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
             return result;
         }
 
+        var hasPassword = BCrypt.Net.BCrypt.HashPassword(model.Password);
+
         var entity = await userRepository
             .Create(new Entities.User
             {
                 Name = model.Name,
                 Email = model.Email,
-                Password = model.Password
+                Password = hasPassword
             });
 
         result.Data = mapper.Map<UserDto>(entity);
@@ -61,10 +63,10 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
 
         if (!string.IsNullOrWhiteSpace(model.Password))
         {
-            if (model.OldPassword != user.Password)
+            if (!BCrypt.Net.BCrypt.Verify(model.OldPassword, user.Password))
                 return result.SetError(UserErrors.DifferentPassword);
 
-            user.Password = model.Password;
+            user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
         }
 
         var entity = await userRepository.Update(user);

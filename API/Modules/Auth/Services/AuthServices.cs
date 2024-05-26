@@ -12,7 +12,7 @@ public class AuthServices(IUserRepository userRepository) : IAuthService
         var result = new Result<object>();
         var user = await userRepository.FindByEmail(model.Email);
 
-        if (user == null || user.Password != model.Password)
+        if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
         {
             result.Message = "Email ou senha incorretos.";
             result.HasError = true;
