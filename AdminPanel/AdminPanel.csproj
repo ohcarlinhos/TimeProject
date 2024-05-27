@@ -6,4 +6,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.5.2" />
+      <PackageReference Include="Blazorise.Tailwind" Version="1.5.2" />
+    </ItemGroup>
+
 </Project>
