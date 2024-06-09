@@ -8,4 +8,5 @@ public class CreateTimeRecordModel
     public int? CategoryId { get; set; }
     [MaxLength(120)] public string? Description { get; set; }
     [Required] public List<TimePeriodModel>? TimePeriods { get; set; }
+    [MaxLength(32)] public string? Code { get; set; }
 }

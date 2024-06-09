@@ -27,11 +27,12 @@ public class TimeRecordServices(
         return mapper.Map<List<Entities.TimeRecord>, List<TimeRecordDto>>(entities);
     }
 
-    public async Task<Result<Pagination<TimeRecordDto>>> Index(int userId, int page, int perPage, string search, string orderBy, string sort)
+    public async Task<Result<Pagination<TimeRecordDto>>> Index(int userId, int page, int perPage, string search,
+        string orderBy, string sort)
     {
         var data = MapData(timeRecordRepository.Index(userId, page, perPage, search, orderBy, sort));
         var totalItems = await timeRecordRepository.GetTotalItems(userId, search);
-        
+
         return new Result<Pagination<TimeRecordDto>>()
         {
             Data = Pagination<TimeRecordDto>.Handle(data, page, perPage, totalItems, search, orderBy, sort)
@@ -54,6 +55,7 @@ public class TimeRecordServices(
             UserId = userId,
             CategoryId = model.CategoryId,
             Description = model.Description,
+            Code = model.Code
         });
 
         try
@@ -84,17 +86,17 @@ public class TimeRecordServices(
             .FindById(id, userId);
 
         if (timeRecord == null)
-            return result.SetError("not_found: Não foi encontrado um timeRecord com esse id.");
+            return result.SetError("time_record_not_found");
 
         if (model.CategoryId != null)
         {
             var category = await categoryRepository.FindById((int)model.CategoryId, userId);
-            if (category == null) return result.SetError("not_found: Categoria não encontrada.");
+            if (category == null) return result.SetError("category_not_found");
             timeRecord.CategoryId = model.CategoryId;
         }
 
-        if (model.Description != null)
-            timeRecord.Description = model.Description;
+        timeRecord.Description = model.Description;
+        timeRecord.Code = model.Code;
 
         return result.SetData(MapData(await timeRecordRepository.Update(timeRecord)));
     }

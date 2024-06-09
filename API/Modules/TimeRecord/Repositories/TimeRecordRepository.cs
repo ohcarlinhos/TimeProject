@@ -5,13 +5,18 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordRepository
 {
-    public List<Entities.TimeRecord> Index(int userId, int page, int perPage, string search, string orderBy, string sort)
+    public List<Entities.TimeRecord> Index(int userId, int page, int perPage, string search, string orderBy,
+        string sort)
     {
         IQueryable<Entities.TimeRecord> query = dbContext.TimeRecords;
         query = query.Where(tr => tr.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
             query = query.Where(tr =>
+                tr.Code != null &&
+                EF.Functions.Like(
+                    tr.Code.ToLower(),
+                    $"%{search.ToLower()}%") ||
                 tr.Description != null &&
                 EF.Functions.Like(
                     tr.Description.ToLower(),
@@ -22,7 +27,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             query = query.OrderByDescending(tr => tr.TimePeriods!.FirstOrDefault()!.Start);
         else
             query = query.OrderBy(tr => tr.TimePeriods!.FirstOrDefault()!.Start);
-        
+
         return query
             .Skip((page - 1) * perPage)
             .Take(perPage)
@@ -52,7 +57,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         var now = DateTime.Now.ToUniversalTime();
         entity.CreatedAt = now;
         entity.UpdatedAt = now;
-        
+
         await dbContext.TimeRecords.AddAsync(entity);
         await dbContext.SaveChangesAsync();
         return entity;

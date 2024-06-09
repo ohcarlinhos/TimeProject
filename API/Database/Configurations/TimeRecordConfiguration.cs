@@ -15,6 +15,7 @@ public class TimeRecordConfiguration : IEntityTypeConfiguration<Entities.TimeRec
 
         builder.Property(e => e.UserId).IsRequired();
         builder.Property(e => e.CategoryId);
+        builder.Property(e => e.Code).HasMaxLength(32); 
 
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();

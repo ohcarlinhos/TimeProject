@@ -9,6 +9,7 @@ public class TimeRecordDto
     public int UserId { get; set; }
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
+    public string? Code { get; set; }
 
     public List<TimePeriodDto> TimePeriods { get; set; }
     public DateTime? TimeRecordDate => TimePeriods.Count > 0 ? TimePeriods[0].Start : null;
