@@ -10,6 +10,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
     {
         return dbContext.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
+            .OrderByDescending(tp => tp.Start)
             .Skip((page - 1) * perPage)
             .Take(perPage)
             .ToList();
