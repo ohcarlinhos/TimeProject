@@ -1,13 +1,10 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-
 using API.Database;
-using API.Infrastructure;
 using API.Infrastructure.Config;
 using API.Infrastructure.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
-EnvConfig.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env"));
 
 const string customCors = "_customCors";
 CorsBuilderConfig.Apply(builder, customCors);

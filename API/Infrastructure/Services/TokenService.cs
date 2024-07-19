@@ -1,26 +1,27 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Entities;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Infrastructure.Services;
 
-public static class TokenService
+public class TokenService(IConfiguration configuration)
 {
-    public static object GenerateBearerJwt(User user)
+    public object GenerateBearerJwt(User user)
     {
         // configurações do token
         var tokenSubject = new ClaimsIdentity(new[]
         {
-            new Claim (ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim (ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, "")
         });
 
-        var tokenExpires = DateTime.UtcNow.AddHours(EnvVariables.JwtTokenExpires);
+        var tokenExpires = DateTime.UtcNow.AddHours(double.Parse(configuration["Jwt:Expires"]!));
 
         var tokenSigningCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(EnvVariables.Jwt),
+            new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Key"]!)),
             SecurityAlgorithms.HmacSha256Signature
         );
 

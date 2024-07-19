@@ -1,4 +1,5 @@
-﻿using API.Modules.Auth.Services;
+﻿using API.Infrastructure.Services;
+using API.Modules.Auth.Services;
 using API.Modules.Category.Services;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.Services;
@@ -15,5 +16,6 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<ICategoryServices, CategoryServices>();
         builder.Services.AddScoped<ITimeRecordServices, TimeRecordServices>();
         builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
+        builder.Services.AddSingleton<TokenService>();
     }
 }

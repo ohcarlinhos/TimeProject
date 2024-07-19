@@ -46,6 +46,8 @@ public class TimeRecordDto
         }
     }
 
+    public double TimeTotalMilliseconds => TimePeriodsCalc.TotalMilliseconds;
+    
     public object? Time =>
         TimePeriods.Count > 0
             ? new

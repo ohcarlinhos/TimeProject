@@ -5,7 +5,7 @@ using API.Modules.User.Repositories;
 
 namespace API.Modules.Auth.Services;
 
-public class AuthServices(IUserRepository userRepository) : IAuthService
+public class AuthServices(IUserRepository userRepository, TokenService tokenService) : IAuthService
 {
     public async Task<Result<object>> Login(LoginModel model)
     {
@@ -19,7 +19,7 @@ public class AuthServices(IUserRepository userRepository) : IAuthService
             return result;
         }
 
-        result.Data = TokenService.GenerateBearerJwt(user);
+        result.Data = tokenService.GenerateBearerJwt(user);
         return result;
     }
 }
