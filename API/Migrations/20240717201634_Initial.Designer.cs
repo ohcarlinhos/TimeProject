@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240609151607_AddCodeToTimeRecords")]
-    partial class AddCodeToTimeRecords
+    [Migration("20240717201634_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
