@@ -10,12 +10,11 @@ public class TokenService(IConfiguration configuration)
 {
     public object GenerateBearerJwt(User user)
     {
-        // configurações do token
         var tokenSubject = new ClaimsIdentity(new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, "")
+            new Claim(ClaimTypes.Role, user.UserRole.ToString())
         });
 
         var tokenExpires = DateTime.UtcNow.AddHours(double.Parse(configuration["Jwt:Expires"]!));
@@ -25,7 +24,6 @@ public class TokenService(IConfiguration configuration)
             SecurityAlgorithms.HmacSha256Signature
         );
 
-        // descrição do token
         var tokenDescriptor = new SecurityTokenDescriptor()
         {
             Subject = tokenSubject,
@@ -33,7 +31,6 @@ public class TokenService(IConfiguration configuration)
             SigningCredentials = tokenSigningCredentials,
         };
 
-        // geração do token
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);
