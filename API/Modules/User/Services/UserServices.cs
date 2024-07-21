@@ -1,4 +1,5 @@
-﻿using API.Modules.Shared;
+﻿using API.Database;
+using API.Modules.Shared;
 using API.Modules.User.DTO;
 using API.Modules.User.Errors;
 using API.Modules.User.Models;
@@ -7,7 +8,7 @@ using AutoMapper;
 
 namespace API.Modules.User.Services;
 
-public class UserServices(IUserRepository userRepository, IMapper mapper) : IUserServices
+public class UserServices(IUserRepository userRepository, IMapper mapper, ProjectContext dbContext) : IUserServices
 {
     public async Task<Result<UserDto>> Get(int id)
     {
@@ -19,6 +20,14 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
     public async Task<Result<UserDto>> Create(CreateUserModel model)
     {
         var result = new Result<UserDto>();
+        var registerCode = await dbContext.RegisterCodes.FindAsync(model.RegisterCode);
+
+        if (registerCode == null || registerCode.IsUsed)
+        {
+            result.Message = UserErrors.RegisterCodeIsNotAvailable;
+            result.HasError = true;
+            return result;
+        }
 
         if (await EmailNotAvailability(model.Email))
         {
@@ -36,6 +45,12 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
                 Email = model.Email,
                 Password = hasPassword
             });
+
+        // lógica de validação de código de registro.
+        registerCode.IsUsed = true;
+        registerCode.UserId = entity.Id;
+        dbContext.RegisterCodes.Update(registerCode);
+        await dbContext.SaveChangesAsync();
 
         result.Data = mapper.Map<UserDto>(entity);
 
@@ -58,7 +73,7 @@ public class UserServices(IUserRepository userRepository, IMapper mapper) : IUse
             user.Email = model.Email;
         }
 
-        if (!string.IsNullOrWhiteSpace(model.Name) && user.Name != model.Name) 
+        if (!string.IsNullOrWhiteSpace(model.Name) && user.Name != model.Name)
             user.Name = model.Name;
 
         if (!string.IsNullOrWhiteSpace(model.Password))
