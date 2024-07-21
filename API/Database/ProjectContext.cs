@@ -20,5 +20,13 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
 
         mb.ApplyConfiguration(new CategoryConfiguration());
         mb.ApplyConfiguration(new RegisterCodeConfiguration());
+
+        mb.Entity<RegisterCode>().HasData([
+            new RegisterCode(),
+            new RegisterCode(),
+            new RegisterCode(),
+            new RegisterCode(),
+            new RegisterCode(),
+        ]);
     }
 }
