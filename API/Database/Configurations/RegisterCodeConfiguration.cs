@@ -9,9 +9,9 @@ public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCode>
     public void Configure(EntityTypeBuilder<RegisterCode> builder)
     {
         builder.ToTable("register_code");
-        builder.HasKey(e => e.Key);
+        builder.HasKey(e => e.Id);
 
-        builder.Property(e => e.Key).IsRequired();
+        builder.Property(e => e.Id).IsRequired();
         builder.Property(e => e.IsUsed).IsRequired();
         builder.Property(e => e.UserId);
 
