@@ -15,6 +15,7 @@ public class User
     public string Email { get; set; } = null!;
     public string Password { get; set; } = null!;
     public UserRole UserRole { get; set; } = UserRole.NormalUser;
+    public bool IsActive { get; set; } = true;
     
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

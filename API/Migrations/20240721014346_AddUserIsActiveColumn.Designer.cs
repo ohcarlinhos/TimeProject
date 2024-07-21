@@ -3,6 +3,7 @@ using System;
 using API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20240721014346_AddUserIsActiveColumn")]
+    partial class AddUserIsActiveColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,25 +54,6 @@ namespace API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("categories", (string)null);
-                });
-
-            modelBuilder.Entity("Entities.RegisterCode", b =>
-                {
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsUsed")
-                        .HasColumnType("boolean");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Key");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("register_code", (string)null);
                 });
 
             modelBuilder.Entity("Entities.TimePeriod", b =>
@@ -200,13 +184,6 @@ namespace API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Entities.RegisterCode", b =>
-                {
-                    b.HasOne("Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("Entities.RegisterCode", "UserId");
                 });
 
             modelBuilder.Entity("Entities.TimePeriod", b =>

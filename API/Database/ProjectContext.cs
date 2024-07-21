@@ -10,12 +10,15 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     public DbSet<TimeRecord> TimeRecords { get; set; }
     public DbSet<TimePeriod> TimePeriods { get; set; }
     public DbSet<Category> Categories { get; set; }
+    public DbSet<RegisterCode> RegisterCodes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder mb)
     {
         mb.ApplyConfiguration(new UserConfiguration());
         mb.ApplyConfiguration(new TimeRecordConfiguration());
         mb.ApplyConfiguration(new TimePeriodConfiguration());
+
         mb.ApplyConfiguration(new CategoryConfiguration());
+        mb.ApplyConfiguration(new RegisterCodeConfiguration());
     }
 }
