@@ -11,7 +11,7 @@ public class TimeRecordConfiguration : IEntityTypeConfiguration<Entities.TimeRec
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(e => e.Description).HasMaxLength(120);
+        builder.Property(e => e.Description).HasMaxLength(240);
         builder.Property(e => e.ExternalLink).HasMaxLength(120);
 
         builder.Property(e => e.UserId).IsRequired();
