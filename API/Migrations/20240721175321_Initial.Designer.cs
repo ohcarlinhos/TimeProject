@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240721014726_AddRegisterCodeTable")]
-    partial class AddRegisterCodeTable
+    [Migration("20240721175321_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("Entities.RegisterCode", b =>
                 {
-                    b.Property<string>("Key")
+                    b.Property<string>("Id")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsUsed")
@@ -67,12 +67,39 @@ namespace API.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Key");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("register_code", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "245a1ba3-9794-4d4b-91c9-16ad1ec322ac",
+                            IsUsed = false
+                        },
+                        new
+                        {
+                            Id = "67d574ee-151f-4d42-9661-95ee13525ad3",
+                            IsUsed = false
+                        },
+                        new
+                        {
+                            Id = "51102149-65db-406f-bff9-5ac907b70616",
+                            IsUsed = false
+                        },
+                        new
+                        {
+                            Id = "ac6b615c-b6c5-4596-86c8-ed31a32f4968",
+                            IsUsed = false
+                        },
+                        new
+                        {
+                            Id = "c96f3682-c6a5-4238-b9b3-cf5e68359b1a",
+                            IsUsed = false
+                        });
                 });
 
             modelBuilder.Entity("Entities.TimePeriod", b =>

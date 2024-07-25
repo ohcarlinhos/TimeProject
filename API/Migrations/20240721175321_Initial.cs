@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace API.Migrations
 {
     /// <inheritdoc />
@@ -22,6 +24,7 @@ namespace API.Migrations
                     Email = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
                     Password = table.Column<string>(type: "character varying(72)", maxLength: 72, nullable: false),
                     UserRole = table.Column<int>(type: "integer", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -50,6 +53,24 @@ namespace API.Migrations
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "register_code",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    IsUsed = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_register_code", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_register_code_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -112,10 +133,28 @@ namespace API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "register_code",
+                columns: new[] { "Id", "IsUsed", "UserId" },
+                values: new object[,]
+                {
+                    { "245a1ba3-9794-4d4b-91c9-16ad1ec322ac", false, null },
+                    { "51102149-65db-406f-bff9-5ac907b70616", false, null },
+                    { "67d574ee-151f-4d42-9661-95ee13525ad3", false, null },
+                    { "ac6b615c-b6c5-4596-86c8-ed31a32f4968", false, null },
+                    { "c96f3682-c6a5-4238-b9b3-cf5e68359b1a", false, null }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_categories_UserId",
                 table: "categories",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_register_code_UserId",
+                table: "register_code",
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_time_periods_TimeRecordId",
@@ -147,6 +186,9 @@ namespace API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "register_code");
+
             migrationBuilder.DropTable(
                 name: "time_periods");
 

@@ -74,27 +74,27 @@ namespace API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "45f18760-4a4f-499f-9aa0-daa190c110c0",
+                            Id = "245a1ba3-9794-4d4b-91c9-16ad1ec322ac",
                             IsUsed = false
                         },
                         new
                         {
-                            Id = "0a3316e4-5cf4-45c6-8b9d-fc916c538b91",
+                            Id = "67d574ee-151f-4d42-9661-95ee13525ad3",
                             IsUsed = false
                         },
                         new
                         {
-                            Id = "10b67dbb-5974-430a-9b35-8550454df09f",
+                            Id = "51102149-65db-406f-bff9-5ac907b70616",
                             IsUsed = false
                         },
                         new
                         {
-                            Id = "7254f040-8660-446e-ba7a-28626408d016",
+                            Id = "ac6b615c-b6c5-4596-86c8-ed31a32f4968",
                             IsUsed = false
                         },
                         new
                         {
-                            Id = "09d1ea29-d600-4db3-bf36-f9711021f451",
+                            Id = "c96f3682-c6a5-4238-b9b3-cf5e68359b1a",
                             IsUsed = false
                         });
                 });
