@@ -1,4 +1,4 @@
-﻿using API.Modules.Auth.Models;
+﻿using API.Modules.Auth.Dto;
 using API.Modules.Shared;
 
 namespace API.Modules.Auth.Services;

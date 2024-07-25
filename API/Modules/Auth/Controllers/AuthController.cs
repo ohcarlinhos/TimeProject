@@ -1,4 +1,4 @@
-﻿using API.Modules.Auth.Models;
+﻿using API.Modules.Auth.Dto;
 using API.Modules.Auth.Services;
 using API.Modules.Shared.Controllers;
 using Microsoft.AspNetCore.Mvc;

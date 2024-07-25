@@ -1,5 +1,5 @@
 ﻿using API.Infrastructure.Services;
-using API.Modules.Auth.Models;
+using API.Modules.Auth.Dto;
 using API.Modules.Shared;
 using API.Modules.User.Repositories;
 
