@@ -7,12 +7,12 @@ namespace API.Modules.Auth.Services;
 
 public class AuthServices(IUserRepository userRepository, TokenService tokenService) : IAuthService
 {
-    public async Task<Result<object>> Login(LoginModel model)
+    public async Task<Result<object>> Login(LoginDto dto)
     {
         var result = new Result<object>();
-        var user = await userRepository.FindByEmail(model.Email);
+        var user = await userRepository.FindByEmail(dto.Email);
 
-        if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+        if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
         {
             result.Message = "Email ou senha incorretos.";
             result.HasError = true;

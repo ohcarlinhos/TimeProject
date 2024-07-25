@@ -10,8 +10,8 @@ namespace API.Modules.Auth.Controllers;
 public class AuthController(IAuthService authService) : CustomController
 {
     [HttpPost, Route("login")]
-    public async Task<ActionResult<object>> Login([FromBody] LoginModel model)
+    public async Task<ActionResult<object>> Login([FromBody] LoginDto dto)
     {
-        return HandleResponse(await authService.Login(model));
+        return HandleResponse(await authService.Login(dto));
     }
 }

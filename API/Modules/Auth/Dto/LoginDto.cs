@@ -2,7 +2,7 @@
 
 namespace API.Modules.Auth.Models;
 
-public class LoginModel
+public class LoginDto
 {
     [EmailAddress]
     public string Email { get; set; }
