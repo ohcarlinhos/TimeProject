@@ -1,8 +1,8 @@
 ﻿using API.Infrastructure.Services;
 using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
-using API.Modules.User.DTO;
-using API.Modules.User.Models;
+using API.Modules.User.Dto;
+using API.Modules.User.Map;
 using API.Modules.User.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +14,16 @@ namespace API.Modules.User.Controllers;
 public class UserController(IUserServices userServices) : CustomController
 {
     [HttpPost]
-    public async Task<ActionResult<UserDto>> Create([FromBody] CreateUserModel model)
+    public async Task<ActionResult<UserMap>> Create([FromBody] CreateUserDto dto)
     {
-        return HandleResponse(await userServices.Create(model));
+        return HandleResponse(await userServices.Create(dto));
     }
 
     [HttpPut("{id:int}"), Authorize]
-    public async Task<ActionResult<UserDto>> Update([FromRoute] int id, [FromBody] UpdateUserModel model)
+    public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
         if (UserSession.Id(User) != id) return Unauthorized();
-        return HandleResponse(await userServices.Update(id, model));
+        return HandleResponse(await userServices.Update(id, dto));
     }
 
     [HttpDelete("{id:int}"), Authorize]
@@ -34,13 +34,13 @@ public class UserController(IUserServices userServices) : CustomController
     }
 
     [HttpGet, Authorize, Route("{id:int}")]
-    public async Task<ActionResult<UserDto>> Get(int id)
+    public async Task<ActionResult<UserMap>> Get(int id)
     {
         return HandleResponse(await userServices.Get(id));
     }
 
     [HttpGet, Authorize, Route("myself")]
-    public async Task<ActionResult<UserDto>> Myself()
+    public async Task<ActionResult<UserMap>> Myself()
     {
         return HandleResponse(await userServices
             .Get(UserSession.Id(User)));

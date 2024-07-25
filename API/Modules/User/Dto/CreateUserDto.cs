@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Modules.User.Models;
+namespace API.Modules.User.Dto;
 
-public class CreateUserModel
+public class CreateUserDto
 {
     [MinLength(2), MaxLength(120)]
     public string Name { get; set; }

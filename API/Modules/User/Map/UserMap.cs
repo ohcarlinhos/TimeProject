@@ -1,8 +1,8 @@
 ﻿using Entities;
 
-namespace API.Modules.User.DTO;
+namespace API.Modules.User.Map;
 
-public class UserDto
+public class UserMap
 {
     public int Id { get; set; }
     public string Name { get; set; }
