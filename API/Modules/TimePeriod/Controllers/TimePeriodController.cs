@@ -1,5 +1,4 @@
-﻿using API.Infrastructure.Services;
-using API.Modules.Shared;
+﻿using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using API.Modules.TimePeriod.DTO;
 using API.Modules.TimePeriod.Models;
@@ -13,7 +12,7 @@ namespace API.Modules.TimePeriod.Controllers;
 [Route("/api/time-period")]
 public class TimePeriodController(ITimePeriodServices timePeriodServices) : CustomController
 {
-    [HttpGet, Authorize, Route("{timeRecordId}")]
+    [HttpGet, Authorize, Route("{timeRecordId:int}")]
     public async Task<ActionResult<Pagination<TimePeriodDto>>> Index(int timeRecordId, int page = 1, int perPage = 12)
     {
         var result = await timePeriodServices
@@ -27,6 +26,15 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     {
         var result = await timePeriodServices
             .Create(model, UserSession.Id(User));
+
+        return HandleResponse(result);
+    }
+    
+    [HttpPost, Authorize, Route("list/{id:int}")]
+    public async Task<ActionResult<List<Entities.TimePeriod>>> Create([FromBody] List<TimePeriodModel> model, int id)
+    {
+        var result = await timePeriodServices
+            .CreateByList(model, id,UserSession.Id(User));
 
         return HandleResponse(result);
     }
