@@ -2,8 +2,8 @@
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using API.Modules.TimePeriod.Services;
-using API.Modules.TimeRecord.DTO;
-using API.Modules.TimeRecord.Models;
+using API.Modules.TimeRecord.Dto;
+using API.Modules.TimeRecord.Map;
 using API.Modules.TimeRecord.Repositories;
 using AutoMapper;
 
@@ -17,53 +17,53 @@ public class TimeRecordServices(
     IMapper mapper
 ) : ITimeRecordServices
 {
-    private TimeRecordDto MapData(Entities.TimeRecord entity)
+    private TimeRecordMap MapData(Entities.TimeRecord entity)
     {
-        return mapper.Map<Entities.TimeRecord, TimeRecordDto>(entity);
+        return mapper.Map<Entities.TimeRecord, TimeRecordMap>(entity);
     }
 
-    private List<TimeRecordDto> MapData(List<Entities.TimeRecord> entities)
+    private List<TimeRecordMap> MapData(List<Entities.TimeRecord> entities)
     {
-        return mapper.Map<List<Entities.TimeRecord>, List<TimeRecordDto>>(entities);
+        return mapper.Map<List<Entities.TimeRecord>, List<TimeRecordMap>>(entities);
     }
 
-    public async Task<Result<Pagination<TimeRecordDto>>> Index(int userId, int page, int perPage, string search,
+    public async Task<Result<Pagination<TimeRecordMap>>> Index(int userId, int page, int perPage, string search,
         string orderBy, string sort)
     {
         var data = MapData(timeRecordRepository.Index(userId, page, perPage, search, orderBy, sort));
         var totalItems = await timeRecordRepository.GetTotalItems(userId, search);
 
-        return new Result<Pagination<TimeRecordDto>>()
+        return new Result<Pagination<TimeRecordMap>>()
         {
-            Data = Pagination<TimeRecordDto>.Handle(data, page, perPage, totalItems, search, orderBy, sort)
+            Data = Pagination<TimeRecordMap>.Handle(data, page, perPage, totalItems, search, orderBy, sort)
         };
     }
 
-    public async Task<Result<TimeRecordDto>> Create(CreateTimeRecordModel model, int userId)
+    public async Task<Result<TimeRecordMap>> Create(CreateTimeRecordDto dto, int userId)
     {
-        var result = new Result<TimeRecordDto>();
+        var result = new Result<TimeRecordMap>();
         var transaction = await dbContext.Database.BeginTransactionAsync();
 
-        if (model.CategoryId != null)
+        if (dto.CategoryId != null)
         {
-            var category = await categoryRepository.FindById((int)model.CategoryId, userId);
+            var category = await categoryRepository.FindById((int)dto.CategoryId, userId);
             if (category == null) return result.SetError("not_found: Categoria não encontrada.");
         }
 
         var timeRecord = await timeRecordRepository.Create(new Entities.TimeRecord
         {
             UserId = userId,
-            CategoryId = model.CategoryId,
-            Description = model.Description,
-            Code = model.Code
+            CategoryId = dto.CategoryId,
+            Description = dto.Description,
+            Code = dto.Code
         });
 
         try
         {
-            if (model.TimePeriods != null)
+            if (dto.TimePeriods != null)
             {
                 var timePeriodsResult = await timePeriodServices
-                    .CreateByList(model.TimePeriods, timeRecord.Id, userId);
+                    .CreateByList(dto.TimePeriods, timeRecord.Id, userId);
 
                 if (timePeriodsResult.HasError) throw new Exception(timePeriodsResult.Message);
             }
@@ -78,9 +78,9 @@ public class TimeRecordServices(
         return result.SetData(MapData(timeRecord));
     }
 
-    public async Task<Result<TimeRecordDto>> Update(int id, UpdateTimeRecordModel model, int userId)
+    public async Task<Result<TimeRecordMap>> Update(int id, UpdateTimeRecordDto dto, int userId)
     {
-        var result = new Result<TimeRecordDto>();
+        var result = new Result<TimeRecordMap>();
 
         var timeRecord = await timeRecordRepository
             .FindById(id, userId);
@@ -88,22 +88,22 @@ public class TimeRecordServices(
         if (timeRecord == null)
             return result.SetError("time_record_not_found");
 
-        if (model.CategoryId != null)
+        if (dto.CategoryId != null)
         {
-            var category = await categoryRepository.FindById((int)model.CategoryId, userId);
+            var category = await categoryRepository.FindById((int)dto.CategoryId, userId);
             if (category == null) return result.SetError("category_not_found");
-            timeRecord.CategoryId = model.CategoryId;
+            timeRecord.CategoryId = dto.CategoryId;
         }
 
-        timeRecord.Description = model.Description;
-        timeRecord.Code = model.Code;
+        timeRecord.Description = dto.Description;
+        timeRecord.Code = dto.Code;
 
         return result.SetData(MapData(await timeRecordRepository.Update(timeRecord)));
     }
 
-    public async Task<Result<TimeRecordDto>> Details(int id, int userId)
+    public async Task<Result<TimeRecordMap>> Details(int id, int userId)
     {
-        var result = new Result<TimeRecordDto>();
+        var result = new Result<TimeRecordMap>();
 
         var timeRecord = await timeRecordRepository
             .Details(id, userId);

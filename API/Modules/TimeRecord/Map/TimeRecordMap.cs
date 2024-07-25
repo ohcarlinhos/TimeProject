@@ -1,8 +1,8 @@
 ﻿using API.Modules.TimePeriod.Map;
 
-namespace API.Modules.TimeRecord.DTO;
+namespace API.Modules.TimeRecord.Map;
 
-public class TimeRecordDto
+public class TimeRecordMap
 {
     public int Id { get; set; }
     public string? Description { get; set; }
@@ -52,10 +52,10 @@ public class TimeRecordDto
         TimePeriods.Count > 0
             ? new
             {
-                Days = TimePeriodsCalc.Days,
-                Hours = TimePeriodsCalc.Hours,
-                Minutes = TimePeriodsCalc.Minutes,
-                Seconds = TimePeriodsCalc.Seconds,
+                TimePeriodsCalc.Days,
+                TimePeriodsCalc.Hours,
+                TimePeriodsCalc.Minutes,
+                TimePeriodsCalc.Seconds,
             }
             : null;
 
