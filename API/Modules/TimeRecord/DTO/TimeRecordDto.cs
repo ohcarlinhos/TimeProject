@@ -1,4 +1,4 @@
-﻿using API.Modules.TimePeriod.DTO;
+﻿using API.Modules.TimePeriod.Map;
 
 namespace API.Modules.TimeRecord.DTO;
 
@@ -11,7 +11,7 @@ public class TimeRecordDto
     public int? CategoryId { get; set; }
     public string? Code { get; set; }
 
-    public List<TimePeriodDto> TimePeriods { get; set; }
+    public List<TimePeriodMap> TimePeriods { get; set; }
     public DateTime? TimeRecordDate => TimePeriods.Count > 0 ? TimePeriods[0].Start : null;
     public int TimePeriodsCount => TimePeriods.Count;
 

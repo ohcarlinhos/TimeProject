@@ -1,6 +1,6 @@
-﻿namespace API.Modules.TimePeriod.Models;
+﻿namespace API.Modules.TimePeriod.Dto;
 
-public class TimePeriodModel
+public class TimePeriodDto
 {
     public DateTime Start { get; set; }
     public DateTime End { get; set; }

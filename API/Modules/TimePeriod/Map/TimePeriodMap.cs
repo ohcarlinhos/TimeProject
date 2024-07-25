@@ -1,6 +1,6 @@
-﻿namespace API.Modules.TimePeriod.DTO;
+﻿namespace API.Modules.TimePeriod.Map;
 
-public class TimePeriodDto
+public class TimePeriodMap
 {
     public int Id { get; set; }
     public int TimeRecordId { get; set; }

@@ -1,7 +1,7 @@
 ﻿using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
-using API.Modules.TimePeriod.DTO;
-using API.Modules.TimePeriod.Models;
+using API.Modules.TimePeriod.Dto;
+using API.Modules.TimePeriod.Map;
 using API.Modules.TimePeriod.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ namespace API.Modules.TimePeriod.Controllers;
 public class TimePeriodController(ITimePeriodServices timePeriodServices) : CustomController
 {
     [HttpGet, Authorize, Route("{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<TimePeriodDto>>> Index(int timeRecordId, int page = 1, int perPage = 12)
+    public async Task<ActionResult<Pagination<TimePeriodMap>>> Index(int timeRecordId, int page = 1, int perPage = 12)
     {
         var result = await timePeriodServices
             .Index(timeRecordId, UserSession.Id(User), page, perPage);
@@ -22,16 +22,16 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult<Entities.TimePeriod>> Create([FromBody] CreateTimePeriodModel model)
+    public async Task<ActionResult<Entities.TimePeriod>> Create([FromBody] CreateTimePeriodDto dto)
     {
         var result = await timePeriodServices
-            .Create(model, UserSession.Id(User));
+            .Create(dto, UserSession.Id(User));
 
         return HandleResponse(result);
     }
     
     [HttpPost, Authorize, Route("list/{id:int}")]
-    public async Task<ActionResult<List<Entities.TimePeriod>>> Create([FromBody] List<TimePeriodModel> model, int id)
+    public async Task<ActionResult<List<Entities.TimePeriod>>> Create([FromBody] List<TimePeriodDto> model, int id)
     {
         var result = await timePeriodServices
             .CreateByList(model, id,UserSession.Id(User));
@@ -40,10 +40,10 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPut, Authorize, Route("{id}")]
-    public async Task<ActionResult<Entities.TimePeriod>> Update(int id, [FromBody] TimePeriodModel model)
+    public async Task<ActionResult<Entities.TimePeriod>> Update(int id, [FromBody] TimePeriodDto dto)
     {
         var result = await timePeriodServices
-            .Update(id, model, UserSession.Id(User));
+            .Update(id, dto, UserSession.Id(User));
 
         return HandleResponse(result);
     }
