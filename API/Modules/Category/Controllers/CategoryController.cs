@@ -1,6 +1,6 @@
 ﻿using API.Infrastructure.Services;
-using API.Modules.Category.DTO;
-using API.Modules.Category.Models;
+using API.Modules.Category.Dto;
+using API.Modules.Category.Map;
 using API.Modules.Category.Services;
 using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
@@ -14,7 +14,7 @@ public class CategoryController(ICategoryServices categoryServices)
     : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<CategoryDto>>> Index(int page = 1, int perPage = 10, string search = "",
+    public async Task<ActionResult<Pagination<CategoryMap>>> Index(int page = 1, int perPage = 10, string search = "",
         string sort = "asc")
     {
         return HandleResponse(await categoryServices
@@ -22,24 +22,24 @@ public class CategoryController(ICategoryServices categoryServices)
     }
 
     [HttpGet, Route("all")]
-    public ActionResult<List<CategoryDto>> Index()
+    public ActionResult<List<CategoryMap>> Index()
     {
         return HandleResponse(categoryServices
             .Index(UserSession.Id(User)));
     }
 
     [HttpPost]
-    public async Task<ActionResult<Entities.Category>> Create([FromBody] CategoryModel model)
+    public async Task<ActionResult<Entities.Category>> Create([FromBody] CategoryDto dto)
     {
         return HandleResponse(await categoryServices
-            .Create(model, UserSession.Id(User)));
+            .Create(dto, UserSession.Id(User)));
     }
 
     [HttpPut, Route("{id}")]
-    public async Task<ActionResult<Entities.Category>> Update(int id, [FromBody] CategoryModel model)
+    public async Task<ActionResult<Entities.Category>> Update(int id, [FromBody] CategoryDto dto)
     {
         return HandleResponse(await categoryServices
-            .Update(id, model, UserSession.Id(User)));
+            .Update(id, dto, UserSession.Id(User)));
     }
 
     [HttpDelete, Route("{id}")]

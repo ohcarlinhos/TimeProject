@@ -1,5 +1,5 @@
-﻿using API.Modules.Category.DTO;
-using API.Modules.Category.Models;
+﻿using API.Modules.Category.Dto;
+using API.Modules.Category.Map;
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using AutoMapper;
@@ -8,34 +8,34 @@ namespace API.Modules.Category.Services;
 
 public class CategoryServices(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryServices
 {
-    private CategoryDto MapData(Entities.Category entity)
+    private CategoryMap MapData(Entities.Category entity)
     {
-        return mapper.Map<Entities.Category, CategoryDto>(entity);
+        return mapper.Map<Entities.Category, CategoryMap>(entity);
     }
     
-    private List<CategoryDto> MapData(List<Entities.Category> entities)
+    private List<CategoryMap> MapData(List<Entities.Category> entities)
     {
-        return mapper.Map<List<Entities.Category>, List<CategoryDto>>(entities);
+        return mapper.Map<List<Entities.Category>, List<CategoryMap>>(entities);
     }
 
-    public Result<List<CategoryDto>> Index(int userId)
+    public Result<List<CategoryMap>> Index(int userId)
     {
-        return new Result<List<CategoryDto>>()
+        return new Result<List<CategoryMap>>()
             { Data = MapData(categoryRepository.Index(userId)) };
     }
 
-    public async Task<Result<Pagination<CategoryDto>>> Index(int userId, int page, int perPage, string search, string sort)
+    public async Task<Result<Pagination<CategoryMap>>> Index(int userId, int page, int perPage, string search, string sort)
     {
         var data = MapData(categoryRepository.Index(userId, page, perPage, search, sort));
         var totalItems = await categoryRepository.GetTotalItems(userId, search);
-        return new Result<Pagination<CategoryDto>>()
-            { Data = Pagination<CategoryDto>.Handle(data, page, perPage, totalItems, search, "", sort) };
+        return new Result<Pagination<CategoryMap>>()
+            { Data = Pagination<CategoryMap>.Handle(data, page, perPage, totalItems, search, "", sort) };
     }
 
-    public async Task<Result<Entities.Category>> Create(CategoryModel model, int userId)
+    public async Task<Result<Entities.Category>> Create(CategoryDto dto, int userId)
     {
         var result = new Result<Entities.Category>();
-        var category = await categoryRepository.FindByName(model.Name, userId);
+        var category = await categoryRepository.FindByName(dto.Name, userId);
 
         if (category != null)
             return result.SetData(category);
@@ -43,12 +43,12 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
         result.Data = await categoryRepository.Create(new Entities.Category
         {
             UserId = userId,
-            Name = model.Name
+            Name = dto.Name
         });
         return result;
     }
 
-    public async Task<Result<Entities.Category>> Update(int id, CategoryModel model, int userId)
+    public async Task<Result<Entities.Category>> Update(int id, CategoryDto dto, int userId)
     {
         var result = new Result<Entities.Category>();
         var category = await categoryRepository.FindById(id);
@@ -57,10 +57,10 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
 
         if (category.UserId != userId) return result.SetError("unauthorized");
 
-        if (await categoryRepository.FindByName(model.Name, userId) != null)
-            return result.SetError($"bad_request: Você já possui uma category '{model.Name}'.");
+        if (await categoryRepository.FindByName(dto.Name, userId) != null)
+            return result.SetError($"bad_request: Você já possui uma category '{dto.Name}'.");
 
-        category.Name = model.Name;
+        category.Name = dto.Name;
         result.Data = await categoryRepository.Update(category);
         return result;
     }

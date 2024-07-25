@@ -1,4 +1,4 @@
-﻿using API.Modules.Category.DTO;
+﻿using API.Modules.Category.Map;
 using API.Modules.TimePeriod.Map;
 using API.Modules.TimeRecord.Map;
 using API.Modules.User.Map;
@@ -14,6 +14,6 @@ public class MappingProfile : Profile
         CreateMap<User, UserMap>();
         CreateMap<TimeRecord, TimeRecordMap>();
         CreateMap<TimePeriod, TimePeriodMap>();
-        CreateMap<Category, CategoryDto>();
+        CreateMap<Category, CategoryMap>();
     }
 }
