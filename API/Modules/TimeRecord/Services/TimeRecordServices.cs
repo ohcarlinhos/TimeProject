@@ -55,7 +55,8 @@ public class TimeRecordServices(
             UserId = userId,
             CategoryId = dto.CategoryId,
             Description = dto.Description,
-            Code = dto.Code
+            Code = dto.Code,
+            ExternalLink = dto.ExternalLink
         });
 
         try
@@ -97,6 +98,7 @@ public class TimeRecordServices(
 
         timeRecord.Description = dto.Description;
         timeRecord.Code = dto.Code;
+        timeRecord.ExternalLink = dto.ExternalLink;
 
         return result.SetData(MapData(await timeRecordRepository.Update(timeRecord)));
     }

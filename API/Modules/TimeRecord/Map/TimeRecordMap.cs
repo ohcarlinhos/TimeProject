@@ -10,6 +10,7 @@ public class TimeRecordMap
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
     public string? Code { get; set; }
+    public string? ExternalLink { get; set; }
 
     public List<TimePeriodMap> TimePeriods { get; set; }
     public DateTime? TimeRecordDate => TimePeriods.Count > 0 ? TimePeriods[0].Start : null;
