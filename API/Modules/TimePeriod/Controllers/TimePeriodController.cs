@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Modules.TimePeriod.Controllers;
 
 [ApiController]
-[Route("/api/time-period")]
+[Route("api/time-period")]
 public class TimePeriodController(ITimePeriodServices timePeriodServices) : CustomController
 {
     [HttpGet, Authorize, Route("{timeRecordId:int}")]
