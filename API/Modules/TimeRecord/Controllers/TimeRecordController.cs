@@ -41,11 +41,11 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
         return HandleResponse(result);
     }
 
-    [HttpGet, Authorize, Route("{id}")]
-    public async Task<ActionResult<TimeRecordMap>> Details(int id)
+    [HttpGet, Authorize, Route("{code}")]
+    public async Task<ActionResult<TimeRecordMap>> Details(string code)
     {
         var result = await timeRecordServices
-            .Details(id, UserSession.Id(User));
+            .Details(code, UserSession.Id(User));
 
         return HandleResponse(result);
     }

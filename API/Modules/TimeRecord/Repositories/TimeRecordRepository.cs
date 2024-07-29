@@ -84,12 +84,18 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         return await dbContext.TimeRecords
             .FirstOrDefaultAsync(timeRecord => timeRecord.Id == id && timeRecord.UserId == userId);
     }
+    
+    public async Task<Entities.TimeRecord?> FindByCode(string code, int userId)
+    {
+        return await dbContext.TimeRecords
+            .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
+    }
 
-    public async Task<Entities.TimeRecord?> Details(int id, int userId)
+    public async Task<Entities.TimeRecord?> Details(string code, int userId)
     {
         return await dbContext.TimeRecords
             .Include(r => r.TimePeriods)
             .Include(r => r.Category)
-            .FirstOrDefaultAsync(timeRecord => timeRecord.Id == id && timeRecord.UserId == userId);
+            .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
     }
 }

@@ -5,11 +5,12 @@ namespace API.Modules.TimeRecord.Map;
 public class TimeRecordMap
 {
     public int Id { get; set; }
+    public string? Title { get; set; }
     public string? Description { get; set; }
     public int UserId { get; set; }
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
-    public string? Code { get; set; }
+    public string Code { get; set; }
     public string? ExternalLink { get; set; }
 
     public List<TimePeriodMap> TimePeriods { get; set; }
