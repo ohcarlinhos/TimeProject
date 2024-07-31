@@ -28,11 +28,12 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 
+app.UseSwagger();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwaggerUI();
 }
 else
 {
