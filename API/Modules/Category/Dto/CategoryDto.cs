@@ -1,6 +1,8 @@
-﻿namespace API.Modules.Category.Dto;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.Modules.Category.Dto;
 
 public class CategoryDto
 {
-    public string Name { get; set; }
+    [MaxLength(20)] public string Name { get; set; }
 }
