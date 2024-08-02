@@ -18,11 +18,7 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(c =>
-                EF.Functions.Like(
-                    c.Name.ToLower(),
-                    $"%{search.ToLower()}%")
-            );
+            query = SearchWhereConditional(query, search);
 
         if (string.IsNullOrWhiteSpace(sort) || sort == "asc")
             query = query.OrderBy(c => c.Name);
@@ -41,11 +37,7 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(c =>
-                EF.Functions.Like(
-                    c.Name.ToLower(),
-                    $"%{search.ToLower()}%")
-            );
+            query = SearchWhereConditional(query, search);
 
         return query.CountAsync();
     }
@@ -93,4 +85,13 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
             .Where(category => category.Name == name && category.UserId == userId)
             .FirstOrDefaultAsync();
     }
+    
+    private static IQueryable<Entities.Category> SearchWhereConditional(IQueryable<Entities.Category> query, string search)
+    {
+        return query.Where(c =>
+            EF.Functions.Like(
+                c.Name.ToLower(),
+                $"%{search.ToLower()}%")
+        );
+    } 
 }

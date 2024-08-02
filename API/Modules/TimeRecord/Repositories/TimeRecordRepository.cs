@@ -12,21 +12,12 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         query = query.Where(tr => tr.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(tr =>
-                tr.Code != null &&
-                EF.Functions.Like(
-                    tr.Code.ToLower(),
-                    $"%{search.ToLower()}%") ||
-                tr.Description != null &&
-                EF.Functions.Like(
-                    tr.Description.ToLower(),
-                    $"%{search.ToLower()}%")
-            );
+            query = SearchWhereConditional(query, search);
 
         if (string.IsNullOrWhiteSpace(sort) || sort == "desc")
-            query = query.OrderByDescending(tr => tr.TimePeriods!.FirstOrDefault()!.Start);
+            query = query.OrderByDescending(tr => tr.TimePeriods.FirstOrDefault()!.Start);
         else
-            query = query.OrderBy(tr => tr.TimePeriods!.FirstOrDefault()!.Start);
+            query = query.OrderBy(tr => tr.TimePeriods.FirstOrDefault()!.Start);
 
         return query
             .Skip((page - 1) * perPage)
@@ -35,19 +26,14 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             .Include(r => r.Category)
             .ToList();
     }
-
+    
     public async Task<int> GetTotalItems(int userId, string search)
     {
         IQueryable<Entities.TimeRecord> query = dbContext.TimeRecords;
         query = query.Where(timeRecord => timeRecord.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(tr =>
-                tr.Description != null &&
-                EF.Functions.Like(
-                    tr.Description.ToLower(),
-                    $"%{search.ToLower()}%")
-            );
+            query = SearchWhereConditional(query, search);
 
         return await query.CountAsync();
     }
@@ -84,7 +70,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         return await dbContext.TimeRecords
             .FirstOrDefaultAsync(timeRecord => timeRecord.Id == id && timeRecord.UserId == userId);
     }
-    
+
     public async Task<Entities.TimeRecord?> FindByCode(string code, int userId)
     {
         return await dbContext.TimeRecords
@@ -97,5 +83,20 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             .Include(r => r.TimePeriods)
             .Include(r => r.Category)
             .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
+    }
+    
+    private static IQueryable<Entities.TimeRecord> SearchWhereConditional(IQueryable<Entities.TimeRecord> query,
+        string search)
+    {
+        return query.Where(tr =>
+            tr.Code != null &&
+            EF.Functions.Like(
+                tr.Code.ToLower(),
+                $"%{search.ToLower()}%") ||
+            tr.Description != null &&
+            EF.Functions.Like(
+                tr.Title!.ToLower(),
+                $"%{search.ToLower()}%")
+        );
     }
 }
