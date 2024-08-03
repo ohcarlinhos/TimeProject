@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+
 using API.Database;
 using API.Infrastructure.Config;
 using API.Infrastructure.Mapping;
@@ -28,12 +29,13 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 
-app.UseSwagger();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-app.UseSwaggerUI();
+    
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 else
 {
