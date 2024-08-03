@@ -15,6 +15,6 @@ public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCode>
         builder.Property(e => e.IsUsed).IsRequired();
         builder.Property(e => e.UserId);
 
-        builder.HasOne<User>().WithOne().HasForeignKey<RegisterCode>(e => e.UserId);
+        builder.HasOne<User>(e => e.User).WithOne().HasForeignKey<RegisterCode>(e => e.UserId);
     }
 }
