@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{B48E60AA-FE7E-4842-8EFA-CA9324F98E64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtos", "Dtos\Dtos.csproj", "{9B0C97F3-7B12-40B1-9D85-25EA31DF4F2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{7943632A-12F0-4103-A3D0-15F36BA3014A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{B48E60AA-FE7E-4842-8EFA-CA9324F98E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B48E60AA-FE7E-4842-8EFA-CA9324F98E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B48E60AA-FE7E-4842-8EFA-CA9324F98E64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B0C97F3-7B12-40B1-9D85-25EA31DF4F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B0C97F3-7B12-40B1-9D85-25EA31DF4F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B0C97F3-7B12-40B1-9D85-25EA31DF4F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B0C97F3-7B12-40B1-9D85-25EA31DF4F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7943632A-12F0-4103-A3D0-15F36BA3014A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7943632A-12F0-4103-A3D0-15F36BA3014A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7943632A-12F0-4103-A3D0-15F36BA3014A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7943632A-12F0-4103-A3D0-15F36BA3014A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
