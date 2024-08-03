@@ -5,12 +5,37 @@ namespace API.Modules.User.Repositories
 {
     public class UserRepository(ProjectContext dbContext) : IUserRepository
     {
+        public List<Entities.User> Index(int page, int perPage, string search, string orderBy, string sort)
+        {
+            IQueryable<Entities.User> query = dbContext.Users;
+
+            if (!string.IsNullOrWhiteSpace(search))
+                query = SearchWhereConditional(query, search);
+
+            if (string.IsNullOrWhiteSpace(sort) || sort == "desc")
+                query = query.OrderByDescending(tr => tr.Name);
+            else
+                query = query.OrderBy(tr => tr.Name);
+
+            return query.ToList();
+        }
+
+        public int GetTotalItems(string search)
+        {
+            IQueryable<Entities.User> query = dbContext.Users;
+            
+            if (!string.IsNullOrWhiteSpace(search))
+                query = SearchWhereConditional(query, search);
+            
+            return query.Count();
+        }
+
         public async Task<Entities.User> Create(Entities.User entity)
         {
             var now = DateTime.Now.ToUniversalTime();
             entity.CreatedAt = now;
             entity.UpdatedAt = now;
-            
+
             dbContext.Users.Add(entity);
             await dbContext.SaveChangesAsync();
             return entity;
@@ -19,7 +44,7 @@ namespace API.Modules.User.Repositories
         public async Task<Entities.User> Update(Entities.User entity)
         {
             entity.UpdatedAt = DateTime.Now.ToUniversalTime();
-            
+
             dbContext.Users.Update(entity);
             await dbContext.SaveChangesAsync();
             return entity;
@@ -45,6 +70,16 @@ namespace API.Modules.User.Repositories
             return await dbContext.Users
                 .Where(u => u.Email == email)
                 .FirstOrDefaultAsync();
+        }
+        
+        private static IQueryable<Entities.User> SearchWhereConditional(IQueryable<Entities.User> query, string search)
+        {
+            return query.Where((u) =>
+                EF.Functions.Like(
+                    u.Name.ToLower(),
+                    $"%{search.ToLower()}%"
+                )
+            );
         }
     }
 }

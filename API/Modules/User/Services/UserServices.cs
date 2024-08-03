@@ -10,6 +10,28 @@ namespace API.Modules.User.Services;
 
 public class UserServices(IUserRepository userRepository, IMapper mapper, ProjectContext dbContext) : IUserServices
 {
+    private List<UserMap> MapData(List<Entities.User> users)
+    {
+        return mapper.Map<List<UserMap>>(users);
+    }
+
+    private UserMap MapData(Entities.User user)
+    {
+        return mapper.Map<UserMap>(user);
+    }
+
+    public Result<Pagination<UserMap>> Index(int page, int perPage, string search, string orderBy,
+        string sort)
+    {
+        var data = MapData(userRepository.Index(page, perPage, search, orderBy, sort));
+        var totalItems = userRepository.GetTotalItems(search);
+        
+        return new Result<Pagination<UserMap>>()
+        {
+            Data = Pagination<UserMap>.Handle(data, page, perPage, totalItems, search, orderBy, sort) 
+        };
+    }
+
     public async Task<Result<UserMap>> Get(int id)
     {
         var result = new Result<UserMap>();

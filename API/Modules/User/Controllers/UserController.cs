@@ -1,10 +1,11 @@
-﻿using API.Infrastructure.Services;
-using API.Modules.Shared;
+﻿using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using API.Modules.User.Services;
+using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.User;
+using Shared;
 
 namespace API.Modules.User.Controllers;
 
@@ -12,6 +13,20 @@ namespace API.Modules.User.Controllers;
 [Route("api/user")]
 public class UserController(IUserServices userServices) : CustomController
 {
+    [HttpGet, Authorize]
+    public ActionResult<Pagination<UserMap>> Index(
+        int page = 1,
+        int perPage = 4,
+        string search = "",
+        string orderBy = "",
+        string sort = "desc"
+    )
+    {
+        if (UserRole.Admin.ToString() == UserSession.Role(User))
+            return HandleResponse(userServices.Index(page, perPage, search, orderBy, sort));
+        return Unauthorized();
+    }
+
     [HttpPost]
     public async Task<ActionResult<UserMap>> Create([FromBody] CreateUserDto dto)
     {
