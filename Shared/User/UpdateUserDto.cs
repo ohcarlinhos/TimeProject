@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Modules.User.Dto;
+namespace Shared.User;
 
 public class UpdateUserDto
 {

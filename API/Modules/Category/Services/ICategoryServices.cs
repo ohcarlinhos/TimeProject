@@ -1,6 +1,6 @@
-﻿using API.Modules.Category.Dto;
-using API.Modules.Category.Map;
-using API.Modules.Shared;
+﻿using API.Modules.Shared;
+using Shared;
+using Shared.Category;
 
 namespace API.Modules.Category.Services;
 

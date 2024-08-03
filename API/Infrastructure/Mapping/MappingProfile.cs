@@ -1,9 +1,9 @@
-﻿using API.Modules.Category.Map;
-using API.Modules.TimePeriod.Map;
-using API.Modules.TimeRecord.Map;
-using API.Modules.User.Map;
-using AutoMapper;
+﻿using AutoMapper;
 using Entities;
+using Shared.Category;
+using Shared.TimePeriod;
+using Shared.TimeRecord;
+using Shared.User;
 
 namespace API.Infrastructure.Mapping;
 

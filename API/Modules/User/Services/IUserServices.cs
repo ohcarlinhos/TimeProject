@@ -1,6 +1,6 @@
 ﻿using API.Modules.Shared;
-using API.Modules.User.Dto;
-using API.Modules.User.Map;
+using Shared;
+using Shared.User;
 
 namespace API.Modules.User.Services;
 

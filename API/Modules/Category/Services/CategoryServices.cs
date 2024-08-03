@@ -1,8 +1,8 @@
-﻿using API.Modules.Category.Dto;
-using API.Modules.Category.Map;
-using API.Modules.Category.Repositories;
+﻿using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using AutoMapper;
+using Shared;
+using Shared.Category;
 
 namespace API.Modules.Category.Services;
 

@@ -1,6 +1,6 @@
 ﻿using API.Modules.Shared;
-using API.Modules.TimeRecord.Dto;
-using API.Modules.TimeRecord.Map;
+using Shared;
+using Shared.TimeRecord;
 
 namespace API.Modules.TimeRecord.Services;
 

@@ -1,10 +1,10 @@
 ﻿using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
-using API.Modules.TimePeriod.Dto;
-using API.Modules.TimePeriod.Map;
 using API.Modules.TimePeriod.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
+using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Controllers;
 

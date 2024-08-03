@@ -16,29 +16,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37ae9a32-c503-45e5-8052-4ce4174ec735" name="Changes" comment="fix: add max length size rule to category dto">
-      <change afterPath="$PROJECT_DIR$/API/Modules/User/Controllers/RegisterCodeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RegistraMTA/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RegistraMTA/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="37ae9a32-c503-45e5-8052-4ce4174ec735" name="Changes" comment="feat: add shared">
+      <change afterPath="$PROJECT_DIR$/Shared/Shared.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API/API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API/Database/Configurations/RegisterCodeConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Database/Configurations/RegisterCodeConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Infrastructure/Mapping/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Infrastructure/Mapping/MappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/Auth/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/Auth/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/Auth/Dto/LoginDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Auth/LoginDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Auth/Services/AuthServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/Auth/Services/AuthServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Auth/Services/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/Auth/Services/IAuthService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Category/Controllers/CategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/Category/Controllers/CategoryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/Category/Dto/CategoryDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Category/CategoryDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/Category/Map/CategoryMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Category/CategoryMap.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Category/Services/CategoryServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/Category/Services/CategoryServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Category/Services/ICategoryServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/Category/Services/ICategoryServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Shared/Controllers/CustomController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/Shared/Controllers/CustomController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Shared/Pagination.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Pagination.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/Shared/Result.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/Result.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/TimePeriod/Controllers/TimePeriodController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/TimePeriod/Controllers/TimePeriodController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/TimePeriod/Dto/CreateTimePeriodDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/TimePeriod/CreateTimePeriodDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/TimePeriod/Dto/TimePeriodDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/TimePeriod/TimePeriodDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/TimePeriod/Map/TimePeriodMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/TimePeriod/TimePeriodMap.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/TimePeriod/Services/ITimePeriodServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/TimePeriod/Services/ITimePeriodServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/TimePeriod/Services/TimePeriodServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/TimePeriod/Services/TimePeriodServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/TimeRecord/Controllers/TimeRecordController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/TimeRecord/Controllers/TimeRecordController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/TimeRecord/Dto/CreateTimeRecordDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/TimeRecord/CreateTimeRecordDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/TimeRecord/Dto/UpdateTimeRecordDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/TimeRecord/UpdateTimeRecordDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/TimeRecord/Map/TimeRecordMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/TimeRecord/TimeRecordMap.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/TimeRecord/Services/ITimeRecordServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/TimeRecord/Services/ITimeRecordServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/TimeRecord/Services/TimeRecordServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/TimeRecord/Services/TimeRecordServices.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/User/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/User/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/User/Dto/CreateUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/User/CreateUserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/User/Dto/UpdateUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/User/UpdateUserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/Modules/User/Map/UserMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/User/UserMap.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/User/Services/IUserServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/User/Services/IUserServices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/Modules/User/Services/UserServices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API/Modules/User/Services/UserServices.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/RegisterCode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/RegisterCode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RegistraMTA.sln" beforeDir="false" afterPath="$PROJECT_DIR$/RegistraMTA.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,33 +88,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Roda.executor": "Run",
-    ".NET Launch Settings Profile.Unnamed.executor": "Run",
-    "Publish to folder.Publish Entities to folder.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Roda.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Publish to folder.Publish Entities to folder.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "rider.external.source.directories": [
-      "C:\\Users\\crpu4\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\crpu4\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\crpu4\\AppData\\Local\\Symbols\\src"
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\crpu4\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\crpu4\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\crpu4\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Roda">
     <configuration name="Publish Entities to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" platform="Any CPU" runtime="Portable" target_folder="$PROJECT_DIR$/../portable" target_framework="net8.0" uuid_high="-5436301412659214270" uuid_low="-8143974242816782748" />
@@ -209,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722608535081</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: add shared">
+      <option name="closed" value="true" />
+      <created>1722720369567</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722720369567</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +251,7 @@
     <MESSAGE value="fix: swagger" />
     <MESSAGE value="fix: time record search and refactor category search" />
     <MESSAGE value="fix: add max length size rule to category dto" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: add max length size rule to category dto" />
+    <MESSAGE value="feat: add shared" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add shared" />
   </component>
 </project>

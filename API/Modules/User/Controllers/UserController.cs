@@ -1,11 +1,10 @@
 ﻿using API.Infrastructure.Services;
 using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
-using API.Modules.User.Dto;
-using API.Modules.User.Map;
 using API.Modules.User.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.User;
 
 namespace API.Modules.User.Controllers;
 

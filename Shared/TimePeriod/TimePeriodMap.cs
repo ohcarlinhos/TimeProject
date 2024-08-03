@@ -1,4 +1,4 @@
-﻿namespace API.Modules.TimePeriod.Map;
+﻿namespace Shared.TimePeriod;
 
 public class TimePeriodMap
 {

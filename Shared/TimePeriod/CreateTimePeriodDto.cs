@@ -1,4 +1,4 @@
-﻿namespace API.Modules.TimePeriod.Dto;
+﻿namespace Shared.TimePeriod;
 
 public class CreateTimePeriodDto
 {

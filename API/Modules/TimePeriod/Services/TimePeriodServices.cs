@@ -1,10 +1,10 @@
 ﻿using API.Modules.Shared;
-using API.Modules.TimePeriod.Dto;
 using API.Modules.TimePeriod.Errors;
-using API.Modules.TimePeriod.Map;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Repositories;
 using AutoMapper;
+using Shared;
+using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Services;
 

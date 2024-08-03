@@ -1,6 +1,6 @@
-﻿using API.Modules.TimePeriod.Map;
+﻿using Shared.TimePeriod;
 
-namespace API.Modules.TimeRecord.Map;
+namespace Shared.TimeRecord;
 
 public class TimeRecordMap
 {

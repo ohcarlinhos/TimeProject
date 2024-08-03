@@ -1,11 +1,11 @@
 ﻿using API.Infrastructure.Services;
 using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
-using API.Modules.TimeRecord.Dto;
-using API.Modules.TimeRecord.Map;
 using API.Modules.TimeRecord.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared;
+using Shared.TimeRecord;
 
 namespace API.Modules.TimeRecord.Controllers;
 

@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace API.Modules.User.Map;
+namespace Shared.User;
 
 public class UserMap
 {

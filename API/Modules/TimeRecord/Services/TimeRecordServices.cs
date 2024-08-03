@@ -4,9 +4,9 @@ using API.Database;
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using API.Modules.TimePeriod.Services;
-using API.Modules.TimeRecord.Dto;
-using API.Modules.TimeRecord.Map;
 using API.Modules.TimeRecord.Repositories;
+using Shared;
+using Shared.TimeRecord;
 
 namespace API.Modules.TimeRecord.Services;
 

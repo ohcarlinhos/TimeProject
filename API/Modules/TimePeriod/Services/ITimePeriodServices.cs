@@ -1,6 +1,6 @@
 ﻿using API.Modules.Shared;
-using API.Modules.TimePeriod.Dto;
-using API.Modules.TimePeriod.Map;
+using Shared;
+using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Services;
 

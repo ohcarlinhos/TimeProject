@@ -1,7 +1,8 @@
 ﻿using API.Infrastructure.Services;
-using API.Modules.Auth.Dto;
 using API.Modules.Shared;
 using API.Modules.User.Repositories;
+using Shared;
+using Shared.Auth;
 
 namespace API.Modules.Auth.Services;
 

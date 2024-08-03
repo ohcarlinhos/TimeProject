@@ -1,4 +1,4 @@
-﻿namespace API.Modules.Shared;
+﻿namespace Shared;
 
 public class Result<T>
 {

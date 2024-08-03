@@ -1,4 +1,4 @@
-﻿namespace API.Modules.Category.Map;
+﻿namespace Shared.Category;
 
 public class CategoryMap
 {

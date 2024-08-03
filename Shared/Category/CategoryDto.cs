@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Modules.Category.Dto;
+namespace Shared.Category;
 
 public class CategoryDto
 {
