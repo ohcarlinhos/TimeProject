@@ -3,9 +3,8 @@
 public enum UserRole
 {
     Admin,
-    NormalUser,
-    PayingUser,
-    GuestUser
+    Normal,
+    Beta,
 }
 
 public class User
@@ -14,7 +13,7 @@ public class User
     public string Name { get; set; } = null!;
     public string Email { get; set; } = null!;
     public string Password { get; set; } = null!;
-    public UserRole UserRole { get; set; } = UserRole.NormalUser;
+    public UserRole UserRole { get; set; } = UserRole.Normal;
     public bool IsActive { get; set; } = true;
     
     public DateTime? CreatedAt { get; set; }
