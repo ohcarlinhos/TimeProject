@@ -6,7 +6,7 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordRepository
 {
-    public List<Entities.TimeRecord> Index(int userId, PaginationQuery paginationQuery)
+    public List<Entities.TimeRecord> Index(PaginationQuery paginationQuery, int userId)
     {
         var query = dbContext.TimeRecords.AsQueryable();
         query = query.Where(tr => tr.UserId == userId);
@@ -25,11 +25,11 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             .ToList();
     }
 
-    public async Task<int> GetTotalItems(int userId, string? search)
+    public async Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId)
     {
         var query = dbContext.TimeRecords.AsQueryable();
         query = query.Where(timeRecord => timeRecord.UserId == userId);
-        query = SearchWhereConditional(query, search);
+        query = SearchWhereConditional(query, paginationQuery.Search);
 
         return await query.CountAsync();
     }

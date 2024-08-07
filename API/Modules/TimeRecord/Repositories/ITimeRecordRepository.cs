@@ -4,8 +4,8 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public interface ITimeRecordRepository
 {
-    List<Entities.TimeRecord> Index(int userId, PaginationQuery paginationQuery);
-    Task<int> GetTotalItems(int userId, string? search);
+    List<Entities.TimeRecord> Index(PaginationQuery paginationQuery, int userId);
+    Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId);
     Task<Entities.TimeRecord> Create(Entities.TimeRecord entity);
     Task<Entities.TimeRecord> Update(Entities.TimeRecord entity);
     Task<bool> Delete(Entities.TimeRecord entity);
