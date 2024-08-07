@@ -14,48 +14,34 @@ namespace API.Modules.TimeRecord.Controllers;
 public class TimeRecordController(ITimeRecordServices timeRecordServices) : CustomController
 {
     [HttpGet, Authorize]
-    public async Task<ActionResult<Pagination<TimeRecordMap>>> Index(int page = 1, int perPage = 4,
-        string search = "", string orderBy = "", string sort = "desc")
+    public async Task<ActionResult<Pagination<TimeRecordMap>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        var result = await timeRecordServices
-            .Index(UserSession.Id(User), page, perPage, search, orderBy, sort);
-
-        return HandleResponse(result);
+        return HandleResponse(await timeRecordServices.Index(paginationQuery, User));
     }
 
     [HttpPost, Authorize]
     public async Task<ActionResult<TimeRecordMap>> Create([FromBody] CreateTimeRecordDto dto)
     {
-        var result = await timeRecordServices
-            .Create(dto, UserSession.Id(User));
-
+        var result = await timeRecordServices.Create(dto, User);
+        result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
 
-    [HttpPut, Authorize, Route("{id}")]
+    [HttpPut, Authorize, Route("{id:int}")]
     public async Task<ActionResult<TimeRecordMap>> Update(int id, [FromBody] UpdateTimeRecordDto dto)
     {
-        var result = await timeRecordServices
-            .Update(id, dto, UserSession.Id(User));
-
-        return HandleResponse(result);
+        return HandleResponse(await timeRecordServices.Update(id, dto, User));
     }
 
     [HttpGet, Authorize, Route("{code}")]
     public async Task<ActionResult<TimeRecordMap>> Details(string code)
     {
-        var result = await timeRecordServices
-            .Details(code, UserSession.Id(User));
-
-        return HandleResponse(result);
+        return HandleResponse(await timeRecordServices.Details(code, User));
     }
 
-    [HttpDelete, Authorize, Route("{id}")]
+    [HttpDelete, Authorize, Route("{id:int}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
-        var result = await timeRecordServices
-            .Delete(id, UserSession.Id(User));
-
-        return HandleResponse(result);
+        return HandleResponse(await timeRecordServices.Delete(id, User));
     }
 }
