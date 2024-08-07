@@ -1,5 +1,6 @@
 ﻿using API.Database;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace API.Modules.Category.Repositories;
 
@@ -12,32 +13,32 @@ public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRep
             .ToList();
     }
 
-    public List<Entities.Category> Index(int userId, int page, int perPage, string search, string sort)
+    public List<Entities.Category> Index(PaginationQuery paginationQuery, int userId)
     {
         IQueryable<Entities.Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
-        if (!string.IsNullOrWhiteSpace(search))
-            query = SearchWhereConditional(query, search);
+        if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
+            query = SearchWhereConditional(query, paginationQuery.Search);
 
-        if (string.IsNullOrWhiteSpace(sort) || sort == "asc")
+        if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "asc")
             query = query.OrderBy(c => c.Name);
         else
             query = query.OrderByDescending(c => c.Name);
 
         return query
-            .Skip((page - 1) * perPage)
-            .Take(perPage)
+            .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
+            .Take(paginationQuery.PerPage)
             .ToList();
     }
 
-    public Task<int> GetTotalItems(int userId, string search)
+    public Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId)
     {
         IQueryable<Entities.Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
-        if (!string.IsNullOrWhiteSpace(search))
-            query = SearchWhereConditional(query, search);
+        if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
+            query = SearchWhereConditional(query, paginationQuery.Search);
 
         return query.CountAsync();
     }

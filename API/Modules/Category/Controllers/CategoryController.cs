@@ -1,6 +1,4 @@
-﻿using API.Infrastructure.Services;
-using API.Modules.Category.Services;
-using API.Modules.Shared;
+﻿using API.Modules.Category.Services;
 using API.Modules.Shared.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,38 +12,32 @@ public class CategoryController(ICategoryServices categoryServices)
     : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<CategoryMap>>> Index(int page = 1, int perPage = 10, string search = "",
-        string sort = "asc")
+    public async Task<ActionResult<Pagination<CategoryMap>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await categoryServices
-            .Index(UserSession.Id(User), page, perPage, search, sort));
+        return HandleResponse(await categoryServices.Index(paginationQuery, User));
     }
 
     [HttpGet, Route("all")]
     public ActionResult<List<CategoryMap>> Index()
     {
-        return HandleResponse(categoryServices
-            .Index(UserSession.Id(User)));
+        return HandleResponse(categoryServices.Index(User));
     }
 
     [HttpPost]
     public async Task<ActionResult<Entities.Category>> Create([FromBody] CategoryDto dto)
     {
-        return HandleResponse(await categoryServices
-            .Create(dto, UserSession.Id(User)));
+        return HandleResponse(await categoryServices.Create(dto, User));
     }
 
-    [HttpPut, Route("{id}")]
+    [HttpPut, Route("{id:int}")]
     public async Task<ActionResult<Entities.Category>> Update(int id, [FromBody] CategoryDto dto)
     {
-        return HandleResponse(await categoryServices
-            .Update(id, dto, UserSession.Id(User)));
+        return HandleResponse(await categoryServices.Update(id, dto, User));
     }
 
-    [HttpDelete, Route("{id}")]
+    [HttpDelete, Route("{id:int}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
-        return HandleResponse(await categoryServices
-            .Delete(id, UserSession.Id(User)));
+        return HandleResponse(await categoryServices.Delete(id, User));
     }
 }
