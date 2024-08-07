@@ -8,8 +8,12 @@ public class CustomController : ControllerBase
 {
     protected ActionResult<T> HandleResponse<T>(Result<T> result)
     {
-        if (result.IsValid)
-            return Ok(result.Data);
+        if (string.IsNullOrEmpty(result.ActionName) && result.IsValid)
+        {
+            return CreatedAtAction(result.ActionName, result.Data);
+        }
+
+        if (result.IsValid) return Ok(result.Data);
 
         var errorResponse = new HttpErrorResponse() { Message = result.Message };
         if (result.Message!.Contains("not_found")) return NotFound(errorResponse);
