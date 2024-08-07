@@ -32,4 +32,22 @@ public class Pagination<T>
             Data = data
         };
     }
+    
+    public static Pagination<T> Handle(
+        List<T> data, 
+        PaginationQuery paginationQuery,
+        int totalItems)
+    {
+        return new Pagination<T>
+        {
+            Page = paginationQuery.Page,
+            PerPage = paginationQuery.PerPage,
+            TotalItems = totalItems,
+            TotalPages = (int)Math.Ceiling((float)totalItems / paginationQuery.PerPage),
+            Search = paginationQuery.Search,
+            OrderBy = paginationQuery.OrderBy,
+            Sort = paginationQuery.Sort,
+            Data = data
+        };
+    }
 }
