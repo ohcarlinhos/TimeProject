@@ -1,4 +1,5 @@
 ﻿using API.Database;
+using API.Infrastructure.Util;
 using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using Entities;
@@ -15,7 +16,7 @@ public class RegisterCodeController(ProjectContext dbContext) : CustomController
     [HttpGet, Authorize]
     public ActionResult<List<RegisterCode>> Index()
     {
-        if (UserRole.Admin.ToString() == UserSession.Role(User))
+        if (UserRole.Admin.ToString() == UserClaims.Role(User))
             return Ok(dbContext.RegisterCodes.Include((e) => e.User).ToList());
 
         return Unauthorized();

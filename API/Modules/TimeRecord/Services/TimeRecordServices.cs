@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
 using API.Database;
+using API.Infrastructure.Util;
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using API.Modules.TimePeriod.Services;
@@ -31,8 +32,8 @@ public class TimeRecordServices(
 
     public async Task<Result<Pagination<TimeRecordMap>>> Index(PaginationQuery paginationQuery, ClaimsPrincipal user)
     {
-        var data = MapData(timeRecordRepository.Index(paginationQuery, UserSession.Id(user)));
-        var totalItems = await timeRecordRepository.GetTotalItems(paginationQuery, UserSession.Id(user));
+        var data = MapData(timeRecordRepository.Index(paginationQuery, UserClaims.Id(user)));
+        var totalItems = await timeRecordRepository.GetTotalItems(paginationQuery, UserClaims.Id(user));
 
         return new Result<Pagination<TimeRecordMap>>
         {
@@ -47,20 +48,20 @@ public class TimeRecordServices(
 
         if (dto.CategoryId != null)
         {
-            var category = await categoryRepository.FindById((int)dto.CategoryId, UserSession.Id(user));
+            var category = await categoryRepository.FindById((int)dto.CategoryId, UserClaims.Id(user));
             if (category == null) return result.SetError("category_not_found");
         }
 
         if (dto.Code.IsNullOrEmpty() == false)
         {
-            var trByCode = await timeRecordRepository.FindByCode(dto.Code!, UserSession.Id(user));
+            var trByCode = await timeRecordRepository.FindByCode(dto.Code!, UserClaims.Id(user));
             if (trByCode != null) return result.SetError("time_record_code_already_in_use");
         }
 
         var timeRecord = await timeRecordRepository
             .Create(new Entities.TimeRecord
                 {
-                    UserId = UserSession.Id(user),
+                    UserId = UserClaims.Id(user),
                     CategoryId = dto.CategoryId,
                     Title = dto.Title,
                     Description = dto.Description,
@@ -74,7 +75,7 @@ public class TimeRecordServices(
             if (dto.TimePeriods != null)
             {
                 var timePeriodsResult = await timePeriodServices
-                    .CreateByList(dto.TimePeriods, timeRecord.Id, UserSession.Id(user));
+                    .CreateByList(dto.TimePeriods, timeRecord.Id, UserClaims.Id(user));
 
                 if (timePeriodsResult.HasError)
                     throw new Exception(timePeriodsResult.Message);
@@ -94,14 +95,14 @@ public class TimeRecordServices(
     {
         var result = new Result<TimeRecordMap>();
 
-        var timeRecord = await timeRecordRepository.FindById(id, UserSession.Id(user));
+        var timeRecord = await timeRecordRepository.FindById(id, UserClaims.Id(user));
 
         if (timeRecord == null)
             return result.SetError("time_record_not_found");
 
         if (dto.CategoryId != null)
         {
-            var category = await categoryRepository.FindById((int)dto.CategoryId, UserSession.Id(user));
+            var category = await categoryRepository.FindById((int)dto.CategoryId, UserClaims.Id(user));
             if (category == null) return result.SetError("category_not_found");
             timeRecord.CategoryId = dto.CategoryId;
         }
@@ -111,7 +112,7 @@ public class TimeRecordServices(
 
         if (timeRecord.Code != dto.Code)
         {
-            var trByCode = await timeRecordRepository.FindByCode(dto.Code!, UserSession.Id(user));
+            var trByCode = await timeRecordRepository.FindByCode(dto.Code!, UserClaims.Id(user));
             if (trByCode != null) return result.SetError("time_record_code_already_in_use");
         }
 
@@ -129,7 +130,7 @@ public class TimeRecordServices(
         var result = new Result<TimeRecordMap>();
 
         var timeRecord = await timeRecordRepository
-            .Details(code, UserSession.Id(user));
+            .Details(code, UserClaims.Id(user));
 
         if (timeRecord == null)
             return result.SetError("time_record_not_found");
@@ -142,7 +143,7 @@ public class TimeRecordServices(
         var result = new Result<bool>();
 
         var timeRecord = await timeRecordRepository
-            .FindById(id, UserSession.Id(user));
+            .FindById(id, UserClaims.Id(user));
 
         if (timeRecord == null)
             return result.SetError("time_record_not_found");

@@ -1,4 +1,5 @@
-﻿using API.Modules.Shared;
+﻿using API.Infrastructure.Util;
+using API.Modules.Shared;
 using API.Modules.Shared.Controllers;
 using API.Modules.TimePeriod.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -16,7 +17,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<Pagination<TimePeriodMap>>> Index(int timeRecordId, int page = 1, int perPage = 12)
     {
         var result = await timePeriodServices
-            .Index(timeRecordId, UserSession.Id(User), page, perPage);
+            .Index(timeRecordId, UserClaims.Id(User), page, perPage);
 
         return HandleResponse(result);
     }
@@ -25,7 +26,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<Entities.TimePeriod>> Create([FromBody] CreateTimePeriodDto dto)
     {
         var result = await timePeriodServices
-            .Create(dto, UserSession.Id(User));
+            .Create(dto, UserClaims.Id(User));
 
         return HandleResponse(result);
     }
@@ -34,7 +35,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<List<Entities.TimePeriod>>> Create([FromBody] List<TimePeriodDto> model, int id)
     {
         var result = await timePeriodServices
-            .CreateByList(model, id,UserSession.Id(User));
+            .CreateByList(model, id,UserClaims.Id(User));
 
         return HandleResponse(result);
     }
@@ -43,7 +44,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<Entities.TimePeriod>> Update(int id, [FromBody] TimePeriodDto dto)
     {
         var result = await timePeriodServices
-            .Update(id, dto, UserSession.Id(User));
+            .Update(id, dto, UserClaims.Id(User));
 
         return HandleResponse(result);
     }
@@ -52,7 +53,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     public async Task<ActionResult<bool>> Delete(int id)
     {
         var result = await timePeriodServices
-            .Delete(id, UserSession.Id(User));
+            .Delete(id, UserClaims.Id(User));
 
         return HandleResponse(result);
     }

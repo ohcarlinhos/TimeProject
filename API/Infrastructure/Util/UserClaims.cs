@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 
-namespace API.Modules.Shared;
+namespace API.Infrastructure.Util;
 
-public static class UserSession
+public static class UserClaims
 {
     public static int Id(ClaimsPrincipal userClaimsPrincipal)
     {

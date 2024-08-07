@@ -1,4 +1,4 @@
-﻿using API.Modules.Shared;
+﻿using API.Infrastructure.Util;
 using API.Modules.Shared.Controllers;
 using API.Modules.User.Services;
 using Entities;
@@ -22,7 +22,7 @@ public class UserController(IUserServices userServices) : CustomController
         string sort = "desc"
     )
     {
-        if (UserRole.Admin.ToString() == UserSession.Role(User))
+        if (UserRole.Admin.ToString() == UserClaims.Role(User))
             return HandleResponse(userServices.Index(page, perPage, search, orderBy, sort));
         return Unauthorized();
     }
@@ -36,14 +36,14 @@ public class UserController(IUserServices userServices) : CustomController
     [HttpPut("{id:int}"), Authorize]
     public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
-        if (UserSession.Id(User) != id) return Unauthorized();
+        if (UserClaims.Id(User) != id) return Unauthorized();
         return HandleResponse(await userServices.Update(id, dto));
     }
 
     [HttpDelete("{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
-        if (UserSession.Id(User) != id) return Unauthorized();
+        if (UserClaims.Id(User) != id) return Unauthorized();
         return HandleResponse(await userServices.Delete(id));
     }
 
@@ -57,6 +57,6 @@ public class UserController(IUserServices userServices) : CustomController
     public async Task<ActionResult<UserMap>> Myself()
     {
         return HandleResponse(await userServices
-            .Get(UserSession.Id(User)));
+            .Get(UserClaims.Id(User)));
     }
 }
