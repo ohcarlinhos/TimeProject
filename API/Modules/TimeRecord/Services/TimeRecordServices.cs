@@ -31,8 +31,8 @@ public class TimeRecordServices(
 
     public async Task<Result<Pagination<TimeRecordMap>>> Index(PaginationQuery paginationQuery, ClaimsPrincipal user)
     {
-        var data = MapData(timeRecordRepository.Index(UserSession.Id(user), paginationQuery));
-        var totalItems = await timeRecordRepository.GetTotalItems(UserSession.Id(user), paginationQuery.Search);
+        var data = MapData(timeRecordRepository.Index(paginationQuery, UserSession.Id(user)));
+        var totalItems = await timeRecordRepository.GetTotalItems(paginationQuery, UserSession.Id(user));
 
         return new Result<Pagination<TimeRecordMap>>
         {
