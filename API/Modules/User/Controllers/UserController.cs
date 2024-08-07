@@ -36,15 +36,17 @@ public class UserController(IUserServices userServices) : CustomController
     [HttpPut("{id:int}"), Authorize]
     public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
-        if (UserClaims.Id(User) != id) return Unauthorized();
-        return HandleResponse(await userServices.Update(id, dto));
+        return UserClaims.Id(User) == id
+            ? HandleResponse(await userServices.Update(id, dto))
+            : Forbid();
     }
 
     [HttpDelete("{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
-        if (UserClaims.Id(User) != id) return Unauthorized();
-        return HandleResponse(await userServices.Delete(id));
+        return UserClaims.Id(User) == id
+            ? HandleResponse(await userServices.Delete(id))
+            : Forbid();
     }
 
     [HttpGet, Authorize, Route("{id:int}")]
