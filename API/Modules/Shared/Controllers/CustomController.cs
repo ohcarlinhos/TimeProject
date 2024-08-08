@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared;
+using Shared.General;
 
 namespace API.Modules.Shared.Controllers;
 

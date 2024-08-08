@@ -1,4 +1,4 @@
-﻿namespace Shared;
+﻿namespace Shared.General;
 
 public class PaginationQuery
 {

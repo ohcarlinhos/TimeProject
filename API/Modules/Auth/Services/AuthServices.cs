@@ -3,6 +3,7 @@ using API.Modules.Auth.Errors;
 using API.Modules.User.Repositories;
 using Shared;
 using Shared.Auth;
+using Shared.General;
 
 namespace API.Modules.Auth.Services;
 

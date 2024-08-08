@@ -1,4 +1,5 @@
 ﻿using Shared;
+using Shared.General;
 
 namespace API.Modules.Category.Repositories;
 

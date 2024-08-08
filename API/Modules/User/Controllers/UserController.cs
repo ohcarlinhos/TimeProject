@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.User;
 using Shared;
+using Shared.General;
 
 namespace API.Modules.User.Controllers;
 

@@ -1,5 +1,6 @@
 ﻿using API.Modules.Shared;
 using Shared;
+using Shared.General;
 using Shared.User;
 
 namespace API.Modules.User.Services;

@@ -4,6 +4,7 @@ using API.Modules.User.Errors;
 using API.Modules.User.Repositories;
 using AutoMapper;
 using Shared;
+using Shared.General;
 using Shared.User;
 
 namespace API.Modules.User.Services;

@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Shared;
 using Shared.Category;
+using Shared.General;
 
 namespace API.Modules.Category.Services;
 

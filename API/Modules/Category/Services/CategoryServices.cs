@@ -5,6 +5,7 @@ using API.Modules.Shared;
 using AutoMapper;
 using Shared;
 using Shared.Category;
+using Shared.General;
 
 namespace API.Modules.Category.Services;
 
