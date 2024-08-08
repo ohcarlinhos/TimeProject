@@ -1,5 +1,5 @@
 ﻿using API.Infrastructure.Services;
-using API.Modules.Shared;
+using API.Modules.Auth.Errors;
 using API.Modules.User.Repositories;
 using Shared;
 using Shared.Auth;
@@ -15,7 +15,7 @@ public class AuthServices(IUserRepository userRepository, TokenService tokenServ
 
         if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
         {
-            result.Message = "Email ou senha incorretos.";
+            result.Message = AuthErrors.WrongEmailOrPassword;
             result.HasError = true;
             return result;
         }
