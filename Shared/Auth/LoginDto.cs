@@ -4,7 +4,6 @@ namespace Shared.Auth;
 
 public class LoginDto
 {
-    [EmailAddress]
-    public string Email { get; set; }
-    public string Password { get; set; }
+    [Required, EmailAddress] public string Email { get; set; }
+    [Required, MinLength(8), MaxLength(48)] public string Password { get; set; }
 }
