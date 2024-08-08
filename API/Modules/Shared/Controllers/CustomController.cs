@@ -1,5 +1,4 @@
-﻿using API.Infrastructure.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shared;
 
 namespace API.Modules.Shared.Controllers;
@@ -14,7 +13,7 @@ public class CustomController : ControllerBase
         if (result.IsValid) return Ok(result.Data);
 
         var messageSplit = result.Message.Split(":");
-        var errorResponse = new HttpErrorResponse() { Message = messageSplit[messageSplit.Length - 1] };
+        var errorResponse = new ErrorResult() { Message = messageSplit[messageSplit.Length - 1] };
         
         if (result.Message.Contains("not_found")) return NotFound(errorResponse);
         if (result.Message.Contains("unauthorized")) return Unauthorized();
