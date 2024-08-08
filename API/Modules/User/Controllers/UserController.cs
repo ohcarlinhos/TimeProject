@@ -24,7 +24,7 @@ public class UserController(IUserServices userServices) : CustomController
     {
         if (UserRole.Admin.ToString() == UserClaims.Role(User))
             return HandleResponse(userServices.Index(page, perPage, search, orderBy, sort));
-        return Unauthorized();
+        return Forbid();
     }
 
     [HttpPost]
