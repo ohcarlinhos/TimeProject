@@ -7,5 +7,5 @@ namespace API.Modules.Auth.Services;
 
 public interface IAuthService
 {
-    Task<Result<object>> Login(LoginDto dto);
+    Task<Result<JwtData>> Login(LoginDto dto);
 }

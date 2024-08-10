@@ -3,12 +3,13 @@ using System.Security.Claims;
 using System.Text;
 using Entities;
 using Microsoft.IdentityModel.Tokens;
+using Shared.Auth;
 
 namespace API.Infrastructure.Services;
 
 public class TokenService(IConfiguration configuration)
 {
-    public object GenerateBearerJwt(User user)
+    public JwtData GenerateBearerJwt(User user)
     {
         var tokenSubject = new ClaimsIdentity(new[]
         {
@@ -35,9 +36,6 @@ public class TokenService(IConfiguration configuration)
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);
 
-        return new
-        {
-            token = tokenString
-        };
+        return new JwtData { Token = tokenString };
     }
 }

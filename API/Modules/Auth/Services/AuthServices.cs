@@ -9,9 +9,9 @@ namespace API.Modules.Auth.Services;
 
 public class AuthServices(IUserRepository userRepository, TokenService tokenService) : IAuthService
 {
-    public async Task<Result<object>> Login(LoginDto dto)
+    public async Task<Result<JwtData>> Login(LoginDto dto)
     {
-        var result = new Result<object>();
+        var result = new Result<JwtData>();
         var user = await userRepository.FindByEmail(dto.Email);
 
         if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
