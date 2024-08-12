@@ -8,7 +8,7 @@ public class CustomController : ControllerBase
 {
     protected ActionResult<T> HandleResponse<T>(Result<T> result)
     {
-        if (string.IsNullOrEmpty(result.ActionName) && result.IsValid)
+        if (!string.IsNullOrEmpty(result.ActionName) && result.IsValid)
             return CreatedAtAction(result.ActionName, result.Data);
 
         if (result.IsValid) return Ok(result.Data);
