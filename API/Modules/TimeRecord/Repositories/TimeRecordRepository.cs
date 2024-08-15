@@ -1,6 +1,5 @@
 ﻿using API.Database;
 using Microsoft.EntityFrameworkCore;
-using Shared;
 using Shared.General;
 
 namespace API.Modules.TimeRecord.Repositories;

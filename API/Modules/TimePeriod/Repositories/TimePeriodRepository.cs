@@ -1,22 +1,22 @@
 ﻿using API.Database;
-using API.Modules.Shared;
 using Microsoft.EntityFrameworkCore;
+using Shared.General;
 
 namespace API.Modules.TimePeriod.Repositories;
 
 public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodRepository
 {
-    public List<Entities.TimePeriod> Index(int timeRecordId, int userId, int page, int perPage)
+    public List<Entities.TimePeriod> Index(int timeRecordId, PaginationQuery paginationQuery, int userId)
     {
         return dbContext.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
             .OrderByDescending(tp => tp.Start)
-            .Skip((page - 1) * perPage)
-            .Take(perPage)
+            .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
+            .Take(paginationQuery.PerPage)
             .ToList();
     }
 
-    public async Task<int> GetTotalItems(int timeRecordId, int userId)
+    public async Task<int> GetTotalItems(int timeRecordId, PaginationQuery paginationQuery, int userId)
     {
         return await dbContext.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)

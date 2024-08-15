@@ -4,11 +4,9 @@ using AutoMapper;
 using API.Database;
 using API.Infrastructure.Util;
 using API.Modules.Category.Repositories;
-using API.Modules.Shared;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.Errors;
 using API.Modules.TimeRecord.Repositories;
-using Shared;
 using Shared.General;
 using Shared.TimeRecord;
 
@@ -77,7 +75,7 @@ public class TimeRecordServices(
             if (dto.TimePeriods != null)
             {
                 var timePeriodsResult = await timePeriodServices
-                    .CreateByList(dto.TimePeriods, timeRecord.Id, UserClaims.Id(user));
+                    .CreateByList(dto.TimePeriods, timeRecord.Id, user);
 
                 if (timePeriodsResult.HasError)
                     throw new Exception(timePeriodsResult.Message);

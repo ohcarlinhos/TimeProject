@@ -1,5 +1,4 @@
-﻿using API.Modules.Shared;
-using Shared;
+﻿using System.Security.Claims;
 using Shared.General;
 using Shared.TimePeriod;
 
@@ -7,20 +6,24 @@ namespace API.Modules.TimePeriod.Services;
 
 public interface ITimePeriodServices
 {
-    public Task<Result<Pagination<TimePeriodMap>>> Index(int timeRecordId, int userId, int page, int perPage);
+    public Task<Result<Pagination<TimePeriodMap>>> Index(
+        int timeRecordId,
+        PaginationQuery paginationQuery,
+        ClaimsPrincipal user
+    );
 
     Task<Result<Entities.TimePeriod>> Create(
         CreateTimePeriodDto dto,
-        int userId
+        ClaimsPrincipal user
     );
 
     Task<Result<List<Entities.TimePeriod>>> CreateByList(
         List<TimePeriodDto> model,
-        int timeRecord,
-        int userId
+        int timeRecordId,
+        ClaimsPrincipal user
     );
 
-    Task<Result<Entities.TimePeriod>> Update(int id, TimePeriodDto dto, int userId);
+    Task<Result<Entities.TimePeriod>> Update(int id, TimePeriodDto dto, ClaimsPrincipal user);
 
-    Task<Result<bool>> Delete(int id, int userId);
+    Task<Result<bool>> Delete(int id, ClaimsPrincipal user);
 }

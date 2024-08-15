@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using Shared;
 using Shared.General;
 using Shared.TimeRecord;
 

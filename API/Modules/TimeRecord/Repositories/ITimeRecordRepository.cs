@@ -1,5 +1,4 @@
-﻿using Shared;
-using Shared.General;
+﻿using Shared.General;
 
 namespace API.Modules.TimeRecord.Repositories;
 
