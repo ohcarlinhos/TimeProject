@@ -31,23 +31,33 @@ public class UserController(IUserServices userServices) : CustomController
     [HttpPut("{id:int}"), Authorize]
     public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
-        return UserClaims.Id(User) == id
+        return HasAuthorization(id)
             ? HandleResponse(await userServices.Update(id, dto))
             : Forbid();
     }
 
+    [HttpPost("disable/{id:int}"), Authorize]
+    public async Task<ActionResult<bool>> Disable([FromRoute] int id)
+    {
+        return HasAuthorization(id)
+            ? HandleResponse(await userServices.Disable(id))
+            : Forbid();
+    }
+    
     [HttpDelete("{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
-        return UserClaims.Id(User) == id
+        return HasAuthorization(id)
             ? HandleResponse(await userServices.Delete(id))
             : Forbid();
     }
-
+    
     [HttpGet, Authorize, Route("{id:int}")]
     public async Task<ActionResult<UserMap>> Get(int id)
     {
-        return HandleResponse(await userServices.Get(id));
+        return HasAuthorization(id)
+            ? HandleResponse(await userServices.Get(id))
+            : Forbid();
     }
 
     [HttpGet, Authorize, Route("myself")]
@@ -55,5 +65,10 @@ public class UserController(IUserServices userServices) : CustomController
     {
         return HandleResponse(await userServices
             .Get(UserClaims.Id(User)));
+    }
+
+    private bool HasAuthorization(int id)
+    {
+        return UserClaims.Id(User) == id || UserRole.Admin.ToString() == UserClaims.Role(User);
     }
 }

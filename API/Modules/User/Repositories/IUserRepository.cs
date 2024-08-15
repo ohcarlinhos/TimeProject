@@ -8,6 +8,7 @@ namespace API.Modules.User.Repositories
         int GetTotalItems(PaginationQuery paginationQuery);
         Task<Entities.User> Create(Entities.User entity);
         Task<Entities.User> Update(Entities.User entity);
+        Task<bool> Disable(int id);
         Task<bool> Delete(int id);
         Task<Entities.User?> FindById(int id);
         Task<Entities.User?> FindByEmail(string email);

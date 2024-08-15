@@ -25,10 +25,10 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
     {
         var data = MapData(userRepository.Index(paginationQuery));
         var totalItems = userRepository.GetTotalItems(paginationQuery);
-        
+
         return new Result<Pagination<UserMap>>()
         {
-            Data = Pagination<UserMap>.Handle(data, paginationQuery, totalItems) 
+            Data = Pagination<UserMap>.Handle(data, paginationQuery, totalItems)
         };
     }
 
@@ -111,7 +111,15 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
         result.Data = mapper.Map<UserMap>(entity);
         return result;
     }
-
+    
+    public async Task<Result<bool>> Disable(int id)
+    {
+        return new Result<bool>
+        {
+            Data = await userRepository.Disable(id)
+        };
+    }
+    
     public async Task<Result<bool>> Delete(int id)
     {
         return new Result<bool>

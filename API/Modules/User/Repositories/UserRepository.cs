@@ -24,10 +24,10 @@ namespace API.Modules.User.Repositories
         public int GetTotalItems(PaginationQuery paginationQuery)
         {
             IQueryable<Entities.User> query = dbContext.Users;
-            
+
             if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
                 query = SearchWhereConditional(query, paginationQuery.Search);
-            
+
             return query.Count();
         }
 
@@ -51,6 +51,17 @@ namespace API.Modules.User.Repositories
             return entity;
         }
 
+
+        public async Task<bool> Disable(int id)
+        {
+            var entity = await FindById(id);
+            if (entity == null) return true;
+
+            entity.IsActive = false;
+            await dbContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> Delete(int id)
         {
             var entity = await FindById(id);
@@ -72,7 +83,7 @@ namespace API.Modules.User.Repositories
                 .Where(u => u.Email == email)
                 .FirstOrDefaultAsync();
         }
-        
+
         private static IQueryable<Entities.User> SearchWhereConditional(IQueryable<Entities.User> query, string search)
         {
             return query.Where((u) =>
