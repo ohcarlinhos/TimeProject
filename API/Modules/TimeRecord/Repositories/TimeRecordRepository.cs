@@ -21,7 +21,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         return query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
-            .Include(r => r.TimePeriods)
+            .Include(r => r.TimePeriods.OrderBy(tp => tp.Start))
             .Include(r => r.Category)
             .ToList();
     }
@@ -77,7 +77,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     public async Task<Entities.TimeRecord?> Details(string code, int userId)
     {
         return await dbContext.TimeRecords
-            .Include(r => r.TimePeriods)
+            .Include(r => r.TimePeriods.OrderBy(tp => tp.Start))
             .Include(r => r.Category)
             .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
     }
