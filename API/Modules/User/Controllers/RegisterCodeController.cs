@@ -1,10 +1,10 @@
 ﻿using API.Database;
-using API.Infrastructure.Util;
 using API.Modules.Shared.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Shared.General.Util;
 
 namespace API.Modules.User.Controllers;
 

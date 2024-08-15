@@ -1,5 +1,4 @@
-﻿using API.Infrastructure.Util;
-using API.Modules.Shared.Controllers;
+﻿using API.Modules.Shared.Controllers;
 using API.Modules.User.Services;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.User;
 using Shared;
 using Shared.General;
+using Shared.General.Util;
 
 namespace API.Modules.User.Controllers;
 

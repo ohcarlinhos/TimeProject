@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace API.Infrastructure.Util;
+namespace Shared.General.Util;
 
 public static class UserClaims
 {

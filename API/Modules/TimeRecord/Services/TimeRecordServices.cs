@@ -2,12 +2,12 @@
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
 using API.Database;
-using API.Infrastructure.Util;
 using API.Modules.Category.Repositories;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.Errors;
 using API.Modules.TimeRecord.Repositories;
 using Shared.General;
+using Shared.General.Util;
 using Shared.TimeRecord;
 
 namespace API.Modules.TimeRecord.Services;
