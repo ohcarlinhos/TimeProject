@@ -13,7 +13,7 @@ public class TokenService(IConfiguration configuration)
     {
         var tokenSubject = new ClaimsIdentity(new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim("id", user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.UserRole.ToString())
         });
