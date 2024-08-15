@@ -17,6 +17,7 @@ public class CustomController : ControllerBase
 
         var code = messageSplit[0];
 
+        if (code.Contains("forbid")) return Forbid();
         if (code.Contains("bad_request")) return BadRequest(errorResponse);
         if (code.Contains("not_found")) return NotFound(errorResponse);
         if (code.Contains("unauthorized")) return Unauthorized();
