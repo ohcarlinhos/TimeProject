@@ -1,18 +1,19 @@
 ﻿using API.Database;
 using Microsoft.EntityFrameworkCore;
+using Shared.General;
 
 namespace API.Modules.User.Repositories
 {
     public class UserRepository(ProjectContext dbContext) : IUserRepository
     {
-        public List<Entities.User> Index(int page, int perPage, string search, string orderBy, string sort)
+        public List<Entities.User> Index(PaginationQuery paginationQuery)
         {
             IQueryable<Entities.User> query = dbContext.Users;
 
-            if (!string.IsNullOrWhiteSpace(search))
-                query = SearchWhereConditional(query, search);
+            if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
+                query = SearchWhereConditional(query, paginationQuery.Search);
 
-            if (string.IsNullOrWhiteSpace(sort) || sort == "desc")
+            if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
                 query = query.OrderByDescending(tr => tr.Name);
             else
                 query = query.OrderBy(tr => tr.Name);
@@ -20,12 +21,12 @@ namespace API.Modules.User.Repositories
             return query.ToList();
         }
 
-        public int GetTotalItems(string search)
+        public int GetTotalItems(PaginationQuery paginationQuery)
         {
             IQueryable<Entities.User> query = dbContext.Users;
             
-            if (!string.IsNullOrWhiteSpace(search))
-                query = SearchWhereConditional(query, search);
+            if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
+                query = SearchWhereConditional(query, paginationQuery.Search);
             
             return query.Count();
         }

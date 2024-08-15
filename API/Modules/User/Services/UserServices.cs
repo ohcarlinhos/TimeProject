@@ -21,15 +21,14 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
         return mapper.Map<UserMap>(user);
     }
 
-    public Result<Pagination<UserMap>> Index(int page, int perPage, string search, string orderBy,
-        string sort)
+    public Result<Pagination<UserMap>> Index(PaginationQuery paginationQuery)
     {
-        var data = MapData(userRepository.Index(page, perPage, search, orderBy, sort));
-        var totalItems = userRepository.GetTotalItems(search);
+        var data = MapData(userRepository.Index(paginationQuery));
+        var totalItems = userRepository.GetTotalItems(paginationQuery);
         
         return new Result<Pagination<UserMap>>()
         {
-            Data = Pagination<UserMap>.Handle(data, page, perPage, totalItems, search, orderBy, sort) 
+            Data = Pagination<UserMap>.Handle(data, paginationQuery, totalItems) 
         };
     }
 

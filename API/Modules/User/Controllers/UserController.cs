@@ -15,16 +15,10 @@ namespace API.Modules.User.Controllers;
 public class UserController(IUserServices userServices) : CustomController
 {
     [HttpGet, Authorize]
-    public ActionResult<Pagination<UserMap>> Index(
-        int page = 1,
-        int perPage = 4,
-        string search = "",
-        string orderBy = "",
-        string sort = "desc"
-    )
+    public ActionResult<Pagination<UserMap>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         if (UserRole.Admin.ToString() == UserClaims.Role(User))
-            return HandleResponse(userServices.Index(page, perPage, search, orderBy, sort));
+            return HandleResponse(userServices.Index(paginationQuery));
         return Forbid();
     }
 
