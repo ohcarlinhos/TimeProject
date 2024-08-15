@@ -111,15 +111,23 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
         result.Data = mapper.Map<UserMap>(entity);
         return result;
     }
-    
-    public async Task<Result<bool>> Disable(int id)
+
+    public async Task<Result<bool>> Disable(int id, DisableUserDto dto)
     {
-        return new Result<bool>
-        {
-            Data = await userRepository.Disable(id)
-        };
+        var result = new Result<bool>();
+        var user = await userRepository.FindById(id);
+
+        if (user == null)
+            return result.SetError(UserErrors.NotFound);
+
+        user.IsActive = dto.IsActive;
+        await userRepository.Update(user);
+
+        result.Data = user.IsActive;
+
+        return result;
     }
-    
+
     public async Task<Result<bool>> Delete(int id)
     {
         return new Result<bool>

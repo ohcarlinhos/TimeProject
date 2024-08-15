@@ -50,18 +50,7 @@ namespace API.Modules.User.Repositories
             await dbContext.SaveChangesAsync();
             return entity;
         }
-
-
-        public async Task<bool> Disable(int id)
-        {
-            var entity = await FindById(id);
-            if (entity == null) return true;
-
-            entity.IsActive = false;
-            await dbContext.SaveChangesAsync();
-            return true;
-        }
-
+        
         public async Task<bool> Delete(int id)
         {
             var entity = await FindById(id);

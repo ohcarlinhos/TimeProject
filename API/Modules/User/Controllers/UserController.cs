@@ -37,10 +37,10 @@ public class UserController(IUserServices userServices) : CustomController
     }
 
     [HttpPost("disable/{id:int}"), Authorize]
-    public async Task<ActionResult<bool>> Disable([FromRoute] int id)
+    public async Task<ActionResult<bool>> Disable([FromRoute] int id, [FromBody] DisableUserDto dto)
     {
         return HasAuthorization(id)
-            ? HandleResponse(await userServices.Disable(id))
+            ? HandleResponse(await userServices.Disable(id, dto))
             : Forbid();
     }
     
