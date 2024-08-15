@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared;
 using Shared.General;
 
 namespace API.Modules.Shared.Controllers;
@@ -13,11 +12,14 @@ public class CustomController : ControllerBase
 
         if (result.IsValid) return Ok(result.Data);
 
-        var messageSplit = result.Message.Split(":");
-        var errorResponse = new ErrorResult() { Message = messageSplit[messageSplit.Length - 1] };
-        
-        if (result.Message.Contains("not_found")) return NotFound(errorResponse);
-        if (result.Message.Contains("unauthorized")) return Unauthorized();
+        var messageSplit = result.Message?.Split(":") ?? ["generic_error"];
+        var errorResponse = new ErrorResult { Message = messageSplit[^1] };
+
+        var code = messageSplit[0];
+
+        if (code.Contains("bad_request")) return BadRequest(errorResponse);
+        if (code.Contains("not_found")) return NotFound(errorResponse);
+        if (code.Contains("unauthorized")) return Unauthorized();
         return BadRequest(errorResponse);
     }
 }
