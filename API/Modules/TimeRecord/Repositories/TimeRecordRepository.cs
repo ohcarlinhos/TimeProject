@@ -55,6 +55,14 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         return entity;
     }
 
+    public async Task<Entities.TimeRecord?> Details(string code, int userId)
+    {
+        return await dbContext.TimeRecords
+            .Include(r => r.TimePeriods.OrderBy(tp => tp.Start))
+            .Include(r => r.Category)
+            .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
+    }
+    
     public async Task<bool> Delete(Entities.TimeRecord entity)
     {
         dbContext.TimeRecords.Remove(entity);
@@ -71,14 +79,6 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     public async Task<Entities.TimeRecord?> FindByCode(string code, int userId)
     {
         return await dbContext.TimeRecords
-            .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
-    }
-
-    public async Task<Entities.TimeRecord?> Details(string code, int userId)
-    {
-        return await dbContext.TimeRecords
-            .Include(r => r.TimePeriods.OrderBy(tp => tp.Start))
-            .Include(r => r.Category)
             .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
     }
 
