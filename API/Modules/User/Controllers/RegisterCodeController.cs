@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Shared.General.Util;
+using Shared.User;
 
 namespace API.Modules.User.Controllers;
 
@@ -19,5 +20,17 @@ public class RegisterCodeController(ProjectContext dbContext) : CustomController
             return Ok(dbContext.RegisterCodes.Include((e) => e.User).ToList());
 
         return Forbid();
+    }
+
+    [HttpPost, Authorize]
+    public async Task<ActionResult<RegisterCode>> Create(CreateRegisterCodeDto _)
+    {
+        if (UserRole.Admin.ToString() != UserClaims.Role(User))
+            return Forbid();
+
+        var registerCode = new RegisterCode();
+        dbContext.RegisterCodes.Add(registerCode);
+        await dbContext.SaveChangesAsync();
+        return Ok(registerCode);
     }
 }
