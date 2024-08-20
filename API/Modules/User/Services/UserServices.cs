@@ -2,6 +2,7 @@
 using API.Modules.Shared;
 using API.Modules.User.Errors;
 using API.Modules.User.Repositories;
+using API.Modules.User.Services.Config;
 using AutoMapper;
 using Shared;
 using Shared.General;
@@ -81,6 +82,16 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
 
     public async Task<Result<UserMap>> Update(int id, UpdateUserDto dto)
     {
+        return await _update(id, dto, null);
+    }
+
+    public async Task<Result<UserMap>> Update(int id, UpdateUserDto dto, UpdateUserMethodConfig config)
+    {
+        return await _update(id, dto, config);
+    }
+
+    private async Task<Result<UserMap>> _update(int id, UpdateUserDto dto, UpdateUserMethodConfig? config)
+    {
         var result = new Result<UserMap>();
         var user = await userRepository.FindById(id);
 
@@ -100,8 +111,11 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
 
         if (!string.IsNullOrWhiteSpace(dto.Password))
         {
-            if (!BCrypt.Net.BCrypt.Verify(dto.OldPassword, user.Password))
+            if ((config == null || config.SkipOldPasswordCompare == false) &&
+                BCrypt.Net.BCrypt.Verify(dto.OldPassword, user.Password) == false)
+            {
                 return result.SetError(UserErrors.DifferentPassword);
+            }
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
         }

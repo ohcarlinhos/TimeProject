@@ -1,5 +1,6 @@
 ﻿using API.Modules.Shared.Controllers;
 using API.Modules.User.Services;
+using API.Modules.User.Services.Config;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,19 @@ public class UserController(IUserServices userServices) : CustomController
             : Forbid();
     }
 
+    [HttpPut("password/{id:int}"), Authorize]
+    public async Task<ActionResult<UserMap>> UpdatePassword([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
+    {
+        return IsAdmin()
+            ? HandleResponse(await userServices.Update(id, new UpdateUserDto
+                {
+                    Password = dto.Password
+                },
+                new UpdateUserMethodConfig { SkipOldPasswordCompare = true }))
+            : Forbid();
+    }
+
+
     [HttpPost("disable/{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Disable([FromRoute] int id, [FromBody] DisableUserDto dto)
     {
@@ -43,7 +57,7 @@ public class UserController(IUserServices userServices) : CustomController
             ? HandleResponse(await userServices.Disable(id, dto))
             : Forbid();
     }
-    
+
     [HttpDelete("{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
@@ -51,7 +65,7 @@ public class UserController(IUserServices userServices) : CustomController
             ? HandleResponse(await userServices.Delete(id))
             : Forbid();
     }
-    
+
     [HttpGet, Authorize, Route("{id:int}")]
     public async Task<ActionResult<UserMap>> Get(int id)
     {
@@ -67,8 +81,13 @@ public class UserController(IUserServices userServices) : CustomController
             .Get(UserClaims.Id(User)));
     }
 
+    private bool IsAdmin()
+    {
+        return UserRole.Admin.ToString() == UserClaims.Role(User);
+    }
+
     private bool HasAuthorization(int id)
     {
-        return UserClaims.Id(User) == id || UserRole.Admin.ToString() == UserClaims.Role(User);
+        return UserClaims.Id(User) == id || IsAdmin();
     }
 }
