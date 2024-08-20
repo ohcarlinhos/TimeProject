@@ -6,4 +6,5 @@ public static class UserErrors
     public const string EmailAlreadyInUse = "email_already_in_use";
     public const string DifferentPassword = "different_password";
     public const string RegisterCodeIsNotAvailable = "register_code_is_not_available";
+    public const string RoleNotFound = "bad_request:role_not_found";
 }

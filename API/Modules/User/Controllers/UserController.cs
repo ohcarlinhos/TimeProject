@@ -49,6 +49,13 @@ public class UserController(IUserServices userServices) : CustomController
             : Forbid();
     }
 
+    [HttpPut("role/{id:int}"), Authorize]
+    public async Task<ActionResult<UserMap>> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
+    {
+        return IsAdmin()
+            ? HandleResponse(await userServices.UpdateRole(id, dto))
+            : Forbid();
+    }
 
     [HttpPost("disable/{id:int}"), Authorize]
     public async Task<ActionResult<bool>> Disable([FromRoute] int id, [FromBody] DisableUserDto dto)

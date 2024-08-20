@@ -1,10 +1,9 @@
 ﻿using API.Database;
-using API.Modules.Shared;
 using API.Modules.User.Errors;
 using API.Modules.User.Repositories;
 using API.Modules.User.Services.Config;
 using AutoMapper;
-using Shared;
+using Entities;
 using Shared.General;
 using Shared.User;
 
@@ -122,6 +121,26 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
 
         var entity = await userRepository.Update(user);
 
+        result.Data = mapper.Map<UserMap>(entity);
+        return result;
+    }
+
+    public async Task<Result<UserMap>> UpdateRole(int id, UpdateRoleDto dto)
+    {
+        var result = new Result<UserMap>();
+        var user = await userRepository.FindById(id);
+
+        if (user == null)
+            return result.SetError(UserErrors.NotFound);
+
+        if (Enum.TryParse(typeof(UserRole), dto.Role, out var userRole) == false)
+        {
+            return result.SetError(UserErrors.RoleNotFound);
+        }
+
+        user.UserRole = (UserRole)userRole;
+
+        var entity = await userRepository.Update(user);
         result.Data = mapper.Map<UserMap>(entity);
         return result;
     }
