@@ -1,6 +1,7 @@
 ﻿using API.Infrastructure.Services;
 using API.Modules.Auth.Errors;
 using API.Modules.User.Repositories;
+using Entities;
 using Shared;
 using Shared.Auth;
 using Shared.General;
@@ -11,6 +12,16 @@ public class AuthServices(IUserRepository userRepository, TokenService tokenServ
 {
     public async Task<Result<JwtData>> Login(LoginDto dto)
     {
+        return await Login(dto, false);
+    }
+
+    public async Task<Result<JwtData>> Login(LoginDto dto, bool onlyAdmin)
+    {
+        return await _login(dto, onlyAdmin);
+    }
+
+    private async Task<Result<JwtData>> _login(LoginDto dto, bool onlyAdmin = false)
+    {
         var result = new Result<JwtData>();
         var user = await userRepository.FindByEmail(dto.Email);
 
@@ -19,6 +30,11 @@ public class AuthServices(IUserRepository userRepository, TokenService tokenServ
             result.Message = AuthErrors.WrongEmailOrPassword;
             result.HasError = true;
             return result;
+        }
+
+        if (onlyAdmin && user.UserRole != UserRole.Admin)
+        {
+            return result.SetError("forbid");
         }
 
         result.Data = tokenService.GenerateBearerJwt(user);

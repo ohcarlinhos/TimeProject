@@ -14,4 +14,10 @@ public class AuthController(IAuthService authService) : CustomController
     {
         return HandleResponse(await authService.Login(dto));
     }
+
+    [HttpPost, Route("panel")]
+    public async Task<ActionResult<JwtData>> PanelLogin([FromBody] LoginDto dto)
+    {
+        return HandleResponse(await authService.Login(dto, true));
+    }
 }
