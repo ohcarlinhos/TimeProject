@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entities;
+using Microsoft.AspNetCore.Mvc;
 using Shared.General;
+using Shared.General.Util;
 
 namespace API.Modules.Shared.Controllers;
 
@@ -22,5 +24,10 @@ public class CustomController : ControllerBase
         if (code.Contains("not_found")) return NotFound(errorResponse);
         if (code.Contains("unauthorized")) return Unauthorized();
         return BadRequest(errorResponse);
+    }
+    
+    protected bool IsAdmin()
+    {
+        return UserRole.Admin.ToString() == UserClaims.Role(User);
     }
 }

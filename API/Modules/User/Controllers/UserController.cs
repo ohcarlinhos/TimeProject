@@ -88,11 +88,6 @@ public class UserController(IUserServices userServices) : CustomController
             .Get(UserClaims.Id(User)));
     }
 
-    private bool IsAdmin()
-    {
-        return UserRole.Admin.ToString() == UserClaims.Role(User);
-    }
-
     private bool HasAuthorization(int id)
     {
         return UserClaims.Id(User) == id || IsAdmin();
