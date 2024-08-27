@@ -18,7 +18,7 @@ public class TokenService(IConfiguration configuration)
             new Claim(ClaimTypes.Role, user.UserRole.ToString())
         });
 
-        var tokenExpires = DateTime.UtcNow.AddMinutes(1);
+        var tokenExpires = DateTime.UtcNow.AddHours(double.Parse(configuration["Jwt:Expires"]!));
 
         var tokenSigningCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Key"]!)),
