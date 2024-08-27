@@ -18,7 +18,7 @@ public class TokenService(IConfiguration configuration)
             new Claim(ClaimTypes.Role, user.UserRole.ToString())
         });
 
-        var tokenExpires = DateTime.UtcNow.AddHours(double.Parse(configuration["Jwt:Expires"]!));
+        var tokenExpires = DateTime.UtcNow.AddMinutes(1);
 
         var tokenSigningCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Key"]!)),
@@ -36,6 +36,12 @@ public class TokenService(IConfiguration configuration)
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);
 
-        return new JwtData { Token = tokenString };
+        return new JwtData
+        {
+            Token = tokenString,
+            Now = DateTime.Now.ToUniversalTime(),
+            ValidFrom = token.ValidFrom,
+            ValidTo = token.ValidTo,
+        };
     }
 }
