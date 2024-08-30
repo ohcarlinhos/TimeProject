@@ -11,10 +11,10 @@ public class TimePeriodMap
 
     public object Time => new
     {
-        Seconds = Calc.Seconds,
-        Minutes = Calc.Minutes,
-        Hours = Calc.Hours,
-        Days = Calc.Days,
+        Calc.Seconds,
+        Calc.Minutes,
+        Calc.Hours,
+        Calc.Days,
     };
     
     public string FormattedTime
