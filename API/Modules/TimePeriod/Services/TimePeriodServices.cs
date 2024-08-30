@@ -25,6 +25,12 @@ public class TimePeriodServices(
         return mapper.Map<List<Entities.TimePeriod>, List<TimePeriodMap>>(entity);
     }
 
+
+    private List<DatedTimePeriodMap> MapData(List<DatedTimePeriod> entity)
+    {
+        return mapper.Map<List<DatedTimePeriod>, List<DatedTimePeriodMap>>(entity);
+    }
+
     public async Task<Result<Pagination<TimePeriodMap>>> Index(int timeRecordId,
         PaginationQuery paginationQuery, ClaimsPrincipal user)
     {
@@ -37,6 +43,23 @@ public class TimePeriodServices(
                 data,
                 paginationQuery,
                 totalItems
+            )
+        };
+    }
+
+    public Result<Pagination<DatedTimePeriodMap>> Dated(
+        int timeRecordId,
+        PaginationQuery paginationQuery,
+        ClaimsPrincipal user)
+    {
+        var data = timePeriodRepository.Dated(timeRecordId, paginationQuery, UserClaims.Id(user));
+
+        return new Result<Pagination<DatedTimePeriodMap>>
+        {
+            Data = Pagination<DatedTimePeriodMap>.Handle(
+                MapData(data.DatedTimePeriods),
+                paginationQuery,
+                data.TotalItems
             )
         };
     }

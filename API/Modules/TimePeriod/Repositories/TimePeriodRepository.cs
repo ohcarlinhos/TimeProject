@@ -1,6 +1,7 @@
 ﻿using API.Database;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
+using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Repositories;
 
@@ -23,6 +24,39 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
             .CountAsync();
     }
 
+    public DatedResult Dated(int timeRecordId, PaginationQuery paginationQuery, int userId)
+    {
+        var timePeriodQuery = dbContext.TimePeriods.AsQueryable();
+        timePeriodQuery = timePeriodQuery.Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId);
+
+        var dateQuery = timePeriodQuery.GroupBy(p => p.Start.Date);
+
+        var resultList = dateQuery
+            .Select(p => new { p.Key, Count = p.Count() })
+            .OrderByDescending(p => p.Key)
+            .ToList();
+
+        var totalItems = dateQuery.Count();
+
+        var datedTimePeriods = new List<DatedTimePeriod>();
+
+        foreach (var result in resultList)
+        {
+            var query = timePeriodQuery
+                .Where(p => p.Start.Date == result.Key.Date)
+                .OrderByDescending(p => p.Start)
+                .ToList();
+            datedTimePeriods.Add(new DatedTimePeriod
+                { Date = result.Key.Date.ToString("yyyy-MM-dd"), Count = result.Count, TimePeriods = query });
+        }
+
+        return new DatedResult
+        {
+            DatedTimePeriods = datedTimePeriods,
+            TotalItems = totalItems
+        };
+    }
+
     public async Task<Entities.TimePeriod> Create(Entities.TimePeriod entity)
     {
         var now = DateTime.Now.ToUniversalTime();
@@ -37,7 +71,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
     public async Task<List<Entities.TimePeriod>> CreateByList(List<Entities.TimePeriod> entityList)
     {
         var now = DateTime.Now.ToUniversalTime();
-        
+
         foreach (var entity in entityList)
         {
             entity.CreatedAt = now;
@@ -52,7 +86,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
     public async Task<Entities.TimePeriod> Update(Entities.TimePeriod entity)
     {
         entity.UpdatedAt = DateTime.Now.ToUniversalTime();
-        
+
         dbContext.TimePeriods.Update(entity);
         await dbContext.SaveChangesAsync();
         return entity;

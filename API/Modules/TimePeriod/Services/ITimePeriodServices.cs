@@ -11,6 +11,12 @@ public interface ITimePeriodServices
         PaginationQuery paginationQuery,
         ClaimsPrincipal user
     );
+    
+    public Result<Pagination<DatedTimePeriodMap>> Dated(
+        int timeRecordId,
+        PaginationQuery paginationQuery,
+        ClaimsPrincipal user
+    );
 
     Task<Result<Entities.TimePeriod>> Create(
         CreateTimePeriodDto dto,
