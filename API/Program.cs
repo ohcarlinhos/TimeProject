@@ -32,8 +32,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/error");
-    // app.UseExceptionHandler("/error-development");
+    app.UseExceptionHandler("/error-development");
     
     app.UseSwagger();
     app.UseSwaggerUI();
