@@ -29,31 +29,31 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         var timePeriodQuery = dbContext.TimePeriods.AsQueryable();
         timePeriodQuery = timePeriodQuery.Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId);
 
-        var dateQuery = timePeriodQuery.GroupBy(p => p.Start.Date);
+        var timePeriods = timePeriodQuery.OrderByDescending(p => p.Start).ToList();
 
-        var resultList = dateQuery
-            .Select(p => new { p.Key, Count = p.Count() })
-            .OrderByDescending(p => p.Key)
+        var brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+
+        var dates = timePeriods
+            .Select(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date)
+            .Distinct()
             .ToList();
-
-        var totalItems = dateQuery.Count();
 
         var datedTimePeriods = new List<DatedTimePeriod>();
 
-        foreach (var result in resultList)
+        foreach (var d in dates)
         {
-            var query = timePeriodQuery
-                .Where(p => p.Start.Date == result.Key.Date)
+            var result = timePeriods
+                .Where(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date == d.Date)
                 .OrderByDescending(p => p.Start)
                 .ToList();
-            datedTimePeriods.Add(new DatedTimePeriod
-                { Date = result.Key.Date.ToString("yyyy-MM-dd"), Count = result.Count, TimePeriods = query });
+
+            datedTimePeriods.Add(new DatedTimePeriod { Date = d.Date, Count = result.Count, TimePeriods = result });
         }
 
         return new DatedResult
         {
             DatedTimePeriods = datedTimePeriods,
-            TotalItems = totalItems
+            TotalItems = dates.Count
         };
     }
 

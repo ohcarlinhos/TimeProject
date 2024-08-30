@@ -2,7 +2,7 @@
 
 public class DatedTimePeriodMap
 {
-    public string Date { get; set; }
+    public DateTime Date { get; set; }
     public int Count { get; set; }
     public IEnumerable<TimePeriodMap> TimePeriods { get; set; }
 
