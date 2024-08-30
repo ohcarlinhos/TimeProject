@@ -12,7 +12,7 @@ public interface ITimePeriodServices
         ClaimsPrincipal user
     );
     
-    public Result<Pagination<DatedTimePeriodMap>> Dated(
+    public Task<Result<Pagination<DatedTimePeriodMap>>> Dated(
         int timeRecordId,
         PaginationQuery paginationQuery,
         ClaimsPrincipal user

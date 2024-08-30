@@ -47,12 +47,12 @@ public class TimePeriodServices(
         };
     }
 
-    public Result<Pagination<DatedTimePeriodMap>> Dated(
+    public async Task<Result<Pagination<DatedTimePeriodMap>>> Dated(
         int timeRecordId,
         PaginationQuery paginationQuery,
         ClaimsPrincipal user)
     {
-        var data = timePeriodRepository.Dated(timeRecordId, paginationQuery, UserClaims.Id(user));
+        var data = await timePeriodRepository.Dated(timeRecordId, paginationQuery, UserClaims.Id(user));
 
         return new Result<Pagination<DatedTimePeriodMap>>
         {

@@ -12,7 +12,7 @@ public class DatedResult
 public interface ITimePeriodRepository
 {
     List<Entities.TimePeriod> Index(int timeRecordId, PaginationQuery paginationQuery, int userId);
-    DatedResult Dated(int timeRecordId, PaginationQuery paginationQuery, int userId);
+    Task<DatedResult> Dated(int timeRecordId, PaginationQuery paginationQuery, int userId);
     Task<int> GetTotalItems(int timeRecordId, PaginationQuery paginationQuery, int userId);
     Task<Entities.TimePeriod> Create(Entities.TimePeriod entity);
     Task<List<Entities.TimePeriod>> CreateByList(List<Entities.TimePeriod> entityList);

@@ -24,12 +24,12 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
             .CountAsync();
     }
 
-    public DatedResult Dated(int timeRecordId, PaginationQuery paginationQuery, int userId)
+    public async Task<DatedResult> Dated(int timeRecordId, PaginationQuery paginationQuery, int userId)
     {
         var timePeriodQuery = dbContext.TimePeriods.AsQueryable();
         timePeriodQuery = timePeriodQuery.Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId);
 
-        var timePeriods = timePeriodQuery.OrderByDescending(p => p.Start).ToList();
+        var timePeriods = await timePeriodQuery.OrderByDescending(p => p.Start).ToListAsync();
 
         var brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
 
