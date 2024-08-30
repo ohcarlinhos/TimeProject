@@ -39,7 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/error-development");
+    app.UseExceptionHandler("/error");
 }
 
 app.UseCors(customCors);
