@@ -1,4 +1,5 @@
-﻿using API.Database;
+﻿using System.Runtime.InteropServices;
+using API.Database;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
 using Shared.TimePeriod;
@@ -31,11 +32,13 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
 
         var timePeriods = await timePeriodQuery.OrderByDescending(p => p.Start).ToListAsync();
 
-        var brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+
+        var brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById(RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? "E. South America Standard Time"
+            : "America/Sao_Paulo");
 
         var dates = timePeriods
-            // .Select(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date)
-            .Select(p => p.Start.Date)
+            .Select(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date)
             .Distinct()
             .ToList();
 
@@ -44,8 +47,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         foreach (var d in dates)
         {
             var result = timePeriods
-                // .Where(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date == d.Date)
-                .Where(p => p.Start.Date == d.Date)
+                .Where(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date == d.Date)
                 .OrderByDescending(p => p.Start)
                 .ToList();
 
