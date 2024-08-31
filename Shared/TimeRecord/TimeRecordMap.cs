@@ -10,10 +10,10 @@ public class TimeRecordMap
     public int UserId { get; set; }
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
-    public string Code { get; set; }
+    public string Code { get; set; } = string.Empty;
     public string? ExternalLink { get; set; }
 
-    public List<TimePeriodMap> TimePeriods { get; set; }
+    public List<TimePeriodMap> TimePeriods { get; set; } = null!;
     public DateTime? TimeRecordDate => TimePeriods.Count > 0 ? TimePeriods[0].Start : null;
     public int TimePeriodsCount => TimePeriods.Count;
 

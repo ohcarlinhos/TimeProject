@@ -13,5 +13,5 @@ public class TimePeriod
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     
-    public TimeRecord TimeRecord { get; set; }
+    public TimeRecord? TimeRecord { get; set; }
 }

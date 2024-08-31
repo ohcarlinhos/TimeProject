@@ -1,10 +1,12 @@
-﻿namespace Shared.TimePeriod;
+﻿using Entities;
+
+namespace Shared.TimePeriod;
 
 public class DatedTimePeriodMap
 {
     public DateTime Date { get; set; }
     public int Count { get; set; }
-    public IEnumerable<TimePeriodMap> TimePeriods { get; set; }
+    public IEnumerable<TimePeriodMap> TimePeriods { get; set; } = null!;
 
     private TimeSpan TimePeriodsCalc
     {
@@ -16,24 +18,30 @@ public class DatedTimePeriodMap
                     current.Add(timePeriod.End.Subtract(timePeriod.Start)));
         }
     }
+
+    public TimeRecordMeta? Meta { get; set; }
     
-    public string FormattedTime
-    {
-        get
-        {
-            var tpc = TimePeriodsCalc;
-            var ft = "";
+    // public int TimePeriodCount => Meta?.TimePeriodCount ?? 0;
+    
+    // public string FormattedTime
+    // {
+    //     get
+    //     {
+            // var tpc = TimePeriodsCalc;
+            // var ft = "";
+            //
+            // if (tpc.Days > 0)
+            //     ft += $"{tpc.Days}d ";
+            // if (tpc.Hours > 0)
+            //     ft += $"{tpc.Hours}h ";
+            // if (tpc.Minutes > 0)
+            //     ft += $"{tpc.Minutes}m ";
+            // if (tpc.Seconds > 0)
+            //     ft += $"{tpc.Seconds}s ";
 
-            if (tpc.Days > 0)
-                ft += $"{tpc.Days}d ";
-            if (tpc.Hours > 0)
-                ft += $"{tpc.Hours}h ";
-            if (tpc.Minutes > 0)
-                ft += $"{tpc.Minutes}m ";
-            if (tpc.Seconds > 0)
-                ft += $"{tpc.Seconds}s ";
+            // return ft.Trim();
+            // return Meta?.FormattedTime ?? "";
 
-            return ft.Trim();
-        }
-    }
+        // }
+    // }
 }

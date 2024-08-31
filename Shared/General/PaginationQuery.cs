@@ -11,7 +11,7 @@ public class PaginationQuery
     }
 
     public int PerPage { get; set; } = 10;
-    public string? Search { get; set; } = "";
-    public string? OrderBy { get; set; } = "";
+    public string? Search { get; set; } = string.Empty;
+    public string? OrderBy { get; set; } = string.Empty;
     public string? Sort { get; set; } = "desc";
 }

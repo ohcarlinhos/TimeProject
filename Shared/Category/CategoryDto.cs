@@ -4,5 +4,5 @@ namespace Shared.Category;
 
 public class CategoryDto
 {
-    [MaxLength(20)] public string Name { get; set; }
+    [MaxLength(20)] public string Name { get; set; } = string.Empty;
 }

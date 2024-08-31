@@ -4,5 +4,5 @@ namespace Shared.User;
 
 public class UpdateRoleDto
 {
-    [Required] public string Role { get; set; } = "";
+    [Required] public string Role { get; set; } = string.Empty;
 }
