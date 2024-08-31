@@ -2,6 +2,7 @@
 using API.Modules.TimePeriod.Errors;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Repositories;
+using API.Modules.TimeRecord.Services;
 using AutoMapper;
 using Shared.General;
 using Shared.General.Util;
@@ -12,6 +13,7 @@ namespace API.Modules.TimePeriod.Services;
 public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,
     ITimeRecordRepository timeRecordRepository,
+    ITimeRecordMetaServices timeRecordMetaServices,
     IMapper mapper
 ) : ITimePeriodServices
 {
@@ -82,7 +84,7 @@ public class TimePeriodServices(
         if (timeRecord == null)
             return result.SetError(TimePeriodErrors.WrongTimeRecordId);
 
-        return result.SetData(await timePeriodRepository
+        var data = await timePeriodRepository
             .Create(new Entities.TimePeriod
                 {
                     UserId = UserClaims.Id(user),
@@ -90,8 +92,11 @@ public class TimePeriodServices(
                     Start = dto.Start,
                     End = dto.End
                 }
-            )
-        );
+            );
+
+        await timeRecordMetaServices.CreateOrUpdate(data.TimeRecordId);
+
+        return result.SetData(data);
     }
 
     public async Task<Result<List<Entities.TimePeriod>>> CreateByList(
@@ -118,8 +123,11 @@ public class TimePeriodServices(
             });
         }
 
+        var data = await timePeriodRepository.CreateByList(list);
+        await timeRecordMetaServices.CreateOrUpdate(timeRecordId);
+
         return result.IsValid
-            ? result.SetData(await timePeriodRepository.CreateByList(list))
+            ? result.SetData(data)
             : result;
     }
 
@@ -136,7 +144,10 @@ public class TimePeriodServices(
         timePeriod.Start = dto.Start;
         timePeriod.End = dto.End;
 
-        return result.SetData(await timePeriodRepository.Update(timePeriod));
+        var data = await timePeriodRepository.Update(timePeriod);
+        await timeRecordMetaServices.CreateOrUpdate(data.TimeRecordId);
+
+        return result.SetData(data);
     }
 
     public async Task<Result<bool>> Delete(int id, ClaimsPrincipal user)
@@ -148,7 +159,10 @@ public class TimePeriodServices(
         if (timePeriod == null)
             return result.SetError(TimePeriodErrors.NotFound);
 
-        return result.SetData(await timePeriodRepository.Delete(timePeriod));
+        var data = await timePeriodRepository.Delete(timePeriod);
+        await timeRecordMetaServices.CreateOrUpdate(timePeriod.TimeRecordId);
+
+        return result.SetData(data);
     }
 
     private static void ValidateStartAndEnd<T>(

@@ -10,5 +10,5 @@ public interface ITimeRecordServices
     Task<Result<TimeRecordMap>> Create(CreateTimeRecordDto dto, ClaimsPrincipal user);
     Task<Result<TimeRecordMap>> Update(int id, UpdateTimeRecordDto dto, ClaimsPrincipal user);
     Task<Result<TimeRecordMap>> Details(string code, ClaimsPrincipal user);
-    Task<Result<bool>> Delete(int id, ClaimsPrincipal user); 
+    Task<Result<bool>> Delete(int id, ClaimsPrincipal user);
 }

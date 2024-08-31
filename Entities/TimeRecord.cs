@@ -9,11 +9,13 @@ public class TimeRecord
 
     public int UserId { get; set; }
     public int? CategoryId { get; set; }
-    public string? Code { get; set; }
+    public string Code { get; set; } = string.Empty;
     
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
-    public IEnumerable<TimePeriod> TimePeriods { get; set; }
+    public IEnumerable<TimePeriod>? TimePeriods { get; set; }
+    
     public Category? Category { get; set; }
+    public TimeRecordMeta? Meta { get; set; }
 }

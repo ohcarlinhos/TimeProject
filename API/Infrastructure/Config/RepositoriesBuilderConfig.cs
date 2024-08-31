@@ -13,5 +13,6 @@ public static class RepositoriesBuilderConfig
         builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<ITimeRecordRepository, TimeRecordRepository>();
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
+        builder.Services.AddScoped<ITimeRecordMetaRepository, TimeRecordMetaRepository>();
     }
 }

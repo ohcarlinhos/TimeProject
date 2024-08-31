@@ -17,6 +17,7 @@ public class TimeRecordServices(
     ITimeRecordRepository timeRecordRepository,
     ICategoryRepository categoryRepository,
     ITimePeriodServices timePeriodServices,
+    ITimeRecordMetaServices timeRecordMetaServices,
     IMapper mapper
 ) : ITimeRecordServices
 {
@@ -121,6 +122,8 @@ public class TimeRecordServices(
         timeRecord.Title = dto.Title;
         timeRecord.Description = dto.Description;
         timeRecord.ExternalLink = dto.ExternalLink;
+
+        await timeRecordMetaServices.CreateOrUpdate(timeRecord.Id);
 
         return result.SetData(MapData(await timeRecordRepository.Update(timeRecord)));
     }
