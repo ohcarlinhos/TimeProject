@@ -48,7 +48,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         {
             var result = timePeriods
                 .Where(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date == d.Date)
-                .OrderByDescending(p => p.Start)
+                .OrderBy(p => p.Start)
                 .ToList();
 
             datedTimePeriods.Add(new DatedTimePeriod { Date = d.Date, Count = result.Count, TimePeriods = result });

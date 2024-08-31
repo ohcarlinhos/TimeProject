@@ -13,15 +13,17 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         query = SearchWhereConditional(query, paginationQuery.Search);
 
         if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
-            query = query.OrderByDescending(tr => tr.TimePeriods.FirstOrDefault()!.Start);
+            query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
+                .ThenByDescending(tr => tr.Meta.LastTimePeriodDate);
         else
-            query = query.OrderBy(tr => tr.TimePeriods.FirstOrDefault()!.Start);
+            query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
+                .ThenBy(p => p.Meta!.LastTimePeriodDate);
 
         return query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
-            .Include(r => r.TimePeriods.OrderBy(tp => tp.Start))
             .Include(r => r.Category)
+            .Include(r => r.Meta)
             .ToList();
     }
 
@@ -57,11 +59,11 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     public async Task<Entities.TimeRecord?> Details(string code, int userId)
     {
         return await dbContext.TimeRecords
-            .Include(r => r.TimePeriods.OrderBy(tp => tp.Start))
             .Include(r => r.Category)
+            .Include(r => r.Meta)
             .FirstOrDefaultAsync(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
     }
-    
+
     public async Task<bool> Delete(Entities.TimeRecord entity)
     {
         dbContext.TimeRecords.Remove(entity);
