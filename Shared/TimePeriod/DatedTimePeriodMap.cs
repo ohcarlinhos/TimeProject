@@ -8,40 +8,5 @@ public class DatedTimePeriodMap
     public int Count { get; set; }
     public IEnumerable<TimePeriodMap> TimePeriods { get; set; } = null!;
 
-    private TimeSpan TimePeriodsCalc
-    {
-        get
-        {
-            var total = new TimeSpan();
-            return TimePeriods
-                .Aggregate(total, (current, timePeriod) =>
-                    current.Add(timePeriod.End.Subtract(timePeriod.Start)));
-        }
-    }
-
-    public TimeRecordMeta? Meta { get; set; }
-    
-    // public int TimePeriodCount => Meta?.TimePeriodCount ?? 0;
-    
-    // public string FormattedTime
-    // {
-    //     get
-    //     {
-            // var tpc = TimePeriodsCalc;
-            // var ft = "";
-            //
-            // if (tpc.Days > 0)
-            //     ft += $"{tpc.Days}d ";
-            // if (tpc.Hours > 0)
-            //     ft += $"{tpc.Hours}h ";
-            // if (tpc.Minutes > 0)
-            //     ft += $"{tpc.Minutes}m ";
-            // if (tpc.Seconds > 0)
-            //     ft += $"{tpc.Seconds}s ";
-
-            // return ft.Trim();
-            // return Meta?.FormattedTime ?? "";
-
-        // }
-    // }
+    public string FormattedTime => TimeFormat.StringFromTimePeriods(TimePeriods);
 }
