@@ -120,6 +120,9 @@ namespace API.Migrations
                     b.Property<int>("TimeRecordId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("TimerSessionId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .IsRequired()
                         .HasColumnType("timestamp with time zone");
@@ -130,6 +133,8 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("TimeRecordId");
+
+                    b.HasIndex("TimerSessionId");
 
                     b.HasIndex("UserId");
 
@@ -193,7 +198,7 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("FirstTimePeriodDate")
+                    b.Property<DateTime?>("FirstTimePeriodDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FormattedTime")
@@ -201,7 +206,7 @@ namespace API.Migrations
                         .HasMaxLength(24)
                         .HasColumnType("character varying(24)");
 
-                    b.Property<DateTime>("LastTimePeriodDate")
+                    b.Property<DateTime?>("LastTimePeriodDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("TimePeriodCount")
@@ -214,6 +219,45 @@ namespace API.Migrations
                     b.HasKey("TimeRecordId");
 
                     b.ToTable("time_record_metas", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.TimerSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("From")
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
+
+                    b.Property<int>("TimeRecordId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .IsRequired()
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TimeRecordId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("timer_sessions", (string)null);
                 });
 
             modelBuilder.Entity("Entities.User", b =>
@@ -287,6 +331,11 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entities.TimerSession", "TimerSession")
+                        .WithMany("TimePeriods")
+                        .HasForeignKey("TimerSessionId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -294,6 +343,8 @@ namespace API.Migrations
                         .IsRequired();
 
                     b.Navigation("TimeRecord");
+
+                    b.Navigation("TimerSession");
                 });
 
             modelBuilder.Entity("Entities.TimeRecord", b =>
@@ -321,10 +372,32 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Entities.TimerSession", b =>
+                {
+                    b.HasOne("Entities.TimeRecord", "TimeRecord")
+                        .WithMany()
+                        .HasForeignKey("TimeRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TimeRecord");
+                });
+
             modelBuilder.Entity("Entities.TimeRecord", b =>
                 {
                     b.Navigation("Meta");
 
+                    b.Navigation("TimePeriods");
+                });
+
+            modelBuilder.Entity("Entities.TimerSession", b =>
+                {
                     b.Navigation("TimePeriods");
                 });
 #pragma warning restore 612, 618
