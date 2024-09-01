@@ -66,7 +66,7 @@ public class TimeRecordServices(
                     CategoryId = dto.CategoryId,
                     Title = dto.Title,
                     Description = dto.Description,
-                    Code = dto.Code.IsNullOrEmpty() ? Guid.NewGuid().ToString() : dto.Code,
+                    Code = dto.Code.IsNullOrEmpty() == false ? dto.Code! : Guid.NewGuid().ToString(),
                     ExternalLink = dto.ExternalLink
                 }
             );

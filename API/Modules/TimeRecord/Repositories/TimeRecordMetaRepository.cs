@@ -10,8 +10,8 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
     public async Task<TimeRecordMeta> CreateOrUpdate(int timeRecordId)
     {
         var timeRecord = await dbContext.TimeRecords.FirstOrDefaultAsync(e => e.Id == timeRecordId);
-        var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord.Id);
-        var timePeriods = await dbContext.TimePeriods.Where(e => e.TimeRecordId == timeRecord.Id).ToListAsync();
+        var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord!.Id);
+        var timePeriods = await dbContext.TimePeriods.Where(e => e.TimeRecordId == timeRecord!.Id).ToListAsync();
         
         var now = DateTime.Now.ToUniversalTime();
         var formattedTime = TimeFormat.StringFromTimePeriods(timePeriods);

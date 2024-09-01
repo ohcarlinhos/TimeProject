@@ -5,7 +5,7 @@ namespace API.Modules.TimePeriod.Repositories;
 
 public class DatedResult
 {
-    public List<DatedTimePeriod> DatedTimePeriods { get; set; }
+    public List<DatedTimePeriod> DatedTimePeriods { get; set; } = null!;
     public int TotalItems { get; set; }
 }
 
