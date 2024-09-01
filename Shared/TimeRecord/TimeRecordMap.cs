@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Shared.Category;
 
 namespace Shared.TimeRecord;
 
@@ -12,7 +13,7 @@ public class TimeRecordMap
     public string Code { get; set; } = string.Empty;
     public string? ExternalLink { get; set; }
 
-    private Entities.Category? Category { get; set; }
+    public CategoryMap? Category { get; set; }
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
