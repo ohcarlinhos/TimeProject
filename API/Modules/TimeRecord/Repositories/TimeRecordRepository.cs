@@ -14,7 +14,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
 
         if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
             query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
-                .ThenByDescending(tr => tr.Meta.LastTimePeriodDate);
+                .ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
         else
             query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
                 .ThenBy(p => p.Meta!.LastTimePeriodDate);
