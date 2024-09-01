@@ -4,9 +4,11 @@ namespace Shared.General.Util;
 
 public static class TimeFormat
 {
-    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<Entities.TimePeriod> timePeriods)
+    private static TimeSpan TimeSpanFromTimePeriods(IEnumerable<Entities.TimePeriod>? timePeriods)
     {
         var total = new TimeSpan();
+        if (timePeriods == null) return total;
+
         return timePeriods
             .Aggregate(total, (current, timePeriod) =>
                 current.Add(timePeriod.End.Subtract(timePeriod.Start)));
