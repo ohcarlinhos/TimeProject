@@ -4,6 +4,7 @@ using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Repositories;
 using API.Modules.TimeRecord.Services;
 using AutoMapper;
+using Entities;
 using Shared.General;
 using Shared.General.Util;
 using Shared.TimePeriod;
@@ -14,6 +15,7 @@ public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,
     ITimeRecordRepository timeRecordRepository,
     ITimeRecordMetaServices timeRecordMetaServices,
+    ITimerSessionServices timerSessionServices,
     IMapper mapper
 ) : ITimePeriodServices
 {
@@ -100,7 +102,7 @@ public class TimePeriodServices(
     }
 
     public async Task<Result<List<Entities.TimePeriod>>> CreateByList(
-        List<TimePeriodDto> model,
+        TimePeriodListDto dto,
         int timeRecordId,
         ClaimsPrincipal user
     )
@@ -108,27 +110,37 @@ public class TimePeriodServices(
         var result = new Result<List<Entities.TimePeriod>>();
         List<Entities.TimePeriod> list = [];
 
-        foreach (var timePeriod in model)
+        foreach (var timePeriod in dto.TimePeriods)
         {
             ValidateStartAndEnd(timePeriod.Start, timePeriod.End, result);
             if (result.HasError)
                 break;
 
-            list.Add(new Entities.TimePeriod()
+            if (HasMinSize(timePeriod))
             {
-                UserId = UserClaims.Id(user),
-                TimeRecordId = timeRecordId,
-                Start = timePeriod.Start,
-                End = timePeriod.End
-            });
+                list.Add(new Entities.TimePeriod()
+                {
+                    UserId = UserClaims.Id(user),
+                    TimeRecordId = timeRecordId,
+                    Start = timePeriod.Start,
+                    End = timePeriod.End
+                });
+            }
         }
+
+        if (result.HasError) return result;
+        if (list.Count == 0) return result.SetData([]);
+
+        var timerSession = await timerSessionServices.Create(new TimerSession
+            { TimeRecordId = timeRecordId, UserId = UserClaims.Id(user), Type = dto.Type, From = dto.From }
+        );
+
+        list.ForEach(i => { i.TimerSessionId = timerSession.Id; });
 
         var data = await timePeriodRepository.CreateByList(list);
         await timeRecordMetaServices.CreateOrUpdate(timeRecordId);
 
-        return result.IsValid
-            ? result.SetData(data)
-            : result;
+        return result.SetData(data);
     }
 
     public async Task<Result<Entities.TimePeriod>> Update(int id, TimePeriodDto dto, ClaimsPrincipal user)
@@ -173,5 +185,11 @@ public class TimePeriodServices(
     {
         if (start.CompareTo(end) > 0)
             result.SetError(TimePeriodErrors.EndDateIsBiggerThenStartDate);
+    }
+
+    private static bool HasMinSize(TimePeriodDto dto)
+    {
+        var time = dto.End.Subtract(dto.Start);
+        return time.TotalSeconds > 10;
     }
 }

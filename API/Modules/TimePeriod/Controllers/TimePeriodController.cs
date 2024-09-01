@@ -41,10 +41,10 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPost, Authorize, Route("list/{id:int}")]
-    public async Task<ActionResult<List<Entities.TimePeriod>>> Create([FromBody] List<TimePeriodDto> model, int id)
+    public async Task<ActionResult<List<Entities.TimePeriod>>> Create([FromBody] TimePeriodListDto dto, int id)
     {
         var result = await timePeriodServices
-            .CreateByList(model, id, User);
+            .CreateByList(dto, id, User);
 
         return HandleResponse(result);
     }

@@ -12,6 +12,7 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     public DbSet<Category> Categories { get; set; }
     public DbSet<RegisterCode> RegisterCodes { get; set; }
     public DbSet<TimeRecordMeta> TimeRecordMetas { get; set; }
+    public DbSet<TimerSession> TimerSessions { get; set; }
     
     protected override void OnModelCreating(ModelBuilder mb)
     {
@@ -21,6 +22,7 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
         mb.ApplyConfiguration(new CategoryConfiguration());
         mb.ApplyConfiguration(new RegisterCodeConfiguration());
         mb.ApplyConfiguration(new TimeRecordMetaConfiguration());
+        mb.ApplyConfiguration(new TimerSessionConfiguration());
 
         mb.Entity<RegisterCode>().HasData([
             new RegisterCode { Id = "07577660-b921-4e07-bb68-990e8f286475" },

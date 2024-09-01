@@ -24,7 +24,7 @@ public interface ITimePeriodServices
     );
 
     Task<Result<List<Entities.TimePeriod>>> CreateByList(
-        List<TimePeriodDto> model,
+        TimePeriodListDto dto,
         int timeRecordId,
         ClaimsPrincipal user
     );

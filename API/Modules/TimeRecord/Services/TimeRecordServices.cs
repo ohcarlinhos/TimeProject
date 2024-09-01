@@ -8,6 +8,7 @@ using API.Modules.TimeRecord.Errors;
 using API.Modules.TimeRecord.Repositories;
 using Shared.General;
 using Shared.General.Util;
+using Shared.TimePeriod;
 using Shared.TimeRecord;
 
 namespace API.Modules.TimeRecord.Services;
@@ -76,7 +77,10 @@ public class TimeRecordServices(
             if (dto.TimePeriods != null)
             {
                 var timePeriodsResult = await timePeriodServices
-                    .CreateByList(dto.TimePeriods, timeRecord.Id, user);
+                    .CreateByList(
+                        new TimePeriodListDto
+                            { TimePeriods = dto.TimePeriods, Type = dto.TimerSessionType, From = dto.TimerSessionFrom },
+                        timeRecord.Id, user);
 
                 if (timePeriodsResult.HasError)
                     throw new Exception(timePeriodsResult.Message);

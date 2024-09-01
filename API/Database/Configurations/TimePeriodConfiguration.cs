@@ -17,12 +17,19 @@ public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
 
         builder.Property(e => e.UserId).IsRequired();
         builder.Property(e => e.TimeRecordId).IsRequired();
+        builder.Property(e => e.TimerSessionId);
 
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
-        builder.HasOne(e => e.TimeRecord).WithMany(e => e.TimePeriods)
+        
+        builder.HasOne(e => e.TimeRecord)
+            .WithMany(e => e.TimePeriods)
             .HasForeignKey(e => e.TimeRecordId);
+
+        builder.HasOne<TimerSession>(e => e.TimerSession)
+            .WithMany(e => e.TimePeriods)
+            .HasForeignKey(e => e.TimerSessionId);
     }
 }

@@ -15,10 +15,10 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
             .Where(e => e.TimeRecordId == timeRecord!.Id)
             .OrderBy(p => p.Start)
             .ToListAsync();
-        
+
         var now = DateTime.Now.ToUniversalTime();
         var formattedTime = TimeFormat.StringFromTimePeriods(timePeriods);
-        
+
         if (entity == null)
         {
             entity = new TimeRecordMeta
@@ -26,8 +26,8 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
                 TimeRecordId = timeRecord!.Id,
                 TimePeriodCount = timePeriods.Count,
                 FormattedTime = formattedTime,
-                FirstTimePeriodDate = timePeriods[0].Start,
-                LastTimePeriodDate = timePeriods[^1].Start,
+                FirstTimePeriodDate = timePeriods.Count > 0 ? timePeriods[0].Start : null,
+                LastTimePeriodDate = timePeriods.Count > 0 ? timePeriods[^1].Start : null,
                 CreatedAt = now,
                 UpdatedAt = now
             };
@@ -38,8 +38,8 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         {
             entity.TimePeriodCount = timePeriods.Count;
             entity.FormattedTime = formattedTime;
-            entity.FirstTimePeriodDate = timePeriods[0].Start;
-            entity.LastTimePeriodDate = timePeriods[^1].Start;
+            entity.FirstTimePeriodDate = timePeriods.Count > 0 ? timePeriods[0].Start : null;
+            entity.LastTimePeriodDate = timePeriods.Count > 0 ? timePeriods[^1].Start : null;
             entity.UpdatedAt = now;
         }
 
