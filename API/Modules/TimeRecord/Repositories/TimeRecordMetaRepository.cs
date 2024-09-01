@@ -11,7 +11,10 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
     {
         var timeRecord = await dbContext.TimeRecords.FirstOrDefaultAsync(e => e.Id == timeRecordId);
         var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord!.Id);
-        var timePeriods = await dbContext.TimePeriods.Where(e => e.TimeRecordId == timeRecord!.Id).ToListAsync();
+        var timePeriods = await dbContext.TimePeriods
+            .Where(e => e.TimeRecordId == timeRecord!.Id)
+            .OrderBy(p => p.Start)
+            .ToListAsync();
         
         var now = DateTime.Now.ToUniversalTime();
         var formattedTime = TimeFormat.StringFromTimePeriods(timePeriods);
