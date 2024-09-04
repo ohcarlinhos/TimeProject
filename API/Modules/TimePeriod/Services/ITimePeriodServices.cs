@@ -11,10 +11,9 @@ public interface ITimePeriodServices
         PaginationQuery paginationQuery,
         ClaimsPrincipal user
     );
-    
-    public Task<Result<Pagination<DatedTimePeriodMap>>> Dated(
+
+    public Task<Result<IEnumerable<DatedTimeMap>>> Dated(
         int timeRecordId,
-        PaginationQuery paginationQuery,
         ClaimsPrincipal user
     );
 

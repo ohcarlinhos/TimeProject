@@ -30,9 +30,9 @@ public class TimePeriodServices(
     }
 
 
-    private List<DatedTimePeriodMap> MapData(List<DatedTimePeriod> entity)
+    private IEnumerable<DatedTimeMap> MapData(IEnumerable<DatedTime> entity)
     {
-        return mapper.Map<List<DatedTimePeriod>, List<DatedTimePeriodMap>>(entity);
+        return mapper.Map<IEnumerable<DatedTime>, IEnumerable<DatedTimeMap>>(entity);
     }
 
     public async Task<Result<Pagination<TimePeriodMap>>> Index(int timeRecordId,
@@ -51,20 +51,12 @@ public class TimePeriodServices(
         };
     }
 
-    public async Task<Result<Pagination<DatedTimePeriodMap>>> Dated(
-        int timeRecordId,
-        PaginationQuery paginationQuery,
-        ClaimsPrincipal user)
+    public async Task<Result<IEnumerable<DatedTimeMap>>> Dated(int timeRecordId, ClaimsPrincipal user)
     {
-        var data = await timePeriodRepository.Dated(timeRecordId, paginationQuery, UserClaims.Id(user));
+        var data = await timePeriodRepository.Dated(timeRecordId, UserClaims.Id(user));
 
-        return new Result<Pagination<DatedTimePeriodMap>>
-        {
-            Data = Pagination<DatedTimePeriodMap>.Handle(
-                MapData(data.DatedTimePeriods),
-                paginationQuery,
-                data.DatedTimePeriods.Count
-            )
+        return new Result<IEnumerable<DatedTimeMap>> {
+            Data = MapData(data)
         };
     }
 

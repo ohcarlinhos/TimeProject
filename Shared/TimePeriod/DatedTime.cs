@@ -2,7 +2,7 @@
 
 namespace Shared.TimePeriod;
 
-public class DatedTimePeriod
+public class DatedTime
 {
     public DateTime Date { get; set; }
     public IEnumerable<Entities.TimePeriod>? TimePeriods { get; set; }

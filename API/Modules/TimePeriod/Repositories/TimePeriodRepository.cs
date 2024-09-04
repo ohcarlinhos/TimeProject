@@ -25,10 +25,11 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
             .CountAsync();
     }
 
-    public async Task<DatedResult> Dated(int timeRecordId, PaginationQuery paginationQuery, int userId)
+    public async Task<IEnumerable<DatedTime>> Dated(int timeRecordId, int userId)
     {
         var timePeriodQuery = dbContext.TimePeriods
-            .Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId).AsQueryable();
+            .Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId)
+            .AsQueryable();
 
         var timerSessionQuery = dbContext.TimerSessions.Where(p =>
                 p.UserId == userId && p.TimeRecordId == timeRecordId && p.TimePeriods != null && p.TimePeriods.Any())
@@ -52,7 +53,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
             ? "E. South America Standard Time"
             : "America/Sao_Paulo");
         
-        var datedTimePeriods = new List<DatedTimePeriod>();
+        var datedTimes = new List<DatedTime>();
 
         dates = dates.Select(p => TimeZoneInfo.ConvertTimeFromUtc(p, brasiliaTimeZone).Date).Distinct().ToList();
 
@@ -71,16 +72,13 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
                     .Date == d.Date)
                 .ToList();
 
-            datedTimePeriods.Add(new DatedTimePeriod
+            datedTimes.Add(new DatedTime
             {
                 Date = d.Date, TimePeriods = tpList, TimerSessions = tsList
             });
         }
 
-        return new DatedResult
-        {
-            DatedTimePeriods = datedTimePeriods,
-        };
+        return datedTimes;
     }
 
     public async Task<Entities.TimePeriod> Create(Entities.TimePeriod entity)

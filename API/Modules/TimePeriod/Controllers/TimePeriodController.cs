@@ -22,13 +22,9 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpGet, Authorize, Route("dated/{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<DatedTimePeriodMap>>> Dated([FromRoute] int timeRecordId,
-        [FromQuery] PaginationQuery paginationQuery)
+    public async Task<ActionResult<IEnumerable<DatedTimeMap>>> Dated([FromRoute] int timeRecordId)
     {
-        var result = await timePeriodServices
-            .Dated(timeRecordId, paginationQuery, User);
-
-        return HandleResponse(result);
+        return HandleResponse(await timePeriodServices.Dated(timeRecordId, User));
     }
 
     [HttpPost, Authorize]
