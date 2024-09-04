@@ -1,8 +1,10 @@
-﻿namespace Shared.TimePeriod;
+﻿using Entities;
+
+namespace Shared.TimePeriod;
 
 public class DatedTimePeriod
 {
     public DateTime Date { get; set; }
-    public int Count { get; set; }
-    public List<Entities.TimePeriod> TimePeriods { get; set; } = null!;
+    public IEnumerable<Entities.TimePeriod>? TimePeriods { get; set; }
+    public IEnumerable<TimerSession>? TimerSessions { get; set; }
 }

@@ -1,10 +1,20 @@
-﻿using Shared.TimePeriod;
+﻿using Entities;
+using Shared.TimePeriod;
 
 namespace Shared.General.Util;
 
 public static class TimeFormat
 {
-    private static TimeSpan TimeSpanFromTimePeriods(IEnumerable<Entities.TimePeriod>? timePeriods)
+    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<TimePeriodMap>? timePeriods)
+    {
+        if (timePeriods == null) return new TimeSpan();
+
+        return TimeSpanFromTimePeriods(timePeriods
+            .Select(p => new Entities.TimePeriod
+                { Start = p.Start, End = p.End }).ToList());
+    }
+
+    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<Entities.TimePeriod>? timePeriods)
     {
         var total = new TimeSpan();
         if (timePeriods == null) return total;
@@ -14,6 +24,37 @@ public static class TimeFormat
                 current.Add(timePeriod.End.Subtract(timePeriod.Start)));
     }
 
+    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<TimerSessionMap>? timerSessions)
+    {
+        var total = new TimeSpan();
+
+        if (timerSessions == null) return total;
+
+        foreach (var ts in timerSessions)
+        {
+            total = total.Add(TimeSpanFromTimePeriods(ts.TimePeriods));
+        }
+
+        return total;
+    }
+
+    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<TimerSession>? timerSessions)
+    {
+        var total = new TimeSpan();
+
+        if (timerSessions == null) return total;
+
+        foreach (var ts in timerSessions)
+        {
+            if (ts.TimePeriods != null && ts.TimePeriods.Any())
+            {
+                total = total.Add(TimeSpanFromTimePeriods(ts.TimePeriods.ToList()));
+            }
+        }
+
+        return total;
+    }
+    
     public static string StringFromTimeSpan(TimeSpan timeSpan)
     {
         var formatted = string.Empty;
@@ -30,15 +71,18 @@ public static class TimeFormat
         return formatted.Trim();
     }
 
-    public static string StringFromTimePeriods(IEnumerable<TimePeriodMap> timePeriods)
+    public static string StringFromTimePeriods(IEnumerable<TimePeriodMap>? timePeriods)
     {
+        if (timePeriods == null) return "0s";
+
         return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods
             .Select(p => new Entities.TimePeriod
-                { Start = p.Start, End = p.End })));
+                { Start = p.Start, End = p.End }).ToList()
+        ));
     }
 
-    public static string StringFromTimePeriods(IEnumerable<Entities.TimePeriod> timePeriods)
+    public static string StringFromTimePeriods(IEnumerable<Entities.TimePeriod>? timePeriods)
     {
-        return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods));
+        return timePeriods == null ? "0s" : StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods.ToList()));
     }
 }

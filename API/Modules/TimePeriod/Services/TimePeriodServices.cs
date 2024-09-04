@@ -63,7 +63,7 @@ public class TimePeriodServices(
             Data = Pagination<DatedTimePeriodMap>.Handle(
                 MapData(data.DatedTimePeriods),
                 paginationQuery,
-                data.TotalItems
+                data.DatedTimePeriods.Count
             )
         };
     }
@@ -190,6 +190,6 @@ public class TimePeriodServices(
     private static bool HasMinSize(TimePeriodDto dto)
     {
         var time = dto.End.Subtract(dto.Start);
-        return time.TotalSeconds > 10;
+        return time.TotalSeconds > 2;
     }
 }

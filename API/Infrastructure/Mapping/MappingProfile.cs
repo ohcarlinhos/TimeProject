@@ -16,5 +16,6 @@ public class MappingProfile : Profile
         CreateMap<TimePeriod, TimePeriodMap>();
         CreateMap<Category, CategoryMap>();
         CreateMap<DatedTimePeriod, DatedTimePeriodMap>();
+        CreateMap<TimerSession, TimerSessionMap>();
     }
 }

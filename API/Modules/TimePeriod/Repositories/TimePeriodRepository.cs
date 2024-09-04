@@ -27,37 +27,59 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
 
     public async Task<DatedResult> Dated(int timeRecordId, PaginationQuery paginationQuery, int userId)
     {
-        var timePeriodQuery = dbContext.TimePeriods.AsQueryable();
-        timePeriodQuery = timePeriodQuery.Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId);
+        var timePeriodQuery = dbContext.TimePeriods
+            .Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId).AsQueryable();
 
-        var timePeriods = await timePeriodQuery.OrderByDescending(p => p.Start).ToListAsync();
+        var timerSessionQuery = dbContext.TimerSessions.Where(p =>
+                p.UserId == userId && p.TimeRecordId == timeRecordId && p.TimePeriods != null && p.TimePeriods.Any())
+            .AsQueryable();
 
+        var dates = await timePeriodQuery
+            .Select((p) => p.Start)
+            .OrderByDescending(p => p.Date)
+            .ToListAsync();
+
+        var timePeriods = await timePeriodQuery
+            .Where((p) => p.TimerSessionId == null)
+            .OrderByDescending(p => p.Start).ToListAsync();
+
+        var timerSessions = await timerSessionQuery
+            .OrderByDescending(p => p.TimePeriods!.FirstOrDefault()!.Start.Date)
+            .Include(p => p.TimePeriods!.OrderByDescending(q => q.Start))
+            .ToListAsync();
 
         var brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById(RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
             ? "E. South America Standard Time"
             : "America/Sao_Paulo");
-
-        var dates = timePeriods
-            .Select(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date)
-            .Distinct()
-            .ToList();
-
+        
         var datedTimePeriods = new List<DatedTimePeriod>();
+
+        dates = dates.Select(p => TimeZoneInfo.ConvertTimeFromUtc(p, brasiliaTimeZone).Date).Distinct().ToList();
 
         foreach (var d in dates)
         {
-            var result = timePeriods
-                .Where(p => TimeZoneInfo.ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date == d.Date)
+            var tpList = timePeriods
+                .Where(p => TimeZoneInfo
+                    .ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date == d)
                 .OrderBy(p => p.Start)
                 .ToList();
 
-            datedTimePeriods.Add(new DatedTimePeriod { Date = d.Date, Count = result.Count, TimePeriods = result });
+            var tsList = timerSessions
+                .Where(a => a.TimePeriods!.Any())
+                .Where(p => TimeZoneInfo
+                    .ConvertTimeFromUtc(p.TimePeriods!.FirstOrDefault()!.Start, brasiliaTimeZone)
+                    .Date == d.Date)
+                .ToList();
+
+            datedTimePeriods.Add(new DatedTimePeriod
+            {
+                Date = d.Date, TimePeriods = tpList, TimerSessions = tsList
+            });
         }
 
         return new DatedResult
         {
             DatedTimePeriods = datedTimePeriods,
-            TotalItems = dates.Count
         };
     }
 

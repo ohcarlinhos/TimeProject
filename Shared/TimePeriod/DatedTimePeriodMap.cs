@@ -5,9 +5,14 @@ namespace Shared.TimePeriod;
 public class DatedTimePeriodMap
 {
     public DateTime Date { get; set; }
-    public int Count { get; set; }
-    
-    public IEnumerable<TimePeriodMap> TimePeriods { get; set; } = null!;
 
-    public string FormattedTime => TimeFormat.StringFromTimePeriods(TimePeriods);
+    public IEnumerable<TimePeriodMap>? TimePeriods { get; set; }
+    public IEnumerable<TimerSessionMap>? TimerSessions { get; set; }
+
+    private TimeSpan TimeSpanTimePeriods => TimeFormat.TimeSpanFromTimePeriods(TimePeriods);
+    private TimeSpan TimeSpanTimerSessions => TimeFormat.TimeSpanFromTimerSessions(TimerSessions);
+
+    public string FormattedTime => TimeFormat.StringFromTimeSpan(TimeSpanTimePeriods.Add(TimeSpanTimerSessions));
+    public string TimePeriodsFormattedTime => TimeFormat.StringFromTimePeriods(TimePeriods);
+    public string TimerSessionsFormattedTime => TimeFormat.StringFromTimeSpan(TimeSpanTimerSessions);
 }
