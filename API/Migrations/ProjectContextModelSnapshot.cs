@@ -22,7 +22,7 @@ namespace API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Entities.Category", b =>
+            modelBuilder.Entity("Entities.CategoryEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace API.Migrations
                     b.ToTable("categories", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.RegisterCode", b =>
+            modelBuilder.Entity("Entities.RegisterCodeEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -99,7 +99,7 @@ namespace API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.TimePeriod", b =>
+            modelBuilder.Entity("Entities.TimePeriodEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace API.Migrations
                     b.ToTable("time_periods", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.TimeRecord", b =>
+            modelBuilder.Entity("Entities.TimeRecordEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,7 +189,7 @@ namespace API.Migrations
                     b.ToTable("time_records", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.TimeRecordMeta", b =>
+            modelBuilder.Entity("Entities.TimeRecordMetaEntity", b =>
                 {
                     b.Property<int>("TimeRecordId")
                         .HasColumnType("integer");
@@ -221,7 +221,7 @@ namespace API.Migrations
                     b.ToTable("time_record_metas", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.TimerSession", b =>
+            modelBuilder.Entity("Entities.TimerSessionEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -260,7 +260,7 @@ namespace API.Migrations
                     b.ToTable("timer_sessions", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.User", b =>
+            modelBuilder.Entity("Entities.UserEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -305,38 +305,38 @@ namespace API.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Category", b =>
+            modelBuilder.Entity("Entities.CategoryEntity", b =>
                 {
-                    b.HasOne("Entities.User", null)
+                    b.HasOne("Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.RegisterCode", b =>
+            modelBuilder.Entity("Entities.RegisterCodeEntity", b =>
                 {
-                    b.HasOne("Entities.User", "User")
+                    b.HasOne("Entities.UserEntity", "User")
                         .WithOne()
-                        .HasForeignKey("Entities.RegisterCode", "UserId");
+                        .HasForeignKey("Entities.RegisterCodeEntity", "UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Entities.TimePeriod", b =>
+            modelBuilder.Entity("Entities.TimePeriodEntity", b =>
                 {
-                    b.HasOne("Entities.TimeRecord", "TimeRecord")
+                    b.HasOne("Entities.TimeRecordEntity", "TimeRecord")
                         .WithMany("TimePeriods")
                         .HasForeignKey("TimeRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.TimerSession", "TimerSession")
+                    b.HasOne("Entities.TimerSessionEntity", "TimerSession")
                         .WithMany("TimePeriods")
                         .HasForeignKey("TimerSessionId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Entities.User", null)
+                    b.HasOne("Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -347,14 +347,14 @@ namespace API.Migrations
                     b.Navigation("TimerSession");
                 });
 
-            modelBuilder.Entity("Entities.TimeRecord", b =>
+            modelBuilder.Entity("Entities.TimeRecordEntity", b =>
                 {
-                    b.HasOne("Entities.Category", "Category")
+                    b.HasOne("Entities.CategoryEntity", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Entities.User", null)
+                    b.HasOne("Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -363,40 +363,40 @@ namespace API.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Entities.TimeRecordMeta", b =>
+            modelBuilder.Entity("Entities.TimeRecordMetaEntity", b =>
                 {
-                    b.HasOne("Entities.TimeRecord", null)
+                    b.HasOne("Entities.TimeRecordEntity", null)
                         .WithOne("Meta")
-                        .HasForeignKey("Entities.TimeRecordMeta", "TimeRecordId")
+                        .HasForeignKey("Entities.TimeRecordMetaEntity", "TimeRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.TimerSession", b =>
+            modelBuilder.Entity("Entities.TimerSessionEntity", b =>
                 {
-                    b.HasOne("Entities.TimeRecord", "TimeRecord")
+                    b.HasOne("Entities.TimeRecordEntity", "TimeRecordEntity")
                         .WithMany()
                         .HasForeignKey("TimeRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.User", null)
+                    b.HasOne("Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TimeRecord");
+                    b.Navigation("TimeRecordEntity");
                 });
 
-            modelBuilder.Entity("Entities.TimeRecord", b =>
+            modelBuilder.Entity("Entities.TimeRecordEntity", b =>
                 {
                     b.Navigation("Meta");
 
                     b.Navigation("TimePeriods");
                 });
 
-            modelBuilder.Entity("Entities.TimerSession", b =>
+            modelBuilder.Entity("Entities.TimerSessionEntity", b =>
                 {
                     b.Navigation("TimePeriods");
                 });

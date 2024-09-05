@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Database.Configurations;
 
-public class CategoryConfiguration: IEntityTypeConfiguration<Entities.Category>
+public class CategoryConfiguration: IEntityTypeConfiguration<CategoryEntity>
 {
-    public void Configure(EntityTypeBuilder<Entities.Category> builder)
+    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
     {
         builder.ToTable("categories");
         builder.HasKey(e => e.Id);
@@ -19,6 +19,6 @@ public class CategoryConfiguration: IEntityTypeConfiguration<Entities.Category>
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
         
-        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
     }
 }

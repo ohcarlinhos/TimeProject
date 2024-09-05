@@ -5,16 +5,16 @@ namespace API.Modules.TimePeriod.Services;
 
 public class TimerSessionServices(ProjectContext dbContext) : ITimerSessionServices
 {
-    public async Task<TimerSession> Create(TimerSession timerSession)
+    public async Task<TimerSessionEntity> Create(TimerSessionEntity timerSessionEntity)
     {
         var now = DateTime.Now.ToUniversalTime();
         
-        timerSession.CreatedAt = now;
-        timerSession.UpdatedAt = now;
+        timerSessionEntity.CreatedAt = now;
+        timerSessionEntity.UpdatedAt = now;
 
-        dbContext.TimerSessions.Add(timerSession);
+        dbContext.TimerSessions.Add(timerSessionEntity);
 
         await dbContext.SaveChangesAsync();
-        return timerSession;
+        return timerSessionEntity;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Entities;
 
-public class TimePeriod
+public class TimePeriodEntity
 {
     public int Id { get; set; }
 
@@ -14,6 +14,6 @@ public class TimePeriod
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     
-    public TimeRecord? TimeRecord { get; set; }
-    public TimerSession? TimerSession { get; set; }
+    public TimeRecordEntity? TimeRecord { get; set; }
+    public TimerSessionEntity? TimerSession { get; set; }
 }

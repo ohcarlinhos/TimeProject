@@ -1,6 +1,6 @@
 ﻿namespace Entities;
 
-public class TimeRecord
+public class TimeRecordEntity
 {
     public int Id { get; set; }
     public string? Title { get; set; }
@@ -14,8 +14,8 @@ public class TimeRecord
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
-    public IEnumerable<TimePeriod>? TimePeriods { get; set; }
+    public IEnumerable<TimePeriodEntity>? TimePeriods { get; set; }
     
-    public Category? Category { get; set; }
-    public TimeRecordMeta? Meta { get; set; }
+    public CategoryEntity? Category { get; set; }
+    public TimeRecordMetaEntity? Meta { get; set; }
 }

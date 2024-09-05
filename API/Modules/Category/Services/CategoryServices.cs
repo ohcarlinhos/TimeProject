@@ -2,6 +2,7 @@
 using API.Modules.Category.Repositories;
 using API.Modules.Shared;
 using AutoMapper;
+using Entities;
 using Shared;
 using Shared.Category;
 using Shared.General;
@@ -25,15 +26,15 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
             { Data = Pagination<CategoryMap>.Handle(data, paginationQuery, totalItems) };
     }
 
-    public async Task<Result<Entities.Category>> Create(CategoryDto dto, ClaimsPrincipal user)
+    public async Task<Result<CategoryEntity>> Create(CategoryDto dto, ClaimsPrincipal user)
     {
-        var result = new Result<Entities.Category>();
+        var result = new Result<CategoryEntity>();
         var category = await categoryRepository.FindByName(dto.Name, UserClaims.Id(user));
 
         if (category != null)
             return result.SetData(category);
 
-        result.Data = await categoryRepository.Create(new Entities.Category
+        result.Data = await categoryRepository.Create(new CategoryEntity
         {
             UserId = UserClaims.Id(user),
             Name = dto.Name
@@ -41,9 +42,9 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
         return result;
     }
 
-    public async Task<Result<Entities.Category>> Update(int id, CategoryDto dto, ClaimsPrincipal user)
+    public async Task<Result<CategoryEntity>> Update(int id, CategoryDto dto, ClaimsPrincipal user)
     {
-        var result = new Result<Entities.Category>();
+        var result = new Result<CategoryEntity>();
         var category = await categoryRepository.FindById(id);
 
         if (category == null) return result.SetError("not_found: Categoria não encontrada.");
@@ -71,13 +72,13 @@ public class CategoryServices(ICategoryRepository categoryRepository, IMapper ma
         return result;
     }
     
-    private CategoryMap MapData(Entities.Category entity)
+    private CategoryMap MapData(CategoryEntity entity)
     {
-        return mapper.Map<Entities.Category, CategoryMap>(entity);
+        return mapper.Map<CategoryEntity, CategoryMap>(entity);
     }
     
-    private List<CategoryMap> MapData(List<Entities.Category> entities)
+    private List<CategoryMap> MapData(List<CategoryEntity> entities)
     {
-        return mapper.Map<List<Entities.Category>, List<CategoryMap>>(entities);
+        return mapper.Map<List<CategoryEntity>, List<CategoryMap>>(entities);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using API.Database;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
 
@@ -6,9 +7,9 @@ namespace API.Modules.User.Repositories
 {
     public class UserRepository(ProjectContext dbContext) : IUserRepository
     {
-        public List<Entities.User> Index(PaginationQuery paginationQuery)
+        public List<UserEntity> Index(PaginationQuery paginationQuery)
         {
-            IQueryable<Entities.User> query = dbContext.Users;
+            IQueryable<UserEntity> query = dbContext.Users;
 
             if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
                 query = SearchWhereConditional(query, paginationQuery.Search);
@@ -23,7 +24,7 @@ namespace API.Modules.User.Repositories
 
         public int GetTotalItems(PaginationQuery paginationQuery)
         {
-            IQueryable<Entities.User> query = dbContext.Users;
+            IQueryable<UserEntity> query = dbContext.Users;
 
             if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
                 query = SearchWhereConditional(query, paginationQuery.Search);
@@ -31,7 +32,7 @@ namespace API.Modules.User.Repositories
             return query.Count();
         }
 
-        public async Task<Entities.User> Create(Entities.User entity)
+        public async Task<UserEntity> Create(UserEntity entity)
         {
             var now = DateTime.Now.ToUniversalTime();
             entity.CreatedAt = now;
@@ -42,7 +43,7 @@ namespace API.Modules.User.Repositories
             return entity;
         }
 
-        public async Task<Entities.User> Update(Entities.User entity)
+        public async Task<UserEntity> Update(UserEntity entity)
         {
             entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 
@@ -61,19 +62,19 @@ namespace API.Modules.User.Repositories
             return true;
         }
 
-        public async Task<Entities.User?> FindById(int id)
+        public async Task<UserEntity?> FindById(int id)
         {
             return await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<Entities.User?> FindByEmail(string email)
+        public async Task<UserEntity?> FindByEmail(string email)
         {
             return await dbContext.Users
                 .Where(u => u.Email == email)
                 .FirstOrDefaultAsync();
         }
 
-        private static IQueryable<Entities.User> SearchWhereConditional(IQueryable<Entities.User> query, string search)
+        private static IQueryable<UserEntity> SearchWhereConditional(IQueryable<UserEntity> query, string search)
         {
             return query.Where((u) =>
                 EF.Functions.Like(

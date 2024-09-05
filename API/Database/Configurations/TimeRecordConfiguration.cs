@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Database.Configurations;
 
-public class TimeRecordConfiguration : IEntityTypeConfiguration<Entities.TimeRecord>
+public class TimeRecordConfiguration : IEntityTypeConfiguration<TimeRecordEntity>
 {
-    public void Configure(EntityTypeBuilder<Entities.TimeRecord> builder)
+    public void Configure(EntityTypeBuilder<TimeRecordEntity> builder)
     {
         builder.ToTable("time_records");
         builder.HasKey(e => e.Id);
@@ -22,7 +23,7 @@ public class TimeRecordConfiguration : IEntityTypeConfiguration<Entities.TimeRec
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<Entities.User>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
         builder.HasOne(e => e.Category).WithMany().HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
 

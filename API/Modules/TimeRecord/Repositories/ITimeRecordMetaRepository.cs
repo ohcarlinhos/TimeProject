@@ -4,5 +4,5 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public interface ITimeRecordMetaRepository
 { 
-    Task<TimeRecordMeta> CreateOrUpdate(int timeRecordId);
+    Task<TimeRecordMetaEntity> CreateOrUpdate(int timeRecordId);
 }

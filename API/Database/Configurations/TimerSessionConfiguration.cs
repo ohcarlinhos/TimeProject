@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Database.Configurations;
 
-public class TimerSessionConfiguration : IEntityTypeConfiguration<TimerSession>
+public class TimerSessionConfiguration : IEntityTypeConfiguration<TimerSessionEntity>
 {
-    public void Configure(EntityTypeBuilder<TimerSession> builder)
+    public void Configure(EntityTypeBuilder<TimerSessionEntity> builder)
     {
         builder.ToTable("timer_sessions");
         builder.HasKey(e => e.Id);
@@ -19,9 +19,9 @@ public class TimerSessionConfiguration : IEntityTypeConfiguration<TimerSession>
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
         
-        builder.HasOne<TimeRecord>(e => e.TimeRecord)
+        builder.HasOne<TimeRecordEntity>(e => e.TimeRecordEntity)
             .WithMany()
             .HasForeignKey(e => e.TimeRecordId);
         

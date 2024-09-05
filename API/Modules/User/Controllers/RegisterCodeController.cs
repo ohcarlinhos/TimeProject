@@ -15,7 +15,7 @@ namespace API.Modules.User.Controllers;
 public class RegisterCodeController(ProjectContext dbContext) : CustomController
 {
     [HttpGet, Authorize]
-    public ActionResult<List<RegisterCode>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<List<RegisterCodeEntity>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         if (UserRole.Admin.ToString() != UserClaims.Role(User))
             return Forbid();
@@ -28,16 +28,16 @@ public class RegisterCodeController(ProjectContext dbContext) : CustomController
             .Include((e) => e.User)
             .ToList();
 
-        return Ok(Pagination<RegisterCode>.Handle(data, paginationQuery, query.Count()));
+        return Ok(Pagination<RegisterCodeEntity>.Handle(data, paginationQuery, query.Count()));
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult<RegisterCode>> Create(CreateRegisterCodeDto _)
+    public async Task<ActionResult<RegisterCodeEntity>> Create(CreateRegisterCodeDto _)
     {
         if (UserRole.Admin.ToString() != UserClaims.Role(User))
             return Forbid();
 
-        var registerCode = new RegisterCode();
+        var registerCode = new RegisterCodeEntity();
         dbContext.RegisterCodes.Add(registerCode);
         await dbContext.SaveChangesAsync();
         return Ok(registerCode);
@@ -49,7 +49,7 @@ public class RegisterCodeController(ProjectContext dbContext) : CustomController
         if (UserRole.Admin.ToString() != UserClaims.Role(User))
             return Forbid();
 
-        var registerCode = new RegisterCode { Id = id };
+        var registerCode = new RegisterCodeEntity { Id = id };
 
         dbContext.RegisterCodes.Remove(registerCode);
         await dbContext.SaveChangesAsync();

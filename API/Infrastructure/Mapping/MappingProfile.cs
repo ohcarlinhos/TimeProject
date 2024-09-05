@@ -11,11 +11,11 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<User, UserMap>();
-        CreateMap<TimeRecord, TimeRecordMap>();
-        CreateMap<TimePeriod, TimePeriodMap>();
-        CreateMap<Category, CategoryMap>();
+        CreateMap<UserEntity, UserMap>();
+        CreateMap<TimeRecordEntity, TimeRecordMap>();
+        CreateMap<TimePeriodEntity, TimePeriodMap>();
+        CreateMap<CategoryEntity, CategoryMap>();
         CreateMap<DatedTime, DatedTimeMap>();
-        CreateMap<TimerSession, TimerSessionMap>();
+        CreateMap<TimerSessionEntity, TimerSessionMap>();
     }
 }

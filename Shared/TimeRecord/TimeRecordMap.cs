@@ -17,5 +17,5 @@ public class TimeRecordMap
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
-    public TimeRecordMeta? Meta { get; set; }
+    public TimeRecordMetaEntity? Meta { get; set; }
 }

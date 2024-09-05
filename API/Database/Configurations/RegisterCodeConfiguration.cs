@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Database.Configurations;
 
-public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCode>
+public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCodeEntity>
 {
-    public void Configure(EntityTypeBuilder<RegisterCode> builder)
+    public void Configure(EntityTypeBuilder<RegisterCodeEntity> builder)
     {
         builder.ToTable("register_code");
         builder.HasKey(e => e.Id);
@@ -15,6 +15,6 @@ public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCode>
         builder.Property(e => e.IsUsed).IsRequired();
         builder.Property(e => e.UserId);
 
-        builder.HasOne<User>(e => e.User).WithOne().HasForeignKey<RegisterCode>(e => e.UserId);
+        builder.HasOne<UserEntity>(e => e.User).WithOne().HasForeignKey<RegisterCodeEntity>(e => e.UserId);
     }
 }

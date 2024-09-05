@@ -7,7 +7,7 @@ namespace API.Modules.TimeRecord.Repositories;
 
 public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMetaRepository
 {
-    public async Task<TimeRecordMeta> CreateOrUpdate(int timeRecordId)
+    public async Task<TimeRecordMetaEntity> CreateOrUpdate(int timeRecordId)
     {
         var timeRecord = await dbContext.TimeRecords.FirstOrDefaultAsync(e => e.Id == timeRecordId);
         var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord!.Id);
@@ -21,7 +21,7 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
 
         if (entity == null)
         {
-            entity = new TimeRecordMeta
+            entity = new TimeRecordMetaEntity
             {
                 TimeRecordId = timeRecord!.Id,
                 TimePeriodCount = timePeriods.Count,

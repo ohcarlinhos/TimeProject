@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using API.Database;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
 using Shared.TimePeriod;
@@ -8,7 +9,7 @@ namespace API.Modules.TimePeriod.Repositories;
 
 public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodRepository
 {
-    public List<Entities.TimePeriod> Index(int timeRecordId, PaginationQuery paginationQuery, int userId)
+    public List<TimePeriodEntity> Index(int timeRecordId, PaginationQuery paginationQuery, int userId)
     {
         return dbContext.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
@@ -81,7 +82,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         return datedTimes;
     }
 
-    public async Task<Entities.TimePeriod> Create(Entities.TimePeriod entity)
+    public async Task<TimePeriodEntity> Create(TimePeriodEntity entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.CreatedAt = now;
@@ -92,7 +93,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         return entity;
     }
 
-    public async Task<List<Entities.TimePeriod>> CreateByList(List<Entities.TimePeriod> entityList)
+    public async Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entityList)
     {
         var now = DateTime.Now.ToUniversalTime();
 
@@ -107,7 +108,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         return entityList;
     }
 
-    public async Task<Entities.TimePeriod> Update(Entities.TimePeriod entity)
+    public async Task<TimePeriodEntity> Update(TimePeriodEntity entity)
     {
         entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 
@@ -116,21 +117,21 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         return entity;
     }
 
-    public async Task<bool> Delete(Entities.TimePeriod entity)
+    public async Task<bool> Delete(TimePeriodEntity entity)
     {
         dbContext.TimePeriods.Remove(entity);
         await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<bool> DeleteAllByTimeRecordId(IEnumerable<Entities.TimePeriod> entityList)
+    public async Task<bool> DeleteAllByTimeRecordId(IEnumerable<TimePeriodEntity> entityList)
     {
         dbContext.TimePeriods.RemoveRange(entityList);
         await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<Entities.TimePeriod?> FindById(int id, int userId)
+    public async Task<TimePeriodEntity?> FindById(int id, int userId)
     {
         return await dbContext.TimePeriods
             .FirstOrDefaultAsync(timePeriod => timePeriod.Id == id && timePeriod.UserId == userId);

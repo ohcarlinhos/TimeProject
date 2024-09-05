@@ -1,17 +1,17 @@
-﻿using Shared;
-using Shared.General;
+﻿using Shared.General;
+using Entities;
 
 namespace API.Modules.Category.Repositories;
 
 public interface ICategoryRepository
 {
-    List<Entities.Category> Index(int userId);
-    List<Entities.Category> Index(PaginationQuery paginationQuery, int userId);
+    List<CategoryEntity> Index(int userId);
+    List<CategoryEntity> Index(PaginationQuery paginationQuery, int userId);
     Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId);
-    Task<Entities.Category> Create(Entities.Category entity);
-    Task<Entities.Category> Update(Entities.Category entity);
-    Task<bool> Delete(Entities.Category entity);
-    Task<Entities.Category?> FindById(int id);
-    Task<Entities.Category?> FindById(int id, int userId);
-    Task<Entities.Category?> FindByName(string name, int userId);
+    Task<CategoryEntity> Create(CategoryEntity entity);
+    Task<CategoryEntity> Update(CategoryEntity entity);
+    Task<bool> Delete(CategoryEntity entity);
+    Task<CategoryEntity?> FindById(int id);
+    Task<CategoryEntity?> FindById(int id, int userId);
+    Task<CategoryEntity?> FindByName(string name, int userId);
 }

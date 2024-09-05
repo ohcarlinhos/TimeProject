@@ -1,6 +1,6 @@
 ﻿namespace Entities;
 
-public class TimeRecordMeta
+public class TimeRecordMetaEntity
 {
     public int TimeRecordId { get; set; }
 

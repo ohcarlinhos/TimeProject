@@ -6,6 +6,7 @@ using API.Modules.Category.Repositories;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.Errors;
 using API.Modules.TimeRecord.Repositories;
+using Entities;
 using Shared.General;
 using Shared.General.Util;
 using Shared.TimePeriod;
@@ -22,14 +23,14 @@ public class TimeRecordServices(
     IMapper mapper
 ) : ITimeRecordServices
 {
-    private TimeRecordMap MapData(Entities.TimeRecord entity)
+    private TimeRecordMap MapData(TimeRecordEntity entity)
     {
-        return mapper.Map<Entities.TimeRecord, TimeRecordMap>(entity);
+        return mapper.Map<TimeRecordEntity, TimeRecordMap>(entity);
     }
 
-    private List<TimeRecordMap> MapData(List<Entities.TimeRecord> entities)
+    private List<TimeRecordMap> MapData(List<TimeRecordEntity> entities)
     {
-        return mapper.Map<List<Entities.TimeRecord>, List<TimeRecordMap>>(entities);
+        return mapper.Map<List<TimeRecordEntity>, List<TimeRecordMap>>(entities);
     }
 
     public async Task<Result<Pagination<TimeRecordMap>>> Index(PaginationQuery paginationQuery, ClaimsPrincipal user)
@@ -61,7 +62,7 @@ public class TimeRecordServices(
         }
 
         var timeRecord = await timeRecordRepository
-            .Create(new Entities.TimeRecord
+            .Create(new TimeRecordEntity
                 {
                     UserId = UserClaims.Id(user),
                     CategoryId = dto.CategoryId,

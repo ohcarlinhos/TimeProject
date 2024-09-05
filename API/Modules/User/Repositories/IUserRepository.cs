@@ -1,15 +1,16 @@
-﻿using Shared.General;
+﻿using Entities;
+using Shared.General;
 
 namespace API.Modules.User.Repositories
 {
     public interface IUserRepository
     {
-        List<Entities.User> Index(PaginationQuery paginationQuery);
+        List<UserEntity> Index(PaginationQuery paginationQuery);
         int GetTotalItems(PaginationQuery paginationQuery);
-        Task<Entities.User> Create(Entities.User entity);
-        Task<Entities.User> Update(Entities.User entity);
+        Task<UserEntity> Create(UserEntity entity);
+        Task<UserEntity> Update(UserEntity entity);
         Task<bool> Delete(int id);
-        Task<Entities.User?> FindById(int id);
-        Task<Entities.User?> FindByEmail(string email);
+        Task<UserEntity?> FindById(int id);
+        Task<UserEntity?> FindByEmail(string email);
     }
 }

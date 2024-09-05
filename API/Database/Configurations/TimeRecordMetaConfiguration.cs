@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Database.Configurations;
 
-public class TimeRecordMetaConfiguration : IEntityTypeConfiguration<TimeRecordMeta>
+public class TimeRecordMetaConfiguration : IEntityTypeConfiguration<TimeRecordMetaEntity>
 {
-    public void Configure(EntityTypeBuilder<TimeRecordMeta> builder)
+    public void Configure(EntityTypeBuilder<TimeRecordMetaEntity> builder)
     {
         builder.ToTable("time_record_metas");
         builder.HasKey(e => e.TimeRecordId);
@@ -20,6 +20,6 @@ public class TimeRecordMetaConfiguration : IEntityTypeConfiguration<TimeRecordMe
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<TimeRecord>().WithOne(e => e.Meta).HasForeignKey<TimeRecordMeta>(e => e.TimeRecordId);
+        builder.HasOne<TimeRecordEntity>().WithOne(e => e.Meta).HasForeignKey<TimeRecordMetaEntity>(e => e.TimeRecordId);
     }
 }

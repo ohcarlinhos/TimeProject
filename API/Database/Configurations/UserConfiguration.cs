@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Database.Configurations;
 
-public class UserConfiguration: IEntityTypeConfiguration<Entities.User>
+public class UserConfiguration: IEntityTypeConfiguration<UserEntity>
 {
-    public void Configure(EntityTypeBuilder<Entities.User> builder)
+    public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
         builder.ToTable("users");
         builder.HasKey(e => e.Id);

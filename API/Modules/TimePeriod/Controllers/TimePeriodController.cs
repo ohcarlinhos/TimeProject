@@ -1,5 +1,6 @@
 ﻿using API.Modules.Shared.Controllers;
 using API.Modules.TimePeriod.Services;
+using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General;
@@ -28,7 +29,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPost, Authorize]
-    public async Task<ActionResult<Entities.TimePeriod>> Create([FromBody] CreateTimePeriodDto dto)
+    public async Task<ActionResult<TimePeriodEntity>> Create([FromBody] CreateTimePeriodDto dto)
     {
         var result = await timePeriodServices
             .Create(dto, User);
@@ -37,7 +38,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPost, Authorize, Route("list/{id:int}")]
-    public async Task<ActionResult<List<Entities.TimePeriod>>> Create([FromBody] TimePeriodListDto dto, int id)
+    public async Task<ActionResult<List<TimePeriodEntity>>> Create([FromBody] TimePeriodListDto dto, int id)
     {
         var result = await timePeriodServices
             .CreateByList(dto, id, User);
@@ -46,7 +47,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     }
 
     [HttpPut, Authorize, Route("{id:int}")]
-    public async Task<ActionResult<Entities.TimePeriod>> Update(int id, [FromBody] TimePeriodDto dto)
+    public async Task<ActionResult<TimePeriodEntity>> Update(int id, [FromBody] TimePeriodDto dto)
     {
         var result = await timePeriodServices
             .Update(id, dto, User);

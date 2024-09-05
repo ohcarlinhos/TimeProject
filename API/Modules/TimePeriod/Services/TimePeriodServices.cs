@@ -19,14 +19,14 @@ public class TimePeriodServices(
     IMapper mapper
 ) : ITimePeriodServices
 {
-    private TimePeriodMap MapData(Entities.TimePeriod entity)
+    private TimePeriodMap MapData(TimePeriodEntity entity)
     {
-        return mapper.Map<Entities.TimePeriod, TimePeriodMap>(entity);
+        return mapper.Map<TimePeriodEntity, TimePeriodMap>(entity);
     }
 
-    private List<TimePeriodMap> MapData(List<Entities.TimePeriod> entity)
+    private List<TimePeriodMap> MapData(List<TimePeriodEntity> entity)
     {
-        return mapper.Map<List<Entities.TimePeriod>, List<TimePeriodMap>>(entity);
+        return mapper.Map<List<TimePeriodEntity>, List<TimePeriodMap>>(entity);
     }
 
 
@@ -60,12 +60,12 @@ public class TimePeriodServices(
         };
     }
 
-    public async Task<Result<Entities.TimePeriod>> Create(
+    public async Task<Result<TimePeriodEntity>> Create(
         CreateTimePeriodDto dto,
         ClaimsPrincipal user
     )
     {
-        var result = new Result<Entities.TimePeriod>();
+        var result = new Result<TimePeriodEntity>();
 
         ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;
@@ -79,7 +79,7 @@ public class TimePeriodServices(
             return result.SetError(TimePeriodErrors.WrongTimeRecordId);
 
         var data = await timePeriodRepository
-            .Create(new Entities.TimePeriod
+            .Create(new TimePeriodEntity
                 {
                     UserId = UserClaims.Id(user),
                     TimeRecordId = dto.TimeRecordId,
@@ -93,14 +93,14 @@ public class TimePeriodServices(
         return result.SetData(data);
     }
 
-    public async Task<Result<List<Entities.TimePeriod>>> CreateByList(
+    public async Task<Result<List<TimePeriodEntity>>> CreateByList(
         TimePeriodListDto dto,
         int timeRecordId,
         ClaimsPrincipal user
     )
     {
-        var result = new Result<List<Entities.TimePeriod>>();
-        List<Entities.TimePeriod> list = [];
+        var result = new Result<List<TimePeriodEntity>>();
+        List<TimePeriodEntity> list = [];
 
         foreach (var timePeriod in dto.TimePeriods)
         {
@@ -110,7 +110,7 @@ public class TimePeriodServices(
 
             if (HasMinSize(timePeriod))
             {
-                list.Add(new Entities.TimePeriod()
+                list.Add(new TimePeriodEntity()
                 {
                     UserId = UserClaims.Id(user),
                     TimeRecordId = timeRecordId,
@@ -123,7 +123,7 @@ public class TimePeriodServices(
         if (result.HasError) return result;
         if (list.Count == 0) return result.SetData([]);
 
-        var timerSession = await timerSessionServices.Create(new TimerSession
+        var timerSession = await timerSessionServices.Create(new TimerSessionEntity
             { TimeRecordId = timeRecordId, UserId = UserClaims.Id(user), Type = dto.Type, From = dto.From }
         );
 
@@ -135,9 +135,9 @@ public class TimePeriodServices(
         return result.SetData(data);
     }
 
-    public async Task<Result<Entities.TimePeriod>> Update(int id, TimePeriodDto dto, ClaimsPrincipal user)
+    public async Task<Result<TimePeriodEntity>> Update(int id, TimePeriodDto dto, ClaimsPrincipal user)
     {
-        var result = new Result<Entities.TimePeriod>();
+        var result = new Result<TimePeriodEntity>();
 
         ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;

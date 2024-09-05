@@ -11,14 +11,14 @@ namespace API.Modules.User.Services;
 
 public class UserServices(IUserRepository userRepository, IMapper mapper, ProjectContext dbContext) : IUserServices
 {
-    private List<UserMap> MapData(List<Entities.User> users)
+    private List<UserMap> MapData(List<UserEntity> users)
     {
         return mapper.Map<List<UserMap>>(users);
     }
 
-    private UserMap MapData(Entities.User user)
+    private UserMap MapData(UserEntity userEntity)
     {
-        return mapper.Map<UserMap>(user);
+        return mapper.Map<UserMap>(userEntity);
     }
 
     public Result<Pagination<UserMap>> Index(PaginationQuery paginationQuery)
@@ -61,7 +61,7 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
         var hasPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
         var entity = await userRepository
-            .Create(new Entities.User
+            .Create(new UserEntity
             {
                 Name = dto.Name,
                 Email = dto.Email,

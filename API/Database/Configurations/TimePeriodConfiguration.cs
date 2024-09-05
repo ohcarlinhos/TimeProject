@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Database.Configurations;
 
-public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
+public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriodEntity>
 {
-    public void Configure(EntityTypeBuilder<TimePeriod> builder)
+    public void Configure(EntityTypeBuilder<TimePeriodEntity> builder)
     {
         builder.ToTable("time_periods");
         builder.HasKey(e => e.Id);
@@ -22,13 +22,13 @@ public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriod>
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
         
         builder.HasOne(e => e.TimeRecord)
             .WithMany(e => e.TimePeriods)
             .HasForeignKey(e => e.TimeRecordId);
 
-        builder.HasOne<TimerSession>(e => e.TimerSession)
+        builder.HasOne<TimerSessionEntity>(e => e.TimerSession)
             .WithMany(e => e.TimePeriods)
             .HasForeignKey(e => e.TimerSessionId);
     }

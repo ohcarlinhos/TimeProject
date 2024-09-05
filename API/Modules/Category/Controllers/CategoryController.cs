@@ -1,5 +1,6 @@
 ﻿using API.Modules.Category.Services;
 using API.Modules.Shared.Controllers;
+using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
@@ -25,13 +26,13 @@ public class CategoryController(ICategoryServices categoryServices)
     }
 
     [HttpPost]
-    public async Task<ActionResult<Entities.Category>> Create([FromBody] CategoryDto dto)
+    public async Task<ActionResult<CategoryEntity>> Create([FromBody] CategoryDto dto)
     {
         return HandleResponse(await categoryServices.Create(dto, User));
     }
 
     [HttpPut, Route("{id:int}")]
-    public async Task<ActionResult<Entities.Category>> Update(int id, [FromBody] CategoryDto dto)
+    public async Task<ActionResult<CategoryEntity>> Update(int id, [FromBody] CategoryDto dto)
     {
         return HandleResponse(await categoryServices.Update(id, dto, User));
     }

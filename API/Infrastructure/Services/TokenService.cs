@@ -9,13 +9,13 @@ namespace API.Infrastructure.Services;
 
 public class TokenService(IConfiguration configuration)
 {
-    public JwtData GenerateBearerJwt(User user)
+    public JwtData GenerateBearerJwt(UserEntity userEntity)
     {
         var tokenSubject = new ClaimsIdentity(new[]
         {
-            new Claim("id", user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.UserRole.ToString())
+            new Claim("id", userEntity.Id.ToString()),
+            new Claim(ClaimTypes.Email, userEntity.Email),
+            new Claim(ClaimTypes.Role, userEntity.UserRole.ToString())
         });
 
         var tokenExpires = DateTime.UtcNow.AddHours(double.Parse(configuration["Jwt:Expires"]!));

@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Entities;
 using Shared.General;
 using Shared.TimePeriod;
 
@@ -17,18 +18,18 @@ public interface ITimePeriodServices
         ClaimsPrincipal user
     );
 
-    Task<Result<Entities.TimePeriod>> Create(
+    Task<Result<TimePeriodEntity>> Create(
         CreateTimePeriodDto dto,
         ClaimsPrincipal user
     );
 
-    Task<Result<List<Entities.TimePeriod>>> CreateByList(
+    Task<Result<List<TimePeriodEntity>>> CreateByList(
         TimePeriodListDto dto,
         int timeRecordId,
         ClaimsPrincipal user
     );
 
-    Task<Result<Entities.TimePeriod>> Update(int id, TimePeriodDto dto, ClaimsPrincipal user);
+    Task<Result<TimePeriodEntity>> Update(int id, TimePeriodDto dto, ClaimsPrincipal user);
 
     Task<Result<bool>> Delete(int id, ClaimsPrincipal user);
 }
