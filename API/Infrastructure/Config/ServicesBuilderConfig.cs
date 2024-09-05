@@ -18,7 +18,7 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
         builder.Services.AddScoped<ITimeRecordMetaServices, TimeRecordMetaServices>();
         builder.Services.AddScoped<ITimerSessionServices, TimerSessionServices>();
-
-        builder.Services.AddSingleton<TokenService>();
+        
+        builder.Services.AddSingleton<ITokenService, TokenService>();
     }
 }

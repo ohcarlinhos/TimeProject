@@ -7,7 +7,7 @@ using Shared.Auth;
 
 namespace API.Infrastructure.Services;
 
-public class TokenService(IConfiguration configuration)
+public class TokenService(IConfiguration configuration) : ITokenService
 {
     public JwtData GenerateBearerJwt(UserEntity userEntity)
     {

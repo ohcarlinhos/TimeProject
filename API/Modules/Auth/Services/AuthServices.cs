@@ -2,13 +2,12 @@
 using API.Modules.Auth.Errors;
 using API.Modules.User.Repositories;
 using Entities;
-using Shared;
 using Shared.Auth;
 using Shared.General;
 
 namespace API.Modules.Auth.Services;
 
-public class AuthServices(IUserRepository userRepository, TokenService tokenService) : IAuthService
+public class AuthServices(IUserRepository userRepository, ITokenService tokenService) : IAuthService
 {
     public async Task<Result<JwtData>> Login(LoginDto dto)
     {
