@@ -1,6 +1,6 @@
 ﻿namespace API.Infrastructure.Config;
 
-public class CorsBuilderConfig
+public static class CorsBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder, string customCors)
     {

@@ -2,7 +2,7 @@
 
 namespace API.Infrastructure.Config;
 
-public class SwaggerBuilderConfig
+public static class SwaggerBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

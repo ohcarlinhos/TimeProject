@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.Infrastructure.Config;
 
-public class JwtBuilderConfig
+public static class JwtBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {
