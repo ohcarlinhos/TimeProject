@@ -38,25 +38,28 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
 
         var dates = await timePeriodQuery
             .Select((p) => p.Start)
-            .OrderByDescending(p => p.Date)
+            .OrderByDescending(p => p)
             .ToListAsync();
 
         var timePeriods = await timePeriodQuery
             .Where((p) => p.TimerSessionId == null)
-            .OrderByDescending(p => p.Start).ToListAsync();
+            .ToListAsync();
 
         var timerSessions = await timerSessionQuery
-            .OrderByDescending(p => p.TimePeriods!.FirstOrDefault()!.Start.Date)
-            .Include(p => p.TimePeriods!.OrderByDescending(q => q.Start))
+            .Include(p => p.TimePeriods!
+                .OrderBy(q => q.Start))
             .ToListAsync();
 
         var brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById(RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
             ? "E. South America Standard Time"
             : "America/Sao_Paulo");
-        
+
         var datedTimes = new List<DatedTime>();
 
-        dates = dates.Select(p => TimeZoneInfo.ConvertTimeFromUtc(p, brasiliaTimeZone).Date).Distinct().ToList();
+        dates = dates.Select(date => TimeZoneInfo.ConvertTimeFromUtc(date, brasiliaTimeZone).Date)
+            .Distinct()
+            .OrderByDescending(d => d)
+            .ToList();
 
         foreach (var d in dates)
         {
@@ -69,8 +72,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
             var tsList = timerSessions
                 .Where(a => a.TimePeriods!.Any())
                 .Where(p => TimeZoneInfo
-                    .ConvertTimeFromUtc(p.TimePeriods!.FirstOrDefault()!.Start, brasiliaTimeZone)
-                    .Date == d.Date)
+                    .ConvertTimeFromUtc(p.TimePeriods!.FirstOrDefault()!.Start, brasiliaTimeZone).Date == d)
                 .ToList();
 
             datedTimes.Add(new DatedTime
