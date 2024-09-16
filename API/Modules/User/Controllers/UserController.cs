@@ -26,7 +26,9 @@ public class UserController(IUserServices userServices) : CustomController
     [HttpPost]
     public async Task<ActionResult<UserMap>> Create([FromBody] CreateUserDto dto)
     {
-        return HandleResponse(await userServices.Create(dto));
+        var result = await userServices.Create(dto);
+        result.ActionName = nameof(Create);
+        return HandleResponse(result);
     }
 
     [HttpPut("{id:int}"), Authorize]

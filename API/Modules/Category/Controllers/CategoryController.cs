@@ -28,7 +28,9 @@ public class CategoryController(ICategoryServices categoryServices)
     [HttpPost]
     public async Task<ActionResult<CategoryEntity>> Create([FromBody] CategoryDto dto)
     {
-        return HandleResponse(await categoryServices.Create(dto, User));
+        var result = await categoryServices.Create(dto, User);
+        result.ActionName = nameof(Create);
+        return HandleResponse(result);
     }
 
     [HttpPut, Route("{id:int}")]

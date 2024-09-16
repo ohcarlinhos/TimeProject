@@ -31,9 +31,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
     [HttpPost, Authorize]
     public async Task<ActionResult<TimePeriodEntity>> Create([FromBody] CreateTimePeriodDto dto)
     {
-        var result = await timePeriodServices
-            .Create(dto, User);
-
+        var result = await timePeriodServices.Create(dto, User);
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
