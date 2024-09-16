@@ -21,6 +21,7 @@ public class TimeRecordController(ITimeRecordServices timeRecordServices) : Cust
     public async Task<ActionResult<TimeRecordMap>> Create([FromBody] CreateTimeRecordDto dto)
     {
         var result = await timeRecordServices.Create(dto, User);
+
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }

@@ -34,6 +34,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
         var result = await timePeriodServices
             .Create(dto, User);
 
+        result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
 
@@ -43,6 +44,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices) : Cust
         var result = await timePeriodServices
             .CreateByList(dto, id, User);
 
+        result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
 

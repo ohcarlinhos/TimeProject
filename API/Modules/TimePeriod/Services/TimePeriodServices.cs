@@ -55,7 +55,8 @@ public class TimePeriodServices(
     {
         var data = await timePeriodRepository.Dated(timeRecordId, UserClaims.Id(user));
 
-        return new Result<IEnumerable<DatedTimeMap>> {
+        return new Result<IEnumerable<DatedTimeMap>>
+        {
             Data = MapData(data)
         };
     }
