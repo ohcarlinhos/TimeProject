@@ -1,13 +1,16 @@
-﻿using API.Infrastructure.Services;
+﻿using API.Handlers.Email;
+using API.Infrastructure.Services;
 using API.Modules.Auth.Errors;
 using API.Modules.User.Repositories;
 using Entities;
 using Shared.Auth;
 using Shared.General;
+using Shared.Handlers.Email;
 
 namespace API.Modules.Auth.Services;
 
-public class AuthServices(IUserRepository userRepository, ITokenService tokenService) : IAuthService
+public class AuthServices(IUserRepository userRepository, ITokenService tokenService, IEmailHandler emailHandler)
+    : IAuthService
 {
     public async Task<Result<JwtData>> Login(LoginDto dto)
     {
@@ -17,6 +20,29 @@ public class AuthServices(IUserRepository userRepository, ITokenService tokenSer
     public async Task<Result<JwtData>> Login(LoginDto dto, bool onlyAdmin)
     {
         return await _login(dto, onlyAdmin);
+    }
+
+    public async Task<Result<bool>> Recovery(RecoveryDto recoveryDto)
+    {
+        var result = new Result<bool>();
+
+        try
+        {
+            if (await userRepository.FindByEmail(recoveryDto.Email) != null)
+                emailHandler.Send(new EmailPayload
+                {
+                    To = recoveryDto.Email,
+                    Body = @"TODO: implement recovery email"
+                });
+
+            result.Data = true;
+        }
+        catch
+        {
+            return result.SetError("send_recovery_email_error");
+        }
+
+        return result;
     }
 
     private async Task<Result<JwtData>> _login(LoginDto dto, bool onlyAdmin = false)

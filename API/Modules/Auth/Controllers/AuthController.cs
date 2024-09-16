@@ -20,4 +20,10 @@ public class AuthController(IAuthService authService) : CustomController
     {
         return HandleResponse(await authService.Login(dto, true));
     }
+
+    [HttpPost, Route("recovery")]
+    public async Task<ActionResult<bool>> Recovery([FromBody] RecoveryDto dto)
+    {
+        return HandleResponse(await authService.Recovery(dto));
+    }
 }
