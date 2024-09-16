@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-
 using API.Database;
 using API.Infrastructure.Config;
 using API.Infrastructure.Mapping;
@@ -17,23 +16,19 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 
 SwaggerBuilderConfig.Apply(builder);
-
-builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjectContext>(
-    options => options.UseNpgsql(builder.Configuration.GetConnectionString("DataBase"))
-);
-
+DatabaseBuilderConfig.Apply(builder);
 RepositoriesBuilderConfig.Apply(builder);
 ServicesBuilderConfig.Apply(builder);
-
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+IntegrationsBuilderConfig.Apply(builder);
+HandlersBuilderConfig.Apply(builder);
+MappingBuilderConfig.Apply(builder);
 
 var app = builder.Build();
-
 
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-    
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
