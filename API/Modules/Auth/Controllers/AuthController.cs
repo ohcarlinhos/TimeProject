@@ -26,4 +26,10 @@ public class AuthController(IAuthService authService) : CustomController
     {
         return HandleResponse(await authService.Recovery(dto));
     }
+
+    [HttpPost, Route("recovery/password")]
+    public async Task<ActionResult<bool>> RecoveryPassword([FromBody] RecoveryPasswordDto dto)
+    {
+        return HandleResponse(await authService.RecoveryPassword(dto));
+    }
 }

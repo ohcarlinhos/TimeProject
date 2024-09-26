@@ -1,7 +1,8 @@
 ﻿using API.Handlers.Email;
 using API.Infrastructure.Services;
 using API.Modules.Auth.Errors;
-using API.Modules.User.Repositories;
+using API.Modules.Codes.Services;
+using API.Modules.User.Services;
 using Entities;
 using Shared.Auth;
 using Shared.General;
@@ -9,7 +10,12 @@ using Shared.Handlers.Email;
 
 namespace API.Modules.Auth.Services;
 
-public class AuthServices(IUserRepository userRepository, ITokenService tokenService, IEmailHandler emailHandler)
+public class AuthServices(
+    IUserServices userServices,
+    IConfirmCodeServices confirmCodeServices,
+    ITokenService tokenService,
+    IEmailHandler emailHandler,
+    IConfiguration configuration)
     : IAuthService
 {
     public async Task<Result<JwtData>> Login(LoginDto dto)
@@ -22,39 +28,18 @@ public class AuthServices(IUserRepository userRepository, ITokenService tokenSer
         return await _login(dto, onlyAdmin);
     }
 
-    public async Task<Result<bool>> Recovery(RecoveryDto recoveryDto)
-    {
-        var result = new Result<bool>();
-
-        try
-        {
-            if (await userRepository.FindByEmail(recoveryDto.Email) != null)
-                emailHandler.Send(new EmailPayload
-                {
-                    To = recoveryDto.Email,
-                    Body = @"TODO: implement recovery email"
-                });
-
-            result.Data = true;
-        }
-        catch
-        {
-            return result.SetError("send_recovery_email_error");
-        }
-
-        return result;
-    }
-
     private async Task<Result<JwtData>> _login(LoginDto dto, bool onlyAdmin = false)
     {
         var result = new Result<JwtData>();
-        var user = await userRepository.FindByEmail(dto.Email);
 
-        if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+        var findUserResult = await userServices.FindByEmail(dto.Email);
+        if (findUserResult.HasError) return result.SetError(AuthErrors.WrongEmailOrPassword);
+
+        var user = findUserResult.Data!;
+
+        if (BCrypt.Net.BCrypt.Verify(dto.Password, user.Password) == false)
         {
-            result.Message = AuthErrors.WrongEmailOrPassword;
-            result.HasError = true;
-            return result;
+            return result.SetError(AuthErrors.WrongEmailOrPassword);
         }
 
         if (onlyAdmin && user.UserRole != UserRole.Admin)
@@ -62,7 +47,67 @@ public class AuthServices(IUserRepository userRepository, ITokenService tokenSer
             return result.SetError("forbid");
         }
 
-        result.Data = tokenService.GenerateBearerJwt(user);
-        return result;
+        return result.SetData(tokenService.GenerateBearerJwt(user));
+    }
+
+    public async Task<Result<bool>> Recovery(RecoveryDto dto)
+    {
+        var result = new Result<bool>();
+
+        var findUserResult = await userServices.FindByEmail(dto.Email);
+        if (findUserResult.HasError) return result.SetError(findUserResult.Message);
+
+        var user = findUserResult.Data!;
+
+        try
+        {
+            var createRecoveryCodeResult = await confirmCodeServices.CreateRecovery(user.Id);
+            if (createRecoveryCodeResult.HasError) return result.SetError(createRecoveryCodeResult.Message);
+
+            var recoveryCode = createRecoveryCodeResult.Data!;
+
+            var emailUrl = configuration["RecoveryUrl"] + recoveryCode.Id;
+
+            emailHandler.Send(new EmailPayload
+            {
+                To = dto.Email,
+                Subject = "Recuperação de senha - Registra meu tempo aí!",
+                Body =
+                    $@"
+                        <p>
+                            Você acaba de requisitar a recuperação da sua senha, para prosseguir <a href='{emailUrl}' target='_blank'>clique aqui</a> para recria-la. <br/>
+                            Ou copie a URL e cole no seu navegador: {emailUrl} <br/><br/>
+                            Expiração do código: {recoveryCode.ExpireDate.ToLocalTime()}
+                        </p>
+                            ",
+                IsHtml = true
+            });
+        }
+        catch
+        {
+            return result.SetError("send_recovery_email_error");
+        }
+
+        return result.SetData(true);
+    }
+
+    public async Task<Result<bool>> RecoveryPassword(RecoveryPasswordDto dto)
+    {
+        var result = new Result<bool>();
+
+        var validateConfirmCodeResult = await confirmCodeServices.Validate(dto.Code, dto.Email);
+
+        if (validateConfirmCodeResult.HasError)
+            return result.SetError(validateConfirmCodeResult.Message);
+
+        var updatePasswordResult = await userServices
+            .UpdatePasswordByEmail(dto.Email, dto.Password);
+
+        if (updatePasswordResult.HasError)
+            return result.SetError(updatePasswordResult.Message);
+
+        await confirmCodeServices.SetUsed(dto.Code);
+
+        return result.SetData(true);
     }
 }
