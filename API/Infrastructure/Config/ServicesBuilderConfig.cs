@@ -1,6 +1,7 @@
 ﻿using API.Infrastructure.Services;
 using API.Modules.Auth.Services;
 using API.Modules.Category.Services;
+using API.Modules.Codes.Services;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.Services;
 using API.Modules.User.Services;
@@ -18,7 +19,8 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
         builder.Services.AddScoped<ITimeRecordMetaServices, TimeRecordMetaServices>();
         builder.Services.AddScoped<ITimerSessionServices, TimerSessionServices>();
-        
+        builder.Services.AddScoped<IConfirmCodeServices, ConfirmCodeServices>();
+
         builder.Services.AddSingleton<ITokenService, TokenService>();
     }
 }

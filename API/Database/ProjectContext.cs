@@ -1,6 +1,7 @@
 ﻿using API.Database.Configurations;
 using Entities;
 using Microsoft.EntityFrameworkCore;
+using Shared.Auth;
 
 namespace API.Database;
 
@@ -13,6 +14,7 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     public DbSet<RegisterCodeEntity> RegisterCodes { get; set; }
     public DbSet<TimeRecordMetaEntity> TimeRecordMetas { get; set; }
     public DbSet<TimerSessionEntity> TimerSessions { get; set; }
+    public DbSet<ConfirmCodeEntity> ConfirmCodes { get; set; }
     
     protected override void OnModelCreating(ModelBuilder mb)
     {
@@ -23,6 +25,7 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
         mb.ApplyConfiguration(new RegisterCodeConfiguration());
         mb.ApplyConfiguration(new TimeRecordMetaConfiguration());
         mb.ApplyConfiguration(new TimerSessionConfiguration());
+        mb.ApplyConfiguration(new ConfirmCodeConfiguration());
 
         mb.Entity<RegisterCodeEntity>().HasData([
             new RegisterCodeEntity { Id = "07577660-b921-4e07-bb68-990e8f286475" },
