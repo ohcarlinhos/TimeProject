@@ -32,11 +32,14 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
         };
     }
 
-    public async Task<Result<UserMap>> Get(int id)
+    public async Task<Result<UserMap>> Details(int id)
     {
         var result = new Result<UserMap>();
-        var entity = await userRepository.FindById(id);
-        return result.SetData(mapper.Map<UserMap>(entity));
+        var user = await userRepository.FindById(id);
+
+        return user == null
+            ? result.SetError(UserErrors.NotFound)
+            : result.SetData(mapper.Map<UserMap>(user));
     }
 
     public async Task<Result<UserMap>> Create(CreateUserDto dto)
@@ -145,6 +148,22 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
         return result;
     }
 
+    public async Task<Result<UserMap>> UpdatePasswordByEmail(string email, string password)
+    {
+        var result = new Result<UserMap>();
+        var user = await userRepository.FindByEmail(email);
+
+        if (user == null)
+            return result.SetError(UserErrors.NotFound);
+
+        user.Password = BCrypt.Net.BCrypt.HashPassword(password);
+        ;
+
+        var entity = await userRepository.Update(user);
+        result.Data = mapper.Map<UserMap>(entity);
+        return result;
+    }
+
     public async Task<Result<bool>> Disable(int id, DisableUserDto dto)
     {
         var result = new Result<bool>();
@@ -167,6 +186,23 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
         {
             Data = await userRepository.Delete(id)
         };
+    }
+
+
+    public async Task<Result<UserEntity>> FindByEmail(string email)
+    {
+        var result = new Result<UserEntity>();
+        var user = await userRepository.FindByEmail(email);
+
+        return user == null ? result.SetError(UserErrors.NotFound) : result.SetData(user);
+    }
+
+    public async Task<Result<UserEntity>> FindById(int id)
+    {
+        var result = new Result<UserEntity>();
+        var user = await userRepository.FindById(id);
+
+        return user == null ? result.SetError(UserErrors.NotFound) : result.SetData(user);
     }
 
     private async Task<bool> EmailNotAvailability(string email) => await userRepository.FindByEmail(email) != null;

@@ -76,10 +76,10 @@ public class UserController(IUserServices userServices) : CustomController
     }
 
     [HttpGet, Authorize, Route("{id:int}")]
-    public async Task<ActionResult<UserMap>> Get(int id)
+    public async Task<ActionResult<UserMap>> Details(int id)
     {
         return HasAuthorization(id)
-            ? HandleResponse(await userServices.Get(id))
+            ? HandleResponse(await userServices.Details(id))
             : Forbid();
     }
 
@@ -87,7 +87,7 @@ public class UserController(IUserServices userServices) : CustomController
     public async Task<ActionResult<UserMap>> Myself()
     {
         return HandleResponse(await userServices
-            .Get(UserClaims.Id(User)));
+            .Details(UserClaims.Id(User)));
     }
 
     private bool HasAuthorization(int id)
