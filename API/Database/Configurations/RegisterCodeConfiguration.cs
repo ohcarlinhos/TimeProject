@@ -15,6 +15,8 @@ public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCodeEn
         builder.Property(e => e.IsUsed).IsRequired();
         builder.Property(e => e.UserId);
 
-        builder.HasOne<UserEntity>(e => e.User).WithOne().HasForeignKey<RegisterCodeEntity>(e => e.UserId);
+        builder.HasOne<UserEntity>(e => e.User).WithOne()
+            .HasForeignKey<RegisterCodeEntity>(e => e.UserId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }
