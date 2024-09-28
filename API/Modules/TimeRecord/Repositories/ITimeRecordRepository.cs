@@ -1,12 +1,12 @@
 ﻿using Entities;
 using Shared.General;
+using Shared.General.Repositories;
 
 namespace API.Modules.TimeRecord.Repositories;
 
 public interface ITimeRecordRepository
 {
-    List<TimeRecordEntity> Index(PaginationQuery paginationQuery, int userId);
-    Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId);
+    Task<IndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId);
     Task<TimeRecordEntity> Create(TimeRecordEntity entity);
     Task<TimeRecordEntity> Update(TimeRecordEntity entity);
     Task<bool> Delete(TimeRecordEntity entity);

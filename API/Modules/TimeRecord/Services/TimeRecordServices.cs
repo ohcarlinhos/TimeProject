@@ -28,19 +28,18 @@ public class TimeRecordServices(
         return mapper.Map<TimeRecordEntity, TimeRecordMap>(entity);
     }
 
-    private List<TimeRecordMap> MapData(List<TimeRecordEntity> entities)
+    private IEnumerable<TimeRecordMap> MapData(IEnumerable<TimeRecordEntity> entities)
     {
-        return mapper.Map<List<TimeRecordEntity>, List<TimeRecordMap>>(entities);
+        return mapper.Map<IEnumerable<TimeRecordEntity>, IEnumerable<TimeRecordMap>>(entities);
     }
 
     public async Task<Result<Pagination<TimeRecordMap>>> Index(PaginationQuery paginationQuery, ClaimsPrincipal user)
     {
-        var data = MapData(timeRecordRepository.Index(paginationQuery, UserClaims.Id(user)));
-        var totalItems = await timeRecordRepository.GetTotalItems(paginationQuery, UserClaims.Id(user));
+        var result = await timeRecordRepository.Index(paginationQuery, UserClaims.Id(user));
 
         return new Result<Pagination<TimeRecordMap>>
         {
-            Data = Pagination<TimeRecordMap>.Handle(data, paginationQuery, totalItems)
+            Data = Pagination<TimeRecordMap>.Handle(MapData(result.Entities), paginationQuery, result.Count)
         };
     }
 

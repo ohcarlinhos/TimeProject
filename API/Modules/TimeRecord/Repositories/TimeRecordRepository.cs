@@ -2,12 +2,13 @@
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
+using Shared.General.Repositories;
 
 namespace API.Modules.TimeRecord.Repositories;
 
 public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordRepository
 {
-    public List<TimeRecordEntity> Index(PaginationQuery paginationQuery, int userId)
+    public async Task<IndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId)
     {
         var query = dbContext.TimeRecords.AsQueryable();
         query = query.Where(tr => tr.UserId == userId);
@@ -25,6 +26,8 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
                 }
             }
 
+        var count = await query.CountAsync();
+
         if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
             query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
                 .ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
@@ -32,23 +35,20 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
                 .ThenBy(p => p.Meta!.LastTimePeriodDate);
 
-        return query
+        var entities = await query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
             .Include(r => r.Category)
             .Include(r => r.Meta)
-            .ToList();
+            .ToListAsync();
+
+        return new IndexRepositoryResult<TimeRecordEntity>()
+        {
+            Count = count,
+            Entities = entities
+        };
     }
-
-    public async Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId)
-    {
-        var query = dbContext.TimeRecords.AsQueryable();
-        query = query.Where(timeRecord => timeRecord.UserId == userId);
-        query = SearchWhereConditional(query, paginationQuery.Search);
-
-        return await query.CountAsync();
-    }
-
+    
     public async Task<TimeRecordEntity> Create(TimeRecordEntity entity)
     {
         var now = DateTime.Now.ToUniversalTime();

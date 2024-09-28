@@ -6,13 +6,13 @@ public class Pagination<T>
     public int PerPage { get; set; }
     public int TotalPages { get; set; }
     public int TotalItems { get; set; }
-    public List<T>? Data { get; set; }
+    public IEnumerable<T>? Data { get; set; }
     public string? Search { get; set; }
     public string? OrderBy { get; set; }
     public string? Sort { get; set; }
 
     public static Pagination<T> Handle(
-        List<T> data, 
+        IEnumerable<T> data, 
         int page, 
         int perPage, 
         int totalItems, 
@@ -34,7 +34,7 @@ public class Pagination<T>
     }
     
     public static Pagination<T> Handle(
-        List<T> data, 
+        IEnumerable<T> data, 
         PaginationQuery paginationQuery,
         int totalItems)
     {
