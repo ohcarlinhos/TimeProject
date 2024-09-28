@@ -12,10 +12,10 @@ namespace API.Modules.Category.Services;
 
 public class CategoryServices(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryServices
 {
-    public Result<List<CategoryMap>> Index(ClaimsPrincipal user)
+    public Result<List<CategoryMap>> Index(ClaimsPrincipal user, bool onlyWithData)
     {
         return new Result<List<CategoryMap>>()
-            { Data = MapData(categoryRepository.Index(UserClaims.Id(user))) };
+            { Data = MapData(categoryRepository.Index(UserClaims.Id(user), onlyWithData)) };
     }
 
     public async Task<Result<Pagination<CategoryMap>>> Index(PaginationQuery paginationQuery, ClaimsPrincipal user)

@@ -5,7 +5,7 @@ namespace API.Modules.Category.Repositories;
 
 public interface ICategoryRepository
 {
-    List<CategoryEntity> Index(int userId);
+    List<CategoryEntity> Index(int userId, bool onlyWithData);
     List<CategoryEntity> Index(PaginationQuery paginationQuery, int userId);
     Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId);
     Task<CategoryEntity> Create(CategoryEntity entity);

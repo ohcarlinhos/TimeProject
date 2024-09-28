@@ -14,4 +14,5 @@ public class PaginationQuery
     public string? Search { get; set; } = string.Empty;
     public string? OrderBy { get; set; } = string.Empty;
     public string? Sort { get; set; } = "desc";
+    public IEnumerable<string>? Filters { get; set; }
 }

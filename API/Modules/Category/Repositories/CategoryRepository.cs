@@ -5,13 +5,19 @@ using Entities;
 
 namespace API.Modules.Category.Repositories;
 
-public partial class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
+public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 {
-    public List<CategoryEntity> Index(int userId)
+    public List<CategoryEntity> Index(int userId, bool onlyWithData)
     {
-        return dbContext.Categories
-            .Where(category => category.UserId == userId)
-            .ToList();
+        return onlyWithData
+            ? dbContext.TimeRecords
+                .Where(e => e.Category != null)
+                .Select(e => e.Category)
+                .Distinct()
+                .ToList()!
+            : dbContext.Categories
+                .Where((category) => category.UserId == userId)
+                .ToList();
     }
 
     public List<CategoryEntity> Index(PaginationQuery paginationQuery, int userId)

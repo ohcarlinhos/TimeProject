@@ -20,9 +20,9 @@ public class CategoryController(ICategoryServices categoryServices)
     }
 
     [HttpGet, Route("all")]
-    public ActionResult<List<CategoryMap>> Index()
+    public ActionResult<List<CategoryMap>> Index([FromQuery] bool onlyWithData)
     {
-        return HandleResponse(categoryServices.Index(User));
+        return HandleResponse(categoryServices.Index(User, onlyWithData));
     }
 
     [HttpPost]

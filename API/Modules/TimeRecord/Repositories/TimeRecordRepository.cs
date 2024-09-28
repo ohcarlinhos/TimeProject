@@ -13,6 +13,18 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         query = query.Where(tr => tr.UserId == userId);
         query = SearchWhereConditional(query, paginationQuery.Search);
 
+        if (paginationQuery.Filters != null)
+            foreach (var filter in paginationQuery.Filters)
+            {
+                var split = filter.Split("::");
+
+                if (split[0] == "category")
+                {
+                    var id = int.Parse(split[^1]);
+                    query = query.Where(tr => tr.CategoryId == id);
+                }
+            }
+
         if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
             query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
                 .ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
