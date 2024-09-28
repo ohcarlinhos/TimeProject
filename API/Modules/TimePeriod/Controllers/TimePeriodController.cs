@@ -9,7 +9,7 @@ using Shared.TimePeriod;
 namespace API.Modules.TimePeriod.Controllers;
 
 [ApiController]
-[Route("api/time-period")]
+[Route("api/period")]
 public class TimePeriodController(ITimePeriodServices timePeriodServices) : CustomController
 {
     [HttpGet, Authorize, Route("{timeRecordId:int}")]

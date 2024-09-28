@@ -8,7 +8,7 @@ using Shared.TimeRecord;
 namespace API.Modules.TimeRecord.Controllers;
 
 [ApiController]
-[Route("api/time-record")]
+[Route("api/record")]
 public class TimeRecordController(ITimeRecordServices timeRecordServices) : CustomController
 {
     [HttpGet, Authorize]
