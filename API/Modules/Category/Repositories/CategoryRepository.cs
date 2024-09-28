@@ -11,7 +11,7 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
     {
         return onlyWithData
             ? dbContext.TimeRecords
-                .Where(e => e.Category != null)
+                .Where(e => e.Category != null && e.UserId == userId)
                 .Select(e => e.Category)
                 .Distinct()
                 .ToList()!
