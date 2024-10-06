@@ -1,18 +1,16 @@
 using System.Text.Json.Serialization;
-using Microsoft.EntityFrameworkCore;
-using API.Database;
 using API.Infrastructure.Config;
-using API.Infrastructure.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
 const string customCors = "_customCors";
 CorsBuilderConfig.Apply(builder, customCors);
+
+SettingsBuilderConfig.Apply(builder);
 JwtBuilderConfig.Apply(builder);
 
-builder.Services.AddControllers()
-    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 
 SwaggerBuilderConfig.Apply(builder);
@@ -28,7 +26,6 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-
     app.UseSwagger();
     app.UseSwaggerUI();
 }

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using API.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -8,6 +9,8 @@ public static class JwtBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {
+        var settings = builder.Configuration.GetRequiredSection("Jwt").Get<JwtSettings>();
+        
         builder.Services
             .AddAuthentication(authOptions =>
             {
@@ -23,7 +26,7 @@ public static class JwtBuilderConfig
                     ValidateIssuerSigningKey = true,
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]!)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(settings!.Secret)),
                 };
             });
     }
