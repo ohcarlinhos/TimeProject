@@ -1,4 +1,4 @@
-﻿using API.Modules.Shared.Controllers;
+﻿using API.Modules.Core.Controllers;
 using API.Modules.User.Services;
 using API.Modules.User.Services.Config;
 using Entities;

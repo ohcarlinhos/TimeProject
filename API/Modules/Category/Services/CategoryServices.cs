@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using API.Modules.Category.Repositories;
-using API.Modules.Shared;
+using API.Modules.Core;
 using AutoMapper;
 using Entities;
 using Shared;

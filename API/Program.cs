@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using API.Infrastructure.Config;
+using API.Infra.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 

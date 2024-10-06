@@ -1,7 +1,7 @@
-﻿using API.Handlers.Email;
-using API.Infrastructure.Services;
+﻿using API.Infra.Services;
 using API.Modules.Auth.Errors;
 using API.Modules.Codes.Services;
+using API.Modules.Core.Handlers.Email;
 using API.Modules.User.Services;
 using Entities;
 using Shared.Auth;

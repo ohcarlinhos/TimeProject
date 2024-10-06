@@ -1,4 +1,4 @@
-﻿using API.Modules.Shared.Controllers;
+﻿using API.Modules.Core.Controllers;
 using API.Modules.TimeRecord.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

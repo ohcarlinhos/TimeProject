@@ -1,5 +1,5 @@
 ﻿using API.Modules.Auth.Services;
-using API.Modules.Shared.Controllers;
+using API.Modules.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Auth;
 

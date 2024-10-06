@@ -1,5 +1,5 @@
 ﻿using API.Modules.Category.Services;
-using API.Modules.Shared.Controllers;
+using API.Modules.Core.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
