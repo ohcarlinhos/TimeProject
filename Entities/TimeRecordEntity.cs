@@ -11,8 +11,8 @@ public class TimeRecordEntity
     public int? CategoryId { get; set; }
     public string Code { get; set; } = string.Empty;
     
-    public DateTime? CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 
     public IEnumerable<TimePeriodEntity>? TimePeriods { get; set; }
     

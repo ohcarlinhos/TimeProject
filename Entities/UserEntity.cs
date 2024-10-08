@@ -16,6 +16,6 @@ public class UserEntity
     public UserRole UserRole { get; set; } = UserRole.Normal;
     public bool IsActive { get; set; } = true;
     
-    public DateTime? CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

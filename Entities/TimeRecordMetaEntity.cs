@@ -10,6 +10,6 @@ public class TimeRecordMetaEntity
     public DateTime? FirstTimePeriodDate { get; set; }
     public DateTime? LastTimePeriodDate { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }

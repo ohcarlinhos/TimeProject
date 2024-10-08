@@ -11,8 +11,8 @@ public class TimePeriodEntity
     public int TimeRecordId { get; set; }
     public int? TimerSessionId { get; set; }
     
-    public DateTime? CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
     
     public TimeRecordEntity? TimeRecord { get; set; }
     public TimerSessionEntity? TimerSession { get; set; }
