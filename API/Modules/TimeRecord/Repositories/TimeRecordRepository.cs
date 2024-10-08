@@ -48,7 +48,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             Entities = entities
         };
     }
-    
+
     public async Task<TimeRecordEntity> Create(TimeRecordEntity entity)
     {
         var now = DateTime.Now.ToUniversalTime();

@@ -1,5 +1,6 @@
 ﻿using API.Modules.Category.Repositories;
 using API.Modules.Codes.Repositories;
+using API.Modules.Statistic.Repository;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Repositories;
 using API.Modules.User.Repositories;
@@ -16,6 +17,7 @@ public static class RepositoriesBuilderConfig
         builder.Services.AddScoped<ITimeRecordRepository, TimeRecordRepository>();
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
         builder.Services.AddScoped<ITimeRecordMetaRepository, TimeRecordMetaRepository>();
+        builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
         builder.Services.AddScoped<IConfirmCodeRepository, ConfirmCodeRepository>();
     }
 }

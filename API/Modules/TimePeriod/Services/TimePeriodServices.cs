@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 using API.Modules.TimePeriod.Errors;
 using API.Modules.TimePeriod.Repositories;
-using API.Modules.TimeRecord.Repositories;
 using API.Modules.TimeRecord.Services;
+using API.Modules.TimeRecord.UseCases;
 using AutoMapper;
 using Entities;
 using Shared.General;
@@ -13,9 +13,9 @@ namespace API.Modules.TimePeriod.Services;
 
 public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,
-    ITimeRecordRepository timeRecordRepository,
     ITimeRecordMetaServices timeRecordMetaServices,
     ITimerSessionServices timerSessionServices,
+    IFindTimeRecordById findTimeRecordById,
     IMapper mapper
 ) : ITimePeriodServices
 {
@@ -74,10 +74,8 @@ public class TimePeriodServices(
         if (dto.Start.CompareTo(dto.End) > 0)
             return result.SetError(TimePeriodErrors.EndDateIsBiggerThenStartDate);
 
-        var timeRecord = await timeRecordRepository.FindById(dto.TimeRecordId, UserClaims.Id(user));
-
-        if (timeRecord == null)
-            return result.SetError(TimePeriodErrors.WrongTimeRecordId);
+        var findTrResult = await findTimeRecordById.Handle(dto.TimeRecordId, user);
+        if (findTrResult.HasError) return result.SetError(findTrResult.Message);
 
         var data = await timePeriodRepository
             .Create(new TimePeriodEntity

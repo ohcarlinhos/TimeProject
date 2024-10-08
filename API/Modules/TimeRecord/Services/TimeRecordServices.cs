@@ -151,9 +151,8 @@ public class TimeRecordServices(
         var timeRecord = await timeRecordRepository
             .FindById(id, UserClaims.Id(user));
 
-        if (timeRecord == null)
-            return result.SetError(TimeRecordErrors.NotFound);
-
-        return result.SetData(await timeRecordRepository.Delete(timeRecord));
+        return timeRecord != null
+            ? result.SetData(await timeRecordRepository.Delete(timeRecord))
+            : result.SetError(TimeRecordErrors.NotFound);
     }
 }

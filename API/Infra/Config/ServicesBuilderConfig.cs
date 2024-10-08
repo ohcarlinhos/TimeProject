@@ -2,8 +2,10 @@
 using API.Modules.Auth.Services;
 using API.Modules.Category.Services;
 using API.Modules.Codes.Services;
+using API.Modules.Statistic.UseCases;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimeRecord.Services;
+using API.Modules.TimeRecord.UseCases;
 using API.Modules.User.Services;
 
 namespace API.Infra.Config;
@@ -21,6 +23,14 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<ITimerSessionServices, TimerSessionServices>();
         builder.Services.AddScoped<IConfirmCodeServices, ConfirmCodeServices>();
 
+        // Use Cases
+        // Time Record
+        builder.Services.AddScoped<IFindTimeRecordById, FindTimeRecordById>();
+
+        // Statistics
+        builder.Services.AddScoped<IGetDayStatistics, GetDayStatistics>();
+
+        // Token
         builder.Services.AddSingleton<ITokenService, TokenService>();
     }
 }
