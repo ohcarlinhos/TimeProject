@@ -36,11 +36,11 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
         var breakList = sessionList.Where(e => e.Type == "break").ToList();
 
         var timeRecordCreatedCount = await db.TimeRecords
-            .Where((e) => e.CreatedAt >= initDate && e.CreatedAt < endDate)
+            .Where((e) => e.CreatedAt >= initDate && e.CreatedAt < endDate && userId == e.UserId)
             .CountAsync();
 
         var timeRecordUpdatedCount = await db.TimeRecords
-            .Where((e) => e.UpdatedAt >= initDate && e.UpdatedAt < endDate)
+            .Where((e) => e.UpdatedAt >= initDate && e.UpdatedAt < endDate && userId == e.UserId)
             .CountAsync();
 
         return new DayStatistic
