@@ -9,13 +9,8 @@ public interface ITimePeriodServices
 {
     public Task<Result<Pagination<TimePeriodMap>>> Index(
         int timeRecordId,
-        PaginationQuery paginationQuery,
-        ClaimsPrincipal user
-    );
-
-    public Task<Result<IEnumerable<DatedTimeMap>>> Dated(
-        int timeRecordId,
-        ClaimsPrincipal user
+        ClaimsPrincipal user,
+        PaginationQuery paginationQuery
     );
 
     Task<Result<TimePeriodEntity>> Create(

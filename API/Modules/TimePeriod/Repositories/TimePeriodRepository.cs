@@ -9,7 +9,7 @@ namespace API.Modules.TimePeriod.Repositories;
 
 public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodRepository
 {
-    public List<TimePeriodEntity> Index(int timeRecordId, PaginationQuery paginationQuery, int userId)
+    public List<TimePeriodEntity> Index(int timeRecordId, int userId, PaginationQuery paginationQuery)
     {
         return dbContext.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
@@ -24,64 +24,6 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         return await dbContext.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
             .CountAsync();
-    }
-
-    public async Task<IEnumerable<DatedTime>> Dated(int timeRecordId, int userId)
-    {
-        var timePeriodQuery = dbContext.TimePeriods
-            .Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId)
-            .AsQueryable();
-
-        var timerSessionQuery = dbContext.TimerSessions.Where(p =>
-                p.UserId == userId && p.TimeRecordId == timeRecordId && p.TimePeriods != null && p.TimePeriods.Any())
-            .AsQueryable();
-
-        var dates = await timePeriodQuery
-            .Select((p) => p.Start)
-            .OrderByDescending(p => p)
-            .ToListAsync();
-
-        var timePeriods = await timePeriodQuery
-            .Where((p) => p.TimerSessionId == null)
-            .ToListAsync();
-
-        var timerSessions = await timerSessionQuery
-            .Include(p => p.TimePeriods!
-                .OrderBy(q => q.Start))
-            .ToListAsync();
-
-        var brasiliaTimeZone = TimeZoneInfo.FindSystemTimeZoneById(RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-            ? "E. South America Standard Time"
-            : "America/Sao_Paulo");
-
-        var datedTimes = new List<DatedTime>();
-
-        dates = dates.Select(date => TimeZoneInfo.ConvertTimeFromUtc(date, brasiliaTimeZone).Date)
-            .Distinct()
-            .OrderByDescending(d => d)
-            .ToList();
-
-        foreach (var d in dates)
-        {
-            var tpList = timePeriods
-                .Where(p => TimeZoneInfo
-                    .ConvertTimeFromUtc(p.Start, brasiliaTimeZone).Date == d)
-                .OrderBy(p => p.Start)
-                .ToList();
-
-            var tsList = timerSessions
-                .Where(a => a.TimePeriods!.Any())
-                .Where(p => TimeZoneInfo
-                    .ConvertTimeFromUtc(p.TimePeriods!.FirstOrDefault()!.Start, brasiliaTimeZone).Date == d)
-                .ToList();
-
-            datedTimes.Add(new DatedTime
-            {
-                Date = d.Date, TimePeriods = tpList, TimerSessions = tsList
-            });
-        }
-
-        return datedTimes;
     }
 
     public async Task<TimePeriodEntity> Create(TimePeriodEntity entity)

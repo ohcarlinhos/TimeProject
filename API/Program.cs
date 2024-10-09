@@ -17,6 +17,9 @@ SwaggerBuilderConfig.Apply(builder);
 DatabaseBuilderConfig.Apply(builder);
 RepositoriesBuilderConfig.Apply(builder);
 ServicesBuilderConfig.Apply(builder);
+
+TimePeriodBuilderConfig.Apply(builder);
+
 IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);
 MappingBuilderConfig.Apply(builder);

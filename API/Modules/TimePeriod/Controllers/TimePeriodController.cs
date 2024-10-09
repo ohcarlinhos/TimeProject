@@ -1,5 +1,6 @@
 ﻿using API.Modules.Core.Controllers;
 using API.Modules.TimePeriod.Services;
+using API.Modules.TimePeriod.UseCases;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,22 +11,24 @@ namespace API.Modules.TimePeriod.Controllers;
 
 [ApiController]
 [Route("api/period")]
-public class TimePeriodController(ITimePeriodServices timePeriodServices) : CustomController
+public class TimePeriodController(ITimePeriodServices timePeriodServices, IGetTimePeriodHistory getTimePeriodHistory)
+    : CustomController
 {
     [HttpGet, Authorize, Route("{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<TimePeriodMap>>> Index(int timeRecordId,
+    public async Task<ActionResult<Pagination<Shared.TimePeriod.TimePeriodMap>>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         var result = await timePeriodServices
-            .Index(timeRecordId, paginationQuery, User);
+            .Index(timeRecordId, User, paginationQuery);
 
         return HandleResponse(result);
     }
 
-    [HttpGet, Authorize, Route("dated/{timeRecordId:int}")]
-    public async Task<ActionResult<IEnumerable<DatedTimeMap>>> Dated([FromRoute] int timeRecordId)
+    [HttpGet, Authorize, Route("history/{timeRecordId:int}")]
+    public async Task<ActionResult<IEnumerable<HistoryDayMap>>> HistoryIndex([FromRoute] int timeRecordId,
+        [FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await timePeriodServices.Dated(timeRecordId, User));
+        return HandleResponse(await getTimePeriodHistory.Handle(timeRecordId, User, paginationQuery));
     }
 
     [HttpPost, Authorize]

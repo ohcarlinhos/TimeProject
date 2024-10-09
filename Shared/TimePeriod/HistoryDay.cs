@@ -2,9 +2,9 @@
 
 namespace Shared.TimePeriod;
 
-public class DatedTime
+public class HistoryDay
 {
     public DateTime Date { get; set; }
-    public IEnumerable<Entities.TimePeriodEntity>? TimePeriods { get; set; }
+    public IEnumerable<TimePeriodEntity>? TimePeriods { get; set; }
     public IEnumerable<TimerSessionEntity>? TimerSessions { get; set; }
 }

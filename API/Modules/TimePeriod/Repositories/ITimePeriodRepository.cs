@@ -6,9 +6,8 @@ namespace API.Modules.TimePeriod.Repositories;
 
 public interface ITimePeriodRepository
 {
-    List<TimePeriodEntity> Index(int timeRecordId, PaginationQuery paginationQuery, int userId);
+    List<TimePeriodEntity> Index(int timeRecordId, int userId, PaginationQuery paginationQuery);
     Task<int> GetTotalItems(int timeRecordId, PaginationQuery paginationQuery, int userId);
-    Task<IEnumerable<DatedTime>> Dated(int timeRecordId, int userId);
     Task<TimePeriodEntity> Create(TimePeriodEntity entity);
     Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entityList);
     Task<TimePeriodEntity> Update(TimePeriodEntity entity);

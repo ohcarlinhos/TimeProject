@@ -19,27 +19,16 @@ public class TimePeriodServices(
     IMapper mapper
 ) : ITimePeriodServices
 {
-    private TimePeriodMap MapData(TimePeriodEntity entity)
-    {
-        return mapper.Map<TimePeriodEntity, TimePeriodMap>(entity);
-    }
-
     private List<TimePeriodMap> MapData(List<TimePeriodEntity> entity)
     {
         return mapper.Map<List<TimePeriodEntity>, List<TimePeriodMap>>(entity);
     }
 
-
-    private IEnumerable<DatedTimeMap> MapData(IEnumerable<DatedTime> entity)
-    {
-        return mapper.Map<IEnumerable<DatedTime>, IEnumerable<DatedTimeMap>>(entity);
-    }
-
     public async Task<Result<Pagination<TimePeriodMap>>> Index(int timeRecordId,
-        PaginationQuery paginationQuery, ClaimsPrincipal user)
+        ClaimsPrincipal user, PaginationQuery paginationQuery)
     {
         var totalItems = await timePeriodRepository.GetTotalItems(timeRecordId, paginationQuery, UserClaims.Id(user));
-        var data = MapData(timePeriodRepository.Index(timeRecordId, paginationQuery, UserClaims.Id(user)));
+        var data = MapData(timePeriodRepository.Index(timeRecordId, UserClaims.Id(user), paginationQuery));
 
         return new Result<Pagination<TimePeriodMap>>()
         {
@@ -48,16 +37,6 @@ public class TimePeriodServices(
                 paginationQuery,
                 totalItems
             )
-        };
-    }
-
-    public async Task<Result<IEnumerable<DatedTimeMap>>> Dated(int timeRecordId, ClaimsPrincipal user)
-    {
-        var data = await timePeriodRepository.Dated(timeRecordId, UserClaims.Id(user));
-
-        return new Result<IEnumerable<DatedTimeMap>>
-        {
-            Data = MapData(data)
         };
     }
 
