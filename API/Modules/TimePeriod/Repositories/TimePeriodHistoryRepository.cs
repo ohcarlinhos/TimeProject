@@ -36,12 +36,6 @@ public class TimePeriodHistoryRepository(ProjectContext db) : ITimePeriodHistory
             .ToList();
     }
 
-    public IEnumerable<DateTime> TakeDatesFromPagination(IEnumerable<DateTime> dates, PaginationQuery paginationQuery)
-    {
-        return dates
-            .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
-            .Take(paginationQuery.PerPage);
-    }
 
     public async Task<List<TimePeriodEntity>> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
         DateTime initDate, DateTime endDate)

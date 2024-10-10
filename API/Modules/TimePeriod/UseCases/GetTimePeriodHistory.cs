@@ -20,7 +20,10 @@ public class GetTimePeriodHistory(
     {
         var userId = UserClaims.Id(user);
         var distinctDates = await repo.GetDistinctDates(timeRecordId, userId, -3);
-        var dates = repo.TakeDatesFromPagination(distinctDates, paginationQuery);
+        
+        var dates = distinctDates
+            .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
+            .Take(paginationQuery.PerPage);
 
         var historyDays = new List<HistoryDay>();
 
