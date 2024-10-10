@@ -27,7 +27,7 @@ public class TimePeriodHistoryRepository(ProjectContext db) : ITimePeriodHistory
     {
         var datesFromQuery = await TimePeriodQuery(timeRecordId, userId)
             .Select(p => p.Start)
-            .OrderByDescending(p => p)
+            .OrderBy(p => p)
             .ToListAsync();
 
         return datesFromQuery
@@ -42,7 +42,7 @@ public class TimePeriodHistoryRepository(ProjectContext db) : ITimePeriodHistory
     {
         return await TimePeriodQuery(timeRecordId, userId)
             .Where(p => p.Start >= initDate && p.Start < endDate && p.TimerSessionId == null)
-            .OrderBy(p => p.Start)
+            .OrderByDescending(p => p.Start)
             .ToListAsync();
     }
 

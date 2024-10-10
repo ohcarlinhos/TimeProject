@@ -10,9 +10,9 @@ namespace API.Modules.TimePeriod.UseCases;
 
 public class GetTimePeriodHistory(
     ITimePeriodHistoryRepository repo,
-    ITimePeriodMapData mapData) : IGetTimePeriodHistory
+    ITimePeriodMapDataUtil mapDataUtil) : IGetTimePeriodHistory
 {
-    public async Task<Result<Pagination<HistoryDayMap>>> Handle(
+    public async Task<Result<Pagination<HistoryPeriodDayMap>>> Handle(
         int timeRecordId,
         ClaimsPrincipal user,
         PaginationQuery paginationQuery
@@ -25,7 +25,7 @@ public class GetTimePeriodHistory(
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage);
 
-        var historyDays = new List<HistoryDay>();
+        var historyDays = new List<HistoryPeriodDay>();
 
         foreach (var dateItem in dates)
         {
@@ -37,18 +37,20 @@ public class GetTimePeriodHistory(
 
             if (tpList.Count == 0 && tsList.Count == 0) continue;
 
-            historyDays.Add(new HistoryDay
+            historyDays.Add(new HistoryPeriodDay
             {
                 Date = initDate,
+                InitDate = initDate,
+                EndDate = endDate,
                 TimePeriods = tpList,
                 TimerSessions = tsList
             });
         }
 
-        return new Result<Pagination<HistoryDayMap>>
+        return new Result<Pagination<HistoryPeriodDayMap>>
         {
-            Data = Pagination<HistoryDayMap>
-                .Handle(mapData.Handle(historyDays), paginationQuery, distinctDates.Count)
+            Data = Pagination<HistoryPeriodDayMap>
+                .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)
         };
     }
 }

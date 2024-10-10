@@ -7,6 +7,6 @@ namespace API.Modules.TimePeriod.UseCases;
 
 public interface IGetTimePeriodHistory
 {
-    public Task<Result<Pagination<HistoryDayMap>>> Handle(int timeRecordId, ClaimsPrincipal user,
+    public Task<Result<Pagination<HistoryPeriodDayMap>>> Handle(int timeRecordId, ClaimsPrincipal user,
         PaginationQuery paginationQuery);
 }

@@ -14,8 +14,9 @@ public static class TimePeriodBuilderConfig
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
         builder.Services.AddScoped<ITimePeriodHistoryRepository, TimePeriodHistoryRepository>();
 
-        builder.Services.AddScoped<ITimePeriodMapData, TimePeriodMapData>();
-        
         builder.Services.AddScoped<IGetTimePeriodHistory, GetTimePeriodHistory>();
+
+        builder.Services.AddScoped<ITimePeriodMapDataUtil, TimePeriodMapDataUtil>();
+        builder.Services.AddScoped<ITimePeriodCutUtil, TimePeriodCutUtil>();
     }
 }

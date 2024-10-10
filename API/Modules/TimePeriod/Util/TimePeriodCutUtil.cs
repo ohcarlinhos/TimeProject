@@ -1,0 +1,18 @@
+﻿using Entities;
+
+namespace API.Modules.TimePeriod.Util;
+
+public class TimePeriodCutUtil : ITimePeriodCutUtil
+{
+    public TimePeriodEntity Handle(TimePeriodEntity entity, DateTime initDate, DateTime endDate)
+    {
+        var start = entity.Start < initDate ? initDate : entity.Start;
+        var end = entity.End > endDate ? entity.End = endDate.AddMilliseconds(-1) : entity.End;
+        return new TimePeriodEntity { Start = start, End = end };
+    }
+
+    public List<TimePeriodEntity> Handle(IEnumerable<TimePeriodEntity> list, DateTime initDate, DateTime endDate)
+    {
+        return list.Select(e => Handle(e, initDate, endDate)).ToList();
+    }
+}

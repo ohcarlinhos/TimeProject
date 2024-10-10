@@ -26,7 +26,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices, IGetTi
     }
 
     [HttpGet, Authorize, Route("history/{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<HistoryDayMap>>> HistoryIndex([FromRoute] int timeRecordId,
+    public async Task<ActionResult<Pagination<HistoryPeriodDayMap>>> HistoryIndex([FromRoute] int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(await getTimePeriodHistory.Handle(timeRecordId, User, paginationQuery));

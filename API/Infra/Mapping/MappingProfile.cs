@@ -15,7 +15,7 @@ public class MappingProfile : Profile
         CreateMap<TimeRecordEntity, TimeRecordMap>();
         CreateMap<TimePeriodEntity, TimePeriodMap>();
         CreateMap<CategoryEntity, CategoryMap>();
-        CreateMap<HistoryDay, HistoryDayMap>();
+        CreateMap<HistoryPeriodDay, HistoryPeriodDayMap>();
         CreateMap<TimerSessionEntity, TimerSessionMap>();
     }
 }

@@ -1,8 +1,11 @@
-using Shared.Statistic;
+using Entities;
 
 namespace API.Modules.Statistic.Repository;
 
 public interface IStatisticRepository
 {
-    public Task<DayStatistic> GetDay(DateTime date, int userId);
+    Task<List<TimePeriodEntity>> GetTimePeriodsByRange(int userId, DateTime initDate, DateTime endDate);
+    Task<List<TimerSessionEntity>> GetTimerSessionsByRange(int userId, DateTime initDate, DateTime endDate);
+    Task<int> TimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate);
+    Task<int> TimeRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate);
 }

@@ -4,7 +4,7 @@ using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Util;
 
-public class TimePeriodMapData(IMapper mapper) : ITimePeriodMapData
+public class TimePeriodMapDataUtil(IMapper mapper) : ITimePeriodMapDataUtil
 {
     public TimePeriodMap Handle(TimePeriodEntity entity)
     {
@@ -16,8 +16,8 @@ public class TimePeriodMapData(IMapper mapper) : ITimePeriodMapData
         return mapper.Map<List<TimePeriodEntity>, List<TimePeriodMap>>(entity);
     }
 
-    public IEnumerable<HistoryDayMap> Handle(IEnumerable<HistoryDay> entity)
+    public IEnumerable<HistoryPeriodDayMap> Handle(IEnumerable<HistoryPeriodDay> entity)
     {
-        return mapper.Map<IEnumerable<HistoryDay>, IEnumerable<HistoryDayMap>>(entity);
+        return mapper.Map<IEnumerable<HistoryPeriodDay>, IEnumerable<HistoryPeriodDayMap>>(entity);
     }
 }
