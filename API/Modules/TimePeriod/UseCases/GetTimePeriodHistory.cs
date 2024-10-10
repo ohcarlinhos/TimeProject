@@ -9,17 +9,43 @@ using Shared.TimePeriod;
 namespace API.Modules.TimePeriod.UseCases;
 
 public class GetTimePeriodHistory(
-    ITimePeriodHistoryRepository historyRepository,
+    ITimePeriodHistoryRepository repo,
     ITimePeriodMapData mapData) : IGetTimePeriodHistory
 {
-    public async Task<Result<Pagination<HistoryDayMap>>> Handle(int timeRecordId, ClaimsPrincipal user,
-        PaginationQuery paginationQuery)
+    public async Task<Result<Pagination<HistoryDayMap>>> Handle(
+        int timeRecordId,
+        ClaimsPrincipal user,
+        PaginationQuery paginationQuery
+    )
     {
-        var result = await historyRepository.Index(timeRecordId, UserClaims.Id(user), paginationQuery);
+        var userId = UserClaims.Id(user);
+        var distinctDates = await repo.GetDistinctDates(timeRecordId, userId, -3);
+        var dates = repo.TakeDatesFromPagination(distinctDates, paginationQuery);
+
+        var historyDays = new List<HistoryDay>();
+
+        foreach (var dateItem in dates)
+        {
+            var initDate = dateItem.AddHours(3);
+            var endDate = initDate.AddDays(1);
+
+            var tpList = await repo.GetTimePeriodsWithoutTimerSession(timeRecordId, userId, initDate, endDate);
+            var tsList = await repo.GetTimerSessions(timeRecordId, userId, initDate, endDate);
+
+            if (tpList.Count == 0 && tsList.Count == 0) continue;
+
+            historyDays.Add(new HistoryDay
+            {
+                Date = initDate,
+                TimePeriods = tpList,
+                TimerSessions = tsList
+            });
+        }
 
         return new Result<Pagination<HistoryDayMap>>
         {
-            Data = Pagination<HistoryDayMap>.Handle(mapData.Handle(result.Entities), paginationQuery, result.Count)
+            Data = Pagination<HistoryDayMap>
+                .Handle(mapData.Handle(historyDays), paginationQuery, distinctDates.Count)
         };
     }
 }
