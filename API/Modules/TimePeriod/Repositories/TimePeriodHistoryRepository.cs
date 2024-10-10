@@ -27,11 +27,13 @@ public class TimePeriodHistoryRepository(ProjectContext db) : ITimePeriodHistory
 
         var distinctDate = datesFromQuery
             .Select(e => e.AddHours(-3).Date)
-            .Distinct();
+            .Distinct()
+            .ToList();
 
         var dates = distinctDate
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
-            .Take(paginationQuery.PerPage);
+            .Take(paginationQuery.PerPage)
+            .ToList();
 
         var datedTimeList = new List<HistoryDay>();
 
@@ -46,7 +48,6 @@ public class TimePeriodHistoryRepository(ProjectContext db) : ITimePeriodHistory
                 .ToListAsync();
 
             var tsList = await timerSessionQuery
-                .Where(a => a.TimePeriods != null && a.TimePeriods.Any())
                 .Where(p => p.TimePeriods!.FirstOrDefault()!.Start >= initDate &&
                             p.TimePeriods!.FirstOrDefault()!.Start < endDate)
                 .Include(p => p.TimePeriods!

@@ -25,10 +25,12 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
         var isolatedPeriodList = timePeriodList
             .Where(e => e.TimerSessionId == null)
             .ToList();
-        
+
         var sessionList = await db.TimerSessions
-            .Where(e => e.CreatedAt >= initDate && e.CreatedAt < endDate && userId == e.UserId)
-            .Include(e => e.TimePeriods)
+            .Where(p => p.TimePeriods!.FirstOrDefault()!.Start >= initDate &&
+                        p.TimePeriods!.FirstOrDefault()!.Start < endDate && userId == p.UserId)
+            .Include(p => p.TimePeriods!
+                .OrderBy(q => q.Start))
             .ToListAsync();
 
         var timerList = sessionList.Where(e => e.Type == "timer").ToList();
