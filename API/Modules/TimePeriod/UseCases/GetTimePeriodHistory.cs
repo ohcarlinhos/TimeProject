@@ -12,12 +12,14 @@ public class GetTimePeriodHistory(
     ITimePeriodHistoryRepository historyRepository,
     ITimePeriodMapData mapData) : IGetTimePeriodHistory
 {
-    public async Task<Result<IEnumerable<HistoryDayMap>>> Handle(int timeRecordId, ClaimsPrincipal user,
+    public async Task<Result<Pagination<HistoryDayMap>>> Handle(int timeRecordId, ClaimsPrincipal user,
         PaginationQuery paginationQuery)
     {
-        return new Result<IEnumerable<HistoryDayMap>>
+        var result = await historyRepository.Index(timeRecordId, UserClaims.Id(user), paginationQuery);
+
+        return new Result<Pagination<HistoryDayMap>>
         {
-            Data = mapData.Handle(await historyRepository.Index(timeRecordId, UserClaims.Id(user), paginationQuery))
+            Data = Pagination<HistoryDayMap>.Handle(mapData.Handle(result.Entities), paginationQuery, result.Count)
         };
     }
 }

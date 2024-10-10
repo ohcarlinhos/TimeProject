@@ -1,14 +1,15 @@
 using API.Database;
 using Microsoft.EntityFrameworkCore;
-using Shared.General;
 using Shared.General.Pagination;
+using Shared.General.Repositories;
 using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Repositories;
 
-public class TimePeriodHistoryRepository(ProjectContext db): ITimePeriodHistoryRepository
+public class TimePeriodHistoryRepository(ProjectContext db) : ITimePeriodHistoryRepository
 {
-    public async Task<IEnumerable<HistoryDay>> Index(int timeRecordId, int userId, PaginationQuery paginationQuery)
+    public async Task<IndexRepositoryResult<HistoryDay>> Index(int timeRecordId, int userId,
+        PaginationQuery paginationQuery)
     {
         var timePeriodQuery = db.TimePeriods
             .Where(p => p.UserId == userId && p.TimeRecordId == timeRecordId)
@@ -19,48 +20,54 @@ public class TimePeriodHistoryRepository(ProjectContext db): ITimePeriodHistoryR
                 p.UserId == userId && p.TimeRecordId == timeRecordId && p.TimePeriods != null && p.TimePeriods.Any())
             .AsQueryable();
 
-        var dates = await timePeriodQuery
-            .Select((p) => p.Start.Date)
-            .Distinct()
+        var datesFromQuery = await timePeriodQuery
+            .Select(p => p.Start)
             .OrderByDescending(p => p)
-            .Take(paginationQuery.PerPage)
             .ToListAsync();
 
-        var timePeriods = await timePeriodQuery
-            .Where((p) => p.TimerSessionId == null)
-            .ToListAsync();
+        var distinctDate = datesFromQuery
+            .Select(e => e.AddHours(-3).Date)
+            .Distinct();
 
-        var timerSessions = await timerSessionQuery
-            .Include(p => p.TimePeriods!
-                .OrderBy(q => q.Start))
-            .ToListAsync();
+        var dates = distinctDate
+            .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
+            .Take(paginationQuery.PerPage);
 
         var datedTimeList = new List<HistoryDay>();
-        
+
         foreach (var dateItem in dates)
         {
             var initDate = dateItem.AddHours(3);
             var endDate = initDate.AddDays(1);
 
-            var tpList = timePeriods
-                .Where(p => p.Start >= initDate && p.Start < endDate)
+            var tpList = await timePeriodQuery
+                .Where(p => p.Start >= initDate && p.Start < endDate && p.TimerSessionId == null)
                 .OrderBy(p => p.Start)
-                .ToList();
+                .ToListAsync();
 
-            var tsList = timerSessions
+            var tsList = await timerSessionQuery
                 .Where(a => a.TimePeriods != null && a.TimePeriods.Any())
-                .Where(p =>  p.TimePeriods?.FirstOrDefault()!.Start >= initDate &&
-                             p.TimePeriods.FirstOrDefault()!.Start < endDate)
-                .ToList();
+                .Where(p => p.TimePeriods!.FirstOrDefault()!.Start >= initDate &&
+                            p.TimePeriods!.FirstOrDefault()!.Start < endDate)
+                .Include(p => p.TimePeriods!
+                    .OrderBy(q => q.Start))
+                .ToListAsync();
 
-            datedTimeList.Add(new HistoryDay
+            if (tpList.Any() || tsList.Any())
             {
-                Date = initDate, 
-                TimePeriods = tpList, 
-                TimerSessions = tsList
-            });
+                datedTimeList.Add(new HistoryDay
+                {
+                    Date = initDate,
+                    TimePeriods = tpList,
+                    TimerSessions = tsList
+                });
+            }
         }
 
-        return datedTimeList;
+        return new IndexRepositoryResult<HistoryDay>
+        {
+            Count = distinctDate.Count(),
+            Entities = datedTimeList
+        };
     }
 }

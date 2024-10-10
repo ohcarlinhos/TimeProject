@@ -15,18 +15,7 @@ public class PaginationQuery
     public virtual int PerPage
     {
         get => _perPage;
-        set
-        {
-            switch (value)
-            {
-                case < 0:
-                    _perPage = 0;
-                    return;
-                case > 30:
-                    _perPage = 30;
-                    return;
-            }
-        }
+        set => _perPage = value <= 0 ? 1 : value > 30 ? 30 : value;
     }
 
     public string? Search { get; set; } = string.Empty;
