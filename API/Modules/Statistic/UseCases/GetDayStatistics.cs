@@ -24,7 +24,14 @@ public class GetDayStatistics(IStatisticRepository repo, ITimePeriodCutUtil time
         var timePeriodList = timePeriodCutUtil.Handle(timePeriodListByRange, initDate, endDate);
         var isolatedPeriodList = timePeriodList.Where(e => e.TimerSessionId == null).ToList();
 
-        var sessionList = await repo.GetTimerSessionsByRange(userId, initDate, endDate);
+        var sessionList = (await repo.GetTimerSessionsByRange(userId, initDate, endDate))
+            .Select(e =>
+            {
+                e.TimePeriods = timePeriodCutUtil.Handle(e.TimePeriods!, initDate, endDate);
+                return e;
+            })
+            .ToList();
+
         var timerList = sessionList.Where(e => e.Type == "timer").ToList();
         var pomodoroList = sessionList.Where(e => e.Type == "pomodoro").ToList();
         var breakList = sessionList.Where(e => e.Type == "break").ToList();
