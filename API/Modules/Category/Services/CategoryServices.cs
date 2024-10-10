@@ -6,6 +6,7 @@ using Entities;
 using Shared;
 using Shared.Category;
 using Shared.General;
+using Shared.General.Pagination;
 using Shared.General.Util;
 
 namespace API.Modules.Category.Services;

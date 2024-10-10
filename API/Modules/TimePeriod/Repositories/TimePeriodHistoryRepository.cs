@@ -1,6 +1,7 @@
 using API.Database;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
+using Shared.General.Pagination;
 using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Repositories;
@@ -22,7 +23,7 @@ public class TimePeriodHistoryRepository(ProjectContext db): ITimePeriodHistoryR
             .Select((p) => p.Start.Date)
             .Distinct()
             .OrderByDescending(p => p)
-            // .Take(9)
+            .Take(paginationQuery.PerPage)
             .ToListAsync();
 
         var timePeriods = await timePeriodQuery

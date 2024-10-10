@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.User;
 using Shared;
 using Shared.General;
+using Shared.General.Pagination;
 using Shared.General.Util;
 
 namespace API.Modules.User.Controllers;

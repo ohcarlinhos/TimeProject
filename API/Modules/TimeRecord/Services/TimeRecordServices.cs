@@ -8,6 +8,7 @@ using API.Modules.TimeRecord.Errors;
 using API.Modules.TimeRecord.Repositories;
 using Entities;
 using Shared.General;
+using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.TimePeriod;
 using Shared.TimeRecord;

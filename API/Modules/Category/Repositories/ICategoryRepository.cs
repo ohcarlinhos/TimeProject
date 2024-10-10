@@ -1,5 +1,6 @@
 ﻿using Shared.General;
 using Entities;
+using Shared.General.Pagination;
 
 namespace API.Modules.Category.Repositories;
 

@@ -2,6 +2,7 @@
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
+using Shared.General.Pagination;
 
 namespace API.Modules.User.Repositories
 {

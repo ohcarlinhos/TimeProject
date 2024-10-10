@@ -1,4 +1,4 @@
-﻿namespace Shared.General;
+﻿namespace Shared.General.Pagination;
 
 public class Pagination<T>
 {

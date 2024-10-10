@@ -2,6 +2,7 @@
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General;
+using Shared.General.Pagination;
 using Shared.General.Repositories;
 
 namespace API.Modules.TimeRecord.Repositories;

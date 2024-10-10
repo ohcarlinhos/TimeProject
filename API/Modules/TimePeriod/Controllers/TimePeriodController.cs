@@ -5,6 +5,7 @@ using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General;
+using Shared.General.Pagination;
 using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.Controllers;
@@ -26,7 +27,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices, IGetTi
 
     [HttpGet, Authorize, Route("history/{timeRecordId:int}")]
     public async Task<ActionResult<IEnumerable<HistoryDayMap>>> HistoryIndex([FromRoute] int timeRecordId,
-        [FromQuery] PaginationQuery paginationQuery)
+        [FromQuery] HistoryPaginationQuery paginationQuery)
     {
         return HandleResponse(await getTimePeriodHistory.Handle(timeRecordId, User, paginationQuery));
     }

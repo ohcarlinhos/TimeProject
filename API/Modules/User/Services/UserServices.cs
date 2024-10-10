@@ -5,6 +5,7 @@ using API.Modules.User.Services.Config;
 using AutoMapper;
 using Entities;
 using Shared.General;
+using Shared.General.Pagination;
 using Shared.User;
 
 namespace API.Modules.User.Services;
