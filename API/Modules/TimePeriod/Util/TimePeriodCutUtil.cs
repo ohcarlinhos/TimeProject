@@ -8,11 +8,12 @@ public class TimePeriodCutUtil : ITimePeriodCutUtil
     {
         var start = entity.Start < initDate ? initDate : entity.Start;
         var end = entity.End > endDate ? entity.End = endDate.AddMilliseconds(-1) : entity.End;
-        return new TimePeriodEntity { Start = start, End = end, TimerSessionId = entity.TimerSessionId};
+        if (end < start) end = start;
+        return new TimePeriodEntity { Start = start, End = end, TimerSessionId = entity.TimerSessionId };
     }
 
     public List<TimePeriodEntity> Handle(IEnumerable<TimePeriodEntity> list, DateTime initDate, DateTime endDate)
     {
-        return list.Select(e => Handle(e, initDate, endDate)).ToList();
+        return list.Select(e => Handle(e, initDate, endDate)).Where(e => e.Start < e.End).ToList();
     }
 }
