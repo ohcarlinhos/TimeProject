@@ -6,5 +6,5 @@ namespace API.Modules.Statistic.UseCases;
 
 public interface IGetDayStatistics
 {
-    public Task<Result<DayStatistic>> Handle(ClaimsPrincipal user, DateTime? date = null);
+    public Task<Result<DayStatistic>> Handle(int userId, DateTime? date = null);
 }

@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using API.Modules.Statistic.Repository;
 using API.Modules.TimePeriod.Util;
-using Entities;
 using Shared.General;
 using Shared.General.Util;
 using Shared.Statistic;
@@ -10,12 +9,11 @@ namespace API.Modules.Statistic.UseCases;
 
 public class GetDayStatistics(IStatisticRepository repo, ITimePeriodCutUtil timePeriodCutUtil) : IGetDayStatistics
 {
-    public async Task<Result<DayStatistic>> Handle(ClaimsPrincipal user, DateTime? date = null)
+    public async Task<Result<DayStatistic>> Handle(int userId, DateTime? date = null)
     {
         var result = new Result<DayStatistic>();
 
         var selectedDate = date?.Date ?? DateTime.Today.ToUniversalTime().Date;
-        var userId = UserClaims.Id(user);
 
         var initDate = selectedDate.AddHours(3);
         var endDate = initDate.AddDays(1);
