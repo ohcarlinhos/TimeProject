@@ -22,8 +22,21 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
     )
     {
         return db.TimerSessions
-            .Where(p => p.TimePeriods!.FirstOrDefault()!.Start >= initDate &&
-                        p.TimePeriods!.FirstOrDefault()!.Start < endDate && userId == p.UserId)
+            .Where(p =>
+                (
+                    (
+                        p.TimePeriods!.Count(e => e.Start >= initDate) > 0
+                        &&
+                        p.TimePeriods!.Count(e => e.Start < endDate) > 0
+                    )
+                    ||
+                    (
+                        p.TimePeriods!.Count(e => e.End > initDate) > 0
+                        &&
+                        p.TimePeriods!.Count(e => e.End <= endDate) > 0
+                    )
+                )
+                && userId == p.UserId)
             .Include(p => p.TimePeriods!.OrderBy(q => q.Start))
             .ToListAsync();
     }
