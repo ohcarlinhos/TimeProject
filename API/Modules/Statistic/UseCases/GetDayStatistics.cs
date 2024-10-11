@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using API.Modules.Statistic.Repository;
 using API.Modules.TimePeriod.Util;
 using Shared.General;
@@ -9,13 +8,13 @@ namespace API.Modules.Statistic.UseCases;
 
 public class GetDayStatistics(IStatisticRepository repo, ITimePeriodCutUtil timePeriodCutUtil) : IGetDayStatistics
 {
-    public async Task<Result<DayStatistic>> Handle(int userId, DateTime? date = null)
+    public async Task<Result<DayStatistic>> Handle(int userId, DateTime? date = null, int hoursToAddOnInitDate = 0)
     {
         var result = new Result<DayStatistic>();
 
         var selectedDate = date?.Date ?? DateTime.Today.ToUniversalTime().Date;
 
-        var initDate = selectedDate.AddHours(3);
+        var initDate = selectedDate.AddHours(hoursToAddOnInitDate);
         var endDate = initDate.AddDays(1);
 
         var timePeriodListByRange = await repo.GetTimePeriodsByRange(userId, initDate, endDate);

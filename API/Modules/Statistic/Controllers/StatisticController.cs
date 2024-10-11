@@ -13,6 +13,6 @@ public class StatisticController(IGetDayStatistics getDayStatistics) : CustomCon
     [HttpGet, Route("day")]
     public async Task<ActionResult<DayStatistic>> Day([FromQuery] DateTime? date)
     {
-        return HandleResponse(await getDayStatistics.Handle(UserClaims.Id(User), date));
+        return HandleResponse(await getDayStatistics.Handle(UserClaims.Id(User), date, 3));
     }
 }
