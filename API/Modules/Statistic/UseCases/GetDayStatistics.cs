@@ -38,22 +38,22 @@ public class GetDayStatistics(IStatisticRepository repo, ITimePeriodCutUtil time
             StartDay = initDate,
             EndDay = endDate,
 
+
             TotalHours = TimeFormat.StringFromTimePeriods(timePeriodList),
             TotalIsolatedPeriodHours = TimeFormat.StringFromTimePeriods(isolatedPeriodList),
-
             TotalTimerHours = TimeFormat.StringFromTimerSessions(timerList),
             TotalPomodoroHours = TimeFormat.StringFromTimerSessions(pomodoroList),
             TotalBreakHours = TimeFormat.StringFromTimerSessions(breakList),
-
-            TimePeriodCount = timePeriodList.Count,
-            InterruptionCount = timePeriodList.Count > 0 ? timePeriodList.Count - 1 : 0,
-            SessionCount = sessionList.Count,
-
+            
             IsolatedPeriodCount = isolatedPeriodList.Count,
             TimerCount = timerList.Count,
             PomodoroCount = pomodoroList.Count,
             BreakCount = breakList.Count,
 
+            TimePeriodCount = timePeriodList.Count,
+            InterruptionCount = timePeriodList.Count > 0 ? timePeriodList.Count - 1 : 0,
+            SessionCount = sessionList.Count,
+            
             CreatedTimeRecordCount = await repo.TimeRecordCreatedCount(userId, initDate, endDate),
             UpdatedTimeRecordCount = await repo.TimeRecordUpdatedCount(userId, initDate, endDate),
         });
