@@ -63,6 +63,15 @@ public class GetDayStatisticsTests
                 UserId = userId,
                 TimerSessionId = null,
                 TimeRecordId = timeRecordId
+            },
+            // will be removed
+            new TimePeriodEntity
+            {
+                Start = today.AddDays(1).AddMinutes(20),
+                End = today.AddDays(1).AddMinutes(45),
+                UserId = userId,
+                TimerSessionId = null,
+                TimeRecordId = timeRecordId
             }
         ];
     }
