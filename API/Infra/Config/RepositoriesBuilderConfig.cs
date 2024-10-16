@@ -2,8 +2,7 @@
 using API.Core.TimeRecord.Repositories;
 using API.Modules.Category.Repositories;
 using API.Modules.Codes.Repositories;
-using API.Modules.Statistic.Repository;
-using API.Modules.TimePeriod.Repositories;
+using API.Modules.Statistic;
 using API.Modules.TimeRecord.Repositories;
 using API.Modules.User.Repositories;
 using Entities;

@@ -5,7 +5,6 @@ using API.Core.TimePeriod.Services;
 using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
-using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Services;
 using API.Modules.TimeRecord.UseCases;
 using AutoMapper;

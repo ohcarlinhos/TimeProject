@@ -3,7 +3,7 @@ using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modules.Statistic.Repository;
+namespace API.Modules.Statistic;
 
 public class StatisticRepository(ProjectContext db) : IStatisticRepository
 {

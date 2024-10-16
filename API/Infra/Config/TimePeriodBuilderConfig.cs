@@ -4,7 +4,7 @@ using API.Core.TimePeriod.Util;
 using API.Core.TimeRecord.Repositories;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
-using API.Modules.TimePeriod.Repositories;
+using API.Modules.TimePeriod;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimePeriod.Util;
 using API.Modules.TimeRecord.Repositories;
