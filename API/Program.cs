@@ -19,6 +19,7 @@ RepositoriesBuilderConfig.Apply(builder);
 ServicesBuilderConfig.Apply(builder);
 
 TimePeriodBuilderConfig.Apply(builder);
+TimeRecordBuilderConfig.Apply(builder);
 
 IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);

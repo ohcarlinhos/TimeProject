@@ -16,9 +16,4 @@ public class TimePeriodMapDataUtil(IMapper mapper) : ITimePeriodMapDataUtil
     {
         return mapper.Map<List<TimePeriodEntity>, List<TimePeriodMap>>(entity);
     }
-
-    public IEnumerable<HistoryPeriodDayMap> Handle(IEnumerable<HistoryPeriodDay> entity)
-    {
-        return mapper.Map<IEnumerable<HistoryPeriodDay>, IEnumerable<HistoryPeriodDayMap>>(entity);
-    }
 }

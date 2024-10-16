@@ -1,21 +1,20 @@
 using System.Security.Claims;
 using API.Core.TimePeriod.Repositories;
-using API.Core.TimePeriod.UseCases;
 using API.Core.TimePeriod.Util;
-using API.Modules.TimePeriod.Repositories;
-using API.Modules.TimePeriod.Util;
+using API.Core.TimeRecord.UseCases;
+using API.Core.TimeRecord.Util;
 using Shared.General;
 using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod.UseCases;
+namespace API.Modules.TimeRecord.UseCases;
 
-public class GetTimePeriodHistoryUseCase(
+public class GetTimeRecordHistoryUseCase(
     ITimePeriodHistoryRepository repo,
-    ITimePeriodMapDataUtil mapDataUtil) : IGetTimePeriodHistoryUseCase
+    ITimeRecordMapDataUtil mapDataUtil) : IGetTimeRecordHistoryUseCase
 {
-    public async Task<Result<Pagination<HistoryPeriodDayMap>>> Handle(
+    public async Task<Result<Pagination<TimeRecordHistoryDayMap>>> Handle(
         int timeRecordId,
         ClaimsPrincipal user,
         PaginationQuery paginationQuery
@@ -28,7 +27,7 @@ public class GetTimePeriodHistoryUseCase(
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage);
 
-        var historyDays = new List<HistoryPeriodDay>();
+        var historyDays = new List<TimeRecordHistoryDay>();
 
         foreach (var dateItem in dates)
         {
@@ -40,7 +39,7 @@ public class GetTimePeriodHistoryUseCase(
 
             if (tpList.Count == 0 && tsList.Count == 0) continue;
 
-            historyDays.Add(new HistoryPeriodDay
+            historyDays.Add(new TimeRecordHistoryDay
             {
                 Date = initDate,
                 InitDate = initDate,
@@ -50,9 +49,9 @@ public class GetTimePeriodHistoryUseCase(
             });
         }
 
-        return new Result<Pagination<HistoryPeriodDayMap>>
+        return new Result<Pagination<TimeRecordHistoryDayMap>>
         {
-            Data = Pagination<HistoryPeriodDayMap>
+            Data = Pagination<TimeRecordHistoryDayMap>
                 .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)
         };
     }

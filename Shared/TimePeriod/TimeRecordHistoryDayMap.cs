@@ -2,7 +2,7 @@
 
 namespace Shared.TimePeriod;
 
-public class HistoryPeriodDayMap
+public class TimeRecordHistoryDayMap
 {
     public DateTime Date { get; set; }
 

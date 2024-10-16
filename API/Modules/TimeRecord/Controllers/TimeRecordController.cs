@@ -1,21 +1,31 @@
-﻿using API.Modules.Core.Controllers;
+﻿using API.Core.TimeRecord.UseCases;
+using API.Modules.Core.Controllers;
 using API.Modules.TimeRecord.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.General;
 using Shared.General.Pagination;
+using Shared.TimePeriod;
 using Shared.TimeRecord;
 
 namespace API.Modules.TimeRecord.Controllers;
 
 [ApiController]
 [Route("api/record")]
-public class TimeRecordController(ITimeRecordServices timeRecordServices) : CustomController
+public class TimeRecordController(
+    ITimeRecordServices timeRecordServices,
+    IGetTimeRecordHistoryUseCase getTimeRecordHistoryUseCase) : CustomController
 {
     [HttpGet, Authorize]
     public async Task<ActionResult<Pagination<TimeRecordMap>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(await timeRecordServices.Index(paginationQuery, User));
+    }
+
+    [HttpGet, Authorize, Route("history/{timeRecordId:int}")]
+    public async Task<ActionResult<Pagination<TimeRecordHistoryDayMap>>> HistoryIndex([FromRoute] int timeRecordId,
+        [FromQuery] PaginationQuery paginationQuery)
+    {
+        return HandleResponse(await getTimeRecordHistoryUseCase.Handle(timeRecordId, User, paginationQuery));
     }
 
     [HttpPost, Authorize]
