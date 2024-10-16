@@ -1,9 +1,9 @@
-﻿using API.Modules.Auth.Services;
+﻿using API.Core.Auth;
 using API.Modules.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Auth;
 
-namespace API.Modules.Auth.Controllers;
+namespace API.Modules.Auth;
 
 [ApiController]
 [Route("api/auth")]

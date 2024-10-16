@@ -1,5 +1,4 @@
-﻿using API.Modules.Auth.Errors;
-using API.Modules.Codes.Errors;
+﻿using API.Modules.Codes.Errors;
 using API.Modules.Codes.Repositories;
 using Entities;
 using Shared.General;

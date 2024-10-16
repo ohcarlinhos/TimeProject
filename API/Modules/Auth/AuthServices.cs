@@ -1,15 +1,15 @@
-﻿using API.Core.User;
+﻿using API.Core.Auth;
+using API.Core.Errors;
+using API.Core.User;
 using API.Infra.Services;
-using API.Modules.Auth.Errors;
 using API.Modules.Codes.Services;
 using API.Modules.Core.Handlers.Email;
-using API.Modules.User.Services;
 using Entities;
 using Shared.Auth;
 using Shared.General;
 using Shared.Handlers.Email;
 
-namespace API.Modules.Auth.Services;
+namespace API.Modules.Auth;
 
 public class AuthServices(
     IUserServices userServices,

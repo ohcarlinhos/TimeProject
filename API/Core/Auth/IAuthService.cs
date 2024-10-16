@@ -1,7 +1,7 @@
 ﻿using Shared.Auth;
 using Shared.General;
 
-namespace API.Modules.Auth.Services;
+namespace API.Core.Auth;
 
 public interface IAuthService
 {
