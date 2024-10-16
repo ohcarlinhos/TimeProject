@@ -1,7 +1,6 @@
 ﻿using API.Core.User;
 using API.Database;
 using API.Infra.Errors;
-using API.Modules.User.Services.Config;
 using AutoMapper;
 using Entities;
 using Shared.General;
@@ -10,7 +9,7 @@ using Shared.User;
 
 namespace API.Modules.User.Services;
 
-public class UserServices(IUserRepository userRepository, IMapper mapper, ProjectContext dbContext) : IUserServices
+public class UserServices(IUserRepository userRepository, IMapper mapper) : IUserServices
 {
     private List<UserMap> MapData(List<UserEntity> users)
     {
@@ -43,52 +42,6 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
             : result.SetData(mapper.Map<UserMap>(user));
     }
 
-    public async Task<Result<UserMap>> Update(int id, UpdateUserDto dto)
-    {
-        return await _update(id, dto, null);
-    }
-
-    public async Task<Result<UserMap>> Update(int id, UpdateUserDto dto, UpdateUserMethodConfig config)
-    {
-        return await _update(id, dto, config);
-    }
-
-    private async Task<Result<UserMap>> _update(int id, UpdateUserDto dto, UpdateUserMethodConfig? config)
-    {
-        var result = new Result<UserMap>();
-        var user = await userRepository.FindById(id);
-
-        if (user == null)
-            return result.SetError(UserErrors.NotFound);
-
-        if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email)
-        {
-            if (await EmailNotAvailability(dto.Email))
-                return result.SetError(UserErrors.EmailAlreadyInUse);
-
-            user.Email = dto.Email;
-        }
-
-        if (!string.IsNullOrWhiteSpace(dto.Name) && user.Name != dto.Name)
-            user.Name = dto.Name;
-
-        if (!string.IsNullOrWhiteSpace(dto.Password))
-        {
-            if ((config == null || config.SkipOldPasswordCompare == false) &&
-                BCrypt.Net.BCrypt.Verify(dto.OldPassword, user.Password) == false)
-            {
-                return result.SetError(UserErrors.DifferentPassword);
-            }
-
-            user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-        }
-
-        var entity = await userRepository.Update(user);
-
-        result.Data = mapper.Map<UserMap>(entity);
-        return result;
-    }
-
     public async Task<Result<UserMap>> UpdateRole(int id, UpdateRoleDto dto)
     {
         var result = new Result<UserMap>();
@@ -118,7 +71,6 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
             return result.SetError(UserErrors.NotFound);
 
         user.Password = BCrypt.Net.BCrypt.HashPassword(password);
-        ;
 
         var entity = await userRepository.Update(user);
         result.Data = mapper.Map<UserMap>(entity);

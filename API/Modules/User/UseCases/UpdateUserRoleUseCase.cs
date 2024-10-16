@@ -1,0 +1,32 @@
+﻿using API.Core.User;
+using API.Core.User.UseCases;
+using API.Core.User.Utils;
+using API.Infra.Errors;
+using Entities;
+using Shared.General;
+using Shared.User;
+
+namespace API.Modules.User.UseCases;
+
+public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper): IUpdateUserRoleUseCase
+{
+    public async Task<Result<UserMap>> Handle(int id, UpdateRoleDto dto)
+    {
+        var result = new Result<UserMap>();
+        var user = await repo.FindById(id);
+
+        if (user == null)
+            return result.SetError(UserErrors.NotFound);
+
+        if (Enum.TryParse(typeof(UserRole), dto.Role, out var userRole) == false)
+        {
+            return result.SetError(UserErrors.RoleNotFound);
+        }
+
+        user.UserRole = (UserRole)userRole;
+
+        var entity = await repo.Update(user);
+        result.Data = mapper.Handle(entity);
+        return result;
+    }
+}

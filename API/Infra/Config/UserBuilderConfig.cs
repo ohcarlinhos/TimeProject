@@ -14,8 +14,13 @@ public static class UserBuilderConfig
     {
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IUserServices, UserServices>();
+        
         builder.Services.AddScoped<IUserMapDataUtil, UserMapDataUtil>();
+        builder.Services.AddScoped<IUpdateUserOptions, UpdateUserOptions>();
         
         builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
+        builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        builder.Services.AddScoped<IUpdateUserRoleUseCase, UpdateUserRoleUseCase>();
+        
     }
 }

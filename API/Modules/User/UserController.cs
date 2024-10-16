@@ -1,7 +1,7 @@
 ﻿using API.Core.User;
 using API.Core.User.UseCases;
 using API.Infra.Controllers;
-using API.Modules.User.Services.Config;
+using API.Modules.User.Utils;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,12 @@ namespace API.Modules.User;
 
 [ApiController]
 [Route("api/user")]
-public class UserController(IUserServices userServices, ICreateUserUseCase createUserUseCase) : CustomController
+public class UserController(
+    IUserServices userServices,
+    ICreateUserUseCase createUserUseCase,
+    IUpdateUserUseCase updateUserUseCase,
+    IUpdateUserRoleUseCase updateUserRoleUseCase
+) : CustomController
 {
     [HttpGet, Authorize]
     public ActionResult<Pagination<UserMap>> Index([FromQuery] PaginationQuery paginationQuery)
@@ -35,7 +40,7 @@ public class UserController(IUserServices userServices, ICreateUserUseCase creat
     public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
         return HasAuthorization(id)
-            ? HandleResponse(await userServices.Update(id, dto))
+            ? HandleResponse(await updateUserUseCase.Handle(id, dto))
             : Forbid();
     }
 
@@ -43,11 +48,11 @@ public class UserController(IUserServices userServices, ICreateUserUseCase creat
     public async Task<ActionResult<UserMap>> UpdatePassword([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
     {
         return IsAdmin()
-            ? HandleResponse(await userServices.Update(id, new UpdateUserDto
+            ? HandleResponse(await updateUserUseCase.Handle(id, new UpdateUserDto
                 {
                     Password = dto.Password
                 },
-                new UpdateUserMethodConfig { SkipOldPasswordCompare = true }))
+                new UpdateUserOptions { SkipOldPasswordCompare = true }))
             : Forbid();
     }
 
@@ -55,7 +60,7 @@ public class UserController(IUserServices userServices, ICreateUserUseCase creat
     public async Task<ActionResult<UserMap>> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
     {
         return IsAdmin()
-            ? HandleResponse(await userServices.UpdateRole(id, dto))
+            ? HandleResponse(await updateUserRoleUseCase.Handle(id, dto))
             : Forbid();
     }
 
