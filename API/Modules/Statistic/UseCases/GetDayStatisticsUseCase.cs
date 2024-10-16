@@ -1,3 +1,4 @@
+using API.Core.Statistic.UseCases;
 using API.Modules.Statistic.Repository;
 using API.Modules.TimePeriod.Util;
 using Shared.General;
@@ -6,7 +7,7 @@ using Shared.Statistic;
 
 namespace API.Modules.Statistic.UseCases;
 
-public class GetDayStatistics(IStatisticRepository repo, ITimePeriodCutUtil timePeriodCutUtil) : IGetDayStatistics
+public class GetDayStatisticsUseCase(IStatisticRepository repo, ITimePeriodCutUtil timePeriodCutUtil) : IGetDayStatisticsUseCase
 {
     public async Task<Result<DayStatistic>> Handle(int userId, DateTime? date = null, int hoursToAddOnInitDate = 0)
     {

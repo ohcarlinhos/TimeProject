@@ -8,7 +8,7 @@ using Shared.Statistic;
 
 namespace UnitTests.UseCases;
 
-public class GetDayStatisticsTests
+public class GetDayStatisticsUseCaseTests
 {
     private readonly Mock<IStatisticRepository> _staticRepository = new();
 
@@ -163,7 +163,7 @@ public class GetDayStatisticsTests
     public async void Given_Date_When_IsToday_Then_ShouldReturnDayStatistic()
     {
         // Arrange
-        var getDayStatistics = new GetDayStatistics(_staticRepository.Object, new TimePeriodCutUtil());
+        var getDayStatistics = new GetDayStatisticsUseCase(_staticRepository.Object, new TimePeriodCutUtil());
 
         const int userId = 1;
         var today = DateTime.Today;
@@ -181,7 +181,7 @@ public class GetDayStatisticsTests
     public async void Given_Date_When_DontProvide_Then_ShouldReturnDayStatistic()
     {
         // Arrange
-        var getDayStatistics = new GetDayStatistics(_staticRepository.Object, new TimePeriodCutUtil());
+        var getDayStatistics = new GetDayStatisticsUseCase(_staticRepository.Object, new TimePeriodCutUtil());
 
         const int userId = 1;
         var today = DateTime.Today;
@@ -199,7 +199,7 @@ public class GetDayStatisticsTests
     public async void Given_Date_When_BrazilUtc_Then_ShouldReturnDayStatistic()
     {
         // Arrange
-        var getDayStatistics = new GetDayStatistics(_staticRepository.Object, new TimePeriodCutUtil());
+        var getDayStatistics = new GetDayStatisticsUseCase(_staticRepository.Object, new TimePeriodCutUtil());
 
         const int userId = 1;
         const int addHoursOnInitDate = 3;

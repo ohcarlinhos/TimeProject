@@ -1,9 +1,9 @@
 using Shared.General;
 using Shared.Statistic;
 
-namespace API.Modules.Statistic.UseCases;
+namespace API.Core.Statistic.UseCases;
 
-public interface IGetDayStatistics
+public interface IGetDayStatisticsUseCase
 {
     public Task<Result<DayStatistic>> Handle(int userId, DateTime? date = null, int hoursToAddOnInitDate = 0);
 }

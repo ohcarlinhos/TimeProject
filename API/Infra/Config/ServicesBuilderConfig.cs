@@ -1,4 +1,5 @@
-﻿using API.Infra.Services;
+﻿using API.Core.Statistic.UseCases;
+using API.Infra.Services;
 using API.Modules.Auth.Services;
 using API.Modules.Category.Services;
 using API.Modules.Codes.Services;
@@ -27,7 +28,7 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<IFindTimeRecordById, FindTimeRecordById>();
 
         // Statistics
-        builder.Services.AddScoped<IGetDayStatistics, GetDayStatistics>();
+        builder.Services.AddScoped<IGetDayStatisticsUseCase, GetDayStatisticsUseCase>();
 
         // Token
         builder.Services.AddSingleton<ITokenService, TokenService>();

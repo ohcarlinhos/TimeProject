@@ -1,4 +1,5 @@
 ﻿using API.Core.TimePeriod.Repositories;
+using API.Core.TimePeriod.UseCases;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimePeriod.UseCases;
@@ -15,7 +16,7 @@ public static class TimePeriodBuilderConfig
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
         builder.Services.AddScoped<ITimePeriodHistoryRepository, TimePeriodHistoryRepository>();
 
-        builder.Services.AddScoped<IGetTimePeriodHistory, GetTimePeriodHistory>();
+        builder.Services.AddScoped<IGetTimePeriodHistoryUseCase, GetTimePeriodHistoryUseCase>();
         builder.Services.AddScoped<ITimerSessionRepository, TimerSessionRepository>();
 
         builder.Services.AddScoped<ITimePeriodMapDataUtil, TimePeriodMapDataUtil>();
