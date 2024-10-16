@@ -1,6 +1,6 @@
-﻿using API.Core.Errors;
-using API.Core.User;
+﻿using API.Core.User;
 using API.Database;
+using API.Infra.Errors;
 using API.Modules.User.Services.Config;
 using AutoMapper;
 using Entities;

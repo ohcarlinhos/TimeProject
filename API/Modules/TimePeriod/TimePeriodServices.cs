@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
-using API.Core.Errors;
 using API.Core.TimePeriod;
 using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
+using API.Infra.Errors;
 using AutoMapper;
 using Entities;
 using Shared.General;

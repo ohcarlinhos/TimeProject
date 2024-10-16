@@ -1,4 +1,4 @@
-﻿namespace API.Core.Errors;
+﻿namespace API.Infra.Errors;
 
 public static class AuthErrors
 {
