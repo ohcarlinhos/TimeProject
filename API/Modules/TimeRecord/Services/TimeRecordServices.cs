@@ -1,10 +1,10 @@
 ﻿using System.Security.Claims;
+using API.Core.Category;
 using API.Core.Errors;
 using API.Core.TimePeriod;
 using API.Core.TimeRecord.Repositories;
 using API.Core.TimeRecord.Services;
 using API.Database;
-using API.Modules.Category.Repositories;
 using AutoMapper;
 using Entities;
 using Microsoft.IdentityModel.Tokens;

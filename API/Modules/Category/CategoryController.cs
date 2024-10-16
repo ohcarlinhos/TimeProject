@@ -1,14 +1,12 @@
-﻿using API.Modules.Category.Services;
+﻿using API.Core.Category;
 using API.Modules.Core.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared;
 using Shared.Category;
-using Shared.General;
 using Shared.General.Pagination;
 
-namespace API.Modules.Category.Controllers;
+namespace API.Modules.Category;
 
 [ApiController, Route("api/category"), Authorize]
 public class CategoryController(ICategoryServices categoryServices)

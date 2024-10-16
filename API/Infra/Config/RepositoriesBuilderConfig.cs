@@ -1,7 +1,8 @@
-﻿using API.Core.Statistic;
+﻿using API.Core.Category;
+using API.Core.Statistic;
 using API.Core.TimeRecord.Repositories;
 using API.Core.User;
-using API.Modules.Category.Repositories;
+using API.Modules.Category;
 using API.Modules.Codes.Repositories;
 using API.Modules.Statistic;
 using API.Modules.TimeRecord.Repositories;

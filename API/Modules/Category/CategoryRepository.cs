@@ -1,10 +1,10 @@
-﻿using API.Database;
-using Microsoft.EntityFrameworkCore;
-using Shared.General;
+﻿using API.Core.Category;
+using API.Database;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using Shared.General.Pagination;
 
-namespace API.Modules.Category.Repositories;
+namespace API.Modules.Category;
 
 public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 {

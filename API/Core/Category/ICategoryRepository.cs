@@ -1,8 +1,7 @@
-﻿using Shared.General;
-using Entities;
+﻿using Entities;
 using Shared.General.Pagination;
 
-namespace API.Modules.Category.Repositories;
+namespace API.Core.Category;
 
 public interface ICategoryRepository
 {

@@ -1,11 +1,10 @@
 ﻿using System.Security.Claims;
 using Entities;
-using Shared;
 using Shared.Category;
 using Shared.General;
 using Shared.General.Pagination;
 
-namespace API.Modules.Category.Services;
+namespace API.Core.Category;
 
 public interface ICategoryServices
 {

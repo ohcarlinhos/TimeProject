@@ -1,11 +1,12 @@
-﻿using API.Core.Statistic.UseCases;
+﻿using API.Core.Category;
+using API.Core.Statistic.UseCases;
 using API.Core.TimePeriod;
 using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
 using API.Core.User;
 using API.Infra.Services;
 using API.Modules.Auth.Services;
-using API.Modules.Category.Services;
+using API.Modules.Category;
 using API.Modules.Codes.Services;
 using API.Modules.Statistic.UseCases;
 using API.Modules.TimePeriod;

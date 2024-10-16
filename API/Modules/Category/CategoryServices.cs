@@ -1,15 +1,13 @@
 ﻿using System.Security.Claims;
-using API.Modules.Category.Repositories;
-using API.Modules.Core;
+using API.Core.Category;
 using AutoMapper;
 using Entities;
-using Shared;
 using Shared.Category;
 using Shared.General;
 using Shared.General.Pagination;
 using Shared.General.Util;
 
-namespace API.Modules.Category.Services;
+namespace API.Modules.Category;
 
 public class CategoryServices(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryServices
 {
