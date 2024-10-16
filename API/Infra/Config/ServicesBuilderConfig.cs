@@ -24,16 +24,10 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<IAuthService, AuthServices>();
         builder.Services.AddScoped<IUserServices, UserServices>();
         builder.Services.AddScoped<ICategoryServices, CategoryServices>();
-        builder.Services.AddScoped<ITimeRecordServices, TimeRecordServices>();
         builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
-        builder.Services.AddScoped<ITimeRecordMetaServices, TimeRecordMetaServices>();
+
         builder.Services.AddScoped<IConfirmCodeServices, ConfirmCodeServices>();
-
-        // Use Cases
-        // Time Record
-        builder.Services.AddScoped<IFindTimeRecordById, FindTimeRecordById>();
-
-        // Statistics
+        
         builder.Services.AddScoped<IGetDayStatisticsUseCase, GetDayStatisticsUseCase>();
 
         // Token

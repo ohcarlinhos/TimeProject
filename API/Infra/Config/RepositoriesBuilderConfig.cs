@@ -17,8 +17,6 @@ public static class RepositoriesBuilderConfig
     {
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-        builder.Services.AddScoped<ITimeRecordRepository, TimeRecordRepository>();
-        builder.Services.AddScoped<ITimeRecordMetaRepository, TimeRecordMetaRepository>();
         builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
         builder.Services.AddScoped<IConfirmCodeRepository, ConfirmCodeRepository>();
     }

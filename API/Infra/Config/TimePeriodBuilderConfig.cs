@@ -15,12 +15,10 @@ public static class TimePeriodBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
-
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
-
-        builder.Services.AddScoped<IGetTimeRecordHistoryUseCase, GetTimeRecordHistoryUseCase>();
         builder.Services.AddScoped<ITimerSessionRepository, TimerSessionRepository>();
+
+        builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
 
         builder.Services.AddScoped<ITimePeriodMapDataUtil, TimePeriodMapDataUtil>();
         builder.Services.AddScoped<ITimePeriodCutUtil, TimePeriodCutUtil>();
