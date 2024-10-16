@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace API.Core.TimePeriod.Repositories;
+namespace API.Core.TimerSession;
 
 public interface ITimerSessionRepository
 {

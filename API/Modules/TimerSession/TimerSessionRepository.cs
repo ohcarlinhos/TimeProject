@@ -1,8 +1,9 @@
 ﻿using API.Core.TimePeriod.Repositories;
+using API.Core.TimerSession;
 using API.Database;
 using Entities;
 
-namespace API.Modules.TimePeriod.Repositories;
+namespace API.Modules.TimerSession;
 
 public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
 {
