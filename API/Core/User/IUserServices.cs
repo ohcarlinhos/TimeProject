@@ -4,7 +4,7 @@ using Shared.General;
 using Shared.General.Pagination;
 using Shared.User;
 
-namespace API.Modules.User.Services;
+namespace API.Core.User;
 
 public interface IUserServices
 {

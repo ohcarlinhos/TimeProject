@@ -1,8 +1,7 @@
 ﻿using Entities;
-using Shared.General;
 using Shared.General.Pagination;
 
-namespace API.Modules.User.Repositories
+namespace API.Core.User
 {
     public interface IUserRepository
     {

@@ -1,4 +1,4 @@
-﻿namespace API.Modules.User.Errors;
+﻿namespace API.Core.Errors;
 
 public static class UserErrors
 {

@@ -1,16 +1,14 @@
-﻿using API.Modules.Core.Controllers;
-using API.Modules.User.Services;
+﻿using API.Core.User;
+using API.Modules.Core.Controllers;
 using API.Modules.User.Services.Config;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.User;
-using Shared;
-using Shared.General;
 using Shared.General.Pagination;
 using Shared.General.Util;
+using Shared.User;
 
-namespace API.Modules.User.Controllers;
+namespace API.Modules.User;
 
 [ApiController]
 [Route("api/user")]

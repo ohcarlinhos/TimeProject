@@ -1,10 +1,11 @@
 ﻿using API.Core.Statistic.Repositories;
 using API.Core.TimeRecord.Repositories;
+using API.Core.User;
 using API.Modules.Category.Repositories;
 using API.Modules.Codes.Repositories;
 using API.Modules.Statistic;
 using API.Modules.TimeRecord.Repositories;
-using API.Modules.User.Repositories;
+using API.Modules.User;
 using Entities;
 
 namespace API.Infra.Config;

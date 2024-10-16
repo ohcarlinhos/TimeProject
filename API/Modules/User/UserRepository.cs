@@ -1,10 +1,10 @@
-﻿using API.Database;
+﻿using API.Core.User;
+using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using Shared.General;
 using Shared.General.Pagination;
 
-namespace API.Modules.User.Repositories
+namespace API.Modules.User
 {
     public class UserRepository(ProjectContext dbContext) : IUserRepository
     {

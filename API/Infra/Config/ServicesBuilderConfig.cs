@@ -2,6 +2,7 @@
 using API.Core.TimePeriod.Services;
 using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
+using API.Core.User;
 using API.Infra.Services;
 using API.Modules.Auth.Services;
 using API.Modules.Category.Services;
