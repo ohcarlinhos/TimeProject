@@ -63,6 +63,15 @@ public class GetDayStatisticsUseCaseTests
                 UserId = userId,
                 TimerSessionId = null,
                 TimeRecordId = timeRecordId
+            },
+            // will be removed
+            new TimePeriodEntity
+            {
+                Start = today.AddDays(1).AddMinutes(20),
+                End = today.AddDays(1).AddMinutes(45),
+                UserId = userId,
+                TimerSessionId = null,
+                TimeRecordId = timeRecordId
             }
         ];
     }
@@ -142,20 +151,18 @@ public class GetDayStatisticsUseCaseTests
         data.Should().NotBeNull();
 
         data!.TimePeriodCount.Should().Be(7);
-        data.TotalHours.Should().Be("2h 55m 15s");
-
-        data.IsolatedPeriodCount.Should().Be(2);
-        data.TotalIsolatedPeriodHours.Should().Be("40m 10s");
-
         data.SessionCount.Should().Be(4);
 
+        data.IsolatedPeriodCount.Should().Be(2);
         data.TimerCount.Should().Be(2);
-        data.TotalTimerHours.Should().Be("1h 35m");
-
         data.PomodoroCount.Should().Be(1);
-        data.TotalPomodoroHours.Should().Be("25m");
-
         data.BreakCount.Should().Be(1);
+
+        data.TotalHours.Should().Be("2h 55m 15s");
+
+        data.TotalIsolatedPeriodHours.Should().Be("40m 10s");
+        data.TotalTimerHours.Should().Be("1h 35m");
+        data.TotalPomodoroHours.Should().Be("25m");
         data.TotalBreakHours.Should().Be("15m 5s");
     }
 
