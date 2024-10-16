@@ -1,7 +1,7 @@
 ﻿using Entities;
 using Shared.General.Pagination;
 
-namespace API.Core.TimePeriod.Repositories;
+namespace API.Core.TimePeriod;
 
 public interface ITimePeriodRepository
 {

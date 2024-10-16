@@ -1,4 +1,4 @@
-﻿using API.Modules.TimePeriod.Util;
+﻿using API.Modules.TimePeriod.Utils;
 using Entities;
 using FluentAssertions;
 

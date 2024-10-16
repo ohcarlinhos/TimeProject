@@ -1,9 +1,7 @@
 using System.Security.Claims;
-using API.Core.TimePeriod.Repositories;
-using API.Core.TimePeriod.Util;
 using API.Core.TimeRecord.Repositories;
 using API.Core.TimeRecord.UseCases;
-using API.Core.TimeRecord.Util;
+using API.Core.TimeRecord.Utils;
 using Shared.General;
 using Shared.General.Pagination;
 using Shared.General.Util;

@@ -1,7 +1,7 @@
 ﻿using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.Util;
+using API.Core.TimeRecord.Utils;
 using API.Modules.TimeRecord.Repositories;
-using API.Modules.TimeRecord.Util;
+using API.Modules.TimeRecord.Utils;
 
 namespace API.Infra.Config;
 

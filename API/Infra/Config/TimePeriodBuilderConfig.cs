@@ -1,12 +1,10 @@
-﻿using API.Core.TimePeriod.Repositories;
-using API.Core.TimePeriod.Services;
-using API.Core.TimePeriod.Util;
+﻿using API.Core.TimePeriod;
+using API.Core.TimePeriod.Utils;
 using API.Core.TimeRecord.Repositories;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
 using API.Modules.TimePeriod;
-using API.Modules.TimePeriod.Services;
-using API.Modules.TimePeriod.Util;
+using API.Modules.TimePeriod.Utils;
 using API.Modules.TimeRecord.Repositories;
 using API.Modules.TimeRecord.UseCases;
 using API.Modules.TimerSession;

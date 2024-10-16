@@ -1,4 +1,4 @@
-﻿using API.Core.TimePeriod.Services;
+﻿using API.Core.TimePeriod;
 using API.Modules.Core.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;

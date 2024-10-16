@@ -1,5 +1,4 @@
-﻿using API.Core.TimePeriod.Repositories;
-using API.Core.TimerSession;
+﻿using API.Core.TimerSession;
 using API.Database;
 using Entities;
 

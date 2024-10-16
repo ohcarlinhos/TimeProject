@@ -1,8 +1,8 @@
-using API.Core.TimeRecord.Util;
+using API.Core.TimeRecord.Utils;
 using AutoMapper;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimeRecord.Util;
+namespace API.Modules.TimeRecord.Utils;
 
 public class TimeRecordMapDataUtil(IMapper mapper) : ITimeRecordMapDataUtil
 {

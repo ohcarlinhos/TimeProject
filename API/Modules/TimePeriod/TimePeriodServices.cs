@@ -1,12 +1,9 @@
 ﻿using System.Security.Claims;
 using API.Core.Errors;
-using API.Core.TimePeriod.Repositories;
-using API.Core.TimePeriod.Services;
+using API.Core.TimePeriod;
 using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
-using API.Modules.TimeRecord.Services;
-using API.Modules.TimeRecord.UseCases;
 using AutoMapper;
 using Entities;
 using Shared.General;
@@ -14,7 +11,7 @@ using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod.Services;
+namespace API.Modules.TimePeriod;
 
 public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,

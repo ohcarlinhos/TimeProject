@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace API.Core.TimePeriod.Util;
+namespace API.Core.TimePeriod.Utils;
 
 public interface ITimePeriodCutUtil
 {

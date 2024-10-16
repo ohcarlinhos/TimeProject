@@ -1,7 +1,7 @@
-﻿using API.Core.TimePeriod.Util;
+﻿using API.Core.TimePeriod.Utils;
 using Entities;
 
-namespace API.Modules.TimePeriod.Util;
+namespace API.Modules.TimePeriod.Utils;
 
 public class TimePeriodCutUtil : ITimePeriodCutUtil
 {

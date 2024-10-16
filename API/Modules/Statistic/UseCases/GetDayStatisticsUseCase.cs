@@ -1,7 +1,6 @@
 using API.Core.Statistic.Repositories;
 using API.Core.Statistic.UseCases;
-using API.Core.TimePeriod.Util;
-using API.Modules.TimePeriod.Util;
+using API.Core.TimePeriod.Utils;
 using Shared.General;
 using Shared.General.Util;
 using Shared.Statistic;

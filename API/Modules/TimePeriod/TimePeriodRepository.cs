@@ -1,4 +1,4 @@
-﻿using API.Core.TimePeriod.Repositories;
+﻿using API.Core.TimePeriod;
 using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;

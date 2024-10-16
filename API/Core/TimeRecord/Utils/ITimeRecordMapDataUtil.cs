@@ -1,6 +1,6 @@
 using Shared.TimePeriod;
 
-namespace API.Core.TimeRecord.Util;
+namespace API.Core.TimeRecord.Utils;
 
 public interface ITimeRecordMapDataUtil
 {

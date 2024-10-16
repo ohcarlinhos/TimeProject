@@ -4,7 +4,7 @@ using Shared.General;
 using Shared.General.Pagination;
 using Shared.TimePeriod;
 
-namespace API.Core.TimePeriod.Services;
+namespace API.Core.TimePeriod;
 
 public interface ITimePeriodServices
 {
