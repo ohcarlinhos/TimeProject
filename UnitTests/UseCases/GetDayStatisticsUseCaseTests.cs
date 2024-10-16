@@ -1,4 +1,4 @@
-using API.Core.Statistic.Repositories;
+using API.Core.Statistic;
 using API.Modules.Statistic.UseCases;
 using API.Modules.TimePeriod.Utils;
 using Entities;

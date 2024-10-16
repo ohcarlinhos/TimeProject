@@ -1,4 +1,4 @@
-using API.Core.Statistic.Repositories;
+using API.Core.Statistic;
 using API.Core.Statistic.UseCases;
 using API.Core.TimePeriod.Utils;
 using Shared.General;
