@@ -3,7 +3,7 @@ using Shared.General;
 using Shared.General.Pagination;
 using Shared.TimeRecord;
 
-namespace API.Modules.TimeRecord.Services;
+namespace API.Core.TimeRecord.Services;
 
 public interface ITimeRecordServices
 {

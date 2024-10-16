@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace API.Modules.TimeRecord.Repositories;
+namespace API.Core.TimeRecord.Repositories;
 
 public interface ITimeRecordMetaRepository
 { 

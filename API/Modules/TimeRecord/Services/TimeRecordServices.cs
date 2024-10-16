@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
 using API.Core.Errors;
 using API.Core.TimePeriod.Services;
-using Microsoft.IdentityModel.Tokens;
-using AutoMapper;
+using API.Core.TimeRecord.Repositories;
+using API.Core.TimeRecord.Services;
 using API.Database;
 using API.Modules.Category.Repositories;
-using API.Modules.TimePeriod.Services;
-using API.Modules.TimeRecord.Repositories;
+using AutoMapper;
 using Entities;
+using Microsoft.IdentityModel.Tokens;
 using Shared.General;
 using Shared.General.Pagination;
 using Shared.General.Util;

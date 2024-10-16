@@ -1,4 +1,5 @@
 ﻿using API.Core.Statistic.Repositories;
+using API.Core.TimeRecord.Repositories;
 using API.Modules.Category.Repositories;
 using API.Modules.Codes.Repositories;
 using API.Modules.Statistic.Repository;

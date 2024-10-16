@@ -1,4 +1,5 @@
-﻿using API.Core.TimeRecord.UseCases;
+﻿using API.Core.TimeRecord.Services;
+using API.Core.TimeRecord.UseCases;
 using API.Modules.Core.Controllers;
 using API.Modules.TimeRecord.Services;
 using Microsoft.AspNetCore.Authorization;
