@@ -1,4 +1,4 @@
-﻿namespace API.Modules.TimePeriod.Errors;
+﻿namespace API.Core.Errors;
 
 public static class TimePeriodErrors
 {

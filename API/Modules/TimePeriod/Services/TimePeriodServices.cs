@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
+using API.Core.Errors;
 using API.Core.TimePeriod.Repositories;
-using API.Modules.TimePeriod.Errors;
+using API.Core.TimePeriod.Services;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Services;
 using API.Modules.TimeRecord.UseCases;

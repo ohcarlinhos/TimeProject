@@ -1,4 +1,5 @@
 ﻿using API.Core.Statistic.UseCases;
+using API.Core.TimePeriod.Services;
 using API.Infra.Services;
 using API.Modules.Auth.Services;
 using API.Modules.Category.Services;

@@ -1,4 +1,5 @@
-﻿using API.Modules.Category.Repositories;
+﻿using API.Core.Statistic.Repositories;
+using API.Modules.Category.Repositories;
 using API.Modules.Codes.Repositories;
 using API.Modules.Statistic.Repository;
 using API.Modules.TimePeriod.Repositories;

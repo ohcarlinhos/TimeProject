@@ -1,7 +1,7 @@
 using Entities;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod.Util;
+namespace API.Core.TimePeriod.Util;
 
 public interface ITimePeriodMapDataUtil
 {

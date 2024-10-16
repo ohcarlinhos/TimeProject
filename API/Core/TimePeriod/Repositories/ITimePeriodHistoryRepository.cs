@@ -1,6 +1,6 @@
 using Entities;
 
-namespace API.Modules.TimePeriod.Repositories;
+namespace API.Core.TimePeriod.Repositories;
 
 public interface ITimePeriodHistoryRepository
 {

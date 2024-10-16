@@ -1,6 +1,6 @@
 using Entities;
 
-namespace API.Modules.Statistic.Repository;
+namespace API.Core.Statistic.Repositories;
 
 public interface IStatisticRepository
 {

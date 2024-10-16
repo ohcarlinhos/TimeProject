@@ -1,6 +1,6 @@
-﻿using API.Core.TimePeriod.UseCases;
+﻿using API.Core.TimePeriod.Services;
+using API.Core.TimePeriod.UseCases;
 using API.Modules.Core.Controllers;
-using API.Modules.TimePeriod.Services;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
