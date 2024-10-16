@@ -74,6 +74,8 @@ namespace API.Modules.User
                 .Where(u => u.Email == email)
                 .FirstOrDefaultAsync();
         }
+        
+        public async Task<bool> EmailIsAvailable(string email) => await FindByEmail(email) == null;
 
         private static IQueryable<UserEntity> SearchWhereConditional(IQueryable<UserEntity> query, string search)
         {

@@ -1,4 +1,5 @@
 ﻿using API.Core.User;
+using API.Core.User.UseCases;
 using API.Infra.Controllers;
 using API.Modules.User.Services.Config;
 using Entities;
@@ -12,7 +13,7 @@ namespace API.Modules.User;
 
 [ApiController]
 [Route("api/user")]
-public class UserController(IUserServices userServices) : CustomController
+public class UserController(IUserServices userServices, ICreateUserUseCase createUserUseCase) : CustomController
 {
     [HttpGet, Authorize]
     public ActionResult<Pagination<UserMap>> Index([FromQuery] PaginationQuery paginationQuery)
@@ -25,7 +26,7 @@ public class UserController(IUserServices userServices) : CustomController
     [HttpPost]
     public async Task<ActionResult<UserMap>> Create([FromBody] CreateUserDto dto)
     {
-        var result = await userServices.Create(dto);
+        var result = await createUserUseCase.Handle(dto);
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
