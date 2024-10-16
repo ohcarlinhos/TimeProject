@@ -1,6 +1,6 @@
 ﻿using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
-using API.Modules.Core.Controllers;
+using API.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Pagination;

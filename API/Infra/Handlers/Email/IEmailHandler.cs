@@ -1,6 +1,6 @@
 ﻿using Shared.Handlers.Email;
 
-namespace API.Modules.Core.Handlers.Email;
+namespace API.Infra.Handlers.Email;
 
 public interface IEmailHandler
 {

@@ -1,5 +1,5 @@
 using API.Core.Statistic.UseCases;
-using API.Modules.Core.Controllers;
+using API.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Util;

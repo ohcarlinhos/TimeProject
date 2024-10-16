@@ -1,5 +1,5 @@
 ﻿using API.Core.Category;
-using API.Modules.Core.Controllers;
+using API.Infra.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

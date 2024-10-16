@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.General;
 using Shared.General.Util;
 
-namespace API.Modules.Core.Controllers;
+namespace API.Infra.Controllers;
 
 public class CustomController : ControllerBase
 {

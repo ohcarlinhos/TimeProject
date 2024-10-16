@@ -1,5 +1,5 @@
 ﻿using API.Core.User;
-using API.Modules.Core.Controllers;
+using API.Infra.Controllers;
 using API.Modules.User.Services.Config;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
