@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using API.Modules.TimeRecord.Errors;
+using API.Core.Errors;
 using API.Modules.TimeRecord.Repositories;
 using Entities;
 using Shared.General;

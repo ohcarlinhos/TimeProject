@@ -1,4 +1,4 @@
-﻿namespace API.Modules.TimeRecord.Errors;
+﻿namespace API.Core.Errors;
 
 public static class TimeRecordErrors
 {
