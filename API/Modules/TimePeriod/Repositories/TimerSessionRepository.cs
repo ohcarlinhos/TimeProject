@@ -1,9 +1,10 @@
-﻿using API.Database;
+﻿using API.Core.TimePeriod.Repositories;
+using API.Database;
 using Entities;
 
-namespace API.Modules.TimePeriod.Services;
+namespace API.Modules.TimePeriod.Repositories;
 
-public class TimerSessionServices(ProjectContext dbContext) : ITimerSessionServices
+public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
 {
     public async Task<TimerSessionEntity> Create(TimerSessionEntity timerSessionEntity)
     {
@@ -12,9 +13,9 @@ public class TimerSessionServices(ProjectContext dbContext) : ITimerSessionServi
         timerSessionEntity.CreatedAt = now;
         timerSessionEntity.UpdatedAt = now;
 
-        dbContext.TimerSessions.Add(timerSessionEntity);
+        db.TimerSessions.Add(timerSessionEntity);
 
-        await dbContext.SaveChangesAsync();
+        await db.SaveChangesAsync();
         return timerSessionEntity;
     }
 }

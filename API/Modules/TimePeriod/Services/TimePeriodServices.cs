@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using API.Core.TimePeriod.Repositories;
 using API.Modules.TimePeriod.Errors;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimeRecord.Services;
@@ -15,7 +16,7 @@ namespace API.Modules.TimePeriod.Services;
 public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,
     ITimeRecordMetaServices timeRecordMetaServices,
-    ITimerSessionServices timerSessionServices,
+    ITimerSessionRepository timerSessionRepository,
     IFindTimeRecordById findTimeRecordById,
     IMapper mapper
 ) : ITimePeriodServices
@@ -102,7 +103,7 @@ public class TimePeriodServices(
         if (result.HasError) return result;
         if (list.Count == 0) return result.SetData([]);
 
-        var timerSession = await timerSessionServices.Create(new TimerSessionEntity
+        var timerSession = await timerSessionRepository.Create(new TimerSessionEntity
             { TimeRecordId = timeRecordId, UserId = UserClaims.Id(user), Type = dto.Type, From = dto.From }
         );
 
