@@ -22,7 +22,6 @@ public static class ServicesBuilderConfig
     public static void Apply(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IAuthService, AuthServices>();
-        builder.Services.AddScoped<IUserServices, UserServices>();
         builder.Services.AddScoped<ICategoryServices, CategoryServices>();
         builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
 

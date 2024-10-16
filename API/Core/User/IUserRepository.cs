@@ -12,5 +12,6 @@ namespace API.Core.User
         Task<bool> Delete(int id);
         Task<UserEntity?> FindById(int id);
         Task<UserEntity?> FindByEmail(string email);
+        Task<bool> EmailIsAvailable(string email);
     }
 }

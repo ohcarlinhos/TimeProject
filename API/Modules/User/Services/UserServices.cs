@@ -43,46 +43,6 @@ public class UserServices(IUserRepository userRepository, IMapper mapper, Projec
             : result.SetData(mapper.Map<UserMap>(user));
     }
 
-    public async Task<Result<UserMap>> Create(CreateUserDto dto)
-    {
-        var result = new Result<UserMap>();
-        var registerCode = await dbContext.RegisterCodes.FindAsync(dto.RegisterCode);
-
-        if (registerCode == null || registerCode.IsUsed)
-        {
-            result.Message = UserErrors.RegisterCodeIsNotAvailable;
-            result.HasError = true;
-            return result;
-        }
-
-        if (await EmailNotAvailability(dto.Email))
-        {
-            result.Message = UserErrors.EmailAlreadyInUse;
-            result.HasError = true;
-            return result;
-        }
-
-        var hasPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-
-        var entity = await userRepository
-            .Create(new UserEntity
-            {
-                Name = dto.Name,
-                Email = dto.Email,
-                Password = hasPassword
-            });
-
-        // lógica de validação de código de registro.
-        registerCode.IsUsed = true;
-        registerCode.UserId = entity.Id;
-        dbContext.RegisterCodes.Update(registerCode);
-        await dbContext.SaveChangesAsync();
-
-        result.Data = mapper.Map<UserMap>(entity);
-
-        return result;
-    }
-
     public async Task<Result<UserMap>> Update(int id, UpdateUserDto dto)
     {
         return await _update(id, dto, null);

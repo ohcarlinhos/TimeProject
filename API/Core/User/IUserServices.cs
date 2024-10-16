@@ -9,7 +9,6 @@ namespace API.Core.User;
 public interface IUserServices
 {
     Result<Pagination<UserMap>> Index(PaginationQuery paginationQuery);
-    Task<Result<UserMap>> Create(CreateUserDto dto);
     Task<Result<UserMap>> Update(int id, UpdateUserDto dto);
     Task<Result<UserMap>> Update(int id, UpdateUserDto dto, UpdateUserMethodConfig config);
     Task<Result<UserMap>> UpdateRole(int id, UpdateRoleDto dto);

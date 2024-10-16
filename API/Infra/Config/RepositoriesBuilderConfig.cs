@@ -15,7 +15,6 @@ public static class RepositoriesBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
         builder.Services.AddScoped<IConfirmCodeRepository, ConfirmCodeRepository>();

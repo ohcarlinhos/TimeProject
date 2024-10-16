@@ -1,0 +1,21 @@
+﻿using API.Core.User;
+using API.Core.User.UseCases;
+using API.Core.User.Utils;
+using API.Modules.User;
+using API.Modules.User.Services;
+using API.Modules.User.UseCases;
+using API.Modules.User.Utils;
+
+namespace API.Infra.Config;
+
+public static class UserBuilderConfig
+{
+    public static void Apply(WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IUserServices, UserServices>();
+        builder.Services.AddScoped<IUserMapDataUtil, UserMapDataUtil>();
+        
+        builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
+    }
+}
