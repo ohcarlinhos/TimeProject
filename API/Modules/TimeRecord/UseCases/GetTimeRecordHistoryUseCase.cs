@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using API.Core.TimePeriod.Repositories;
 using API.Core.TimePeriod.Util;
+using API.Core.TimeRecord.Repositories;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimeRecord.Util;
 using Shared.General;
@@ -11,7 +12,7 @@ using Shared.TimePeriod;
 namespace API.Modules.TimeRecord.UseCases;
 
 public class GetTimeRecordHistoryUseCase(
-    ITimePeriodHistoryRepository repo,
+    ITimeRecordHistoryRepository repo,
     ITimeRecordMapDataUtil mapDataUtil) : IGetTimeRecordHistoryUseCase
 {
     public async Task<Result<Pagination<TimeRecordHistoryDayMap>>> Handle(

@@ -1,12 +1,11 @@
-using API.Core.TimePeriod.Repositories;
+using API.Core.TimeRecord.Repositories;
 using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using Shared.General.Pagination;
 
-namespace API.Modules.TimePeriod.Repositories;
+namespace API.Modules.TimeRecord.Repositories;
 
-public class TimePeriodHistoryRepository(ProjectContext db) : ITimePeriodHistoryRepository
+public class TimeRecordHistoryRepository(ProjectContext db) : ITimeRecordHistoryRepository
 {
     private IQueryable<TimePeriodEntity> TimePeriodQuery(int timeRecordId, int userId)
     {

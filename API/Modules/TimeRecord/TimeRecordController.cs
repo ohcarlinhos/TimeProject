@@ -1,14 +1,13 @@
 ﻿using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
 using API.Modules.Core.Controllers;
-using API.Modules.TimeRecord.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Pagination;
 using Shared.TimePeriod;
 using Shared.TimeRecord;
 
-namespace API.Modules.TimeRecord.Controllers;
+namespace API.Modules.TimeRecord;
 
 [ApiController]
 [Route("api/record")]

@@ -1,11 +1,13 @@
 ﻿using API.Core.TimePeriod.Repositories;
 using API.Core.TimePeriod.Services;
 using API.Core.TimePeriod.Util;
+using API.Core.TimeRecord.Repositories;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
 using API.Modules.TimePeriod.Repositories;
 using API.Modules.TimePeriod.Services;
 using API.Modules.TimePeriod.Util;
+using API.Modules.TimeRecord.Repositories;
 using API.Modules.TimeRecord.UseCases;
 using API.Modules.TimerSession;
 
@@ -18,7 +20,6 @@ public static class TimePeriodBuilderConfig
         builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
 
         builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
-        builder.Services.AddScoped<ITimePeriodHistoryRepository, TimePeriodHistoryRepository>();
 
         builder.Services.AddScoped<IGetTimeRecordHistoryUseCase, GetTimeRecordHistoryUseCase>();
         builder.Services.AddScoped<ITimerSessionRepository, TimerSessionRepository>();

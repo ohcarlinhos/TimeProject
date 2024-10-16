@@ -1,8 +1,8 @@
 using Entities;
 
-namespace API.Core.TimePeriod.Repositories;
+namespace API.Core.TimeRecord.Repositories;
 
-public interface ITimePeriodHistoryRepository
+public interface ITimeRecordHistoryRepository
 {
     Task<List<DateTime>> GetDistinctDates(int timeRecordId, int userId, int addHours = 0);
 
