@@ -1,17 +1,13 @@
 ﻿using API.Core.TimePeriod;
 using API.Core.TimePeriod.Utils;
-using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
 using API.Modules.TimePeriod;
 using API.Modules.TimePeriod.Utils;
-using API.Modules.TimeRecord.Repositories;
-using API.Modules.TimeRecord.UseCases;
 using API.Modules.TimerSession;
 
-namespace API.Infra.Config;
+namespace API.Infra.Modules;
 
-public static class TimePeriodBuilderConfig
+public static class TimePeriodConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

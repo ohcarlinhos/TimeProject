@@ -7,9 +7,9 @@ using API.Modules.TimeRecord.Services;
 using API.Modules.TimeRecord.UseCases;
 using API.Modules.TimeRecord.Utils;
 
-namespace API.Infra.Config;
+namespace API.Infra.Modules;
 
-public static class TimeRecordBuilderConfig
+public static class TimeRecordConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

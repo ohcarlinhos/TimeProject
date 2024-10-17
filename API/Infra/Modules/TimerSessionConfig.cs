@@ -1,9 +1,9 @@
 ﻿using API.Core.TimerSession;
 using API.Modules.TimerSession;
 
-namespace API.Infra.Config;
+namespace API.Infra.Modules;
 
-public static class TimerSessionBuilderConfig
+public static class TimerSessionConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

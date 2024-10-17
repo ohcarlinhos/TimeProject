@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using API.Infra.Config;
+using API.Infra.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,13 +16,13 @@ builder.Services.AddEndpointsApiExplorer();
 
 SwaggerBuilderConfig.Apply(builder);
 DatabaseBuilderConfig.Apply(builder);
-RepositoriesBuilderConfig.Apply(builder);
-ServicesBuilderConfig.Apply(builder);
+RepositoriesConfig.Apply(builder);
+ServicesConfig.Apply(builder);
 
-TimePeriodBuilderConfig.Apply(builder);
-TimeRecordBuilderConfig.Apply(builder);
-TimerSessionBuilderConfig.Apply(builder);
-UserBuilderConfig.Apply(builder);
+TimePeriodConfig.Apply(builder);
+TimeRecordConfig.Apply(builder);
+TimerSessionConfig.Apply(builder);
+UserConfig.Apply(builder);
 
 IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);

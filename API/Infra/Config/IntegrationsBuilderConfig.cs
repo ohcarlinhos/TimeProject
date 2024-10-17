@@ -1,4 +1,5 @@
-﻿using API.Infra.Integrations.Smtp;
+﻿using API.Infra.Integrations;
+using API.Infra.Interfaces;
 
 namespace API.Infra.Config;
 

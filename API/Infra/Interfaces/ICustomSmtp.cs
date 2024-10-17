@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace API.Infra.Integrations.Smtp;
+namespace API.Infra.Interfaces;
 
 public interface ICustomSmtp
 { 

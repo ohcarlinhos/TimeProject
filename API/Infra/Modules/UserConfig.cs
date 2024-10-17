@@ -5,9 +5,9 @@ using API.Modules.User;
 using API.Modules.User.UseCases;
 using API.Modules.User.Utils;
 
-namespace API.Infra.Config;
+namespace API.Infra.Modules;
 
-public static class UserBuilderConfig
+public static class UserConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

@@ -1,7 +1,6 @@
 ﻿using API.Database.Configurations;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using Shared.Auth;
 
 namespace API.Database;
 

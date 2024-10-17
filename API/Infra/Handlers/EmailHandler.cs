@@ -1,5 +1,5 @@
 ﻿using System.Net.Mail;
-using API.Infra.Integrations.Smtp;
+using API.Infra.Interfaces;
 using Shared.Handlers.Email;
 
 namespace API.Infra.Handlers.Email;
