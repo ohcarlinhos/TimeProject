@@ -1,0 +1,21 @@
+﻿using API.Core.User;
+using API.Core.User.UseCases;
+using API.Core.User.Utils;
+using API.Infra.Errors;
+using Shared.General;
+using Shared.User;
+
+namespace API.Modules.User.UseCases;
+
+public class GetUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IGetUserUseCase
+{
+    public async Task<Result<UserMap>> Handle(int id)
+    {
+        var result = new Result<UserMap>();
+        var user = await repo.FindById(id);
+
+        return user == null
+            ? result.SetError(UserErrors.NotFound)
+            : result.SetData(mapper.Handle(user));
+    }
+}

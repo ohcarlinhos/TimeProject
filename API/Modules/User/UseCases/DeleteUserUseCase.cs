@@ -1,0 +1,13 @@
+﻿using API.Core.User;
+using API.Core.User.UseCases;
+using Shared.General;
+
+namespace API.Modules.User.UseCases;
+
+public class DeleteUserUseCase(IUserRepository repo) : IDeleteUserUseCase
+{
+    public async Task<Result<bool>> Handle(int id)
+    {
+        return new Result<bool> { Data = await repo.Delete(id) };
+    }
+}

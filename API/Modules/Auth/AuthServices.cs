@@ -1,5 +1,5 @@
 ﻿using API.Core.Auth;
-using API.Core.User;
+using API.Core.User.UseCases;
 using API.Infra.Errors;
 using API.Infra.Handlers.Email;
 using API.Infra.Services;
@@ -12,11 +12,12 @@ using Shared.Handlers.Email;
 namespace API.Modules.Auth;
 
 public class AuthServices(
-    IUserServices userServices,
     IConfirmCodeServices confirmCodeServices,
     ITokenService tokenService,
     IEmailHandler emailHandler,
-    IConfiguration configuration)
+    IConfiguration configuration,
+    IUpdateUserPasswordByEmailUseCase updateUserPasswordByEmailUseCase,
+    IGetUserByEmailUseCase getUserByEmailUseCase)
     : IAuthService
 {
     public async Task<Result<JwtData>> Login(LoginDto dto)
@@ -33,7 +34,7 @@ public class AuthServices(
     {
         var result = new Result<JwtData>();
 
-        var findUserResult = await userServices.FindByEmail(dto.Email);
+        var findUserResult = await getUserByEmailUseCase.Handle(dto.Email);
         if (findUserResult.HasError) return result.SetError(AuthErrors.WrongEmailOrPassword);
 
         var user = findUserResult.Data!;
@@ -55,7 +56,7 @@ public class AuthServices(
     {
         var result = new Result<bool>();
 
-        var findUserResult = await userServices.FindByEmail(dto.Email);
+        var findUserResult = await getUserByEmailUseCase.Handle(dto.Email);
         if (findUserResult.HasError) return result.SetError(findUserResult.Message);
 
         var user = findUserResult.Data!;
@@ -101,8 +102,7 @@ public class AuthServices(
         if (validateConfirmCodeResult.HasError)
             return result.SetError(validateConfirmCodeResult.Message);
 
-        var updatePasswordResult = await userServices
-            .UpdatePasswordByEmail(dto.Email, dto.Password);
+        var updatePasswordResult = await updateUserPasswordByEmailUseCase.Handle(dto.Email, dto.Password);
 
         if (updatePasswordResult.HasError)
             return result.SetError(updatePasswordResult.Message);
