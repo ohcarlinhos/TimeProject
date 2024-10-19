@@ -1,9 +1,7 @@
 ﻿using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimeRecord.Utils;
 using API.Modules.TimeRecord.Repositories;
-using API.Modules.TimeRecord.Services;
 using API.Modules.TimeRecord.UseCases;
 using API.Modules.TimeRecord.Utils;
 
@@ -16,13 +14,18 @@ public static class TimeRecordConfig
         builder.Services.AddScoped<ITimeRecordRepository, TimeRecordRepository>();
         builder.Services.AddScoped<ITimeRecordMetaRepository, TimeRecordMetaRepository>();
         builder.Services.AddScoped<ITimeRecordHistoryRepository, TimeRecordHistoryRepository>();
-
-        builder.Services.AddScoped<ITimeRecordServices, TimeRecordServices>();
-        builder.Services.AddScoped<ITimeRecordMetaServices, TimeRecordMetaServices>();
-
+        
         builder.Services.AddScoped<ITimeRecordMapDataUtil, TimeRecordMapDataUtil>();
 
         builder.Services.AddScoped<IGetTimeRecordHistoryUseCase, GetTimeRecordHistoryUseCase>();
+        
+        builder.Services.AddScoped<IGetAllTimeRecordUseCase, GetAllTimeRecordUseCase>();
+        builder.Services.AddScoped<IGetTimeRecordByCodeUseCase, GetTimeRecordByCodeUseCase>();
         builder.Services.AddScoped<IGetTimeRecordByIdUseCase, GetTimeRecordByIdUseCase>();
+        builder.Services.AddScoped<ICreateTimeRecordUseCase, CreateTimeRecordUseCase>();
+        builder.Services.AddScoped<IUpdateTimeRecordUseCase, UpdateTimeRecordUseCase>();
+        builder.Services.AddScoped<IDeleteTimeRecordUseCase, DeleteTimeRecordUseCase>();
+        
+        builder.Services.AddScoped<ISyncTrMetaUseCase, SyncTrMetaUseCase>();
     }
 }

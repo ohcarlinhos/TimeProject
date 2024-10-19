@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using API.Core.TimePeriod;
-using API.Core.TimeRecord.Services;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimerSession;
 using API.Infra.Errors;
@@ -15,9 +14,9 @@ namespace API.Modules.TimePeriod;
 
 public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,
-    ITimeRecordMetaServices timeRecordMetaServices,
     ITimerSessionRepository timerSessionRepository,
     IGetTimeRecordByIdUseCase getTimeRecordByIdUseCase,
+    ISyncTrMetaUseCase syncTrMetaUseCase,
     IMapper mapper
 ) : ITimePeriodServices
 {
@@ -68,7 +67,7 @@ public class TimePeriodServices(
                 }
             );
 
-        await timeRecordMetaServices.CreateOrUpdate(data.TimeRecordId);
+        await syncTrMetaUseCase.Handle(data.TimeRecordId);
 
         return result.SetData(data);
     }
@@ -76,7 +75,7 @@ public class TimePeriodServices(
     public async Task<Result<List<TimePeriodEntity>>> CreateByList(
         TimePeriodListDto dto,
         int timeRecordId,
-        ClaimsPrincipal user
+        int userId
     )
     {
         var result = new Result<List<TimePeriodEntity>>();
@@ -92,7 +91,7 @@ public class TimePeriodServices(
             {
                 list.Add(new TimePeriodEntity()
                 {
-                    UserId = UserClaims.Id(user),
+                    UserId = userId,
                     TimeRecordId = timeRecordId,
                     Start = timePeriod.Start,
                     End = timePeriod.End
@@ -104,13 +103,13 @@ public class TimePeriodServices(
         if (list.Count == 0) return result.SetData([]);
 
         var timerSession = await timerSessionRepository.Create(new TimerSessionEntity
-            { TimeRecordId = timeRecordId, UserId = UserClaims.Id(user), Type = dto.Type, From = dto.From }
+            { TimeRecordId = timeRecordId, UserId = userId, Type = dto.Type, From = dto.From }
         );
 
         list.ForEach(i => { i.TimerSessionId = timerSession.Id; });
 
         var data = await timePeriodRepository.CreateByList(list);
-        await timeRecordMetaServices.CreateOrUpdate(timeRecordId);
+        await syncTrMetaUseCase.Handle(timeRecordId);
 
         return result.SetData(data);
     }
@@ -129,7 +128,7 @@ public class TimePeriodServices(
         timePeriod.End = dto.End;
 
         var data = await timePeriodRepository.Update(timePeriod);
-        await timeRecordMetaServices.CreateOrUpdate(data.TimeRecordId);
+        await syncTrMetaUseCase.Handle(data.TimeRecordId);
 
         return result.SetData(data);
     }
@@ -144,7 +143,7 @@ public class TimePeriodServices(
             return result.SetError(TimePeriodErrors.NotFound);
 
         var data = await timePeriodRepository.Delete(timePeriod);
-        await timeRecordMetaServices.CreateOrUpdate(timePeriod.TimeRecordId);
+        await syncTrMetaUseCase.Handle(timePeriod.TimeRecordId);
 
         return result.SetData(data);
     }

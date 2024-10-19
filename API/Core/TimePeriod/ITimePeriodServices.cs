@@ -22,7 +22,7 @@ public interface ITimePeriodServices
     Task<Result<List<TimePeriodEntity>>> CreateByList(
         TimePeriodListDto dto,
         int timeRecordId,
-        ClaimsPrincipal user
+        int userId
     );
 
     Task<Result<TimePeriodEntity>> Update(int id, TimePeriodDto dto, ClaimsPrincipal user);

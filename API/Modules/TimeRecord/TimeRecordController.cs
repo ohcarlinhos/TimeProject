@@ -1,9 +1,9 @@
-﻿using API.Core.TimeRecord.Services;
-using API.Core.TimeRecord.UseCases;
+﻿using API.Core.TimeRecord.UseCases;
 using API.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Pagination;
+using Shared.General.Util;
 using Shared.TimePeriod;
 using Shared.TimeRecord;
 
@@ -12,13 +12,18 @@ namespace API.Modules.TimeRecord;
 [ApiController]
 [Route("api/record")]
 public class TimeRecordController(
-    ITimeRecordServices timeRecordServices,
-    IGetTimeRecordHistoryUseCase getTimeRecordHistoryUseCase) : CustomController
+    IGetAllTimeRecordUseCase getAllTimeRecordUseCase,
+    IGetTimeRecordHistoryUseCase getTimeRecordHistoryUseCase,
+    ICreateTimeRecordUseCase createTimeRecordUseCase,
+    IUpdateTimeRecordUseCase updateTimeRecordUseCase,
+    IGetTimeRecordByCodeUseCase getTimeRecordByCodeUseCase,
+    IDeleteTimeRecordUseCase deleteTimeRecordUseCase
+) : CustomController
 {
     [HttpGet, Authorize]
     public async Task<ActionResult<Pagination<TimeRecordMap>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await timeRecordServices.Index(paginationQuery, User));
+        return HandleResponse(await getAllTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet, Authorize, Route("history/{timeRecordId:int}")]
@@ -31,7 +36,7 @@ public class TimeRecordController(
     [HttpPost, Authorize]
     public async Task<ActionResult<TimeRecordMap>> Create([FromBody] CreateTimeRecordDto dto)
     {
-        var result = await timeRecordServices.Create(dto, User);
+        var result = await createTimeRecordUseCase.Handle(dto, UserClaims.Id(User));
 
         result.ActionName = nameof(Create);
         return HandleResponse(result);
@@ -40,18 +45,18 @@ public class TimeRecordController(
     [HttpPut, Authorize, Route("{id:int}")]
     public async Task<ActionResult<TimeRecordMap>> Update(int id, [FromBody] UpdateTimeRecordDto dto)
     {
-        return HandleResponse(await timeRecordServices.Update(id, dto, User));
+        return HandleResponse(await updateTimeRecordUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpGet, Authorize, Route("{code}")]
-    public async Task<ActionResult<TimeRecordMap>> Details(string code)
+    public async Task<ActionResult<TimeRecordMap>> Get(string code)
     {
-        return HandleResponse(await timeRecordServices.Details(code, User));
+        return HandleResponse(await getTimeRecordByCodeUseCase.Handle(code, UserClaims.Id(User)));
     }
 
     [HttpDelete, Authorize, Route("{id:int}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
-        return HandleResponse(await timeRecordServices.Delete(id, User));
+        return HandleResponse(await deleteTimeRecordUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

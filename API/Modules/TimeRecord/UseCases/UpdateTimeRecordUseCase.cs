@@ -1,0 +1,55 @@
+﻿using API.Core.Category;
+using API.Core.TimeRecord.Repositories;
+using API.Core.TimeRecord.UseCases;
+using API.Core.TimeRecord.Utils;
+using API.Infra.Errors;
+using Microsoft.IdentityModel.Tokens;
+using Shared.General;
+using Shared.TimeRecord;
+
+namespace API.Modules.TimeRecord.UseCases;
+
+public class UpdateTimeRecordUseCase(
+    ITimeRecordRepository repo,
+    ITimeRecordMapDataUtil mapDataUtil,
+    ICategoryRepository categoryRepo,
+    ISyncTrMetaUseCase syncTrMetaUseCase
+)
+    : IUpdateTimeRecordUseCase
+{
+    public async Task<Result<TimeRecordMap>> Handle(int id, UpdateTimeRecordDto dto, int userId)
+    {
+        var result = new Result<TimeRecordMap>();
+
+        var timeRecord = await repo.FindById(id, userId);
+
+        if (timeRecord == null)
+            return result.SetError(TimeRecordErrors.NotFound);
+
+        if (dto.CategoryId != null)
+        {
+            var category = await categoryRepo.FindById((int)dto.CategoryId, userId);
+            if (category == null) return result.SetError(TimeRecordErrors.CategoryNotFound);
+            timeRecord.CategoryId = dto.CategoryId;
+        }
+
+        if (dto.Code.IsNullOrEmpty())
+            return result.SetError(TimeRecordErrors.CodeMustValue);
+
+        if (timeRecord.Code != dto.Code)
+        {
+            var trByCode = await repo.FindByCode(dto.Code, userId);
+            if (trByCode != null) return result.SetError(TimeRecordErrors.AlreadyInUse);
+        }
+
+        timeRecord.Code = dto.Code;
+
+        timeRecord.Title = dto.Title;
+        timeRecord.Description = dto.Description;
+        timeRecord.ExternalLink = dto.ExternalLink;
+
+        await syncTrMetaUseCase.Handle(timeRecord.Id);
+
+        return result.SetData(mapDataUtil.Handle(await repo.Update(timeRecord)));
+    }
+}

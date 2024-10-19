@@ -4,6 +4,7 @@ using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Pagination;
+using Shared.General.Util;
 using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod;
@@ -35,7 +36,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices)
     public async Task<ActionResult<List<TimePeriodEntity>>> Create([FromBody] TimePeriodListDto dto, int id)
     {
         var result = await timePeriodServices
-            .CreateByList(dto, id, User);
+            .CreateByList(dto, id, UserClaims.Id(User));
 
         result.ActionName = nameof(Create);
         return HandleResponse(result);
