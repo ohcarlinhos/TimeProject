@@ -8,7 +8,7 @@ using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.User;
 
-namespace API.Modules.Codes;
+namespace API.Modules.Codes.Controllers;
 
 [ApiController]
 [Route("api/register-code")]
