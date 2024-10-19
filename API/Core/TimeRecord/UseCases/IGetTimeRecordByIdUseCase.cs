@@ -6,5 +6,5 @@ namespace API.Core.TimeRecord.UseCases;
 
 public interface IGetTimeRecordByIdUseCase
 {
-    Task<Result<TimeRecordEntity>> Handle(int id, ClaimsPrincipal user);
+    Task<Result<TimeRecordEntity>> Handle(int id, int userId);
 }

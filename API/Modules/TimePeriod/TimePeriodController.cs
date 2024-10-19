@@ -1,4 +1,4 @@
-﻿using API.Core.TimePeriod;
+﻿using API.Core.TimePeriod.UseCases;
 using API.Infra.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -11,23 +11,26 @@ namespace API.Modules.TimePeriod;
 
 [ApiController]
 [Route("api/period")]
-public class TimePeriodController(ITimePeriodServices timePeriodServices)
+public class TimePeriodController(
+    IGetAllTimePeriodUseCase getAllTimePeriodUseCase,
+    ICreateTimePeriodUseCase createTimePeriodUseCase,
+    ICreateTimePeriodByListUseCase createTimePeriodByListUseCase,
+    IUpdateTimePeriodUseCase updateTimePeriodUseCase,
+    IDeleteTimePeriodUseCase deleteTimePeriodUseCase
+)
     : CustomController
 {
     [HttpGet, Authorize, Route("{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<Shared.TimePeriod.TimePeriodMap>>> Index(int timeRecordId,
+    public async Task<ActionResult<Pagination<TimePeriodMap>>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
-        var result = await timePeriodServices
-            .Index(timeRecordId, User, paginationQuery);
-
-        return HandleResponse(result);
+        return HandleResponse(await getAllTimePeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
-    
+
     [HttpPost, Authorize]
     public async Task<ActionResult<TimePeriodEntity>> Create([FromBody] CreateTimePeriodDto dto)
     {
-        var result = await timePeriodServices.Create(dto, User);
+        var result = await createTimePeriodUseCase.Handle(dto, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -35,9 +38,7 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices)
     [HttpPost, Authorize, Route("list/{id:int}")]
     public async Task<ActionResult<List<TimePeriodEntity>>> Create([FromBody] TimePeriodListDto dto, int id)
     {
-        var result = await timePeriodServices
-            .CreateByList(dto, id, UserClaims.Id(User));
-
+        var result = await createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -45,18 +46,12 @@ public class TimePeriodController(ITimePeriodServices timePeriodServices)
     [HttpPut, Authorize, Route("{id:int}")]
     public async Task<ActionResult<TimePeriodEntity>> Update(int id, [FromBody] TimePeriodDto dto)
     {
-        var result = await timePeriodServices
-            .Update(id, dto, User);
-
-        return HandleResponse(result);
+        return HandleResponse(await updateTimePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpDelete, Authorize, Route("{id:int}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
-        var result = await timePeriodServices
-            .Delete(id, User);
-
-        return HandleResponse(result);
+        return HandleResponse(await deleteTimePeriodUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

@@ -1,5 +1,5 @@
 ﻿using API.Core.Category;
-using API.Core.TimePeriod;
+using API.Core.TimePeriod.UseCases;
 using API.Core.TimeRecord.Repositories;
 using API.Core.TimeRecord.UseCases;
 using API.Core.TimeRecord.Utils;
@@ -17,7 +17,7 @@ public class CreateTimeRecordUseCase(
     ITimeRecordRepository repo,
     ITimeRecordMapDataUtil mapDataUtil,
     ICategoryRepository categoryRepo,
-    ITimePeriodServices timePeriodServices,
+    ICreateTimePeriodByListUseCase createTimePeriodByListUseCase,
     ProjectContext db)
     : ICreateTimeRecordUseCase
 {
@@ -54,8 +54,8 @@ public class CreateTimeRecordUseCase(
         {
             if (dto.TimePeriods != null)
             {
-                var timePeriodsResult = await timePeriodServices
-                    .CreateByList(
+                var timePeriodsResult = await createTimePeriodByListUseCase
+                    .Handle(
                         new TimePeriodListDto()
                             { TimePeriods = dto.TimePeriods, Type = dto.TimerSessionType, From = dto.TimerSessionFrom },
                         timeRecord.Id, userId);
