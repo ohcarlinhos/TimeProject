@@ -17,7 +17,7 @@ public class TimePeriodServices(
     ITimePeriodRepository timePeriodRepository,
     ITimeRecordMetaServices timeRecordMetaServices,
     ITimerSessionRepository timerSessionRepository,
-    IFindTimeRecordById findTimeRecordById,
+    IGetTimeRecordByIdUseCase getTimeRecordByIdUseCase,
     IMapper mapper
 ) : ITimePeriodServices
 {
@@ -55,7 +55,7 @@ public class TimePeriodServices(
         if (dto.Start.CompareTo(dto.End) > 0)
             return result.SetError(TimePeriodErrors.EndDateIsBiggerThenStartDate);
 
-        var findTrResult = await findTimeRecordById.Handle(dto.TimeRecordId, user);
+        var findTrResult = await getTimeRecordByIdUseCase.Handle(dto.TimeRecordId, user);
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);
 
         var data = await timePeriodRepository

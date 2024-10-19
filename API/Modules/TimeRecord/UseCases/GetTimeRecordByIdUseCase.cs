@@ -9,7 +9,7 @@ using Shared.General.Util;
 
 namespace API.Modules.TimeRecord.UseCases;
 
-public class FindTimeRecordById(ITimeRecordRepository repository) : IFindTimeRecordById
+public class GetTimeRecordByIdUseCase(ITimeRecordRepository repository) : IGetTimeRecordByIdUseCase
 {
     public async Task<Result<TimeRecordEntity>> Handle(int id, ClaimsPrincipal user)
     {

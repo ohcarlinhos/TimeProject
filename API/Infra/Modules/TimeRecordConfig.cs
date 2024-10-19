@@ -23,6 +23,6 @@ public static class TimeRecordConfig
         builder.Services.AddScoped<ITimeRecordMapDataUtil, TimeRecordMapDataUtil>();
 
         builder.Services.AddScoped<IGetTimeRecordHistoryUseCase, GetTimeRecordHistoryUseCase>();
-        builder.Services.AddScoped<IFindTimeRecordById, FindTimeRecordById>();
+        builder.Services.AddScoped<IGetTimeRecordByIdUseCase, GetTimeRecordByIdUseCase>();
     }
 }

@@ -4,7 +4,7 @@ using Shared.General;
 
 namespace API.Core.TimeRecord.UseCases;
 
-public interface IFindTimeRecordById
+public interface IGetTimeRecordByIdUseCase
 {
     Task<Result<TimeRecordEntity>> Handle(int id, ClaimsPrincipal user);
 }
