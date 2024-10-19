@@ -1,33 +1,41 @@
 ﻿using API.Core.Category;
+using API.Core.Category.UseCases;
 using API.Infra.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Category;
 using Shared.General.Pagination;
+using Shared.General.Util;
 
 namespace API.Modules.Category;
 
 [ApiController, Route("api/category"), Authorize]
-public class CategoryController(ICategoryServices categoryServices)
+public class CategoryController(
+    IGetAllCategoryUseCase getAllCategoryUseCase,
+    IGetPaginatedCategoryUseCase getPaginatedCategoryUseCase,
+    ICreateCategoryUseCase createCategoryUseCase,
+    IDeleteCategoryUseCase deleteCategoryUseCase,
+    IUpdateCategoryUseCase updateCategoryUseCase
+)
     : CustomController
 {
     [HttpGet]
     public async Task<ActionResult<Pagination<CategoryMap>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await categoryServices.Index(paginationQuery, User));
+        return HandleResponse(await getPaginatedCategoryUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet, Route("all")]
     public ActionResult<List<CategoryMap>> Index([FromQuery] bool onlyWithData)
     {
-        return HandleResponse(categoryServices.Index(User, onlyWithData));
+        return HandleResponse(getAllCategoryUseCase.Handle(UserClaims.Id(User), onlyWithData));
     }
 
     [HttpPost]
     public async Task<ActionResult<CategoryEntity>> Create([FromBody] CategoryDto dto)
     {
-        var result = await categoryServices.Create(dto, User);
+        var result = await createCategoryUseCase.Handle(dto, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -35,12 +43,12 @@ public class CategoryController(ICategoryServices categoryServices)
     [HttpPut, Route("{id:int}")]
     public async Task<ActionResult<CategoryEntity>> Update(int id, [FromBody] CategoryDto dto)
     {
-        return HandleResponse(await categoryServices.Update(id, dto, User));
+        return HandleResponse(await updateCategoryUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpDelete, Route("{id:int}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
-        return HandleResponse(await categoryServices.Delete(id, User));
+        return HandleResponse(await deleteCategoryUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

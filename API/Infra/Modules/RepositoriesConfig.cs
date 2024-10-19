@@ -10,7 +10,6 @@ public static class RepositoriesConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
         builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
         builder.Services.AddScoped<IConfirmCodeRepository, ConfirmCodeRepository>();
     }

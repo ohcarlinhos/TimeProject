@@ -23,6 +23,7 @@ TimePeriodConfig.Apply(builder);
 TimeRecordConfig.Apply(builder);
 TimerSessionConfig.Apply(builder);
 UserConfig.Apply(builder);
+CategoryConfig.Apply(builder);
 
 IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);

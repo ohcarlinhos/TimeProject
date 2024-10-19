@@ -17,8 +17,6 @@ public static class ServicesConfig
     public static void Apply(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IAuthService, AuthServices>();
-        builder.Services.AddScoped<ICategoryServices, CategoryServices>();
-        builder.Services.AddScoped<ITimePeriodServices, TimePeriodServices>();
 
         builder.Services.AddScoped<IConfirmCodeServices, ConfirmCodeServices>();
         
