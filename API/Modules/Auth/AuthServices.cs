@@ -1,10 +1,8 @@
 ﻿using API.Core.Auth;
-using API.Core.Codes;
+using API.Core.Codes.UseCases;
 using API.Core.User.UseCases;
 using API.Infra.Errors;
-using API.Infra.Handlers.Email;
 using API.Infra.Interfaces;
-using API.Infra.Services;
 using Entities;
 using Shared.Auth;
 using Shared.General;
@@ -13,12 +11,15 @@ using Shared.Handlers.Email;
 namespace API.Modules.Auth;
 
 public class AuthServices(
-    IConfirmCodeServices confirmCodeServices,
     ITokenService tokenService,
     IEmailHandler emailHandler,
     IConfiguration configuration,
     IUpdateUserPasswordByEmailUseCase updateUserPasswordByEmailUseCase,
-    IGetUserByEmailUseCase getUserByEmailUseCase)
+    IGetUserByEmailUseCase getUserByEmailUseCase,
+    ICreateRecoveryCodeUseCase createRecoveryCodeUseCase,
+    ISetUsedConfirmCodeUseCase setUsedConfirmCodeUseCase,
+    IValidateConfirmCodeUseCase validateConfirmCodeUseCase
+)
     : IAuthService
 {
     public async Task<Result<JwtData>> Login(LoginDto dto)
@@ -64,7 +65,7 @@ public class AuthServices(
 
         try
         {
-            var createRecoveryCodeResult = await confirmCodeServices.CreateRecovery(user.Id);
+            var createRecoveryCodeResult = await createRecoveryCodeUseCase.Handle(user.Id);
             if (createRecoveryCodeResult.HasError) return result.SetError(createRecoveryCodeResult.Message);
 
             var recoveryCode = createRecoveryCodeResult.Data!;
@@ -98,7 +99,7 @@ public class AuthServices(
     {
         var result = new Result<bool>();
 
-        var validateConfirmCodeResult = await confirmCodeServices.Validate(dto.Code, dto.Email);
+        var validateConfirmCodeResult = await validateConfirmCodeUseCase.Handle(dto.Code, dto.Email);
 
         if (validateConfirmCodeResult.HasError)
             return result.SetError(validateConfirmCodeResult.Message);
@@ -108,7 +109,7 @@ public class AuthServices(
         if (updatePasswordResult.HasError)
             return result.SetError(updatePasswordResult.Message);
 
-        await confirmCodeServices.SetUsed(dto.Code);
+        await setUsedConfirmCodeUseCase.Handle(dto.Code);
 
         return result.SetData(true);
     }
