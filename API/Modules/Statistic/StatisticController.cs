@@ -8,11 +8,11 @@ using Shared.Statistic;
 namespace API.Modules.Statistic;
 
 [ApiController, Route("api/statistic"), Authorize]
-public class StatisticController(IGetDayStatisticsUseCase getDayStatisticsUseCase) : CustomController
+public class StatisticController(IGetDayStatisticUseCase getDayStatisticUseCase) : CustomController
 {
     [HttpGet, Route("day")]
     public async Task<ActionResult<DayStatistic>> Day([FromQuery] DateTime? date)
     {
-        return HandleResponse(await getDayStatisticsUseCase.Handle(UserClaims.Id(User), date, 3));
+        return HandleResponse(await getDayStatisticUseCase.Handle(UserClaims.Id(User), date, 3));
     }
 }

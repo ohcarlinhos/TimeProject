@@ -16,7 +16,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 SwaggerBuilderConfig.Apply(builder);
 DatabaseBuilderConfig.Apply(builder);
-RepositoriesConfig.Apply(builder);
 ServicesConfig.Apply(builder);
 
 TimePeriodConfig.Apply(builder);
@@ -24,6 +23,9 @@ TimeRecordConfig.Apply(builder);
 TimerSessionConfig.Apply(builder);
 UserConfig.Apply(builder);
 CategoryConfig.Apply(builder);
+CodeConfig.Apply(builder);
+AuthConfig.Apply(builder);
+StatisticConfig.Apply(builder);
 
 IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);
