@@ -1,7 +1,7 @@
 ﻿using Entities;
 using Shared.General;
 
-namespace API.Modules.Codes.Services;
+namespace API.Core.Codes;
 
 public interface IConfirmCodeServices
 {

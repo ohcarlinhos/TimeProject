@@ -1,10 +1,10 @@
 ﻿using API.Core.Auth;
+using API.Core.Codes;
 using API.Core.User.UseCases;
 using API.Infra.Errors;
 using API.Infra.Handlers.Email;
 using API.Infra.Interfaces;
 using API.Infra.Services;
-using API.Modules.Codes.Services;
 using Entities;
 using Shared.Auth;
 using Shared.General;

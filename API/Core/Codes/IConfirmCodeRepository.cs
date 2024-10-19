@@ -1,6 +1,6 @@
 ﻿using Entities;
 
-namespace API.Modules.Codes.Repositories;
+namespace API.Core.Codes;
 
 public interface IConfirmCodeRepository
 {

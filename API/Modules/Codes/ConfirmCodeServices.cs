@@ -1,9 +1,9 @@
-﻿using API.Modules.Codes.Errors;
-using API.Modules.Codes.Repositories;
+﻿using API.Core.Codes;
+using API.Infra.Errors;
 using Entities;
 using Shared.General;
 
-namespace API.Modules.Codes.Services;
+namespace API.Modules.Codes;
 
 public class ConfirmCodeServices(IConfirmCodeRepository repository) : IConfirmCodeServices
 {

@@ -4,12 +4,11 @@ using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shared.General;
 using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.User;
 
-namespace API.Modules.Codes.Controllers;
+namespace API.Modules.Codes;
 
 [ApiController]
 [Route("api/register-code")]

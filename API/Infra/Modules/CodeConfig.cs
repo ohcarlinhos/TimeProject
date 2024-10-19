@@ -1,5 +1,5 @@
-﻿using API.Modules.Codes.Repositories;
-using API.Modules.Codes.Services;
+﻿using API.Core.Codes;
+using API.Modules.Codes;
 
 namespace API.Infra.Modules;
 

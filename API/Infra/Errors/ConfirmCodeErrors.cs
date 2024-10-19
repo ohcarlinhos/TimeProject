@@ -1,4 +1,4 @@
-﻿namespace API.Modules.Codes.Errors;
+﻿namespace API.Infra.Errors;
 
 public static class ConfirmCodeErrors
 {
