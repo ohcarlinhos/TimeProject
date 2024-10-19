@@ -5,7 +5,7 @@ using API.Modules.Statistic.UseCases;
 
 namespace API.Infra.Modules;
 
-public static class StatisticConfig
+public static class StatisticBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

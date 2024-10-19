@@ -5,7 +5,7 @@ using API.Modules.Codes.UseCases;
 
 namespace API.Infra.Modules;
 
-public static class CodeConfig
+public static class CodeBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

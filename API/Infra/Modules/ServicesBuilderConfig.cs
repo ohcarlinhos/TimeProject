@@ -3,7 +3,7 @@ using API.Infra.Services;
 
 namespace API.Infra.Modules;
 
-public static class ServicesConfig
+public static class ServicesBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

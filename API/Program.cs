@@ -16,16 +16,16 @@ builder.Services.AddEndpointsApiExplorer();
 
 SwaggerBuilderConfig.Apply(builder);
 DatabaseBuilderConfig.Apply(builder);
-ServicesConfig.Apply(builder);
+ServicesBuilderConfig.Apply(builder);
 
-TimePeriodConfig.Apply(builder);
-TimeRecordConfig.Apply(builder);
-TimerSessionConfig.Apply(builder);
-UserConfig.Apply(builder);
-CategoryConfig.Apply(builder);
-CodeConfig.Apply(builder);
-AuthConfig.Apply(builder);
-StatisticConfig.Apply(builder);
+TimePeriodBuilderConfig.Apply(builder);
+TimeRecordBuilderConfig.Apply(builder);
+TimerSessionBuilderConfig.Apply(builder);
+UserBuilderConfig.Apply(builder);
+CategoryBuilderConfig.Apply(builder);
+CodeBuilderConfig.Apply(builder);
+AuthBuilderConfig.Apply(builder);
+StatisticBuilderConfig.Apply(builder);
 
 IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);

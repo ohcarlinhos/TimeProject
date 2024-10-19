@@ -3,7 +3,7 @@ using API.Modules.Auth;
 
 namespace API.Infra.Modules;
 
-public static class AuthConfig
+public static class AuthBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

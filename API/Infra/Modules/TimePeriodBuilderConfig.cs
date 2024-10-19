@@ -7,7 +7,7 @@ using API.Modules.TimePeriod.Utils;
 
 namespace API.Infra.Modules;
 
-public static class TimePeriodConfig
+public static class TimePeriodBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {

@@ -7,7 +7,7 @@ using API.Modules.Category.Utils;
 
 namespace API.Infra.Modules;
 
-public static class CategoryConfig
+public static class CategoryBuilderConfig
 {
     public static void Apply(WebApplicationBuilder builder)
     {
