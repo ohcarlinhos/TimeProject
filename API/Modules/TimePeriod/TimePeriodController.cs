@@ -12,7 +12,7 @@ namespace API.Modules.TimePeriod;
 [ApiController]
 [Route("api/period")]
 public class TimePeriodController(
-    IGetAllTimePeriodUseCase getAllTimePeriodUseCase,
+    IGetPaginatedTimePeriodUseCase getPaginatedTimePeriodUseCase,
     ICreateTimePeriodUseCase createTimePeriodUseCase,
     ICreateTimePeriodByListUseCase createTimePeriodByListUseCase,
     IUpdateTimePeriodUseCase updateTimePeriodUseCase,
@@ -24,7 +24,7 @@ public class TimePeriodController(
     public async Task<ActionResult<Pagination<TimePeriodMap>>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await getAllTimePeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
+        return HandleResponse(await getPaginatedTimePeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
 
     [HttpPost, Authorize]

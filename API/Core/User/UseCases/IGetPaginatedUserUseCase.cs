@@ -4,7 +4,7 @@ using Shared.User;
 
 namespace API.Core.User.UseCases;
 
-public interface IGetAllUserUseCase
+public interface IGetPaginatedUserUseCase
 {
     Result<Pagination<UserMap>> Handle(PaginationQuery paginationQuery);
 }

@@ -17,7 +17,7 @@ public static class TimePeriodConfig
         builder.Services.AddScoped<ITimePeriodCutUtil, TimePeriodCutUtil>();
         builder.Services.AddScoped<ITimePeriodValidateUtil, TimePeriodValidateUtil>();
 
-        builder.Services.AddScoped<IGetAllTimePeriodUseCase, GetAllTimePeriodUseCase>();
+        builder.Services.AddScoped<IGetPaginatedTimePeriodUseCase, GetPaginatedTimePeriodUseCase>();
         builder.Services.AddScoped<ICreateTimePeriodByListUseCase, CreateTimePeriodByListUseCase>();
         builder.Services.AddScoped<ICreateTimePeriodUseCase, CreateTimePeriodUseCase>();
         builder.Services.AddScoped<IUpdateTimePeriodUseCase, UpdateTimePeriodUseCase>();

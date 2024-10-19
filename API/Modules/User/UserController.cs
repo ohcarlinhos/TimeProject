@@ -20,14 +20,14 @@ public class UserController(
     IDisableUserUseCase disableUserUseCase,
     IGetUserUseCase getUserUseCase,
     IDeleteUserUseCase deleteUserUseCase,
-    IGetAllUserUseCase getAllUserUseCase
+    IGetPaginatedUserUseCase getPaginatedUserUseCase
 ) : CustomController
 {
     [HttpGet, Authorize]
     public ActionResult<Pagination<UserMap>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         if (UserRole.Admin.ToString() == UserClaims.Role(User))
-            return HandleResponse(getAllUserUseCase.Handle(paginationQuery));
+            return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
         return Forbid();
     }
 

@@ -19,7 +19,7 @@ public static class TimeRecordConfig
 
         builder.Services.AddScoped<IGetTimeRecordHistoryUseCase, GetTimeRecordHistoryUseCase>();
         
-        builder.Services.AddScoped<IGetAllTimeRecordUseCase, GetAllTimeRecordUseCase>();
+        builder.Services.AddScoped<IGetPaginatedTimeRecordUseCase, GetPaginatedTimeRecordUseCase>();
         builder.Services.AddScoped<IGetTimeRecordByCodeUseCase, GetTimeRecordByCodeUseCase>();
         builder.Services.AddScoped<IGetTimeRecordByIdUseCase, GetTimeRecordByIdUseCase>();
         builder.Services.AddScoped<ICreateTimeRecordUseCase, CreateTimeRecordUseCase>();

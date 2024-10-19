@@ -7,8 +7,8 @@ using Shared.TimePeriod;
 
 namespace API.Modules.TimePeriod.UseCases;
 
-public class GetAllTimePeriodUseCase(ITimePeriodRepository repo, ITimePeriodMapDataUtil mapDataUtil)
-    : IGetAllTimePeriodUseCase
+public class GetPaginatedTimePeriodUseCase(ITimePeriodRepository repo, ITimePeriodMapDataUtil mapDataUtil)
+    : IGetPaginatedTimePeriodUseCase
 {
     public async Task<Result<Pagination<TimePeriodMap>>> Handle(int timeRecordId, int userId,
         PaginationQuery paginationQuery)

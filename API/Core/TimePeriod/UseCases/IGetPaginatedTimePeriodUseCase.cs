@@ -4,7 +4,7 @@ using Shared.TimePeriod;
 
 namespace API.Core.TimePeriod.UseCases;
 
-public interface IGetAllTimePeriodUseCase
+public interface IGetPaginatedTimePeriodUseCase
 {
     Task<Result<Pagination<TimePeriodMap>>> Handle(int timeRecordId, int userId, PaginationQuery paginationQuery);
 }

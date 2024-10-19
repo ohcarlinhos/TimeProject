@@ -7,7 +7,7 @@ using Shared.User;
 
 namespace API.Modules.User.UseCases;
 
-public class GetAllUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IGetAllUserUseCase
+public class GetPaginatedUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IGetPaginatedUserUseCase
 {
     public Result<Pagination<UserMap>> Handle(PaginationQuery paginationQuery)
     {

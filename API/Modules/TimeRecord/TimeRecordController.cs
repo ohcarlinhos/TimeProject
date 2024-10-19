@@ -12,7 +12,7 @@ namespace API.Modules.TimeRecord;
 [ApiController]
 [Route("api/record")]
 public class TimeRecordController(
-    IGetAllTimeRecordUseCase getAllTimeRecordUseCase,
+    IGetPaginatedTimeRecordUseCase getPaginatedTimeRecordUseCase,
     IGetTimeRecordHistoryUseCase getTimeRecordHistoryUseCase,
     ICreateTimeRecordUseCase createTimeRecordUseCase,
     IUpdateTimeRecordUseCase updateTimeRecordUseCase,
@@ -23,7 +23,7 @@ public class TimeRecordController(
     [HttpGet, Authorize]
     public async Task<ActionResult<Pagination<TimeRecordMap>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await getAllTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
+        return HandleResponse(await getPaginatedTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet, Authorize, Route("history/{timeRecordId:int}")]
