@@ -1,6 +1,6 @@
 ﻿namespace API.Infra.Errors;
 
-public static class TimeRecordErrors
+public static class TimeRecordMessageErrors
 {
     public const string NotFound = "not_found:time_record_not_found";
     public const string AlreadyInUse = "bad_request:time_record_code_already_in_use";

@@ -14,7 +14,7 @@ public class TimePeriodValidateUtil : ITimePeriodValidateUtil
     )
     {
         if (start.CompareTo(end) > 0)
-            result.SetError(TimePeriodErrors.EndDateIsBiggerThenStartDate);
+            result.SetError(TimePeriodMessageErrors.EndDateIsBiggerThenStartDate);
     }
 
     public bool HasMinSize(TimePeriodDto dto)

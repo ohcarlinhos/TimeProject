@@ -16,7 +16,7 @@ public class UpdateUserPasswordByEmailUseCase(IUserRepository repo, IUserMapData
         var user = await repo.FindByEmail(email);
 
         if (user == null)
-            return result.SetError(UserErrors.NotFound);
+            return result.SetError(UserMessageErrors.NotFound);
 
         user.Password = BCrypt.Net.BCrypt.HashPassword(password);
 

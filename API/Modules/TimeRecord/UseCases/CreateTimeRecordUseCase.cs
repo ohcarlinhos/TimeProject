@@ -29,13 +29,13 @@ public class CreateTimeRecordUseCase(
         if (dto.CategoryId != null)
         {
             var category = await categoryRepo.FindById((int)dto.CategoryId, userId);
-            if (category == null) return result.SetError(TimeRecordErrors.CategoryNotFound);
+            if (category == null) return result.SetError(TimeRecordMessageErrors.CategoryNotFound);
         }
 
         if (dto.Code.IsNullOrEmpty() == false)
         {
             var trByCode = await repo.FindByCode(dto.Code!, userId);
-            if (trByCode != null) return result.SetError(TimeRecordErrors.CodeAlreadyInUse);
+            if (trByCode != null) return result.SetError(TimeRecordMessageErrors.CodeAlreadyInUse);
         }
 
         var timeRecord = await repo

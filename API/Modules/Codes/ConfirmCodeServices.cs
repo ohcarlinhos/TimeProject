@@ -16,7 +16,7 @@ public class ConfirmCodeServices(IConfirmCodeRepository repository) : IConfirmCo
             .ToList();
         
         return codes.Count > 0
-            ? result.SetError(ConfirmCodeErrors.CheckYourEmailInbox)
+            ? result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox)
             : result.SetData(await repository.Create(new ConfirmCodeEntity
             {
                 UserId = userId,
@@ -30,10 +30,10 @@ public class ConfirmCodeServices(IConfirmCodeRepository repository) : IConfirmCo
         var result = new Result<bool>();
         var recoveryCode = await repository.FindByIdAndEmail(id, email);
 
-        if (recoveryCode == null) return result.SetError(ConfirmCodeErrors.NotFound);
+        if (recoveryCode == null) return result.SetError(ConfirmCodeMessageErrors.NotFound);
 
         if (recoveryCode is { IsUsed: true } || DateTime.Now > recoveryCode.ExpireDate)
-            return result.SetError(ConfirmCodeErrors.IsUsedOrExpired);
+            return result.SetError(ConfirmCodeMessageErrors.IsUsedOrExpired);
 
         return result.SetData(true);
     }
@@ -44,7 +44,7 @@ public class ConfirmCodeServices(IConfirmCodeRepository repository) : IConfirmCo
         var recoveryCode = await repository.FindById(id);
 
         if (recoveryCode == null)
-            return result.SetError(ConfirmCodeErrors.NotFound);
+            return result.SetError(ConfirmCodeMessageErrors.NotFound);
 
         recoveryCode.IsUsed = true;
         await repository.Update(recoveryCode);

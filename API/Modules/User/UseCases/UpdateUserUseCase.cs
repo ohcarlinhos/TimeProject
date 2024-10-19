@@ -25,13 +25,13 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper): I
         var user = await repo.FindById(id);
 
         if (user == null)
-            return result.SetError(UserErrors.NotFound);
+            return result.SetError(UserMessageErrors.NotFound);
 
         if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email)
         {
             var emailAvailable = await repo.EmailIsAvailable(dto.Email);
             if (emailAvailable == false)
-                return result.SetError(UserErrors.EmailAlreadyInUse);
+                return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
             user.Email = dto.Email;
         }
@@ -44,7 +44,7 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper): I
             if ((config == null || config.SkipOldPasswordCompare == false) &&
                 BCrypt.Net.BCrypt.Verify(dto.OldPassword, user.Password) == false)
             {
-                return result.SetError(UserErrors.DifferentPassword);
+                return result.SetError(UserMessageErrors.DifferentPassword);
             }
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);

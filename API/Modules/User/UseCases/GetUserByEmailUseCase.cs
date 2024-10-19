@@ -13,6 +13,6 @@ public class GetUserByEmailUseCase(IUserRepository repo) : IGetUserByEmailUseCas
         var result = new Result<UserEntity>();
         var user = await repo.FindByEmail(email);
 
-        return user == null ? result.SetError(UserErrors.NotFound) : result.SetData(user);
+        return user == null ? result.SetError(UserMessageErrors.NotFound) : result.SetData(user);
     }
 }

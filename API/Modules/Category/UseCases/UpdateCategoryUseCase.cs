@@ -14,12 +14,12 @@ public class UpdateCategoryUseCase(ICategoryRepository repo) : IUpdateCategoryUs
         var result = new Result<CategoryEntity>();
         var category = await repo.FindById(id);
 
-        if (category == null) return result.SetError(CategoryErrors.NotFound);
+        if (category == null) return result.SetError(CategoryMessageErrors.NotFound);
 
-        if (category.UserId != userId) return result.SetError(GeneralErrors.Unauthorized);
+        if (category.UserId != userId) return result.SetError(GeneralMessageErrors.Unauthorized);
 
         if (await repo.FindByName(dto.Name, userId) != null)
-            return result.SetError(CategoryErrors.AlreadyExists);
+            return result.SetError(CategoryMessageErrors.AlreadyExists);
 
         category.Name = dto.Name;
         result.Data = await repo.Update(category);

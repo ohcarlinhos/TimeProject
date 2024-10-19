@@ -14,7 +14,7 @@ public class DisableUserUseCase(IUserRepository repo): IDisableUserUseCase
         var user = await repo.FindById(id);
 
         if (user == null)
-            return result.SetError(UserErrors.NotFound);
+            return result.SetError(UserMessageErrors.NotFound);
 
         user.IsActive = dto.IsActive;
         await repo.Update(user);

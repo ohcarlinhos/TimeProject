@@ -24,22 +24,22 @@ public class UpdateTimeRecordUseCase(
         var timeRecord = await repo.FindById(id, userId);
 
         if (timeRecord == null)
-            return result.SetError(TimeRecordErrors.NotFound);
+            return result.SetError(TimeRecordMessageErrors.NotFound);
 
         if (dto.CategoryId != null)
         {
             var category = await categoryRepo.FindById((int)dto.CategoryId, userId);
-            if (category == null) return result.SetError(TimeRecordErrors.CategoryNotFound);
+            if (category == null) return result.SetError(TimeRecordMessageErrors.CategoryNotFound);
             timeRecord.CategoryId = dto.CategoryId;
         }
 
         if (dto.Code.IsNullOrEmpty())
-            return result.SetError(TimeRecordErrors.CodeMustValue);
+            return result.SetError(TimeRecordMessageErrors.CodeMustValue);
 
         if (timeRecord.Code != dto.Code)
         {
             var trByCode = await repo.FindByCode(dto.Code, userId);
-            if (trByCode != null) return result.SetError(TimeRecordErrors.AlreadyInUse);
+            if (trByCode != null) return result.SetError(TimeRecordMessageErrors.AlreadyInUse);
         }
 
         timeRecord.Code = dto.Code;

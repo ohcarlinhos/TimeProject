@@ -13,7 +13,7 @@ public class DeleteTimeRecordUseCase(ITimeRecordRepository repo) : IDeleteTimeRe
         var entity = await repo.FindById(id, userId);
 
         return entity == null
-            ? result.SetError(TimeRecordErrors.NotFound)
+            ? result.SetError(TimeRecordMessageErrors.NotFound)
             : result.SetData(await repo.Delete(entity));
     }
 }

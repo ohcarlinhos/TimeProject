@@ -16,7 +16,7 @@ public class GetTimeRecordByCodeUseCase(ITimeRecordRepository repo, ITimeRecordM
         var entity = await repo.Details(code, userId);
 
         return entity == null
-            ? result.SetError(TimeRecordErrors.NotFound)
+            ? result.SetError(TimeRecordMessageErrors.NotFound)
             : result.SetData(mapDataUtil.Handle(entity));
     }
 }

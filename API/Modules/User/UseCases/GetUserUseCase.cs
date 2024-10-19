@@ -15,7 +15,7 @@ public class GetUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IGe
         var user = await repo.FindById(id);
 
         return user == null
-            ? result.SetError(UserErrors.NotFound)
+            ? result.SetError(UserMessageErrors.NotFound)
             : result.SetData(mapper.Handle(user));
     }
 }

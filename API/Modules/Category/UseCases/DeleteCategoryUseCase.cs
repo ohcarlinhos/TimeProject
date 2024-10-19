@@ -12,9 +12,9 @@ public class DeleteCategoryUseCase(ICategoryRepository repo) : IDeleteCategoryUs
         var result = new Result<bool>();
         var category = await repo.FindById(id);
 
-        if (category == null) return result.SetError(CategoryErrors.NotFound);
+        if (category == null) return result.SetError(CategoryMessageErrors.NotFound);
 
-        if (category.UserId != userId) return result.SetError(GeneralErrors.Unauthorized);
+        if (category.UserId != userId) return result.SetError(GeneralMessageErrors.Unauthorized);
 
         result.Data = await repo.Delete(category);
         return result;

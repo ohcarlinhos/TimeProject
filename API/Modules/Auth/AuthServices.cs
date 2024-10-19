@@ -36,13 +36,13 @@ public class AuthServices(
         var result = new Result<JwtData>();
 
         var findUserResult = await getUserByEmailUseCase.Handle(dto.Email);
-        if (findUserResult.HasError) return result.SetError(AuthErrors.WrongEmailOrPassword);
+        if (findUserResult.HasError) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
 
         var user = findUserResult.Data!;
 
         if (BCrypt.Net.BCrypt.Verify(dto.Password, user.Password) == false)
         {
-            return result.SetError(AuthErrors.WrongEmailOrPassword);
+            return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
         }
 
         if (onlyAdmin && user.UserRole != UserRole.Admin)

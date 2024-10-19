@@ -24,7 +24,7 @@ public class CreateTimePeriodUseCase(
         if (result.HasError) return result;
 
         if (dto.Start.CompareTo(dto.End) > 0)
-            return result.SetError(TimePeriodErrors.EndDateIsBiggerThenStartDate);
+            return result.SetError(TimePeriodMessageErrors.EndDateIsBiggerThenStartDate);
 
         var findTrResult = await getTimeRecordByIdUseCase.Handle(dto.TimeRecordId, userId);
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);

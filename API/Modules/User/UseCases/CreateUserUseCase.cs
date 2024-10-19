@@ -18,7 +18,7 @@ public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMap
 
         if (registerCode == null || registerCode.IsUsed)
         {
-            result.Message = UserErrors.RegisterCodeIsNotAvailable;
+            result.Message = UserMessageErrors.RegisterCodeIsNotAvailable;
             result.HasError = true;
             return result;
         }
@@ -27,7 +27,7 @@ public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMap
 
         if (emailAvailable == false)
         {
-            result.Message = UserErrors.EmailAlreadyInUse;
+            result.Message = UserMessageErrors.EmailAlreadyInUse;
             result.HasError = true;
             return result;
         }

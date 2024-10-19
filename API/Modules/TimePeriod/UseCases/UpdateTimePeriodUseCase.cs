@@ -23,7 +23,7 @@ public class UpdateTimePeriodUseCase(
         if (result.HasError) return result;
 
         var timePeriod = await repo.FindById(id, userId);
-        if (timePeriod == null) return result.SetError(TimePeriodErrors.NotFound);
+        if (timePeriod == null) return result.SetError(TimePeriodMessageErrors.NotFound);
 
         timePeriod.Start = dto.Start;
         timePeriod.End = dto.End;

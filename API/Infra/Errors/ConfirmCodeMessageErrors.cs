@@ -1,6 +1,6 @@
 ﻿namespace API.Infra.Errors;
 
-public static class ConfirmCodeErrors
+public static class ConfirmCodeMessageErrors
 {
     public const string CheckYourEmailInbox = "bad_request:check_your_email_inbox";
     public const string NotFound = "bad_request:recovery_code_not_found";

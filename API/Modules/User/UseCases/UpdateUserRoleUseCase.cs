@@ -16,11 +16,11 @@ public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper
         var user = await repo.FindById(id);
 
         if (user == null)
-            return result.SetError(UserErrors.NotFound);
+            return result.SetError(UserMessageErrors.NotFound);
 
         if (Enum.TryParse(typeof(UserRole), dto.Role, out var userRole) == false)
         {
-            return result.SetError(UserErrors.RoleNotFound);
+            return result.SetError(UserMessageErrors.RoleNotFound);
         }
 
         user.UserRole = (UserRole)userRole;
