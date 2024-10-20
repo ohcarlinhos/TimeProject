@@ -4,5 +4,7 @@ namespace API.Core.TimerSession;
 
 public interface ITimerSessionRepository
 {
-    public Task<TimerSessionEntity> Create(TimerSessionEntity timerSessionEntity);
+    Task<TimerSessionEntity> Create(TimerSessionEntity timerSessionEntity);
+    Task<TimerSessionEntity?> FindById(int id, int userId);
+    Task<bool> Delete(TimerSessionEntity entity);
 }

@@ -67,7 +67,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         return true;
     }
 
-    public async Task<bool> DeleteAllByTimeRecordId(IEnumerable<TimePeriodEntity> entityList)
+    public async Task<bool> DeleteByList(List<TimePeriodEntity> entityList)
     {
         dbContext.TimePeriods.RemoveRange(entityList);
         await dbContext.SaveChangesAsync();
