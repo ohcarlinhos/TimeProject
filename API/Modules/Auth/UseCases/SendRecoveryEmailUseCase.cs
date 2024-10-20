@@ -43,7 +43,7 @@ public class SendRecoveryEmailUseCase(
                         <p>
                             Você acaba de requisitar a recuperação da sua senha, para prosseguir <a href='{emailUrl}' target='_blank'>clique aqui</a> para recria-la. <br/>
                             Ou copie a URL e cole no seu navegador: {emailUrl} <br/><br/>
-                            Expiração do código: {recoveryCode.ExpireDate.ToLocalTime()}
+                            Expiração do código: {recoveryCode.ExpireDate.AddHours(-3).ToLocalTime()}
                         </p>
                             ",
                 IsHtml = true
