@@ -1,7 +1,9 @@
-﻿using API.Core.TimeRecord.Repositories;
+﻿using API.Core.TimeRecord;
+using API.Core.TimeRecord.Repositories;
 using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Shared.General.Pagination;
 using Shared.General.Repositories;
 
@@ -48,6 +50,20 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
             Count = count,
             Entities = entities
         };
+    }
+
+    public Task<List<SearchTimeRecordItem>> SearchTimeRecord(string search, int userId)
+    {
+        var query = dbContext.TimeRecords.AsQueryable();
+        query = query.Where(tr => tr.UserId == userId);
+
+        if (search.IsNullOrEmpty() == false)
+            query = SearchWhereConditional(query, search);
+
+        return query
+            .Select(e => new SearchTimeRecordItem(e.Id, e.Code, e.Title))
+            .Take(10)
+            .ToListAsync();
     }
 
     public async Task<TimeRecordEntity> Create(TimeRecordEntity entity)
@@ -103,11 +119,10 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         if (string.IsNullOrWhiteSpace(search)) return query;
 
         return query.Where(tr =>
-            tr.Code != null &&
             EF.Functions.Like(
                 tr.Code.ToLower(),
                 $"%{search.ToLower()}%") ||
-            tr.Description != null &&
+            tr.Title != null &&
             EF.Functions.Like(
                 tr.Title!.ToLower(),
                 $"%{search.ToLower()}%")

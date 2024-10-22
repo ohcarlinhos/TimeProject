@@ -25,6 +25,7 @@ public static class TimeRecordBuilderConfig
         builder.Services.AddScoped<ICreateTimeRecordUseCase, CreateTimeRecordUseCase>();
         builder.Services.AddScoped<IUpdateTimeRecordUseCase, UpdateTimeRecordUseCase>();
         builder.Services.AddScoped<IDeleteTimeRecordUseCase, DeleteTimeRecordUseCase>();
+        builder.Services.AddScoped<ISearchTimeRecordUseCase, SearchTimeRecordUseCase>();
         
         builder.Services.AddScoped<ISyncTrMetaUseCase, SyncTrMetaUseCase>();
     }

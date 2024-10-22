@@ -1,4 +1,5 @@
-﻿using API.Core.TimeRecord.UseCases;
+﻿using API.Core.TimeRecord;
+using API.Core.TimeRecord.UseCases;
 using API.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,8 @@ public class TimeRecordController(
     ICreateTimeRecordUseCase createTimeRecordUseCase,
     IUpdateTimeRecordUseCase updateTimeRecordUseCase,
     IGetTimeRecordByCodeUseCase getTimeRecordByCodeUseCase,
-    IDeleteTimeRecordUseCase deleteTimeRecordUseCase
+    IDeleteTimeRecordUseCase deleteTimeRecordUseCase,
+    ISearchTimeRecordUseCase searchTimeRecordUseCase
 ) : CustomController
 {
     [HttpGet, Authorize]
@@ -32,6 +34,12 @@ public class TimeRecordController(
     {
         return HandleResponse(
             await getTimeRecordHistoryUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
+    }
+
+    [HttpGet, Authorize, Route("search")]
+    public async Task<ActionResult<List<SearchTimeRecordItem>>> Search([FromQuery] string? value)
+    {
+        return HandleResponse(await searchTimeRecordUseCase.Handle(value ?? "", UserClaims.Id(User)));
     }
 
     [HttpPost, Authorize]
