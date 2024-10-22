@@ -30,7 +30,8 @@ public class TimeRecordController(
     public async Task<ActionResult<Pagination<TimeRecordHistoryDayMap>>> HistoryIndex([FromRoute] int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await getTimeRecordHistoryUseCase.Handle(timeRecordId, User, paginationQuery));
+        return HandleResponse(
+            await getTimeRecordHistoryUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
 
     [HttpPost, Authorize]

@@ -15,13 +15,12 @@ public class GetTimeRecordHistoryUseCase(
 {
     public async Task<Result<Pagination<TimeRecordHistoryDayMap>>> Handle(
         int timeRecordId,
-        ClaimsPrincipal user,
+        int userId,
         PaginationQuery paginationQuery
     )
     {
-        var userId = UserClaims.Id(user);
         var distinctDates = await repo.GetDistinctDates(timeRecordId, userId, -3);
-        
+
         var dates = distinctDates
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage);

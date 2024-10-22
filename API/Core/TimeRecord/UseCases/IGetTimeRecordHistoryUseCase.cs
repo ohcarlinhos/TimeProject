@@ -7,6 +7,6 @@ namespace API.Core.TimeRecord.UseCases;
 
 public interface IGetTimeRecordHistoryUseCase
 {
-    public Task<Result<Pagination<TimeRecordHistoryDayMap>>> Handle(int timeRecordId, ClaimsPrincipal user,
+    public Task<Result<Pagination<TimeRecordHistoryDayMap>>> Handle(int timeRecordId, int userId,
         PaginationQuery paginationQuery);
 }
