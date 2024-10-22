@@ -60,6 +60,9 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         if (search.IsNullOrEmpty() == false)
             query = SearchWhereConditional(query, search);
 
+        query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
+            .ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
+        
         return query
             .Select(e => new SearchTimeRecordItem(e.Id, e.Code, e.Title))
             .Take(10)
