@@ -5,7 +5,7 @@ using Shared.General;
 
 namespace API.Modules.Codes.UseCases;
 
-public class SetUsedConfirmCodeUseCase(IConfirmCodeRepository repo) : ISetUsedConfirmCodeUseCase
+public class SetIsUsedConfirmCodeUseCase(IConfirmCodeRepository repo) : ISetIsUsedConfirmCodeUseCase
 {
     public async Task<Result<bool>> Handle(string id)
     {

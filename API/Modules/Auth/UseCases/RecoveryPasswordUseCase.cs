@@ -8,7 +8,7 @@ namespace API.Modules.Auth.UseCases;
 
 public class RecoveryPasswordUseCase(
     IUpdateUserPasswordByEmailUseCase updateUserPasswordByEmailUseCase,
-    ISetUsedConfirmCodeUseCase setUsedConfirmCodeUseCase,
+    ISetIsUsedConfirmCodeUseCase setIsUsedConfirmCodeUseCase,
     IValidateConfirmCodeUseCase validateConfirmCodeUseCase
 ) : IRecoveryPasswordUseCase
 {
@@ -26,7 +26,7 @@ public class RecoveryPasswordUseCase(
         if (updatePasswordResult.HasError)
             return result.SetError(updatePasswordResult.Message);
 
-        await setUsedConfirmCodeUseCase.Handle(dto.Code);
+        await setIsUsedConfirmCodeUseCase.Handle(dto.Code);
 
         return result.SetData(true);
     }
