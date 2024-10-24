@@ -1,4 +1,4 @@
-﻿using API.Infra.Handlers.Email;
+﻿using API.Infra.Handlers;
 using API.Infra.Interfaces;
 
 namespace API.Infra.Config;

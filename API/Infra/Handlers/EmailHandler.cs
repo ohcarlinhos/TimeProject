@@ -2,7 +2,7 @@
 using API.Infra.Interfaces;
 using Shared.Handlers.Email;
 
-namespace API.Infra.Handlers.Email;
+namespace API.Infra.Handlers;
 
 public class EmailHandler(ICustomSmtp customSmtp) : IEmailHandler
 {

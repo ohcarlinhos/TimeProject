@@ -11,13 +11,12 @@ public class CreateRecoveryCodeUseCase(IConfirmCodeRepository repo) : ICreateRec
     public async Task<Result<ConfirmCodeEntity>> Handle(int userId)
     {
         var result = new Result<ConfirmCodeEntity>();
-        var codes = (await repo
-                .FindByUserId(userId, ConfirmCodeType.Recovery))
+        var codes = (await repo.FindByUserId(userId, ConfirmCodeType.Recovery))
             .Where(rc => DateTime.Now < rc.ExpireDate && rc is { IsUsed: false })
             .ToList();
 
         return codes.Count > 0
-            ? result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox)
+            ? result.SetData(codes.First())
             : result.SetData(await repo.Create(new ConfirmCodeEntity
             {
                 UserId = userId,

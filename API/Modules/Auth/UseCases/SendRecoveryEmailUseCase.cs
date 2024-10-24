@@ -12,6 +12,7 @@ namespace API.Modules.Auth.UseCases;
 public class SendRecoveryEmailUseCase(
     IGetUserByEmailUseCase getUserByEmailUseCase,
     ICreateRecoveryCodeUseCase createRecoveryCodeUseCase,
+    ISetWasSentConfirmCodeUseCase setWasSentConfirmCodeUseCase,
     IEmailHandler emailHandler,
     IConfiguration configuration
 ) : ISendRecoveryEmailUseCase
@@ -25,14 +26,15 @@ public class SendRecoveryEmailUseCase(
 
         var user = findUserResult.Data!;
 
+        var createRecoveryCodeResult = await createRecoveryCodeUseCase.Handle(user.Id);
+
+        var recoveryCode = createRecoveryCodeResult.Data!;
+        if (recoveryCode.WasSent) return result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox);
+
         try
         {
-            var createRecoveryCodeResult = await createRecoveryCodeUseCase.Handle(user.Id);
-            if (createRecoveryCodeResult.HasError) return result.SetError(createRecoveryCodeResult.Message);
-
-            var recoveryCode = createRecoveryCodeResult.Data!;
-
             var emailUrl = configuration["RecoveryUrl"] + recoveryCode.Id;
+            var recoveryCodeLimit = recoveryCode.ExpireDate.AddHours(-3).ToLocalTime();
 
             emailHandler.Send(new EmailPayload
             {
@@ -43,11 +45,13 @@ public class SendRecoveryEmailUseCase(
                         <p>
                             Você acaba de requisitar a recuperação da sua senha, para prosseguir <a href='{emailUrl}' target='_blank'>clique aqui</a> para recria-la. <br/>
                             Ou copie a URL e cole no seu navegador: {emailUrl} <br/><br/>
-                            Expiração do código: {recoveryCode.ExpireDate.AddHours(-3).ToLocalTime()}
+                            Expiração do código: {recoveryCodeLimit}
                         </p>
                             ",
                 IsHtml = true
             });
+
+            await setWasSentConfirmCodeUseCase.Handle(recoveryCode.Id);
         }
         catch
         {
