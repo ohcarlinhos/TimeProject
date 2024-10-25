@@ -9,7 +9,7 @@ using Shared.User;
 
 namespace API.Modules.User.UseCases;
 
-public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMapDataUtil mapper): ICreateUserUseCase
+public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMapDataUtil mapper) : ICreateUserUseCase
 {
     public async Task<Result<UserMap>> Handle(CreateUserDto dto)
     {
@@ -32,14 +32,12 @@ public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMap
             return result;
         }
 
-        var hasPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-
         var entity = await repo
             .Create(new UserEntity()
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = hasPassword
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
             });
 
         registerCode.IsUsed = true;
