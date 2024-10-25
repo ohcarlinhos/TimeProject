@@ -25,5 +25,6 @@ public static class UserBuilderConfig
         builder.Services.AddScoped<IGetUserByEmailUseCase, GetUserByEmailUseCase>();
         builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
         builder.Services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();
+        builder.Services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();
     }
 }
