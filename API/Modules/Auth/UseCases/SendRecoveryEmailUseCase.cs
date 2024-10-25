@@ -3,53 +3,41 @@ using API.Core.Codes.UseCases;
 using API.Core.User.UseCases;
 using API.Infra.Errors;
 using API.Infra.Interfaces;
-using Shared.Auth;
+using API.Modules.Auth.Utils;
+using Entities;
 using Shared.General;
-using Shared.Handlers.Email;
 
 namespace API.Modules.Auth.UseCases;
 
 public class SendRecoveryEmailUseCase(
     IGetUserByEmailUseCase getUserByEmailUseCase,
-    ICreateRecoveryCodeUseCase createRecoveryCodeUseCase,
+    ICreateConfirmCodeUseCase createConfirmCodeUseCase,
     ISetWasSentConfirmCodeUseCase setWasSentConfirmCodeUseCase,
     IEmailHandler emailHandler,
     IConfiguration configuration
 ) : ISendRecoveryEmailUseCase
 {
-    public async Task<Result<bool>> Handle(RecoveryDto dto)
+    public async Task<Result<bool>> Handle(string email)
     {
         var result = new Result<bool>();
 
-        var findUserResult = await getUserByEmailUseCase.Handle(dto.Email);
+        var findUserResult = await getUserByEmailUseCase.Handle(email);
         if (findUserResult.HasError) return result.SetError(findUserResult.Message);
 
         var user = findUserResult.Data!;
 
-        var createRecoveryCodeResult = await createRecoveryCodeUseCase.Handle(user.Id);
+        var createRecoveryCodeResult = await createConfirmCodeUseCase.Handle(user.Id, ConfirmCodeType.Recovery);
 
         var recoveryCode = createRecoveryCodeResult.Data!;
         if (recoveryCode.WasSent) return result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox);
 
         try
         {
-            var emailUrl = configuration["RecoveryUrl"] + recoveryCode.Id;
-            var recoveryCodeLimit = recoveryCode.ExpireDate.AddHours(-3).ToLocalTime();
-
-            emailHandler.Send(new EmailPayload
-            {
-                To = dto.Email,
-                Subject = "Recuperação de senha - Registra meu tempo aí!",
-                Body =
-                    $@"
-                        <p>
-                            Você acaba de requisitar a recuperação da sua senha, para prosseguir <a href='{emailUrl}' target='_blank'>clique aqui</a> para recria-la. <br/>
-                            Ou copie a URL e cole no seu navegador: {emailUrl} <br/><br/>
-                            Expiração do código: {recoveryCodeLimit}
-                        </p>
-                            ",
-                IsHtml = true
-            });
+            emailHandler.Send(RecoveryEmailFactory.Create(
+                email,
+                configuration["RecoveryUrl"] + recoveryCode.Id,
+                recoveryCode.ExpireDate.AddHours(-3).ToLocalTime()
+            ));
 
             await setWasSentConfirmCodeUseCase.Handle(recoveryCode.Id);
         }

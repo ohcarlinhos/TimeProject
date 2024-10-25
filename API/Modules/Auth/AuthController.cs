@@ -27,7 +27,7 @@ public class AuthController(
     [HttpPost, Route("recovery")]
     public async Task<ActionResult<bool>> Recovery([FromBody] RecoveryDto dto)
     {
-        return HandleResponse(await sendRecoveryEmailUseCase.Handle(dto));
+        return HandleResponse(await sendRecoveryEmailUseCase.Handle(dto.Email));
     }
 
     [HttpPost, Route("recovery/password")]
