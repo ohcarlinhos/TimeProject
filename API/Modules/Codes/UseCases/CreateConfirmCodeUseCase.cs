@@ -1,17 +1,16 @@
 ﻿using API.Core.Codes;
 using API.Core.Codes.UseCases;
-using API.Infra.Errors;
 using Entities;
 using Shared.General;
 
 namespace API.Modules.Codes.UseCases;
 
-public class CreateRecoveryCodeUseCase(IConfirmCodeRepository repo) : ICreateRecoveryCodeUseCase
+public class CreateConfirmCodeUseCase(IConfirmCodeRepository repo) : ICreateConfirmCodeUseCase
 {
-    public async Task<Result<ConfirmCodeEntity>> Handle(int userId)
+    public async Task<Result<ConfirmCodeEntity>> Handle(int userId, ConfirmCodeType type)
     {
         var result = new Result<ConfirmCodeEntity>();
-        var codes = (await repo.FindByUserId(userId, ConfirmCodeType.Recovery))
+        var codes = (await repo.FindByUserId(userId, type))
             .Where(rc => DateTime.Now < rc.ExpireDate && rc is { IsUsed: false })
             .ToList();
 
@@ -21,7 +20,7 @@ public class CreateRecoveryCodeUseCase(IConfirmCodeRepository repo) : ICreateRec
             {
                 UserId = userId,
                 ExpireDate = DateTime.Now.AddMinutes(15).ToUniversalTime(),
-                Type = ConfirmCodeType.Recovery
+                Type = type
             }));
     }
 }

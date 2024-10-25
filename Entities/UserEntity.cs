@@ -15,6 +15,7 @@ public class UserEntity
     public string Password { get; set; } = null!;
     public UserRole UserRole { get; set; } = UserRole.Normal;
     public bool IsActive { get; set; } = true;
+    public bool IsVerified { get; set; }
     
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

@@ -11,7 +11,7 @@ public static class CodeBuilderConfig
     {
         builder.Services.AddScoped<IConfirmCodeRepository, ConfirmCodeRepository>();
 
-        builder.Services.AddScoped<ICreateRecoveryCodeUseCase, CreateRecoveryCodeUseCase>();
+        builder.Services.AddScoped<ICreateConfirmCodeUseCase, CreateConfirmCodeUseCase>();
         builder.Services.AddScoped<IValidateConfirmCodeUseCase, ValidateConfirmCodeUseCase>();
         builder.Services.AddScoped<ISetIsUsedConfirmCodeUseCase, SetIsUsedConfirmCodeUseCase>();
         builder.Services.AddScoped<ISetWasSentConfirmCodeUseCase, SetWasSentConfirmCodeUseCase>();

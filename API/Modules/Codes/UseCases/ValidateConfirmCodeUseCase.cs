@@ -10,11 +10,12 @@ public class ValidateConfirmCodeUseCase(IConfirmCodeRepository repo) : IValidate
     public async Task<Result<bool>> Handle(string id, string email)
     {
         var result = new Result<bool>();
-        var recoveryCode = await repo.FindByIdAndEmail(id, email);
 
-        if (recoveryCode == null) return result.SetError(ConfirmCodeMessageErrors.NotFound);
+        var code = await repo.FindByIdAndEmail(id, email);
 
-        if (recoveryCode is { IsUsed: true } || DateTime.Now > recoveryCode.ExpireDate)
+        if (code == null) return result.SetError(ConfirmCodeMessageErrors.NotFound);
+
+        if (code is { IsUsed: true } || DateTime.Now > code.ExpireDate)
             return result.SetError(ConfirmCodeMessageErrors.IsUsedOrExpired);
 
         return result.SetData(true);
