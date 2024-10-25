@@ -1,0 +1,24 @@
+﻿using Shared.Handlers.Email;
+
+namespace API.Modules.Auth.Utils;
+
+public static class VerifyEmailFactory
+{
+    public static EmailPayload Create(string email, string url, DateTime dateLimit)
+    {
+        return new EmailPayload
+        {
+            To = email,
+            Subject = "Confirmação de E-mail - Registra meu tempo aí!",
+            Body =
+                $@"
+                        <p>
+                            Bem vindo(a) ao Registra meu tempo aí! Para utilizar nossa ferramenta, verifique seu email <a href='{url}' target='_blank'>clicando aqui</a>.<br/>
+                            Ou copie a URL e cole no seu navegador: {url} <br/><br/>
+                            Válido até: {dateLimit}
+                        </p>
+                ",
+            IsHtml = true
+        };
+    }
+}

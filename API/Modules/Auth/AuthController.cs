@@ -1,7 +1,9 @@
 ﻿using API.Core.Auth.UseCases;
 using API.Infra.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Auth;
+using Shared.General.Util;
 
 namespace API.Modules.Auth;
 
@@ -10,7 +12,9 @@ namespace API.Modules.Auth;
 public class AuthController(
     ILoginUseCase loginUseCase,
     ISendRecoveryEmailUseCase sendRecoveryEmailUseCase,
-    IRecoveryPasswordUseCase recoveryPasswordUseCase) : CustomController
+    IRecoveryPasswordUseCase recoveryPasswordUseCase,
+    ISendVerifyEmailUseCase sendVerifyEmailUseCase,
+    IVerifyUserUseCase verifyUserUseCase) : CustomController
 {
     [HttpPost, Route("login")]
     public async Task<ActionResult<JwtData>> Login([FromBody] LoginDto dto)
@@ -34,5 +38,17 @@ public class AuthController(
     public async Task<ActionResult<bool>> RecoveryPassword([FromBody] RecoveryPasswordDto dto)
     {
         return HandleResponse(await recoveryPasswordUseCase.Handle(dto));
+    }
+
+    [HttpPost, Route("verify"), Authorize]
+    public async Task<ActionResult<bool>> Verify()
+    {
+        return HandleResponse(await sendVerifyEmailUseCase.Handle(UserClaims.Email(User)));
+    }
+
+    [HttpPost, Route("verify/{code}"), Authorize]
+    public async Task<ActionResult<bool>> VerifyUser(string code)
+    {
+        return HandleResponse(await verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
     }
 }
