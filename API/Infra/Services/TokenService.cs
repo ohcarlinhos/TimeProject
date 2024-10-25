@@ -17,7 +17,8 @@ public class TokenService(JwtSettings jwtSettings) : ITokenService
         {
             new Claim("id", userEntity.Id.ToString()),
             new Claim(ClaimTypes.Email, userEntity.Email),
-            new Claim(ClaimTypes.Role, userEntity.UserRole.ToString())
+            new Claim(ClaimTypes.Role, userEntity.UserRole.ToString()),
+            new Claim("isVerified", userEntity.IsVerified.ToString())
         });
 
         var tokenExpires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt);
