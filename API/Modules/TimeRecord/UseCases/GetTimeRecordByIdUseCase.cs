@@ -1,6 +1,6 @@
 using System.Security.Claims;
-using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.UseCases;
+using Core.TimeRecord.Repositories;
+using Core.TimeRecord.UseCases;
 using API.Infra.Errors;
 using Entities;
 using Shared.General;

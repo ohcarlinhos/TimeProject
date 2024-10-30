@@ -1,6 +1,6 @@
-﻿using API.Core.TimePeriod;
-using API.Core.TimePeriod.UseCases;
-using API.Core.TimePeriod.Utils;
+﻿using Core.TimePeriod;
+using Core.TimePeriod.UseCases;
+using Core.TimePeriod.Utils;
 using Shared.General;
 using Shared.General.Pagination;
 using Shared.TimePeriod;

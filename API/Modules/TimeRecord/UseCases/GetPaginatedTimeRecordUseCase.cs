@@ -1,6 +1,6 @@
-﻿using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.UseCases;
-using API.Core.TimeRecord.Utils;
+﻿using Core.TimeRecord.Repositories;
+using Core.TimeRecord.UseCases;
+using Core.TimeRecord.Utils;
 using Shared.General;
 using Shared.General.Pagination;
 using Shared.TimeRecord;

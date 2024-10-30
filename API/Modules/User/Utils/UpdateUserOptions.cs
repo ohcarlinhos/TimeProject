@@ -1,4 +1,4 @@
-﻿using API.Core.User.Utils;
+﻿using Core.User.Utils;
 
 namespace API.Modules.User.Utils;
 

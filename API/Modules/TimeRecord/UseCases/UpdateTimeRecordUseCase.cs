@@ -1,8 +1,8 @@
-﻿using API.Core.Category;
-using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.UseCases;
-using API.Core.TimeRecord.Utils;
+﻿using Core.TimeRecord.Repositories;
+using Core.TimeRecord.UseCases;
+using Core.TimeRecord.Utils;
 using API.Infra.Errors;
+using Core.Category;
 using Microsoft.IdentityModel.Tokens;
 using Shared.General;
 using Shared.TimeRecord;

@@ -1,5 +1,5 @@
-﻿using API.Core.Category;
-using API.Core.Category.UseCases;
+﻿using Core.Category;
+using Core.Category.UseCases;
 using Entities;
 using Shared.Category;
 using Shared.General;

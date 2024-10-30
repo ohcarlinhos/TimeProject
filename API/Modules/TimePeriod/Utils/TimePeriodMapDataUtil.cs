@@ -1,4 +1,4 @@
-using API.Core.TimePeriod.Utils;
+using Core.TimePeriod.Utils;
 using AutoMapper;
 using Entities;
 using Shared.TimePeriod;

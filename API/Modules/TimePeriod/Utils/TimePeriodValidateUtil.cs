@@ -1,4 +1,4 @@
-﻿using API.Core.TimePeriod.Utils;
+﻿using Core.TimePeriod.Utils;
 using API.Infra.Errors;
 using Shared.General;
 using Shared.TimePeriod;

@@ -1,4 +1,4 @@
-using API.Core.Statistic;
+using Core.Statistic;
 using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;

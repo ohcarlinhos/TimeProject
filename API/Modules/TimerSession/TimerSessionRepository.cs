@@ -1,4 +1,4 @@
-﻿using API.Core.TimerSession;
+﻿using Core.TimerSession;
 using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;

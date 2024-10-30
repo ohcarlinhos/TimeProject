@@ -1,6 +1,6 @@
-using API.Core.Statistic;
-using API.Core.Statistic.UseCases;
-using API.Core.TimePeriod.Utils;
+using Core.Statistic;
+using Core.Statistic.UseCases;
+using Core.TimePeriod.Utils;
 using Shared.General;
 using Shared.General.Util;
 using Shared.Statistic;

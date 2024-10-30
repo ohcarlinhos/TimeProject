@@ -1,6 +1,6 @@
-﻿using API.Core.TimePeriod;
-using API.Core.TimePeriod.UseCases;
-using API.Core.TimeRecord.UseCases;
+﻿using Core.TimePeriod;
+using Core.TimePeriod.UseCases;
+using Core.TimeRecord.UseCases;
 using API.Infra.Errors;
 using Shared.General;
 

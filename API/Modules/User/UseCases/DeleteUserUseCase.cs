@@ -1,5 +1,5 @@
-﻿using API.Core.User;
-using API.Core.User.UseCases;
+﻿using Core.User;
+using Core.User.UseCases;
 using Shared.General;
 
 namespace API.Modules.User.UseCases;

@@ -1,4 +1,4 @@
-﻿using API.Core.TimerSession.UseCases;
+﻿using Core.TimerSession.UseCases;
 using API.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

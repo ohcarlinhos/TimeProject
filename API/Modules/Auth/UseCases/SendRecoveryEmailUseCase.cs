@@ -1,9 +1,9 @@
-﻿using API.Core.Auth.UseCases;
-using API.Core.Codes.UseCases;
-using API.Core.User.UseCases;
+﻿using Core.Codes.UseCases;
+using Core.User.UseCases;
 using API.Infra.Errors;
 using API.Infra.Interfaces;
 using API.Modules.Auth.Utils;
+using Core.Auth.UseCases;
 using Entities;
 using Shared.General;
 

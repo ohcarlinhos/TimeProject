@@ -1,5 +1,5 @@
-﻿using API.Core.Statistic;
-using API.Core.Statistic.UseCases;
+﻿using Core.Statistic;
+using Core.Statistic.UseCases;
 using API.Modules.Statistic;
 using API.Modules.Statistic.UseCases;
 

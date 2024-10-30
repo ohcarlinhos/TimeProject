@@ -1,5 +1,5 @@
-﻿using API.Core.TimeRecord;
-using API.Core.TimeRecord.Repositories;
+﻿using Core.TimeRecord;
+using Core.TimeRecord.Repositories;
 using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;

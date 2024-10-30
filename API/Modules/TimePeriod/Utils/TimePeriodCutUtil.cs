@@ -1,4 +1,4 @@
-﻿using API.Core.TimePeriod.Utils;
+﻿using Core.TimePeriod.Utils;
 using Entities;
 
 namespace API.Modules.TimePeriod.Utils;

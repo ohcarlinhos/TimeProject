@@ -1,6 +1,6 @@
-﻿using API.Core.Category;
-using API.Core.Category.UseCases;
-using API.Infra.Errors;
+﻿using API.Infra.Errors;
+using Core.Category;
+using Core.Category.UseCases;
 using Shared.General;
 
 namespace API.Modules.Category.UseCases;

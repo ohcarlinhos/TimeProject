@@ -1,5 +1,5 @@
-﻿using API.Core.Auth.UseCases;
-using API.Modules.Auth.UseCases;
+﻿using API.Modules.Auth.UseCases;
+using Core.Auth.UseCases;
 
 namespace API.Infra.Modules;
 

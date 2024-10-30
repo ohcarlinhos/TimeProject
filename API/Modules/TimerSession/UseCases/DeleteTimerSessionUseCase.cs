@@ -1,7 +1,7 @@
-﻿using API.Core.TimePeriod;
-using API.Core.TimeRecord.UseCases;
-using API.Core.TimerSession;
-using API.Core.TimerSession.UseCases;
+﻿using Core.TimePeriod;
+using Core.TimeRecord.UseCases;
+using Core.TimerSession;
+using Core.TimerSession.UseCases;
 using API.Infra.Errors;
 using Shared.General;
 

@@ -1,4 +1,4 @@
-﻿using API.Core.Codes;
+﻿using Core.Codes;
 using API.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;

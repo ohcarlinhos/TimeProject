@@ -1,4 +1,4 @@
-using API.Core.Statistic.UseCases;
+using Core.Statistic.UseCases;
 using API.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

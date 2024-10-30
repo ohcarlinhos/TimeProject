@@ -1,5 +1,5 @@
-﻿using API.Core.Category;
-using API.Database;
+﻿using API.Database;
+using Core.Category;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General.Pagination;

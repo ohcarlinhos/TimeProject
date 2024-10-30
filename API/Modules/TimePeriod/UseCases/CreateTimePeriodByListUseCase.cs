@@ -1,8 +1,8 @@
-﻿using API.Core.TimePeriod;
-using API.Core.TimePeriod.UseCases;
-using API.Core.TimePeriod.Utils;
-using API.Core.TimeRecord.UseCases;
-using API.Core.TimerSession;
+﻿using Core.TimePeriod;
+using Core.TimePeriod.UseCases;
+using Core.TimePeriod.Utils;
+using Core.TimeRecord.UseCases;
+using Core.TimerSession;
 using Entities;
 using Shared.General;
 using Shared.TimePeriod;

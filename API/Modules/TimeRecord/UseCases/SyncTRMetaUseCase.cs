@@ -1,5 +1,5 @@
-﻿using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.UseCases;
+﻿using Core.TimeRecord.Repositories;
+using Core.TimeRecord.UseCases;
 using Entities;
 
 namespace API.Modules.TimeRecord.UseCases;

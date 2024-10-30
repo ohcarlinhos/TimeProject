@@ -1,5 +1,5 @@
-﻿using API.Core.User;
-using API.Core.User.UseCases;
+﻿using Core.User;
+using Core.User.UseCases;
 using API.Infra.Controllers;
 using API.Modules.User.Utils;
 using Entities;

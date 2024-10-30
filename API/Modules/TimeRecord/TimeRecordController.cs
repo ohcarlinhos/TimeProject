@@ -1,5 +1,5 @@
-﻿using API.Core.TimeRecord;
-using API.Core.TimeRecord.UseCases;
+﻿using Core.TimeRecord;
+using Core.TimeRecord.UseCases;
 using API.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
-﻿using API.Core.User;
-using API.Core.User.UseCases;
-using API.Core.User.Utils;
+﻿using Core.User;
+using Core.User.UseCases;
+using Core.User.Utils;
 using API.Modules.User;
 using API.Modules.User.UseCases;
 using API.Modules.User.Utils;

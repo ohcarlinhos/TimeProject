@@ -1,5 +1,5 @@
-﻿using API.Core.Codes;
-using API.Core.Codes.UseCases;
+﻿using Core.Codes;
+using Core.Codes.UseCases;
 using Entities;
 using Shared.General;
 

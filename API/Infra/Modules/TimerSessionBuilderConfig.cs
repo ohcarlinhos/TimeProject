@@ -1,5 +1,5 @@
-﻿using API.Core.TimerSession;
-using API.Core.TimerSession.UseCases;
+﻿using Core.TimerSession;
+using Core.TimerSession.UseCases;
 using API.Modules.TimerSession;
 using API.Modules.TimerSession.UseCases;
 

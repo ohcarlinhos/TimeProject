@@ -1,6 +1,6 @@
-﻿using API.Core.TimeRecord;
-using API.Core.TimeRecord.Repositories;
-using API.Core.TimeRecord.UseCases;
+﻿using Core.TimeRecord;
+using Core.TimeRecord.Repositories;
+using Core.TimeRecord.UseCases;
 using Shared.General;
 
 namespace API.Modules.TimeRecord.UseCases;

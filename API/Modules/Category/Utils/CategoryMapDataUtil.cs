@@ -1,6 +1,6 @@
-using API.Core.Category.Utils;
-using API.Core.User.Utils;
+using Core.User.Utils;
 using AutoMapper;
+using Core.Category.Utils;
 using Entities;
 using Shared.Category;
 
