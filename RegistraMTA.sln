@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{D66F4BF6-8526-4A84-80C2-4E229759992F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6966225F-9317-404C-A2FC-948EC2BA678E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,5 +47,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A81E6502-BC6D-4959-B80D-2174264A8CB3}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D66F4BF6-8526-4A84-80C2-4E229759992F} = {6966225F-9317-404C-A2FC-948EC2BA678E}
+		{B48E60AA-FE7E-4842-8EFA-CA9324F98E64} = {6966225F-9317-404C-A2FC-948EC2BA678E}
+		{7943632A-12F0-4103-A3D0-15F36BA3014A} = {6966225F-9317-404C-A2FC-948EC2BA678E}
 	EndGlobalSection
 EndGlobal
