@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using API.Infra.Settings;
+using App.Infra.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API.Infra.Config;
+namespace App.Infra.Config;
 
 public static class JwtBuilderConfig
 {

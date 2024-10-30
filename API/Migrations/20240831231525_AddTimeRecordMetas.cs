@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace API.Migrations
+namespace App.Migrations
 {
     /// <inheritdoc />
     public partial class AddTimeRecordMetas : Migration

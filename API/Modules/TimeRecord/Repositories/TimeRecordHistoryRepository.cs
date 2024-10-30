@@ -1,9 +1,9 @@
 using Core.TimeRecord.Repositories;
-using API.Database;
+using App.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modules.TimeRecord.Repositories;
+namespace App.Modules.TimeRecord.Repositories;
 
 public class TimeRecordHistoryRepository(ProjectContext db) : ITimeRecordHistoryRepository
 {

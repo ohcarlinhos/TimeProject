@@ -1,6 +1,6 @@
 ﻿using Shared.Handlers.Email;
 
-namespace API.Modules.Auth.Utils;
+namespace App.Modules.Auth.Utils;
 
 public static class RecoveryEmailFactory
 {

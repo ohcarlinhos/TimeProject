@@ -2,12 +2,12 @@
 using Core.TimePeriod.UseCases;
 using Core.TimePeriod.Utils;
 using Core.TimeRecord.UseCases;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Entities;
 using Shared.General;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod.UseCases;
+namespace App.Modules.TimePeriod.UseCases;
 
 public class UpdateTimePeriodUseCase(
     ITimePeriodRepository repo,

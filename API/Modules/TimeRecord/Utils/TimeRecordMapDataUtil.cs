@@ -4,7 +4,7 @@ using Entities;
 using Shared.TimePeriod;
 using Shared.TimeRecord;
 
-namespace API.Modules.TimeRecord.Utils;
+namespace App.Modules.TimeRecord.Utils;
 
 public class TimeRecordMapDataUtil(IMapper mapper) : ITimeRecordMapDataUtil
 {

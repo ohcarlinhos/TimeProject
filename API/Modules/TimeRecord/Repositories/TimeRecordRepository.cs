@@ -1,13 +1,13 @@
 ﻿using Core.TimeRecord;
 using Core.TimeRecord.Repositories;
-using API.Database;
+using App.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Shared.General.Pagination;
 using Shared.General.Repositories;
 
-namespace API.Modules.TimeRecord.Repositories;
+namespace App.Modules.TimeRecord.Repositories;
 
 public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordRepository
 {

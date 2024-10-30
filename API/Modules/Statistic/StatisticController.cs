@@ -1,11 +1,11 @@
 using Core.Statistic.UseCases;
-using API.Infra.Controllers;
+using App.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Util;
 using Shared.Statistic;
 
-namespace API.Modules.Statistic;
+namespace App.Modules.Statistic;
 
 [ApiController, Route("api/statistic"), Authorize]
 public class StatisticController(IGetDayStatisticUseCase getDayStatisticUseCase) : CustomController

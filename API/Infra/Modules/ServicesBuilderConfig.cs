@@ -1,7 +1,7 @@
-﻿using API.Infra.Interfaces;
-using API.Infra.Services;
+﻿using App.Infra.Interfaces;
+using App.Infra.Services;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class ServicesBuilderConfig
 {

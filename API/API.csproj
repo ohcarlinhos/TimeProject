@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <AssemblyName>App</AssemblyName>
+    <RootNamespace>App</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,9 +1,9 @@
 ﻿using Core.Statistic;
 using Core.Statistic.UseCases;
-using API.Modules.Statistic;
-using API.Modules.Statistic.UseCases;
+using App.Modules.Statistic;
+using App.Modules.Statistic.UseCases;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class StatisticBuilderConfig
 {

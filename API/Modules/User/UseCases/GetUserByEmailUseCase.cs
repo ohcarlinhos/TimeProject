@@ -1,10 +1,10 @@
 ﻿using Core.User;
 using Core.User.UseCases;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Entities;
 using Shared.General;
 
-namespace API.Modules.User.UseCases;
+namespace App.Modules.User.UseCases;
 
 public class GetUserByEmailUseCase(IUserRepository repo) : IGetUserByEmailUseCase
 {

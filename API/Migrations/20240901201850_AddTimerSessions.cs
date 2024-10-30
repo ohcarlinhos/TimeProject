@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace API.Migrations
+namespace App.Migrations
 {
     /// <inheritdoc />
     public partial class AddTimerSessions : Migration

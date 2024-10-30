@@ -3,7 +3,7 @@ using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
 using Shared.General;
 
-namespace API.Modules.TimeRecord.UseCases;
+namespace App.Modules.TimeRecord.UseCases;
 
 public class SearchTimeRecordUseCase(ITimeRecordRepository repo) : ISearchTimeRecordUseCase
 {

@@ -1,6 +1,6 @@
 ﻿using Core.User.Utils;
 
-namespace API.Modules.User.Utils;
+namespace App.Modules.User.Utils;
 
 public class UpdateUserOptions : IUpdateUserOptions
 {

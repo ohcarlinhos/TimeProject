@@ -1,7 +1,7 @@
-﻿using API.Infra.Handlers;
-using API.Infra.Interfaces;
+﻿using App.Infra.Handlers;
+using App.Infra.Interfaces;
 
-namespace API.Infra.Config;
+namespace App.Infra.Config;
 
 public static class HandlersBuilderConfig
 {

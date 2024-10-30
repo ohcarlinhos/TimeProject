@@ -1,11 +1,11 @@
 ﻿using Core.User;
 using Core.User.UseCases;
 using Core.User.Utils;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Shared.General;
 using Shared.User;
 
-namespace API.Modules.User.UseCases;
+namespace App.Modules.User.UseCases;
 
 public class UpdateUserPasswordByEmailUseCase(IUserRepository repo, IUserMapDataUtil mapper)
     : IUpdateUserPasswordByEmailUseCase

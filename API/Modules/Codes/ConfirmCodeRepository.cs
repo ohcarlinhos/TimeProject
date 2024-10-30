@@ -1,9 +1,9 @@
 ﻿using Core.Codes;
-using API.Database;
+using App.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modules.Codes;
+namespace App.Modules.Codes;
 
 public class ConfirmCodeRepository(ProjectContext db) : IConfirmCodeRepository
 {

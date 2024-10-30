@@ -1,9 +1,9 @@
 ﻿using Core.TimePeriod.Utils;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Shared.General;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod.Utils;
+namespace App.Modules.TimePeriod.Utils;
 
 public class TimePeriodValidateUtil : ITimePeriodValidateUtil
 {

@@ -7,7 +7,7 @@ using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimeRecord.UseCases;
+namespace App.Modules.TimeRecord.UseCases;
 
 public class GetTimeRecordHistoryUseCase(
     ITimeRecordHistoryRepository repo,

@@ -1,9 +1,9 @@
-﻿using API.Infra.Errors;
+﻿using App.Infra.Errors;
 using Core.Category;
 using Core.Category.UseCases;
 using Shared.General;
 
-namespace API.Modules.Category.UseCases;
+namespace App.Modules.Category.UseCases;
 
 public class DeleteCategoryUseCase(ICategoryRepository repo) : IDeleteCategoryUseCase
 {

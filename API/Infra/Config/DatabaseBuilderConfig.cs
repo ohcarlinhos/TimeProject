@@ -1,7 +1,7 @@
-﻿using API.Database;
+﻿using App.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Infra.Config;
+namespace App.Infra.Config;
 
 public static class DatabaseBuilderConfig
 {

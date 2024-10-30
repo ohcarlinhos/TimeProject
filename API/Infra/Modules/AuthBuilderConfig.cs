@@ -1,7 +1,7 @@
-﻿using API.Modules.Auth.UseCases;
+﻿using App.Modules.Auth.UseCases;
 using Core.Auth.UseCases;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class AuthBuilderConfig
 {

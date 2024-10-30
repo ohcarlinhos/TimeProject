@@ -4,7 +4,7 @@ using AutoMapper;
 using Entities;
 using Shared.User;
 
-namespace API.Modules.User.Utils;
+namespace App.Modules.User.Utils;
 
 public class UserMapDataUtil(IMapper mapper) : IUserMapDataUtil
 {

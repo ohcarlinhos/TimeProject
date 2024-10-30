@@ -5,7 +5,7 @@ using Shared.Category;
 using Shared.General;
 using Shared.General.Pagination;
 
-namespace API.Modules.Category.UseCases;
+namespace App.Modules.Category.UseCases;
 
 public class GetPaginatedCategoryUseCase(ICategoryRepository repo, ICategoryMapDataUtil mapper)
     : IGetPaginatedCategoryUseCase

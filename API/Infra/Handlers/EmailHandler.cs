@@ -1,8 +1,8 @@
 ﻿using System.Net.Mail;
-using API.Infra.Interfaces;
+using App.Infra.Interfaces;
 using Shared.Handlers.Email;
 
-namespace API.Infra.Handlers;
+namespace App.Infra.Handlers;
 
 public class EmailHandler(ICustomSmtp customSmtp) : IEmailHandler
 {

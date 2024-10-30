@@ -1,7 +1,7 @@
-﻿using API.Infra.Settings;
+﻿using App.Infra.Settings;
 using Microsoft.Extensions.Options;
 
-namespace API.Infra.Config;
+namespace App.Infra.Config;
 
 public static class SettingsBuilderConfig
 {

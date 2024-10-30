@@ -2,7 +2,7 @@
 using Core.User.UseCases;
 using Shared.General;
 
-namespace API.Modules.User.UseCases;
+namespace App.Modules.User.UseCases;
 
 public class DeleteUserUseCase(IUserRepository repo) : IDeleteUserUseCase
 {

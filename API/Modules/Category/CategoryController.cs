@@ -1,4 +1,4 @@
-﻿using API.Infra.Controllers;
+﻿using App.Infra.Controllers;
 using Core.Category.UseCases;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +7,7 @@ using Shared.Category;
 using Shared.General.Pagination;
 using Shared.General.Util;
 
-namespace API.Modules.Category;
+namespace App.Modules.Category;
 
 [ApiController, Route("api/category"), Authorize]
 public class CategoryController(

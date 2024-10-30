@@ -1,9 +1,9 @@
 using Core.Statistic;
-using API.Database;
+using App.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modules.Statistic;
+namespace App.Modules.Statistic;
 
 public class StatisticRepository(ProjectContext db) : IStatisticRepository
 {

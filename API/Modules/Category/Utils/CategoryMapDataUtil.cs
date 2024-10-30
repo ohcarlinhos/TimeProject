@@ -4,7 +4,7 @@ using Core.Category.Utils;
 using Entities;
 using Shared.Category;
 
-namespace API.Modules.Category.Utils;
+namespace App.Modules.Category.Utils;
 
 public class CategoryMapDataUtil(IMapper mapper) : ICategoryMapDataUtil
 {

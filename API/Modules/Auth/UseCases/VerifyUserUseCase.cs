@@ -3,7 +3,7 @@ using Core.User.UseCases;
 using Core.Auth.UseCases;
 using Shared.General;
 
-namespace API.Modules.Auth.UseCases;
+namespace App.Modules.Auth.UseCases;
 
 public class VerifyUserUseCase(
     ISetIsUsedConfirmCodeUseCase setIsUsedConfirmCodeUseCase,

@@ -1,10 +1,10 @@
 ﻿using Core.TimePeriod;
-using API.Database;
+using App.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General.Pagination;
 
-namespace API.Modules.TimePeriod;
+namespace App.Modules.TimePeriod;
 
 public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodRepository
 {

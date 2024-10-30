@@ -1,11 +1,11 @@
-﻿using API.Infra.Controllers;
+﻿using App.Infra.Controllers;
 using Core.Auth.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Auth;
 using Shared.General.Util;
 
-namespace API.Modules.Auth;
+namespace App.Modules.Auth;
 
 [ApiController]
 [Route("api/auth")]

@@ -1,11 +1,11 @@
-﻿using API.Infra.Errors;
+﻿using App.Infra.Errors;
 using Core.Category;
 using Core.Category.UseCases;
 using Entities;
 using Shared.Category;
 using Shared.General;
 
-namespace API.Modules.Category.UseCases;
+namespace App.Modules.Category.UseCases;
 
 public class UpdateCategoryUseCase(ICategoryRepository repo) : IUpdateCategoryUseCase
 {

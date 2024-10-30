@@ -5,7 +5,7 @@ using Shared.TimePeriod;
 using Shared.TimeRecord;
 using Shared.User;
 
-namespace API.Infra.Mapping;
+namespace App.Infra.Mapping;
 
 public class MappingProfile : Profile
 {

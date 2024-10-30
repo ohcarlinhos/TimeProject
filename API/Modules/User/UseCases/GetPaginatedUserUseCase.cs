@@ -5,7 +5,7 @@ using Shared.General;
 using Shared.General.Pagination;
 using Shared.User;
 
-namespace API.Modules.User.UseCases;
+namespace App.Modules.User.UseCases;
 
 public class GetPaginatedUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IGetPaginatedUserUseCase
 {

@@ -2,7 +2,7 @@
 using Core.TimeRecord.UseCases;
 using Entities;
 
-namespace API.Modules.TimeRecord.UseCases;
+namespace App.Modules.TimeRecord.UseCases;
 
 public class SyncTrMetaUseCase(ITimeRecordMetaRepository repo) : ISyncTrMetaUseCase
 {

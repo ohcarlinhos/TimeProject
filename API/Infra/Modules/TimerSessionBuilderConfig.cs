@@ -1,9 +1,9 @@
 ﻿using Core.TimerSession;
 using Core.TimerSession.UseCases;
-using API.Modules.TimerSession;
-using API.Modules.TimerSession.UseCases;
+using App.Modules.TimerSession;
+using App.Modules.TimerSession.UseCases;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class TimerSessionBuilderConfig
 {

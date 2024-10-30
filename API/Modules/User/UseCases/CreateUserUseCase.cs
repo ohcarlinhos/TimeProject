@@ -1,13 +1,13 @@
 ﻿using Core.User;
 using Core.User.UseCases;
 using Core.User.Utils;
-using API.Database;
-using API.Infra.Errors;
+using App.Database;
+using App.Infra.Errors;
 using Entities;
 using Shared.General;
 using Shared.User;
 
-namespace API.Modules.User.UseCases;
+namespace App.Modules.User.UseCases;
 
 public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMapDataUtil mapper) : ICreateUserUseCase
 {

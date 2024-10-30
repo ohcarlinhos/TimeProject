@@ -4,7 +4,7 @@ using Entities;
 using Shared.Category;
 using Shared.General;
 
-namespace API.Modules.Category.UseCases;
+namespace App.Modules.Category.UseCases;
 
 public class CreateCategoryUseCase(ICategoryRepository repo) : ICreateCategoryUseCase
 {

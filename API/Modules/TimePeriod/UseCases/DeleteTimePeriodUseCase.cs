@@ -1,10 +1,10 @@
 ﻿using Core.TimePeriod;
 using Core.TimePeriod.UseCases;
 using Core.TimeRecord.UseCases;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Shared.General;
 
-namespace API.Modules.TimePeriod.UseCases;
+namespace App.Modules.TimePeriod.UseCases;
 
 public class DeleteTimePeriodUseCase(ITimePeriodRepository repo, ISyncTrMetaUseCase syncTrMetaUseCase)
     : IDeleteTimePeriodUseCase

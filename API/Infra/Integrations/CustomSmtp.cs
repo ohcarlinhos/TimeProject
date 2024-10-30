@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using API.Infra.Interfaces;
-using API.Infra.Settings;
+using App.Infra.Interfaces;
+using App.Infra.Settings;
 
-namespace API.Infra.Integrations;
+namespace App.Infra.Integrations;
 
 public class CustomSmtp : ICustomSmtp
 {

@@ -1,13 +1,13 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using API.Infra.Interfaces;
-using API.Infra.Settings;
+using App.Infra.Interfaces;
+using App.Infra.Settings;
 using Entities;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Auth;
 
-namespace API.Infra.Services;
+namespace App.Infra.Services;
 
 public class TokenService(JwtSettings jwtSettings) : ITokenService
 {

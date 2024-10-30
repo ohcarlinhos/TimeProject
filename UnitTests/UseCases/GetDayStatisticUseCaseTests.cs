@@ -1,6 +1,6 @@
 using Core.Statistic;
-using API.Modules.Statistic.UseCases;
-using API.Modules.TimePeriod.Utils;
+using App.Modules.Statistic.UseCases;
+using App.Modules.TimePeriod.Utils;
 using Entities;
 using FluentAssertions;
 using Moq;

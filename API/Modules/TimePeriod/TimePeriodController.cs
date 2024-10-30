@@ -1,5 +1,5 @@
 ﻿using Core.TimePeriod.UseCases;
-using API.Infra.Controllers;
+using App.Infra.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod;
+namespace App.Modules.TimePeriod;
 
 [ApiController]
 [Route("api/period")]

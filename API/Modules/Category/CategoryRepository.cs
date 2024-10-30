@@ -1,10 +1,10 @@
-﻿using API.Database;
+﻿using App.Database;
 using Core.Category;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General.Pagination;
 
-namespace API.Modules.Category;
+namespace App.Modules.Category;
 
 public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 {

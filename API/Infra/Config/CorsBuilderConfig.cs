@@ -1,4 +1,4 @@
-﻿namespace API.Infra.Config;
+﻿namespace App.Infra.Config;
 
 public static class CorsBuilderConfig
 {

@@ -1,5 +1,5 @@
-﻿using API.Database;
-using API.Infra.Controllers;
+﻿using App.Database;
+using App.Infra.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.User;
 
-namespace API.Modules.Codes.Controllers;
+namespace App.Modules.Codes.Controllers;
 
 [ApiController]
 [Route("api/register-code")]

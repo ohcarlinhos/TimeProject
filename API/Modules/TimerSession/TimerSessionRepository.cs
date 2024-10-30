@@ -1,9 +1,9 @@
 ﻿using Core.TimerSession;
-using API.Database;
+using App.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Modules.TimerSession;
+namespace App.Modules.TimerSession;
 
 public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
 {

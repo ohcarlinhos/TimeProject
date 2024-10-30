@@ -1,7 +1,7 @@
 ﻿using Entities;
 using Shared.Auth;
 
-namespace API.Infra.Interfaces;
+namespace App.Infra.Interfaces;
 
 public interface ITokenService
 {

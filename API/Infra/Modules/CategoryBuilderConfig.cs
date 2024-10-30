@@ -1,11 +1,11 @@
-﻿using API.Modules.Category;
-using API.Modules.Category.UseCases;
-using API.Modules.Category.Utils;
+﻿using App.Modules.Category;
+using App.Modules.Category.UseCases;
+using App.Modules.Category.Utils;
 using Core.Category;
 using Core.Category.UseCases;
 using Core.Category.Utils;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class CategoryBuilderConfig
 {

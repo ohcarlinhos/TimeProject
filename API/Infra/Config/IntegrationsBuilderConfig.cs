@@ -1,7 +1,7 @@
-﻿using API.Infra.Integrations;
-using API.Infra.Interfaces;
+﻿using App.Infra.Integrations;
+using App.Infra.Interfaces;
 
-namespace API.Infra.Config;
+namespace App.Infra.Config;
 
 public static class IntegrationsBuilderConfig
 {

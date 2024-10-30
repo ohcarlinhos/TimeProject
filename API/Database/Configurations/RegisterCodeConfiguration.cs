@@ -2,7 +2,7 @@ using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace API.Database.Configurations;
+namespace App.Database.Configurations;
 
 public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCodeEntity>
 {

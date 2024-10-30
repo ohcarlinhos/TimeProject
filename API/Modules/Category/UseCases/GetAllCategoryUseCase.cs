@@ -4,7 +4,7 @@ using Core.Category.Utils;
 using Shared.Category;
 using Shared.General;
 
-namespace API.Modules.Category.UseCases;
+namespace App.Modules.Category.UseCases;
 
 public class GetAllCategoryUseCase(ICategoryRepository repo, ICategoryMapDataUtil mapper) : IGetAllCategoryUseCase
 {

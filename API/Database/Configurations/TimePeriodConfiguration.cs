@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace API.Database.Configurations;
+namespace App.Database.Configurations;
 
 public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriodEntity>
 {

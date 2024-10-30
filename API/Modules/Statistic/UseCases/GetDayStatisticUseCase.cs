@@ -5,7 +5,7 @@ using Shared.General;
 using Shared.General.Util;
 using Shared.Statistic;
 
-namespace API.Modules.Statistic.UseCases;
+namespace App.Modules.Statistic.UseCases;
 
 public class GetDayStatisticUseCase(IStatisticRepository repo, ITimePeriodCutUtil timePeriodCutUtil) : IGetDayStatisticUseCase
 {

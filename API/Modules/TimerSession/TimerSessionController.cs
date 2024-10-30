@@ -1,10 +1,10 @@
 ﻿using Core.TimerSession.UseCases;
-using API.Infra.Controllers;
+using App.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Util;
 
-namespace API.Modules.TimerSession;
+namespace App.Modules.TimerSession;
 
 [ApiController, Route("api/session")]
 public class TimerSessionController(IDeleteTimerSessionUseCase deleteTimerSessionUseCase) : CustomController

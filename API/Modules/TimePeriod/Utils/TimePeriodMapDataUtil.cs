@@ -3,7 +3,7 @@ using AutoMapper;
 using Entities;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod.Utils;
+namespace App.Modules.TimePeriod.Utils;
 
 public class TimePeriodMapDataUtil(IMapper mapper) : ITimePeriodMapDataUtil
 {

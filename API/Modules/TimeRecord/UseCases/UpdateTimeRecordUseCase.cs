@@ -1,13 +1,13 @@
 ﻿using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
 using Core.TimeRecord.Utils;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Core.Category;
 using Microsoft.IdentityModel.Tokens;
 using Shared.General;
 using Shared.TimeRecord;
 
-namespace API.Modules.TimeRecord.UseCases;
+namespace App.Modules.TimeRecord.UseCases;
 
 public class UpdateTimeRecordUseCase(
     ITimeRecordRepository repo,

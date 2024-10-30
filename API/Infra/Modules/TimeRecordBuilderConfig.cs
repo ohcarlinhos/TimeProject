@@ -1,11 +1,11 @@
 ﻿using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
 using Core.TimeRecord.Utils;
-using API.Modules.TimeRecord.Repositories;
-using API.Modules.TimeRecord.UseCases;
-using API.Modules.TimeRecord.Utils;
+using App.Modules.TimeRecord.Repositories;
+using App.Modules.TimeRecord.UseCases;
+using App.Modules.TimeRecord.Utils;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class TimeRecordBuilderConfig
 {

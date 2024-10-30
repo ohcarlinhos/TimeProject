@@ -2,10 +2,10 @@
 using Core.TimeRecord.UseCases;
 using Core.TimerSession;
 using Core.TimerSession.UseCases;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Shared.General;
 
-namespace API.Modules.TimerSession.UseCases;
+namespace App.Modules.TimerSession.UseCases;
 
 public class DeleteTimerSessionUseCase(
     ITimerSessionRepository repo,

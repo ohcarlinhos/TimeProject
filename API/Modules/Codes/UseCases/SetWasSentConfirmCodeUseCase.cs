@@ -1,9 +1,9 @@
 ﻿using Core.Codes;
 using Core.Codes.UseCases;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Shared.General;
 
-namespace API.Modules.Codes.UseCases;
+namespace App.Modules.Codes.UseCases;
 
 public class SetWasSentConfirmCodeUseCase(IConfirmCodeRepository repo) : ISetWasSentConfirmCodeUseCase
 {

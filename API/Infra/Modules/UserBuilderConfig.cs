@@ -1,11 +1,11 @@
 ﻿using Core.User;
 using Core.User.UseCases;
 using Core.User.Utils;
-using API.Modules.User;
-using API.Modules.User.UseCases;
-using API.Modules.User.Utils;
+using App.Modules.User;
+using App.Modules.User.UseCases;
+using App.Modules.User.Utils;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class UserBuilderConfig
 {

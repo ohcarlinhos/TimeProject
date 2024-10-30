@@ -1,4 +1,4 @@
-﻿namespace API.Infra.Errors;
+﻿namespace App.Infra.Errors;
 
 public static class GeneralMessageErrors
 {

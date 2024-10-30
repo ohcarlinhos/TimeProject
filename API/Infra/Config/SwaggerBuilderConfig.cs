@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace API.Infra.Config;
+namespace App.Infra.Config;
 
 public static class SwaggerBuilderConfig
 {

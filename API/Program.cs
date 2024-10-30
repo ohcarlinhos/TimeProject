@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
-using API.Infra.Config;
-using API.Infra.Modules;
+using App.Infra.Config;
+using App.Infra.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 

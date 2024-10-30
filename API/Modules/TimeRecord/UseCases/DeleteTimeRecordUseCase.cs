@@ -1,9 +1,9 @@
 ﻿using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
-using API.Infra.Errors;
+using App.Infra.Errors;
 using Shared.General;
 
-namespace API.Modules.TimeRecord.UseCases;
+namespace App.Modules.TimeRecord.UseCases;
 
 public class DeleteTimeRecordUseCase(ITimeRecordRepository repo) : IDeleteTimeRecordUseCase
 {

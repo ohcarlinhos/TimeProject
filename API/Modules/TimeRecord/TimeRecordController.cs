@@ -1,6 +1,6 @@
 ﻿using Core.TimeRecord;
 using Core.TimeRecord.UseCases;
-using API.Infra.Controllers;
+using App.Infra.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Pagination;
@@ -8,7 +8,7 @@ using Shared.General.Util;
 using Shared.TimePeriod;
 using Shared.TimeRecord;
 
-namespace API.Modules.TimeRecord;
+namespace App.Modules.TimeRecord;
 
 [ApiController]
 [Route("api/record")]

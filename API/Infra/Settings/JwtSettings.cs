@@ -1,4 +1,4 @@
-﻿namespace API.Infra.Settings;
+﻿namespace App.Infra.Settings;
 
 public class JwtSettings
 {

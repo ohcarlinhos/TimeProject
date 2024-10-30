@@ -1,12 +1,12 @@
 ﻿using Core.User.UseCases;
-using API.Infra.Errors;
-using API.Infra.Interfaces;
+using App.Infra.Errors;
+using App.Infra.Interfaces;
 using Core.Auth.UseCases;
 using Entities;
 using Shared.Auth;
 using Shared.General;
 
-namespace API.Modules.Auth.UseCases;
+namespace App.Modules.Auth.UseCases;
 
 public class LoginUseCase(ITokenService tokenService, IGetUserByEmailUseCase getUserByEmailUseCase) : ILoginUseCase
 {

@@ -1,8 +1,8 @@
-﻿using API.Database.Configurations;
+﻿using App.Database.Configurations;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Database;
+namespace App.Database;
 
 public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
 {

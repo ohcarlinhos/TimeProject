@@ -3,7 +3,7 @@ using Core.Codes.UseCases;
 using Entities;
 using Shared.General;
 
-namespace API.Modules.Codes.UseCases;
+namespace App.Modules.Codes.UseCases;
 
 public class CreateConfirmCodeUseCase(IConfirmCodeRepository repo) : ICreateConfirmCodeUseCase
 {

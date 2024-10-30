@@ -1,9 +1,9 @@
 ﻿using Core.Codes;
 using Core.Codes.UseCases;
-using API.Modules.Codes;
-using API.Modules.Codes.UseCases;
+using App.Modules.Codes;
+using App.Modules.Codes.UseCases;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class CodeBuilderConfig
 {

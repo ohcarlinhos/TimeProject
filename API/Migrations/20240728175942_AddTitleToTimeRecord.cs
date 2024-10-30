@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace API.Migrations
+namespace App.Migrations
 {
     /// <inheritdoc />
     public partial class AddTitleToTimeRecord : Migration

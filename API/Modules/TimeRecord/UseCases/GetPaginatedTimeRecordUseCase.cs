@@ -5,7 +5,7 @@ using Shared.General;
 using Shared.General.Pagination;
 using Shared.TimeRecord;
 
-namespace API.Modules.TimeRecord.UseCases;
+namespace App.Modules.TimeRecord.UseCases;
 
 public class GetPaginatedTimeRecordUseCase(ITimeRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
     : IGetPaginatedTimeRecordUseCase

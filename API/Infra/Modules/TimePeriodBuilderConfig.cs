@@ -1,11 +1,11 @@
 ﻿using Core.TimePeriod;
 using Core.TimePeriod.UseCases;
 using Core.TimePeriod.Utils;
-using API.Modules.TimePeriod;
-using API.Modules.TimePeriod.UseCases;
-using API.Modules.TimePeriod.Utils;
+using App.Modules.TimePeriod;
+using App.Modules.TimePeriod.UseCases;
+using App.Modules.TimePeriod.Utils;
 
-namespace API.Infra.Modules;
+namespace App.Infra.Modules;
 
 public static class TimePeriodBuilderConfig
 {

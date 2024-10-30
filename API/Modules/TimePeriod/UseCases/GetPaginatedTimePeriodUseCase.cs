@@ -5,7 +5,7 @@ using Shared.General;
 using Shared.General.Pagination;
 using Shared.TimePeriod;
 
-namespace API.Modules.TimePeriod.UseCases;
+namespace App.Modules.TimePeriod.UseCases;
 
 public class GetPaginatedTimePeriodUseCase(ITimePeriodRepository repo, ITimePeriodMapDataUtil mapDataUtil)
     : IGetPaginatedTimePeriodUseCase

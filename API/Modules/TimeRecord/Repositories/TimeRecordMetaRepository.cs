@@ -1,10 +1,10 @@
 ﻿using Core.TimeRecord.Repositories;
-using API.Database;
+using App.Database;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General.Util;
 
-namespace API.Modules.TimeRecord.Repositories;
+namespace App.Modules.TimeRecord.Repositories;
 
 public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMetaRepository
 {

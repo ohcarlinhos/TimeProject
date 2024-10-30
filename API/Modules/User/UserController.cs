@@ -1,7 +1,7 @@
 ﻿using Core.User;
 using Core.User.UseCases;
-using API.Infra.Controllers;
-using API.Modules.User.Utils;
+using App.Infra.Controllers;
+using App.Modules.User.Utils;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.User;
 
-namespace API.Modules.User;
+namespace App.Modules.User;
 
 [ApiController]
 [Route("api/user")]

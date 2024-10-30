@@ -1,6 +1,6 @@
-﻿using API.Infra.Mapping;
+﻿using App.Infra.Mapping;
 
-namespace API.Infra.Config;
+namespace App.Infra.Config;
 
 public static class MappingBuilderConfig
 {
