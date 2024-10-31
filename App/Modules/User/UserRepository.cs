@@ -20,7 +20,10 @@ namespace App.Modules.User
             else
                 query = query.OrderBy(tr => tr.CreatedAt);
 
-            return query.ToList();
+            return query
+                .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
+                .Take(paginationQuery.PerPage)
+                .ToList();
         }
 
         public int GetTotalItems(PaginationQuery paginationQuery)
