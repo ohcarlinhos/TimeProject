@@ -16,9 +16,9 @@ namespace App.Modules.User
                 query = SearchWhereConditional(query, paginationQuery.Search);
 
             if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
-                query = query.OrderByDescending(tr => tr.Name);
+                query = query.OrderByDescending(tr => tr.CreatedAt);
             else
-                query = query.OrderBy(tr => tr.Name);
+                query = query.OrderBy(tr => tr.CreatedAt);
 
             return query.ToList();
         }
