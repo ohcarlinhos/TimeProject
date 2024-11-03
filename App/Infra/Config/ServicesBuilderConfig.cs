@@ -1,7 +1,7 @@
 ﻿using App.Infra.Interfaces;
 using App.Infra.Services;
 
-namespace App.Infra.Modules;
+namespace App.Infra.Config;
 
 public static class ServicesBuilderConfig
 {
