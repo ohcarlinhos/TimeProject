@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace App.Database.Configurations;
 
-public class TimeRecordConfiguration : IEntityTypeConfiguration<TimeRecordEntity>
+public class TimeRecordEntityConfiguration : IEntityTypeConfiguration<TimeRecordEntity>
 {
     public void Configure(EntityTypeBuilder<TimeRecordEntity> builder)
     {

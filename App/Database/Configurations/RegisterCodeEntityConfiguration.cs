@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace App.Database.Configurations;
 
-public class RegisterCodeConfiguration : IEntityTypeConfiguration<RegisterCodeEntity>
+public class RegisterCodeEntityConfiguration : IEntityTypeConfiguration<RegisterCodeEntity>
 {
     public void Configure(EntityTypeBuilder<RegisterCodeEntity> builder)
     {

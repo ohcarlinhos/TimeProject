@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace App.Database.Configurations;
 
-public class TimePeriodConfiguration : IEntityTypeConfiguration<TimePeriodEntity>
+public class TimePeriodEntityConfiguration : IEntityTypeConfiguration<TimePeriodEntity>
 {
     public void Configure(EntityTypeBuilder<TimePeriodEntity> builder)
     {

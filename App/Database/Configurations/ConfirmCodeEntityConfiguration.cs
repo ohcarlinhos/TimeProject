@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace App.Database.Configurations;
 
-public class ConfirmCodeConfiguration : IEntityTypeConfiguration<ConfirmCodeEntity>
+public class ConfirmCodeEntityConfiguration : IEntityTypeConfiguration<ConfirmCodeEntity>
 {
     public void Configure(EntityTypeBuilder<ConfirmCodeEntity> builder)
     {

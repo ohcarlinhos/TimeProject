@@ -17,14 +17,14 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     
     protected override void OnModelCreating(ModelBuilder mb)
     {
-        mb.ApplyConfiguration(new UserConfiguration());
-        mb.ApplyConfiguration(new TimeRecordConfiguration());
-        mb.ApplyConfiguration(new TimePeriodConfiguration());
-        mb.ApplyConfiguration(new CategoryConfiguration());
-        mb.ApplyConfiguration(new RegisterCodeConfiguration());
-        mb.ApplyConfiguration(new TimeRecordMetaConfiguration());
-        mb.ApplyConfiguration(new TimerSessionConfiguration());
-        mb.ApplyConfiguration(new ConfirmCodeConfiguration());
+        mb.ApplyConfiguration(new UserEntityConfiguration());
+        mb.ApplyConfiguration(new TimeRecordEntityConfiguration());
+        mb.ApplyConfiguration(new TimePeriodEntityConfiguration());
+        mb.ApplyConfiguration(new CategoryEntityConfiguration());
+        mb.ApplyConfiguration(new RegisterCodeEntityConfiguration());
+        mb.ApplyConfiguration(new TimeRecordMetaEntityConfiguration());
+        mb.ApplyConfiguration(new TimerSessionEntityConfiguration());
+        mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
 
         mb.Entity<RegisterCodeEntity>().HasData([
             new RegisterCodeEntity { Id = "07577660-b921-4e07-bb68-990e8f286475" },

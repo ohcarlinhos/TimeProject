@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace App.Database.Configurations;
 
-public class TimerSessionConfiguration : IEntityTypeConfiguration<TimerSessionEntity>
+public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<TimerSessionEntity>
 {
     public void Configure(EntityTypeBuilder<TimerSessionEntity> builder)
     {
