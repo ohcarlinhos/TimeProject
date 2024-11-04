@@ -29,14 +29,14 @@ public class LoginUseCase(ITokenService tokenService, IGetUserByEmailUseCase get
 
         var user = findUserResult.Data!;
 
-        if (BCrypt.Net.BCrypt.Verify(dto.Password, user.Password) == false)
-        {
-            return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
-        }
-
         if (onlyAdmin && user.UserRole != UserRole.Admin)
         {
             return result.SetError(GeneralMessageErrors.Forbidden);
+        }
+
+        if (BCrypt.Net.BCrypt.Verify(dto.Password, user.Password) == false)
+        {
+            return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
         }
 
         return result.SetData(tokenService.GenerateBearerJwt(user));
