@@ -15,5 +15,6 @@ public static class CodeBuilderConfig
         builder.Services.AddScoped<IValidateConfirmCodeUseCase, ValidateConfirmCodeUseCase>();
         builder.Services.AddScoped<ISetIsUsedConfirmCodeUseCase, SetIsUsedConfirmCodeUseCase>();
         builder.Services.AddScoped<ISetWasSentConfirmCodeUseCase, SetWasSentConfirmCodeUseCase>();
+        builder.Services.AddScoped<IGetRegisterCodeInfoUseCase, GetRegisterCodeInfoUseCase>();
     }
 }

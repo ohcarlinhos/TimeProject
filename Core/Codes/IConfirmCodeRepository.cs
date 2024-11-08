@@ -10,4 +10,5 @@ public interface IConfirmCodeRepository
     Task<ConfirmCodeEntity?> FindByIdAndEmail(string id, string email);
     Task<List<ConfirmCodeEntity>> FindByUserId(int userId);
     Task<List<ConfirmCodeEntity>> FindByUserId(int userId, ConfirmCodeType type);
+    Task<List<ConfirmCodeEntity>> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type);
 }

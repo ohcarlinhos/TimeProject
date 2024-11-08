@@ -10,9 +10,7 @@ public class CreateConfirmCodeUseCase(IConfirmCodeRepository repo) : ICreateConf
     public async Task<Result<ConfirmCodeEntity>> Handle(int userId, ConfirmCodeType type)
     {
         var result = new Result<ConfirmCodeEntity>();
-        var codes = (await repo.FindByUserId(userId, type))
-            .Where(rc => DateTime.Now < rc.ExpireDate && rc is { IsUsed: false })
-            .ToList();
+        var codes = await repo.FindByUserIdThatIsNotExpiredOrUsed(userId, type);
 
         return codes.Count > 0
             ? result.SetData(codes.First())

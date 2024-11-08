@@ -49,6 +49,14 @@ public class ConfirmCodeRepository(ProjectContext db) : IConfirmCodeRepository
             .ToListAsync();
     }
 
+    public async Task<List<ConfirmCodeEntity>> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type)
+    {
+        var now = DateTime.Now.ToUniversalTime();
+        return await db.ConfirmCodes
+            .Where(e => e.UserId == userId && e.Type == type && now < e.ExpireDate && e.IsUsed == false)
+            .ToListAsync();
+    }
+
     public async Task<ConfirmCodeEntity?> FindById(string id)
     {
         return await db.ConfirmCodes.FirstOrDefaultAsync(e => e.Id == id);

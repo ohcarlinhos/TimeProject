@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities;
 using Shared.Category;
+using Shared.Codes;
 using Shared.TimePeriod;
 using Shared.TimeRecord;
 using Shared.User;
@@ -17,5 +18,6 @@ public class MappingProfile : Profile
         CreateMap<CategoryEntity, CategoryMap>();
         CreateMap<TimeRecordHistoryDay, TimeRecordHistoryDayMap>();
         CreateMap<TimerSessionEntity, TimerSessionMap>();
+        CreateMap<ConfirmCodeEntity, ConfirmCodeMap>();
     }
 }
