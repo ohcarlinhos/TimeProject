@@ -36,7 +36,7 @@ public class SendRecoveryEmailUseCase(
             emailHandler.Send(RecoveryEmailFactory.Create(
                 email,
                 configuration["RecoveryUrl"] + recoveryCode.Id,
-                recoveryCode.ExpireDate.AddHours(-3).ToLocalTime()
+                recoveryCode.ExpireDate.ToLocalTime().ToString()
             ));
 
             await setWasSentConfirmCodeUseCase.Handle(recoveryCode.Id);

@@ -13,7 +13,7 @@ public class AuthController(
     ILoginUseCase loginUseCase,
     ISendRecoveryEmailUseCase sendRecoveryEmailUseCase,
     IRecoveryPasswordUseCase recoveryPasswordUseCase,
-    ISendVerifyEmailUseCase sendVerifyEmailUseCase,
+    ISendRegisterEmailUseCase sendRegisterEmailUseCase,
     IVerifyUserUseCase verifyUserUseCase) : CustomController
 {
     [HttpPost, Route("login")]
@@ -43,7 +43,7 @@ public class AuthController(
     [HttpPost, Route("verify"), Authorize]
     public async Task<ActionResult<bool>> Verify()
     {
-        return HandleResponse(await sendVerifyEmailUseCase.Handle(UserClaims.Email(User)));
+        return HandleResponse(await sendRegisterEmailUseCase.Handle(UserClaims.Email(User)));
     }
 
     [HttpPost, Route("verify/{code}"), Authorize]

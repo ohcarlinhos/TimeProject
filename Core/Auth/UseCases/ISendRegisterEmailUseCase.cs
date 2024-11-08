@@ -2,7 +2,7 @@
 
 namespace Core.Auth.UseCases;
 
-public interface ISendVerifyEmailUseCase
+public interface ISendRegisterEmailUseCase
 {
     public Task<Result<bool>> Handle(string email);
 }

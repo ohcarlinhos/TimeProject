@@ -10,7 +10,7 @@ public static class AuthBuilderConfig
         builder.Services.AddScoped<ILoginUseCase, LoginUseCase>();
         builder.Services.AddScoped<ISendRecoveryEmailUseCase, SendRecoveryEmailUseCase>();
         builder.Services.AddScoped<IRecoveryPasswordUseCase, RecoveryPasswordUseCase>();
-        builder.Services.AddScoped<ISendVerifyEmailUseCase, SendVerifyEmailUseCase>();
+        builder.Services.AddScoped<ISendRegisterEmailUseCase, SendRegisterEmailUseCase>();
         builder.Services.AddScoped<IVerifyUserUseCase, VerifyUserUseCase>();
     }
 }

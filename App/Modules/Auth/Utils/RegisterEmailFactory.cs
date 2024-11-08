@@ -2,9 +2,9 @@
 
 namespace App.Modules.Auth.Utils;
 
-public static class VerifyEmailFactory
+public static class RegisterEmailFactory
 {
-    public static EmailPayload Create(string email, string url, DateTime dateLimit)
+    public static EmailPayload Create(string email, string url, string dateLimit)
     {
         return new EmailPayload
         {

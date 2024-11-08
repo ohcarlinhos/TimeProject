@@ -9,12 +9,12 @@ using Shared.General;
 
 namespace App.Modules.Auth.UseCases;
 
-public class SendVerifyEmailUseCase(
+public class SendRegisterEmailUseCase(
     ICreateConfirmCodeUseCase createConfirmCodeUseCase,
     IGetUserByEmailUseCase getUserByEmailUseCase,
     ISetWasSentConfirmCodeUseCase setWasSentConfirmCodeUseCase,
     IEmailHandler emailHandler,
-    IConfiguration configuration) : ISendVerifyEmailUseCase
+    IConfiguration configuration) : ISendRegisterEmailUseCase
 {
     public async Task<Result<bool>> Handle(string email)
     {
@@ -33,10 +33,10 @@ public class SendVerifyEmailUseCase(
 
         try
         {
-            emailHandler.Send(VerifyEmailFactory.Create(
+            emailHandler.Send(RegisterEmailFactory.Create(
                 email,
                 configuration["VerifyUrl"] + registerCode.Id,
-                registerCode.ExpireDate.AddHours(-3).ToLocalTime()
+                registerCode.ExpireDate.ToLocalTime().ToString()
             ));
 
             await setWasSentConfirmCodeUseCase.Handle(registerCode.Id);
