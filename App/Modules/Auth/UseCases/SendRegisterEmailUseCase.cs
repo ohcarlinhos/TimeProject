@@ -35,8 +35,8 @@ public class SendRegisterEmailUseCase(
         {
             emailHandler.Send(RegisterEmailFactory.Create(
                 email,
-                configuration["VerifyUrl"] + registerCode.Id,
-                registerCode.ExpireDate.ToLocalTime().ToString()
+                configuration["VerifyUrl"] +  registerCode.Id,
+                registerCode.ExpireDate.ToString("dd/MM/yyyy HH:mm:ss")
             ));
 
             await setWasSentConfirmCodeUseCase.Handle(registerCode.Id);
