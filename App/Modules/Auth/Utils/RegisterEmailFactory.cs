@@ -18,7 +18,8 @@ public static class RegisterEmailFactory
                              <!-- START MAIN CONTENT AREA -->
                              <tr>
                                <td class="wrapper">
-                                 <p>Bem vindo(a) ao Registra meu tempo aí! Para utilizar nossa ferramenta, verifique seu email.</p>
+                                 <p>Bem vindo(a) ao Registra meu tempo aí!</p>
+                                 <p>Para utilizar nossa ferramenta, verifique seu email.</p>
                                  <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                    <tbody>
                                      <tr>
