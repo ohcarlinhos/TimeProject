@@ -10,15 +10,46 @@ public static class RecoveryEmailFactory
         {
             To = email,
             Subject = "Recuperação de Senha - Registra meu tempo aí!",
-            Body =
-                $@"
-                        <p>
-                            Você acaba de requisitar a recuperação da sua senha, para prosseguir <a href='{url}' target='_blank'>clique aqui</a> para recria-la. <br/>
-                            Ou copie a URL e cole no seu navegador: {url} <br/><br/>
-                            Expiração do código: {dateLimit}
-                        </p>
-                    ",
-            IsHtml = true
+            Body = EmailFactory
+                .InjectBody("""
+                            <span class="preheader">Você acabou de requisitar a recuperação de senha...</span>
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
+                            
+                             <!-- START MAIN CONTENT AREA -->
+                             <tr>
+                               <td class="wrapper">
+                                 <p>Você acabou de requisitar a recuperação de senha.</p>
+                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                                   <tbody>
+                                     <tr>
+                                       <td align="left">
+                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                           <tbody>
+                                             <tr>
+                                               <td>
+                            """
+                            + $"<a href='{url}' target=\"_blank\">Recriar senha</a>" +
+                            """
+                                               </td>
+                                             </tr>
+                                           </tbody>
+                                         </table>
+                                       </td>
+                                     </tr>
+                                   </tbody>
+                                 </table>
+                                 <p>
+                            """
+                            + $"Expiração do código: {dateLimit}" +
+                            """
+                                 </p>
+                               </td>
+                             </tr>
+                            
+                             <!-- END MAIN CONTENT AREA -->
+                            </table>
+                            """),
+            IsHtml = true,
         };
     }
 }

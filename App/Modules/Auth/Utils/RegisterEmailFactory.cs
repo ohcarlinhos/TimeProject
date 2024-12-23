@@ -10,14 +10,45 @@ public static class RegisterEmailFactory
         {
             To = email,
             Subject = "Confirmação de E-mail - Registra meu tempo aí!",
-            Body =
-                $@"
-                        <p>
-                            Bem vindo(a) ao Registra meu tempo aí! Para utilizar nossa ferramenta, verifique seu email <a href='{url}' target='_blank'>clicando aqui</a>.<br/>
-                            Ou copie a URL e cole no seu navegador: {url} <br/><br/>
-                            Válido até: {dateLimit}
-                        </p>
-                ",
+            Body = EmailFactory
+                .InjectBody("""
+                            <span class="preheader">Bem vindo(a) ao Registra meu tempo aí...</span>
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
+                            
+                             <!-- START MAIN CONTENT AREA -->
+                             <tr>
+                               <td class="wrapper">
+                                 <p>Bem vindo(a) ao Registra meu tempo aí! Para utilizar nossa ferramenta, verifique seu email.</p>
+                                 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                                   <tbody>
+                                     <tr>
+                                       <td align="left">
+                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                           <tbody>
+                                             <tr>
+                                               <td>
+                            """
+                            + $"<a href='{url}' target=\"_blank\">Verificar e-mail</a>" +
+                            """
+                                               </td>
+                                             </tr>
+                                           </tbody>
+                                         </table>
+                                       </td>
+                                     </tr>
+                                   </tbody>
+                                 </table>
+                                 <p>
+                            """
+                            + $"Válido até: {dateLimit}" +
+                            """
+                                 </p>
+                               </td>
+                             </tr>
+                            
+                             <!-- END MAIN CONTENT AREA -->
+                            </table>
+                            """),
             IsHtml = true
         };
     }
