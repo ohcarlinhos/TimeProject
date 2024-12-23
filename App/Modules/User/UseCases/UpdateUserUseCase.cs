@@ -34,6 +34,7 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper): I
                 return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
             user.Email = dto.Email;
+            user.IsVerified = false;
         }
 
         if (!string.IsNullOrWhiteSpace(dto.Name) && user.Name != dto.Name)
