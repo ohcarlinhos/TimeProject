@@ -11,6 +11,7 @@ namespace App.Modules.TimePeriod;
 
 [ApiController]
 [Route("api/period")]
+[Authorize(Policy = "IsActiveAndVerified")]
 public class TimePeriodController(
     IGetPaginatedTimePeriodUseCase getPaginatedTimePeriodUseCase,
     ICreateTimePeriodUseCase createTimePeriodUseCase,
@@ -20,14 +21,14 @@ public class TimePeriodController(
 )
     : CustomController
 {
-    [HttpGet, Authorize, Route("{timeRecordId:int}")]
+    [HttpGet, Route("{timeRecordId:int}")]
     public async Task<ActionResult<Pagination<TimePeriodMap>>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(await getPaginatedTimePeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
 
-    [HttpPost, Authorize]
+    [HttpPost]
     public async Task<ActionResult<TimePeriodEntity>> Create([FromBody] CreateTimePeriodDto dto)
     {
         var result = await createTimePeriodUseCase.Handle(dto, UserClaims.Id(User));
@@ -35,7 +36,7 @@ public class TimePeriodController(
         return HandleResponse(result);
     }
 
-    [HttpPost, Authorize, Route("list/{id:int}")]
+    [HttpPost, Route("list/{id:int}")]
     public async Task<ActionResult<List<TimePeriodEntity>>> Create([FromBody] TimePeriodListDto dto, int id)
     {
         var result = await createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
@@ -43,13 +44,13 @@ public class TimePeriodController(
         return HandleResponse(result);
     }
 
-    [HttpPut, Authorize, Route("{id:int}")]
+    [HttpPut, Route("{id:int}")]
     public async Task<ActionResult<TimePeriodEntity>> Update(int id, [FromBody] TimePeriodDto dto)
     {
         return HandleResponse(await updateTimePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
-    [HttpDelete, Authorize, Route("{id:int}")]
+    [HttpDelete, Route("{id:int}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
         return HandleResponse(await deleteTimePeriodUseCase.Handle(id, UserClaims.Id(User)));

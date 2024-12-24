@@ -29,5 +29,21 @@ public static class JwtBuilderConfig
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(settings!.Secret)),
                 };
             });
+
+        builder.Services.AddAuthorizationBuilder()
+            .AddPolicy("IsAdmin", p =>
+                p.RequireClaim("isAdmin", "True"))
+            
+            .AddPolicy("IsActive", p =>
+                p.RequireClaim("isActive", "True"))
+            
+            .AddPolicy("IsVerified", p =>
+                p.RequireClaim("isVerified", "True"))
+            
+            .AddPolicy("IsActiveAndVerified", p =>
+                p.RequireAssertion(c => 
+                    c.User.HasClaim("isActive", "True") && 
+                    c.User.HasClaim("isVerified", "True"))
+                );
     }
 }

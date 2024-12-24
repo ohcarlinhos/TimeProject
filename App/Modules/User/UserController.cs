@@ -23,7 +23,8 @@ public class UserController(
     IGetPaginatedUserUseCase getPaginatedUserUseCase
 ) : CustomController
 {
-    [HttpGet, Authorize]
+    [HttpGet]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public ActionResult<Pagination<UserMap>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         if (UserRole.Admin.ToString() == UserClaims.Role(User))
@@ -39,13 +40,15 @@ public class UserController(
         return HandleResponse(result);
     }
 
-    [HttpPut("{id:int}"), Authorize]
+    [HttpPut("{id:int}")]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
         return HasAuthorization(id) ? HandleResponse(await updateUserUseCase.Handle(id, dto)) : Forbid();
     }
 
-    [HttpPut("password/{id:int}"), Authorize]
+    [HttpPut("password/{id:int}")]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public async Task<ActionResult<UserMap>> UpdatePassword([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
     {
         return IsAdmin()
@@ -57,31 +60,35 @@ public class UserController(
             : Forbid();
     }
 
-    [HttpPut("role/{id:int}"), Authorize]
+    [HttpPut("role/{id:int}")]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public async Task<ActionResult<UserMap>> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
     {
         return IsAdmin() ? HandleResponse(await updateUserRoleUseCase.Handle(id, dto)) : Forbid();
     }
 
-    [HttpPost("disable/{id:int}"), Authorize]
+    [Authorize(Policy = "IsActiveAndVerified")]
+    [HttpPost("disable/{id:int}")]
     public async Task<ActionResult<bool>> Disable([FromRoute] int id, [FromBody] DisableUserDto dto)
     {
         return HasAuthorization(id) ? HandleResponse(await disableUserUseCase.Handle(id, dto)) : Forbid();
     }
 
-    [HttpDelete("{id:int}"), Authorize]
+    [HttpDelete("{id:int}")]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
         return HasAuthorization(id) ? HandleResponse(await deleteUserUseCase.Handle(id)) : Forbid();
     }
 
-    [HttpGet, Authorize, Route("{id:int}")]
+    [HttpGet, Route("{id:int}")]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public async Task<ActionResult<UserMap>> Get(int id)
     {
         return HasAuthorization(id) ? HandleResponse(await getUserUseCase.Handle(id)) : Forbid();
     }
 
-    [HttpGet, Authorize, Route("myself")]
+    [HttpGet, Authorize(Policy = "IsActive"), Route("myself")]
     public async Task<ActionResult<UserMap>> Myself()
     {
         return HandleResponse(await getUserUseCase.Handle(UserClaims.Id(User)));

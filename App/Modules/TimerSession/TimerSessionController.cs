@@ -7,9 +7,10 @@ using Shared.General.Util;
 namespace App.Modules.TimerSession;
 
 [ApiController, Route("api/session")]
+[Authorize(Policy = "IsActiveAndVerified")]
 public class TimerSessionController(IDeleteTimerSessionUseCase deleteTimerSessionUseCase) : CustomController
 {
-    [HttpDelete, Authorize, Route("{id:int}")]
+    [HttpDelete, Route("{id:int}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
         return HandleResponse(await deleteTimerSessionUseCase.Handle(id, UserClaims.Id(User)));

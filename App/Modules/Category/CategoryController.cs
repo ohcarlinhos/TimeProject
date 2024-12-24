@@ -9,7 +9,8 @@ using Shared.General.Util;
 
 namespace App.Modules.Category;
 
-[ApiController, Route("api/category"), Authorize]
+[ApiController, Route("api/category")]
+[Authorize(Policy = "IsActiveAndVerified")]
 public class CategoryController(
     IGetAllCategoryUseCase getAllCategoryUseCase,
     IGetPaginatedCategoryUseCase getPaginatedCategoryUseCase,

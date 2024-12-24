@@ -40,13 +40,15 @@ public class AuthController(
         return HandleResponse(await recoveryPasswordUseCase.Handle(dto));
     }
 
-    [HttpPost, Route("verify"), Authorize]
+    [HttpPost, Route("verify")]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public async Task<ActionResult<bool>> Verify()
     {
         return HandleResponse(await sendRegisterEmailUseCase.Handle(UserClaims.Email(User)));
     }
 
-    [HttpPost, Route("verify/{code}"), Authorize]
+    [HttpPost, Route("verify/{code}")]
+    [Authorize(Policy = "IsActiveAndVerified")]
     public async Task<ActionResult<bool>> VerifyUser(string code)
     {
         return HandleResponse(await verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
