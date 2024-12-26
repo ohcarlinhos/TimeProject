@@ -24,12 +24,10 @@ public class UserController(
 ) : CustomController
 {
     [HttpGet]
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsAdmin")]
     public ActionResult<Pagination<UserMap>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        if (UserRole.Admin.ToString() == UserClaims.Role(User))
-            return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
-        return Forbid();
+        return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }
 
     [HttpPost]
@@ -48,23 +46,22 @@ public class UserController(
     }
 
     [HttpPut("password/{id:int}")]
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsAdmin")]
     public async Task<ActionResult<UserMap>> UpdatePassword([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
     {
-        return IsAdmin()
-            ? HandleResponse(await updateUserUseCase.Handle(
-                id,
-                new UpdateUserDto { Password = dto.Password },
-                new UpdateUserOptions { SkipOldPasswordCompare = true })
-            )
-            : Forbid();
+        return HandleResponse(await updateUserUseCase.Handle(
+            id,
+            new UpdateUserDto { Password = dto.Password },
+            new UpdateUserOptions { SkipOldPasswordCompare = true })
+        );
+
     }
 
     [HttpPut("role/{id:int}")]
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsAdmin")]
     public async Task<ActionResult<UserMap>> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
     {
-        return IsAdmin() ? HandleResponse(await updateUserRoleUseCase.Handle(id, dto)) : Forbid();
+        return HandleResponse(await updateUserRoleUseCase.Handle(id, dto));
     }
 
     [Authorize(Policy = "IsActiveAndVerified")]
