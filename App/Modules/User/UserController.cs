@@ -1,10 +1,10 @@
-﻿using Core.User;
-using Core.User.UseCases;
+﻿using Core.User.UseCases;
 using App.Infra.Controllers;
 using App.Modules.User.Utils;
-using Entities;
+using Core.Auth.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Auth;
 using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.User;
@@ -20,7 +20,11 @@ public class UserController(
     IDisableUserUseCase disableUserUseCase,
     IGetUserUseCase getUserUseCase,
     IDeleteUserUseCase deleteUserUseCase,
-    IGetPaginatedUserUseCase getPaginatedUserUseCase
+    IGetPaginatedUserUseCase getPaginatedUserUseCase,
+    ISendRecoveryEmailUseCase sendRecoveryEmailUseCase,
+    IRecoveryPasswordUseCase recoveryPasswordUseCase,
+    ISendRegisterEmailUseCase sendRegisterEmailUseCase,
+    IVerifyUserUseCase verifyUserUseCase
 ) : CustomController
 {
     [HttpGet]
@@ -89,6 +93,32 @@ public class UserController(
     public async Task<ActionResult<UserMap>> Myself()
     {
         return HandleResponse(await getUserUseCase.Handle(UserClaims.Id(User)));
+    }
+    
+    [HttpPost, Route("recovery")]
+    public async Task<ActionResult<bool>> Recovery([FromBody] RecoveryDto dto)
+    {
+        return HandleResponse(await sendRecoveryEmailUseCase.Handle(dto.Email));
+    }
+
+    [HttpPost, Route("recovery/password")]
+    public async Task<ActionResult<bool>> RecoveryPassword([FromBody] RecoveryPasswordDto dto)
+    {
+        return HandleResponse(await recoveryPasswordUseCase.Handle(dto));
+    }
+
+    [HttpPost, Route("verify")]
+    [Authorize(Policy = "IsActive")]
+    public async Task<ActionResult<bool>> Verify()
+    {
+        return HandleResponse(await sendRegisterEmailUseCase.Handle(UserClaims.Email(User)));
+    }
+
+    [HttpPost, Route("verify/{code}")]
+    [Authorize(Policy = "IsActive")]
+    public async Task<ActionResult<bool>> VerifyUser(string code)
+    {
+        return HandleResponse(await verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
     }
 
     private bool HasAuthorization(int id)

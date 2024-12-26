@@ -1,7 +1,8 @@
 ﻿using Shared.Auth;
 using Shared.General;
+using Shared.User;
 
-namespace Core.Auth.UseCases;
+namespace Core.User.UseCases;
 
 public interface IRecoveryPasswordUseCase
 {

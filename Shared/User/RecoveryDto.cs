@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared.Auth;
+namespace Shared.User;
 
 public class RecoveryDto
 {

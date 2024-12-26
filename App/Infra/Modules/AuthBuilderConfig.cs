@@ -1,5 +1,7 @@
 ﻿using App.Modules.Auth.UseCases;
+using App.Modules.User.UseCases;
 using Core.Auth.UseCases;
+using Core.User.UseCases;
 
 namespace App.Infra.Modules;
 

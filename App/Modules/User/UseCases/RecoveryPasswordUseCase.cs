@@ -1,10 +1,9 @@
 ﻿using Core.Codes.UseCases;
 using Core.User.UseCases;
-using Core.Auth.UseCases;
-using Shared.Auth;
 using Shared.General;
+using Shared.User;
 
-namespace App.Modules.Auth.UseCases;
+namespace App.Modules.User.UseCases;
 
 public class RecoveryPasswordUseCase(
     IUpdateUserPasswordByEmailUseCase updateUserPasswordByEmailUseCase,

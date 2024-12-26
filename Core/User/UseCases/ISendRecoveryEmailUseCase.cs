@@ -1,6 +1,6 @@
 ﻿using Shared.General;
 
-namespace Core.Auth.UseCases;
+namespace Core.User.UseCases;
 
 public interface ISendRecoveryEmailUseCase
 {

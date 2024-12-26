@@ -1,13 +1,12 @@
-﻿using Core.Codes.UseCases;
-using Core.User.UseCases;
-using App.Infra.Errors;
+﻿using App.Infra.Errors;
 using App.Infra.Interfaces;
 using App.Modules.Auth.Utils;
-using Core.Auth.UseCases;
+using Core.Codes.UseCases;
+using Core.User.UseCases;
 using Entities;
 using Shared.General;
 
-namespace App.Modules.Auth.UseCases;
+namespace App.Modules.User.UseCases;
 
 public class SendRecoveryEmailUseCase(
     IGetUserByEmailUseCase getUserByEmailUseCase,
