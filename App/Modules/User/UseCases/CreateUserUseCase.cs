@@ -14,15 +14,6 @@ public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMap
     public async Task<Result<UserMap>> Handle(CreateUserDto dto)
     {
         var result = new Result<UserMap>();
-        // var registerCode = await db.RegisterCodes.FindAsync(dto.RegisterCode);
-
-        // if (registerCode == null || registerCode.IsUsed)
-        // {
-        //     result.Message = UserMessageErrors.RegisterCodeIsNotAvailable;
-        //     result.HasError = true;
-        //     return result;
-        // }
-
         var emailAvailable = await repo.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false)
@@ -39,11 +30,6 @@ public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMap
                 Email = dto.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
             });
-
-        // registerCode.IsUsed = true;
-        // registerCode.UserId = entity.Id;
-        //
-        // db.RegisterCodes.Update(registerCode);
         await db.SaveChangesAsync();
 
         result.Data = mapper.Handle(entity);
