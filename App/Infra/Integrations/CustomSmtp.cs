@@ -17,7 +17,7 @@ public class CustomSmtp : ICustomSmtp
         _smtpClient = new SmtpClient();
         _smtpClient.Host = _smtpSettings.Host;
         _smtpClient.Port = _smtpSettings.Port;
-        _smtpClient.EnableSsl = true;
+        _smtpClient.EnableSsl = false;
         _smtpClient.Credentials = new NetworkCredential(_smtpSettings.Username, _smtpSettings.Password);
     }
 
