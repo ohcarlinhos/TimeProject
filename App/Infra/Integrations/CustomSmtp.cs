@@ -23,7 +23,7 @@ public class CustomSmtp : ICustomSmtp
 
     public void Send(MailMessage mailMessage)
     {
-        mailMessage.From = new MailAddress(_smtpSettings.Username);
+        mailMessage.From = new MailAddress(_smtpSettings.Email);
         _smtpClient.Send(mailMessage);
     }
 }
