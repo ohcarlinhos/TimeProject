@@ -20,6 +20,7 @@ public class PaginationQuery
 
     public string? Search { get; set; } = string.Empty;
     public string? OrderBy { get; set; } = string.Empty;
-    public string? Sort { get; set; } = "desc";
+    public string? SortProp { get; set; }
+    public string? Sort { get; set; } = "asc";
     public IEnumerable<string>? Filters { get; set; }
 }

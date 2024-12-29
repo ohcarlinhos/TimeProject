@@ -14,10 +14,12 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
     public async Task<IndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId)
     {
         var query = dbContext.TimeRecords.AsQueryable();
+
         query = query.Where(tr => tr.UserId == userId);
         query = SearchWhereConditional(query, paginationQuery.Search);
 
         if (paginationQuery.Filters != null)
+        {
             foreach (var filter in paginationQuery.Filters)
             {
                 var split = filter.Split("::");
@@ -28,15 +30,29 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
                     query = query.Where(tr => tr.CategoryId == id);
                 }
             }
+        }
 
         var count = await query.CountAsync();
 
-        if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
-            query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
-                .ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
-        else
-            query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
-                .ThenBy(p => p.Meta!.LastTimePeriodDate);
+        query = paginationQuery.SortProp switch
+        {
+            "title" => paginationQuery.Sort == "asc"
+                ? query.OrderBy(tr => tr.Title)
+                : query.OrderByDescending(tr => tr.Title),
+
+            "code" => paginationQuery.Sort == "asc"
+                ? query.OrderBy(tr => tr.Title)
+                : query.OrderByDescending(tr => tr.Title),
+
+            "timeOnSeconds" => paginationQuery.Sort == "asc"
+                ? query.OrderBy(tr => tr.Meta == null).ThenBy(p => p.Meta!.TimeOnSeconds)
+                : query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.TimeOnSeconds),
+
+            _ => paginationQuery.Sort == "asc" // Padrão: Último Progresso
+                ? query.OrderBy(tr => tr.Meta == null).ThenBy(p => p.Meta!.LastTimePeriodDate)
+                : query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimePeriodDate)
+        };
+
 
         var entities = await query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
@@ -60,9 +76,8 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         if (search.IsNullOrEmpty() == false)
             query = SearchWhereConditional(query, search);
 
-        query = query.OrderBy(tr => tr.Meta != null ? 0 : 1)
-            .ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
-        
+        query = query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
+
         return query
             .Select(e => new SearchTimeRecordItem(e.Id, e.Code, e.Title))
             .Take(10)
