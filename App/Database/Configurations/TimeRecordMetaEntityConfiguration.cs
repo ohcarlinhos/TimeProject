@@ -13,6 +13,7 @@ public class TimeRecordMetaEntityConfiguration : IEntityTypeConfiguration<TimeRe
 
         builder.Property(e => e.TimeRecordId).IsRequired();
         builder.Property(e => e.FormattedTime).HasMaxLength(24);
+        builder.Property(e => e.TimeOnSeconds);
         builder.Property(e => e.TimePeriodCount);
         builder.Property(e => e.LastTimePeriodDate);
         builder.Property(e => e.LastTimePeriodDate);

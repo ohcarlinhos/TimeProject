@@ -5,6 +5,7 @@ public class TimeRecordMetaEntity
     public int TimeRecordId { get; set; }
 
     public string FormattedTime { get; set; } = string.Empty;
+    public double TimeOnSeconds { get; set; }
     public int TimePeriodCount { get; set; }
     
     public DateTime? FirstTimePeriodDate { get; set; }
