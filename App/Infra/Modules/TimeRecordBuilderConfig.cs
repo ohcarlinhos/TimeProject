@@ -28,5 +28,6 @@ public static class TimeRecordBuilderConfig
         builder.Services.AddScoped<ISearchTimeRecordUseCase, SearchTimeRecordUseCase>();
         
         builder.Services.AddScoped<ISyncTrMetaUseCase, SyncTrMetaUseCase>();
+        builder.Services.AddScoped<ISyncAllTrMetaUseCase, SyncAllTrMetaUseCase>();
     }
 }

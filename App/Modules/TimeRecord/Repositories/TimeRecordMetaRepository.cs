@@ -8,9 +8,28 @@ namespace App.Modules.TimeRecord.Repositories;
 
 public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMetaRepository
 {
-    public async Task<TimeRecordMetaEntity> CreateOrUpdate(int timeRecordId)
+    public async Task<TimeRecordMetaEntity?> CreateOrUpdate(int timeRecordId, bool saveChanges = true)
     {
         var timeRecord = await dbContext.TimeRecords.FirstOrDefaultAsync(e => e.Id == timeRecordId);
+        return timeRecord == null ? null : await CreateOrUpdate(timeRecord, saveChanges);
+    }
+
+    public async Task<IEnumerable<TimeRecordMetaEntity>> CreateOrUpdateList(IEnumerable<TimeRecordEntity> timeRecordEntities)
+    {
+        var list = new List<TimeRecordMetaEntity>();
+
+        foreach (var timeRecordEntity in timeRecordEntities)
+        {
+            list.Add(await CreateOrUpdate(timeRecordEntity, false));
+        }
+
+        await dbContext.SaveChangesAsync();
+
+        return list;
+    }
+
+    public async Task<TimeRecordMetaEntity> CreateOrUpdate(TimeRecordEntity timeRecord, bool saveChanges = true)
+    {
         var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord!.Id);
         var timePeriods = await dbContext.TimePeriods
             .Where(e => e.TimeRecordId == timeRecord!.Id)
@@ -20,7 +39,7 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         var now = DateTime.Now.ToUniversalTime();
         var timeSpan = TimeFormat.TimeSpanFromTimePeriods(timePeriods);
         var formattedTime = TimeFormat.StringFromTimeSpan(timeSpan);
-        
+
         if (entity == null)
         {
             entity = new TimeRecordMetaEntity
@@ -47,7 +66,10 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
             entity.UpdatedAt = now;
         }
 
-        await dbContext.SaveChangesAsync();
+        if (saveChanges)
+        {
+            await dbContext.SaveChangesAsync();
+        }
 
         return entity;
     }

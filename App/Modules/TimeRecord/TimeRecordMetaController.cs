@@ -1,0 +1,20 @@
+﻿using Core.TimeRecord.UseCases;
+using App.Infra.Controllers;
+using Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace App.Modules.TimeRecord;
+
+[ApiController]
+[Route("api/record/meta"), Authorize(Policy = "IsAdmin")]
+public class TimeRecordMetaController(
+    ISyncAllTrMetaUseCase syncAllTrMetaUseCase
+) : CustomController
+{
+    [HttpPost, Route("sync/all")]
+    public async Task<ActionResult<IEnumerable<TimeRecordMetaEntity>>> SyncAll()
+    {
+        return HandleResponse(await syncAllTrMetaUseCase.Handle());
+    }
+}
