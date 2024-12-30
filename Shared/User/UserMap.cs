@@ -11,4 +11,5 @@ public class UserMap
     public bool IsVerified { get; set; }
     public UserRole UserRole { get; set; }
     public string UserRoleLabel => UserRole.ToString();
+    public DateTime CreatedAt { get; set; }
 }
