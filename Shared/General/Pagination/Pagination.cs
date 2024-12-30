@@ -10,6 +10,7 @@ public class Pagination<T>
     public string? Search { get; set; }
     public string? OrderBy { get; set; }
     public string? Sort { get; set; }
+    public string? SortProp { get; set; }
 
     public static Pagination<T> Handle(
         IEnumerable<T> data, 
@@ -18,7 +19,8 @@ public class Pagination<T>
         int totalItems, 
         string search = "",
         string orderBy = "", 
-        string sort = "")
+        string sort = "",
+        string sortProp = "")
     {
         return new Pagination<T>()
         {
@@ -29,6 +31,7 @@ public class Pagination<T>
             Search = search,
             OrderBy = orderBy,
             Sort = sort,
+            SortProp = sortProp,
             Data = data
         };
     }
@@ -47,6 +50,7 @@ public class Pagination<T>
             Search = paginationQuery.Search,
             OrderBy = paginationQuery.OrderBy,
             Sort = paginationQuery.Sort,
+            SortProp = paginationQuery.SortProp,
             Data = data
         };
     }
