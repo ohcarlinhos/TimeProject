@@ -41,8 +41,8 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
                 : query.OrderByDescending(tr => tr.Title),
 
             "code" => paginationQuery.Sort == "asc"
-                ? query.OrderBy(tr => tr.Title)
-                : query.OrderByDescending(tr => tr.Title),
+                ? query.OrderBy(tr => tr.Code)
+                : query.OrderByDescending(tr => tr.Code),
 
             "timeOnSeconds" => paginationQuery.Sort == "asc"
                 ? query.OrderBy(tr => tr.Meta == null).ThenBy(p => p.Meta!.TimeOnSeconds)
