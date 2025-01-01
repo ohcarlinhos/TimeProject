@@ -8,5 +8,6 @@ public static class IntegrationsBuilderConfig
     public static void Apply(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<ICustomSmtp, CustomSmtp>();
+        builder.Services.AddScoped<ICustomBot, CustomBot>();
     }
 }
