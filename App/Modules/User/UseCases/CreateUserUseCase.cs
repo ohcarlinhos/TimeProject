@@ -3,13 +3,15 @@ using Core.User.UseCases;
 using Core.User.Utils;
 using App.Database;
 using App.Infra.Errors;
+using App.Infra.Interfaces;
 using Entities;
 using Shared.General;
 using Shared.User;
 
 namespace App.Modules.User.UseCases;
 
-public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMapDataUtil mapper) : ICreateUserUseCase
+public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMapDataUtil mapper, IHookHandler hook)
+    : ICreateUserUseCase
 {
     public async Task<Result<UserMap>> Handle(CreateUserDto dto)
     {
@@ -33,6 +35,7 @@ public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMap
         await db.SaveChangesAsync();
 
         result.Data = mapper.Handle(entity);
+        await hook.Send(HookTo.Users, $"{dto.Name} acabou de criar uma conta com o email: {dto.Email}");
 
         return result;
     }
