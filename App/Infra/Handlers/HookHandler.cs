@@ -14,6 +14,8 @@ public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings
             _ => telegramSettings.Chats.General
         };
 
+        message += $"\n H: {DateTime.Now:dd/MM/yyyy HH:mm:ss}";
+        
         await customBot.SendMessage(chatId, message);
     }
 }
