@@ -3,6 +3,7 @@ namespace App.Infra.Interfaces;
 public enum HookTo
 {
     General,
+    Errors,
     Users
 }
 

@@ -3,19 +3,26 @@ using App.Infra.Settings;
 
 namespace App.Infra.Handlers;
 
-public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings) : IHookHandler
+public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings, IHostEnvironment hostEnvironment)
+    : IHookHandler
 {
     public async Task Send(HookTo to, string message)
     {
-        var chatId = to switch
+        var threadId = to switch
         {
-            HookTo.General => telegramSettings.Chats.General,
-            HookTo.Users => telegramSettings.Chats.Users,
-            _ => telegramSettings.Chats.General
+            HookTo.General => telegramSettings.Threads.General,
+            HookTo.Errors => telegramSettings.Threads.Errors,
+            HookTo.Users => telegramSettings.Threads.Users,
+            _ => telegramSettings.Threads.General
         };
 
-        message += $"\n H: {DateTime.Now:dd/MM/yyyy HH:mm:ss}";
+        message += $"\n\n{DateTime.Now:dd/MM/yyyy HH:mm:ss}";
         
-        await customBot.SendMessage(chatId, message);
+        if (hostEnvironment.IsDevelopment())
+        {
+            message += $"\n--- DEV ---";
+        }
+
+        await customBot.SendMessage(telegramSettings.ChatId, message, threadId);
     }
 }

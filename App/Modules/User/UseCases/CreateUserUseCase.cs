@@ -35,7 +35,7 @@ public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMap
         await db.SaveChangesAsync();
 
         result.Data = mapper.Handle(entity);
-        await hook.Send(HookTo.Users, $"{dto.Name} acabou de criar uma conta com o email: {dto.Email}");
+        await hook.Send(HookTo.Users, $"{dto.Name} acabou de criar uma conta com o email:\n{dto.Email}");
 
         return result;
     }
