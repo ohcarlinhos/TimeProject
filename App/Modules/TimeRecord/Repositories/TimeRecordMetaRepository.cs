@@ -14,13 +14,13 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         return timeRecord == null ? null : await CreateOrUpdate(timeRecord, saveChanges);
     }
 
-    public async Task<IEnumerable<TimeRecordMetaEntity>> CreateOrUpdateList(IEnumerable<TimeRecordEntity> timeRecordEntities)
+    public async Task<IEnumerable<TimeRecordMetaEntity>> CreateOrUpdateList(IEnumerable<TimeRecordEntity> timeRecordEntities, bool saveChanges = false)
     {
         var list = new List<TimeRecordMetaEntity>();
 
         foreach (var timeRecordEntity in timeRecordEntities)
         {
-            list.Add(await CreateOrUpdate(timeRecordEntity, false));
+            list.Add(await CreateOrUpdate(timeRecordEntity, saveChanges));
         }
 
         await dbContext.SaveChangesAsync();
