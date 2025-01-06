@@ -1,5 +1,5 @@
 ﻿using Core.User.UseCases;
-using App.Infra.Controllers;
+using App.Infrastructure.Controllers;
 using App.Modules.User.Utils;
 using Core.Auth.UseCases;
 using Microsoft.AspNetCore.Authorization;

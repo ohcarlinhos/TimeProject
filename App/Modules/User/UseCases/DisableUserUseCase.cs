@@ -1,6 +1,6 @@
 ﻿using Core.User;
 using Core.User.UseCases;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Shared.General;
 using Shared.User;
 

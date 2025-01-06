@@ -1,5 +1,5 @@
 ﻿using Core.TimerSession.UseCases;
-using App.Infra.Controllers;
+using App.Infrastructure.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Util;

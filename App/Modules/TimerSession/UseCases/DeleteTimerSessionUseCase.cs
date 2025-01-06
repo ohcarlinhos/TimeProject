@@ -2,7 +2,7 @@
 using Core.TimeRecord.UseCases;
 using Core.TimerSession;
 using Core.TimerSession.UseCases;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Shared.General;
 
 namespace App.Modules.TimerSession.UseCases;

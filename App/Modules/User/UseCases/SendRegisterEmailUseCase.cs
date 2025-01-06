@@ -1,5 +1,5 @@
-﻿using App.Infra.Errors;
-using App.Infra.Interfaces;
+﻿using App.Infrastructure.Errors;
+using App.Infrastructure.Interfaces;
 using App.Modules.Auth.Utils;
 using Core.Codes.UseCases;
 using Core.User.UseCases;

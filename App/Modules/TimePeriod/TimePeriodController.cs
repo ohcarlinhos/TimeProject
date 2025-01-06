@@ -1,5 +1,5 @@
 ﻿using Core.TimePeriod.UseCases;
-using App.Infra.Controllers;
+using App.Infrastructure.Controllers;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using Core.User.UseCases;
-using App.Infra.Errors;
-using App.Infra.Interfaces;
+using App.Infrastructure.Errors;
+using App.Infrastructure.Interfaces;
 using Core.Auth.UseCases;
 using Entities;
 using Shared.Auth;

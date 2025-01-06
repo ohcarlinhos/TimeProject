@@ -1,6 +1,6 @@
 ﻿using Core.Codes;
 using Core.Codes.UseCases;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Shared.General;
 
 namespace App.Modules.Codes.UseCases;

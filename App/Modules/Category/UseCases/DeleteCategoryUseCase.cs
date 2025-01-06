@@ -1,4 +1,4 @@
-﻿using App.Infra.Errors;
+﻿using App.Infrastructure.Errors;
 using Core.Category;
 using Core.Category.UseCases;
 using Shared.General;

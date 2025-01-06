@@ -2,7 +2,7 @@
 using Core.TimePeriod.UseCases;
 using Core.TimePeriod.Utils;
 using Core.TimeRecord.UseCases;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Entities;
 using Shared.General;
 using Shared.TimePeriod;

@@ -1,7 +1,7 @@
 ﻿using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
 using Core.TimeRecord.Utils;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Shared.General;
 using Shared.TimeRecord;
 

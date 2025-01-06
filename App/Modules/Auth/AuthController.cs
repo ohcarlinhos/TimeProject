@@ -1,4 +1,4 @@
-﻿using App.Infra.Controllers;
+﻿using App.Infrastructure.Controllers;
 using Core.Auth.UseCases;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Auth;

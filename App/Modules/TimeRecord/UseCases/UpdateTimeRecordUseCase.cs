@@ -1,7 +1,7 @@
 ﻿using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
 using Core.TimeRecord.Utils;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Core.Category;
 using Microsoft.IdentityModel.Tokens;
 using Shared.General;

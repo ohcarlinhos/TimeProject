@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Entities;
 using Shared.General;
 

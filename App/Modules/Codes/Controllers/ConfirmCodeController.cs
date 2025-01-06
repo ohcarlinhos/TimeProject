@@ -1,4 +1,4 @@
-﻿using App.Infra.Controllers;
+﻿using App.Infrastructure.Controllers;
 using Core.Codes.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

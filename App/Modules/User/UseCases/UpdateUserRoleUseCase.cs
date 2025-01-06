@@ -1,7 +1,7 @@
 ﻿using Core.User;
 using Core.User.UseCases;
 using Core.User.Utils;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Entities;
 using Shared.General;
 using Shared.User;

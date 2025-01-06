@@ -1,6 +1,6 @@
 ﻿using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Shared.General;
 
 namespace App.Modules.TimeRecord.UseCases;

@@ -1,7 +1,7 @@
 ﻿using Core.TimePeriod;
 using Core.TimePeriod.UseCases;
 using Core.TimeRecord.UseCases;
-using App.Infra.Errors;
+using App.Infrastructure.Errors;
 using Shared.General;
 
 namespace App.Modules.TimePeriod.UseCases;
