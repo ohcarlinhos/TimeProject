@@ -3,13 +3,15 @@ using Core.User.UseCases;
 using Core.User.Utils;
 using App.Database;
 using App.Infrastructure.Errors;
+using App.Infrastructure.Interfaces;
 using Entities;
 using Shared.General;
 using Shared.User;
 
 namespace App.Modules.User.UseCases;
 
-public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMapDataUtil mapper) : ICreateUserUseCase
+public class CreateUserUseCase(ProjectContext db, IUserRepository repo, IUserMapDataUtil mapper, IHookHandler hook)
+    : ICreateUserUseCase
 {
     public async Task<Result<UserMap>> Handle(CreateUserDto dto)
     {
