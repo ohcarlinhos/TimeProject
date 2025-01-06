@@ -1,5 +1,5 @@
 using App.Infra.Interfaces;
-using App.Infra.Settings;
+using App.Infrastructure.Settings;
 
 namespace App.Infra.Handlers;
 

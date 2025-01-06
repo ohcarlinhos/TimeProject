@@ -1,4 +1,4 @@
-namespace App.Infra.Settings;
+namespace App.Infrastructure.Settings;
 
 public class TelegramThreads
 {

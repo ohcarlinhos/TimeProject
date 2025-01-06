@@ -1,9 +1,9 @@
 using Telegram.Bot;
 using App.Infra.Interfaces;
-using App.Infra.Settings;
+using App.Infrastructure.Settings;
 using Telegram.Bot.Types;
 
-namespace App.Infra.Integrations;
+namespace App.Infrastructure.Integrations;
 
 public class CustomBot(TelegramSettings telegramSettings) : ICustomBot
 {

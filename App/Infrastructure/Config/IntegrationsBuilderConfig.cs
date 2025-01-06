@@ -1,4 +1,5 @@
-﻿using App.Infrastructure.Integrations;
+﻿using App.Infra.Interfaces;
+using App.Infrastructure.Integrations;
 using App.Infrastructure.Interfaces;
 
 namespace App.Infrastructure.Config;
