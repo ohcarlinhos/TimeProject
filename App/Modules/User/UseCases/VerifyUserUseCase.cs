@@ -1,4 +1,4 @@
-﻿using App.Infra.Interfaces;
+﻿using App.Infrastructure.Interfaces;
 using Core.Codes.UseCases;
 using Core.User.UseCases;
 using Shared.General;

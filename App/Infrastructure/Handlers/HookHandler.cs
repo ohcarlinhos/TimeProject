@@ -1,7 +1,8 @@
 using App.Infra.Interfaces;
+using App.Infrastructure.Interfaces;
 using App.Infrastructure.Settings;
 
-namespace App.Infra.Handlers;
+namespace App.Infrastructure.Handlers;
 
 public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings, IHostEnvironment hostEnvironment)
     : IHookHandler

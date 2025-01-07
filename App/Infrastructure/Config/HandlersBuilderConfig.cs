@@ -1,6 +1,4 @@
-﻿using App.Infra.Handlers;
-using App.Infra.Interfaces;
-using App.Infrastructure.Handlers;
+﻿using App.Infrastructure.Handlers;
 using App.Infrastructure.Interfaces;
 
 namespace App.Infrastructure.Config;

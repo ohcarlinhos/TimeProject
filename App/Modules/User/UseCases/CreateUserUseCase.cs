@@ -2,8 +2,8 @@
 using Core.User.UseCases;
 using Core.User.Utils;
 using App.Database;
-using App.Infra.Interfaces;
 using App.Infrastructure.Errors;
+using App.Infrastructure.Interfaces;
 using Entities;
 using Shared.General;
 using Shared.User;
