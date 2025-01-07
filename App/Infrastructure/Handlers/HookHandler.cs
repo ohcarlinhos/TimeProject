@@ -17,7 +17,7 @@ public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings
             _ => telegramSettings.Threads.General
         };
 
-        message += $"\n\n{DateTime.Now:dd/MM/yyyy HH:mm:ss}";
+        message += $"\n\n{DateTime.Now.ToUniversalTime():dd/MM/yyyy HH:mm:ss}";
         
         if (hostEnvironment.IsDevelopment())
         {
