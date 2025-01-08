@@ -1,4 +1,4 @@
-namespace App.Infra.Interfaces;
+namespace App.Infrastructure.Interfaces;
 
 public interface ICustomBot
 {

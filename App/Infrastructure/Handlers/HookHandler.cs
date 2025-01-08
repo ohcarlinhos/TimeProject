@@ -1,4 +1,3 @@
-using App.Infra.Interfaces;
 using App.Infrastructure.Interfaces;
 using App.Infrastructure.Settings;
 

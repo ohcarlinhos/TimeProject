@@ -1,5 +1,5 @@
+using App.Infrastructure.Interfaces;
 using Telegram.Bot;
-using App.Infra.Interfaces;
 using App.Infrastructure.Settings;
 using Telegram.Bot.Types;
 
