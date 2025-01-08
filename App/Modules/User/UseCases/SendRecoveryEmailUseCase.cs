@@ -13,7 +13,8 @@ public class SendRecoveryEmailUseCase(
     ICreateConfirmCodeUseCase createConfirmCodeUseCase,
     ISetWasSentConfirmCodeUseCase setWasSentConfirmCodeUseCase,
     IEmailHandler emailHandler,
-    IConfiguration configuration
+    IConfiguration configuration,
+    IHookHandler hookHandler
 ) : ISendRecoveryEmailUseCase
 {
     public async Task<Result<bool>> Handle(string email)
@@ -42,6 +43,7 @@ public class SendRecoveryEmailUseCase(
         }
         catch
         {
+            await hookHandler.SendError($"Não foi possível enviar o e-mail de recuperação para:\n${user.Email}");
             return result.SetError(AuthMessageErrors.SendEmailError);
         }
 

@@ -10,4 +10,5 @@ public enum HookTo
 public interface IHookHandler
 {
     public Task Send(HookTo to, string message);
+    public Task SendError(string message);
 }

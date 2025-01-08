@@ -26,4 +26,9 @@ public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings
 
         await customBot.SendMessage(telegramSettings.ChatId, message, threadId);
     }
+
+    public async Task SendError(string message)
+    {
+        await Send(HookTo.Errors, message);
+    }
 }

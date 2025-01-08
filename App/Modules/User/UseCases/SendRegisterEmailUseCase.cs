@@ -13,7 +13,9 @@ public class SendRegisterEmailUseCase(
     IGetUserByEmailUseCase getUserByEmailUseCase,
     ISetWasSentConfirmCodeUseCase setWasSentConfirmCodeUseCase,
     IEmailHandler emailHandler,
-    IConfiguration configuration) : ISendRegisterEmailUseCase
+    IConfiguration configuration,
+    IHookHandler hookHandler
+) : ISendRegisterEmailUseCase
 {
     public async Task<Result<bool>> Handle(string email)
     {
@@ -34,7 +36,7 @@ public class SendRegisterEmailUseCase(
         {
             emailHandler.Send(RegisterEmailFactory.Create(
                 email,
-                configuration["VerifyUrl"] +  registerCode.Id,
+                configuration["VerifyUrl"] + registerCode.Id,
                 registerCode.ExpireDate.ToString("dd/MM/yyyy HH:mm:ss")
             ));
 
@@ -42,6 +44,7 @@ public class SendRegisterEmailUseCase(
         }
         catch
         {
+            await hookHandler.SendError($"Não foi possível enviar o e-mail de verificação para:\n${user.Email}");
             return result.SetError(AuthMessageErrors.SendEmailError);
         }
 

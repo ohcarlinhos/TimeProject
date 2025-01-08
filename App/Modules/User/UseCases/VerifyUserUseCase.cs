@@ -9,7 +9,7 @@ public class VerifyUserUseCase(
     ISetIsUsedConfirmCodeUseCase setIsUsedConfirmCodeUseCase,
     ISetIsVerifiedUserUseCase setIsVerifiedUserUseCase,
     IValidateConfirmCodeUseCase validateConfirmCodeUseCase,
-    IHookHandler hook
+    IHookHandler hookHandler
 ) : IVerifyUserUseCase
 {
     public async Task<Result<bool>> Handle(int id, string email, string code)
@@ -22,7 +22,7 @@ public class VerifyUserUseCase(
         await setIsVerifiedUserUseCase.Handle(id, true);
         await setIsUsedConfirmCodeUseCase.Handle(code);
 
-        await hook.Send(HookTo.Users, $"O usuário com o e-mail {email} foi verifiado com sucesso.");
+        await hookHandler.Send(HookTo.Users, $"O usuário com o e-mail {email} foi verifiado com sucesso.");
 
         return result.SetData(true);
     }
