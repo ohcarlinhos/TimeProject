@@ -94,4 +94,7 @@ public static class TimeFormat
             ? "0s"
             : StringFromTimeSpan(TimeSpanFromTimerSessions(timerSessions));
     }
+
+    public static double MinutesFromTimeSpan(TimeSpan timeSpan) => timeSpan.TotalMinutes;
+    public static double HoursFromTimeSpan(TimeSpan timeSpan) => timeSpan.TotalHours;
 }
