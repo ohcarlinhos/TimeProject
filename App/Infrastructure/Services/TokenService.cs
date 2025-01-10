@@ -16,6 +16,7 @@ public class TokenService(JwtSettings jwtSettings) : ITokenService
         var tokenSubject = new ClaimsIdentity(new[]
         {
             new Claim("id", userEntity.Id.ToString()),
+            new Claim(ClaimTypes.Name, userEntity.Name),
             new Claim(ClaimTypes.Email, userEntity.Email),
             new Claim(ClaimTypes.Role, userEntity.UserRole.ToString()),
             new Claim("isAdmin", userEntity.UserRole == UserRole.Admin? "True" : "False"),
