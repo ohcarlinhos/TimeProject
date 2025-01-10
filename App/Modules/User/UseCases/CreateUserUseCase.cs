@@ -39,7 +39,7 @@ public class CreateUserUseCase(
         await db.SaveChangesAsync();
 
         result.Data = mapper.Handle(entity);
-        await hookHandler.Send(HookTo.Users, $"{dto.Name} acabou de criar uma conta com o email:\n{dto.Email}");
+        await hookHandler.Send(HookTo.Users, $"<b>{dto.Name}</b> acabou de criar uma conta com o email:\n<b>{dto.Email}</b>");
 
         return result;
     }

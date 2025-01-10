@@ -44,7 +44,7 @@ public class SendRegisterEmailUseCase(
         }
         catch
         {
-            await hookHandler.SendError($"Não foi possível enviar o e-mail de verificação para:\n${user.Email}");
+            await hookHandler.SendError($"Não foi possível enviar o e-mail de verificação para:\n<b>{user.Email}</b>");
             return result.SetError(AuthMessageErrors.SendEmailError);
         }
 

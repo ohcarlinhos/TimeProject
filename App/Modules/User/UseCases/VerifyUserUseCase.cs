@@ -22,7 +22,7 @@ public class VerifyUserUseCase(
         await setIsVerifiedUserUseCase.Handle(id, true);
         await setIsUsedConfirmCodeUseCase.Handle(code);
 
-        await hookHandler.Send(HookTo.Users, $"O usuário com o e-mail {email} foi verifiado com sucesso.");
+        await hookHandler.Send(HookTo.Users, $"O usuário com o e-mail <b>{email}</b> acabou de verificar sua conta.");
 
         return result.SetData(true);
     }
