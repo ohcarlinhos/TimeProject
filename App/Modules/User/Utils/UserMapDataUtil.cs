@@ -1,4 +1,3 @@
-using Core.User;
 using Core.User.Utils;
 using AutoMapper;
 using Entities;
