@@ -26,6 +26,7 @@ CategoryBuilderConfig.Apply(builder);
 CodeBuilderConfig.Apply(builder);
 AuthBuilderConfig.Apply(builder);
 StatisticBuilderConfig.Apply(builder);
+FeedbackBuilderConfig.Apply(builder);
 
 IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);

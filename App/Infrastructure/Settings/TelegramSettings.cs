@@ -2,9 +2,9 @@ namespace App.Infrastructure.Settings;
 
 public class TelegramThreads
 {
-    public string General { get; set; } = "";
     public string Errors { get; set; } = "";
     public string Users { get; set; } = "";
+    public string Feedbacks { get; set; } = "";
 }
 
 public class TelegramSettings

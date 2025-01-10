@@ -10,10 +10,10 @@ public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings
     {
         var threadId = to switch
         {
-            HookTo.General => telegramSettings.Threads.General,
             HookTo.Errors => telegramSettings.Threads.Errors,
             HookTo.Users => telegramSettings.Threads.Users,
-            _ => telegramSettings.Threads.General
+            HookTo.Feedbacks => telegramSettings.Threads.Feedbacks,
+            _ => null
         };
 
         message += $"\n\n{DateTime.Now.ToUniversalTime():dd/MM/yyyy HH:mm:ss}";

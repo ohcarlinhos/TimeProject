@@ -4,7 +4,8 @@ public enum HookTo
 {
     General,
     Errors,
-    Users
+    Users,
+    Feedbacks
 }
 
 public interface IHookHandler
