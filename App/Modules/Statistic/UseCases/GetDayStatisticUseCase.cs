@@ -7,9 +7,15 @@ using Shared.Statistic;
 
 namespace App.Modules.Statistic.UseCases;
 
-public class GetDayStatisticUseCase(IStatisticRepository repo, ITimePeriodCutUtil timePeriodCutUtil) : IGetDayStatisticUseCase
+public class GetDayStatisticUseCase(IStatisticRepository repository, ITimePeriodCutUtil timePeriodCutUtil)
+    : IGetDayStatisticUseCase
 {
-    public async Task<Result<DayStatistic>> Handle(int userId, DateTime? date = null, int hoursToAddOnInitDate = 0)
+    public async Task<Result<DayStatistic>> Handle(
+        int userId,
+        DateTime? date = null,
+        int hoursToAddOnInitDate = 0,
+        int? timeRecordId = null
+    )
     {
         var result = new Result<DayStatistic>();
 
@@ -18,11 +24,11 @@ public class GetDayStatisticUseCase(IStatisticRepository repo, ITimePeriodCutUti
         var initDate = selectedDate.AddHours(hoursToAddOnInitDate);
         var endDate = initDate.AddDays(1);
 
-        var timePeriodListByRange = await repo.GetTimePeriodsByRange(userId, initDate, endDate);
+        var timePeriodListByRange = await repository.GetTimePeriodsByRange(userId, initDate, endDate, timeRecordId);
         var timePeriodList = timePeriodCutUtil.Handle(timePeriodListByRange, initDate, endDate);
         var isolatedPeriodList = timePeriodList.Where(e => e.TimerSessionId == null).ToList();
 
-        var sessionList = (await repo.GetTimerSessionsByRange(userId, initDate, endDate))
+        var sessionList = (await repository.GetTimerSessionsByRange(userId, initDate, endDate, timeRecordId))
             .Select(e =>
             {
                 e.TimePeriods = timePeriodCutUtil.Handle(e.TimePeriods!, initDate, endDate);
@@ -39,13 +45,12 @@ public class GetDayStatisticUseCase(IStatisticRepository repo, ITimePeriodCutUti
             StartDay = initDate,
             EndDay = endDate,
 
-
             TotalHours = TimeFormat.StringFromTimePeriods(timePeriodList),
             TotalIsolatedPeriodHours = TimeFormat.StringFromTimePeriods(isolatedPeriodList),
             TotalTimerHours = TimeFormat.StringFromTimerSessions(timerList),
             TotalPomodoroHours = TimeFormat.StringFromTimerSessions(pomodoroList),
             TotalBreakHours = TimeFormat.StringFromTimerSessions(breakList),
-            
+
             IsolatedPeriodCount = isolatedPeriodList.Count,
             TimerCount = timerList.Count,
             PomodoroCount = pomodoroList.Count,
@@ -54,9 +59,13 @@ public class GetDayStatisticUseCase(IStatisticRepository repo, ITimePeriodCutUti
             TimePeriodCount = timePeriodList.Count,
             InterruptionCount = timePeriodList.Count > 0 ? timePeriodList.Count - 1 : 0,
             SessionCount = sessionList.Count,
-            
-            CreatedTimeRecordCount = await repo.TimeRecordCreatedCount(userId, initDate, endDate),
-            UpdatedTimeRecordCount = await repo.TimeRecordUpdatedCount(userId, initDate, endDate),
+
+            CreatedTimeRecordCount = timeRecordId == null
+                ? await repository.TimeRecordCreatedCount(userId, initDate, endDate)
+                : 0,
+            UpdatedTimeRecordCount = timeRecordId == null
+                ? await repository.TimeRecordUpdatedCount(userId, initDate, endDate)
+                : 0,
         });
     }
 }

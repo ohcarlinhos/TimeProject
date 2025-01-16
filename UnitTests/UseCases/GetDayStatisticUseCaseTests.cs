@@ -27,11 +27,11 @@ public class GetDayStatisticUseCaseTests
 
         _staticRepository
             .Setup(v => v
-                .GetTimePeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .GetTimePeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
             .Returns(Task.FromResult(timePeriods));
 
         _staticRepository
-            .Setup(v => v.GetTimerSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+            .Setup(v => v.GetTimerSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
             .Returns(Task.FromResult(timerSessions));
     }
 
