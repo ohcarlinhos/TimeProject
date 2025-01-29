@@ -1,4 +1,5 @@
-﻿using App.Infrastructure.Controllers;
+﻿using App.Infrastructure.Attributes;
+using App.Infrastructure.Controllers;
 using Core.Feedback.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +13,14 @@ public class FeedbackController(
     ISendFeedbackUseCase sendFeedbackUseCase,
     ISendPublicFeedbackUseCase sendPublicFeedbackUseCase) : CustomController
 {
-    [HttpPost, Authorize]
+    [HttpPost, Authorize, UserChallenge]
     public async Task<ActionResult<bool>> Send(FeedbackDto feedbackDto)
     {
         return HandleResponse(await sendFeedbackUseCase
             .Handle(feedbackDto, UserClaims.Name(User), UserClaims.Email(User), UserClaims.IsVerified(User)));
     }
 
-    [HttpPost("public")]
+    [HttpPost("public"), UserChallenge]
     public async Task<ActionResult<bool>> SendPublic(PublicFeedbackDto feedbackDto)
     {
         return HandleResponse(await sendPublicFeedbackUseCase.Handle(feedbackDto));
