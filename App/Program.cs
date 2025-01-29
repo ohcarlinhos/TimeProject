@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using App.Infrastructure.Config;
+using App.Infrastructure.Middlewares;
 using App.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,8 @@ IntegrationsBuilderConfig.Apply(builder);
 HandlersBuilderConfig.Apply(builder);
 MappingBuilderConfig.Apply(builder);
 
+builder.Services.AddSingleton<UserChallengeMiddleware>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -48,6 +51,8 @@ else
 app.UseCors(customCors);
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
+app.UseMiddleware<UserChallengeMiddleware>();
 app.MapControllers();
 
 app.Run();

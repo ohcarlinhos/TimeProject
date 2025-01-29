@@ -9,5 +9,6 @@ public static class IntegrationsBuilderConfig
     {
         builder.Services.AddScoped<ICustomSmtp, CustomSmtp>();
         builder.Services.AddSingleton<ICustomBot, CustomBot>();
+        builder.Services.AddSingleton<IUserChallenge, UserChallenge>();
     }
 }
