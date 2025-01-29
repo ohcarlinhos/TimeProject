@@ -14,12 +14,13 @@ public class CreateUserUseCase(
     ProjectContext db,
     IUserRepository repo,
     IUserMapDataUtil mapper,
-    IHookHandler hookHandler
+    IHookHandler hookHandler,
+    IJwtService jwtService
 ) : ICreateUserUseCase
 {
-    public async Task<Result<UserMap>> Handle(CreateUserDto dto)
+    public async Task<Result<CreateUserResult>> Handle(CreateUserDto dto)
     {
-        var result = new Result<UserMap>();
+        var result = new Result<CreateUserResult>();
         var emailAvailable = await repo.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false)
@@ -38,8 +39,14 @@ public class CreateUserUseCase(
             });
         await db.SaveChangesAsync();
 
-        result.Data = mapper.Handle(entity);
-        await hookHandler.Send(HookTo.Users, $"<b>{dto.Name}</b> acabou de criar uma conta com o email:\n<b>{dto.Email}</b>");
+        result.Data = new CreateUserResult
+        {
+            User = mapper.Handle(entity),
+            Jwt = jwtService.Generate(entity)
+        };
+
+        await hookHandler.Send(HookTo.Users,
+            $"<b>{dto.Name}</b> acabou de criar uma conta com o email:\n<b>{dto.Email}</b>");
 
         return result;
     }

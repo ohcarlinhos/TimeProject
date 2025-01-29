@@ -1,10 +1,9 @@
-﻿using Core.User.UseCases;
+﻿using App.Infrastructure.Attributes;
+using Core.User.UseCases;
 using App.Infrastructure.Controllers;
 using App.Modules.User.Utils;
-using Core.Auth.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Auth;
 using Shared.General.Pagination;
 using Shared.General.Util;
 using Shared.User;
@@ -34,8 +33,8 @@ public class UserController(
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }
 
-    [HttpPost]
-    public async Task<ActionResult<UserMap>> Create([FromBody] CreateUserDto dto)
+    [HttpPost, UserChallenge()]
+    public async Task<ActionResult<CreateUserResult>> Create([FromBody] CreateUserDto dto)
     {
         var result = await createUserUseCase.Handle(dto);
         result.ActionName = nameof(Create);

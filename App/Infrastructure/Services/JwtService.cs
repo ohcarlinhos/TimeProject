@@ -9,37 +9,36 @@ using Shared.Auth;
 
 namespace App.Infrastructure.Services;
 
-public class TokenService(JwtSettings jwtSettings) : ITokenService
+public class JwtService(JwtSettings jwtSettings) : IJwtService
 {
-    public JwtData GenerateBearerJwt(UserEntity userEntity)
+    public JwtData Generate(UserEntity userEntity)
     {
-        var tokenSubject = new ClaimsIdentity(new[]
-        {
+        var subject = new ClaimsIdentity([
             new Claim("id", userEntity.Id.ToString()),
             new Claim(ClaimTypes.Name, userEntity.Name),
             new Claim(ClaimTypes.Email, userEntity.Email),
             new Claim(ClaimTypes.Role, userEntity.UserRole.ToString()),
             new Claim("isAdmin", userEntity.UserRole == UserRole.Admin? "True" : "False"),
             new Claim("isActive", userEntity.IsActive.ToString()),
-            new Claim("isVerified", userEntity.IsVerified.ToString()),
-        });
+            new Claim("isVerified", userEntity.IsVerified.ToString())
+        ]);
 
-        var tokenExpires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt);
+        var expires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt);
 
-        var tokenSigningCredentials = new SigningCredentials(
+        var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
             SecurityAlgorithms.HmacSha256Signature
         );
 
-        var tokenDescriptor = new SecurityTokenDescriptor()
+        var descriptor = new SecurityTokenDescriptor()
         {
-            Subject = tokenSubject,
-            Expires = tokenExpires,
-            SigningCredentials = tokenSigningCredentials,
+            Subject = subject,
+            Expires = expires,
+            SigningCredentials = signingCredentials,
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var token = tokenHandler.CreateToken(descriptor);
         var tokenString = tokenHandler.WriteToken(token);
 
         return new JwtData

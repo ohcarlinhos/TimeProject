@@ -8,7 +8,7 @@ using Shared.General;
 
 namespace App.Modules.Auth.UseCases;
 
-public class LoginUseCase(ITokenService tokenService, IGetUserByEmailUseCase getUserByEmailUseCase) : ILoginUseCase
+public class LoginUseCase(IJwtService jwtService, IGetUserByEmailUseCase getUserByEmailUseCase) : ILoginUseCase
 {
     public Task<Result<JwtData>> Handle(LoginDto dto)
     {
@@ -39,6 +39,6 @@ public class LoginUseCase(ITokenService tokenService, IGetUserByEmailUseCase get
             return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
         }
 
-        return result.SetData(tokenService.GenerateBearerJwt(user));
+        return result.SetData(jwtService.Generate(user));
     }
 }
