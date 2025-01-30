@@ -10,6 +10,12 @@ public class UserChallengeMiddleware(IUserChallenge userChallenge) : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+        {
+            await next(context);
+            return;
+        }
+
         var controllerAction = context.GetEndpoint()?.Metadata.GetMetadata<ControllerActionDescriptor>();
 
         if (controllerAction?.MethodInfo
