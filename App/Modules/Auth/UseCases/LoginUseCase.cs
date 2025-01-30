@@ -29,16 +29,18 @@ public class LoginUseCase(IJwtService jwtService, IGetUserByEmailUseCase getUser
 
         var user = findUserResult.Data!;
 
+        if (string.IsNullOrEmpty(user.Password))
+        {
+            return result.SetError(AuthMessageErrors.PasswordLoginDisabled);
+        }
+
         if (onlyAdmin && user.UserRole != UserRole.Admin)
         {
             return result.SetError(GeneralMessageErrors.Forbidden);
         }
-
-        if (BCrypt.Net.BCrypt.Verify(dto.Password, user.Password) == false)
-        {
-            return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
-        }
-
-        return result.SetData(jwtService.Generate(user));
+        
+        return BCrypt.Net.BCrypt.Verify(dto.Password, user.Password)
+            ? result.SetData(jwtService.Generate(user))
+            : result.SetError(AuthMessageErrors.WrongEmailOrPassword);
     }
 }
