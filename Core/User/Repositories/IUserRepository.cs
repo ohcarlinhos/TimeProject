@@ -1,7 +1,7 @@
 ﻿using Entities;
 using Shared.General.Pagination;
 
-namespace Core.User
+namespace Core.User.Repositories
 {
     public interface IUserRepository
     {

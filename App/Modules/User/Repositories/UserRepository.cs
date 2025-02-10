@@ -1,10 +1,11 @@
-﻿using Core.User;
-using App.Database;
+﻿using App.Database;
+using Core.User;
+using Core.User.Repositories;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Shared.General.Pagination;
 
-namespace App.Modules.User
+namespace App.Modules.User.Repositories
 {
     public class UserRepository(ProjectContext dbContext) : IUserRepository
     {

@@ -1,9 +1,10 @@
 ﻿using Core.User;
 using Core.User.UseCases;
 using Core.User.Utils;
-using App.Modules.User;
+using App.Modules.User.Repositories;
 using App.Modules.User.UseCases;
 using App.Modules.User.Utils;
+using Core.User.Repositories;
 
 namespace App.Infrastructure.Modules;
 
@@ -12,6 +13,7 @@ public static class UserBuilderConfig
     public static void Apply(WebApplicationBuilder builder)
     {
         builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped <IUserPasswordRepository, UserPasswordRepository>();
         
         builder.Services.AddScoped<IUserMapDataUtil, UserMapDataUtil>();
         builder.Services.AddScoped<IUpdateUserOptions, UpdateUserOptions>();

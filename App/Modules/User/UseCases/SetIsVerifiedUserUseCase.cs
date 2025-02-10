@@ -1,6 +1,7 @@
 ﻿using Core.User;
 using Core.User.UseCases;
 using App.Infrastructure.Errors;
+using Core.User.Repositories;
 using Shared.General;
 
 namespace App.Modules.User.UseCases;

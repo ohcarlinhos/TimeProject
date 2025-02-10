@@ -13,6 +13,7 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     public DbSet<TimeRecordMetaEntity> TimeRecordMetas { get; set; }
     public DbSet<TimerSessionEntity> TimerSessions { get; set; }
     public DbSet<ConfirmCodeEntity> ConfirmCodes { get; set; }
+    public DbSet<UserPasswordEntity> UserPasswords { get; set; }
     
     protected override void OnModelCreating(ModelBuilder mb)
     {
@@ -23,5 +24,6 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
         mb.ApplyConfiguration(new TimeRecordMetaEntityConfiguration());
         mb.ApplyConfiguration(new TimerSessionEntityConfiguration());
         mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
+        mb.ApplyConfiguration(new UserPasswordEntityConfiguration());
     }
 }
