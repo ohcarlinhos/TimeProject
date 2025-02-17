@@ -31,4 +31,9 @@ public class CustomController : ControllerBase
     {
         return UserRole.Admin.ToString() == UserClaims.Role(User);
     }
+    
+    protected bool HasAuthorization(int id)
+    {
+        return UserClaims.Id(User) == id || IsAdmin();
+    }
 }

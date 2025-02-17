@@ -100,9 +100,4 @@ public class UserController(
     {
         return HandleResponse(await verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
     }
-
-    private bool HasAuthorization(int id)
-    {
-        return UserClaims.Id(User) == id || IsAdmin();
-    }
 }
