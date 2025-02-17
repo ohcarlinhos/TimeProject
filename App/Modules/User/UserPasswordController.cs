@@ -20,14 +20,14 @@ public class UserPasswordController(
     ProjectContext db
 ) : CustomController
 {
-    [HttpPut("{id:int}")]
-    [Authorize(Policy = "IsActiveAndVerified")]
-    public async Task<ActionResult<bool>> Update([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
-    {
-        return HasAuthorization(id)
-            ? HandleResponse(await createOrUpdateUserPasswordUseCase.Handle(id, dto))
-            : Forbid();
-    }
+    // [HttpPut("{id:int}")]
+    // [Authorize(Policy = "IsActiveAndVerified")]
+    // public async Task<ActionResult<bool>> Update([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
+    // {
+    //     return HasAuthorization(id)
+    //         ? HandleResponse(await createOrUpdateUserPasswordUseCase.Handle(id, dto))
+    //         : Forbid();
+    // }
 
     [HttpPut("panel/{id:int}")]
     [Authorize(Policy = "IsAdmin")]

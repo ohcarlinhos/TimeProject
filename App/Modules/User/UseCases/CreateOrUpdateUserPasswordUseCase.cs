@@ -13,7 +13,7 @@ public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository repositor
     {
         return await _handle(userId, dto.Password);
     }
-    
+
     public async Task<Result<bool>> Handle(int userId, UpdatePasswordDto dto)
     {
         return await _handle(userId, dto.Password, dto.OldPassword);
@@ -31,12 +31,13 @@ public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository repositor
                 return result.SetError(UserMessageErrors.DifferentPassword);
             }
 
-            entity.Password = password;
+            entity.Password = BCrypt.Net.BCrypt.HashPassword(password);
             await repository.Update(entity);
         }
         else
         {
-            await repository.Create(new UserPasswordEntity { UserId = userId, Password = password });
+            await repository.Create(new UserPasswordEntity
+                { UserId = userId, Password = BCrypt.Net.BCrypt.HashPassword(password) });
         }
 
         result.Data = true;
