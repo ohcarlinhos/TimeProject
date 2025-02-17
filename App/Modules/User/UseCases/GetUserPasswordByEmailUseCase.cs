@@ -8,9 +8,9 @@ namespace App.Modules.User.UseCases;
 public class GetUserPasswordByEmailUseCase(IUserPasswordRepository repository, IUserRepository userRepository)
     : IGetUserPasswordByEmailUseCase
 {
-    public async Task<Result<GetUserPasswordByEmailUseCaseHandleResult>> Handle(string email)
+    public async Task<Result<GetUserPasswordByEmailResult>> Handle(string email)
     {
-        var result = new Result<GetUserPasswordByEmailUseCaseHandleResult>();
+        var result = new Result<GetUserPasswordByEmailResult>();
 
         var user = await userRepository.FindByEmail(email);
         if (user == null)
@@ -21,7 +21,7 @@ public class GetUserPasswordByEmailUseCase(IUserPasswordRepository repository, I
         var userPassword = await repository.FindByUserId(user.Id);
         return userPassword == null
             ? result.SetError(UserMessageErrors.PasswordNotAllowed)
-            : result.SetData(new GetUserPasswordByEmailUseCaseHandleResult
+            : result.SetData(new GetUserPasswordByEmailResult
                 { UserPassword = userPassword, User = user });
     }
 }
