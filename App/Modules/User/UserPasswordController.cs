@@ -20,11 +20,11 @@ public class UserPasswordController(
     ProjectContext db
 ) : CustomController
 {
-    [HttpPut("{id:int}"), IsAdminOrTheUser]
-    public async Task<ActionResult<bool>> Update([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
-    {
-        return HandleResponse(await createOrUpdateUserPasswordUseCase.Handle(id, dto));
-    }
+    // [HttpPut("{id:int}"), IsAdminOrTheUser]
+    // public async Task<ActionResult<bool>> Update([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
+    // {
+    //     return HandleResponse(await createOrUpdateUserPasswordUseCase.Handle(id, dto));
+    // }
 
     [HttpPut("panel/{id:int}")]
     [Authorize(Policy = "IsAdmin")]
