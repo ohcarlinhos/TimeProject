@@ -6,8 +6,8 @@ namespace Core.User.UseCases;
 
 public class CreateUserResult
 {
-    public UserMap User { get; set; }
-    public JwtData Jwt { get; set; }
+    public UserMap User { get; set; } = null!;
+    public JwtData Jwt { get; set; } = null!;
 }
 
 public interface ICreateUserUseCase
