@@ -2,13 +2,13 @@
 using App.Infrastructure.Errors;
 using App.Infrastructure.Interfaces;
 using Core.Auth.UseCases;
-using Entities;
 using Shared.Auth;
 using Shared.General;
 
 namespace App.Modules.Auth.UseCases;
 
-public class LoginUseCase(IJwtService jwtService, IGetUserByEmailUseCase getUserByEmailUseCase) : ILoginUseCase
+public class LoginUseCase(IJwtService jwtService, IGetUserPasswordByEmailUseCase getUserPasswordByEmailUseCase)
+    : ILoginUseCase
 {
     public Task<Result<JwtData>> Handle(LoginDto dto)
     {
@@ -24,23 +24,16 @@ public class LoginUseCase(IJwtService jwtService, IGetUserByEmailUseCase getUser
     {
         var result = new Result<JwtData>();
 
-        var findUserResult = await getUserByEmailUseCase.Handle(dto.Email);
-        if (findUserResult.HasError) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
-
-        var user = findUserResult.Data!;
-
-        if (string.IsNullOrEmpty(user.Password))
+        var findUserPasswordResult = await getUserPasswordByEmailUseCase.Handle(dto.Email);
+        if (findUserPasswordResult.HasError)
         {
-            return result.SetError(AuthMessageErrors.PasswordLoginDisabled);
+            return result.SetError(findUserPasswordResult.Message);
         }
 
-        if (onlyAdmin && user.UserRole != UserRole.Admin)
-        {
-            return result.SetError(GeneralMessageErrors.Forbidden);
-        }
-        
-        return BCrypt.Net.BCrypt.Verify(dto.Password, user.Password)
-            ? result.SetData(jwtService.Generate(user))
+        var data = findUserPasswordResult.Data!;
+
+        return BCrypt.Net.BCrypt.Verify(dto.Password, data.UserPassword.Password)
+            ? result.SetData(jwtService.Generate(data.User))
             : result.SetError(AuthMessageErrors.WrongEmailOrPassword);
     }
 }

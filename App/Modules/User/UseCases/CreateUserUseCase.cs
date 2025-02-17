@@ -12,8 +12,7 @@ using Shared.User;
 namespace App.Modules.User.UseCases;
 
 public class CreateUserUseCase(
-    ProjectContext db,
-    IUserRepository repo,
+    IUserRepository repository,
     IUserMapDataUtil mapper,
     IHookHandler hookHandler,
     IJwtService jwtService,
@@ -23,7 +22,7 @@ public class CreateUserUseCase(
     public async Task<Result<CreateUserResult>> Handle(CreateUserDto dto)
     {
         var result = new Result<CreateUserResult>();
-        var emailAvailable = await repo.EmailIsAvailable(dto.Email);
+        var emailAvailable = await repository.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false)
         {
@@ -32,7 +31,7 @@ public class CreateUserUseCase(
             return result;
         }
 
-        var entity = await repo
+        var entity = await repository
             .Create(new UserEntity()
             {
                 Name = dto.Name,

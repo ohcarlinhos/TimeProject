@@ -21,10 +21,11 @@ public static class UserBuilderConfig
         builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         builder.Services.AddScoped<IUpdateUserRoleUseCase, UpdateUserRoleUseCase>();
-        builder.Services.AddScoped<IUpdateUserPasswordByEmailUseCase, UpdateUserPasswordByEmailUseCase>();
+        builder.Services.AddScoped<ICreateOrUpdateUserPasswordByEmailUseCase, CreateOrUpdateUserPasswordByEmailUseCase>();
         builder.Services.AddScoped<IDisableUserUseCase, DisableUserUseCase>();
         builder.Services.AddScoped<IGetUserUseCase, GetUserUseCase>();
         builder.Services.AddScoped<IGetUserByEmailUseCase, GetUserByEmailUseCase>();
+        builder.Services.AddScoped<IGetUserPasswordByEmailUseCase, GetUserPasswordByEmailUseCase>();
         builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
         builder.Services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();
         builder.Services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();
