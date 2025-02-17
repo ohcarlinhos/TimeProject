@@ -23,7 +23,7 @@ public class JwtService(JwtSettings jwtSettings) : IJwtService
             new Claim("isVerified", userEntity.IsVerified.ToString())
         ]);
 
-        var expires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt);
+        var expires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt).ToUniversalTime();
 
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
@@ -44,7 +44,6 @@ public class JwtService(JwtSettings jwtSettings) : IJwtService
         return new JwtData
         {
             Token = tokenString,
-            Now = DateTime.Now.ToUniversalTime(),
             ValidFrom = token.ValidFrom,
             ValidTo = token.ValidTo,
         };
