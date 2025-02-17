@@ -38,8 +38,7 @@ public class CreateUserUseCase(
                 Email = dto.Email,
             });
 
-        await createUserPasswordUseCase.Handle(entity.Id,
-            new CreatePasswordDto { Password = BCrypt.Net.BCrypt.HashPassword(dto.Password) });
+        await createUserPasswordUseCase.Handle(entity.Id, new CreatePasswordDto { Password = dto.Password });
 
         result.Data = new CreateUserResult
         {

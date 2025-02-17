@@ -37,7 +37,10 @@ public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository repositor
         else
         {
             await repository.Create(new UserPasswordEntity
-                { UserId = userId, Password = BCrypt.Net.BCrypt.HashPassword(password) });
+            {
+                UserId = userId,
+                Password = BCrypt.Net.BCrypt.HashPassword(password)
+            });
         }
 
         result.Data = true;
