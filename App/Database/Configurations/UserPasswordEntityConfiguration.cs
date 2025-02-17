@@ -12,7 +12,7 @@ public class UserPasswordEntityConfiguration : IEntityTypeConfiguration<UserPass
         builder.HasKey(e => e.UserId);
         
         builder.Property(e => e.UserId).IsRequired();
-        builder.Property(e => e.Password).HasMaxLength(48);
+        builder.Property(e => e.Password).HasMaxLength(72).IsRequired();
 
         builder.HasOne<UserEntity>().WithOne().HasForeignKey<UserPasswordEntity>(e =>e.UserId);
     }
