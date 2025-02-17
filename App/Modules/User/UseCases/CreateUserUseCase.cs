@@ -16,7 +16,8 @@ public class CreateUserUseCase(
     IUserRepository repo,
     IUserMapDataUtil mapper,
     IHookHandler hookHandler,
-    IJwtService jwtService
+    IJwtService jwtService,
+    ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase
 {
     public async Task<Result<CreateUserResult>> Handle(CreateUserDto dto)
@@ -36,9 +37,10 @@ public class CreateUserUseCase(
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
             });
-        await db.SaveChangesAsync();
+
+        await createUserPasswordUseCase.Handle(entity.Id,
+            new CreatePasswordDto { Password = BCrypt.Net.BCrypt.HashPassword(dto.Password) });
 
         result.Data = new CreateUserResult
         {

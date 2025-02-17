@@ -21,7 +21,6 @@ public class UserController(
     IDeleteUserUseCase deleteUserUseCase,
     IGetPaginatedUserUseCase getPaginatedUserUseCase,
     ISendRecoveryEmailUseCase sendRecoveryEmailUseCase,
-    IRecoveryPasswordUseCase recoveryPasswordUseCase,
     ISendRegisterEmailUseCase sendRegisterEmailUseCase,
     IVerifyUserUseCase verifyUserUseCase
 ) : CustomController
@@ -33,7 +32,7 @@ public class UserController(
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }
 
-    [HttpPost, UserChallenge()]
+    [HttpPost, UserChallenge]
     public async Task<ActionResult<CreateUserResult>> Create([FromBody] CreateUserDto dto)
     {
         var result = await createUserUseCase.Handle(dto);
@@ -46,18 +45,6 @@ public class UserController(
     public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
         return HasAuthorization(id) ? HandleResponse(await updateUserUseCase.Handle(id, dto)) : Forbid();
-    }
-
-    [HttpPut("password/{id:int}")]
-    [Authorize(Policy = "IsAdmin")]
-    public async Task<ActionResult<UserMap>> UpdatePassword([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
-    {
-        return HandleResponse(await updateUserUseCase.Handle(
-            id,
-            new UpdateUserDto { Password = dto.Password },
-            new UpdateUserOptions { SkipOldPasswordCompare = true })
-        );
-
     }
 
     [HttpPut("role/{id:int}")]
@@ -98,12 +85,6 @@ public class UserController(
     public async Task<ActionResult<bool>> Recovery([FromBody] RecoveryDto dto)
     {
         return HandleResponse(await sendRecoveryEmailUseCase.Handle(dto.Email));
-    }
-
-    [HttpPost, Route("recovery/password")]
-    public async Task<ActionResult<bool>> RecoveryPassword([FromBody] RecoveryPasswordDto dto)
-    {
-        return HandleResponse(await recoveryPasswordUseCase.Handle(dto));
     }
 
     [HttpPost, Route("verify")]
