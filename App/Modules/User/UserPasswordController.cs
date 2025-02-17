@@ -44,22 +44,22 @@ public class UserPasswordController(
         return HandleResponse(await recoveryPasswordUseCase.Handle(dto));
     }
 
-    [HttpPost, Route("copy/to/new/table")]
-    [Authorize(Policy = "IsAdmin")]
-    public async Task<ActionResult<bool>> CopyToNewTable()
-    {
-        var now = DateTime.Now.ToUniversalTime();
-        
-        var users = await db.Users
-            .Select(e => new UserPasswordEntity { UserId = e.Id, Password = e.Password!, CreatedAt = now, UpdatedAt = now})
-            .ToListAsync();
-
-        var migratedPasswords = await db.UserPasswords.Select(e => e.UserId).ToListAsync();
-
-        users.RemoveAll(e => migratedPasswords.Contains(e.UserId));
-
-        await db.UserPasswords.AddRangeAsync(users);
-        await db.SaveChangesAsync();
-        return Ok();
-    }
+    // [HttpPost, Route("copy/to/new/table")]
+    // [Authorize(Policy = "IsAdmin")]
+    // public async Task<ActionResult<bool>> CopyToNewTable()
+    // {
+    //     var now = DateTime.Now.ToUniversalTime();
+    //     
+    //     var users = await db.Users
+    //         .Select(e => new UserPasswordEntity { UserId = e.Id, Password = e.Password!, CreatedAt = now, UpdatedAt = now})
+    //         .ToListAsync();
+    //
+    //     var migratedPasswords = await db.UserPasswords.Select(e => e.UserId).ToListAsync();
+    //
+    //     users.RemoveAll(e => migratedPasswords.Contains(e.UserId));
+    //
+    //     await db.UserPasswords.AddRangeAsync(users);
+    //     await db.SaveChangesAsync();
+    //     return Ok();
+    // }
 }

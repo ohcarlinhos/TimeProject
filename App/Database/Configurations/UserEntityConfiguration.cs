@@ -15,7 +15,6 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.Name).HasMaxLength(120).IsRequired();
         builder.Property(e => e.Email).HasMaxLength(64).IsRequired();
-        builder.Property(e => e.Password).HasMaxLength(72);
         builder.Property(e => e.UserRole).IsRequired();
         builder.Property(e => e.IsActive).IsRequired();
         builder.Property(e => e.IsVerified).IsRequired();
