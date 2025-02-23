@@ -4,7 +4,7 @@ namespace App.Modules.Auth.Utils;
 
 public static class RecoveryEmailFactory
 {
-    public static EmailPayload Create(string email, string url, string dateLimit)
+    public static EmailPayload Create(string email, string url, DateTime dateLimit)
     {
         return new EmailPayload
         {
@@ -40,7 +40,8 @@ public static class RecoveryEmailFactory
                                  </table>
                                  <p>
                             """
-                            + $"Expiração do código: {dateLimit}" +
+                            + $"Expiração do código: {TimeZoneInfo.ConvertTimeFromUtc(dateLimit, TimeZoneInfo.Local):dd/MM/yyyy HH:mm:ss} <br />" +
+                            $"UTC: {dateLimit}" +
                             """
                                  </p>
                                </td>

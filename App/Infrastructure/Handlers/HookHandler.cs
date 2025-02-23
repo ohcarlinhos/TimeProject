@@ -16,7 +16,9 @@ public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings
             _ => null
         };
 
-        message += $"\n\n{DateTime.Now.ToUniversalTime():dd/MM/yyyy HH:mm:ss}";
+        var now = DateTime.Now.ToUniversalTime();
+        message += $"\n\n{TimeZoneInfo.ConvertTimeFromUtc(now, TimeZoneInfo.Local):dd/MM/yyyy HH:mm:ss}";
+        message += $"\nUTC: {now}";
         
         if (hostEnvironment.IsDevelopment())
         {

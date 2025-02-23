@@ -4,7 +4,7 @@ namespace App.Modules.Auth.Utils;
 
 public static class RegisterEmailFactory
 {
-    public static EmailPayload Create(string email, string url, string dateLimit)
+    public static EmailPayload Create(string email, string url, DateTime dateLimit)
     {
         return new EmailPayload
         {
@@ -41,7 +41,8 @@ public static class RegisterEmailFactory
                                  </table>
                                  <p>
                             """
-                            + $"Válido até: {dateLimit}" +
+                            + $"Válido até: {TimeZoneInfo.ConvertTimeFromUtc(dateLimit, TimeZoneInfo.Local):dd/MM/yyyy HH:mm:ss} <br />" +
+                            $"UTC: {dateLimit}" +
                             """
                                  </p>
                                </td>
