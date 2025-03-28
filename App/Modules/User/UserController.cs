@@ -41,7 +41,7 @@ public class UserController(
     }
 
     [HttpPut("{id:int}")]
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsActive")]
     public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
         return HasAuthorization(id) ? HandleResponse(await updateUserUseCase.Handle(id, dto)) : Forbid();
@@ -54,7 +54,7 @@ public class UserController(
         return HandleResponse(await updateUserRoleUseCase.Handle(id, dto));
     }
 
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsActive")]
     [HttpPost("disable/{id:int}")]
     public async Task<ActionResult<bool>> Disable([FromRoute] int id, [FromBody] DisableUserDto dto)
     {
@@ -62,14 +62,14 @@ public class UserController(
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsActive")]
     public async Task<ActionResult<bool>> Delete([FromRoute] int id)
     {
         return HasAuthorization(id) ? HandleResponse(await deleteUserUseCase.Handle(id)) : Forbid();
     }
 
     [HttpGet, Route("{id:int}")]
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsActive")]
     public async Task<ActionResult<UserMap>> Get(int id)
     {
         return HasAuthorization(id) ? HandleResponse(await getUserUseCase.Handle(id)) : Forbid();
