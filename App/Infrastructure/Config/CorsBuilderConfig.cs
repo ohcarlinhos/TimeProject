@@ -2,7 +2,7 @@
 
 public static class CorsBuilderConfig
 {
-    public static void Apply(WebApplicationBuilder builder, string customCors)
+    public static void AddCorsBuilderConfig(this WebApplicationBuilder builder, string customCors)
     {
         builder.Services.AddCors(options =>
         {

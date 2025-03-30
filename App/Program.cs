@@ -1,39 +1,21 @@
 using System.Text.Json.Serialization;
 using App.Infrastructure.Config;
 using App.Infrastructure.Middlewares;
-using App.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
 const string customCors = "_customCors";
-CorsBuilderConfig.Apply(builder, customCors);
+builder.AddCorsBuilderConfig(customCors);
 
-SettingsBuilderConfig.Apply(builder);
-JwtBuilderConfig.Apply(builder);
+// Injeção de todos os serviços.
+builder.AddServicesBuilderConfig();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 
-SwaggerBuilderConfig.Apply(builder);
-DatabaseBuilderConfig.Apply(builder);
-ServicesBuilderConfig.Apply(builder);
-
-TimePeriodBuilderConfig.Apply(builder);
-TimeRecordBuilderConfig.Apply(builder);
-TimerSessionBuilderConfig.Apply(builder);
-UserBuilderConfig.Apply(builder);
-CategoryBuilderConfig.Apply(builder);
-CodeBuilderConfig.Apply(builder);
-AuthBuilderConfig.Apply(builder);
-StatisticBuilderConfig.Apply(builder);
-FeedbackBuilderConfig.Apply(builder);
-
-IntegrationsBuilderConfig.Apply(builder);
-HandlersBuilderConfig.Apply(builder);
-MappingBuilderConfig.Apply(builder);
-
-builder.Services.AddSingleton<UserChallengeMiddleware>();
+builder.AddSwaggerBuilderConfig();
+builder.AddDatabaseBuilderConfig();
 
 var app = builder.Build();
 

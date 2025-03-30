@@ -5,7 +5,7 @@ namespace App.Infrastructure.Config;
 
 public static class DatabaseBuilderConfig
 {
-    public static void Apply(WebApplicationBuilder builder)
+    public static void AddDatabaseBuilderConfig(this WebApplicationBuilder builder)
     {
         builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjectContext>(
             options => options

@@ -4,7 +4,7 @@ namespace App.Infrastructure.Config;
 
 public static class SwaggerBuilderConfig
 {
-    public static void Apply(WebApplicationBuilder builder)
+    public static void AddSwaggerBuilderConfig(this WebApplicationBuilder builder)
     {
         builder.Services.AddSwaggerGen(options =>
         {
