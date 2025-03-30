@@ -23,7 +23,7 @@ public class DeleteTimerSessionUseCase(
         await tpRepo.DeleteByList(entity.TimePeriods!.ToList());
         var timeRecordId = entity.TimeRecordId;
 
-        var data = await repo.Delete(entity);
+        await repo.Delete(entity);
         await syncTrMetaUseCase.Handle(timeRecordId);
 
         return result.SetData(true);

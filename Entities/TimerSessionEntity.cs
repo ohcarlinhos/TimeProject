@@ -12,6 +12,6 @@ public class TimerSessionEntity
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public TimeRecordEntity TimeRecordEntity { get; set; } = null!;
+    public TimeRecordEntity TimeRecord { get; set; } = null!;
     public IEnumerable<TimePeriodEntity>? TimePeriods { get; set; }
 }

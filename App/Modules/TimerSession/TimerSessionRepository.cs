@@ -7,17 +7,17 @@ namespace App.Modules.TimerSession;
 
 public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
 {
-    public async Task<TimerSessionEntity> Create(TimerSessionEntity timerSessionEntity)
+    public async Task<TimerSessionEntity> Create(TimerSessionEntity entity)
     {
         var now = DateTime.Now.ToUniversalTime();
 
-        timerSessionEntity.CreatedAt = now;
-        timerSessionEntity.UpdatedAt = now;
+        entity.CreatedAt = now;
+        entity.UpdatedAt = now;
 
-        db.TimerSessions.Add(timerSessionEntity);
+        db.TimerSessions.Add(entity);
 
         await db.SaveChangesAsync();
-        return timerSessionEntity;
+        return entity;
     }
 
     public Task<TimerSessionEntity?> FindById(int id, int userId)
