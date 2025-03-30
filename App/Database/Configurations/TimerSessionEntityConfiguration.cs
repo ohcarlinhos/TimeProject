@@ -21,7 +21,7 @@ public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<TimerSes
 
         builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
         
-        builder.HasOne<TimeRecordEntity>(e => e.TimeRecordEntity)
+        builder.HasOne<TimeRecordEntity>(e => e.TimeRecord)
             .WithMany()
             .HasForeignKey(e => e.TimeRecordId);
         
