@@ -11,7 +11,7 @@ namespace App.Modules.TimePeriod;
 
 [ApiController]
 [Route("api/period")]
-[Authorize(Policy = "IsActiveAndVerified")]
+[Authorize(Policy = "IsActive")]
 public class TimePeriodController(
     IGetPaginatedTimePeriodUseCase getPaginatedTimePeriodUseCase,
     ICreateTimePeriodUseCase createTimePeriodUseCase,

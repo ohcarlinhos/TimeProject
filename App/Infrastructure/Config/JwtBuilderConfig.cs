@@ -10,7 +10,7 @@ public static class JwtBuilderConfig
     public static void Apply(WebApplicationBuilder builder)
     {
         var settings = builder.Configuration.GetRequiredSection("Jwt").Get<JwtSettings>();
-        
+
         builder.Services
             .AddAuthentication(authOptions =>
             {
@@ -33,17 +33,9 @@ public static class JwtBuilderConfig
         builder.Services.AddAuthorizationBuilder()
             .AddPolicy("IsAdmin", p =>
                 p.RequireClaim("isAdmin", "True"))
-            
             .AddPolicy("IsActive", p =>
                 p.RequireClaim("isActive", "True"))
-            
             .AddPolicy("IsVerified", p =>
-                p.RequireClaim("isVerified", "True"))
-            
-            .AddPolicy("IsActiveAndVerified", p =>
-                p.RequireAssertion(c => 
-                    c.User.HasClaim("isActive", "True") && 
-                    c.User.HasClaim("isVerified", "True"))
-                );
+                p.RequireClaim("isVerified", "True"));
     }
 }

@@ -21,7 +21,7 @@ public class UserPasswordController(
 ) : CustomController
 {
     [HttpPut("{id:int}")]
-    [Authorize(Policy = "IsActiveAndVerified")]
+    [Authorize(Policy = "IsActive")]
     public async Task<ActionResult<bool>> Update([FromRoute] int id, [FromBody] UpdatePasswordDto dto)
     {
         return HasAuthorization(id)

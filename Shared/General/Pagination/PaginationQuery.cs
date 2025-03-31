@@ -10,12 +10,12 @@ public class PaginationQuery
         set => _page = value <= 0 ? 1 : value;
     }
 
-    private int _perPage = 10;
+    private int _perPage = 12;
 
     public virtual int PerPage
     {
         get => _perPage;
-        set => _perPage = value <= 0 ? 1 : value > 30 ? 30 : value;
+        set => _perPage = value <= 0 ? 1 : value > 36 ? 36 : value;
     }
 
     public string? Search { get; set; } = string.Empty;

@@ -8,7 +8,7 @@ using Shared.Statistic;
 namespace App.Modules.Statistic;
 
 [ApiController, Route("api/statistic")]
-[Authorize(Policy = "IsActiveAndVerified")]
+[Authorize(Policy = "IsActive")]
 public class StatisticController(IGetDayStatisticUseCase getDayStatisticUseCase) : CustomController
 {
     [HttpGet, Route("day")]
