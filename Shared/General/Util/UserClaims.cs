@@ -5,31 +5,33 @@ namespace Shared.General.Util;
 
 public static class UserClaims
 {
-    public static int Id(ClaimsPrincipal userClaimsPrincipal)
+    public static int Id(ClaimsPrincipal p)
     {
-        return int.Parse(userClaimsPrincipal
-            .Claims.FirstOrDefault(claim => claim.Type == "id")?.Value ?? "-1");
+        return int.Parse(GetValue(p, "id") ?? "-1");
     }
 
-    public static string Name(ClaimsPrincipal userClaimsPrincipal)
+    public static string Name(ClaimsPrincipal p)
     {
-        return userClaimsPrincipal
-            .Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Name)?.Value ?? "";
+        return GetValue(p, ClaimTypes.Name) ?? "";
     }
 
-    public static string Email(ClaimsPrincipal userClaimsPrincipal)
+    public static string Email(ClaimsPrincipal p)
     {
-        return userClaimsPrincipal.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value ?? "";
+        return GetValue(p, ClaimTypes.Email) ?? "";
     }
 
-    public static bool IsVerified(ClaimsPrincipal userClaimsPrincipal)
+    public static bool IsVerified(ClaimsPrincipal p)
     {
-        return bool.Parse(userClaimsPrincipal.Claims.FirstOrDefault(claim => claim.Type == "isVerified")?.Value ?? "False");
+        return bool.Parse(GetValue(p, "isVerified") ?? "False");
     }
 
-    public static string Role(ClaimsPrincipal userClaimsPrincipal)
+    public static string Role(ClaimsPrincipal p)
     {
-        return userClaimsPrincipal
-            .Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Role)?.Value ?? UserRole.Normal.ToString();
+        return GetValue(p, ClaimTypes.Role) ?? UserRole.Normal.ToString();
+    }
+
+    private static string? GetValue(ClaimsPrincipal p, string type)
+    {
+        return p.Claims.FirstOrDefault(claim => claim.Type == type)?.Value ?? null;
     }
 }
