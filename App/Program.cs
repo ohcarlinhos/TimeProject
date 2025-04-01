@@ -9,6 +9,7 @@ builder.AddCorsBuilderConfig(customCors);
 
 // Injeção de todos os serviços.
 builder.AddServicesBuilderConfig();
+builder.AddCustomAuthorizationBuilderConfig();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
