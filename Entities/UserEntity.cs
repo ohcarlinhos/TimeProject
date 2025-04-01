@@ -16,7 +16,6 @@ public class UserEntity
     public int Utc { get; set; }
     
     public bool IsActive { get; set; } = true;
-    public bool IsVerified { get; set; }
     
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

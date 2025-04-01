@@ -20,7 +20,7 @@ public class JwtService(JwtSettings jwtSettings) : IJwtService
             new Claim(ClaimTypes.Role, userEntity.UserRole.ToString()),
             new Claim("isAdmin", userEntity.UserRole == UserRole.Admin? "True" : "False"),
             new Claim("isActive", userEntity.IsActive.ToString()),
-            new Claim("isVerified", userEntity.IsVerified.ToString())
+            // new Claim("isVerified", userEntity.IsVerified.ToString())
         ]);
 
         var expires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt).ToUniversalTime();

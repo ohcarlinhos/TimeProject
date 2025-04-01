@@ -21,8 +21,7 @@ public class UserController(
     IDeleteUserUseCase deleteUserUseCase,
     IGetPaginatedUserUseCase getPaginatedUserUseCase,
     ISendRecoveryEmailUseCase sendRecoveryEmailUseCase,
-    ISendRegisterEmailUseCase sendRegisterEmailUseCase,
-    IVerifyUserUseCase verifyUserUseCase
+    ISendRegisterEmailUseCase sendRegisterEmailUseCase
 ) : CustomController
 {
     [HttpGet]
@@ -94,10 +93,10 @@ public class UserController(
         return HandleResponse(await sendRegisterEmailUseCase.Handle(UserClaims.Email(User)));
     }
 
-    [HttpPost, Route("verify/{code}")]
-    [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<bool>> VerifyUser(string code)
-    {
-        return HandleResponse(await verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
-    }
+    // [HttpPost, Route("verify/{code}")]
+    // [Authorize(Policy = "IsActive")]
+    // public async Task<ActionResult<bool>> VerifyUser(string code)
+    // {
+    //     return HandleResponse(await verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
+    // }
 }

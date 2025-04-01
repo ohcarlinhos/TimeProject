@@ -115,7 +115,7 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<IGetUserPasswordByEmailUseCase, GetUserPasswordByEmailUseCase>();
         builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
         builder.Services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();
-        builder.Services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();
+        // builder.Services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();
 
         builder.Services.AddScoped<ICreateOrUpdateUserPasswordUseCase, CreateOrUpdateUserPasswordUseCase>();
 
@@ -127,7 +127,7 @@ public static class ServicesBuilderConfig
         builder.Services.AddScoped<ISendRecoveryEmailUseCase, SendRecoveryEmailUseCase>();
         builder.Services.AddScoped<IRecoveryPasswordUseCase, RecoveryPasswordUseCase>();
         builder.Services.AddScoped<ISendRegisterEmailUseCase, SendRegisterEmailUseCase>();
-        builder.Services.AddScoped<IVerifyUserUseCase, VerifyUserUseCase>();
+        // builder.Services.AddScoped<IVerifyUserUseCase, VerifyUserUseCase>();
 
         #endregion
 

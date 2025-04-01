@@ -39,7 +39,7 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : 
             }
 
             user.Email = dto.Email;
-            user.IsVerified = false;
+            // user.IsVerified = false;
         }
 
         if (!string.IsNullOrWhiteSpace(dto.Name) && user.Name != dto.Name)
