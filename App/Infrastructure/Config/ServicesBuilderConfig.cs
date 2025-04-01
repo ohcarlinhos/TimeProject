@@ -14,6 +14,8 @@ using App.Modules.Codes.UseCases;
 using App.Modules.Feedback.UseCases;
 using App.Modules.Statistic;
 using App.Modules.Statistic.UseCases;
+using App.Modules.TimeMinute;
+using App.Modules.TimeMinute.UseCases;
 using App.Modules.TimePeriod;
 using App.Modules.TimePeriod.UseCases;
 using App.Modules.TimePeriod.Utils;
@@ -34,6 +36,8 @@ using Core.Codes.UseCases;
 using Core.Feedback.UseCases;
 using Core.Statistic;
 using Core.Statistic.UseCases;
+using Core.TimeMinute;
+using Core.TimeMinute.UseCases;
 using Core.TimePeriod;
 using Core.TimePeriod.UseCases;
 using Core.TimePeriod.Utils;
@@ -213,6 +217,13 @@ public static class ServicesBuilderConfig
 
         builder.Services.AddScoped<ISendFeedbackUseCase, SendFeedbackUseCase>();
         builder.Services.AddScoped<ISendPublicFeedbackUseCase, SendPublicFeedbackUseCase>();
+
+        #endregion
+
+        #region TimeMinute
+
+        builder.Services.AddScoped<ITimeMinuteRepository, TimeMinuteRepository>();
+        builder.Services.AddScoped<ICreateTimeMinuteByListUseCase, CreateTimeMinuteByListUseCase>();
 
         #endregion
 
