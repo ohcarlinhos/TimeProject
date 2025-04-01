@@ -47,6 +47,11 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : 
             user.Name = dto.Name;
         }
 
+        if (dto.Utc.HasValue)
+        {
+            user.Utc = dto.Utc.Value;
+        }
+
         var entity = await repo.Update(user);
 
         result.Data = mapper.Handle(entity);

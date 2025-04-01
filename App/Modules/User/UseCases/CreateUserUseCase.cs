@@ -1,7 +1,5 @@
-﻿using Core.User;
-using Core.User.UseCases;
+﻿using Core.User.UseCases;
 using Core.User.Utils;
-using App.Database;
 using App.Infrastructure.Errors;
 using App.Infrastructure.Interfaces;
 using Core.User.Repositories;
@@ -26,19 +24,19 @@ public class CreateUserUseCase(
 
         if (emailAvailable == false)
         {
-            result.Message = UserMessageErrors.EmailAlreadyInUse;
-            result.HasError = true;
-            return result;
+            return result.SetError(UserMessageErrors.EmailAlreadyInUse);
         }
 
         var entity = await repository
-            .Create(new UserEntity()
+            .Create(new UserEntity
             {
                 Name = dto.Name,
                 Email = dto.Email,
+                Utc = dto.Utc
             });
 
-        await createUserPasswordUseCase.Handle(entity.Id, new CreatePasswordDto { Password = dto.Password });
+        await createUserPasswordUseCase
+            .Handle(entity.Id, new CreatePasswordDto { Password = dto.Password });
 
         result.Data = new CreateUserResult
         {
