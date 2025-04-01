@@ -1,12 +1,8 @@
-﻿using App.Database;
-using App.Infrastructure.Attributes;
-using Core.User.UseCases;
+﻿using Core.User.UseCases;
 using App.Infrastructure.Controllers;
 using App.Modules.User.Utils;
-using Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Shared.User;
 
 namespace App.Modules.User;
@@ -16,8 +12,7 @@ namespace App.Modules.User;
 public class UserPasswordController(
     IUpdateUserUseCase updateUserUseCase,
     ICreateOrUpdateUserPasswordUseCase createOrUpdateUserPasswordUseCase,
-    IRecoveryPasswordUseCase recoveryPasswordUseCase,
-    ProjectContext db
+    IRecoveryPasswordUseCase recoveryPasswordUseCase
 ) : CustomController
 {
     [HttpPut("{id:int}")]
