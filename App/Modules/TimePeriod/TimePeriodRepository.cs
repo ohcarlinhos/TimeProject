@@ -36,19 +36,19 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         return entity;
     }
 
-    public async Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entityList)
+    public async Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entities)
     {
         var now = DateTime.Now.ToUniversalTime();
 
-        foreach (var entity in entityList)
+        foreach (var entity in entities)
         {
             entity.CreatedAt = now;
             entity.UpdatedAt = now;
         }
 
-        dbContext.TimePeriods.AddRange(entityList);
+        dbContext.TimePeriods.AddRange(entities);
         await dbContext.SaveChangesAsync();
-        return entityList;
+        return entities;
     }
 
     public async Task<TimePeriodEntity> Update(TimePeriodEntity entity)
