@@ -1,7 +1,6 @@
 ﻿using App.Infrastructure.Attributes;
 using Core.User.UseCases;
 using App.Infrastructure.Controllers;
-using App.Modules.User.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.General.Pagination;
