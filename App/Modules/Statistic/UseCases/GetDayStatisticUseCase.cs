@@ -39,26 +39,35 @@ public class GetDayStatisticUseCase(IStatisticRepository repository, ITimePeriod
         var timerList = sessionList.Where(e => e.Type == "timer").ToList();
         var pomodoroList = sessionList.Where(e => e.Type == "pomodoro").ToList();
         var breakList = sessionList.Where(e => e.Type == "break").ToList();
+        var timeMinuteList = await repository.GetTimeMinutesByRange(userId, initDate, endDate, timeRecordId);
+
+        var allPeriodsTimeSpan = TimeFormat.TimeSpanFromTimePeriods(timePeriodList);
+        var isolatedPeriodsTimeSpan = TimeFormat.TimeSpanFromTimePeriods(isolatedPeriodList);
+        var timeMinutesTimeSpan = TimeFormat.TimeSpanFromTimeMinutes(timeMinuteList);
 
         return result.SetData(new DayStatistic
         {
             StartDay = initDate,
             EndDay = endDate,
 
-            TotalHours = TimeFormat.StringFromTimePeriods(timePeriodList),
+            TotalHours = TimeFormat.StringFromTimeSpan(allPeriodsTimeSpan.Add(timeMinutesTimeSpan)),
             TotalIsolatedPeriodHours = TimeFormat.StringFromTimePeriods(isolatedPeriodList),
             TotalTimerHours = TimeFormat.StringFromTimerSessions(timerList),
             TotalPomodoroHours = TimeFormat.StringFromTimerSessions(pomodoroList),
             TotalBreakHours = TimeFormat.StringFromTimerSessions(breakList),
+            TotalTimeMinutesHours = TimeFormat.StringFromTimeSpan(TimeFormat.TimeSpanFromTimeMinutes(timeMinuteList)),
+            TotalTimeManual = TimeFormat.StringFromTimeSpan(isolatedPeriodsTimeSpan.Add(timeMinutesTimeSpan)),
 
-            IsolatedPeriodCount = isolatedPeriodList.Count,
             TimerCount = timerList.Count,
             PomodoroCount = pomodoroList.Count,
             BreakCount = breakList.Count,
+            IsolatedPeriodCount = isolatedPeriodList.Count,
+            ManualCount = isolatedPeriodList.Count + timeMinuteList.Count,
 
             TimePeriodCount = timePeriodList.Count,
             InterruptionCount = timePeriodList.Count > 0 ? timePeriodList.Count - 1 : 0,
             SessionCount = sessionList.Count,
+            TimeMinuteCount = timeMinuteList.Count,
 
             CreatedTimeRecordCount = timeRecordId == null
                 ? await repository.TimeRecordCreatedCount(userId, initDate, endDate)

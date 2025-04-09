@@ -1,16 +1,17 @@
-using System.Security.Claims;
+using App.Infrastructure.Errors;
 using Core.TimeRecord.Repositories;
 using Core.TimeRecord.UseCases;
 using Core.TimeRecord.Utils;
+using Core.User.Repositories;
 using Shared.General;
 using Shared.General.Pagination;
-using Shared.General.Util;
 using Shared.TimePeriod;
 
 namespace App.Modules.TimeRecord.UseCases;
 
 public class GetTimeRecordHistoryUseCase(
-    ITimeRecordHistoryRepository repo,
+    ITimeRecordHistoryRepository repository,
+    IUserRepository userRepository,
     ITimeRecordMapDataUtil mapDataUtil) : IGetTimeRecordHistoryUseCase
 {
     public async Task<Result<Pagination<TimeRecordHistoryDayMap>>> Handle(
@@ -19,7 +20,15 @@ public class GetTimeRecordHistoryUseCase(
         PaginationQuery paginationQuery
     )
     {
-        var distinctDates = await repo.GetDistinctDates(timeRecordId, userId, -3);
+        var user = await userRepository.FindById(userId);
+
+        if (user == null)
+        {
+            return new Result<Pagination<TimeRecordHistoryDayMap>>().SetError(UserMessageErrors.NotFound);
+        }
+
+        // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
+        var distinctDates = await repository.GetDistinctDates(timeRecordId, userId, user.Utc);
 
         var dates = distinctDates
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
@@ -29,13 +38,15 @@ public class GetTimeRecordHistoryUseCase(
 
         foreach (var dateItem in dates)
         {
-            var initDate = dateItem.AddHours(3);
+            // initDate pega a data que já subtraimos a diferênça de utc e somamos novamente para fazer a busca correnta.
+            var initDate = dateItem.AddHours(user.Utc * -1); 
             var endDate = initDate.AddDays(1);
 
-            var tpList = await repo.GetTimePeriodsWithoutTimerSession(timeRecordId, userId, initDate, endDate);
-            var tsList = await repo.GetTimerSessions(timeRecordId, userId, initDate, endDate);
+            var tpList = await repository.GetTimePeriodsWithoutTimerSession(timeRecordId, userId, initDate, endDate);
+            var tsList = await repository.GetTimerSessions(timeRecordId, userId, initDate, endDate);
+            var tmList = await repository.GetTimeMinutes(timeRecordId, userId, initDate, endDate);
 
-            if (tpList.Count == 0 && tsList.Count == 0) continue;
+            if (tpList.Count == 0 && tsList.Count == 0 && tmList.Count == 0) continue;
 
             historyDays.Add(new TimeRecordHistoryDay
             {
@@ -43,6 +54,7 @@ public class GetTimeRecordHistoryUseCase(
                 InitDate = initDate,
                 EndDate = endDate,
                 TimePeriods = tpList,
+                TimeMinutes = tmList,
                 TimerSessions = tsList
             });
         }

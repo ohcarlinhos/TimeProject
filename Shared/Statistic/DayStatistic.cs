@@ -12,6 +12,8 @@ public class DayStatistic
     public string TotalTimerHours { get; set; } = "";
     public string TotalPomodoroHours { get; set; } = "";
     public string TotalBreakHours { get; set; } = "";
+    public string TotalTimeMinutesHours { get; set; } = "";
+    public string TotalTimeManual { get; set; } = "";
 
     public int TimerCount { get; set; }
     public int PomodoroCount { get; set; }
@@ -20,6 +22,8 @@ public class DayStatistic
     public int IsolatedPeriodCount { get; set; }
     public int SessionCount { get; set; }
     public int TimePeriodCount { get; set; }
+    public int TimeMinuteCount { get; set; }
+    public int ManualCount { get; set; }
     public int InterruptionCount { get; set; }
     
     public int CreatedTimeRecordCount { get; set; }

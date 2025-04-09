@@ -9,6 +9,9 @@ public interface ITimeRecordHistoryRepository
     Task<List<TimePeriodEntity>> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
         DateTime initDate, DateTime endDate);
 
+    Task<List<TimeMinuteEntity>> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
+        DateTime endDate);
+
     Task<List<TimerSessionEntity>> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate);
 }

@@ -7,7 +7,7 @@ public static class TimeFormat
 {
     public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<TimePeriodMap>? timePeriods)
     {
-        if (timePeriods == null) return new TimeSpan();
+        if (timePeriods == null) return TimeSpan.Zero;
 
         return TimeSpanFromTimePeriods(timePeriods
             .Select(p => new TimePeriodEntity
@@ -16,19 +16,25 @@ public static class TimeFormat
 
     public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<TimePeriodEntity>? timePeriods)
     {
-        var total = new TimeSpan();
-        if (timePeriods == null) return total;
+        if (timePeriods == null) return TimeSpan.Zero;
+        var total = TimeSpan.Zero;
 
         return timePeriods
             .Aggregate(total, (current, timePeriod) =>
                 current.Add(timePeriod.End.Subtract(timePeriod.Start)));
     }
 
+    public static TimeSpan TimeSpanFromTimeMinutes(IEnumerable<TimeMinuteEntity>? timeMinutes)
+    {
+        if (timeMinutes == null) return TimeSpan.Zero;
+        var total = TimeSpan.Zero;
+        return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Minutes, 0)));
+    }
+
     public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<TimerSessionMap>? timerSessions)
     {
-        var total = new TimeSpan();
-
-        if (timerSessions == null) return total;
+        if (timerSessions == null) return TimeSpan.Zero;
+        var total = TimeSpan.Zero;
 
         foreach (var ts in timerSessions)
         {
@@ -68,7 +74,8 @@ public static class TimeFormat
         if (timeSpan.Seconds > 0)
             formatted += $"{timeSpan.Seconds}s ";
 
-        return formatted.Trim();
+        var result = formatted.Trim();
+        return string.IsNullOrEmpty(result) ? "0s" : result;
     }
 
     public static string StringFromTimePeriods(IEnumerable<TimePeriodMap>? timePeriods)
@@ -83,16 +90,12 @@ public static class TimeFormat
 
     public static string StringFromTimePeriods(IEnumerable<TimePeriodEntity>? timePeriods)
     {
-        return timePeriods == null || timePeriods.ToList().Count == 0
-            ? "0s"
-            : StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods.ToList()));
+        return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods.ToList()));
     }
 
     public static string StringFromTimerSessions(IEnumerable<TimerSessionEntity>? timerSessions)
     {
-        return timerSessions == null || timerSessions.ToList().Count == 0
-            ? "0s"
-            : StringFromTimeSpan(TimeSpanFromTimerSessions(timerSessions));
+        return StringFromTimeSpan(TimeSpanFromTimerSessions(timerSessions));
     }
 
     public static double MinutesFromTimeSpan(TimeSpan timeSpan) => timeSpan.TotalMinutes;

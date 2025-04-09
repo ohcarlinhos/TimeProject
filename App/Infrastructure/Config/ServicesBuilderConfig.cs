@@ -224,6 +224,7 @@ public static class ServicesBuilderConfig
 
         builder.Services.AddScoped<ITimeMinuteRepository, TimeMinuteRepository>();
         builder.Services.AddScoped<ICreateTimeMinuteByListUseCase, CreateTimeMinuteByListUseCase>();
+        builder.Services.AddScoped<IDeleteTimeMinuteUseCase, DeleteTimeMinuteUseCase>();
 
         #endregion
 

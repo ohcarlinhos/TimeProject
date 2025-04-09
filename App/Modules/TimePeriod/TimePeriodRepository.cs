@@ -6,11 +6,11 @@ using Shared.General.Pagination;
 
 namespace App.Modules.TimePeriod;
 
-public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodRepository
+public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
 {
     public List<TimePeriodEntity> Index(int timeRecordId, int userId, PaginationQuery paginationQuery)
     {
-        return dbContext.TimePeriods
+        return db.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
             .OrderByDescending(tp => tp.Start)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
@@ -20,7 +20,7 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
 
     public async Task<int> GetTotalItems(int timeRecordId, PaginationQuery paginationQuery, int userId)
     {
-        return await dbContext.TimePeriods
+        return await db.TimePeriods
             .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
             .CountAsync();
     }
@@ -31,8 +31,8 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
         entity.CreatedAt = now;
         entity.UpdatedAt = now;
 
-        dbContext.TimePeriods.Add(entity);
-        await dbContext.SaveChangesAsync();
+        db.TimePeriods.Add(entity);
+        await db.SaveChangesAsync();
         return entity;
     }
 
@@ -46,8 +46,10 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
             entity.UpdatedAt = now;
         }
 
-        dbContext.TimePeriods.AddRange(entities);
-        await dbContext.SaveChangesAsync();
+        db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+        db.TimePeriods.AddRange(entities);
+        await db.SaveChangesAsync();
         return entities;
     }
 
@@ -55,28 +57,28 @@ public class TimePeriodRepository(ProjectContext dbContext) : ITimePeriodReposit
     {
         entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        dbContext.TimePeriods.Update(entity);
-        await dbContext.SaveChangesAsync();
+        db.TimePeriods.Update(entity);
+        await db.SaveChangesAsync();
         return entity;
     }
 
     public async Task<bool> Delete(TimePeriodEntity entity)
     {
-        dbContext.TimePeriods.Remove(entity);
-        await dbContext.SaveChangesAsync();
+        db.TimePeriods.Remove(entity);
+        await db.SaveChangesAsync();
         return true;
     }
 
     public async Task<bool> DeleteByList(List<TimePeriodEntity> entityList)
     {
-        dbContext.TimePeriods.RemoveRange(entityList);
-        await dbContext.SaveChangesAsync();
+        db.TimePeriods.RemoveRange(entityList);
+        await db.SaveChangesAsync();
         return true;
     }
 
     public async Task<TimePeriodEntity?> FindById(int id, int userId)
     {
-        return await dbContext.TimePeriods
+        return await db.TimePeriods
             .FirstOrDefaultAsync(timePeriod => timePeriod.Id == id && timePeriod.UserId == userId);
     }
 }

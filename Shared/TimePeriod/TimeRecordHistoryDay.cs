@@ -8,5 +8,6 @@ public class TimeRecordHistoryDay
     public DateTime InitDate { get; set; }
     public DateTime EndDate { get; set; }
     public IEnumerable<TimePeriodEntity>? TimePeriods { get; set; }
+    public IEnumerable<TimeMinuteEntity>? TimeMinutes { get; set; }
     public IEnumerable<TimerSessionEntity>? TimerSessions { get; set; }
 }

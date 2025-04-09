@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Shared.TimeMinute;
 
 public class CreateTimeMinuteListDto
 {
-    public DateTime Date { get; set; }
-    public List<int> Minutes { get; set; } = [];
+    [Required] public DateTime Date { get; set; }
+    [Required] public List<int> Minutes { get; set; } = [];
 }

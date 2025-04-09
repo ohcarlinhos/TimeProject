@@ -59,6 +59,25 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
             .ToListAsync();
     }
 
+    public Task<List<TimeMinuteEntity>> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
+        int? timeRecord = null)
+    {
+        var query = db.TimeMinutes.AsQueryable();
+
+        if (timeRecord != null)
+        {
+            query = query.Where(i => i.TimeRecordId == timeRecord);
+        }
+
+        return query.Where(tm =>
+                tm.UserId == userId
+                && tm.Date >= initDate
+                && tm.Date < endDate
+            )
+            .OrderBy(tm => tm.Date)
+            .ToListAsync();
+    }
+
     public Task<int> TimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate)
     {
         return db.TimeRecords
