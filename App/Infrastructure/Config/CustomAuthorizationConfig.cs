@@ -5,9 +5,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace App.Infrastructure.Config;
 
-public static class CustomAuthorizationBuilderConfig
+public static class CustomAuthorizationConfig
 {
-    public static void AddCustomAuthorizationBuilderConfig(this WebApplicationBuilder builder)
+    public static void AddCustomAuthorizationConfig(this WebApplicationBuilder builder)
     {
         var settings = builder.Configuration.GetRequiredSection("Jwt").Get<JwtSettings>();
 

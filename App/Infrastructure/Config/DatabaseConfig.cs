@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Infrastructure.Config;
 
-public static class DatabaseBuilderConfig
+public static class DatabaseConfig
 {
-    public static void AddDatabaseBuilderConfig(this WebApplicationBuilder builder)
+    public static void AddDatabaseConfig(this WebApplicationBuilder builder)
     {
         builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjectContext>(
             options => options

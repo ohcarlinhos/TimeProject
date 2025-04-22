@@ -46,7 +46,7 @@ public static class TimeFormat
 
     public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<TimerSessionEntity>? timerSessions)
     {
-        var total = new TimeSpan();
+        var total = TimeSpan.Zero;
 
         if (timerSessions == null) return total;
 
@@ -90,7 +90,7 @@ public static class TimeFormat
 
     public static string StringFromTimePeriods(IEnumerable<TimePeriodEntity>? timePeriods)
     {
-        return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods.ToList()));
+        return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods?.ToList()));
     }
 
     public static string StringFromTimerSessions(IEnumerable<TimerSessionEntity>? timerSessions)

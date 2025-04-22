@@ -53,9 +53,9 @@ using Microsoft.Extensions.Options;
 
 namespace App.Infrastructure.Config;
 
-public static class ServicesBuilderConfig
+public static class ServicesConfig
 {
-    public static void AddServicesBuilderConfig(this WebApplicationBuilder builder)
+    public static void AddServicesConfig(this WebApplicationBuilder builder)
     {
         #region Settings
 

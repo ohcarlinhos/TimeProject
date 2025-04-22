@@ -4,19 +4,19 @@ using App.Infrastructure.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-const string customCors = "_customCors";
-builder.AddCorsBuilderConfig(customCors);
+const string customCorsName = "_customCors";
+builder.AddCorsConfig(customCorsName);
 
 // Injeção de todos os serviços.
-builder.AddServicesBuilderConfig();
-builder.AddCustomAuthorizationBuilderConfig();
+builder.AddServicesConfig();
+builder.AddCustomAuthorizationConfig();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 
-builder.AddSwaggerBuilderConfig();
-builder.AddDatabaseBuilderConfig();
+builder.AddSwaggerConfig();
+builder.AddDatabaseConfig();
 
 var app = builder.Build();
 
@@ -31,7 +31,7 @@ else
     app.UseExceptionHandler("/error");
 }
 
-app.UseCors(customCors);
+app.UseCors(customCorsName);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 

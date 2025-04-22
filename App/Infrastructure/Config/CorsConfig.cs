@@ -1,8 +1,8 @@
 ﻿namespace App.Infrastructure.Config;
 
-public static class CorsBuilderConfig
+public static class CorsConfig
 {
-    public static void AddCorsBuilderConfig(this WebApplicationBuilder builder, string customCors)
+    public static void AddCorsConfig(this WebApplicationBuilder builder, string customCors)
     {
         builder.Services.AddCors(options =>
         {
