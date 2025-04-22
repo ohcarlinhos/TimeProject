@@ -8,7 +8,7 @@ using Shared.General.Util;
 
 namespace App.Modules.Feedback;
 
-[ApiController, Route("api/feedback")]
+[ApiController, Route("api/feedbacks")]
 public class FeedbackController(
     ISendFeedbackUseCase sendFeedbackUseCase,
     ISendPublicFeedbackUseCase sendPublicFeedbackUseCase) : CustomController

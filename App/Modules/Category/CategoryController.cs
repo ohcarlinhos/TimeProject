@@ -9,7 +9,7 @@ using Shared.General.Util;
 
 namespace App.Modules.Category;
 
-[ApiController, Route("api/category")]
+[ApiController, Route("api/categories")]
 [Authorize(Policy = "IsActive")]
 public class CategoryController(
     IGetAllCategoryUseCase getAllCategoryUseCase,

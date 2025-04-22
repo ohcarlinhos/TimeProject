@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.Codes;
 using Shared.General.Util;
 
-namespace App.Modules.Codes.Controllers;
+namespace App.Modules.Codes;
 
 [ApiController]
-[Route("api/confirm-code")]
+[Route("api/codes")]
 public class ConfirmCodeController(IGetRegisterCodeInfoUseCase getRegisterCodeInfoUseCase) : CustomController
 {
     [HttpGet, Route("register/info"), Authorize]

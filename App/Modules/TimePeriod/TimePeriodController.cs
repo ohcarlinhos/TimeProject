@@ -10,7 +10,7 @@ using Shared.TimePeriod;
 namespace App.Modules.TimePeriod;
 
 [ApiController]
-[Route("api/period")]
+[Route("api/periods")]
 [Authorize(Policy = "IsActive")]
 public class TimePeriodController(
     IGetPaginatedTimePeriodUseCase getPaginatedTimePeriodUseCase,

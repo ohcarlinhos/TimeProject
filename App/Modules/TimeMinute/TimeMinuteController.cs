@@ -7,7 +7,7 @@ using Shared.TimeMinute;
 
 namespace App.Modules.TimeMinute;
 
-[ApiController, Route("api/minute")]
+[ApiController, Route("api/minutes")]
 public class TimeMinuteController(
     ICreateTimeMinuteByListUseCase createTimeMinuteByListUseCase,
     IDeleteTimeMinuteUseCase deleteTimeMinuteUseCase) : CustomController

@@ -7,7 +7,7 @@ using Shared.Statistic;
 
 namespace App.Modules.Statistic;
 
-[ApiController, Route("api/statistic")]
+[ApiController, Route("api/statistics")]
 [Authorize(Policy = "IsActive")]
 public class StatisticController(IGetDayStatisticUseCase getDayStatisticUseCase) : CustomController
 {

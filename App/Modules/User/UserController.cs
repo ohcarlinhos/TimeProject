@@ -10,7 +10,7 @@ using Shared.User;
 namespace App.Modules.User;
 
 [ApiController]
-[Route("api/user")]
+[Route("api/users")]
 public class UserController(
     ICreateUserUseCase createUserUseCase,
     IUpdateUserUseCase updateUserUseCase,

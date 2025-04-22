@@ -7,7 +7,7 @@ using Shared.Auth;
 namespace App.Modules.Auth;
 
 [ApiController]
-[Route("api/auth")]
+[Route("api/auths")]
 public class AuthController(ILoginUseCase loginUseCase) : CustomController
 {
     [HttpPost, Route("login"), UserChallenge]

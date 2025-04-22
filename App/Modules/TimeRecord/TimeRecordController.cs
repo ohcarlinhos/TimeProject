@@ -11,7 +11,7 @@ using Shared.TimeRecord;
 namespace App.Modules.TimeRecord;
 
 [ApiController]
-[Route("api/record"), Authorize(Policy = "IsActive")]
+[Route("api/records"), Authorize(Policy = "IsActive")]
 public class TimeRecordController(
     IGetPaginatedTimeRecordUseCase getPaginatedTimeRecordUseCase,
     IGetTimeRecordHistoryUseCase getTimeRecordHistoryUseCase,
