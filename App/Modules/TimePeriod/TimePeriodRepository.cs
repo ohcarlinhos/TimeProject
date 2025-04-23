@@ -45,9 +45,7 @@ public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
             entity.CreatedAt = now;
             entity.UpdatedAt = now;
         }
-
-        db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-
+        
         db.TimePeriods.AddRange(entities);
         await db.SaveChangesAsync();
         return entities;

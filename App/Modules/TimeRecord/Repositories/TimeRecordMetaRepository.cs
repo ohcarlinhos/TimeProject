@@ -14,13 +14,18 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         return timeRecord == null ? null : await CreateOrUpdate(timeRecord, saveChanges);
     }
 
-    public async Task<IEnumerable<TimeRecordMetaEntity>> CreateOrUpdateList(IEnumerable<TimeRecordEntity> timeRecordEntities, bool saveChanges = false)
+    public async Task<IEnumerable<TimeRecordMetaEntity>> CreateOrUpdateList(
+        IEnumerable<TimeRecordEntity> timeRecordEntities, bool saveChanges = false)
     {
         var list = new List<TimeRecordMetaEntity>();
 
         foreach (var timeRecordEntity in timeRecordEntities)
         {
-            list.Add(await CreateOrUpdate(timeRecordEntity, saveChanges));
+            var meta = await CreateOrUpdate(timeRecordEntity, saveChanges);
+            if (meta != null)
+            {
+                list.Add(meta);
+            }
         }
 
         await dbContext.SaveChangesAsync();
@@ -28,28 +33,53 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         return list;
     }
 
-    public async Task<TimeRecordMetaEntity> CreateOrUpdate(TimeRecordEntity timeRecord, bool saveChanges = true)
+    public async Task<TimeRecordMetaEntity?> CreateOrUpdate(TimeRecordEntity timeRecord, bool saveChanges = true)
     {
-        var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord!.Id);
+        var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord.Id);
+
         var timePeriods = await dbContext.TimePeriods
-            .Where(e => e.TimeRecordId == timeRecord!.Id)
-            .OrderBy(p => p.Start)
+            .Where(e => e.TimeRecordId == timeRecord.Id)
+            .OrderBy(e => e.Start)
+            .ToListAsync();
+
+        var timeMinutes = await dbContext.TimeMinutes
+            .Where(e => e.TimeRecordId == timeRecord.Id)
+            .OrderBy(e => e.Date)
             .ToListAsync();
 
         var now = DateTime.Now.ToUniversalTime();
-        var timeSpan = TimeFormat.TimeSpanFromTimePeriods(timePeriods);
+        var timeSpan = TimeFormat.TimeSpanFromTimePeriods(timePeriods)
+            .Add(TimeFormat.TimeSpanFromTimeMinutes(timeMinutes));
         var formattedTime = TimeFormat.StringFromTimeSpan(timeSpan);
+
+        var firstList = new List<DateTime>();
+        var lastList = new List<DateTime>();
+
+        if (timePeriods.Count > 0)
+        {
+            firstList.Add(timePeriods[0].Start);
+            lastList.Add(timePeriods[^1].Start);
+        }
+
+        if (timeMinutes.Count > 0)
+        {
+            firstList.Add(timeMinutes[0].Date);
+            lastList.Add(timeMinutes[^1].Date);
+        }
+
+        DateTime? first = firstList.Count > 0 ? firstList[0] : null;
+        DateTime? last = lastList.Count > 0 ? lastList[0] : null;
 
         if (entity == null)
         {
             entity = new TimeRecordMetaEntity
             {
-                TimeRecordId = timeRecord!.Id,
-                TimePeriodCount = timePeriods.Count,
+                TimeRecordId = timeRecord.Id,
+                TimePeriodCount = timePeriods.Count + timeMinutes.Count,
                 FormattedTime = formattedTime,
                 TimeOnSeconds = timeSpan.TotalSeconds,
-                FirstTimePeriodDate = timePeriods.Count > 0 ? timePeriods[0].Start : null,
-                LastTimePeriodDate = timePeriods.Count > 0 ? timePeriods[^1].Start : null,
+                FirstTimePeriodDate = first,
+                LastTimePeriodDate = last,
                 CreatedAt = now,
                 UpdatedAt = now
             };
@@ -58,11 +88,11 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         }
         else
         {
-            entity.TimePeriodCount = timePeriods.Count;
+            entity.TimePeriodCount = timePeriods.Count + timeMinutes.Count;
             entity.TimeOnSeconds = timeSpan.TotalSeconds;
             entity.FormattedTime = formattedTime;
-            entity.FirstTimePeriodDate = timePeriods.Count > 0 ? timePeriods[0].Start : null;
-            entity.LastTimePeriodDate = timePeriods.Count > 0 ? timePeriods[^1].Start : null;
+            entity.FirstTimePeriodDate = first;
+            entity.LastTimePeriodDate = last;
             entity.UpdatedAt = now;
         }
 

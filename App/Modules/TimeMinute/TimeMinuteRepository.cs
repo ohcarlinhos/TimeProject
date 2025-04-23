@@ -30,7 +30,6 @@ public class TimeMinuteRepository(ProjectContext db) : ITimeMinuteRepository
             entity.UpdatedAt = now;
         }
 
-        db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         db.TimeMinutes.AddRange(entities);
 
         await db.SaveChangesAsync();
