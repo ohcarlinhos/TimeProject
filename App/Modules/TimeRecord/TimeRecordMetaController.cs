@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace App.Modules.TimeRecord;
 
 [ApiController]
-[Route("api/record/meta"), Authorize(Policy = "IsAdmin")]
+[Route("api/records/meta"), Authorize(Policy = "IsAdmin")]
 public class TimeRecordMetaController(
     ISyncAllTrMetaUseCase syncAllTrMetaUseCase
 ) : CustomController
