@@ -5,6 +5,7 @@ using App.Infrastructure.Mapping;
 using App.Infrastructure.Middlewares;
 using App.Infrastructure.Services;
 using App.Infrastructure.Settings;
+using App.Modules.Auth.Repositories;
 using App.Modules.Auth.UseCases;
 using App.Modules.Category;
 using App.Modules.Category.UseCases;
@@ -27,6 +28,7 @@ using App.Modules.TimerSession.UseCases;
 using App.Modules.User.Repositories;
 using App.Modules.User.UseCases;
 using App.Modules.User.Utils;
+using Core.Auth.Repositories;
 using Core.Auth.UseCases;
 using Core.Category;
 using Core.Category.UseCases;
@@ -110,6 +112,7 @@ public static class ServicesConfig
 
         builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        builder.Services.AddScoped<ICreateUserByGhUserUseCase, CreateUserByGhUserUseCase>();
         builder.Services.AddScoped<IUpdateUserRoleUseCase, UpdateUserRoleUseCase>();
         builder.Services
             .AddScoped<ICreateOrUpdateUserPasswordByEmailUseCase, CreateOrUpdateUserPasswordByEmailUseCase>();
@@ -117,6 +120,7 @@ public static class ServicesConfig
         builder.Services.AddScoped<IGetUserUseCase, GetUserUseCase>();
         builder.Services.AddScoped<IGetUserByEmailUseCase, GetUserByEmailUseCase>();
         builder.Services.AddScoped<IGetUserPasswordByEmailUseCase, GetUserPasswordByEmailUseCase>();
+        builder.Services.AddScoped<IGetUserByOAtuhProviderIdUseCase, GetUserByOAtuhProviderIdUseCase>();
         builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
         builder.Services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();
         // builder.Services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();
@@ -132,6 +136,13 @@ public static class ServicesConfig
         builder.Services.AddScoped<IRecoveryPasswordUseCase, RecoveryPasswordUseCase>();
         builder.Services.AddScoped<ISendRegisterEmailUseCase, SendRegisterEmailUseCase>();
         // builder.Services.AddScoped<IVerifyUserUseCase, VerifyUserUseCase>();
+
+        #endregion
+
+        #region OAuth
+
+        builder.Services.AddScoped<IOAuthRepository, OAuthRepository>();
+        builder.Services.AddScoped<ILoginGithubUseCase, LoginGithubUseCase>();
 
         #endregion
 

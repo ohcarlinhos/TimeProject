@@ -7,4 +7,5 @@ public static class UserMessageErrors
     public const string DifferentPassword = "bad_request:different_password";
     public const string RoleNotFound = "bad_request:role_not_found";
     public const string PasswordNotAllowed = "bad_request:password_not_allowed";
+    public const string GithubWithoutProviderId = "server_error:you_need_a_provider_id";
 }

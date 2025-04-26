@@ -10,13 +10,13 @@ public class UserPasswordEntityConfiguration : IEntityTypeConfiguration<UserPass
     {
         builder.ToTable("user_passwords");
         builder.HasKey(e => e.UserId);
-        
+
         builder.Property(e => e.UserId).IsRequired();
         builder.Property(e => e.Password).HasMaxLength(72).IsRequired();
-        
+
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<UserEntity>().WithOne().HasForeignKey<UserPasswordEntity>(e =>e.UserId);
+        builder.HasOne<UserEntity>().WithOne().HasForeignKey<UserPasswordEntity>(e => e.UserId);
     }
 }

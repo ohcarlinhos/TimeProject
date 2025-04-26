@@ -15,6 +15,7 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     public DbSet<ConfirmCodeEntity> ConfirmCodes { get; set; }
     public DbSet<UserPasswordEntity> UserPasswords { get; set; }
     public DbSet<TimeMinuteEntity> TimeMinutes { get; set; }
+    public DbSet<OAuthEntity> OAuths { get; set; }
     
     protected override void OnModelCreating(ModelBuilder mb)
     {
@@ -27,5 +28,6 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
         mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
         mb.ApplyConfiguration(new UserPasswordEntityConfiguration());
         mb.ApplyConfiguration(new TimeMinuteEntityConfiguration());
+        mb.ApplyConfiguration(new OAuthEntityConfiguration());
     }
 }
