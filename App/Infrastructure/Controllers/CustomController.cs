@@ -31,9 +31,24 @@ public class CustomController : ControllerBase
     {
         return UserRole.Admin.ToString() == UserClaims.Role(User);
     }
-    
+
     protected bool HasAuthorization(int id)
     {
         return UserClaims.Id(User) == id || IsAdmin();
+    }
+
+    public string? GetClientIpAddress(HttpContext context)
+    {
+        var headers = new[] { "X-Forwarded-For", "X-Real-IP", "CF-Connecting-IP" };
+
+        foreach (var header in headers)
+        {
+            if (context.Request.Headers.TryGetValue(header, out var headerValue))
+            {
+                return headerValue.FirstOrDefault()?.Split(',').FirstOrDefault()?.Trim();
+            }
+        }
+
+        return context.Connection.RemoteIpAddress?.ToString();
     }
 }

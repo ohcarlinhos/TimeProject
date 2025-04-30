@@ -2,6 +2,8 @@
 using App.Infrastructure.Errors;
 using App.Infrastructure.Interfaces;
 using Core.Auth.UseCases;
+using Core.Logs.UserCases;
+using Entities;
 using Octokit;
 using Shared.Auth;
 using Shared.General;
@@ -12,11 +14,12 @@ namespace App.Modules.Auth.UseCases;
 public class LoginGithubUseCase(
     IJwtService jwtService,
     IGetUserByOAtuhProviderIdUseCase getUserByOAtuhProviderIdUseCase,
-    ICreateUserByGhUserUseCase createUserByGhUserUseCase
+    ICreateUserByGhUserUseCase createUserByGhUserUseCase,
+    ICreateUserAccessLog createUserAccessLog
 )
     : ILoginGithubUseCase
 {
-    public async Task<Result<JwtData>> Handle(LoginGithubDto dto)
+    public async Task<Result<JwtData>> Handle(LoginGithubDto dto, UserAccessLogEntity ac)
     {
         var result = new Result<JwtData>();
 
@@ -33,6 +36,8 @@ public class LoginGithubUseCase(
 
             if (getUserByPIdResult is { Data: not null })
             {
+                ac.UserId = getUserByPIdResult.Data.Id;
+                await createUserAccessLog.Handle(ac);
                 return result.SetData(jwtService.Generate(getUserByPIdResult.Data));
             }
 
@@ -45,9 +50,18 @@ public class LoginGithubUseCase(
                     emailList.Select(e => new EmailGh(e.Email, e.Primary, e.Verified))
                 );
 
-            return createUserResult is { Data: not null }
-                ? result.SetData(jwtService.Generate(createUserResult.Data))
-                : result.SetError(createUserResult.Message);
+
+            var createIsSuccess = createUserResult is { Data: not null };
+
+            if (!createIsSuccess)
+            {
+                result.SetError(createUserResult.Message);
+            }
+
+            ac.UserId = createUserResult.Data!.Id;
+            await createUserAccessLog.Handle(ac);
+
+            return result.SetData(jwtService.Generate(createUserResult.Data));
         }
         catch
         {

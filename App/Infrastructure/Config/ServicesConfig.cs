@@ -13,6 +13,8 @@ using App.Modules.Category.Utils;
 using App.Modules.Codes;
 using App.Modules.Codes.UseCases;
 using App.Modules.Feedback.UseCases;
+using App.Modules.Logs.Repositories;
+using App.Modules.Logs.UserCases;
 using App.Modules.Statistic;
 using App.Modules.Statistic.UseCases;
 using App.Modules.TimeMinute;
@@ -36,6 +38,8 @@ using Core.Category.Utils;
 using Core.Codes;
 using Core.Codes.UseCases;
 using Core.Feedback.UseCases;
+using Core.Logs.Repositories;
+using Core.Logs.UserCases;
 using Core.Statistic;
 using Core.Statistic.UseCases;
 using Core.TimeMinute;
@@ -239,6 +243,13 @@ public static class ServicesConfig
 
         #endregion
 
+        #region Logs
+
+        builder.Services.AddScoped<IUserAccessLogRepository, UserAccessLogRepository>();
+        builder.Services.AddScoped<ICreateUserAccessLog, CreateUserAccessLog>();
+
+        #endregion
+        
         #region Middlewares
 
         builder.Services.AddSingleton<UserChallengeMiddleware>();

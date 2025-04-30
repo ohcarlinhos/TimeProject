@@ -1,5 +1,4 @@
-﻿using Core.User;
-using Core.User.UseCases;
+﻿using Core.User.UseCases;
 using App.Infrastructure.Errors;
 using Core.Auth.Repositories;
 using Core.User.Repositories;
