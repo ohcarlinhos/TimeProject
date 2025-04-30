@@ -67,8 +67,8 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
             lastList.Add(timeMinutes[^1].Date);
         }
 
-        DateTime? first = firstList.Count > 0 ? firstList[0] : null;
-        DateTime? last = lastList.Count > 0 ? lastList[0] : null;
+        DateTime? first = firstList.Count > 0 ? firstList.OrderBy(i => i).First() : null;
+        DateTime? last = lastList.Count > 0 ? lastList.OrderByDescending(i => i).First() : null;
 
         if (entity == null)
         {
