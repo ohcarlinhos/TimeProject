@@ -75,11 +75,11 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
             entity = new TimeRecordMetaEntity
             {
                 TimeRecordId = timeRecord.Id,
-                TimePeriodCount = timePeriods.Count + timeMinutes.Count,
+                TimeCount = timePeriods.Count + timeMinutes.Count,
                 FormattedTime = formattedTime,
                 TimeOnSeconds = timeSpan.TotalSeconds,
-                FirstTimePeriodDate = first,
-                LastTimePeriodDate = last,
+                FirstTimeDate = first,
+                LastTimeDate = last,
                 CreatedAt = now,
                 UpdatedAt = now
             };
@@ -88,11 +88,11 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         }
         else
         {
-            entity.TimePeriodCount = timePeriods.Count + timeMinutes.Count;
+            entity.TimeCount = timePeriods.Count + timeMinutes.Count;
             entity.TimeOnSeconds = timeSpan.TotalSeconds;
             entity.FormattedTime = formattedTime;
-            entity.FirstTimePeriodDate = first;
-            entity.LastTimePeriodDate = last;
+            entity.FirstTimeDate = first;
+            entity.LastTimeDate = last;
             entity.UpdatedAt = now;
         }
 

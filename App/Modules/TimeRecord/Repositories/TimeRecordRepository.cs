@@ -49,8 +49,8 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
                 : query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.TimeOnSeconds),
 
             _ => paginationQuery.Sort == "asc" // Padrão: Último Progresso
-                ? query.OrderBy(tr => tr.Meta == null).ThenBy(p => p.Meta!.LastTimePeriodDate)
-                : query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimePeriodDate)
+                ? query.OrderBy(tr => tr.Meta == null).ThenBy(p => p.Meta!.LastTimeDate)
+                : query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimeDate)
         };
 
 
@@ -76,7 +76,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         if (search.IsNullOrEmpty() == false)
             query = SearchWhereConditional(query, search);
 
-        query = query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimePeriodDate);
+        query = query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimeDate);
 
         return query
             .Select(e => new SearchTimeRecordItem(e.Id, e.Code, e.Title))
