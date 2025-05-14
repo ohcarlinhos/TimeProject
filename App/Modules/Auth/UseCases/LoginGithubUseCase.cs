@@ -2,7 +2,7 @@
 using App.Infrastructure.Errors;
 using App.Infrastructure.Interfaces;
 using Core.Auth.UseCases;
-using Core.Logs.UserCases;
+using Core.Loogs.UserCases;
 using Entities;
 using Octokit;
 using Shared.Auth;

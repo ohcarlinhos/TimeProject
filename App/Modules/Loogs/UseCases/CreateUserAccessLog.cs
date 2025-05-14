@@ -1,5 +1,5 @@
-﻿using Core.Logs.UserCases;
-using Core.Loogs.Repositories;
+﻿using Core.Loogs.Repositories;
+using Core.Loogs.UserCases;
 using Entities;
 using Shared.General;
 

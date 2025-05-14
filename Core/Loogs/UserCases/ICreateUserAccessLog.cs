@@ -1,7 +1,7 @@
 ﻿using Entities;
 using Shared.General;
 
-namespace Core.Logs.UserCases;
+namespace Core.Loogs.UserCases;
 
 public interface ICreateUserAccessLog
 {

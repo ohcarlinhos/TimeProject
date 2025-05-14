@@ -11,5 +11,10 @@ public class UserMap
     public bool IsVerified { get; set; }
     public UserRole UserRole { get; set; }
     public string UserRoleLabel => UserRole.ToString();
+    public bool IsAdmin => UserRole == UserRole.Admin;
     public DateTime CreatedAt { get; set; }
+
+    public DateTime? LastUserAccess { get; set; }
+    public string? LastUserAccessType { get; set; }
+    public string? LasUserAccessP
 }
