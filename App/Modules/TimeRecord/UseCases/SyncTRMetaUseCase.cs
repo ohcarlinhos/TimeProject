@@ -10,7 +10,7 @@ public class SyncTrMetaUseCase(ITimeRecordMetaRepository repo) : ISyncTrMetaUseC
     {
         return repo.CreateOrUpdate(id, saveChanges);
     }
-    public Task<TimeRecordMetaEntity> Handle(TimeRecordEntity timeRecordEntity, bool saveChanges = false)
+    public Task<TimeRecordMetaEntity?> Handle(TimeRecordEntity timeRecordEntity, bool saveChanges = false)
     {
         return repo.CreateOrUpdate(timeRecordEntity, saveChanges);
     }

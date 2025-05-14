@@ -27,7 +27,7 @@ public class GetPaginatedUserUseCase(
 
             user.LastUserAccess = lastUserAccess.AccessAt;
             user.LastUserAccessType = lastUserAccess.AccessType.ToString();
-            user.LasUserAccessProvider = lastUserAccess.Provider;
+            user.LastUserAccessProvider = lastUserAccess.Provider;
         }
 
         return new Result<Pagination<UserMap>>

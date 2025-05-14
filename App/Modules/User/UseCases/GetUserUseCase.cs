@@ -30,7 +30,7 @@ public class GetUserUseCase(
 
         userMapped.LastUserAccess = lastAccess.AccessAt;
         userMapped.LastUserAccessType = lastAccess.AccessType.ToString();
-        userMapped.LasUserAccessProvider = lastAccess.Provider;
+        userMapped.LastUserAccessProvider = lastAccess.Provider;
 
         return result.SetData(userMapped);
     }

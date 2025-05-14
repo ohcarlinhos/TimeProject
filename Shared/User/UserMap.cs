@@ -16,5 +16,5 @@ public class UserMap
 
     public DateTime? LastUserAccess { get; set; }
     public string? LastUserAccessType { get; set; }
-    public string? LasUserAccessProvider { get; set; }
+    public string? LastUserAccessProvider { get; set; }
 }
