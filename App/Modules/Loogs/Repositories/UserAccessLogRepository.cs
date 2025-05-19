@@ -33,9 +33,9 @@ namespace App.Modules.Loogs.Repositories
 
             foreach (var id in idList)
             {
-                var maxAccessAt = dbContext.UserAccessLogs
-                    .Where(e => e.UserId == id)
-                    .Max(e => e.AccessAt);
+                DateTime? maxAccessAt = dbContext.UserAccessLogs.Any(e => e.UserId == id)
+                    ? dbContext.UserAccessLogs.Where(e => e.UserId == id).Max(e => e.AccessAt)
+                    : null;
 
                 var lastAccessByUserId = dbContext.UserAccessLogs
                     .FirstOrDefault(e => e.UserId == id && e.AccessAt == maxAccessAt);
