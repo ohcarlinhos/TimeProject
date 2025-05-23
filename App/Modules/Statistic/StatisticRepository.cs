@@ -78,14 +78,14 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
             .ToListAsync();
     }
 
-    public Task<int> TimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate)
+    public Task<int> GetTimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate)
     {
         return db.TimeRecords
             .Where(e => e.CreatedAt >= initDate && e.CreatedAt < endDate && userId == e.UserId)
             .CountAsync();
     }
 
-    public Task<int> TimeRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate)
+    public Task<int> GetTimeRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate)
     {
         return db
             .TimeRecords

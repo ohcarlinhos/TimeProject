@@ -12,6 +12,7 @@ public interface ITimeRecordRepository
     Task<TimeRecordEntity> Update(TimeRecordEntity entity);
     Task<bool> Delete(TimeRecordEntity entity);
     Task<TimeRecordEntity?> FindById(int id, int userId);
+    Task<List<TimeRecordEntity>> FindByIdList(List<int> idList, int userId);
     Task<TimeRecordEntity?> FindByCode(string code, int userId);
     Task<TimeRecordEntity?> Details(string code, int userId);
 }

@@ -119,10 +119,18 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         return true;
     }
 
-    public async Task<TimeRecordEntity?> FindById(int id, int userId)
+    public Task<TimeRecordEntity?> FindById(int id, int userId)
     {
-        return await dbContext.TimeRecords
+        return dbContext.TimeRecords
             .FirstOrDefaultAsync(timeRecord => timeRecord.Id == id && timeRecord.UserId == userId);
+    }
+
+    public Task<List<TimeRecordEntity>> FindByIdList(List<int> idList, int userId)
+    {
+        return dbContext.TimeRecords.Where(e => idList.Contains(e.Id))
+            .Include(e => e.Category)
+            .Include(e => e.Meta)
+            .ToListAsync();
     }
 
     public async Task<TimeRecordEntity?> FindByCode(string code, int userId)
