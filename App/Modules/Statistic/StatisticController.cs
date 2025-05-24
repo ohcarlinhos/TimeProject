@@ -14,12 +14,12 @@ public class StatisticController(IGetDayStatisticUseCase getDayStatisticUseCase)
     [HttpGet, Route("day")]
     public async Task<ActionResult<DayStatistic>> Day([FromQuery] DateTime? date)
     {
-        return HandleResponse(await getDayStatisticUseCase.Handle(UserClaims.Id(User), date, 3));
+        return HandleResponse(await getDayStatisticUseCase.Handle(UserClaims.Id(User), date));
     }
 
     [HttpGet, Route("{timeRecordId:int}/day")]
     public async Task<ActionResult<DayStatistic>> Day(int timeRecordId, [FromQuery] DateTime? date)
     {
-        return HandleResponse(await getDayStatisticUseCase.Handle(UserClaims.Id(User), date, 3, timeRecordId));
+        return HandleResponse(await getDayStatisticUseCase.Handle(UserClaims.Id(User), date, 0, timeRecordId));
     }
 }

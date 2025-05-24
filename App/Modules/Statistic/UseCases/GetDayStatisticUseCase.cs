@@ -26,7 +26,7 @@ public class GetDayStatisticUseCase(
     {
         var result = new Result<DayStatistic>();
 
-        var selectedDate = date?.Date ?? DateTime.Today.ToUniversalTime().Date;
+        var selectedDate = date ?? DateTime.Today.ToUniversalTime();
 
         var initDate = selectedDate.AddHours(hoursToAddOnInitDate);
         var endDate = initDate.AddDays(1);
@@ -47,6 +47,7 @@ public class GetDayStatisticUseCase(
         var timerList = sessionList.Where(e => e.Type == "timer").ToList();
         var pomodoroList = sessionList.Where(e => e.Type == "pomodoro").ToList();
         var breakList = sessionList.Where(e => e.Type == "break").ToList();
+
         var timeMinuteList = await statisticRepository.GetTimeMinutesByRange(userId, initDate, endDate, timeRecordId);
 
         var allPeriodsTimeSpan = TimeFormat.TimeSpanFromTimePeriods(timePeriodList);
@@ -56,7 +57,7 @@ public class GetDayStatisticUseCase(
         var timeRecordIdList = new List<int>();
         timeRecordIdList.AddRange(timePeriodList.Select(e => e.TimeRecordId));
         timeRecordIdList.AddRange(timeMinuteList.Select(e => e.TimeRecordId));
-        
+
         var timeRecords = await timeRecordRepository.FindByIdList(timeRecordIdList.Distinct().ToList(), userId);
         var trRangeProgressList = new List<TimeRecordRangeProgress>();
 
@@ -78,7 +79,8 @@ public class GetDayStatisticUseCase(
                 TimePeriods = trPeriods,
                 TimeMinutes = trMinutes,
                 TimeRecord = mapDataUtil.Handle(tr),
-                TotalHours = TimeFormat.StringFromTimeSpan(trPeriodsTimeSpan.Add(trMinutesTimeSpan))
+                TotalHours = TimeFormat.StringFromTimeSpan(trPeriodsTimeSpan.Add(trMinutesTimeSpan)),
+                TotalTimeSpan = trPeriodsTimeSpan.Add(trMinutesTimeSpan)
             });
         }
 
@@ -112,7 +114,7 @@ public class GetDayStatisticUseCase(
             UpdatedTimeRecordCount = timeRecordId == null
                 ? await statisticRepository.GetTimeRecordUpdatedCount(userId, initDate, endDate)
                 : 0,
-            TimeRecordRangeProgress = trRangeProgressList
+            TimeRecordRangeProgress = trRangeProgressList.OrderByDescending(i => i.TotalTimeSpan).ToList()
         });
     }
 }

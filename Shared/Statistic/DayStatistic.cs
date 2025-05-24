@@ -9,6 +9,7 @@ public class TimeRecordRangeProgress
     public string TotalHours { get; set; } = "";
     public List<TimePeriodEntity>? TimePeriods { get; set; }
     public List<TimeMinuteEntity>? TimeMinutes { get; set; }
+    public TimeSpan TotalTimeSpan { get; set; }
 }
 
 public class DayStatistic

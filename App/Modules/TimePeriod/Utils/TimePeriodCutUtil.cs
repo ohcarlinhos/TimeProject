@@ -7,7 +7,7 @@ public class TimePeriodCutUtil : ITimePeriodCutUtil
 {
     public TimePeriodEntity Handle(TimePeriodEntity entity, DateTime initDate, DateTime endDate)
     {
-        var timePeriod = new TimePeriodEntity { TimerSessionId = entity.TimerSessionId };
+        var timePeriod = new TimePeriodEntity { TimeRecordId = entity.TimeRecordId, TimerSessionId = entity.TimerSessionId };
 
         timePeriod.Start = entity.Start > initDate ? entity.Start : initDate;
         timePeriod.End = entity.End > endDate ? entity.End = endDate.AddMilliseconds(-1) : entity.End;
