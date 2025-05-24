@@ -118,6 +118,7 @@ public static class ServicesConfig
         builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
         builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         builder.Services.AddScoped<ICreateUserByGhUserUseCase, CreateUserByGhUserUseCase>();
+        builder.Services.AddScoped<ICreateUserByGoogleUserUseCase, CreateUserByGoogleUserUseCase>();
         builder.Services.AddScoped<IUpdateUserRoleUseCase, UpdateUserRoleUseCase>();
         builder.Services
             .AddScoped<ICreateOrUpdateUserPasswordByEmailUseCase, CreateOrUpdateUserPasswordByEmailUseCase>();
@@ -148,6 +149,7 @@ public static class ServicesConfig
 
         builder.Services.AddScoped<IOAuthRepository, OAuthRepository>();
         builder.Services.AddScoped<ILoginGithubUseCase, LoginGithubUseCase>();
+        builder.Services.AddScoped<ILoginGoogleUseCase, LoginGoogleUseCase>();
 
         #endregion
 

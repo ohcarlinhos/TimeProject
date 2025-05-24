@@ -7,36 +7,47 @@ using Shared.User;
 
 namespace App.Modules.User.UseCases;
 
-public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository repository) : ICreateOrUpdateUserPasswordUseCase
+public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository userPasswordRepository)
+    : ICreateOrUpdateUserPasswordUseCase
 {
-    public async Task<Result<bool>> Handle(int userId, CreatePasswordDto dto)
+    public Task<Result<bool>> Handle(int userId, CreatePasswordDto dto)
     {
-        return await _handle(userId, dto.Password);
+        return _handle(userId, dto.Password);
     }
 
-    public async Task<Result<bool>> Handle(int userId, UpdatePasswordDto dto)
+    public Task<Result<bool>> Handle(int userId, UpdatePasswordDto dto)
     {
-        return await _handle(userId, dto.Password, dto.OldPassword);
+        return _handle(userId, dto.Password, dto.OldPassword);
     }
 
-    private async Task<Result<bool>> _handle(int userId, string password, string oldPassword = "")
+    public Task<Result<bool>> Handle(int userId, UpdateByAdminPasswordDto dto)
+    {
+        return _handle(userId, dto.Password, "", true);
+    }
+
+    private async Task<Result<bool>> _handle(
+        int userId,
+        string password,
+        string oldPassword = "",
+        bool skipOldPasswordCompare = false
+    )
     {
         var result = new Result<bool>();
-        var entity = await repository.FindByUserId(userId);
+        var entity = await userPasswordRepository.FindByUserId(userId);
 
-        if (entity != null && !string.IsNullOrEmpty(oldPassword))
+        if (entity != null && (!string.IsNullOrEmpty(oldPassword) || skipOldPasswordCompare))
         {
-            if (BCrypt.Net.BCrypt.Verify(oldPassword, entity.Password) == false)
+            if (skipOldPasswordCompare == false && BCrypt.Net.BCrypt.Verify(oldPassword, entity.Password) == false)
             {
                 return result.SetError(UserMessageErrors.DifferentPassword);
             }
 
             entity.Password = BCrypt.Net.BCrypt.HashPassword(password);
-            await repository.Update(entity);
+            await userPasswordRepository.Update(entity);
         }
         else
         {
-            await repository.Create(new UserPasswordEntity
+            await userPasswordRepository.Create(new UserPasswordEntity
             {
                 UserId = userId,
                 Password = BCrypt.Net.BCrypt.HashPassword(password)

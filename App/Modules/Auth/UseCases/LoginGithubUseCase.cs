@@ -45,7 +45,7 @@ public class LoginGithubUseCase(
 
             var createUserResult = await createUserByGhUserUseCase
                 .Handle(
-                    new CreateUserGhDto
+                    new CreateUserOAtuhDto
                         { Name = userFromProvider.Name, UserProviderId = userFromProvider.Id.ToString() },
                     emailList.Select(e => new EmailGh(e.Email, e.Primary, e.Verified))
                 );

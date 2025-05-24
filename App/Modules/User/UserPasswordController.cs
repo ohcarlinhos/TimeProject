@@ -24,16 +24,14 @@ public class UserPasswordController(
             : Forbid();
     }
 
-    [HttpPut("panel/{id:int}")]
+    [HttpPut("admin/{id:int}")]
     [Authorize(Policy = "IsAdmin")]
-    public async Task<ActionResult<UserMap>> UpdateFromPanel([FromRoute] int id,
-        [FromBody] UpdatePasswordPanelDto panelDto)
+    public async Task<ActionResult<bool>> UpdateByAdmin(
+        [FromRoute] int id,
+        [FromBody] UpdateByAdminPasswordDto dto
+    )
     {
-        return HandleResponse(await updateUserUseCase.Handle(
-            id,
-            new UpdateUserDto { Password = panelDto.Password },
-            new UpdateUserOptions { SkipOldPasswordCompare = true })
-        );
+        return HandleResponse(await createOrUpdateUserPasswordUseCase.Handle(id, dto));
     }
 
     [HttpPost, Route("recovery")]

@@ -13,13 +13,13 @@ public class CreateUserByGhUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGhUserUseCase
 {
-    public async Task<Result<UserEntity>> Handle(CreateUserGhDto dto, IEnumerable<EmailGh> emails)
+    public async Task<Result<UserEntity>> Handle(CreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
     {
         var result = new Result<UserEntity>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId))
         {
-            return result.SetError(UserMessageErrors.GithubWithoutProviderId);
+            return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
         }
 
         var filtredEmails = emails.Where(e => e.Verified).ToList();

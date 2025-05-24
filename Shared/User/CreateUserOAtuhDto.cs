@@ -2,7 +2,7 @@
 
 namespace Shared.User;
 
-public class CreateUserGhDto
+public class CreateUserOAtuhDto
 {
     [MinLength(2), MaxLength(120)] public string Name { get; set; } = string.Empty;
     [Required] public string UserProviderId { get; set; } = string.Empty;

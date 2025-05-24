@@ -30,7 +30,7 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : 
             return result.SetError(UserMessageErrors.NotFound);
         }
 
-        if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email)
+        if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email && config?.UpdateFromAdmin == true)
         {
             var emailAvailable = await repo.EmailIsAvailable(dto.Email);
             if (emailAvailable == false)
@@ -39,7 +39,6 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : 
             }
 
             user.Email = dto.Email;
-            // user.IsVerified = false;
         }
 
         if (!string.IsNullOrWhiteSpace(dto.Name) && user.Name != dto.Name)

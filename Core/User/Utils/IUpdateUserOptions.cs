@@ -2,5 +2,5 @@
 
 public interface IUpdateUserOptions
 {
-    public bool SkipOldPasswordCompare { get; set; }
+    public bool UpdateFromAdmin { get; set; }
 }

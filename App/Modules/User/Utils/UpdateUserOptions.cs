@@ -4,5 +4,5 @@ namespace App.Modules.User.Utils;
 
 public class UpdateUserOptions : IUpdateUserOptions
 {
-    public bool SkipOldPasswordCompare { get; set; }
+    public bool UpdateFromAdmin { get; set; }
 }

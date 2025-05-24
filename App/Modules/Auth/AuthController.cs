@@ -9,7 +9,11 @@ namespace App.Modules.Auth;
 
 [ApiController]
 [Route("api/auth")]
-public class AuthController(ILoginUseCase loginUseCase, ILoginGithubUseCase loginGithubUseCase) : CustomController
+public class AuthController(
+    ILoginUseCase loginUseCase,
+    ILoginGithubUseCase loginGithubUseCase,
+    ILoginGoogleUseCase loginGoogleUseCase
+    ) : CustomController
 {
     [HttpPost, Route("login"), UserChallenge]
     public async Task<ActionResult<JwtData>> Login([FromBody] LoginDto dto)
@@ -31,6 +35,18 @@ public class AuthController(ILoginUseCase loginUseCase, ILoginGithubUseCase logi
             UserAgent = Request.Headers.UserAgent.ToString(),
             AccessType = AccessType.Provider,
             Provider = "github"
+        }));
+    }
+
+    [HttpPost, Route("login/google")]
+    public async Task<ActionResult<JwtData>> LoginGoogle([FromBody] LoginGoogleDto dto)
+    {
+        return HandleResponse(await loginGoogleUseCase.Handle(dto, new UserAccessLogEntity
+        {
+            IpAddress = GetClientIpAddress(HttpContext) ?? "",
+            UserAgent = Request.Headers.UserAgent.ToString(),
+            AccessType = AccessType.Provider,
+            Provider = "google"
         }));
     }
 }
