@@ -63,7 +63,7 @@ public class GetDayStatisticUseCase(
 
         foreach (var tr in timeRecords)
         {
-            var trPeriods = timePeriodListByRange
+            var trPeriods = timePeriodList
                 .Where(e => e.TimeRecordId == tr.Id)
                 .ToList();
 
