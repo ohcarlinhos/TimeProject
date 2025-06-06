@@ -18,8 +18,8 @@ public class TimeRecordHistoryDayMap
     private TimeSpan TimeSpanSum => TimeSpanTimePeriods.Add(TimeSpanTimerSessions).Add(TimeSpanTimeMinutes);
 
     public string FormattedTime => TimeFormat.StringFromTimeSpan(TimeSpanSum);
-    public double TimeOnMinutes => TimeFormat.MinutesFromTimeSpan(TimeSpanSum);
-    public double TimeOnHours => TimeFormat.HoursFromTimeSpan(TimeSpanSum);
+    public double TimeInMinutes => TimeFormat.MinutesFromTimeSpan(TimeSpanSum);
+    public double TimeInHours => TimeFormat.HoursFromTimeSpan(TimeSpanSum);
     public string TimePeriodsFormattedTime => TimeFormat.StringFromTimePeriods(TimePeriods);
     public string TimeMinutesFormattedTime => TimeFormat.StringFromTimeSpan(TimeSpanTimeMinutes);
     public string TimerSessionsFormattedTime => TimeFormat.StringFromTimeSpan(TimeSpanTimerSessions);

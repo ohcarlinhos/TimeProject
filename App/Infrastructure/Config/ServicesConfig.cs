@@ -227,7 +227,7 @@ public static class ServicesConfig
         #region Statistics
 
         builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
-        builder.Services.AddScoped<IGetDayStatisticUseCase, GetDayStatisticUseCase>();
+        builder.Services.AddScoped<IGetRangeDaysStatisticUseCase, GetRangeDaysStatisticUseCase>();
 
         #endregion
 

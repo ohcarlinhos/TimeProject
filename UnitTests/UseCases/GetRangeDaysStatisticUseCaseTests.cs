@@ -8,7 +8,7 @@ using Shared.Statistic;
 
 namespace UnitTests.UseCases;
 
-public class GetDayStatisticUseCaseTests
+public class GetRangeDaysStatisticUseCaseTests
 {
     private readonly Mock<IStatisticRepository> _staticRepository = new();
 
@@ -146,7 +146,7 @@ public class GetDayStatisticUseCaseTests
         ];
     }
 
-    private static void RunAssets(DayStatistic? data)
+    private static void RunAssets(RangeStatistic? data)
     {
         data.Should().NotBeNull();
 
@@ -160,10 +160,10 @@ public class GetDayStatisticUseCaseTests
 
         data.TotalHours.Should().Be("2h 55m 15s");
 
-        data.TotalIsolatedPeriodHours.Should().Be("40m 10s");
-        data.TotalTimerHours.Should().Be("1h 35m");
-        data.TotalPomodoroHours.Should().Be("25m");
-        data.TotalBreakHours.Should().Be("15m 5s");
+        data.IsolatedPeriodHours.Should().Be("40m 10s");
+        data.TimerHours.Should().Be("1h 35m");
+        data.PomodoroHours.Should().Be("25m");
+        data.BreakHours.Should().Be("15m 5s");
     }
 
     // [Fact]
