@@ -27,7 +27,7 @@ public class GetRangeDaysStatisticUseCase(
     )
     {
         var initDate = start ?? DateTime.Today.ToUniversalTime();
-        var endDate = end ?? initDate.AddDays(1);
+        var endDate = end ?? initDate.AddDays(1).AddMicroseconds(-1);
 
         var timePeriodsByRange = await statisticRepository
             .GetTimePeriodsByRange(userId, initDate, endDate, timeRecordId);
@@ -93,13 +93,15 @@ public class GetRangeDaysStatisticUseCase(
             daysFromRange.Add(startDate);
             startDate = startDate.AddDays(1);
         }
+        
+        daysFromRange.Add(end);
 
         var daysCount = daysFromRange.Count;
         var activeDaysCount = 0;
         
         foreach (var day in daysFromRange)
         {
-            var result = await _handle(userId, day, day.AddDays(1), null, true);
+            var result = await _handle(userId, day, null, null, true);
             allTimePeriods.AddRange(result.TimePeriods);
             timeMinutes.AddRange(result.TimeMinutes);
             allTimerSessions.AddRange(result.Sessions);
