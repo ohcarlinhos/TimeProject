@@ -163,9 +163,10 @@ public class GetRangeDaysStatisticUseCase(
         var totalSessionTimeSpan = TimeFormat.TimeSpanFromTimerSessions(allTimerSessions);
 
         var rangeProgress = MakeRangeProgress(timeRecords, allTimePeriods, timeMinutes);
+        var daysToAvarageCount = rangeProgress.Count(p => p.TotalTimeSpan.TotalMinutes > 0);
         
-        var hoursAvarege = totalTimeSpan.TotalHours / (end - start).TotalDays;
-        var minutesAvarege = totalTimeSpan.TotalMinutes / (end - start).TotalDays;
+        var hoursAvarege = totalTimeSpan.TotalHours / daysToAvarageCount;
+        var minutesAvarege = totalTimeSpan.TotalMinutes / daysToAvarageCount;
         
         var avarageTimeSpan = TimeSpan.FromHours(hoursAvarege);
         
