@@ -93,12 +93,12 @@ public class GetRangeDaysStatisticUseCase(
             daysFromRange.Add(startDate);
             startDate = startDate.AddDays(1);
         }
-        
+
         daysFromRange.Add(end);
 
         var daysCount = daysFromRange.Count;
         var activeDaysCount = 0;
-        
+
         foreach (var day in daysFromRange)
         {
             var result = await _handle(userId, day, null, null, true);
@@ -163,13 +163,20 @@ public class GetRangeDaysStatisticUseCase(
         var totalSessionTimeSpan = TimeFormat.TimeSpanFromTimerSessions(allTimerSessions);
 
         var rangeProgress = MakeRangeProgress(timeRecords, allTimePeriods, timeMinutes);
-        var daysToAvarageCount = rangeProgress.Count(p => p.TotalTimeSpan.TotalMinutes > 0);
-        
-        var hoursAvarege = totalTimeSpan.TotalHours / daysToAvarageCount;
-        var minutesAvarege = totalTimeSpan.TotalMinutes / daysToAvarageCount;
-        
+
+        var totalDays = (end - start).TotalDays;
+        if (totalDays == 0) totalDays = 1;
+
+        var hoursAvarege = activeDaysCount != 0
+            ? totalTimeSpan.TotalHours / activeDaysCount
+            : totalTimeSpan.TotalHours / totalDays;
+
+        var minutesAvarege = activeDaysCount != 0
+            ? totalTimeSpan.TotalMinutes / activeDaysCount
+            : totalTimeSpan.TotalMinutes / totalDays;
+
         var avarageTimeSpan = TimeSpan.FromHours(hoursAvarege);
-        
+
         return new RangeStatisticsData
         {
             TimePeriods = allTimePeriods,
@@ -184,17 +191,17 @@ public class GetRangeDaysStatisticUseCase(
                 ManualHours = TimeFormat.StringFromTimeSpan(totalManualTimeSpan),
                 TimeMinuteHours = TimeFormat.StringFromTimeSpan(timeMinutesTimeSpan),
                 IsolatedPeriodHours = TimeFormat.StringFromTimePeriods(isolatedPeriods),
-                
+
                 TotalInHours = totalTimeSpan.TotalHours,
                 TotalInMinutes = totalTimeSpan.TotalMinutes,
-                
+
                 AverageInHours = hoursAvarege,
                 AverageInMinutes = minutesAvarege,
                 AverageHours = TimeFormat.StringFromTimeSpan(avarageTimeSpan),
 
                 DaysCount = daysCount,
                 ActiveDaysCount = activeDaysCount,
-                
+
                 TimerHours = TimeFormat.StringFromTimerSessions(timerSessions),
                 PomodoroHours = TimeFormat.StringFromTimerSessions(pomodoroSessions),
                 BreakHours = TimeFormat.StringFromTimerSessions(breakSessions),
