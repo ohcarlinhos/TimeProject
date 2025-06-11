@@ -133,7 +133,7 @@ public class GetRangeDaysStatisticUseCase(
         return new Result<RangeStatisticsWithDays>().SetData(new RangeStatisticsWithDays()
         {
             Total = rangeStatistics,
-            Days = daysStatistics
+            Days = daysStatistics.OrderByDescending(e => e.StartDay).ToList()
         });
     }
 
