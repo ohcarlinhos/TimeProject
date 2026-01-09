@@ -1,6 +1,4 @@
 using Core.Statistic;
-using App.Modules.Statistic.UseCases;
-using App.Modules.TimePeriod.Utils;
 using Entities;
 using FluentAssertions;
 using Moq;
@@ -97,8 +95,8 @@ public class GetRangeDaysStatisticUseCaseTests
                     {
                         Start = today.AddHours(4).AddMinutes(20), End = today.AddHours(4).AddMinutes(40),
                         TimerSessionId = 1
-                    },
-                },
+                    }
+                }
             },
             new TimerSessionEntity
             {
@@ -111,14 +109,14 @@ public class GetRangeDaysStatisticUseCaseTests
                     new()
                     {
                         Start = today.AddHours(5), End = today.AddHours(5).AddMinutes(10),
-                        TimerSessionId = 2,
+                        TimerSessionId = 2
                     },
                     new()
                     {
                         Start = today.AddHours(5).AddMinutes(15), End = today.AddHours(5).AddMinutes(30),
-                        TimerSessionId = 2,
+                        TimerSessionId = 2
                     }
-                },
+                }
             },
             new TimerSessionEntity
             {
@@ -133,7 +131,7 @@ public class GetRangeDaysStatisticUseCaseTests
                         Start = today.AddHours(6), End = today.AddHours(6).AddMinutes(15).AddSeconds(5),
                         TimerSessionId = 3
                     }
-                },
+                }
             },
             new TimerSessionEntity
             {

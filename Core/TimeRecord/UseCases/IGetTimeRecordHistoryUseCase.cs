@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using Shared.General;
 using Shared.General.Pagination;
 using Shared.TimePeriod;

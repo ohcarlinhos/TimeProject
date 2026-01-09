@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace Entities;
+﻿namespace Entities;
 
 public enum AccessType
 {

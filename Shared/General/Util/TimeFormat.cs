@@ -36,10 +36,7 @@ public static class TimeFormat
         if (timerSessions == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
 
-        foreach (var ts in timerSessions)
-        {
-            total = total.Add(TimeSpanFromTimePeriods(ts.TimePeriods));
-        }
+        foreach (var ts in timerSessions) total = total.Add(TimeSpanFromTimePeriods(ts.TimePeriods));
 
         return total;
     }
@@ -51,12 +48,8 @@ public static class TimeFormat
         if (timerSessions == null) return total;
 
         foreach (var ts in timerSessions)
-        {
             if (ts.TimePeriods != null && ts.TimePeriods.Any())
-            {
                 total = total.Add(TimeSpanFromTimePeriods(ts.TimePeriods.ToList()));
-            }
-        }
 
         return total;
     }
@@ -98,6 +91,13 @@ public static class TimeFormat
         return StringFromTimeSpan(TimeSpanFromTimerSessions(timerSessions));
     }
 
-    public static double MinutesFromTimeSpan(TimeSpan timeSpan) => timeSpan.TotalMinutes;
-    public static double HoursFromTimeSpan(TimeSpan timeSpan) => timeSpan.TotalHours;
+    public static double MinutesFromTimeSpan(TimeSpan timeSpan)
+    {
+        return timeSpan.TotalMinutes;
+    }
+
+    public static double HoursFromTimeSpan(TimeSpan timeSpan)
+    {
+        return timeSpan.TotalHours;
+    }
 }

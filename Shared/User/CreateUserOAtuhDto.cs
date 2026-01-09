@@ -4,7 +4,7 @@ namespace Shared.User;
 
 public class CreateUserOAtuhDto
 {
-    [MinLength(2), MaxLength(120)] public string Name { get; set; } = string.Empty;
+    [MinLength(2)] [MaxLength(120)] public string Name { get; set; } = string.Empty;
     [Required] public string UserProviderId { get; set; } = string.Empty;
-    [Required, Range(-12, 13)] public int Utc { get; set; } = -3;
+    [Required] [Range(-12, 13)] public int Utc { get; set; } = -3;
 }

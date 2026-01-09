@@ -4,13 +4,13 @@ public class PaginationQuery
 {
     private int _page = 1;
 
+    private int _perPage = 12;
+
     public int Page
     {
         get => _page;
         set => _page = value <= 0 ? 1 : value;
     }
-
-    private int _perPage = 12;
 
     public virtual int PerPage
     {

@@ -10,8 +10,8 @@ public class TimerSessionMap
 
     public string? Type { get; set; }
     public string? From { get; set; }
-    
+
     public IEnumerable<TimePeriodMap>? TimePeriods { get; set; }
-    
+
     public string FormattedTime => TimeFormat.StringFromTimePeriods(TimePeriods);
 }

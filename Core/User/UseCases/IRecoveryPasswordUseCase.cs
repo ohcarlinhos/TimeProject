@@ -1,5 +1,4 @@
-﻿using Shared.Auth;
-using Shared.General;
+﻿using Shared.General;
 using Shared.User;
 
 namespace Core.User.UseCases;

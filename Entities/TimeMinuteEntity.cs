@@ -11,6 +11,6 @@ public class TimeMinuteEntity
 
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
-    
+
     public TimeRecordEntity? TimeRecord { get; set; }
 }

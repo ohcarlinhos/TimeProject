@@ -10,4 +10,3 @@ public class ConfirmCodeMap
     public ConfirmCodeType Type { get; set; }
     public string FormattedExpireDate => ExpireDate.ToString("dd/MM/yyyy HH:mm:ss");
 }
-

@@ -1,6 +1,6 @@
-﻿using App.Modules.TimePeriod.Utils;
-using Entities;
+﻿using Entities;
 using FluentAssertions;
+using TimeProject.Api.Modules.TimePeriod.Utils;
 
 namespace UnitTests.Utils;
 
@@ -45,7 +45,7 @@ public class TimePeriodCutUtilTests
             {
                 Start = initDate.AddHours(-5),
                 End = initDate.AddHours(-4)
-            },
+            }
         };
 
         #endregion Arrange

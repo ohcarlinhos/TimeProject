@@ -13,16 +13,16 @@ public class Pagination<T>
     public string? SortProp { get; set; }
 
     public static Pagination<T> Handle(
-        IEnumerable<T> data, 
-        int page, 
-        int perPage, 
-        int totalItems, 
+        IEnumerable<T> data,
+        int page,
+        int perPage,
+        int totalItems,
         string search = "",
-        string orderBy = "", 
+        string orderBy = "",
         string sort = "",
         string sortProp = "")
     {
-        return new Pagination<T>()
+        return new Pagination<T>
         {
             Page = page,
             PerPage = perPage,
@@ -35,9 +35,9 @@ public class Pagination<T>
             Data = data
         };
     }
-    
+
     public static Pagination<T> Handle(
-        IEnumerable<T> data, 
+        IEnumerable<T> data,
         PaginationQuery paginationQuery,
         int totalItems)
     {

@@ -10,12 +10,12 @@ public class TimeRecordEntity
     public int UserId { get; set; }
     public int? CategoryId { get; set; }
     public string Code { get; set; } = string.Empty;
-    
+
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
     public IEnumerable<TimePeriodEntity>? TimePeriods { get; set; }
-    
+
     public CategoryEntity? Category { get; set; }
     public TimeRecordMetaEntity? Meta { get; set; }
 }
