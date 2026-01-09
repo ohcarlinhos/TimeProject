@@ -1,27 +1,27 @@
-﻿using Core.User.Repositories;
-using Core.User.UseCases;
-using Core.User.Utils;
-using Shared.General;
-using Shared.User;
+﻿using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.Dtos.User;
 using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.User.UseCases;
 
 public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserUseCase
 {
-    public async Task<Result<UserMap>> Handle(int id, UpdateUserDto dto)
+    public async Task<Result<UserOutDto>> Handle(int id, UpdateUserDto dto)
     {
         return await _update(id, dto, null);
     }
 
-    public async Task<Result<UserMap>> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config)
+    public async Task<Result<UserOutDto>> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config)
     {
         return await _update(id, dto, config);
     }
 
-    private async Task<Result<UserMap>> _update(int id, UpdateUserDto dto, IUpdateUserOptions? config)
+    private async Task<Result<UserOutDto>> _update(int id, UpdateUserDto dto, IUpdateUserOptions? config)
     {
-        var result = new Result<UserMap>();
+        var result = new Result<UserOutDto>();
         var user = await repo.FindById(id);
 
         if (user == null) return result.SetError(UserMessageErrors.NotFound);

@@ -1,8 +1,8 @@
-﻿using Core.TimeRecord.UseCases;
-using Entities;
-using Microsoft.EntityFrameworkCore;
-using Shared.General;
+﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Api.Modules.TimeRecord.UseCases;
 

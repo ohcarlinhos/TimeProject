@@ -1,8 +1,8 @@
-﻿using Core.User.Repositories;
-using Core.User.UseCases;
-using Shared.General;
-using Shared.User;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.User.UseCases;
 

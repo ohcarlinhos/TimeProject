@@ -1,9 +1,9 @@
-﻿using Core.Category;
-using Core.Category.UseCases;
-using Entities;
-using Shared.Category;
-using Shared.General;
+﻿using TimeProject.Core.Application.Dtos.Category;
 using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.UseCases.Category;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
 
 namespace TimeProject.Api.Modules.Category.UseCases;
 

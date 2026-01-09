@@ -1,8 +1,8 @@
-﻿using Core.TimePeriod;
-using Entities;
-using Microsoft.EntityFrameworkCore;
-using Shared.General.Pagination;
+﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
 
 namespace TimeProject.Api.Modules.TimePeriod;
 

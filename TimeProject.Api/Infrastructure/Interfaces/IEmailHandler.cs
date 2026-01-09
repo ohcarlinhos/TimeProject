@@ -1,4 +1,4 @@
-﻿using Shared.Handlers.Email;
+﻿using TimeProject.Core.Application.Dtos.Handlers.Email;
 
 namespace TimeProject.Api.Infrastructure.Interfaces;
 

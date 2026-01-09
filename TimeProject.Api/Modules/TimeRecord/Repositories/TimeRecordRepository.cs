@@ -1,11 +1,10 @@
-﻿using Core.TimeRecord;
-using Core.TimeRecord.Repositories;
-using Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Shared.General.Pagination;
-using Shared.General.Repositories;
 using TimeProject.Api.Database;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Application.General.Repositories;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
 
 namespace TimeProject.Api.Modules.TimeRecord.Repositories;
 

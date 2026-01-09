@@ -1,7 +1,7 @@
-﻿using Core.Codes.UseCases;
-using Core.User.UseCases;
-using Shared.General;
-using Shared.User;
+﻿using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Domain.UseCases.Code;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.User.UseCases;
 

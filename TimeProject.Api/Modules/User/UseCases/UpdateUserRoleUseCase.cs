@@ -1,18 +1,18 @@
-﻿using Core.User.Repositories;
-using Core.User.UseCases;
-using Core.User.Utils;
-using Entities;
-using Shared.General;
-using Shared.User;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.User;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.User.UseCases;
 
 public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
 {
-    public async Task<Result<UserMap>> Handle(int id, UpdateRoleDto dto)
+    public async Task<Result<UserOutDto>> Handle(int id, UpdateRoleDto dto)
     {
-        var result = new Result<UserMap>();
+        var result = new Result<UserOutDto>();
         var user = await repo.FindById(id);
 
         if (user == null)

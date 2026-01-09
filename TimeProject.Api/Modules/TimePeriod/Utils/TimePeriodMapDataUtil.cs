@@ -1,19 +1,19 @@
 using AutoMapper;
-using Core.TimePeriod.Utils;
-using Entities;
-using Shared.TimePeriod;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.TimePeriod.Utils;
 
 public class TimePeriodMapDataUtil(IMapper mapper) : ITimePeriodMapDataUtil
 {
-    public TimePeriodMap Handle(TimePeriodEntity entity)
+    public TimePeriodOutDto Handle(TimePeriodEntity entity)
     {
-        return mapper.Map<TimePeriodEntity, TimePeriodMap>(entity);
+        return mapper.Map<TimePeriodEntity, TimePeriodOutDto>(entity);
     }
 
-    public List<TimePeriodMap> Handle(List<TimePeriodEntity> entity)
+    public List<TimePeriodOutDto> Handle(List<TimePeriodEntity> entity)
     {
-        return mapper.Map<List<TimePeriodEntity>, List<TimePeriodMap>>(entity);
+        return mapper.Map<List<TimePeriodEntity>, List<TimePeriodOutDto>>(entity);
     }
 }

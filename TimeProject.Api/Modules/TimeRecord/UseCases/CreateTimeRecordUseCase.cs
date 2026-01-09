@@ -1,15 +1,14 @@
-﻿using Core.Category;
-using Core.TimePeriod.UseCases;
-using Core.TimeRecord.Repositories;
-using Core.TimeRecord.UseCases;
-using Core.TimeRecord.Utils;
-using Entities;
-using Microsoft.IdentityModel.Tokens;
-using Shared.General;
-using Shared.TimePeriod;
-using Shared.TimeRecord;
+﻿using Microsoft.IdentityModel.Tokens;
 using TimeProject.Api.Database;
 using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Application.Dtos.TimeRecord;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimePeriod;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.TimeRecord.UseCases;
 
@@ -21,9 +20,9 @@ public class CreateTimeRecordUseCase(
     ProjectContext db)
     : ICreateTimeRecordUseCase
 {
-    public async Task<Result<TimeRecordMap>> Handle(CreateTimeRecordDto dto, int userId)
+    public async Task<Result<TimeRecordOutDto>> Handle(CreateTimeRecordDto dto, int userId)
     {
-        var result = new Result<TimeRecordMap>();
+        var result = new Result<TimeRecordOutDto>();
         var transaction = await db.Database.BeginTransactionAsync();
 
         if (dto.CategoryId != null)

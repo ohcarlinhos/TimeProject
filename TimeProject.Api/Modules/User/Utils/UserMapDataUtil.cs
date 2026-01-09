@@ -1,19 +1,19 @@
 using AutoMapper;
-using Core.User.Utils;
-using Entities;
-using Shared.User;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.User.Utils;
 
 public class UserMapDataUtil(IMapper mapper) : IUserMapDataUtil
 {
-    public UserMap Handle(UserEntity entity)
+    public UserOutDto Handle(UserEntity entity)
     {
-        return mapper.Map<UserEntity, UserMap>(entity);
+        return mapper.Map<UserEntity, UserOutDto>(entity);
     }
 
-    public List<UserMap> Handle(List<UserEntity> entity)
+    public List<UserOutDto> Handle(List<UserEntity> entity)
     {
-        return mapper.Map<List<UserEntity>, List<UserMap>>(entity);
+        return mapper.Map<List<UserEntity>, List<UserOutDto>>(entity);
     }
 }

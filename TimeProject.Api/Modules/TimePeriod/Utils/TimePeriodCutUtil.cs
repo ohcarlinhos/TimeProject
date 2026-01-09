@@ -1,5 +1,5 @@
-﻿using Core.TimePeriod.Utils;
-using Entities;
+﻿using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.TimePeriod.Utils;
 

@@ -1,19 +1,19 @@
 using AutoMapper;
-using Core.Category.Utils;
-using Entities;
-using Shared.Category;
+using TimeProject.Core.Application.Dtos.Category;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.Category.Utils;
 
 public class CategoryMapDataUtil(IMapper mapper) : ICategoryMapDataUtil
 {
-    public List<CategoryMap> Handle(List<CategoryEntity> entities)
+    public List<CategoryOutDto> Handle(List<CategoryEntity> entities)
     {
-        return mapper.Map<List<CategoryEntity>, List<CategoryMap>>(entities);
+        return mapper.Map<List<CategoryEntity>, List<CategoryOutDto>>(entities);
     }
 
-    public CategoryMap Handle(CategoryEntity entity)
+    public CategoryOutDto Handle(CategoryEntity entity)
     {
-        return mapper.Map<CategoryEntity, CategoryMap>(entity);
+        return mapper.Map<CategoryEntity, CategoryOutDto>(entity);
     }
 }

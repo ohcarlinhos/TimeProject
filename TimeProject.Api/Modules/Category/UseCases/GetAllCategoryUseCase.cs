@@ -1,15 +1,15 @@
-﻿using Core.Category;
-using Core.Category.UseCases;
-using Core.Category.Utils;
-using Shared.Category;
-using Shared.General;
+﻿using TimeProject.Core.Application.Dtos.Category;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.Category;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.Category.UseCases;
 
 public class GetAllCategoryUseCase(ICategoryRepository repo, ICategoryMapDataUtil mapper) : IGetAllCategoryUseCase
 {
-    public Result<List<CategoryMap>> Handle(int userId, bool onlyWithData)
+    public Result<List<CategoryOutDto>> Handle(int userId, bool onlyWithData)
     {
-        return new Result<List<CategoryMap>> { Data = mapper.Handle(repo.Index(userId, onlyWithData)) };
+        return new Result<List<CategoryOutDto>> { Data = mapper.Handle(repo.Index(userId, onlyWithData)) };
     }
 }

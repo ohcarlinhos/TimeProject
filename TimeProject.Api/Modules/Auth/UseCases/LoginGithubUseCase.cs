@@ -1,13 +1,13 @@
-﻿using Core.Auth.UseCases;
-using Core.Loogs.UserCases;
-using Core.User.UseCases;
-using Entities;
-using Octokit;
-using Shared.Auth;
-using Shared.General;
-using Shared.User;
+﻿using Octokit;
 using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Core.Application.Dtos.Auth;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.CustomLog;
+using TimeProject.Core.Domain.UseCases.Login;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.Auth.UseCases;
 
@@ -15,13 +15,13 @@ public class LoginGithubUseCase(
     IJwtService jwtService,
     IGetUserByOAtuhProviderIdUseCase getUserByOAtuhProviderIdUseCase,
     ICreateUserByGhUserUseCase createUserByGhUserUseCase,
-    ICreateUserAccessLog createUserAccessLog
+    ICreateUserAccessLogUseCase createUserAccessLogUseCase
 )
     : ILoginGithubUseCase
 {
-    public async Task<Result<JwtData>> Handle(LoginGithubDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtDto>> Handle(LoginGithubDto dto, UserAccessLogEntity ac)
     {
-        var result = new Result<JwtData>();
+        var result = new Result<JwtDto>();
 
         try
         {
@@ -37,7 +37,7 @@ public class LoginGithubUseCase(
             if (getUserByPIdResult is { Data: not null })
             {
                 ac.UserId = getUserByPIdResult.Data.Id;
-                await createUserAccessLog.Handle(ac);
+                await createUserAccessLogUseCase.Handle(ac);
                 return result.SetData(jwtService.Generate(getUserByPIdResult.Data));
             }
 
@@ -56,7 +56,7 @@ public class LoginGithubUseCase(
             if (!createIsSuccess) result.SetError(createUserResult.Message);
 
             ac.UserId = createUserResult.Data!.Id;
-            await createUserAccessLog.Handle(ac);
+            await createUserAccessLogUseCase.Handle(ac);
 
             return result.SetData(jwtService.Generate(createUserResult.Data));
         }

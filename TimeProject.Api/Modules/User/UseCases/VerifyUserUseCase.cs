@@ -1,6 +1,6 @@
 ﻿// using TimeProject.Api.Infrastructure.Interfaces;
-// using Core.Codes.UseCases;
-// using Core.User.UseCases;
+// using TimeProject.Core.Codes.UseCases;
+// using TimeProject.Core.User.UseCases;
 // using Shared.General;
 //
 // namespace TimeProject.Api.Modules.User.UseCases;

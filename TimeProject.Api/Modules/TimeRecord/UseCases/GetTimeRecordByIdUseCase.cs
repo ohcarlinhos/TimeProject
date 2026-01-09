@@ -1,8 +1,9 @@
-using Core.TimeRecord.Repositories;
-using Core.TimeRecord.UseCases;
-using Entities;
-using Shared.General;
 using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.TimeRecord.Repositories;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Api.Modules.TimeRecord.UseCases;
 

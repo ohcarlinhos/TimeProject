@@ -1,10 +1,10 @@
-﻿using Core.Feedback.UseCases;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Feedback;
-using Shared.General.Util;
 using TimeProject.Api.Infrastructure.Attributes;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.Feedback;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.UseCases.Feedback;
 
 namespace TimeProject.Api.Modules.Feedback;
 

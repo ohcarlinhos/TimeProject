@@ -1,24 +1,24 @@
-﻿using Core.Auth.UseCases;
-using Core.Loogs.UserCases;
-using Core.User.UseCases;
-using Entities;
-using Shared.Auth;
-using Shared.General;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Core.Application.Dtos.Auth;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.CustomLog;
+using TimeProject.Core.Domain.UseCases.Login;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.Auth.UseCases;
 
 public class LoginUseCase(
     IJwtService jwtService,
     IGetUserPasswordByEmailUseCase getUserPasswordByEmailUseCase,
-    ICreateUserAccessLog createUserAccessLog
+    ICreateUserAccessLogUseCase createUserAccessLogUseCase
 )
     : ILoginUseCase
 {
-    public async Task<Result<JwtData>> Handle(LoginDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtDto>> Handle(LoginDto dto, UserAccessLogEntity ac)
     {
-        var result = new Result<JwtData>();
+        var result = new Result<JwtDto>();
 
         var findUserPasswordResult = await getUserPasswordByEmailUseCase.Handle(dto.Email);
         if (findUserPasswordResult.HasError) return result.SetError(findUserPasswordResult.Message);
@@ -29,7 +29,7 @@ public class LoginUseCase(
         if (!passwordMatch) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
 
         ac.UserId = data.User.Id;
-        await createUserAccessLog.Handle(ac);
+        await createUserAccessLogUseCase.Handle(ac);
 
         return result.SetData(jwtService.Generate(data.User));
     }

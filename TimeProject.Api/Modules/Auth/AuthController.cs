@@ -1,8 +1,8 @@
-﻿using Core.Auth.UseCases;
-using Entities;
-using Microsoft.AspNetCore.Mvc;
-using Shared.Auth;
+﻿using Microsoft.AspNetCore.Mvc;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.Auth;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.Login;
 
 namespace TimeProject.Api.Modules.Auth;
 
@@ -26,7 +26,7 @@ public class AuthController(
 
     [HttpPost]
     [Route("login/github")]
-    public async Task<ActionResult<JwtData>> LoginGithub([FromBody] LoginGithubDto dto)
+    public async Task<ActionResult<JwtDto>> LoginGithub([FromBody] LoginGithubDto dto)
     {
         return HandleResponse(await loginGithubUseCase.Handle(dto, new UserAccessLogEntity
         {
@@ -39,7 +39,7 @@ public class AuthController(
 
     [HttpPost]
     [Route("login/google")]
-    public async Task<ActionResult<JwtData>> LoginGoogle([FromBody] LoginGoogleDto dto)
+    public async Task<ActionResult<JwtDto>> LoginGoogle([FromBody] LoginGoogleDto dto)
     {
         return HandleResponse(await loginGoogleUseCase.Handle(dto, new UserAccessLogEntity
         {

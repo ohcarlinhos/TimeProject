@@ -1,11 +1,11 @@
-﻿using Core.Category.UseCases;
-using Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Category;
-using Shared.General.Pagination;
-using Shared.General.Util;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.Category;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.Category;
 
 namespace TimeProject.Api.Modules.Category;
 
@@ -22,14 +22,14 @@ public class CategoryController(
     : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<CategoryMap>>> Index([FromQuery] PaginationQuery paginationQuery)
+    public async Task<ActionResult<Pagination<CategoryOutDto>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(await getPaginatedCategoryUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("all")]
-    public ActionResult<List<CategoryMap>> Index([FromQuery] bool onlyWithData)
+    public ActionResult<List<CategoryOutDto>> Index([FromQuery] bool onlyWithData)
     {
         return HandleResponse(getAllCategoryUseCase.Handle(UserClaims.Id(User), onlyWithData));
     }

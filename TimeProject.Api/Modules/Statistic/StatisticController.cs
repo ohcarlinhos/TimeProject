@@ -1,9 +1,9 @@
-using Core.Statistic.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.General.Util;
-using Shared.Statistic;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.Statistic;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.UseCases.Statistic;
 
 namespace TimeProject.Api.Modules.Statistic;
 

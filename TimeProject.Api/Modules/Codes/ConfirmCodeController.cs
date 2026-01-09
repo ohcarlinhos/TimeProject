@@ -1,9 +1,9 @@
-﻿using Core.Codes.UseCases;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Codes;
-using Shared.General.Util;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.Codes;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.UseCases.Code;
 
 namespace TimeProject.Api.Modules.Codes;
 
@@ -14,7 +14,7 @@ public class ConfirmCodeController(IGetRegisterCodeInfoUseCase getRegisterCodeIn
     [HttpGet]
     [Route("register/info")]
     [Authorize]
-    public async Task<ActionResult<ConfirmCodeMap>> HasVerifyCodeActive()
+    public async Task<ActionResult<ConfirmCodeOutDto>> HasVerifyCodeActive()
     {
         return HandleResponse(await getRegisterCodeInfoUseCase.Handle(UserClaims.Id(User)));
     }

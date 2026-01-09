@@ -1,12 +1,12 @@
-﻿using Core.TimeRecord;
-using Core.TimeRecord.UseCases;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.General.Pagination;
-using Shared.General.Util;
-using Shared.TimePeriod;
-using Shared.TimeRecord;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Application.Dtos.TimeRecord;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Api.Modules.TimeRecord;
 
@@ -24,14 +24,14 @@ public class TimeRecordController(
 ) : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<TimeRecordMap>>> Index([FromQuery] PaginationQuery paginationQuery)
+    public async Task<ActionResult<Pagination<TimeRecordOutDto>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(await getPaginatedTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("history/{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<TimeRecordHistoryDayMap>>> HistoryIndex([FromRoute] int timeRecordId,
+    public async Task<ActionResult<Pagination<TimeRecordHistoryDayOutDto>>> HistoryIndex([FromRoute] int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
@@ -46,7 +46,7 @@ public class TimeRecordController(
     }
 
     [HttpPost]
-    public async Task<ActionResult<TimeRecordMap>> Create([FromBody] CreateTimeRecordDto dto)
+    public async Task<ActionResult<TimeRecordOutDto>> Create([FromBody] CreateTimeRecordDto dto)
     {
         var result = await createTimeRecordUseCase.Handle(dto, UserClaims.Id(User));
 
@@ -56,14 +56,14 @@ public class TimeRecordController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public async Task<ActionResult<TimeRecordMap>> Update(int id, [FromBody] UpdateTimeRecordDto dto)
+    public async Task<ActionResult<TimeRecordOutDto>> Update(int id, [FromBody] UpdateTimeRecordDto dto)
     {
         return HandleResponse(await updateTimeRecordUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("{code}")]
-    public async Task<ActionResult<TimeRecordMap>> Get(string code)
+    public async Task<ActionResult<TimeRecordOutDto>> Get(string code)
     {
         return HandleResponse(await getTimeRecordByCodeUseCase.Handle(code, UserClaims.Id(User)));
     }

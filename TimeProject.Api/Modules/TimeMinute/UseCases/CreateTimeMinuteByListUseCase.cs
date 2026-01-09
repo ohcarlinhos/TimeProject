@@ -1,12 +1,10 @@
-﻿using Core.TimeMinute;
-using Core.TimeMinute.UseCases;
-using Core.TimeRecord.Repositories;
-using Core.TimeRecord.UseCases;
-using Core.User.Repositories;
-using Entities;
-using Shared.General;
-using Shared.TimeMinute;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.Dtos.TimeMinute;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimeMinute;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Api.Modules.TimeMinute.UseCases;
 

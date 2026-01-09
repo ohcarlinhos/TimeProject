@@ -1,8 +1,8 @@
-﻿using Core.Feedback.UseCases;
-using Shared.Feedback;
-using Shared.General;
+﻿using TimeProject.Core.Application.Dtos.Feedback;
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Api.Modules.Feedback.Utils;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.UseCases.Feedback;
 
 namespace TimeProject.Api.Modules.Feedback.UseCases;
 

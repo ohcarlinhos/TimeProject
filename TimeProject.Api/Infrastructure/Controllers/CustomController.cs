@@ -1,7 +1,7 @@
-﻿using Entities;
-using Microsoft.AspNetCore.Mvc;
-using Shared.General;
-using Shared.General.Util;
+﻿using Microsoft.AspNetCore.Mvc;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Api.Infrastructure.Controllers;
 

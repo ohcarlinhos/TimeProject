@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Entities;
-using Shared.Category;
-using Shared.Codes;
-using Shared.TimePeriod;
-using Shared.TimeRecord;
-using Shared.User;
+using TimeProject.Core.Application.Dtos.Category;
+using TimeProject.Core.Application.Dtos.Codes;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Application.Dtos.TimeRecord;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Api.Infrastructure.Mapping;
 
@@ -12,12 +12,12 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<UserEntity, UserMap>();
-        CreateMap<TimeRecordEntity, TimeRecordMap>();
-        CreateMap<TimePeriodEntity, TimePeriodMap>();
-        CreateMap<CategoryEntity, CategoryMap>();
-        CreateMap<TimeRecordHistoryDay, TimeRecordHistoryDayMap>();
-        CreateMap<TimerSessionEntity, TimerSessionMap>();
-        CreateMap<ConfirmCodeEntity, ConfirmCodeMap>();
+        CreateMap<UserEntity, UserOutDto>();
+        CreateMap<TimeRecordEntity, TimeRecordOutDto>();
+        CreateMap<TimePeriodEntity, TimePeriodOutDto>();
+        CreateMap<CategoryEntity, CategoryOutDto>();
+        CreateMap<TimeRecordHistoryDay, TimeRecordHistoryDayOutDto>();
+        CreateMap<TimerSessionEntity, TimerSessionOutDto>();
+        CreateMap<ConfirmCodeEntity, ConfirmCodeOutDto>();
     }
 }

@@ -1,8 +1,8 @@
-﻿using Core.User.UseCases;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.User;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.User;
 

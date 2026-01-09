@@ -1,11 +1,11 @@
-using Core.TimeRecord.Repositories;
-using Core.TimeRecord.UseCases;
-using Core.TimeRecord.Utils;
-using Core.User.Repositories;
-using Shared.General;
-using Shared.General.Pagination;
-using Shared.TimePeriod;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Application.Dtos.TimePeriod;
 using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.TimeRecord.Repositories;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Api.Modules.TimeRecord.UseCases;
 
@@ -14,7 +14,7 @@ public class GetTimeRecordHistoryUseCase(
     IUserRepository userRepository,
     ITimeRecordMapDataUtil mapDataUtil) : IGetTimeRecordHistoryUseCase
 {
-    public async Task<Result<Pagination<TimeRecordHistoryDayMap>>> Handle(
+    public async Task<Result<Pagination<TimeRecordHistoryDayOutDto>>> Handle(
         int timeRecordId,
         int userId,
         PaginationQuery paginationQuery
@@ -22,7 +22,8 @@ public class GetTimeRecordHistoryUseCase(
     {
         var user = await userRepository.FindById(userId);
 
-        if (user == null) return new Result<Pagination<TimeRecordHistoryDayMap>>().SetError(UserMessageErrors.NotFound);
+        if (user == null)
+            return new Result<Pagination<TimeRecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
 
         // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
         var distinctDates = await repository.GetDistinctDates(timeRecordId, userId, user.Utc);
@@ -56,9 +57,9 @@ public class GetTimeRecordHistoryUseCase(
             });
         }
 
-        return new Result<Pagination<TimeRecordHistoryDayMap>>
+        return new Result<Pagination<TimeRecordHistoryDayOutDto>>
         {
-            Data = Pagination<TimeRecordHistoryDayMap>
+            Data = Pagination<TimeRecordHistoryDayOutDto>
                 .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)
         };
     }

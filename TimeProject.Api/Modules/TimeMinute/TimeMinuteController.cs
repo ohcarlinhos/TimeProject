@@ -1,9 +1,9 @@
-using Core.TimeMinute.UseCases;
-using Entities;
 using Microsoft.AspNetCore.Mvc;
-using Shared.General.Util;
-using Shared.TimeMinute;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.TimeMinute;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.TimeMinute;
 
 namespace TimeProject.Api.Modules.TimeMinute;
 

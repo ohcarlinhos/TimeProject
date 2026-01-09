@@ -1,9 +1,8 @@
-﻿using Core.TimePeriod;
-using Core.TimeRecord.UseCases;
-using Core.TimerSession;
-using Core.TimerSession.UseCases;
-using Shared.General;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
+using TimeProject.Core.Domain.UseCases.TimerSession;
 
 namespace TimeProject.Api.Modules.TimerSession.UseCases;
 

@@ -1,8 +1,8 @@
-﻿using Core.TimerSession.UseCases;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.General.Util;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.UseCases.TimerSession;
 
 namespace TimeProject.Api.Modules.TimerSession;
 

@@ -1,9 +1,9 @@
-﻿using Entities;
-using Shared.Auth;
+﻿using TimeProject.Core.Application.Dtos.Auth;
+using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Api.Infrastructure.Interfaces;
 
 public interface IJwtService
 {
-    JwtData Generate(UserEntity userEntity);
+    JwtDto Generate(UserEntity userEntity);
 }

@@ -1,4 +1,4 @@
-﻿using Core.User.Utils;
+﻿using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.User.Utils;
 

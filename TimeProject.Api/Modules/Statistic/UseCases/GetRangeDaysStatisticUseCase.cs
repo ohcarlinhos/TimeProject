@@ -1,12 +1,10 @@
-using Core.Statistic;
-using Core.Statistic.UseCases;
-using Core.TimePeriod.Utils;
-using Core.TimeRecord.Repositories;
-using Core.TimeRecord.Utils;
-using Entities;
-using Shared.General;
-using Shared.General.Util;
-using Shared.Statistic;
+using TimeProject.Core.Application.Dtos.Statistic;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.Statistic;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.Statistic.UseCases;
 

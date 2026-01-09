@@ -1,6 +1,6 @@
-﻿using Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database.Configurations;
+using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Api.Database;
 

@@ -1,14 +1,14 @@
 ﻿using System.Text.Json.Serialization;
-using Core.Auth.UseCases;
-using Core.Loogs.UserCases;
-using Core.User.UseCases;
-using Entities;
 using RestSharp;
-using Shared.Auth;
-using Shared.General;
-using Shared.User;
 using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Core.Application.Dtos.Auth;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.CustomLog;
+using TimeProject.Core.Domain.UseCases.Login;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.Auth.UseCases;
 
@@ -25,15 +25,15 @@ public class LoginGoogleUseCase(
     IJwtService jwtService,
     IGetUserByOAtuhProviderIdUseCase getUserByOAtuhProviderIdUseCase,
     ICreateUserByGoogleUserUseCase createUserByGoogleUserUseCase,
-    ICreateUserAccessLog createUserAccessLog
+    ICreateUserAccessLogUseCase createUserAccessLogUseCase
 )
     : ILoginGoogleUseCase
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<Result<JwtData>> Handle(LoginGoogleDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtDto>> Handle(LoginGoogleDto dto, UserAccessLogEntity ac)
     {
-        var result = new Result<JwtData>();
+        var result = new Result<JwtDto>();
 
         try
         {
@@ -49,7 +49,7 @@ public class LoginGoogleUseCase(
             if (getUserByPIdResult is { Data: not null })
             {
                 ac.UserId = getUserByPIdResult.Data.Id;
-                await createUserAccessLog.Handle(ac);
+                await createUserAccessLogUseCase.Handle(ac);
                 return result.SetData(jwtService.Generate(getUserByPIdResult.Data));
             }
 
@@ -69,7 +69,7 @@ public class LoginGoogleUseCase(
             if (!createIsSuccess) result.SetError(createUserResult.Message);
 
             ac.UserId = createUserResult.Data!.Id;
-            await createUserAccessLog.Handle(ac);
+            await createUserAccessLogUseCase.Handle(ac);
 
             return result.SetData(jwtService.Generate(createUserResult.Data));
         }

@@ -1,28 +1,3 @@
-using Core.Auth.Repositories;
-using Core.Auth.UseCases;
-using Core.Category;
-using Core.Category.UseCases;
-using Core.Category.Utils;
-using Core.Codes;
-using Core.Codes.UseCases;
-using Core.Feedback.UseCases;
-using Core.Loogs.Repositories;
-using Core.Loogs.UserCases;
-using Core.Statistic;
-using Core.Statistic.UseCases;
-using Core.TimeMinute;
-using Core.TimeMinute.UseCases;
-using Core.TimePeriod;
-using Core.TimePeriod.UseCases;
-using Core.TimePeriod.Utils;
-using Core.TimeRecord.Repositories;
-using Core.TimeRecord.UseCases;
-using Core.TimeRecord.Utils;
-using Core.TimerSession;
-using Core.TimerSession.UseCases;
-using Core.User.Repositories;
-using Core.User.UseCases;
-using Core.User.Utils;
 using Microsoft.Extensions.Options;
 using TimeProject.Api.Infrastructure.Handlers;
 using TimeProject.Api.Infrastructure.Integrations;
@@ -56,6 +31,20 @@ using TimeProject.Api.Modules.TimerSession.UseCases;
 using TimeProject.Api.Modules.User.Repositories;
 using TimeProject.Api.Modules.User.UseCases;
 using TimeProject.Api.Modules.User.Utils;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.Category;
+using TimeProject.Core.Domain.UseCases.Code;
+using TimeProject.Core.Domain.UseCases.CustomLog;
+using TimeProject.Core.Domain.UseCases.Feedback;
+using TimeProject.Core.Domain.UseCases.Login;
+using TimeProject.Core.Domain.UseCases.Statistic;
+using TimeProject.Core.Domain.UseCases.TimeMinute;
+using TimeProject.Core.Domain.UseCases.TimePeriod;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
+using TimeProject.Core.Domain.UseCases.TimerSession;
+using TimeProject.Core.Domain.UseCases.User;
+using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.TimeRecord.Repositories;
 
 namespace TimeProject.Api.Infrastructure.Config;
 
@@ -248,7 +237,7 @@ public static class ServicesConfig
         #region Logs
 
         builder.Services.AddScoped<IUserAccessLogRepository, UserAccessLogRepository>();
-        builder.Services.AddScoped<ICreateUserAccessLog, CreateUserAccessLog>();
+        builder.Services.AddScoped<ICreateUserAccessLogUseCase, CreateUserAccessLogUseCase>();
 
         #endregion
 

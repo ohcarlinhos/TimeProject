@@ -1,8 +1,8 @@
-using Core.Statistic;
-using Entities;
 using FluentAssertions;
 using Moq;
-using Shared.Statistic;
+using TimeProject.Core.Application.Dtos.Statistic;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
 
 namespace UnitTests.UseCases;
 

@@ -1,7 +1,7 @@
-using Core.TimeRecord.Repositories;
-using Entities;
 using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.TimeRecord.Repositories;
 
 namespace TimeProject.Api.Modules.TimeRecord.Repositories;
 

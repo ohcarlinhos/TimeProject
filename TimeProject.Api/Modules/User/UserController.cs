@@ -1,10 +1,10 @@
-﻿using Core.User.UseCases;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.General.Pagination;
-using Shared.General.Util;
-using Shared.User;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.User;
 
@@ -21,7 +21,7 @@ public class UserController(
 {
     [HttpGet]
     [Authorize(Policy = "IsAdmin")]
-    public ActionResult<Pagination<UserMap>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<Pagination<UserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }
@@ -36,14 +36,14 @@ public class UserController(
 
     [HttpPut("{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<UserMap>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
+    public async Task<ActionResult<UserOutDto>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
         return HasAuthorization(id) ? HandleResponse(await updateUserUseCase.Handle(id, dto)) : Forbid();
     }
 
     [HttpPut("role/{id:int}")]
     [Authorize(Policy = "IsAdmin")]
-    public async Task<ActionResult<UserMap>> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
+    public async Task<ActionResult<UserOutDto>> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
     {
         return HandleResponse(await updateUserRoleUseCase.Handle(id, dto));
     }
@@ -64,14 +64,14 @@ public class UserController(
 
     [HttpGet("{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<UserMap>> Get(int id)
+    public async Task<ActionResult<UserOutDto>> Get(int id)
     {
         return HasAuthorization(id) ? HandleResponse(await getUserUseCase.Handle(id)) : Forbid();
     }
 
     [HttpGet("myself")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<UserMap>> Myself()
+    public async Task<ActionResult<UserOutDto>> Myself()
     {
         return HandleResponse(await getUserUseCase.Handle(UserClaims.Id(User)));
     }

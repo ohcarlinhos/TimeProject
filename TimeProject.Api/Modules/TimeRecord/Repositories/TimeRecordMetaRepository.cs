@@ -1,8 +1,8 @@
-﻿using Core.TimeRecord.Repositories;
-using Entities;
-using Microsoft.EntityFrameworkCore;
-using Shared.General.Util;
+﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
 
 namespace TimeProject.Api.Modules.TimeRecord.Repositories;
 

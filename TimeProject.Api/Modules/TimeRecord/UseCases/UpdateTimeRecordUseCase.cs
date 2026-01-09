@@ -1,11 +1,10 @@
-﻿using Core.Category;
-using Core.TimeRecord.Repositories;
-using Core.TimeRecord.UseCases;
-using Core.TimeRecord.Utils;
-using Microsoft.IdentityModel.Tokens;
-using Shared.General;
-using Shared.TimeRecord;
+﻿using Microsoft.IdentityModel.Tokens;
 using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.Dtos.TimeRecord;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.TimeRecord.UseCases;
 
@@ -17,9 +16,9 @@ public class UpdateTimeRecordUseCase(
 )
     : IUpdateTimeRecordUseCase
 {
-    public async Task<Result<TimeRecordMap>> Handle(int id, UpdateTimeRecordDto dto, int userId)
+    public async Task<Result<TimeRecordOutDto>> Handle(int id, UpdateTimeRecordDto dto, int userId)
     {
-        var result = new Result<TimeRecordMap>();
+        var result = new Result<TimeRecordOutDto>();
 
         var timeRecord = await repo.FindById(id, userId);
 

@@ -1,8 +1,8 @@
-﻿using Core.TimeRecord.UseCases;
-using Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Api.Modules.TimeRecord;
 

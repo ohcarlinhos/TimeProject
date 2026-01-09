@@ -1,17 +1,17 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Entities;
 using Microsoft.IdentityModel.Tokens;
-using Shared.Auth;
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Api.Infrastructure.Settings;
+using TimeProject.Core.Application.Dtos.Auth;
+using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Api.Infrastructure.Services;
 
 public class JwtService(JwtSettings jwtSettings) : IJwtService
 {
-    public JwtData Generate(UserEntity userEntity)
+    public JwtDto Generate(UserEntity userEntity)
     {
         var subject = new ClaimsIdentity([
             new Claim("id", userEntity.Id.ToString()),
@@ -42,7 +42,7 @@ public class JwtService(JwtSettings jwtSettings) : IJwtService
         var token = tokenHandler.CreateToken(descriptor);
         var tokenString = tokenHandler.WriteToken(token);
 
-        return new JwtData
+        return new JwtDto
         {
             Token = tokenString,
             ValidFrom = token.ValidFrom,

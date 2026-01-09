@@ -1,11 +1,11 @@
-﻿using Core.TimePeriod.UseCases;
-using Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.General.Pagination;
-using Shared.General.Util;
-using Shared.TimePeriod;
 using TimeProject.Api.Infrastructure.Controllers;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.TimePeriod;
 
 namespace TimeProject.Api.Modules.TimePeriod;
 
@@ -23,7 +23,7 @@ public class TimePeriodController(
 {
     [HttpGet]
     [Route("{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<TimePeriodMap>>> Index(int timeRecordId,
+    public async Task<ActionResult<Pagination<TimePeriodOutDto>>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(

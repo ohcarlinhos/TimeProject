@@ -1,25 +1,25 @@
 using AutoMapper;
-using Core.TimeRecord.Utils;
-using Entities;
-using Shared.TimePeriod;
-using Shared.TimeRecord;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Application.Dtos.TimeRecord;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.TimeRecord.Utils;
 
 public class TimeRecordMapDataUtil(IMapper mapper) : ITimeRecordMapDataUtil
 {
-    public IEnumerable<TimeRecordHistoryDayMap> Handle(IEnumerable<TimeRecordHistoryDay> entity)
+    public IEnumerable<TimeRecordHistoryDayOutDto> Handle(IEnumerable<TimeRecordHistoryDay> entity)
     {
-        return mapper.Map<IEnumerable<TimeRecordHistoryDay>, IEnumerable<TimeRecordHistoryDayMap>>(entity);
+        return mapper.Map<IEnumerable<TimeRecordHistoryDay>, IEnumerable<TimeRecordHistoryDayOutDto>>(entity);
     }
 
-    public TimeRecordMap Handle(TimeRecordEntity entity)
+    public TimeRecordOutDto Handle(TimeRecordEntity entity)
     {
-        return mapper.Map<TimeRecordEntity, TimeRecordMap>(entity);
+        return mapper.Map<TimeRecordEntity, TimeRecordOutDto>(entity);
     }
 
-    public IEnumerable<TimeRecordMap> Handle(IEnumerable<TimeRecordEntity> entities)
+    public IEnumerable<TimeRecordOutDto> Handle(IEnumerable<TimeRecordEntity> entities)
     {
-        return mapper.Map<IEnumerable<TimeRecordEntity>, IEnumerable<TimeRecordMap>>(entities);
+        return mapper.Map<IEnumerable<TimeRecordEntity>, IEnumerable<TimeRecordOutDto>>(entities);
     }
 }

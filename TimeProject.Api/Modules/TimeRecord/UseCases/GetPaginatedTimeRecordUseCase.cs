@@ -1,22 +1,23 @@
-﻿using Core.TimeRecord.Repositories;
-using Core.TimeRecord.UseCases;
-using Core.TimeRecord.Utils;
-using Shared.General;
-using Shared.General.Pagination;
-using Shared.TimeRecord;
+﻿using TimeProject.Core.Application.Dtos.TimeRecord;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.TimeRecord.UseCases;
 
 public class GetPaginatedTimeRecordUseCase(ITimeRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
     : IGetPaginatedTimeRecordUseCase
 {
-    public async Task<Result<Pagination<TimeRecordMap>>> Handle(PaginationQuery paginationQuery, int userId)
+    public async Task<Result<Pagination<TimeRecordOutDto>>> Handle(PaginationQuery paginationQuery, int userId)
     {
         var result = await repo.Index(paginationQuery, userId);
 
-        return new Result<Pagination<TimeRecordMap>>
+        return new Result<Pagination<TimeRecordOutDto>>
         {
-            Data = Pagination<TimeRecordMap>.Handle(mapDataUtil.Handle(result.Entities), paginationQuery, result.Count)
+            Data = Pagination<TimeRecordOutDto>.Handle(mapDataUtil.Handle(result.Entities), paginationQuery,
+                result.Count)
         };
     }
 }

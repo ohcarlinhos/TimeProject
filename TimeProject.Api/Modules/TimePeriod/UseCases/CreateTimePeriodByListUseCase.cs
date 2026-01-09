@@ -1,11 +1,10 @@
-﻿using Core.TimePeriod;
-using Core.TimePeriod.UseCases;
-using Core.TimePeriod.Utils;
-using Core.TimeRecord.UseCases;
-using Core.TimerSession;
-using Entities;
-using Shared.General;
-using Shared.TimePeriod;
+﻿using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimePeriod;
+using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Api.Modules.TimePeriod.UseCases;
 

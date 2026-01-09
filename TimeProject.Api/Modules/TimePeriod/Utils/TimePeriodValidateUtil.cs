@@ -1,7 +1,7 @@
-﻿using Core.TimePeriod.Utils;
-using Shared.General;
-using Shared.TimePeriod;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.Dtos.TimePeriod;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Api.Modules.TimePeriod.Utils;
 

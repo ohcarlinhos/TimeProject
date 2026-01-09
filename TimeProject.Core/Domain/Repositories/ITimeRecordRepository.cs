@@ -1,0 +1,18 @@
+﻿using TimeProject.Core.Application.General.Pagination;
+using TimeProject.Core.Application.General.Repositories;
+using TimeProject.Core.Domain.Entities;
+
+namespace TimeProject.Core.Domain.Repositories;
+
+public interface ITimeRecordRepository
+{
+    Task<IndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId);
+    Task<List<SearchTimeRecordItem>> SearchTimeRecord(string search, int userId);
+    Task<TimeRecordEntity> Create(TimeRecordEntity entity);
+    Task<TimeRecordEntity> Update(TimeRecordEntity entity);
+    Task<bool> Delete(TimeRecordEntity entity);
+    Task<TimeRecordEntity?> FindById(int id, int userId);
+    Task<List<TimeRecordEntity>> FindByIdList(List<int> idList, int userId);
+    Task<TimeRecordEntity?> FindByCode(string code, int userId);
+    Task<TimeRecordEntity?> Details(string code, int userId);
+}

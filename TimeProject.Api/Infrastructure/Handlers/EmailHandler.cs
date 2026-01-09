@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
-using Shared.Handlers.Email;
 using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Core.Application.Dtos.Handlers.Email;
 
 namespace TimeProject.Api.Infrastructure.Handlers;
 

@@ -1,10 +1,9 @@
-﻿using Core.Loogs.Repositories;
-using Core.User.Repositories;
-using Core.User.UseCases;
-using Core.User.Utils;
-using Shared.General;
-using Shared.User;
+﻿using TimeProject.Core.Application.General;
+using TimeProject.Core.Application.Dtos.User;
 using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.User.UseCases;
 
@@ -14,9 +13,9 @@ public class GetUserUseCase(
     IUserMapDataUtil mapper
 ) : IGetUserUseCase
 {
-    public async Task<Result<UserMap>> Handle(int id)
+    public async Task<Result<UserOutDto>> Handle(int id)
     {
-        var result = new Result<UserMap>();
+        var result = new Result<UserOutDto>();
         var user = await userRepository.FindById(id);
 
         if (user == null)

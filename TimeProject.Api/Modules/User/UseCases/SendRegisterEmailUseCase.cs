@@ -1,10 +1,10 @@
-﻿using Core.Codes.UseCases;
-using Core.User.UseCases;
-using Entities;
-using Shared.General;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Api.Modules.Auth.Utils;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.UseCases.Code;
+using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.Domain.UseCases.User;
 
 namespace TimeProject.Api.Modules.User.UseCases;
 
