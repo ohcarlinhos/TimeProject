@@ -8,7 +8,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserRepository(ProjectContext dbContext) : IUserRepository
 {
-    public List<User> Index(PaginationQuery paginationQuery)
+    public IList<User> Index(IPaginationQuery paginationQuery)
     {
         IQueryable<User> query = dbContext.Users;
 
@@ -26,7 +26,7 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
             .ToList();
     }
 
-    public int GetTotalItems(PaginationQuery paginationQuery)
+    public int GetTotalItems(IPaginationQuery paginationQuery)
     {
         IQueryable<User> query = dbContext.Users;
 

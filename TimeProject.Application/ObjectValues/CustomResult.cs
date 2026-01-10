@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Shared;
 
-namespace TimeProject.Domain.RemoveDependencies.General;
+namespace TimeProject.Application.ObjectValues;
 
 public class CustomResult<T> : ICustomResult<T>
 {

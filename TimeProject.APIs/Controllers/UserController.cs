@@ -21,7 +21,7 @@ public class UserController(
 {
     [HttpGet]
     [Authorize(Policy = "IsAdmin")]
-    public ActionResult<Pagination<UserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<IPagination<UserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }

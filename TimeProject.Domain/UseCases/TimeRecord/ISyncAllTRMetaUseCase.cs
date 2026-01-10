@@ -1,9 +1,9 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface ISyncAllTrMetaUseCase
 {
-    Task<CustomResult<IEnumerable<RecordMeta>>> Handle();
+    Task<ICustomResult<IEnumerable<RecordMeta>>> Handle();
 }

@@ -5,8 +5,8 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IUserRepository
 {
-    List<User> Index(PaginationQuery paginationQuery);
-    int GetTotalItems(PaginationQuery paginationQuery);
+    IList<User> Index(IPaginationQuery paginationQuery);
+    int GetTotalItems(IPaginationQuery paginationQuery);
     Task<User> Create(User entity);
     Task<User> Update(User entity);
     Task<bool> Delete(int id);

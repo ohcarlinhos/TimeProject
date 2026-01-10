@@ -1,8 +1,8 @@
-﻿using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.User;
 
 public interface IDeleteUserUseCase
 {
-    Task<CustomResult<bool>> Handle(int id);
+    Task<ICustomResult<bool>> Handle(int id);
 }
