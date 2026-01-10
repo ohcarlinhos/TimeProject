@@ -1,6 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Application.UseCases.User.Utils;
+using TimeProject.Application.UseCases.User.Factories;
 using TimeProject.Core.Application.General;
 using TimeProject.Core.Domain.UseCases.Code;
 using TimeProject.Core.Domain.Entities;

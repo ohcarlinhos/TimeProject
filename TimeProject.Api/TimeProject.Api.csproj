@@ -35,9 +35,6 @@
 
     <ItemGroup>
         <Folder Include="Migrations\"/>
-        <Folder Include="Modules\Auth\Repositories\" />
-        <Folder Include="Modules\Auth\UseCases\" />
-        <Folder Include="Modules\Auth\Utils\" />
     </ItemGroup>
 
     <ItemGroup>

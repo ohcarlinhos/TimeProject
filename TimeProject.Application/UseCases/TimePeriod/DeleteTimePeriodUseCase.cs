@@ -1,0 +1,25 @@
+﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Application.General;
+using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.Domain.UseCases.TimePeriod;
+using TimeProject.Core.Domain.UseCases.TimeRecord;
+
+namespace TimeProject.Application.UseCases.TimePeriod;
+
+public class DeleteTimePeriodUseCase(ITimePeriodRepository repo, ISyncTrMetaUseCase syncTrMetaUseCase)
+    : IDeleteTimePeriodUseCase
+{
+    public async Task<Result<bool>> Handle(int id, int userId)
+    {
+        var result = new Result<bool>();
+        var timePeriod = await repo.FindById(id, userId);
+
+        if (timePeriod == null)
+            return result.SetError(TimePeriodMessageErrors.NotFound);
+
+        var data = await repo.Delete(timePeriod);
+        await syncTrMetaUseCase.Handle(timePeriod.TimeRecordId);
+
+        return result.SetData(data);
+    }
+}

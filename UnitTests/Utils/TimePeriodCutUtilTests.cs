@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using TimeProject.Api.Modules.TimePeriod.Utils;
+using TimeProject.Application.UseCases.TimePeriod.Utils;
 using TimeProject.Core.Domain.Entities;
 
 namespace UnitTests.Utils;
