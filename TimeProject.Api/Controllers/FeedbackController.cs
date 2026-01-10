@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.Api.Controllers.Shared;
 using TimeProject.Api.Infrastructure.Attributes;
-using TimeProject.Core.Domain.UseCases.Feedback;
-using TimeProject.Core.RemoveDependencies.Dtos.Feedback;
-using TimeProject.Core.RemoveDependencies.General.Util;
+using TimeProject.Domain.UseCases.Feedback;
+using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
+using TimeProject.Domain.RemoveDependencies.Util;
 
 namespace TimeProject.Api.Controllers;
 

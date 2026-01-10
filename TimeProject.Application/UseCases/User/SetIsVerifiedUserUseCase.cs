@@ -1,7 +1,7 @@
-﻿// using TimeProject.Core.User;
-// using TimeProject.Core.User.UseCases;
+﻿// using TimeProject.Domain.User;
+// using TimeProject.Domain.User.UseCases;
 // using TimeProject.Api.Infrastructure.Errors;
-// using TimeProject.Core.User.Repositories;
+// using TimeProject.Domain.User.Repositories;
 // using Shared.General;
 //
 // namespace TimeProject.Api.Modules.User.UseCases;

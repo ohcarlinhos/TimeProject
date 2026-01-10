@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeProject.Api", "TimeProj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{35E75EBD-209B-4B1C-A854-51A3AC1D2AE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeProject.Core", "TimeProject.Core\TimeProject.Core.csproj", "{D66F4BF6-8526-4A84-80C2-4E229759992F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeProject.Domain", "TimeProject.Domain\TimeProject.Domain.csproj", "{D66F4BF6-8526-4A84-80C2-4E229759992F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeProject.Application", "TimeProject.Application\TimeProject.Application.csproj", "{654FF997-9EBC-48B4-9307-0ED9E5960CC3}"
 EndProject

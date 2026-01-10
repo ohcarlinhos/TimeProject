@@ -1,11 +1,11 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.UseCases.CustomLog;
-using TimeProject.Core.Domain.UseCases.Login;
-using TimeProject.Core.Domain.UseCases.User;
-using TimeProject.Core.RemoveDependencies.Dtos.Auth;
-using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.UseCases.CustomLog;
+using TimeProject.Domain.UseCases.Login;
+using TimeProject.Domain.UseCases.User;
+using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auth;

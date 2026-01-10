@@ -1,8 +1,8 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.UseCases.TimeRecord;
-using TimeProject.Core.Domain.UseCases.TimerSession;
-using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.UseCases.TimeRecord;
+using TimeProject.Domain.UseCases.TimerSession;
+using TimeProject.Domain.RemoveDependencies.General;
 
 namespace TimeProject.Application.UseCases.TimerSession;
 

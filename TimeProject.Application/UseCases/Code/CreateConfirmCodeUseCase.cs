@@ -1,7 +1,7 @@
-﻿using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.UseCases.Code;
-using TimeProject.Core.RemoveDependencies.General;
+﻿using TimeProject.Domain.Entities;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.UseCases.Code;
+using TimeProject.Domain.RemoveDependencies.General;
 
 namespace TimeProject.Application.UseCases.Code;
 

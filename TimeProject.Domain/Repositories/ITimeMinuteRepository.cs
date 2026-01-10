@@ -1,0 +1,11 @@
+using TimeProject.Domain.Entities;
+
+namespace TimeProject.Domain.Repositories;
+
+public interface ITimeMinuteRepository
+{
+    Task<TimeMinuteEntity> Create(TimeMinuteEntity entity);
+    Task<List<TimeMinuteEntity>> CreateByList(List<TimeMinuteEntity> entities);
+    Task<TimeMinuteEntity?> FindById(int id, int userId);
+    Task<bool> Delete(TimeMinuteEntity entity);
+}

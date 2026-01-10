@@ -1,8 +1,8 @@
 ﻿using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Application.UseCases.Feedback.Factories;
-using TimeProject.Core.Domain.UseCases.Feedback;
-using TimeProject.Core.RemoveDependencies.Dtos.Feedback;
-using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Domain.UseCases.Feedback;
+using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
+using TimeProject.Domain.RemoveDependencies.General;
 
 namespace TimeProject.Application.UseCases.Feedback;
 

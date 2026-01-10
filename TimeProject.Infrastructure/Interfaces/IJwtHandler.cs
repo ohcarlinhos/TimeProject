@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.RemoveDependencies.Dtos.Auth;
+﻿using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 
 namespace TimeProject.Infrastructure.Interfaces;
 

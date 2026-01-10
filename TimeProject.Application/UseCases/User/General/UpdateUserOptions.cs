@@ -1,4 +1,4 @@
-﻿using TimeProject.Core.Domain.Utils;
+﻿using TimeProject.Domain.Utils;
 
 namespace TimeProject.Application.UseCases.User.General;
 

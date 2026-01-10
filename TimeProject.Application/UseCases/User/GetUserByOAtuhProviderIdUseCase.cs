@@ -1,8 +1,8 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.UseCases.User;
-using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.UseCases.User;
+using TimeProject.Domain.RemoveDependencies.General;
 
 namespace TimeProject.Application.UseCases.User;
 

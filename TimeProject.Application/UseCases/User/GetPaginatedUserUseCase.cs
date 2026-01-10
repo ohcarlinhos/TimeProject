@@ -1,9 +1,9 @@
-﻿using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.UseCases.User;
-using TimeProject.Core.Domain.Utils;
-using TimeProject.Core.RemoveDependencies.Dtos.User;
-using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.RemoveDependencies.General.Pagination;
+﻿using TimeProject.Domain.Repositories;
+using TimeProject.Domain.UseCases.User;
+using TimeProject.Domain.Utils;
+using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.RemoveDependencies.General.Pagination;
 
 namespace TimeProject.Application.UseCases.User;
 

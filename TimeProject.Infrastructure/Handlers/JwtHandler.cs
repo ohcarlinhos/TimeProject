@@ -2,8 +2,8 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.RemoveDependencies.Dtos.Auth;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
 

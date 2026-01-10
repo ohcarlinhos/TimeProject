@@ -1,10 +1,10 @@
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.UseCases.Statistic;
-using TimeProject.Core.Domain.Utils;
-using TimeProject.Core.RemoveDependencies.Dtos.Statistic;
-using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.RemoveDependencies.General.Util;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.UseCases.Statistic;
+using TimeProject.Domain.Utils;
+using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
+using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.RemoveDependencies.Util;
 
 namespace TimeProject.Application.UseCases.Statistic;
 

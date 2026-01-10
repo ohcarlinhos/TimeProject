@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.RemoveDependencies.General.Pagination;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.RemoveDependencies.General.Pagination;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;

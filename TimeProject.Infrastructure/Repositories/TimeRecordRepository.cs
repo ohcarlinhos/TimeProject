@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.Repositories.Shared;
-using TimeProject.Core.RemoveDependencies.General.Pagination;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.Repositories.Shared;
+using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Infrastructure.Database;
 using TimeProject.Infrastructure.Repositories.Shared;
 

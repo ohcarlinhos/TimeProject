@@ -1,9 +1,9 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.UseCases.Category;
-using TimeProject.Core.RemoveDependencies.Dtos.Category;
-using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.UseCases.Category;
+using TimeProject.Domain.RemoveDependencies.Dtos.Category;
+using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Entities;
 
 namespace TimeProject.Application.UseCases.Category;
 

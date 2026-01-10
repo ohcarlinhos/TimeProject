@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Utils;
+﻿using TimeProject.Domain.Entities;
+using TimeProject.Domain.Utils;
 
 namespace TimeProject.Application.UseCases.TimePeriod.Utils;
 

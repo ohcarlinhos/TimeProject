@@ -35,7 +35,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\TimeProject.Application\TimeProject.Application.csproj"/>
-        <ProjectReference Include="..\TimeProject.Core\TimeProject.Core.csproj"/>
+        <ProjectReference Include="..\TimeProject.Domain\TimeProject.Domain.csproj" />
         <ProjectReference Include="..\TimeProject.Infrastructure\TimeProject.Infrastructure.csproj"/>
     </ItemGroup>
 

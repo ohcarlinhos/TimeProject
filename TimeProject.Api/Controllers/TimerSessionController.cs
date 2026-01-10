@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.Api.Controllers.Shared;
-using TimeProject.Core.Domain.UseCases.TimerSession;
-using TimeProject.Core.RemoveDependencies.General.Util;
+using TimeProject.Domain.UseCases.TimerSession;
+using TimeProject.Domain.RemoveDependencies.Util;
 
 namespace TimeProject.Api.Controllers;
 

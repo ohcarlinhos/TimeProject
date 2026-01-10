@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.RemoveDependencies.General.Util;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.RemoveDependencies.Util;
 
 namespace TimeProject.Api.Controllers.Shared;
 

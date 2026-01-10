@@ -1,7 +1,7 @@
 using AutoMapper;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Utils;
-using TimeProject.Core.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.Utils;
+using TimeProject.Domain.RemoveDependencies.Dtos.User;
 
 namespace TimeProject.Application.UseCases.User.Utils;
 

@@ -1,10 +1,10 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Application.UseCases.User.Factories;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.UseCases.Code;
-using TimeProject.Core.Domain.UseCases.User;
-using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Domain.Entities;
+using TimeProject.Domain.UseCases.Code;
+using TimeProject.Domain.UseCases.User;
+using TimeProject.Domain.RemoveDependencies.General;
 
 namespace TimeProject.Application.UseCases.User;
 

@@ -1,4 +1,4 @@
-using TimeProject.Core.Domain.Repositories.Shared;
+using TimeProject.Domain.Repositories.Shared;
 
 namespace TimeProject.Infrastructure.Repositories.Shared;
 

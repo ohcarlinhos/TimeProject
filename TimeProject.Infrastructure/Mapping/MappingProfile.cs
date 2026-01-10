@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.RemoveDependencies.Dtos.Category;
-using TimeProject.Core.RemoveDependencies.Dtos.Codes;
-using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
-using TimeProject.Core.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.RemoveDependencies.Dtos.Category;
+using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
+using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Mapping;
 
