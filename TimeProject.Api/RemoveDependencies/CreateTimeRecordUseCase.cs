@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using TimeProject.Api.Database;
 using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
@@ -9,6 +8,7 @@ using TimeProject.Core.Domain.Utils;
 using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Api.RemoveDependencies;
 

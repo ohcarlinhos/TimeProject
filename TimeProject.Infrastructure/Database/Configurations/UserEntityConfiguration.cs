@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
 {
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
-        builder.ToTable("users");
         builder.HasKey(e => e.Id);
         builder.HasIndex(e => e.Email).IsUnique();
 

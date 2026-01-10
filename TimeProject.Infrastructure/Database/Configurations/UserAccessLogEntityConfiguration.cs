@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class UserAccessLogEntityConfiguration : IEntityTypeConfiguration<UserAccessLogEntity>
 {
     public void Configure(EntityTypeBuilder<UserAccessLogEntity> builder)
     {
-        builder.ToTable("user_access_logs");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();

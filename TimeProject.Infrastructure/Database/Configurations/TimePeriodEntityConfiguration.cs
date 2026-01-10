@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class TimePeriodEntityConfiguration : IEntityTypeConfiguration<TimePeriodEntity>
 {
     public void Configure(EntityTypeBuilder<TimePeriodEntity> builder)
     {
-        builder.ToTable("time_periods");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();

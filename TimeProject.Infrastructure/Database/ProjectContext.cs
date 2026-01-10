@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TimeProject.Api.Database.Configurations;
 using TimeProject.Core.Domain.Entities;
+using TimeProject.Infrastructure.Database.Configurations;
 
-namespace TimeProject.Api.Database;
+namespace TimeProject.Infrastructure.Database;
 
 public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
 {

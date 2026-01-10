@@ -2,13 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class ConfirmCodeEntityConfiguration : IEntityTypeConfiguration<ConfirmCodeEntity>
 {
     public void Configure(EntityTypeBuilder<ConfirmCodeEntity> builder)
     {
-        builder.ToTable("confirm_codes");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).HasMaxLength(36).IsRequired();

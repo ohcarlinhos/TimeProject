@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class TimeRecordMetaEntityConfiguration : IEntityTypeConfiguration<TimeRecordMetaEntity>
 {
     public void Configure(EntityTypeBuilder<TimeRecordMetaEntity> builder)
     {
-        builder.ToTable("time_record_metas");
         builder.HasKey(e => e.TimeRecordId);
 
         builder.Property(e => e.TimeRecordId).IsRequired();

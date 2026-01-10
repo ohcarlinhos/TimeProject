@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class UserPasswordEntityConfiguration : IEntityTypeConfiguration<UserPasswordEntity>
 {
     public void Configure(EntityTypeBuilder<UserPasswordEntity> builder)
     {
-        builder.ToTable("user_passwords");
         builder.HasKey(e => e.UserId);
 
         builder.Property(e => e.UserId).IsRequired();

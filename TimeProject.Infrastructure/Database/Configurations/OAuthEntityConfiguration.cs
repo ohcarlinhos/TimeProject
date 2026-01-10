@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class OAuthEntityConfiguration : IEntityTypeConfiguration<OAuthEntity>
 {
     public void Configure(EntityTypeBuilder<OAuthEntity> builder)
     {
-        builder.ToTable("o_auth");
         builder.HasKey(e => new { e.UserId, e.Provider });
 
         builder.Property(e => e.UserId).IsRequired();

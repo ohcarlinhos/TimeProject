@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<TimerSessionEntity>
 {
     public void Configure(EntityTypeBuilder<TimerSessionEntity> builder)
     {
-        builder.ToTable("timer_sessions");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();

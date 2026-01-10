@@ -2,13 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class TimeMinuteEntityConfiguration : IEntityTypeConfiguration<TimeMinuteEntity>
 {
     public void Configure(EntityTypeBuilder<TimeMinuteEntity> builder)
     {
-        builder.ToTable("time_minutes");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();

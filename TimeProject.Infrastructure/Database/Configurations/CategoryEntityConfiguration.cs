@@ -2,13 +2,12 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Core.Domain.Entities;
 
-namespace TimeProject.Api.Database.Configurations;
+namespace TimeProject.Infrastructure.Database.Configurations;
 
 public class CategoryEntityConfiguration : IEntityTypeConfiguration<CategoryEntity>
 {
     public void Configure(EntityTypeBuilder<CategoryEntity> builder)
     {
-        builder.ToTable("categories");
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
