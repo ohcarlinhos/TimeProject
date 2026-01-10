@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
 
 namespace TimeProject.Infrastructure.Integrations;

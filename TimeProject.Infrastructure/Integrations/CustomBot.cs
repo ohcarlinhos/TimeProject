@@ -1,6 +1,6 @@
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
-using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
 
 namespace TimeProject.Infrastructure.Integrations;

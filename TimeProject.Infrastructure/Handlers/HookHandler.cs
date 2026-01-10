@@ -1,4 +1,4 @@
-using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
 
 namespace TimeProject.Infrastructure.Handlers;

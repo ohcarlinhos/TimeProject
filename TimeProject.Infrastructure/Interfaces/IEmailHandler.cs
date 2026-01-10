@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.RemoveDependencies.Dtos.Handlers.Email;
 
-namespace TimeProject.Api.Infrastructure.Interfaces;
+namespace TimeProject.Infrastructure.Interfaces;
 
 public interface IEmailHandler
 {

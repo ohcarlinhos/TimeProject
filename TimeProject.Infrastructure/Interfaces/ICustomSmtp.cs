@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace TimeProject.Api.Infrastructure.Interfaces;
+namespace TimeProject.Infrastructure.Interfaces;
 
 public interface ICustomSmtp
 {

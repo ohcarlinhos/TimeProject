@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.APIs.Controllers.Attributes;
 using TimeProject.Infrastructure.Interfaces;
 

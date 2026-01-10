@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 using RestSharp;
-using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
 

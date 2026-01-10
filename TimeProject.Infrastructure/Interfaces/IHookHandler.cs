@@ -1,4 +1,4 @@
-namespace TimeProject.Api.Infrastructure.Interfaces;
+namespace TimeProject.Infrastructure.Interfaces;
 
 public enum HookTo
 {

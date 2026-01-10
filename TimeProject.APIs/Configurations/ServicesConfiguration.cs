@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Options;
-using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.APIs.Controllers.Middlewares;
 using TimeProject.Application.UseCases.Auth;
 using TimeProject.Application.UseCases.Category;
