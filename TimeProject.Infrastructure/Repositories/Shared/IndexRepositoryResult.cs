@@ -1,6 +1,6 @@
 using TimeProject.Core.Domain.Repositories.Shared;
 
-namespace TimeProject.Api.Repositories.Shared;
+namespace TimeProject.Infrastructure.Repositories.Shared;
 
 public class IndexRepositoryResult<T> : IIndexRepositoryResult<T>
 {

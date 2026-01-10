@@ -4,7 +4,7 @@ using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.RemoveDependencies.General.Pagination;
 using TimeProject.Infrastructure.Database;
 
-namespace TimeProject.Api.Repositories;
+namespace TimeProject.Infrastructure.Repositories;
 
 public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
 {

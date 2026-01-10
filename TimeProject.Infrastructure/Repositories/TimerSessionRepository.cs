@@ -3,7 +3,7 @@ using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
-namespace TimeProject.Api.Repositories;
+namespace TimeProject.Infrastructure.Repositories;
 
 public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
 {
