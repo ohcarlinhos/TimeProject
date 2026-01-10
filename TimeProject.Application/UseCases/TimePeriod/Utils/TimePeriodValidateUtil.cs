@@ -1,7 +1,7 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Core.Domain.Utils;
 using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.Domain.Utils;
 
 namespace TimeProject.Application.UseCases.TimePeriod.Utils;
 

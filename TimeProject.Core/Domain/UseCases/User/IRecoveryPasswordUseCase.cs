@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.RemoveDependencies.Dtos.User;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.User;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Core.Domain.UseCases.User;
 

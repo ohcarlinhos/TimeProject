@@ -4,8 +4,8 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Api.Infrastructure.Settings;
-using TimeProject.Core.RemoveDependencies.Dtos.Auth;
 using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.RemoveDependencies.Dtos.Auth;
 
 namespace TimeProject.Api.Infrastructure.Services;
 

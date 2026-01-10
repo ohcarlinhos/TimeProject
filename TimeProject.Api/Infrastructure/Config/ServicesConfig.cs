@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Options;
-using TimeProject.Api.Controllers;
 using TimeProject.Api.Infrastructure.Handlers;
 using TimeProject.Api.Infrastructure.Integrations;
 using TimeProject.Api.Infrastructure.Interfaces;

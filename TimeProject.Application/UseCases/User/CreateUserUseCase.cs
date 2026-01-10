@@ -1,11 +1,11 @@
-﻿using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.RemoveDependencies.Dtos.User;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.Domain.Utils;
 using TimeProject.Core.Domain.UseCases.User;
+using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.RemoveDependencies.Dtos.User;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Application.UseCases.User;
 

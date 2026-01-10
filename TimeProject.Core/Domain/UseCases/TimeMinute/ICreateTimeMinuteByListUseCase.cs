@@ -1,7 +1,6 @@
+using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.RemoveDependencies.Dtos.TimeMinute;
 using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.Domain.Entities;
-using TimeProject.Core.Domain.Shared;
 
 namespace TimeProject.Core.Domain.UseCases.TimeMinute;
 

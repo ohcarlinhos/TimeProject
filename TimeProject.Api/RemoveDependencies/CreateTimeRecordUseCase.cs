@@ -1,14 +1,14 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using TimeProject.Api.Database;
 using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
-using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.Domain.UseCases.TimePeriod;
 using TimeProject.Core.Domain.UseCases.TimeRecord;
 using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Api.RemoveDependencies;
 

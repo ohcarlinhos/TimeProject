@@ -1,5 +1,4 @@
-﻿using TimeProject.Application.UseCases.User.Factories;
-using TimeProject.Core.RemoveDependencies.Dtos.Handlers.Email;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.Handlers.Email;
 
 namespace TimeProject.Application.UseCases.User.Factories;
 

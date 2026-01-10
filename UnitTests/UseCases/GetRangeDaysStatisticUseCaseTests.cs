@@ -1,8 +1,8 @@
 using FluentAssertions;
 using Moq;
-using TimeProject.Core.RemoveDependencies.Dtos.Statistic;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.RemoveDependencies.Dtos.Statistic;
 
 namespace UnitTests.UseCases;
 

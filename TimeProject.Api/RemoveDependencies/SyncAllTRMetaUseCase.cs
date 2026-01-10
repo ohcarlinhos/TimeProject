@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database;
-using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.UseCases.TimeRecord;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Api.RemoveDependencies;
 

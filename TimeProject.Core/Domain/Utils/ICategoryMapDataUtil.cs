@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.RemoveDependencies.Dtos.Category;
-using TimeProject.Core.Domain.Entities;
+﻿using TimeProject.Core.Domain.Entities;
+using TimeProject.Core.RemoveDependencies.Dtos.Category;
 
 namespace TimeProject.Core.Domain.Utils;
 

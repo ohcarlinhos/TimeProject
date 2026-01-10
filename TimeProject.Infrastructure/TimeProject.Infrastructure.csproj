@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\TimeProject.Core\TimeProject.Core.csproj" />
+        <ProjectReference Include="..\TimeProject.Core\TimeProject.Core.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="AutoMapper" Version="13.0.1"/>
     </ItemGroup>
 
 </Project>

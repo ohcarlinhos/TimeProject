@@ -1,6 +1,5 @@
 ﻿using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
-using TimeProject.Core.TimeRecord.Repositories;
 using TimeProject.Core.Domain.UseCases.TimeRecord;
 
 namespace TimeProject.Application.UseCases.TimeRecord;

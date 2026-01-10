@@ -1,9 +1,9 @@
-﻿using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
-using TimeProject.Core.RemoveDependencies.General;
-using TimeProject.Core.RemoveDependencies.General.Pagination;
-using TimeProject.Core.Domain.Repositories;
+﻿using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.Domain.UseCases.TimeRecord;
 using TimeProject.Core.Domain.Utils;
+using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Core.RemoveDependencies.General.Pagination;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database;
-using TimeProject.Core.RemoveDependencies.General.Pagination;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
+using TimeProject.Core.RemoveDependencies.General.Pagination;
 
 namespace TimeProject.Api.Repositories;
 
