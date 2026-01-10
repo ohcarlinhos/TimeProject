@@ -2,12 +2,13 @@
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Category;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Category;
 
 public class DeleteCategoryUseCase(ICategoryRepository repo) : IDeleteCategoryUseCase
 {
-    public async Task<Result<bool>> Handle(int id, int userId)
+    public async Task<IResult<bool>> Handle(int id, int userId)
     {
         var result = new Result<bool>();
         var category = await repo.FindById(id);

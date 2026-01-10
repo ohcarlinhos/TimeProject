@@ -2,13 +2,13 @@
 using TimeProject.Domain.UseCases.Category;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
 using TimeProject.Domain.RemoveDependencies.General;
-using TimeProject.Domain.Entities;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Category;
 
 public class CreateCategoryUseCase(ICategoryRepository repo) : ICreateCategoryUseCase
 {
-    public async Task<Result<Domain.Entities.Category>> Handle(CategoryDto dto, int userId)
+    public async Task<IResult<Domain.Entities.Category>> Handle(ICategoryDto dto, int userId)
     {
         var result = new Result<Domain.Entities.Category>();
         var category = await repo.FindByName(dto.Name, userId);

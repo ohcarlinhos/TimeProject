@@ -2,12 +2,13 @@
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.APIs.Controllers.Shared;
 
 public class CustomController : ControllerBase
 {
-    protected ActionResult<T> HandleResponse<T>(Result<T> result)
+    protected ActionResult<T> HandleResponse<T>(IResult<T> result)
     {
         if (!string.IsNullOrEmpty(result.ActionName) && result.IsValid)
             return CreatedAtAction(result.ActionName, result.Data);

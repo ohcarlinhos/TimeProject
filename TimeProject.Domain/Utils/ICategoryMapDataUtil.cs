@@ -5,5 +5,5 @@ namespace TimeProject.Domain.Utils;
 
 public interface ICategoryMapDataUtil
 {
-    List<CategoryOutDto> Handle(List<Category> entities);
+    IList<CategoryOutDto> Handle(IList<Category> entities);
 }

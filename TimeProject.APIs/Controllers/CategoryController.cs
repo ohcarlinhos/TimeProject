@@ -22,14 +22,14 @@ public class CategoryController(
     : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<CategoryOutDto>>> Index([FromQuery] PaginationQuery paginationQuery)
+    public async Task<ActionResult<IPagination<CategoryOutDto>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(await getPaginatedCategoryUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("all")]
-    public ActionResult<List<CategoryOutDto>> Index([FromQuery] bool onlyWithData)
+    public ActionResult<IList<CategoryOutDto>> Index([FromQuery] bool onlyWithData)
     {
         return HandleResponse(getAllCategoryUseCase.Handle(UserClaims.Id(User), onlyWithData));
     }

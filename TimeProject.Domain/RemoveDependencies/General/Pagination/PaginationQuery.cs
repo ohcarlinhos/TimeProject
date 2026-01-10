@@ -1,6 +1,6 @@
 ﻿namespace TimeProject.Domain.RemoveDependencies.General.Pagination;
 
-public class PaginationQuery
+public class PaginationQuery : IPaginationQuery
 {
     private int _page = 1;
 

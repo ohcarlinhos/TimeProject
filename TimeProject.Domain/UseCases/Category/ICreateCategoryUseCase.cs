@@ -1,10 +1,9 @@
 ﻿using TimeProject.Domain.RemoveDependencies.Dtos.Category;
-using TimeProject.Domain.RemoveDependencies.General;
-using TimeProject.Domain.Entities;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Category;
 
 public interface ICreateCategoryUseCase
 {
-    Task<Result<Entities.Category>> Handle(CategoryDto dto, int userId);
+    Task<IResult<Entities.Category>> Handle(ICategoryDto dto, int userId);
 }

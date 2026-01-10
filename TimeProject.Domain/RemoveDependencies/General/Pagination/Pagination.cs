@@ -1,6 +1,6 @@
 ﻿namespace TimeProject.Domain.RemoveDependencies.General.Pagination;
 
-public class Pagination<T>
+public class Pagination<T> : IPagination<T>
 {
     public int Page { get; set; }
     public int PerPage { get; set; }
@@ -12,7 +12,7 @@ public class Pagination<T>
     public string? Sort { get; set; }
     public string? SortProp { get; set; }
 
-    public static Pagination<T> Handle(
+    public static IPagination<T> Handle(
         IEnumerable<T> data,
         int page,
         int perPage,
@@ -38,7 +38,7 @@ public class Pagination<T>
 
     public static Pagination<T> Handle(
         IEnumerable<T> data,
-        PaginationQuery paginationQuery,
+        IPaginationQuery paginationQuery,
         int totalItems)
     {
         return new Pagination<T>

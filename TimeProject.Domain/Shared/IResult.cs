@@ -4,6 +4,7 @@ namespace TimeProject.Domain.Shared;
 
 public interface IResult<T>
 {
+    public T? Data { get; }
     bool IsValid { get; }
     bool HasError { get; set; }
     string? Message { get; set; }

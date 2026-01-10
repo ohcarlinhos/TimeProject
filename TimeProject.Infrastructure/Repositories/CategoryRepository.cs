@@ -8,7 +8,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 {
-    public List<Category> Index(int userId, bool onlyWithData)
+    public IList<Category> Index(int userId, bool onlyWithData)
     {
         return onlyWithData
             ? dbContext.TimeRecords
@@ -21,7 +21,7 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
                 .ToList();
     }
 
-    public List<Category> Index(PaginationQuery paginationQuery, int userId)
+    public IList<Category> Index(IPaginationQuery paginationQuery, int userId)
     {
         IQueryable<Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
@@ -40,7 +40,7 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
             .ToList();
     }
 
-    public Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId)
+    public Task<int> GetTotalItems(IPaginationQuery paginationQuery, int userId)
     {
         IQueryable<Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);

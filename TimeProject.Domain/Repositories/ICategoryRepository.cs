@@ -5,9 +5,9 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ICategoryRepository
 {
-    List<Category> Index(int userId, bool onlyWithData);
-    List<Category> Index(PaginationQuery paginationQuery, int userId);
-    Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId);
+    IList<Category> Index(int userId, bool onlyWithData);
+    IList<Category> Index(IPaginationQuery paginationQuery, int userId);
+    Task<int> GetTotalItems(IPaginationQuery paginationQuery, int userId);
     Task<Category> Create(Category entity);
     Task<Category> Update(Category entity);
     Task<bool> Delete(Category entity);

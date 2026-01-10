@@ -1,9 +1,9 @@
 ﻿using TimeProject.Domain.RemoveDependencies.Dtos.Category;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Category;
 
 public interface IGetAllCategoryUseCase
 {
-    Result<List<CategoryOutDto>> Handle(int userId, bool onlyWithData);
+    IResult<IList<CategoryOutDto>> Handle(int userId, bool onlyWithData);
 }

@@ -1,8 +1,8 @@
-﻿using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Category;
 
 public interface IDeleteCategoryUseCase
 {
-    Task<Result<bool>> Handle(int id, int userId);
+    Task<IResult<bool>> Handle(int id, int userId);
 }
