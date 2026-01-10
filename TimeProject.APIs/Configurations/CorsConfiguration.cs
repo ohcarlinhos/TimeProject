@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Api.Configurations;
+﻿namespace TimeProject.APIs.Configurations;
 
 public static class CorsConfiguration
 {

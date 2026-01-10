@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Infrastructure.Database;
 
-namespace TimeProject.Api.Configurations;
+namespace TimeProject.APIs.Configurations;
 
 public static class DatabaseConfiguration
 {

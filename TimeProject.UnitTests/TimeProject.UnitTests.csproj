@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\TimeProject.Api\TimeProject.Api.csproj"/>
+        <ProjectReference Include="..\TimeProject.APIs\TimeProject.APIs.csproj" />
         <ProjectReference Include="..\TimeProject.Domain\TimeProject.Domain.csproj" />
     </ItemGroup>
 

@@ -5,8 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>true</InvariantGlobalization>
-        <RootNamespace>TimeProject.Api</RootNamespace>
-        <PackageId>TimeProject.Api</PackageId>
+        <PackageId>TimeProject.APIs</PackageId>
     </PropertyGroup>
 
     <ItemGroup>

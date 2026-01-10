@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Api.Controllers.Shared;
+﻿namespace TimeProject.APIs.Controllers.Shared;
 
 public class ErrorResult
 {

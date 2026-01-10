@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TimeProject.Api.Controllers.Shared;
+using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.Code;
 using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
 using TimeProject.Domain.RemoveDependencies.Util;
 
-namespace TimeProject.Api.Controllers;
+namespace TimeProject.APIs.Controllers;
 
 [ApiController]
 [Route("api/codes")]

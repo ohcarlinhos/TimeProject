@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Api.Controllers.Attributes;
+﻿namespace TimeProject.APIs.Controllers.Attributes;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class UserChallengeAttribute(bool ignoreAdmin = false) : Attribute

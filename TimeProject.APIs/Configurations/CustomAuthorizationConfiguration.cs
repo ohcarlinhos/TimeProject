@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Infrastructure.Settings;
 
-namespace TimeProject.Api.Configurations;
+namespace TimeProject.APIs.Configurations;
 
 public static class CustomAuthorizationConfiguration
 {

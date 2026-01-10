@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TimeProject.Api.Controllers.Attributes;
-using TimeProject.Api.Controllers.Shared;
+using TimeProject.APIs.Controllers.Attributes;
+using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.Feedback;
 using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
 using TimeProject.Domain.RemoveDependencies.Util;
 
-namespace TimeProject.Api.Controllers;
+namespace TimeProject.APIs.Controllers;
 
 [ApiController]
 [Route("api/feedbacks")]

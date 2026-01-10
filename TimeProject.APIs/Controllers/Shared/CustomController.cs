@@ -3,7 +3,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.RemoveDependencies.Util;
 
-namespace TimeProject.Api.Controllers.Shared;
+namespace TimeProject.APIs.Controllers.Shared;
 
 public class CustomController : ControllerBase
 {

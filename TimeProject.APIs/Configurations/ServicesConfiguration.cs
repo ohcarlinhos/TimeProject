@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
-using TimeProject.Api.Controllers.Middlewares;
 using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.APIs.Controllers.Middlewares;
 using TimeProject.Application.UseCases.Auth;
 using TimeProject.Application.UseCases.Category;
 using TimeProject.Application.UseCases.Code;
@@ -38,7 +38,7 @@ using TimeProject.Infrastructure.Repositories;
 using TimeProject.Infrastructure.Settings;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Api.Configurations;
+namespace TimeProject.APIs.Configurations;
 
 public static class ServicesConfiguration
 {
