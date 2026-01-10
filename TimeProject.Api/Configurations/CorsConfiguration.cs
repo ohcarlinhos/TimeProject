@@ -1,8 +1,8 @@
-﻿namespace TimeProject.Api.Infrastructure.Config;
+﻿namespace TimeProject.Api.Configurations;
 
-public static class CorsConfig
+public static class CorsConfiguration
 {
-    public static void AddCorsConfig(this WebApplicationBuilder builder, string customCors)
+    public static void AddCorsConfiguration(this WebApplicationBuilder builder, string customCors)
     {
         builder.Services.AddCors(options =>
         {

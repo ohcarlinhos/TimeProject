@@ -38,9 +38,9 @@ using TimeProject.Infrastructure.Repositories;
 using TimeProject.Infrastructure.Settings;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Api.Infrastructure.Config;
+namespace TimeProject.Api.Configurations;
 
-public static class ServicesConfig
+public static class ServicesConfiguration
 {
     public static void AddServicesConfig(this WebApplicationBuilder builder)
     {

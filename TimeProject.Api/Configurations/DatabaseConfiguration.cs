@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Infrastructure.Database;
 
-namespace TimeProject.Api.Infrastructure.Config;
+namespace TimeProject.Api.Configurations;
 
-public static class DatabaseConfig
+public static class DatabaseConfiguration
 {
     public static void AddDatabaseConfig(this WebApplicationBuilder builder)
     {

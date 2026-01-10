@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Infrastructure.Settings;
 
-namespace TimeProject.Api.Infrastructure.Config;
+namespace TimeProject.Api.Configurations;
 
-public static class CustomAuthorizationConfig
+public static class CustomAuthorizationConfiguration
 {
-    public static void AddCustomAuthorizationConfig(this WebApplicationBuilder builder)
+    public static void AddCustomAuthorizationConfiguration(this WebApplicationBuilder builder)
     {
         var settings = builder.Configuration.GetRequiredSection("Jwt").Get<JwtSettings>();
 

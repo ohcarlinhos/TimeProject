@@ -1,8 +1,8 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace TimeProject.Api.Infrastructure.Config;
+namespace TimeProject.Api.Configurations;
 
-public static class SwaggerConfig
+public static class SwaggerConfiguration
 {
     public static void AddSwaggerConfig(this WebApplicationBuilder builder)
     {

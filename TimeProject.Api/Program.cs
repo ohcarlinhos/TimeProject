@@ -1,15 +1,15 @@
 using System.Text.Json.Serialization;
+using TimeProject.Api.Configurations;
 using TimeProject.Api.Controllers.Middlewares;
-using TimeProject.Api.Infrastructure.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
 const string customCorsName = "_customCors";
-builder.AddCorsConfig(customCorsName);
+builder.AddCorsConfiguration(customCorsName);
 
 // Injeção de todos os serviços.
 builder.AddServicesConfig();
-builder.AddCustomAuthorizationConfig();
+builder.AddCustomAuthorizationConfiguration();
 
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
