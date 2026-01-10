@@ -1,5 +1,5 @@
 using AutoMapper;
-using TimeProject.Core.Application.Dtos.Category;
+using TimeProject.Core.RemoveDependencies.Dtos.Category;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Utils;
 

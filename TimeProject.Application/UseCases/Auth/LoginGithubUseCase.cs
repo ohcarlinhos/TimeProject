@@ -1,9 +1,9 @@
 ﻿using Octokit;
 using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Core.Application.Dtos.Auth;
-using TimeProject.Core.Application.Dtos.User;
-using TimeProject.Core.Application.General;
+using TimeProject.Core.RemoveDependencies.Dtos.Auth;
+using TimeProject.Core.RemoveDependencies.Dtos.User;
+using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.UseCases.CustomLog;
 using TimeProject.Core.Domain.UseCases.Login;

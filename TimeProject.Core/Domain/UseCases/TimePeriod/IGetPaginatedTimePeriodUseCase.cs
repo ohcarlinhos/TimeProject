@@ -1,6 +1,6 @@
-﻿using TimeProject.Core.Application.Dtos.TimePeriod;
-using TimeProject.Core.Application.General;
-using TimeProject.Core.Application.General.Pagination;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Core.RemoveDependencies.General.Pagination;
 
 namespace TimeProject.Core.Domain.UseCases.TimePeriod;
 

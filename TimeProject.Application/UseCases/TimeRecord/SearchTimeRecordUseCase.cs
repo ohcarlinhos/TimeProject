@@ -1,4 +1,4 @@
-﻿using TimeProject.Core.Application.General;
+﻿using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.Domain.UseCases.TimeRecord;
 

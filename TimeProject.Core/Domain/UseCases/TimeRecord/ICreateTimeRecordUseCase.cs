@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.Application.Dtos.TimeRecord;
-using TimeProject.Core.Application.General;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Core.Domain.UseCases.TimeRecord;
 

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using TimeProject.Core.Application.Dtos.Category;
-using TimeProject.Core.Application.Dtos.Codes;
-using TimeProject.Core.Application.Dtos.TimePeriod;
-using TimeProject.Core.Application.Dtos.TimeRecord;
-using TimeProject.Core.Application.Dtos.User;
+using TimeProject.Core.RemoveDependencies.Dtos.Category;
+using TimeProject.Core.RemoveDependencies.Dtos.Codes;
+using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Core.RemoveDependencies.Dtos.User;
 using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Api.Infrastructure.Mapping;

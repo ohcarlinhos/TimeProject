@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.Application.Dtos.Feedback;
-using TimeProject.Core.Application.General;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.Feedback;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Core.Domain.UseCases.Feedback;
 

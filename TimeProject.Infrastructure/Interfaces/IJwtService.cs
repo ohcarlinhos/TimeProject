@@ -1,4 +1,4 @@
-﻿using TimeProject.Core.Application.Dtos.Auth;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.Auth;
 using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Api.Infrastructure.Interfaces;

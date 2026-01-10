@@ -1,6 +1,6 @@
-using TimeProject.Core.Application.Dtos.Statistic;
-using TimeProject.Core.Application.General;
-using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.RemoveDependencies.Dtos.Statistic;
+using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Core.RemoveDependencies.General.Util;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.Domain.UseCases.Statistic;

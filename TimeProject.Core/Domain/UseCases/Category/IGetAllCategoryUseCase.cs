@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.Application.Dtos.Category;
-using TimeProject.Core.Application.General;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.Category;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Core.Domain.UseCases.Category;
 

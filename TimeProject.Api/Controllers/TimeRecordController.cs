@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.Api.Controllers.Shared;
-using TimeProject.Core.Application.Dtos.TimePeriod;
-using TimeProject.Core.Application.Dtos.TimeRecord;
-using TimeProject.Core.Application.General.Pagination;
-using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Core.RemoveDependencies.General.Pagination;
+using TimeProject.Core.RemoveDependencies.General.Util;
 using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.Domain.UseCases.TimeRecord;
 

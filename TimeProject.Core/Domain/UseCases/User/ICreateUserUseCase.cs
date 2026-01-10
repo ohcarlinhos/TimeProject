@@ -1,6 +1,6 @@
-﻿using TimeProject.Core.Application.Dtos.Auth;
-using TimeProject.Core.Application.Dtos.User;
-using TimeProject.Core.Application.General;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.Auth;
+using TimeProject.Core.RemoveDependencies.Dtos.User;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Core.Domain.UseCases.User;
 

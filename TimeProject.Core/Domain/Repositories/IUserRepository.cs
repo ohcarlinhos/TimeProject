@@ -1,4 +1,4 @@
-﻿using TimeProject.Core.Application.General.Pagination;
+﻿using TimeProject.Core.RemoveDependencies.General.Pagination;
 using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Core.Domain.Repositories;

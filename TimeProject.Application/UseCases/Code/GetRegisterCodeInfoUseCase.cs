@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using TimeProject.Core.Application.Dtos.Codes;
-using TimeProject.Core.Application.General;
+using TimeProject.Core.RemoveDependencies.Dtos.Codes;
+using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Core.Domain.UseCases.Code;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;

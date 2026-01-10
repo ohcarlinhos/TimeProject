@@ -1,4 +1,4 @@
-﻿using TimeProject.Core.Application.Dtos.User;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.User;
 using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Core.Domain.Utils;

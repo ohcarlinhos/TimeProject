@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Application\"/>
+        <Folder Include="RemoveDependencies\" />
         <Folder Include="Domain\UseCases\"/>
     </ItemGroup>
 

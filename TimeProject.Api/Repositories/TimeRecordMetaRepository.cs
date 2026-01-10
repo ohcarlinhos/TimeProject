@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Api.Database;
-using TimeProject.Core.Application.General.Util;
+using TimeProject.Core.RemoveDependencies.General.Util;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
 

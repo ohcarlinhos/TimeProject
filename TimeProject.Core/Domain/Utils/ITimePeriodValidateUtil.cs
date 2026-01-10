@@ -1,5 +1,5 @@
-﻿using TimeProject.Core.Application.Dtos.TimePeriod;
-using TimeProject.Core.Application.General;
+﻿using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Core.RemoveDependencies.General;
 
 namespace TimeProject.Core.Domain.Utils;
 

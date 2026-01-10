@@ -1,4 +1,4 @@
-﻿using TimeProject.Core.Application.General;
+﻿using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Core.Domain.Entities;
 
 namespace TimeProject.Core.Domain.UseCases.TimeRecord;
