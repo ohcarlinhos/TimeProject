@@ -5,8 +5,8 @@ namespace TimeProject.Domain.UseCases.User;
 
 public class GetUserPasswordByEmailResult
 {
-    public UserPasswordEntity UserPassword { get; set; } = null!;
-    public UserEntity User { get; set; } = null!;
+    public UserPassword UserPassword { get; set; } = null!;
+    public Entities.User User { get; set; } = null!;
 }
 
 public interface IGetUserPasswordByEmailUseCase

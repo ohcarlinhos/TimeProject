@@ -8,10 +8,10 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
 {
-    public List<TimePeriodEntity> Index(int timeRecordId, int userId, PaginationQuery paginationQuery)
+    public List<PeriodRecord> Index(int timeRecordId, int userId, PaginationQuery paginationQuery)
     {
         return db.TimePeriods
-            .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
+            .Where(timePeriod => timePeriod.RecordId == timeRecordId && timePeriod.UserId == userId)
             .OrderByDescending(tp => tp.Start)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
@@ -21,11 +21,11 @@ public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
     public async Task<int> GetTotalItems(int timeRecordId, PaginationQuery paginationQuery, int userId)
     {
         return await db.TimePeriods
-            .Where(timePeriod => timePeriod.TimeRecordId == timeRecordId && timePeriod.UserId == userId)
+            .Where(timePeriod => timePeriod.RecordId == timeRecordId && timePeriod.UserId == userId)
             .CountAsync();
     }
 
-    public async Task<TimePeriodEntity> Create(TimePeriodEntity entity)
+    public async Task<PeriodRecord> Create(PeriodRecord entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.CreatedAt = now;
@@ -36,7 +36,7 @@ public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
         return entity;
     }
 
-    public async Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entities)
+    public async Task<List<PeriodRecord>> CreateByList(List<PeriodRecord> entities)
     {
         var now = DateTime.Now.ToUniversalTime();
 
@@ -51,7 +51,7 @@ public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
         return entities;
     }
 
-    public async Task<TimePeriodEntity> Update(TimePeriodEntity entity)
+    public async Task<PeriodRecord> Update(PeriodRecord entity)
     {
         entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 
@@ -60,21 +60,21 @@ public class TimePeriodRepository(ProjectContext db) : ITimePeriodRepository
         return entity;
     }
 
-    public async Task<bool> Delete(TimePeriodEntity entity)
+    public async Task<bool> Delete(PeriodRecord entity)
     {
         db.TimePeriods.Remove(entity);
         await db.SaveChangesAsync();
         return true;
     }
 
-    public async Task<bool> DeleteByList(List<TimePeriodEntity> entityList)
+    public async Task<bool> DeleteByList(List<PeriodRecord> entityList)
     {
         db.TimePeriods.RemoveRange(entityList);
         await db.SaveChangesAsync();
         return true;
     }
 
-    public async Task<TimePeriodEntity?> FindById(int id, int userId)
+    public async Task<PeriodRecord?> FindById(int id, int userId)
     {
         return await db.TimePeriods
             .FirstOrDefaultAsync(timePeriod => timePeriod.Id == id && timePeriod.UserId == userId);

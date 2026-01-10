@@ -6,12 +6,12 @@ public interface ITimeRecordHistoryRepository
 {
     Task<List<DateTime>> GetDistinctDates(int timeRecordId, int userId, int addHours = 0);
 
-    Task<List<TimePeriodEntity>> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
+    Task<List<PeriodRecord>> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
         DateTime initDate, DateTime endDate);
 
-    Task<List<TimeMinuteEntity>> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
+    Task<List<MinuteRecord>> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate);
 
-    Task<List<TimerSessionEntity>> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
+    Task<List<TimerSession>> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate);
 }

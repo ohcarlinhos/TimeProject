@@ -20,7 +20,7 @@ public class LoginGithubUseCase(
 )
     : ILoginGithubUseCase
 {
-    public async Task<Result<JwtResult>> Handle(LoginGithubDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtResult>> Handle(LoginGithubDto dto, UserAccessLog ac)
     {
         var result = new Result<JwtResult>();
 

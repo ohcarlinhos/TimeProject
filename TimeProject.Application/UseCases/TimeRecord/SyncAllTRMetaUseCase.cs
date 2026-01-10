@@ -12,9 +12,9 @@ public class SyncAllTrMetaUseCase(
 )
     : ISyncAllTrMetaUseCase
 {
-    public async Task<Result<IEnumerable<TimeRecordMetaEntity>>> Handle()
+    public async Task<Result<IEnumerable<RecordMeta>>> Handle()
     {
-        IEnumerable<TimeRecordEntity> list = await db.TimeRecords.ToListAsync();
-        return new Result<IEnumerable<TimeRecordMetaEntity>> { Data = await syncTrMetaUseCase.Handle(list, true) };
+        IEnumerable<Domain.Entities.Record> list = await db.TimeRecords.ToListAsync();
+        return new Result<IEnumerable<RecordMeta>> { Data = await syncTrMetaUseCase.Handle(list, true) };
     }
 }

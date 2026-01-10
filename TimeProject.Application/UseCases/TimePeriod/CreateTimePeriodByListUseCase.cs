@@ -15,10 +15,10 @@ public class CreateTimePeriodByListUseCase(
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : ICreateTimePeriodByListUseCase
 {
-    public async Task<Result<List<TimePeriodEntity>>> Handle(TimePeriodListDto dto, int timeRecordId, int userId)
+    public async Task<Result<List<Domain.Entities.PeriodRecord>>> Handle(TimePeriodListDto dto, int timeRecordId, int userId)
     {
-        var result = new Result<List<TimePeriodEntity>>();
-        List<TimePeriodEntity> list = [];
+        var result = new Result<List<Domain.Entities.PeriodRecord>>();
+        List<Domain.Entities.PeriodRecord> list = [];
 
         foreach (var timePeriod in dto.TimePeriods)
         {
@@ -27,10 +27,10 @@ public class CreateTimePeriodByListUseCase(
                 break;
 
             if (timePeriodValidateUtil.HasMinSize(timePeriod))
-                list.Add(new TimePeriodEntity
+                list.Add(new Domain.Entities.PeriodRecord
                 {
                     UserId = userId,
-                    TimeRecordId = timeRecordId,
+                    RecordId = timeRecordId,
                     Start = timePeriod.Start,
                     End = timePeriod.End
                 });
@@ -39,8 +39,8 @@ public class CreateTimePeriodByListUseCase(
         if (result.HasError) return result;
         if (list.Count == 0) return result.SetData([]);
 
-        var timerSession = await timerSessionRepo.Create(new TimerSessionEntity
-            { TimeRecordId = timeRecordId, UserId = userId, Type = dto.Type, From = dto.From }
+        var timerSession = await timerSessionRepo.Create(new Domain.Entities.TimerSession
+            { RecordId = timeRecordId, UserId = userId, Type = dto.Type, From = dto.From }
         );
 
         list.ForEach(i => { i.TimerSessionId = timerSession.Id; });

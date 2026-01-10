@@ -55,9 +55,9 @@ public class RangeStatistic
 public class RangeStatisticsData
 {
     public RangeStatistic Statistic { get; set; } = new();
-    public List<TimePeriodEntity> TimePeriods { get; set; } = [];
-    public List<TimeMinuteEntity> TimeMinutes { get; set; } = [];
-    public List<TimerSessionEntity> Sessions { get; set; } = [];
+    public List<Entities.PeriodRecord> TimePeriods { get; set; } = [];
+    public List<Entities.MinuteRecord> TimeMinutes { get; set; } = [];
+    public List<TimerSession> Sessions { get; set; } = [];
 }
 
 public class RangeStatisticsWithDays

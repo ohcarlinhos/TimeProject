@@ -26,7 +26,7 @@ public class CreateUserUseCase(
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
         var entity = await repository
-            .Create(new UserEntity
+            .Create(new Domain.Entities.User
             {
                 Name = dto.Name,
                 Email = dto.Email,

@@ -7,7 +7,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class TimeMinuteRepository(ProjectContext db) : ITimeMinuteRepository
 {
-    public async Task<TimeMinuteEntity> Create(TimeMinuteEntity entity)
+    public async Task<MinuteRecord> Create(MinuteRecord entity)
     {
         var now = DateTime.Now.ToUniversalTime();
 
@@ -20,7 +20,7 @@ public class TimeMinuteRepository(ProjectContext db) : ITimeMinuteRepository
         return entity;
     }
 
-    public async Task<List<TimeMinuteEntity>> CreateByList(List<TimeMinuteEntity> entities)
+    public async Task<List<MinuteRecord>> CreateByList(List<MinuteRecord> entities)
     {
         var now = DateTime.Now.ToUniversalTime();
 
@@ -36,12 +36,12 @@ public class TimeMinuteRepository(ProjectContext db) : ITimeMinuteRepository
         return entities;
     }
 
-    public Task<TimeMinuteEntity?> FindById(int id, int userId)
+    public Task<MinuteRecord?> FindById(int id, int userId)
     {
         return db.TimeMinutes.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
     }
 
-    public async Task<bool> Delete(TimeMinuteEntity entity)
+    public async Task<bool> Delete(MinuteRecord entity)
     {
         db.TimeMinutes.Remove(entity);
         await db.SaveChangesAsync();

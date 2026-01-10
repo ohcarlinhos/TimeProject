@@ -1,8 +1,6 @@
-﻿using TimeProject.Domain.Entities;
+﻿namespace TimeProject.Domain.Entities;
 
-namespace TimeProject.Domain.Entities;
-
-public class TimeRecordEntity
+public class Record
 {
     public int Id { get; set; }
     public string? Title { get; set; }
@@ -16,8 +14,8 @@ public class TimeRecordEntity
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public IEnumerable<TimePeriodEntity>? TimePeriods { get; set; }
+    public IEnumerable<PeriodRecord>? PeriodRecords { get; set; }
 
-    public CategoryEntity? Category { get; set; }
-    public TimeRecordMetaEntity? Meta { get; set; }
+    public Category? Category { get; set; }
+    public RecordMeta? Meta { get; set; }
 }

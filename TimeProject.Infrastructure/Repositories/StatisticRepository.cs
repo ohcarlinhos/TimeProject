@@ -7,7 +7,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class StatisticRepository(ProjectContext db) : IStatisticRepository
 {
-    public Task<List<TimePeriodEntity>> GetTimePeriodsByRange(
+    public Task<List<PeriodRecord>> GetTimePeriodsByRange(
         int userId,
         DateTime initDate,
         DateTime endDate,
@@ -16,14 +16,14 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
     {
         var query = db.TimePeriods.AsQueryable();
 
-        if (timeRecord != null) query = query.Where(i => i.TimeRecordId == timeRecord);
+        if (timeRecord != null) query = query.Where(i => i.RecordId == timeRecord);
 
         return query.Where(e => (
             (e.Start >= initDate && e.Start < endDate) || (e.End > initDate && e.End <= endDate)
         ) && userId == e.UserId).ToListAsync();
     }
 
-    public Task<List<TimerSessionEntity>> GetTimerSessionsByRange(
+    public Task<List<TimerSession>> GetTimerSessionsByRange(
         int userId,
         DateTime initDate,
         DateTime endDate,
@@ -32,33 +32,33 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
     {
         var query = db.TimerSessions.AsQueryable();
 
-        if (timeRecord != null) query = query.Where(i => i.TimeRecordId == timeRecord);
+        if (timeRecord != null) query = query.Where(i => i.RecordId == timeRecord);
 
         return query.Where(p =>
                 (
                     (
-                        p.TimePeriods!.Count(e => e.Start >= initDate) > 0
+                        p.PeriodRecords!.Count(e => e.Start >= initDate) > 0
                         &&
-                        p.TimePeriods!.Count(e => e.Start < endDate) > 0
+                        p.PeriodRecords!.Count(e => e.Start < endDate) > 0
                     )
                     ||
                     (
-                        p.TimePeriods!.Count(e => e.End > initDate) > 0
+                        p.PeriodRecords!.Count(e => e.End > initDate) > 0
                         &&
-                        p.TimePeriods!.Count(e => e.End <= endDate) > 0
+                        p.PeriodRecords!.Count(e => e.End <= endDate) > 0
                     )
                 )
                 && userId == p.UserId)
-            .Include(p => p.TimePeriods!.OrderBy(q => q.Start))
+            .Include(p => p.PeriodRecords!.OrderBy(q => q.Start))
             .ToListAsync();
     }
 
-    public Task<List<TimeMinuteEntity>> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
+    public Task<List<MinuteRecord>> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
         int? timeRecord = null)
     {
         var query = db.TimeMinutes.AsQueryable();
 
-        if (timeRecord != null) query = query.Where(i => i.TimeRecordId == timeRecord);
+        if (timeRecord != null) query = query.Where(i => i.RecordId == timeRecord);
 
         return query.Where(tm =>
                 tm.UserId == userId

@@ -4,9 +4,9 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class OAuthEntityConfiguration : IEntityTypeConfiguration<OAuthEntity>
+public class OAuthEntityConfiguration : IEntityTypeConfiguration<OAuth>
 {
-    public void Configure(EntityTypeBuilder<OAuthEntity> builder)
+    public void Configure(EntityTypeBuilder<OAuth> builder)
     {
         builder.HasKey(e => new { e.UserId, e.Provider });
 
@@ -17,6 +17,6 @@ public class OAuthEntityConfiguration : IEntityTypeConfiguration<OAuthEntity>
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
     }
 }

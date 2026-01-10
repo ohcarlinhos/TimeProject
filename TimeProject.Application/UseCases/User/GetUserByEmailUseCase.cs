@@ -8,9 +8,9 @@ namespace TimeProject.Application.UseCases.User;
 
 public class GetUserByEmailUseCase(IUserRepository repo) : IGetUserByEmailUseCase
 {
-    public async Task<Result<UserEntity>> Handle(string email)
+    public async Task<Result<Domain.Entities.User>> Handle(string email)
     {
-        var result = new Result<UserEntity>();
+        var result = new Result<Domain.Entities.User>();
         var user = await repo.FindByEmail(email);
 
         return user == null ? result.SetError(UserMessageErrors.NotFound) : result.SetData(user);

@@ -8,7 +8,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 {
-    public List<CategoryEntity> Index(int userId, bool onlyWithData)
+    public List<Category> Index(int userId, bool onlyWithData)
     {
         return onlyWithData
             ? dbContext.TimeRecords
@@ -21,9 +21,9 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
                 .ToList();
     }
 
-    public List<CategoryEntity> Index(PaginationQuery paginationQuery, int userId)
+    public List<Category> Index(PaginationQuery paginationQuery, int userId)
     {
-        IQueryable<CategoryEntity> query = dbContext.Categories;
+        IQueryable<Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
@@ -42,7 +42,7 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 
     public Task<int> GetTotalItems(PaginationQuery paginationQuery, int userId)
     {
-        IQueryable<CategoryEntity> query = dbContext.Categories;
+        IQueryable<Category> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
@@ -51,7 +51,7 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
         return query.CountAsync();
     }
 
-    public async Task<CategoryEntity> Create(CategoryEntity entity)
+    public async Task<Category> Create(Category entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.CreatedAt = now;
@@ -62,7 +62,7 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
         return entity;
     }
 
-    public async Task<CategoryEntity> Update(CategoryEntity entity)
+    public async Task<Category> Update(Category entity)
     {
         entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 
@@ -71,31 +71,31 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
         return entity;
     }
 
-    public async Task<bool> Delete(CategoryEntity entity)
+    public async Task<bool> Delete(Category entity)
     {
         dbContext.Categories.Remove(entity);
         await dbContext.SaveChangesAsync();
         return true;
     }
 
-    public async Task<CategoryEntity?> FindById(int id)
+    public async Task<Category?> FindById(int id)
     {
         return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<CategoryEntity?> FindById(int id, int userId)
+    public async Task<Category?> FindById(int id, int userId)
     {
         return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
     }
 
-    public async Task<CategoryEntity?> FindByName(string name, int userId)
+    public async Task<Category?> FindByName(string name, int userId)
     {
         return await dbContext.Categories
             .Where(category => category.Name == name && category.UserId == userId)
             .FirstOrDefaultAsync();
     }
 
-    private static IQueryable<CategoryEntity> SearchWhereConditional(IQueryable<CategoryEntity> query, string search)
+    private static IQueryable<Category> SearchWhereConditional(IQueryable<Category> query, string search)
     {
         return query.Where(c =>
             EF.Functions.Like(

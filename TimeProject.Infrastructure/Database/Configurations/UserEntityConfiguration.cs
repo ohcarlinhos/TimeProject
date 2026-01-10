@@ -4,9 +4,9 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
+public class UserEntityConfiguration : IEntityTypeConfiguration<User>
 {
-    public void Configure(EntityTypeBuilder<UserEntity> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(e => e.Id);
         builder.HasIndex(e => e.Email).IsUnique();

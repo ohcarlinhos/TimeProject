@@ -7,14 +7,14 @@ namespace TimeProject.Application.UseCases.Code;
 
 public class CreateConfirmCodeUseCase(IConfirmCodeRepository repo) : ICreateConfirmCodeUseCase
 {
-    public async Task<Result<ConfirmCodeEntity>> Handle(int userId, ConfirmCodeType type)
+    public async Task<Result<ConfirmCode>> Handle(int userId, ConfirmCodeType type)
     {
-        var result = new Result<ConfirmCodeEntity>();
+        var result = new Result<ConfirmCode>();
         var codes = await repo.FindByUserIdThatIsNotExpiredOrUsed(userId, type);
 
         return codes.Count > 0
             ? result.SetData(codes.First())
-            : result.SetData(await repo.Create(new ConfirmCodeEntity
+            : result.SetData(await repo.Create(new ConfirmCode
             {
                 UserId = userId,
                 ExpireDate = DateTime.Now.AddMinutes(15).ToUniversalTime(),

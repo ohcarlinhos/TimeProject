@@ -9,9 +9,9 @@ namespace TimeProject.Application.UseCases.User;
 public class GetUserByOAtuhProviderIdUseCase(IUserRepository repository, IOAuthRepository oAtuhRepository)
     : IGetUserByOAtuhProviderIdUseCase
 {
-    public async Task<Result<UserEntity>> Handle(string provider, string id)
+    public async Task<Result<Domain.Entities.User>> Handle(string provider, string id)
     {
-        var result = new Result<UserEntity>();
+        var result = new Result<Domain.Entities.User>();
 
         var userOAuth = await oAtuhRepository.FindByUserProviderId(provider, id);
         if (userOAuth == null) return result.SetError(UserMessageErrors.NotFound);

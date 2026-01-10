@@ -5,6 +5,6 @@ namespace TimeProject.Domain.Utils;
 
 public interface ITimePeriodMapDataUtil
 {
-    public TimePeriodOutDto Handle(TimePeriodEntity entity);
-    public List<TimePeriodOutDto> Handle(List<TimePeriodEntity> entity);
+    public TimePeriodOutDto Handle(PeriodRecord entity);
+    public List<TimePeriodOutDto> Handle(List<PeriodRecord> entity);
 }

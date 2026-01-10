@@ -8,9 +8,9 @@ namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class GetTimeRecordByIdUseCase(ITimeRecordRepository repo) : IGetTimeRecordByIdUseCase
 {
-    public async Task<Result<TimeRecordEntity>> Handle(int id, int userId)
+    public async Task<Result<Domain.Entities.Record>> Handle(int id, int userId)
     {
-        var result = new Result<TimeRecordEntity>();
+        var result = new Result<Domain.Entities.Record>();
         var entity = await repo.FindById(id, userId);
 
         return entity == null

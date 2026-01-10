@@ -4,8 +4,8 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ITimeMinuteRepository
 {
-    Task<TimeMinuteEntity> Create(TimeMinuteEntity entity);
-    Task<List<TimeMinuteEntity>> CreateByList(List<TimeMinuteEntity> entities);
-    Task<TimeMinuteEntity?> FindById(int id, int userId);
-    Task<bool> Delete(TimeMinuteEntity entity);
+    Task<MinuteRecord> Create(MinuteRecord entity);
+    Task<List<MinuteRecord>> CreateByList(List<MinuteRecord> entities);
+    Task<MinuteRecord?> FindById(int id, int userId);
+    Task<bool> Delete(MinuteRecord entity);
 }

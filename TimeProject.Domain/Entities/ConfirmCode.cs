@@ -6,7 +6,7 @@ public enum ConfirmCodeType
     Recovery
 }
 
-public class ConfirmCodeEntity
+public class ConfirmCode
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public DateTime ExpireDate { get; set; }
@@ -18,5 +18,5 @@ public class ConfirmCodeEntity
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public UserEntity? User { get; set; }
+    public User? User { get; set; }
 }

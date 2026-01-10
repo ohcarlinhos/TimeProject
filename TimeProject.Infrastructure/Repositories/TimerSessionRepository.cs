@@ -7,7 +7,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
 {
-    public async Task<TimerSessionEntity> Create(TimerSessionEntity entity)
+    public async Task<TimerSession> Create(TimerSession entity)
     {
         var now = DateTime.Now.ToUniversalTime();
 
@@ -20,14 +20,14 @@ public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
         return entity;
     }
 
-    public Task<TimerSessionEntity?> FindById(int id, int userId)
+    public Task<TimerSession?> FindById(int id, int userId)
     {
         return db.TimerSessions
-            .Include(e => e.TimePeriods)
+            .Include(e => e.PeriodRecords)
             .FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
     }
 
-    public async Task<bool> Delete(TimerSessionEntity entity)
+    public async Task<bool> Delete(TimerSession entity)
     {
         db.TimerSessions.Remove(entity);
         await db.SaveChangesAsync();

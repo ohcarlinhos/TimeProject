@@ -16,7 +16,7 @@ public class TimePeriodCutUtilTests
         var initDate = DateTime.Today;
         var endDate = DateTime.Today.AddDays(1);
 
-        var list = new List<TimePeriodEntity>
+        var list = new List<PeriodRecord>
         {
             // start is before then initDate
             new()

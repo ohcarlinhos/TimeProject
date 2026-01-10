@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimePeriod;
 
 public interface ICreateTimePeriodUseCase
 {
-    Task<Result<TimePeriodEntity>> Handle(CreateTimePeriodDto dto, int userId);
+    Task<Result<Entities.PeriodRecord>> Handle(CreateTimePeriodDto dto, int userId);
 }

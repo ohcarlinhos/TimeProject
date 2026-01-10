@@ -4,11 +4,11 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IConfirmCodeRepository
 {
-    Task<ConfirmCodeEntity> Create(ConfirmCodeEntity entity);
-    Task<ConfirmCodeEntity> Update(ConfirmCodeEntity entity);
-    Task<ConfirmCodeEntity?> FindById(string id);
-    Task<ConfirmCodeEntity?> FindByIdAndEmail(string id, string email);
-    Task<List<ConfirmCodeEntity>> FindByUserId(int userId);
-    Task<List<ConfirmCodeEntity>> FindByUserId(int userId, ConfirmCodeType type);
-    Task<List<ConfirmCodeEntity>> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type);
+    Task<ConfirmCode> Create(ConfirmCode entity);
+    Task<ConfirmCode> Update(ConfirmCode entity);
+    Task<ConfirmCode?> FindById(string id);
+    Task<ConfirmCode?> FindByIdAndEmail(string id, string email);
+    Task<List<ConfirmCode>> FindByUserId(int userId);
+    Task<List<ConfirmCode>> FindByUserId(int userId, ConfirmCodeType type);
+    Task<List<ConfirmCode>> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type);
 }

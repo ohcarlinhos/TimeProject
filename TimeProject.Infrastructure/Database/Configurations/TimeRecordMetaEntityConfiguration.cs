@@ -4,13 +4,13 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimeRecordMetaEntityConfiguration : IEntityTypeConfiguration<TimeRecordMetaEntity>
+public class TimeRecordMetaEntityConfiguration : IEntityTypeConfiguration<RecordMeta>
 {
-    public void Configure(EntityTypeBuilder<TimeRecordMetaEntity> builder)
+    public void Configure(EntityTypeBuilder<RecordMeta> builder)
     {
-        builder.HasKey(e => e.TimeRecordId);
+        builder.HasKey(e => e.RecordId);
 
-        builder.Property(e => e.TimeRecordId).IsRequired();
+        builder.Property(e => e.RecordId).IsRequired();
         builder.Property(e => e.FormattedTime).HasMaxLength(24);
         builder.Property(e => e.TimeOnSeconds);
         builder.Property(e => e.TimeCount);
@@ -20,7 +20,7 @@ public class TimeRecordMetaEntityConfiguration : IEntityTypeConfiguration<TimeRe
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<TimeRecordEntity>().WithOne(e => e.Meta)
-            .HasForeignKey<TimeRecordMetaEntity>(e => e.TimeRecordId);
+        builder.HasOne<Record>().WithOne(e => e.Meta)
+            .HasForeignKey<RecordMeta>(e => e.RecordId);
     }
 }

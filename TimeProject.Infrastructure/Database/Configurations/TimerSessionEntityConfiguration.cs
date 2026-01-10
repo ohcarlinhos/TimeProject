@@ -4,27 +4,27 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<TimerSessionEntity>
+public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<TimerSession>
 {
-    public void Configure(EntityTypeBuilder<TimerSessionEntity> builder)
+    public void Configure(EntityTypeBuilder<TimerSession> builder)
     {
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(e => e.TimeRecordId).IsRequired();
+        builder.Property(e => e.RecordId).IsRequired();
         builder.Property(e => e.Type).HasMaxLength(10);
         builder.Property(e => e.From).HasMaxLength(15);
 
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
 
-        builder.HasOne<TimeRecordEntity>(e => e.TimeRecord)
+        builder.HasOne<Record>(e => e.Record)
             .WithMany()
-            .HasForeignKey(e => e.TimeRecordId);
+            .HasForeignKey(e => e.RecordId);
 
-        builder.HasMany(e => e.TimePeriods)
+        builder.HasMany(e => e.PeriodRecords)
             .WithOne(e => e.TimerSession)
             .HasForeignKey(e => e.TimerSessionId)
             .OnDelete(DeleteBehavior.SetNull);

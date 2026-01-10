@@ -8,9 +8,9 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserRepository(ProjectContext dbContext) : IUserRepository
 {
-    public List<UserEntity> Index(PaginationQuery paginationQuery)
+    public List<User> Index(PaginationQuery paginationQuery)
     {
-        IQueryable<UserEntity> query = dbContext.Users;
+        IQueryable<User> query = dbContext.Users;
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
             query = SearchWhereConditional(query, paginationQuery.Search);
@@ -28,7 +28,7 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
 
     public int GetTotalItems(PaginationQuery paginationQuery)
     {
-        IQueryable<UserEntity> query = dbContext.Users;
+        IQueryable<User> query = dbContext.Users;
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
             query = SearchWhereConditional(query, paginationQuery.Search);
@@ -36,7 +36,7 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         return query.Count();
     }
 
-    public async Task<UserEntity> Create(UserEntity entity)
+    public async Task<User> Create(User entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.CreatedAt = now;
@@ -47,7 +47,7 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         return entity;
     }
 
-    public async Task<UserEntity> Update(UserEntity entity)
+    public async Task<User> Update(User entity)
     {
         entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 
@@ -66,12 +66,12 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         return true;
     }
 
-    public async Task<UserEntity?> FindById(int id)
+    public async Task<User?> FindById(int id)
     {
         return await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
     }
 
-    public async Task<UserEntity?> FindByEmail(string email)
+    public async Task<User?> FindByEmail(string email)
     {
         return await dbContext.Users
             .Where(u => u.Email == email)
@@ -83,7 +83,7 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         return await FindByEmail(email) == null;
     }
 
-    private static IQueryable<UserEntity> SearchWhereConditional(IQueryable<UserEntity> query, string search)
+    private static IQueryable<User> SearchWhereConditional(IQueryable<User> query, string search)
     {
         return query.Where(u =>
             EF.Functions.Like(

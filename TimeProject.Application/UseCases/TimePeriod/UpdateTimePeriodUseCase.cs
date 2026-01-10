@@ -15,9 +15,9 @@ public class UpdateTimePeriodUseCase(
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : IUpdateTimePeriodUseCase
 {
-    public async Task<Result<TimePeriodEntity>> Handle(int id, TimePeriodDto dto, int userId)
+    public async Task<Result<Domain.Entities.PeriodRecord>> Handle(int id, TimePeriodDto dto, int userId)
     {
-        var result = new Result<TimePeriodEntity>();
+        var result = new Result<Domain.Entities.PeriodRecord>();
 
         timePeriodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;
@@ -29,7 +29,7 @@ public class UpdateTimePeriodUseCase(
         timePeriod.End = dto.End;
 
         var data = await repo.Update(timePeriod);
-        await syncTrMetaUseCase.Handle(data.TimeRecordId);
+        await syncTrMetaUseCase.Handle(data.RecordId);
 
         return result.SetData(data);
     }

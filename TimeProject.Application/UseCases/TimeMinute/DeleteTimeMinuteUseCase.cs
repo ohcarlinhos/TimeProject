@@ -19,7 +19,7 @@ public class DeleteTimeMinuteUseCase(
         if (timeMinute == null) return result.SetError(TimeMinuteMessageErrors.NotFound);
 
         var data = await repository.Delete(timeMinute);
-        await syncTrMetaUseCase.Handle(timeMinute.TimeRecordId);
+        await syncTrMetaUseCase.Handle(timeMinute.RecordId);
 
         return result.SetData(data);
     }

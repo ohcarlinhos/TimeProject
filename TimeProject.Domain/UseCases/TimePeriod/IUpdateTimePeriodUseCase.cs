@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimePeriod;
 
 public interface IUpdateTimePeriodUseCase
 {
-    Task<Result<TimePeriodEntity>> Handle(int id, TimePeriodDto dto, int userId);
+    Task<Result<Entities.PeriodRecord>> Handle(int id, TimePeriodDto dto, int userId);
 }

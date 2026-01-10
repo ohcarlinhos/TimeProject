@@ -7,13 +7,13 @@ namespace TimeProject.Infrastructure.Utils;
 
 public class CategoryMapDataUtil(IMapper mapper) : ICategoryMapDataUtil
 {
-    public List<CategoryOutDto> Handle(List<CategoryEntity> entities)
+    public List<CategoryOutDto> Handle(List<Category> entities)
     {
-        return mapper.Map<List<CategoryEntity>, List<CategoryOutDto>>(entities);
+        return mapper.Map<List<Category>, List<CategoryOutDto>>(entities);
     }
 
-    public CategoryOutDto Handle(CategoryEntity entity)
+    public CategoryOutDto Handle(Category entity)
     {
-        return mapper.Map<CategoryEntity, CategoryOutDto>(entity);
+        return mapper.Map<Category, CategoryOutDto>(entity);
     }
 }

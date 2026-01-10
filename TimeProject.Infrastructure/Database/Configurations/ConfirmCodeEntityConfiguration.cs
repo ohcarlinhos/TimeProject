@@ -4,9 +4,9 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class ConfirmCodeEntityConfiguration : IEntityTypeConfiguration<ConfirmCodeEntity>
+public class ConfirmCodeEntityConfiguration : IEntityTypeConfiguration<ConfirmCode>
 {
-    public void Configure(EntityTypeBuilder<ConfirmCodeEntity> builder)
+    public void Configure(EntityTypeBuilder<ConfirmCode> builder)
     {
         builder.HasKey(e => e.Id);
 
@@ -20,6 +20,6 @@ public class ConfirmCodeEntityConfiguration : IEntityTypeConfiguration<ConfirmCo
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<UserEntity>(e => e.User).WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>(e => e.User).WithMany().HasForeignKey(e => e.UserId);
     }
 }

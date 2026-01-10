@@ -17,7 +17,7 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public async Task<Result<JwtResult>> Handle(LoginDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtResult>> Handle(LoginDto dto, UserAccessLog ac)
     {
         var result = new Result<JwtResult>();
 

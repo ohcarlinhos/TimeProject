@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.Login;
 
 public interface ILoginGithubUseCase
 {
-    Task<Result<JwtResult>> Handle(LoginGithubDto dto, UserAccessLogEntity ac);
+    Task<Result<JwtResult>> Handle(LoginGithubDto dto, UserAccessLog ac);
 }

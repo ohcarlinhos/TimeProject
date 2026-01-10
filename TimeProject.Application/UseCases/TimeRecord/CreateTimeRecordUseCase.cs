@@ -37,7 +37,7 @@ public class CreateTimeRecordUseCase(
         }
 
         var timeRecord = await repo
-            .Create(new TimeRecordEntity
+            .Create(new Domain.Entities.Record
                 {
                     UserId = userId,
                     CategoryId = dto.CategoryId,

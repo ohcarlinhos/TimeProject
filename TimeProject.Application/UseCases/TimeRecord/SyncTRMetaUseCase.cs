@@ -6,17 +6,17 @@ namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class SyncTrMetaUseCase(ITimeRecordMetaRepository repo) : ISyncTrMetaUseCase
 {
-    public Task<TimeRecordMetaEntity?> Handle(int id, bool saveChanges = true)
+    public Task<RecordMeta?> Handle(int id, bool saveChanges = true)
     {
         return repo.CreateOrUpdate(id, saveChanges);
     }
 
-    public Task<TimeRecordMetaEntity?> Handle(TimeRecordEntity timeRecordEntity, bool saveChanges = false)
+    public Task<RecordMeta?> Handle(Domain.Entities.Record record, bool saveChanges = false)
     {
-        return repo.CreateOrUpdate(timeRecordEntity, saveChanges);
+        return repo.CreateOrUpdate(record, saveChanges);
     }
 
-    public Task<IEnumerable<TimeRecordMetaEntity>> Handle(IEnumerable<TimeRecordEntity> timeRecordEntities,
+    public Task<IEnumerable<RecordMeta>> Handle(IEnumerable<Domain.Entities.Record> timeRecordEntities,
         bool saveChanges = false)
     {
         return repo.CreateOrUpdateList(timeRecordEntities, saveChanges);

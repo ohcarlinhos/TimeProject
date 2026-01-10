@@ -6,17 +6,17 @@ namespace TimeProject.Infrastructure.Database;
 
 public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
 {
-    public DbSet<UserEntity> Users { get; set; }
-    public DbSet<TimeRecordEntity> TimeRecords { get; set; }
-    public DbSet<TimePeriodEntity> TimePeriods { get; set; }
-    public DbSet<CategoryEntity> Categories { get; set; }
-    public DbSet<TimeRecordMetaEntity> TimeRecordMetas { get; set; }
-    public DbSet<TimerSessionEntity> TimerSessions { get; set; }
-    public DbSet<ConfirmCodeEntity> ConfirmCodes { get; set; }
-    public DbSet<UserPasswordEntity> UserPasswords { get; set; }
-    public DbSet<TimeMinuteEntity> TimeMinutes { get; set; }
-    public DbSet<OAuthEntity> OAuths { get; set; }
-    public DbSet<UserAccessLogEntity> UserAccessLogs { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Record> TimeRecords { get; set; }
+    public DbSet<PeriodRecord> TimePeriods { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<RecordMeta> TimeRecordMetas { get; set; }
+    public DbSet<TimerSession> TimerSessions { get; set; }
+    public DbSet<ConfirmCode> ConfirmCodes { get; set; }
+    public DbSet<UserPassword> UserPasswords { get; set; }
+    public DbSet<MinuteRecord> TimeMinutes { get; set; }
+    public DbSet<OAuth> OAuths { get; set; }
+    public DbSet<UserAccessLog> UserAccessLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder mb)
     {

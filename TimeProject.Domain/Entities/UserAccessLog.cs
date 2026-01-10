@@ -6,7 +6,7 @@ public enum AccessType
     Provider
 }
 
-public class UserAccessLogEntity
+public class UserAccessLog
 {
     public int Id { get; set; }
     public int UserId { get; set; }

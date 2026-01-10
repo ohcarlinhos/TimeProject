@@ -1,6 +1,6 @@
 ﻿namespace TimeProject.Domain.Entities;
 
-public class CustomerEntity
+public class Customer
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

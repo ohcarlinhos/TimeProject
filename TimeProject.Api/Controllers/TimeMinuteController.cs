@@ -15,7 +15,7 @@ public class TimeMinuteController(
 {
     [HttpPost]
     [Route("list/{id:int}")]
-    public async Task<ActionResult<List<TimeMinuteEntity>>> Create([FromBody] CreateTimeMinuteListDto dto, int id)
+    public async Task<ActionResult<List<MinuteRecord>>> Create([FromBody] CreateTimeMinuteListDto dto, int id)
     {
         var result = await createTimeMinuteByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);

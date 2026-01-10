@@ -7,7 +7,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRepository
 {
-    public async Task<bool> Create(UserPasswordEntity entity)
+    public async Task<bool> Create(UserPassword entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.CreatedAt = now;
@@ -18,7 +18,7 @@ public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRep
         return true;
     }
 
-    public async Task<bool> Update(UserPasswordEntity entity)
+    public async Task<bool> Update(UserPassword entity)
     {
         entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 
@@ -37,7 +37,7 @@ public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRep
         return true;
     }
 
-    public async Task<UserPasswordEntity?> FindByUserId(int userId)
+    public async Task<UserPassword?> FindByUserId(int userId)
     {
         return await dbContext.UserPasswords.FirstOrDefaultAsync(i => i.UserId == userId);
     }

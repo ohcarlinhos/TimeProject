@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.Login;
 
 public interface ILoginUseCase
 {
-    Task<Result<JwtResult>> Handle(LoginDto dto, UserAccessLogEntity ac);
+    Task<Result<JwtResult>> Handle(LoginDto dto, UserAccessLog ac);
 }

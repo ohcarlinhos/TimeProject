@@ -4,9 +4,9 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimeRecordEntityConfiguration : IEntityTypeConfiguration<TimeRecordEntity>
+public class TimeRecordEntityConfiguration : IEntityTypeConfiguration<Record>
 {
-    public void Configure(EntityTypeBuilder<TimeRecordEntity> builder)
+    public void Configure(EntityTypeBuilder<Record> builder)
     {
         builder.HasKey(e => e.Id);
 
@@ -22,10 +22,10 @@ public class TimeRecordEntityConfiguration : IEntityTypeConfiguration<TimeRecord
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
         builder.HasOne(e => e.Category).WithMany().HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.HasMany(e => e.TimePeriods).WithOne(e => e.TimeRecord);
+        builder.HasMany(e => e.PeriodRecords).WithOne(e => e.Record);
     }
 }

@@ -4,9 +4,9 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class UserPasswordEntityConfiguration : IEntityTypeConfiguration<UserPasswordEntity>
+public class UserPasswordEntityConfiguration : IEntityTypeConfiguration<UserPassword>
 {
-    public void Configure(EntityTypeBuilder<UserPasswordEntity> builder)
+    public void Configure(EntityTypeBuilder<UserPassword> builder)
     {
         builder.HasKey(e => e.UserId);
 
@@ -16,6 +16,6 @@ public class UserPasswordEntityConfiguration : IEntityTypeConfiguration<UserPass
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<UserEntity>().WithOne().HasForeignKey<UserPasswordEntity>(e => e.UserId);
+        builder.HasOne<User>().WithOne().HasForeignKey<UserPassword>(e => e.UserId);
     }
 }

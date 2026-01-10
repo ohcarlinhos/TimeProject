@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.Code;
 
 public interface ICreateConfirmCodeUseCase
 {
-    Task<Result<ConfirmCodeEntity>> Handle(int userId, ConfirmCodeType type);
+    Task<Result<ConfirmCode>> Handle(int userId, ConfirmCodeType type);
 }

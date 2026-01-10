@@ -4,8 +4,8 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IUserPasswordRepository
 {
-    public Task<bool> Create(UserPasswordEntity entity);
-    public Task<bool> Update(UserPasswordEntity entity);
+    public Task<bool> Create(UserPassword entity);
+    public Task<bool> Update(UserPassword entity);
     public Task<bool> Delete(int id);
-    public Task<UserPasswordEntity?> FindByUserId(int userId);
+    public Task<UserPassword?> FindByUserId(int userId);
 }

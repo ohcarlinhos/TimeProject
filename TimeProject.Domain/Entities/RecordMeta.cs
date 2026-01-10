@@ -1,8 +1,8 @@
 ﻿namespace TimeProject.Domain.Entities;
 
-public class TimeRecordMetaEntity
+public class RecordMeta
 {
-    public int TimeRecordId { get; set; }
+    public int RecordId { get; set; }
 
     public string FormattedTime { get; set; } = string.Empty;
     public double TimeOnSeconds { get; set; }

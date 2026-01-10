@@ -29,7 +29,7 @@ public class TimeRecordHistoryRepository(ProjectContext db) : ITimeRecordHistory
             .ToList();
     }
 
-    public async Task<List<TimePeriodEntity>> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
+    public async Task<List<PeriodRecord>> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
         DateTime initDate, DateTime endDate)
     {
         return await TimePeriodQuery(timeRecordId, userId)
@@ -42,7 +42,7 @@ public class TimeRecordHistoryRepository(ProjectContext db) : ITimeRecordHistory
             .ToListAsync();
     }
 
-    public async Task<List<TimeMinuteEntity>> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
+    public async Task<List<MinuteRecord>> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate)
     {
         return await TimeMinuteQuery(timeRecordId, userId)
@@ -51,40 +51,40 @@ public class TimeRecordHistoryRepository(ProjectContext db) : ITimeRecordHistory
             .ToListAsync();
     }
 
-    public async Task<List<TimerSessionEntity>> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
+    public async Task<List<TimerSession>> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate)
     {
         return await TimerSessionQuery(timeRecordId, userId)
             .Where(e =>
-                e.TimePeriods!.FirstOrDefault()!.Start >= initDate
-                && e.TimePeriods!.FirstOrDefault()!.Start < endDate
+                e.PeriodRecords!.FirstOrDefault()!.Start >= initDate
+                && e.PeriodRecords!.FirstOrDefault()!.Start < endDate
             )
-            .Include(e => e.TimePeriods!.OrderBy(tp => tp.Start))
+            .Include(e => e.PeriodRecords!.OrderBy(tp => tp.Start))
             .ToListAsync();
     }
 
-    private IQueryable<TimePeriodEntity> TimePeriodQuery(int timeRecordId, int userId)
+    private IQueryable<PeriodRecord> TimePeriodQuery(int timeRecordId, int userId)
     {
         return db.TimePeriods
-            .Where(e => e.UserId == userId && e.TimeRecordId == timeRecordId)
+            .Where(e => e.UserId == userId && e.RecordId == timeRecordId)
             .AsQueryable();
     }
 
-    private IQueryable<TimeMinuteEntity> TimeMinuteQuery(int timeRecordId, int userId)
+    private IQueryable<MinuteRecord> TimeMinuteQuery(int timeRecordId, int userId)
     {
         return db.TimeMinutes
-            .Where(e => e.UserId == userId && e.TimeRecordId == timeRecordId)
+            .Where(e => e.UserId == userId && e.RecordId == timeRecordId)
             .AsQueryable();
     }
 
-    private IQueryable<TimerSessionEntity> TimerSessionQuery(int timeRecordId, int userId)
+    private IQueryable<TimerSession> TimerSessionQuery(int timeRecordId, int userId)
     {
         return db.TimerSessions
             .Where(e =>
                 e.UserId == userId
-                && e.TimeRecordId == timeRecordId
-                && e.TimePeriods != null
-                && e.TimePeriods.Any()
+                && e.RecordId == timeRecordId
+                && e.PeriodRecords != null
+                && e.PeriodRecords.Any()
             )
             .AsQueryable();
     }

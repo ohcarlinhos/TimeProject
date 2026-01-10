@@ -15,7 +15,7 @@ public class TimeRecordMetaController(
 {
     [HttpPost]
     [Route("sync/all")]
-    public async Task<ActionResult<IEnumerable<TimeRecordMetaEntity>>> SyncAll()
+    public async Task<ActionResult<IEnumerable<RecordMeta>>> SyncAll()
     {
         return HandleResponse(await syncAllTrMetaUseCase.Handle());
     }

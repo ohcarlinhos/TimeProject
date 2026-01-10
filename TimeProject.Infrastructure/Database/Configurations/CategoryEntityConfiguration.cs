@@ -4,9 +4,9 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class CategoryEntityConfiguration : IEntityTypeConfiguration<CategoryEntity>
+public class CategoryEntityConfiguration : IEntityTypeConfiguration<Category>
 {
-    public void Configure(EntityTypeBuilder<CategoryEntity> builder)
+    public void Configure(EntityTypeBuilder<Category> builder)
     {
         builder.HasKey(e => e.Id);
 
@@ -18,6 +18,6 @@ public class CategoryEntityConfiguration : IEntityTypeConfiguration<CategoryEnti
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
     }
 }

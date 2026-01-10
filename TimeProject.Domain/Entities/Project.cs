@@ -1,6 +1,6 @@
 ﻿namespace TimeProject.Domain.Entities;
 
-public class CategoryEntity
+public class Project
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

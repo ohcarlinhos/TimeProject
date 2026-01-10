@@ -9,7 +9,7 @@ public class TimeRecordHistoryDayOutDto
 
     public IEnumerable<TimePeriodOutDto>? TimePeriods { get; set; }
     public IEnumerable<TimerSessionOutDto>? TimerSessions { get; set; }
-    public IEnumerable<TimeMinuteEntity>? TimeMinutes { get; set; }
+    public IEnumerable<Entities.MinuteRecord>? TimeMinutes { get; set; }
 
     private TimeSpan TimeSpanTimePeriods => TimeFormat.TimeSpanFromTimePeriods(TimePeriods);
     private TimeSpan TimeSpanTimerSessions => TimeFormat.TimeSpanFromTimerSessions(TimerSessions);

@@ -35,7 +35,7 @@ public class CategoryController(
     }
 
     [HttpPost]
-    public async Task<ActionResult<CategoryEntity>> Create([FromBody] CategoryDto dto)
+    public async Task<ActionResult<Category>> Create([FromBody] CategoryDto dto)
     {
         var result = await createCategoryUseCase.Handle(dto, UserClaims.Id(User));
         result.ActionName = nameof(Create);
@@ -44,7 +44,7 @@ public class CategoryController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public async Task<ActionResult<CategoryEntity>> Update(int id, [FromBody] CategoryDto dto)
+    public async Task<ActionResult<Category>> Update(int id, [FromBody] CategoryDto dto)
     {
         return HandleResponse(await updateCategoryUseCase.Handle(id, dto, UserClaims.Id(User)));
     }

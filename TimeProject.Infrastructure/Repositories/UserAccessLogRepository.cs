@@ -7,7 +7,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserAccessLogRepository(ProjectContext dbContext) : IUserAccessLogRepository
 {
-    public async Task<UserAccessLogEntity> Create(UserAccessLogEntity entity)
+    public async Task<UserAccessLog> Create(UserAccessLog entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.AccessAt = now;
@@ -17,7 +17,7 @@ public class UserAccessLogRepository(ProjectContext dbContext) : IUserAccessLogR
         return entity;
     }
 
-    public Task<UserAccessLogEntity?> GetLastAccessByUserId(int id)
+    public Task<UserAccessLog?> GetLastAccessByUserId(int id)
     {
         var maxAccessAt = dbContext.UserAccessLogs
             .Where(e => e.UserId == id)
@@ -27,9 +27,9 @@ public class UserAccessLogRepository(ProjectContext dbContext) : IUserAccessLogR
             .FirstOrDefaultAsync();
     }
 
-    public List<UserAccessLogEntity> GetLastAccessByUserIdList(IEnumerable<int> idList)
+    public List<UserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
     {
-        var list = new List<UserAccessLogEntity>();
+        var list = new List<UserAccessLog>();
 
         foreach (var id in idList)
         {

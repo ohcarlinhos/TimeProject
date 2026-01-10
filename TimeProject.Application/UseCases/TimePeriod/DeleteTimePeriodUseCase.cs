@@ -18,7 +18,7 @@ public class DeleteTimePeriodUseCase(ITimePeriodRepository repo, ISyncTrMetaUseC
             return result.SetError(TimePeriodMessageErrors.NotFound);
 
         var data = await repo.Delete(timePeriod);
-        await syncTrMetaUseCase.Handle(timePeriod.TimeRecordId);
+        await syncTrMetaUseCase.Handle(timePeriod.RecordId);
 
         return result.SetData(data);
     }

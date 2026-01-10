@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface ICreateUserByGoogleUserUseCase
 {
-    Task<Result<UserEntity>> Handle(CreateUserOAtuhDto dto, string email);
+    Task<Result<Entities.User>> Handle(CreateUserOAtuhDto dto, string email);
 }

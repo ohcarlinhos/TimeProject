@@ -13,13 +13,13 @@ public class TimeRecordMapDataUtil(IMapper mapper) : ITimeRecordMapDataUtil
         return mapper.Map<IEnumerable<TimeRecordHistoryDay>, IEnumerable<TimeRecordHistoryDayOutDto>>(entity);
     }
 
-    public TimeRecordOutDto Handle(TimeRecordEntity entity)
+    public TimeRecordOutDto Handle(Domain.Entities.Record entity)
     {
-        return mapper.Map<TimeRecordEntity, TimeRecordOutDto>(entity);
+        return mapper.Map<Domain.Entities.Record, TimeRecordOutDto>(entity);
     }
 
-    public IEnumerable<TimeRecordOutDto> Handle(IEnumerable<TimeRecordEntity> entities)
+    public IEnumerable<TimeRecordOutDto> Handle(IEnumerable<Domain.Entities.Record> entities)
     {
-        return mapper.Map<IEnumerable<TimeRecordEntity>, IEnumerable<TimeRecordOutDto>>(entities);
+        return mapper.Map<IEnumerable<Domain.Entities.Record>, IEnumerable<TimeRecordOutDto>>(entities);
     }
 }

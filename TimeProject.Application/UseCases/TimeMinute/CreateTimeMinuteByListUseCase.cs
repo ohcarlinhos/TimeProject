@@ -15,10 +15,10 @@ public class CreateTimeMinuteByListUseCase(
     ISyncTrMetaUseCase syncTrMetaUseCase
 ) : ICreateTimeMinuteByListUseCase
 {
-    public async Task<Result<List<TimeMinuteEntity>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId)
+    public async Task<Result<List<Domain.Entities.MinuteRecord>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId)
     {
-        var result = new Result<List<TimeMinuteEntity>>();
-        List<TimeMinuteEntity> list = [];
+        var result = new Result<List<Domain.Entities.MinuteRecord>>();
+        List<Domain.Entities.MinuteRecord> list = [];
 
         var user = await userRepository.FindById(userId);
         if (user is null) return result.SetError(TimeRecordMessageErrors.NotFound);
@@ -27,10 +27,10 @@ public class CreateTimeMinuteByListUseCase(
         if (timeRecord is null) return result.SetError(TimeRecordMessageErrors.NotFound);
 
         foreach (var minutes in dto.Minutes)
-            list.Add(new TimeMinuteEntity
+            list.Add(new Domain.Entities.MinuteRecord
             {
                 UserId = userId,
-                TimeRecordId = timeRecordId,
+                RecordId = timeRecordId,
                 Minutes = minutes,
                 Date = dto.Date.AddHours(user.Utc * -1).ToUniversalTime()
             });

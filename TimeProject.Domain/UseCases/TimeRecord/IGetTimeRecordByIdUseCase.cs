@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface IGetTimeRecordByIdUseCase
 {
-    Task<Result<TimeRecordEntity>> Handle(int id, int userId);
+    Task<Result<Entities.Record>> Handle(int id, int userId);
 }

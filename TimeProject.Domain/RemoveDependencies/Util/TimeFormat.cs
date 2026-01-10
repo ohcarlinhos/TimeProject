@@ -10,11 +10,11 @@ public static class TimeFormat
         if (timePeriods == null) return TimeSpan.Zero;
 
         return TimeSpanFromTimePeriods(timePeriods
-            .Select(p => new TimePeriodEntity
+            .Select(p => new PeriodRecord
                 { Start = p.Start, End = p.End }).ToList());
     }
 
-    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<TimePeriodEntity>? timePeriods)
+    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<PeriodRecord>? timePeriods)
     {
         if (timePeriods == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
@@ -24,7 +24,7 @@ public static class TimeFormat
                 current.Add(timePeriod.End.Subtract(timePeriod.Start)));
     }
 
-    public static TimeSpan TimeSpanFromTimeMinutes(IEnumerable<TimeMinuteEntity>? timeMinutes)
+    public static TimeSpan TimeSpanFromTimeMinutes(IEnumerable<MinuteRecord>? timeMinutes)
     {
         if (timeMinutes == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
@@ -41,15 +41,15 @@ public static class TimeFormat
         return total;
     }
 
-    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<TimerSessionEntity>? timerSessions)
+    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<TimerSession>? timerSessions)
     {
         var total = TimeSpan.Zero;
 
         if (timerSessions == null) return total;
 
         foreach (var ts in timerSessions)
-            if (ts.TimePeriods != null && ts.TimePeriods.Any())
-                total = total.Add(TimeSpanFromTimePeriods(ts.TimePeriods.ToList()));
+            if (ts.PeriodRecords != null && ts.PeriodRecords.Any())
+                total = total.Add(TimeSpanFromTimePeriods(ts.PeriodRecords.ToList()));
 
         return total;
     }
@@ -76,17 +76,17 @@ public static class TimeFormat
         if (timePeriods == null) return "0s";
 
         return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods
-            .Select(p => new TimePeriodEntity
+            .Select(p => new PeriodRecord
                 { Start = p.Start, End = p.End }).ToList()
         ));
     }
 
-    public static string StringFromTimePeriods(IEnumerable<TimePeriodEntity>? timePeriods)
+    public static string StringFromTimePeriods(IEnumerable<PeriodRecord>? timePeriods)
     {
         return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods?.ToList()));
     }
 
-    public static string StringFromTimerSessions(IEnumerable<TimerSessionEntity>? timerSessions)
+    public static string StringFromTimerSessions(IEnumerable<TimerSession>? timerSessions)
     {
         return StringFromTimeSpan(TimeSpanFromTimerSessions(timerSessions));
     }

@@ -8,7 +8,7 @@ public interface ITimeRecordMapDataUtil
 {
     IEnumerable<TimeRecordHistoryDayOutDto> Handle(IEnumerable<TimeRecordHistoryDay> entity);
 
-    TimeRecordOutDto Handle(TimeRecordEntity entity);
+    TimeRecordOutDto Handle(Entities.Record entity);
 
-    IEnumerable<TimeRecordOutDto> Handle(IEnumerable<TimeRecordEntity> entities);
+    IEnumerable<TimeRecordOutDto> Handle(IEnumerable<Entities.Record> entities);
 }

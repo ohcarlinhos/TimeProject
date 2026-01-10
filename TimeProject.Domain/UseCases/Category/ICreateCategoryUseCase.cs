@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.Category;
 
 public interface ICreateCategoryUseCase
 {
-    Task<Result<CategoryEntity>> Handle(CategoryDto dto, int userId);
+    Task<Result<Entities.Category>> Handle(CategoryDto dto, int userId);
 }

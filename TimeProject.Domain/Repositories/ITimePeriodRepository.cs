@@ -5,12 +5,12 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ITimePeriodRepository
 {
-    List<TimePeriodEntity> Index(int timeRecordId, int userId, PaginationQuery paginationQuery);
+    List<PeriodRecord> Index(int timeRecordId, int userId, PaginationQuery paginationQuery);
     Task<int> GetTotalItems(int timeRecordId, PaginationQuery paginationQuery, int userId);
-    Task<TimePeriodEntity> Create(TimePeriodEntity entity);
-    Task<List<TimePeriodEntity>> CreateByList(List<TimePeriodEntity> entities);
-    Task<bool> DeleteByList(List<TimePeriodEntity> entityList);
-    Task<TimePeriodEntity> Update(TimePeriodEntity entity);
-    Task<bool> Delete(TimePeriodEntity entity);
-    Task<TimePeriodEntity?> FindById(int id, int userId);
+    Task<PeriodRecord> Create(PeriodRecord entity);
+    Task<List<PeriodRecord>> CreateByList(List<PeriodRecord> entities);
+    Task<bool> DeleteByList(List<PeriodRecord> entityList);
+    Task<PeriodRecord> Update(PeriodRecord entity);
+    Task<bool> Delete(PeriodRecord entity);
+    Task<PeriodRecord?> FindById(int id, int userId);
 }

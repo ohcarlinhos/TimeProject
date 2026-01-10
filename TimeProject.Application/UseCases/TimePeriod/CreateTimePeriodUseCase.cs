@@ -16,9 +16,9 @@ public class CreateTimePeriodUseCase(
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : ICreateTimePeriodUseCase
 {
-    public async Task<Result<TimePeriodEntity>> Handle(CreateTimePeriodDto dto, int userId)
+    public async Task<Result<Domain.Entities.PeriodRecord>> Handle(CreateTimePeriodDto dto, int userId)
     {
-        var result = new Result<TimePeriodEntity>();
+        var result = new Result<Domain.Entities.PeriodRecord>();
 
         timePeriodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;
@@ -30,16 +30,16 @@ public class CreateTimePeriodUseCase(
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);
 
         var data = await repo
-            .Create(new TimePeriodEntity
+            .Create(new Domain.Entities.PeriodRecord
                 {
                     UserId = userId,
-                    TimeRecordId = dto.TimeRecordId,
+                    RecordId = dto.TimeRecordId,
                     Start = dto.Start,
                     End = dto.End
                 }
             );
 
-        await syncTrMetaUseCase.Handle(data.TimeRecordId);
+        await syncTrMetaUseCase.Handle(data.RecordId);
 
         return result.SetData(data);
     }

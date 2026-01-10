@@ -1,9 +1,9 @@
 namespace TimeProject.Domain.Entities;
 
-public class TimeMinuteEntity
+public class MinuteRecord
 {
     public int Id { get; set; }
-    public int TimeRecordId { get; set; }
+    public int RecordId { get; set; }
     public int Minutes { get; set; }
     public DateTime Date { get; set; }
 
@@ -12,5 +12,5 @@ public class TimeMinuteEntity
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public TimeRecordEntity? TimeRecord { get; set; }
+    public Record? Record { get; set; }
 }

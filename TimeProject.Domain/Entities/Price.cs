@@ -1,11 +1,11 @@
 ﻿namespace TimeProject.Domain.Entities;
 
-public class PriceEntity
+public class Price
 {
     public int Id { get; set; }
 
     public int? ProjectId { get; set; }
-    public int? TimeRecordId { get; set; }
+    public int? RecordId { get; set; }
 
     public int UserId { get; set; }
 

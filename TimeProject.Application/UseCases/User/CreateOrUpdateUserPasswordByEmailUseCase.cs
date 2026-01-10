@@ -26,7 +26,7 @@ public class CreateOrUpdateUserPasswordByEmailUseCase(IUserPasswordRepository re
         }
         else
         {
-            await repo.Create(new UserPasswordEntity { Password = BCrypt.Net.BCrypt.HashPassword(password) });
+            await repo.Create(new UserPassword { Password = BCrypt.Net.BCrypt.HashPassword(password) });
         }
 
         result.Data = true;

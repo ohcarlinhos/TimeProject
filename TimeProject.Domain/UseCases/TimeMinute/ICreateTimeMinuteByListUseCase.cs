@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimeMinute;
 
 public interface ICreateTimeMinuteByListUseCase
 {
-    Task<Result<List<TimeMinuteEntity>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId);
+    Task<Result<List<Entities.MinuteRecord>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId);
 }

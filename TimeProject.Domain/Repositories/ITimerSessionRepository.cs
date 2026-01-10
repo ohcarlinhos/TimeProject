@@ -4,7 +4,7 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ITimerSessionRepository
 {
-    Task<TimerSessionEntity> Create(TimerSessionEntity entity);
-    Task<TimerSessionEntity?> FindById(int id, int userId);
-    Task<bool> Delete(TimerSessionEntity entity);
+    Task<TimerSession> Create(TimerSession entity);
+    Task<TimerSession?> FindById(int id, int userId);
+    Task<bool> Delete(TimerSession entity);
 }

@@ -4,9 +4,9 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class UserAccessLogEntityConfiguration : IEntityTypeConfiguration<UserAccessLogEntity>
+public class UserAccessLogEntityConfiguration : IEntityTypeConfiguration<UserAccessLog>
 {
-    public void Configure(EntityTypeBuilder<UserAccessLogEntity> builder)
+    public void Configure(EntityTypeBuilder<UserAccessLog> builder)
     {
         builder.HasKey(e => e.Id);
 
@@ -17,6 +17,6 @@ public class UserAccessLogEntityConfiguration : IEntityTypeConfiguration<UserAcc
         builder.Property(e => e.AccessType).IsRequired();
         builder.Property(e => e.AccessAt).IsRequired();
 
-        builder.HasOne<UserEntity>().WithMany().HasForeignKey(e => e.UserId);
+        builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
     }
 }

@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.CustomLog;
 
 public interface ICreateUserAccessLogUseCase
 {
-    Task<Result<UserAccessLogEntity>> Handle(UserAccessLogEntity entity);
+    Task<Result<UserAccessLog>> Handle(UserAccessLog entity);
 }

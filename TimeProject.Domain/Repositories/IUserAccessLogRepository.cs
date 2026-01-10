@@ -4,7 +4,7 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IUserAccessLogRepository
 {
-    public Task<UserAccessLogEntity> Create(UserAccessLogEntity entity);
-    public Task<UserAccessLogEntity?> GetLastAccessByUserId(int id);
-    public List<UserAccessLogEntity> GetLastAccessByUserIdList(IEnumerable<int> idList);
+    public Task<UserAccessLog> Create(UserAccessLog entity);
+    public Task<UserAccessLog?> GetLastAccessByUserId(int id);
+    public List<UserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList);
 }

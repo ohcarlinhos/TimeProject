@@ -15,7 +15,7 @@ public class GetRegisterCodeInfoUseCase(IConfirmCodeRepository repo, IMapper map
         var codes = await repo.FindByUserIdThatIsNotExpiredOrUsed(userId, ConfirmCodeType.Register);
 
         return codes.Count != 0
-            ? result.SetData(mapper.Map<ConfirmCodeEntity, ConfirmCodeOutDto>(codes.First()))
+            ? result.SetData(mapper.Map<ConfirmCode, ConfirmCodeOutDto>(codes.First()))
             : result.SetError("not_found:code_not_found");
     }
 }

@@ -19,8 +19,8 @@ public class GetRangeDaysStatisticUseCaseTests
 
         foreach (var session in timerSessions)
         {
-            if (session.TimePeriods == null || !session.TimePeriods.Any()) continue;
-            timePeriods.AddRange(session.TimePeriods);
+            if (session.PeriodRecords == null || !session.PeriodRecords.Any()) continue;
+            timePeriods.AddRange(session.PeriodRecords);
         }
 
         _staticRepository
@@ -33,58 +33,58 @@ public class GetRangeDaysStatisticUseCaseTests
             .Returns(Task.FromResult(timerSessions));
     }
 
-    private static List<TimePeriodEntity> CreateTimePeriodList(DateTime today, int userId, int timeRecordId)
+    private static List<PeriodRecord> CreateTimePeriodList(DateTime today, int userId, int timeRecordId)
     {
         return
         [
             // will be removed
-            new TimePeriodEntity
+            new PeriodRecord
             {
                 Start = today.AddHours(-3),
                 End = today.AddHours(-3).AddMinutes(15),
                 UserId = userId,
                 TimerSessionId = null,
-                TimeRecordId = timeRecordId
+                RecordId = timeRecordId
             },
-            new TimePeriodEntity
+            new PeriodRecord
             {
                 Start = today,
                 End = today.AddMinutes(15).AddSeconds(10),
                 UserId = userId,
                 TimerSessionId = null,
-                TimeRecordId = timeRecordId
+                RecordId = timeRecordId
             },
-            new TimePeriodEntity
+            new PeriodRecord
             {
                 Start = today.AddMinutes(20),
                 End = today.AddMinutes(45),
                 UserId = userId,
                 TimerSessionId = null,
-                TimeRecordId = timeRecordId
+                RecordId = timeRecordId
             },
             // will be removed
-            new TimePeriodEntity
+            new PeriodRecord
             {
                 Start = today.AddDays(1).AddMinutes(20),
                 End = today.AddDays(1).AddMinutes(45),
                 UserId = userId,
                 TimerSessionId = null,
-                TimeRecordId = timeRecordId
+                RecordId = timeRecordId
             }
         ];
     }
 
-    private static List<TimerSessionEntity> CreateTimerSessionList(DateTime today, int userId, int timeRecordId)
+    private static List<TimerSession> CreateTimerSessionList(DateTime today, int userId, int timeRecordId)
     {
         return
         [
-            new TimerSessionEntity
+            new TimerSession
             {
                 Id = 1,
                 UserId = userId,
-                TimeRecordId = timeRecordId,
+                RecordId = timeRecordId,
                 Type = "timer",
-                TimePeriods = new List<TimePeriodEntity>
+                PeriodRecords = new List<PeriodRecord>
                 {
                     new()
                     {
@@ -98,13 +98,13 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new TimerSessionEntity
+            new TimerSession
             {
                 Id = 2,
                 UserId = userId,
-                TimeRecordId = timeRecordId,
+                RecordId = timeRecordId,
                 Type = "pomodoro",
-                TimePeriods = new List<TimePeriodEntity>
+                PeriodRecords = new List<PeriodRecord>
                 {
                     new()
                     {
@@ -118,13 +118,13 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new TimerSessionEntity
+            new TimerSession
             {
                 Id = 3,
                 UserId = userId,
-                TimeRecordId = timeRecordId,
+                RecordId = timeRecordId,
                 Type = "break",
-                TimePeriods = new List<TimePeriodEntity>
+                PeriodRecords = new List<PeriodRecord>
                 {
                     new()
                     {
@@ -133,13 +133,13 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new TimerSessionEntity
+            new TimerSession
             {
                 Id = 4,
                 UserId = userId,
-                TimeRecordId = timeRecordId,
+                RecordId = timeRecordId,
                 Type = "timer",
-                TimePeriods = new List<TimePeriodEntity>()
+                PeriodRecords = new List<PeriodRecord>()
             }
         ];
     }

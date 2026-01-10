@@ -34,9 +34,9 @@ public class GetRangeDaysStatisticUseCase(
         var daysFromRange = new List<DateTime> { start };
         var daysStatistics = new List<RangeStatistic>();
 
-        var allTimePeriods = new List<TimePeriodEntity>();
-        var timeMinutes = new List<TimeMinuteEntity>();
-        var allTimerSessions = new List<TimerSessionEntity>();
+        var allTimePeriods = new List<Domain.Entities.PeriodRecord>();
+        var timeMinutes = new List<Domain.Entities.MinuteRecord>();
+        var allTimerSessions = new List<Domain.Entities.TimerSession>();
 
         var startDate = start.AddDays(1);
 
@@ -67,7 +67,7 @@ public class GetRangeDaysStatisticUseCase(
             allTimePeriods,
             timeMinutes,
             allTimerSessions,
-            new List<TimeRecordEntity>(),
+            new List<Domain.Entities.Record>(),
             daysCount,
             activeDaysCount
         ).Statistic;
@@ -106,19 +106,19 @@ public class GetRangeDaysStatisticUseCase(
             (await statisticRepository.GetTimerSessionsByRange(userId, initDate, endDate, timeRecordId))
             .Select(e =>
             {
-                e.TimePeriods = timePeriodCutUtil.Handle(e.TimePeriods!, initDate, endDate);
+                e.PeriodRecords = timePeriodCutUtil.Handle(e.PeriodRecords!, initDate, endDate);
                 return e;
             })
             .ToList();
 
         var timeMinutes = await statisticRepository.GetTimeMinutesByRange(userId, initDate, endDate, timeRecordId);
 
-        var timeRecords = new List<TimeRecordEntity>();
+        var timeRecords = new List<Domain.Entities.Record>();
         if (timeRecordId == null && !skipRangeProgress)
         {
             var trIdList = new List<int>();
-            trIdList.AddRange(timePeriods.Select(e => e.TimeRecordId));
-            trIdList.AddRange(timeMinutes.Select(e => e.TimeRecordId));
+            trIdList.AddRange(timePeriods.Select(e => e.RecordId));
+            trIdList.AddRange(timeMinutes.Select(e => e.RecordId));
             timeRecords.AddRange(await timeRecordRepository.FindByIdList(trIdList.Distinct().ToList(), userId));
         }
 
@@ -135,10 +135,10 @@ public class GetRangeDaysStatisticUseCase(
     private RangeStatisticsData MakeRangeStatisticDatas(
         DateTime start,
         DateTime end,
-        List<TimePeriodEntity> allTimePeriods,
-        List<TimeMinuteEntity> timeMinutes,
-        List<TimerSessionEntity> allTimerSessions,
-        List<TimeRecordEntity> timeRecords,
+        List<Domain.Entities.PeriodRecord> allTimePeriods,
+        List<Domain.Entities.MinuteRecord> timeMinutes,
+        List<Domain.Entities.TimerSession> allTimerSessions,
+        List<Domain.Entities.Record> timeRecords,
         int daysCount = 0,
         int activeDaysCount = 0
     )
@@ -222,9 +222,9 @@ public class GetRangeDaysStatisticUseCase(
     }
 
     private List<TimeRecordRangeProgress> MakeRangeProgress(
-        List<TimeRecordEntity> timeRecords,
-        List<TimePeriodEntity> allTimePeriods,
-        List<TimeMinuteEntity> allTimeMinutes
+        List<Domain.Entities.Record> timeRecords,
+        List<Domain.Entities.PeriodRecord> allTimePeriods,
+        List<Domain.Entities.MinuteRecord> allTimeMinutes
     )
     {
         var rangeProgressList = new List<TimeRecordRangeProgress>();
@@ -232,11 +232,11 @@ public class GetRangeDaysStatisticUseCase(
         foreach (var tr in timeRecords)
         {
             var periods = allTimePeriods
-                .Where(e => e.TimeRecordId == tr.Id)
+                .Where(e => e.RecordId == tr.Id)
                 .ToList();
 
             var minutes = allTimeMinutes
-                .Where(e => e.TimeRecordId == tr.Id)
+                .Where(e => e.RecordId == tr.Id)
                 .ToList();
 
             var periodsTimeSpan = TimeFormat.TimeSpanFromTimePeriods(periods);
@@ -254,15 +254,15 @@ public class GetRangeDaysStatisticUseCase(
         return rangeProgressList.OrderByDescending(i => i.TotalTimeSpan).ToList();
     }
 
-    private Task<List<TimeRecordEntity>> GetTimeRecordsByRange(
+    private Task<List<Domain.Entities.Record>> GetTimeRecordsByRange(
         int userId,
-        List<TimePeriodEntity> allTimePeriods,
-        List<TimeMinuteEntity> allTimeMinutes
+        List<Domain.Entities.PeriodRecord> allTimePeriods,
+        List<Domain.Entities.MinuteRecord> allTimeMinutes
     )
     {
         var trIdList = new List<int>();
-        trIdList.AddRange(allTimePeriods.Select(e => e.TimeRecordId));
-        trIdList.AddRange(allTimeMinutes.Select(e => e.TimeRecordId));
+        trIdList.AddRange(allTimePeriods.Select(e => e.RecordId));
+        trIdList.AddRange(allTimeMinutes.Select(e => e.RecordId));
         return timeRecordRepository.FindByIdList(trIdList.Distinct().ToList(), userId);
     }
 }

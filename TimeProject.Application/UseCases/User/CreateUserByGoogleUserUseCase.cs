@@ -12,9 +12,9 @@ public class CreateUserByGoogleUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGoogleUserUseCase
 {
-    public async Task<Result<UserEntity>> Handle(CreateUserOAtuhDto dto, string email)
+    public async Task<Result<Domain.Entities.User>> Handle(CreateUserOAtuhDto dto, string email)
     {
-        var result = new Result<UserEntity>();
+        var result = new Result<Domain.Entities.User>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId)) return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
 
@@ -22,7 +22,7 @@ public class CreateUserByGoogleUserUseCase(
 
         if (userWithEmail != null)
         {
-            await oAuthRepository.Create(new OAuthEntity
+            await oAuthRepository.Create(new OAuth
             {
                 UserId = userWithEmail.Id,
                 Provider = "google",
@@ -33,14 +33,14 @@ public class CreateUserByGoogleUserUseCase(
         }
 
         var userEntity = await repository
-            .Create(new UserEntity
+            .Create(new Domain.Entities.User
             {
                 Name = dto.Name,
                 Email = email,
                 Utc = dto.Utc
             });
 
-        await oAuthRepository.Create(new OAuthEntity
+        await oAuthRepository.Create(new OAuth
         {
             UserId = userEntity.Id,
             Provider = "google",

@@ -31,7 +31,7 @@ public class TimePeriodController(
     }
 
     [HttpPost]
-    public async Task<ActionResult<TimePeriodEntity>> Create([FromBody] CreateTimePeriodDto dto)
+    public async Task<ActionResult<PeriodRecord>> Create([FromBody] CreateTimePeriodDto dto)
     {
         var result = await createTimePeriodUseCase.Handle(dto, UserClaims.Id(User));
         result.ActionName = nameof(Create);
@@ -40,7 +40,7 @@ public class TimePeriodController(
 
     [HttpPost]
     [Route("list/{id:int}")]
-    public async Task<ActionResult<List<TimePeriodEntity>>> Create([FromBody] TimePeriodListDto dto, int id)
+    public async Task<ActionResult<List<PeriodRecord>>> Create([FromBody] TimePeriodListDto dto, int id)
     {
         var result = await createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);
@@ -49,7 +49,7 @@ public class TimePeriodController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public async Task<ActionResult<TimePeriodEntity>> Update(int id, [FromBody] TimePeriodDto dto)
+    public async Task<ActionResult<PeriodRecord>> Update(int id, [FromBody] TimePeriodDto dto)
     {
         return HandleResponse(await updateTimePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
     }

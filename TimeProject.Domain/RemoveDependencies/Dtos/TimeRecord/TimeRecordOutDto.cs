@@ -17,5 +17,5 @@ public class TimeRecordOutDto
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
-    public TimeRecordMetaEntity? Meta { get; set; }
+    public RecordMeta? Meta { get; set; }
 }

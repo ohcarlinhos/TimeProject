@@ -12,9 +12,9 @@ public class CreateUserByGhUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGhUserUseCase
 {
-    public async Task<Result<UserEntity>> Handle(CreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
+    public async Task<Result<Domain.Entities.User>> Handle(CreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
     {
-        var result = new Result<UserEntity>();
+        var result = new Result<Domain.Entities.User>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId)) return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
 
@@ -27,7 +27,7 @@ public class CreateUserByGhUserUseCase(
 
             if (userWithPrimaryEmail != null)
             {
-                await oAuthRepository.Create(new OAuthEntity
+                await oAuthRepository.Create(new OAuth
                 {
                     UserId = userWithPrimaryEmail.Id,
                     Provider = "github",
@@ -44,7 +44,7 @@ public class CreateUserByGhUserUseCase(
                 var userWithSecondaryEmail = await repository.FindByEmail(secondaryEmail.Email);
                 if (userWithSecondaryEmail == null) continue;
 
-                await oAuthRepository.Create(new OAuthEntity
+                await oAuthRepository.Create(new OAuth
                 {
                     UserId = userWithSecondaryEmail.Id,
                     Provider = "github",
@@ -56,14 +56,14 @@ public class CreateUserByGhUserUseCase(
         }
 
         var userEntity = await repository
-            .Create(new UserEntity
+            .Create(new Domain.Entities.User
             {
                 Name = dto.Name,
                 Email = primaryEmail?.Email ?? "",
                 Utc = dto.Utc
             });
 
-        await oAuthRepository.Create(new OAuthEntity
+        await oAuthRepository.Create(new OAuth
         {
             UserId = userEntity.Id,
             Provider = "github",

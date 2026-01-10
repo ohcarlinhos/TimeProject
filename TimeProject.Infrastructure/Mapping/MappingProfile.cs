@@ -12,12 +12,12 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<UserEntity, UserOutDto>();
-        CreateMap<TimeRecordEntity, TimeRecordOutDto>();
-        CreateMap<TimePeriodEntity, TimePeriodOutDto>();
-        CreateMap<CategoryEntity, CategoryOutDto>();
+        CreateMap<User, UserOutDto>();
+        CreateMap<Record, TimeRecordOutDto>();
+        CreateMap<PeriodRecord, TimePeriodOutDto>();
+        CreateMap<Category, CategoryOutDto>();
         CreateMap<TimeRecordHistoryDay, TimeRecordHistoryDayOutDto>();
-        CreateMap<TimerSessionEntity, TimerSessionOutDto>();
-        CreateMap<ConfirmCodeEntity, ConfirmCodeOutDto>();
+        CreateMap<TimerSession, TimerSessionOutDto>();
+        CreateMap<ConfirmCode, ConfirmCodeOutDto>();
     }
 }

@@ -11,17 +11,17 @@ namespace TimeProject.Infrastructure.Handlers;
 
 public class JwtHandler(JwtSettings jwtSettings) : IJwtHandler
 {
-    public JwtResult Generate(UserEntity userEntity)
+    public JwtResult Generate(User user)
     {
         var subject = new ClaimsIdentity([
-            new Claim("id", userEntity.Id.ToString()),
+            new Claim("id", user.Id.ToString()),
 
-            new Claim(ClaimTypes.Name, userEntity.Name),
-            new Claim(ClaimTypes.Email, userEntity.Email),
-            new Claim(ClaimTypes.Role, userEntity.UserRole.ToString()),
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.UserRole.ToString()),
 
-            new Claim("isAdmin", userEntity.UserRole == UserRole.Admin ? "True" : "False"),
-            new Claim("isActive", userEntity.IsActive.ToString())
+            new Claim("isAdmin", user.UserRole == UserRole.Admin ? "True" : "False"),
+            new Claim("isActive", user.IsActive.ToString())
         ]);
 
         var expires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt).ToUniversalTime();

@@ -7,13 +7,13 @@ namespace TimeProject.Application.UseCases.User.Utils;
 
 public class UserMapDataUtil(IMapper mapper) : IUserMapDataUtil
 {
-    public UserOutDto Handle(UserEntity entity)
+    public UserOutDto Handle(Domain.Entities.User entity)
     {
-        return mapper.Map<UserEntity, UserOutDto>(entity);
+        return mapper.Map<Domain.Entities.User, UserOutDto>(entity);
     }
 
-    public List<UserOutDto> Handle(List<UserEntity> entity)
+    public List<UserOutDto> Handle(List<Domain.Entities.User> entity)
     {
-        return mapper.Map<List<UserEntity>, List<UserOutDto>>(entity);
+        return mapper.Map<List<Domain.Entities.User>, List<UserOutDto>>(entity);
     }
 }

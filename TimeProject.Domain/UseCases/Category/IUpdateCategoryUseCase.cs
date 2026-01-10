@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.Category;
 
 public interface IUpdateCategoryUseCase
 {
-    Task<Result<CategoryEntity>> Handle(int id, CategoryDto dto, int userId);
+    Task<Result<Entities.Category>> Handle(int id, CategoryDto dto, int userId);
 }

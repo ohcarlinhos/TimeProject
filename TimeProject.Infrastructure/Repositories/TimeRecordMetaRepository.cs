@@ -8,16 +8,16 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMetaRepository
 {
-    public async Task<TimeRecordMetaEntity?> CreateOrUpdate(int timeRecordId, bool saveChanges = true)
+    public async Task<RecordMeta?> CreateOrUpdate(int timeRecordId, bool saveChanges = true)
     {
         var timeRecord = await dbContext.TimeRecords.FirstOrDefaultAsync(e => e.Id == timeRecordId);
         return timeRecord == null ? null : await CreateOrUpdate(timeRecord, saveChanges);
     }
 
-    public async Task<IEnumerable<TimeRecordMetaEntity>> CreateOrUpdateList(
-        IEnumerable<TimeRecordEntity> timeRecordEntities, bool saveChanges = false)
+    public async Task<IEnumerable<RecordMeta>> CreateOrUpdateList(
+        IEnumerable<Record> timeRecordEntities, bool saveChanges = false)
     {
-        var list = new List<TimeRecordMetaEntity>();
+        var list = new List<RecordMeta>();
 
         foreach (var timeRecordEntity in timeRecordEntities)
         {
@@ -30,17 +30,17 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
         return list;
     }
 
-    public async Task<TimeRecordMetaEntity?> CreateOrUpdate(TimeRecordEntity timeRecord, bool saveChanges = true)
+    public async Task<RecordMeta?> CreateOrUpdate(Record record, bool saveChanges = true)
     {
-        var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.TimeRecordId == timeRecord.Id);
+        var entity = await dbContext.TimeRecordMetas.FirstOrDefaultAsync(e => e.RecordId == record.Id);
 
         var timePeriods = await dbContext.TimePeriods
-            .Where(e => e.TimeRecordId == timeRecord.Id)
+            .Where(e => e.RecordId == record.Id)
             .OrderBy(e => e.Start)
             .ToListAsync();
 
         var timeMinutes = await dbContext.TimeMinutes
-            .Where(e => e.TimeRecordId == timeRecord.Id)
+            .Where(e => e.RecordId == record.Id)
             .OrderBy(e => e.Date)
             .ToListAsync();
 
@@ -69,9 +69,9 @@ public class TimeRecordMetaRepository(ProjectContext dbContext) : ITimeRecordMet
 
         if (entity == null)
         {
-            entity = new TimeRecordMetaEntity
+            entity = new RecordMeta
             {
-                TimeRecordId = timeRecord.Id,
+                RecordId = record.Id,
                 TimeCount = timePeriods.Count + timeMinutes.Count,
                 FormattedTime = formattedTime,
                 TimeOnSeconds = timeSpan.TotalSeconds,

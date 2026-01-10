@@ -19,8 +19,8 @@ public class DeleteTimerSessionUseCase(
         if (entity == null)
             return result.SetError(TimerSessionMessageErrors.NotFound);
 
-        await tpRepo.DeleteByList(entity.TimePeriods!.ToList());
-        var timeRecordId = entity.TimeRecordId;
+        await tpRepo.DeleteByList(entity.PeriodRecords!.ToList());
+        var timeRecordId = entity.RecordId;
 
         await repo.Delete(entity);
         await syncTrMetaUseCase.Handle(timeRecordId);

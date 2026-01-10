@@ -7,7 +7,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class OAuthRepository(ProjectContext dbContext) : IOAuthRepository
 {
-    public async Task<OAuthEntity> Create(OAuthEntity entity)
+    public async Task<OAuth> Create(OAuth entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.CreatedAt = now;
@@ -28,12 +28,12 @@ public class OAuthRepository(ProjectContext dbContext) : IOAuthRepository
         return true;
     }
 
-    public async Task<OAuthEntity?> FindByUserId(int id)
+    public async Task<OAuth?> FindByUserId(int id)
     {
         return await dbContext.OAuths.FirstOrDefaultAsync(i => i.UserId == id);
     }
 
-    public async Task<OAuthEntity?> FindByUserProviderId(string provider, string id)
+    public async Task<OAuth?> FindByUserProviderId(string provider, string id)
     {
         return await dbContext.OAuths.FirstOrDefaultAsync(i => i.Provider == provider && i.UserProviderId == id);
     }

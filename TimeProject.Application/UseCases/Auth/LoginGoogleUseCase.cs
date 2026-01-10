@@ -32,7 +32,7 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<Result<JwtResult>> Handle(LoginGoogleDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtResult>> Handle(LoginGoogleDto dto, UserAccessLog ac)
     {
         var result = new Result<JwtResult>();
 
