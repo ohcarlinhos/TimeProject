@@ -1,9 +1,9 @@
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
 
-namespace TimeProject.Api.Infrastructure.Handlers;
+namespace TimeProject.Infrastructure.Handlers;
 
-public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings, IHostEnvironment hostEnvironment)
+public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings)
     : IHookHandler
 {
     public async Task Send(HookTo to, string message)
@@ -19,9 +19,7 @@ public class HookHandler(ICustomBot customBot, TelegramSettings telegramSettings
         var now = DateTime.Now.ToUniversalTime();
         message += $"\n\n{TimeZoneInfo.ConvertTimeFromUtc(now, TimeZoneInfo.Local):dd/MM/yyyy HH:mm:ss}";
         message += $"\nUTC: {now}";
-
-        if (hostEnvironment.IsDevelopment()) message += "\n--- DEV ---";
-
+        
         await customBot.SendMessage(telegramSettings.ChatId, message, threadId);
     }
 

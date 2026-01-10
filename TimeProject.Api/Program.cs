@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
+using TimeProject.Api.Controllers.Middlewares;
 using TimeProject.Api.Infrastructure.Config;
-using TimeProject.Api.Infrastructure.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 

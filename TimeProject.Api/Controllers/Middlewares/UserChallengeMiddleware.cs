@@ -1,10 +1,9 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.IdentityModel.Tokens;
-using TimeProject.Api.Infrastructure.Attributes;
+using TimeProject.Api.Controllers.Attributes;
 using TimeProject.Api.Infrastructure.Interfaces;
 
-namespace TimeProject.Api.Infrastructure.Middlewares;
+namespace TimeProject.Api.Controllers.Middlewares;
 
 public class UserChallengeMiddleware(IUserChallenge userChallenge) : IMiddleware
 {

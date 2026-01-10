@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Options;
-using TimeProject.Api.Infrastructure.Handlers;
+using TimeProject.Api.Controllers.Middlewares;
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Api.Infrastructure.Middlewares;
 using TimeProject.Application.UseCases.Auth;
 using TimeProject.Application.UseCases.Category;
 using TimeProject.Application.UseCases.Code;
