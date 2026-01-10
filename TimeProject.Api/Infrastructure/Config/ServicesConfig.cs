@@ -6,7 +6,6 @@ using TimeProject.Api.Infrastructure.Mapping;
 using TimeProject.Api.Infrastructure.Middlewares;
 using TimeProject.Api.Infrastructure.Services;
 using TimeProject.Api.Infrastructure.Settings;
-using TimeProject.Api.RemoveDependencies;
 using TimeProject.Api.Repositories;
 using TimeProject.Application.UseCases.Auth;
 using TimeProject.Application.UseCases.Category;

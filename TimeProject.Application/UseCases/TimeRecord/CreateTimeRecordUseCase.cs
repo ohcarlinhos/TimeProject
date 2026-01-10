@@ -1,5 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.Domain.UseCases.TimePeriod;
@@ -10,7 +9,7 @@ using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Infrastructure.Database;
 
-namespace TimeProject.Api.RemoveDependencies;
+namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class CreateTimeRecordUseCase(
     ITimeRecordRepository repo,
@@ -31,7 +30,7 @@ public class CreateTimeRecordUseCase(
             if (category == null) return result.SetError(TimeRecordMessageErrors.CategoryNotFound);
         }
 
-        if (dto.Code.IsNullOrEmpty() == false)
+        if (string.IsNullOrEmpty(dto.Code) == false)
         {
             var trByCode = await repo.FindByCode(dto.Code!, userId);
             if (trByCode != null) return result.SetError(TimeRecordMessageErrors.CodeAlreadyInUse);
@@ -44,7 +43,7 @@ public class CreateTimeRecordUseCase(
                     CategoryId = dto.CategoryId,
                     Title = dto.Title,
                     Description = dto.Description,
-                    Code = dto.Code.IsNullOrEmpty() == false ? dto.Code! : Guid.NewGuid().ToString(),
+                    Code = string.IsNullOrEmpty(dto.Code) == false ? dto.Code! : Guid.NewGuid().ToString(),
                     ExternalLink = dto.ExternalLink
                 }
             );

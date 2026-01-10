@@ -4,7 +4,7 @@ using TimeProject.Core.Domain.UseCases.TimeRecord;
 using TimeProject.Core.RemoveDependencies.General;
 using TimeProject.Infrastructure.Database;
 
-namespace TimeProject.Api.RemoveDependencies;
+namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class SyncAllTrMetaUseCase(
     ProjectContext db,

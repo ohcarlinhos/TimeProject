@@ -1,14 +1,13 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using TimeProject.Api.Infrastructure.Errors;
+﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Core.Domain.Repositories;
 using TimeProject.Core.Domain.UseCases.TimeRecord;
 using TimeProject.Core.Domain.Utils;
 using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Core.RemoveDependencies.General;
 
-namespace TimeProject.Api.RemoveDependencies;
+namespace TimeProject.Application.UseCases.TimeRecord;
 
-internal class UpdateTimeRecordUseCase(
+public class UpdateTimeRecordUseCase(
     ITimeRecordRepository repo,
     ITimeRecordMapDataUtil mapDataUtil,
     ICategoryRepository categoryRepo,
@@ -32,7 +31,7 @@ internal class UpdateTimeRecordUseCase(
             timeRecord.CategoryId = dto.CategoryId;
         }
 
-        if (dto.Code.IsNullOrEmpty())
+        if (string.IsNullOrEmpty(dto.Code))
             return result.SetError(TimeRecordMessageErrors.CodeMustValue);
 
         if (timeRecord.Code != dto.Code)
