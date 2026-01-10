@@ -71,7 +71,7 @@ public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordReposit
         var query = dbContext.TimeRecords.AsQueryable();
         query = query.Where(tr => tr.UserId == userId);
 
-        if (search.IsNullOrEmpty() == false)
+        if (string.IsNullOrEmpty(search) == false)
             query = SearchWhereConditional(query, search);
 
         query = query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimeDate);

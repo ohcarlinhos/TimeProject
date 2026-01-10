@@ -1,11 +1,7 @@
 using Microsoft.Extensions.Options;
 using TimeProject.Api.Infrastructure.Handlers;
-using TimeProject.Api.Infrastructure.Integrations;
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Api.Infrastructure.Mapping;
 using TimeProject.Api.Infrastructure.Middlewares;
-using TimeProject.Api.Infrastructure.Services;
-using TimeProject.Api.Infrastructure.Settings;
 using TimeProject.Api.Repositories;
 using TimeProject.Application.UseCases.Auth;
 using TimeProject.Application.UseCases.Category;
@@ -36,6 +32,11 @@ using TimeProject.Core.Domain.UseCases.TimerSession;
 using TimeProject.Core.Domain.UseCases.User;
 using TimeProject.Core.Domain.Utils;
 using TimeProject.Core.TimeRecord.Repositories;
+using TimeProject.Infrastructure.Handlers;
+using TimeProject.Infrastructure.Integrations;
+using TimeProject.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.Mapping;
+using TimeProject.Infrastructure.Settings;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Api.Infrastructure.Config;
@@ -83,7 +84,7 @@ public static class ServicesConfig
 
         #region Jwt
 
-        builder.Services.AddSingleton<IJwtService, JwtService>();
+        builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
 
         #endregion
 

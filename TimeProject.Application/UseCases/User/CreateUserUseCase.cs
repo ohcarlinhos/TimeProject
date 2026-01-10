@@ -6,6 +6,7 @@ using TimeProject.Core.Domain.UseCases.User;
 using TimeProject.Core.Domain.Utils;
 using TimeProject.Core.RemoveDependencies.Dtos.User;
 using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.User;
 
@@ -13,7 +14,7 @@ public class CreateUserUseCase(
     IUserRepository repository,
     IUserMapDataUtil mapper,
     IHookHandler hookHandler,
-    IJwtService jwtService,
+    IJwtHandler jwtHandler,
     ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase
 {
@@ -38,7 +39,7 @@ public class CreateUserUseCase(
         result.Data = new CreateUserResult
         {
             User = mapper.Handle(entity),
-            Jwt = jwtService.Generate(entity)
+            Jwt = jwtHandler.Generate(entity)
         };
 
         await hookHandler.Send(HookTo.Users,

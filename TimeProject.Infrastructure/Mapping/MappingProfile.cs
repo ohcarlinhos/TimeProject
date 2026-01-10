@@ -6,7 +6,7 @@ using TimeProject.Core.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Core.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Core.RemoveDependencies.Dtos.User;
 
-namespace TimeProject.Api.Infrastructure.Mapping;
+namespace TimeProject.Infrastructure.Mapping;
 
 public class MappingProfile : Profile
 {

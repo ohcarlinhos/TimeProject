@@ -25,8 +25,9 @@ public class UserChallengeMiddleware(IUserChallenge userChallenge) : IMiddleware
         {
             context.Request.Headers.TryGetValue("UserChallengeToken", out var token);
 
-            if (token.IsNullOrEmpty() ||
-                (token.IsNullOrEmpty() && await userChallenge.Test(token.ToString()) == false))
+            if (string.IsNullOrEmpty(token) || (
+                    string.IsNullOrEmpty(token) && await userChallenge.Test(token.ToString()) == false)
+               )
             {
                 SetTokenError(context);
                 return;

@@ -9,6 +9,7 @@ using TimeProject.Core.Domain.UseCases.User;
 using TimeProject.Core.RemoveDependencies.Dtos.Auth;
 using TimeProject.Core.RemoveDependencies.Dtos.User;
 using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auth;
 
@@ -22,7 +23,7 @@ public class LoginGoogleResponse
 }
 
 public class LoginGoogleUseCase(
-    IJwtService jwtService,
+    IJwtHandler jwtHandler,
     IGetUserByOAtuhProviderIdUseCase getUserByOAtuhProviderIdUseCase,
     ICreateUserByGoogleUserUseCase createUserByGoogleUserUseCase,
     ICreateUserAccessLogUseCase createUserAccessLogUseCase
@@ -31,9 +32,9 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<Result<JwtDto>> Handle(LoginGoogleDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtResult>> Handle(LoginGoogleDto dto, UserAccessLogEntity ac)
     {
-        var result = new Result<JwtDto>();
+        var result = new Result<JwtResult>();
 
         try
         {
@@ -50,7 +51,7 @@ public class LoginGoogleUseCase(
             {
                 ac.UserId = getUserByPIdResult.Data.Id;
                 await createUserAccessLogUseCase.Handle(ac);
-                return result.SetData(jwtService.Generate(getUserByPIdResult.Data));
+                return result.SetData(jwtHandler.Generate(getUserByPIdResult.Data));
             }
 
             if (userFromProvider.VerifiedEmail == false)
@@ -71,7 +72,7 @@ public class LoginGoogleUseCase(
             ac.UserId = createUserResult.Data!.Id;
             await createUserAccessLogUseCase.Handle(ac);
 
-            return result.SetData(jwtService.Generate(createUserResult.Data));
+            return result.SetData(jwtHandler.Generate(createUserResult.Data));
         }
         catch
         {

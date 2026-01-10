@@ -2,7 +2,7 @@
 using TimeProject.Api.Infrastructure.Interfaces;
 using TimeProject.Core.RemoveDependencies.Dtos.Handlers.Email;
 
-namespace TimeProject.Api.Infrastructure.Handlers;
+namespace TimeProject.Infrastructure.Handlers;
 
 public class EmailHandler(ICustomSmtp customSmtp) : IEmailHandler
 {

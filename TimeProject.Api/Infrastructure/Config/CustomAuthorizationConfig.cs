@@ -1,7 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using TimeProject.Api.Infrastructure.Settings;
+using TimeProject.Infrastructure.Settings;
 
 namespace TimeProject.Api.Infrastructure.Config;
 

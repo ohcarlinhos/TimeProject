@@ -6,19 +6,20 @@ using TimeProject.Core.Domain.UseCases.Login;
 using TimeProject.Core.Domain.UseCases.User;
 using TimeProject.Core.RemoveDependencies.Dtos.Auth;
 using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auth;
 
 public class LoginUseCase(
-    IJwtService jwtService,
+    IJwtHandler jwtHandler,
     IGetUserPasswordByEmailUseCase getUserPasswordByEmailUseCase,
     ICreateUserAccessLogUseCase createUserAccessLogUseCase
 )
     : ILoginUseCase
 {
-    public async Task<Result<JwtDto>> Handle(LoginDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtResult>> Handle(LoginDto dto, UserAccessLogEntity ac)
     {
-        var result = new Result<JwtDto>();
+        var result = new Result<JwtResult>();
 
         var findUserPasswordResult = await getUserPasswordByEmailUseCase.Handle(dto.Email);
         if (findUserPasswordResult.HasError) return result.SetError(findUserPasswordResult.Message);
@@ -31,6 +32,6 @@ public class LoginUseCase(
         ac.UserId = data.User.Id;
         await createUserAccessLogUseCase.Handle(ac);
 
-        return result.SetData(jwtService.Generate(data.User));
+        return result.SetData(jwtHandler.Generate(data.User));
     }
 }

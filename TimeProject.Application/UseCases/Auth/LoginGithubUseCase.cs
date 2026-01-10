@@ -8,20 +8,21 @@ using TimeProject.Core.Domain.UseCases.User;
 using TimeProject.Core.RemoveDependencies.Dtos.Auth;
 using TimeProject.Core.RemoveDependencies.Dtos.User;
 using TimeProject.Core.RemoveDependencies.General;
+using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auth;
 
 public class LoginGithubUseCase(
-    IJwtService jwtService,
+    IJwtHandler jwtHandler,
     IGetUserByOAtuhProviderIdUseCase getUserByOAtuhProviderIdUseCase,
     ICreateUserByGhUserUseCase createUserByGhUserUseCase,
     ICreateUserAccessLogUseCase createUserAccessLogUseCase
 )
     : ILoginGithubUseCase
 {
-    public async Task<Result<JwtDto>> Handle(LoginGithubDto dto, UserAccessLogEntity ac)
+    public async Task<Result<JwtResult>> Handle(LoginGithubDto dto, UserAccessLogEntity ac)
     {
-        var result = new Result<JwtDto>();
+        var result = new Result<JwtResult>();
 
         try
         {
@@ -38,7 +39,7 @@ public class LoginGithubUseCase(
             {
                 ac.UserId = getUserByPIdResult.Data.Id;
                 await createUserAccessLogUseCase.Handle(ac);
-                return result.SetData(jwtService.Generate(getUserByPIdResult.Data));
+                return result.SetData(jwtHandler.Generate(getUserByPIdResult.Data));
             }
 
             var emailList = await client.User.Email.GetAll();
@@ -58,7 +59,7 @@ public class LoginGithubUseCase(
             ac.UserId = createUserResult.Data!.Id;
             await createUserAccessLogUseCase.Handle(ac);
 
-            return result.SetData(jwtService.Generate(createUserResult.Data));
+            return result.SetData(jwtHandler.Generate(createUserResult.Data));
         }
         catch
         {

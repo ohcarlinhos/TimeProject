@@ -1,4 +1,4 @@
-namespace TimeProject.Api.Infrastructure.Settings;
+namespace TimeProject.Infrastructure.Settings;
 
 public class TelegramThreads
 {

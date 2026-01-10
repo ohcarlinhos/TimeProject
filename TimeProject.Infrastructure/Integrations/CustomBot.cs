@@ -1,9 +1,9 @@
 using Telegram.Bot;
 using Telegram.Bot.Types.Enums;
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Api.Infrastructure.Settings;
+using TimeProject.Infrastructure.Settings;
 
-namespace TimeProject.Api.Infrastructure.Integrations;
+namespace TimeProject.Infrastructure.Integrations;
 
 public class CustomBot(TelegramSettings telegramSettings) : ICustomBot
 {

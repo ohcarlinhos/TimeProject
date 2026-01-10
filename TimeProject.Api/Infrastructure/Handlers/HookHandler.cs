@@ -1,5 +1,5 @@
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Api.Infrastructure.Settings;
+using TimeProject.Infrastructure.Settings;
 
 namespace TimeProject.Api.Infrastructure.Handlers;
 

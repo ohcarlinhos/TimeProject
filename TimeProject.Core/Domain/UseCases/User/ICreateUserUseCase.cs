@@ -7,7 +7,7 @@ namespace TimeProject.Core.Domain.UseCases.User;
 public class CreateUserResult
 {
     public UserOutDto User { get; set; } = null!;
-    public JwtDto Jwt { get; set; } = null!;
+    public JwtResult Jwt { get; set; } = null!;
 }
 
 public interface ICreateUserUseCase

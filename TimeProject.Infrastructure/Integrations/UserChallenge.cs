@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 using RestSharp;
 using TimeProject.Api.Infrastructure.Interfaces;
-using TimeProject.Api.Infrastructure.Settings;
+using TimeProject.Infrastructure.Settings;
 
-namespace TimeProject.Api.Infrastructure.Integrations;
+namespace TimeProject.Infrastructure.Integrations;
 
 public class UserChallengeResponse
 {
