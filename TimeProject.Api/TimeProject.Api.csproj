@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>true</InvariantGlobalization>
@@ -36,10 +36,14 @@
     <ItemGroup>
         <Folder Include="Migrations\"/>
         <Folder Include="Modules\Auth\Repositories\" />
+        <Folder Include="Modules\Auth\UseCases\" />
+        <Folder Include="Modules\Auth\Utils\" />
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\TimeProject.Application\TimeProject.Application.csproj" />
         <ProjectReference Include="..\TimeProject.Core\TimeProject.Core.csproj"/>
+        <ProjectReference Include="..\TimeProject.Infrastructure\TimeProject.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

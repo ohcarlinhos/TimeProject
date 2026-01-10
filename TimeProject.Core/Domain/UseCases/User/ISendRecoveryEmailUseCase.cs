@@ -4,5 +4,5 @@ namespace TimeProject.Core.Domain.UseCases.User;
 
 public interface ISendRecoveryEmailUseCase
 {
-    Task<Result<bool>> Handle(string email);
+    Task<Result<bool>> Handle(string email, string recoveryUrl);
 }
