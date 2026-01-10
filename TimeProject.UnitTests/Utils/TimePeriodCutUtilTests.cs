@@ -2,7 +2,7 @@
 using TimeProject.Application.UseCases.TimePeriod.Utils;
 using TimeProject.Domain.Entities;
 
-namespace UnitTests.Utils;
+namespace TimeProject.UnitTests.Utils;
 
 public class TimePeriodCutUtilTests
 {

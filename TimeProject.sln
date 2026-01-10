@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeProject.Api", "TimeProject.Api\TimeProject.Api.csproj", "{CAF2D004-E63B-4BBD-9607-C4117D641E49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{35E75EBD-209B-4B1C-A854-51A3AC1D2AE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeProject.UnitTests", "TimeProject.UnitTests\TimeProject.UnitTests.csproj", "{35E75EBD-209B-4B1C-A854-51A3AC1D2AE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeProject.Domain", "TimeProject.Domain\TimeProject.Domain.csproj", "{D66F4BF6-8526-4A84-80C2-4E229759992F}"
 EndProject

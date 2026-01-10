@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Moq;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.Repositories;
 using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
+using TimeProject.Domain.Repositories;
 
-namespace UnitTests.UseCases;
+namespace TimeProject.UnitTests.UseCases;
 
 public class GetRangeDaysStatisticUseCaseTests
 {
