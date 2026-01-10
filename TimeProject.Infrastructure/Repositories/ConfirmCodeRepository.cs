@@ -35,21 +35,21 @@ public class ConfirmCodeRepository(ProjectContext db) : IConfirmCodeRepository
             .FirstOrDefaultAsync(e => e.Id == id && e.User!.Email == email);
     }
 
-    public async Task<List<ConfirmCode>> FindByUserId(int userId)
+    public async Task<IList<ConfirmCode>> FindByUserId(int userId)
     {
         return await db.ConfirmCodes
             .Where(e => e.UserId == userId)
             .ToListAsync();
     }
 
-    public async Task<List<ConfirmCode>> FindByUserId(int userId, ConfirmCodeType type)
+    public async Task<IList<ConfirmCode>> FindByUserId(int userId, ConfirmCodeType type)
     {
         return await db.ConfirmCodes
             .Where(e => e.UserId == userId && e.Type == type)
             .ToListAsync();
     }
 
-    public async Task<List<ConfirmCode>> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type)
+    public async Task<IList<ConfirmCode>> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type)
     {
         var now = DateTime.Now.ToUniversalTime();
         return await db.ConfirmCodes

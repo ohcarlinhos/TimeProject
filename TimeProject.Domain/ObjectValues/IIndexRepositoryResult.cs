@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Domain.Repositories.Shared;
+﻿namespace TimeProject.Domain.ObjectValues;
 
 public interface IIndexRepositoryResult<T>
 {
