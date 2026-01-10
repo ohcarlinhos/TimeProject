@@ -2,14 +2,15 @@
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class DeleteTimeRecordUseCase(ITimeRecordRepository repo) : IDeleteTimeRecordUseCase
 {
-    public async Task<Result<bool>> Handle(int id, int userId)
+    public async Task<ICustomResult<bool>> Handle(int id, int userId)
     {
-        var result = new Result<bool>();
+        var result = new CustomResult<bool>();
         var entity = await repo.FindById(id, userId);
 
         return entity == null

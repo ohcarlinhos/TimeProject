@@ -2,14 +2,15 @@
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Code;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Code;
 
 public class ValidateConfirmCodeUseCase(IConfirmCodeRepository repo) : IValidateConfirmCodeUseCase
 {
-    public async Task<Result<bool>> Handle(string id, string email)
+    public async Task<ICustomResult<bool>> Handle(string id, string email)
     {
-        var result = new Result<bool>();
+        var result = new CustomResult<bool>();
 
         var code = await repo.FindByIdAndEmail(id, email);
 

@@ -6,6 +6,7 @@ using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimePeriod;
 
@@ -16,9 +17,9 @@ public class CreateTimePeriodUseCase(
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : ICreateTimePeriodUseCase
 {
-    public async Task<Result<Domain.Entities.PeriodRecord>> Handle(CreateTimePeriodDto dto, int userId)
+    public async Task<ICustomResult<PeriodRecord>> Handle(CreateTimePeriodDto dto, int userId)
     {
-        var result = new Result<Domain.Entities.PeriodRecord>();
+        var result = new CustomResult<PeriodRecord>();
 
         timePeriodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;

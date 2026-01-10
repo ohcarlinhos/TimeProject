@@ -3,6 +3,7 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.UseCases.TimerSession;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimerSession;
 
@@ -11,9 +12,9 @@ public class DeleteTimerSessionUseCase(
     ITimePeriodRepository tpRepo,
     ISyncTrMetaUseCase syncTrMetaUseCase) : IDeleteTimerSessionUseCase
 {
-    public async Task<Result<bool>> Handle(int id, int userId)
+    public async Task<ICustomResult<bool>> Handle(int id, int userId)
     {
-        var result = new Result<bool>();
+        var result = new CustomResult<bool>();
         var entity = await repo.FindById(id, userId);
 
         if (entity == null)

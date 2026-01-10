@@ -8,9 +8,9 @@ namespace TimeProject.Application.UseCases.Category;
 
 public class CreateCategoryUseCase(ICategoryRepository repo) : ICreateCategoryUseCase
 {
-    public async Task<IResult<Domain.Entities.Category>> Handle(ICategoryDto dto, int userId)
+    public async Task<ICustomResult<Domain.Entities.Category>> Handle(ICategoryDto dto, int userId)
     {
-        var result = new Result<Domain.Entities.Category>();
+        var result = new CustomResult<Domain.Entities.Category>();
         var category = await repo.FindByName(dto.Name, userId);
 
         if (category != null)

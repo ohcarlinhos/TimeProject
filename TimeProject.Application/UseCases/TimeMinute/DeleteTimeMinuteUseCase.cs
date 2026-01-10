@@ -3,6 +3,7 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeMinute;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeMinute;
 
@@ -11,9 +12,9 @@ public class DeleteTimeMinuteUseCase(
     ISyncTrMetaUseCase syncTrMetaUseCase
 ) : IDeleteTimeMinuteUseCase
 {
-    public async Task<Result<bool>> Handle(int id, int userId)
+    public async Task<ICustomResult<bool>> Handle(int id, int userId)
     {
-        var result = new Result<bool>();
+        var result = new CustomResult<bool>();
 
         var timeMinute = await repository.FindById(id, userId);
         if (timeMinute == null) return result.SetError(TimeMinuteMessageErrors.NotFound);

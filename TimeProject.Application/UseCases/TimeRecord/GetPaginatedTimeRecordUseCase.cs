@@ -4,17 +4,18 @@ using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class GetPaginatedTimeRecordUseCase(ITimeRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
     : IGetPaginatedTimeRecordUseCase
 {
-    public async Task<Result<Pagination<TimeRecordOutDto>>> Handle(PaginationQuery paginationQuery, int userId)
+    public async Task<ICustomResult<IPagination<TimeRecordOutDto>>> Handle(PaginationQuery paginationQuery, int userId)
     {
         var result = await repo.Index(paginationQuery, userId);
 
-        return new Result<Pagination<TimeRecordOutDto>>
+        return new CustomResult<IPagination<TimeRecordOutDto>>
         {
             Data = Pagination<TimeRecordOutDto>.Handle(mapDataUtil.Handle(result.Entities), paginationQuery,
                 result.Count)

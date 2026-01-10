@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.Feedback;
 
 public interface ISendPublicFeedbackUseCase
 {
-    Task<Result<bool>> Handle(PublicFeedbackDto feedbackDto);
+    Task<CustomResult<bool>> Handle(PublicFeedbackDto feedbackDto);
 }

@@ -3,15 +3,16 @@ using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
 public class GetUserByOAtuhProviderIdUseCase(IUserRepository repository, IOAuthRepository oAtuhRepository)
     : IGetUserByOAtuhProviderIdUseCase
 {
-    public async Task<Result<Domain.Entities.User>> Handle(string provider, string id)
+    public async Task<ICustomResult<Domain.Entities.User>> Handle(string provider, string id)
     {
-        var result = new Result<Domain.Entities.User>();
+        var result = new CustomResult<Domain.Entities.User>();
 
         var userOAuth = await oAtuhRepository.FindByUserProviderId(provider, id);
         if (userOAuth == null) return result.SetError(UserMessageErrors.NotFound);

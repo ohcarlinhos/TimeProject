@@ -10,11 +10,11 @@ public class TimePeriodValidateUtil : ITimePeriodValidateUtil
     public void ValidateStartAndEnd<T>(
         DateTime start,
         DateTime end,
-        Result<T> result
+        CustomResult<T> customResult
     )
     {
         if (start.CompareTo(end) > 0)
-            result.SetError(TimePeriodMessageErrors.EndDateIsBiggerThenStartDate);
+            customResult.SetError(TimePeriodMessageErrors.EndDateIsBiggerThenStartDate);
     }
 
     public bool HasMinSize(TimePeriodDto dto)

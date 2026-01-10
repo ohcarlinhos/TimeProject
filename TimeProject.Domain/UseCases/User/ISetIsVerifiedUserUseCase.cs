@@ -1,9 +1,8 @@
-﻿// using Shared.General;
-//
-// namespace TimeProject.Domain.User.UseCases;
-//
-// public interface ISetIsVerifiedUserUseCase
-// {
-//     Task<Result<bool>> Handle(int id, bool isVerified);
-// }
+﻿using TimeProject.Domain.Shared;
 
+namespace TimeProject.Domain.UseCases.User;
+
+public interface ISetIsVerifiedUserUseCase
+{
+    Task<ICustomResult<bool>> Handle(int id, bool isVerified);
+}

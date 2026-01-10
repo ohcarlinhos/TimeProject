@@ -4,6 +4,7 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
@@ -12,9 +13,9 @@ public class CreateUserByGhUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGhUserUseCase
 {
-    public async Task<Result<Domain.Entities.User>> Handle(CreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
+    public async Task<ICustomResult<Domain.Entities.User>> Handle(CreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
     {
-        var result = new Result<Domain.Entities.User>();
+        var result = new CustomResult<Domain.Entities.User>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId)) return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
 

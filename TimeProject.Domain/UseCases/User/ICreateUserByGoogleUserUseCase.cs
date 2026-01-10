@@ -1,10 +1,9 @@
-﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.User;
 
 public interface ICreateUserByGoogleUserUseCase
 {
-    Task<Result<Entities.User>> Handle(CreateUserOAtuhDto dto, string email);
+    Task<ICustomResult<Entities.User>> Handle(CreateUserOAtuhDto dto, string email);
 }

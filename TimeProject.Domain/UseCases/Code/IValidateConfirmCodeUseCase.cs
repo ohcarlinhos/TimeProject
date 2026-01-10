@@ -1,8 +1,8 @@
-﻿using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Code;
 
 public interface IValidateConfirmCodeUseCase
 {
-    Task<Result<bool>> Handle(string id, string email);
+    Task<ICustomResult<bool>> Handle(string id, string email);
 }

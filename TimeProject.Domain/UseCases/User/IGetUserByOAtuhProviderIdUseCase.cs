@@ -1,9 +1,8 @@
-﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.User;
 
 public interface IGetUserByOAtuhProviderIdUseCase
 {
-    Task<Result<Entities.User>> Handle(string provider, string id);
+    Task<ICustomResult<Entities.User>> Handle(string provider, string id);
 }

@@ -5,6 +5,7 @@ using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimePeriod;
 
@@ -15,10 +16,10 @@ public class CreateTimePeriodByListUseCase(
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : ICreateTimePeriodByListUseCase
 {
-    public async Task<Result<List<Domain.Entities.PeriodRecord>>> Handle(TimePeriodListDto dto, int timeRecordId, int userId)
+    public async Task<ICustomResult<IList<PeriodRecord>>> Handle(TimePeriodListDto dto, int timeRecordId, int userId)
     {
-        var result = new Result<List<Domain.Entities.PeriodRecord>>();
-        List<Domain.Entities.PeriodRecord> list = [];
+        var result = new CustomResult<IList<PeriodRecord>>();
+        List<PeriodRecord> list = [];
 
         foreach (var timePeriod in dto.TimePeriods)
         {
@@ -27,7 +28,7 @@ public class CreateTimePeriodByListUseCase(
                 break;
 
             if (timePeriodValidateUtil.HasMinSize(timePeriod))
-                list.Add(new Domain.Entities.PeriodRecord
+                list.Add(new PeriodRecord
                 {
                     UserId = userId,
                     RecordId = timeRecordId,
@@ -39,7 +40,7 @@ public class CreateTimePeriodByListUseCase(
         if (result.HasError) return result;
         if (list.Count == 0) return result.SetData([]);
 
-        var timerSession = await timerSessionRepo.Create(new Domain.Entities.TimerSession
+        var timerSession = await timerSessionRepo.Create(new Domain.Entities.TimerSession()
             { RecordId = timeRecordId, UserId = userId, Type = dto.Type, From = dto.From }
         );
 

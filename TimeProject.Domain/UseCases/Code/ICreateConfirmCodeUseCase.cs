@@ -1,9 +1,9 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Code;
 
 public interface ICreateConfirmCodeUseCase
 {
-    Task<Result<ConfirmCode>> Handle(int userId, ConfirmCodeType type);
+    Task<ICustomResult<ConfirmCode>> Handle(int userId, ConfirmCodeType type);
 }

@@ -1,8 +1,8 @@
-﻿using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.User;
 
 public interface ISendRecoveryEmailUseCase
 {
-    Task<Result<bool>> Handle(string email, string recoveryUrl);
+    Task<ICustomResult<bool>> Handle(string email, string recoveryUrl);
 }

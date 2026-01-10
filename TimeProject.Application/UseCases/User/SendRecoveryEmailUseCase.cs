@@ -5,6 +5,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Domain.UseCases.Code;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
@@ -16,9 +17,9 @@ public class SendRecoveryEmailUseCase(
     IHookHandler hookHandler
 ) : ISendRecoveryEmailUseCase
 {
-    public async Task<Result<bool>> Handle(string email, string recoveryUrl)
+    public async Task<ICustomResult<bool>> Handle(string email, string recoveryUrl)
     {
-        var result = new Result<bool>();
+        var result = new CustomResult<bool>();
 
         var findUserResult = await getUserByEmailUseCase.Handle(email);
         if (findUserResult.HasError) return result.SetError(findUserResult.Message);

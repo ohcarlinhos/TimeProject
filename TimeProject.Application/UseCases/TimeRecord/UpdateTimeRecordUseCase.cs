@@ -4,6 +4,7 @@ using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
@@ -15,9 +16,9 @@ public class UpdateTimeRecordUseCase(
 )
     : IUpdateTimeRecordUseCase
 {
-    public async Task<Result<TimeRecordOutDto>> Handle(int id, UpdateTimeRecordDto dto, int userId)
+    public async Task<ICustomResult<TimeRecordOutDto>> Handle(int id, UpdateTimeRecordDto dto, int userId)
     {
-        var result = new Result<TimeRecordOutDto>();
+        var result = new CustomResult<TimeRecordOutDto>();
 
         var timeRecord = await repo.FindById(id, userId);
 

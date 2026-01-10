@@ -23,7 +23,7 @@ public class TimePeriodController(
 {
     [HttpGet]
     [Route("{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<TimePeriodOutDto>>> Index(int timeRecordId,
+    public async Task<ActionResult<IPagination<TimePeriodOutDto>>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
@@ -40,7 +40,7 @@ public class TimePeriodController(
 
     [HttpPost]
     [Route("list/{id:int}")]
-    public async Task<ActionResult<List<PeriodRecord>>> Create([FromBody] TimePeriodListDto dto, int id)
+    public async Task<ActionResult<IList<PeriodRecord>>> Create([FromBody] TimePeriodListDto dto, int id)
     {
         var result = await createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);

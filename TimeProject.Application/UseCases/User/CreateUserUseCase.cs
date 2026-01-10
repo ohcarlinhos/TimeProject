@@ -1,11 +1,14 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Api.Infrastructure.Interfaces;
+using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.User;
@@ -18,9 +21,9 @@ public class CreateUserUseCase(
     ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase
 {
-    public async Task<Result<CreateUserResult>> Handle(CreateUserDto dto)
+    public async Task<ICustomResult<ICreateUserResult>> Handle(CreateUserDto dto)
     {
-        var result = new Result<CreateUserResult>();
+        var result = new CustomResult<ICreateUserResult>();
         var emailAvailable = await repository.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);

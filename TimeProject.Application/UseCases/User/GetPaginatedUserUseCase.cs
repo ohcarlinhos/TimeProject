@@ -12,7 +12,7 @@ public class GetPaginatedUserUseCase(
     IUserAccessLogRepository userAccessLogRepository,
     IUserMapDataUtil mapper) : IGetPaginatedUserUseCase
 {
-    public Result<Pagination<UserOutDto>> Handle(PaginationQuery paginationQuery)
+    public CustomResult<Pagination<UserOutDto>> Handle(PaginationQuery paginationQuery)
     {
         var data = mapper.Handle(userRepository.Index(paginationQuery));
         var totalItems = userRepository.GetTotalItems(paginationQuery);
@@ -28,7 +28,7 @@ public class GetPaginatedUserUseCase(
             user.LastUserAccessProvider = lastUserAccess.Provider;
         }
 
-        return new Result<Pagination<UserOutDto>>
+        return new CustomResult<Pagination<UserOutDto>>
             { Data = Pagination<UserOutDto>.Handle(data, paginationQuery, totalItems) };
     }
 }

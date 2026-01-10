@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.Feedback;
 
 public interface ISendFeedbackUseCase
 {
-    Task<Result<bool>> Handle(FeedbackDto feedbackDto, string name, string email, bool isVerified);
+    Task<CustomResult<bool>> Handle(FeedbackDto feedbackDto, string name, string email, bool isVerified);
 }

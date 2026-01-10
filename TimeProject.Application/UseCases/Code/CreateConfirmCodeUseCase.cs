@@ -2,14 +2,15 @@
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Code;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Code;
 
 public class CreateConfirmCodeUseCase(IConfirmCodeRepository repo) : ICreateConfirmCodeUseCase
 {
-    public async Task<Result<ConfirmCode>> Handle(int userId, ConfirmCodeType type)
+    public async Task<ICustomResult<ConfirmCode>> Handle(int userId, ConfirmCodeType type)
     {
-        var result = new Result<ConfirmCode>();
+        var result = new CustomResult<ConfirmCode>();
         var codes = await repo.FindByUserIdThatIsNotExpiredOrUsed(userId, type);
 
         return codes.Count > 0

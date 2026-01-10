@@ -8,14 +8,14 @@ namespace TimeProject.APIs.Controllers.Shared;
 
 public class CustomController : ControllerBase
 {
-    protected ActionResult<T> HandleResponse<T>(IResult<T> result)
+    protected ActionResult<T> HandleResponse<T>(ICustomResult<T> customResult)
     {
-        if (!string.IsNullOrEmpty(result.ActionName) && result.IsValid)
-            return CreatedAtAction(result.ActionName, result.Data);
+        if (!string.IsNullOrEmpty(customResult.ActionName) && customResult.IsValid)
+            return CreatedAtAction(customResult.ActionName, customResult.Data);
 
-        if (result.IsValid) return Ok(result.Data);
+        if (customResult.IsValid) return Ok(customResult.Data);
 
-        var messageSplit = result.Message?.Split(":") ?? ["generic_error"];
+        var messageSplit = customResult.Message?.Split(":") ?? ["generic_error"];
         var errorResponse = new ErrorResult { Message = messageSplit[^1] };
 
         var code = messageSplit[0];

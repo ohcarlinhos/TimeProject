@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IGetPaginatedUserUseCase
 {
-    Result<Pagination<UserOutDto>> Handle(PaginationQuery paginationQuery);
+    CustomResult<Pagination<UserOutDto>> Handle(PaginationQuery paginationQuery);
 }

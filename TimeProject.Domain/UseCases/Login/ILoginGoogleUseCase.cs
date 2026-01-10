@@ -1,10 +1,11 @@
 ﻿using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Login;
 
 public interface ILoginGoogleUseCase
 {
-    Task<Result<JwtResult>> Handle(LoginGoogleDto dto, UserAccessLog ac);
+    Task<ICustomResult<JwtResult>> Handle(LoginGoogleDto dto, UserAccessLog ac);
 }

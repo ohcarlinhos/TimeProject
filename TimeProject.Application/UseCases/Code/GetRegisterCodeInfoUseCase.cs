@@ -4,14 +4,15 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Code;
 using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Code;
 
 public class GetRegisterCodeInfoUseCase(IConfirmCodeRepository repo, IMapper mapper) : IGetRegisterCodeInfoUseCase
 {
-    public async Task<Result<ConfirmCodeOutDto>> Handle(int userId)
+    public async Task<ICustomResult<ConfirmCodeOutDto>> Handle(int userId)
     {
-        var result = new Result<ConfirmCodeOutDto>();
+        var result = new CustomResult<ConfirmCodeOutDto>();
         var codes = await repo.FindByUserIdThatIsNotExpiredOrUsed(userId, ConfirmCodeType.Register);
 
         return codes.Count != 0

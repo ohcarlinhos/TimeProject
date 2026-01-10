@@ -5,6 +5,7 @@ using TimeProject.Domain.UseCases.TimeMinute;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeMinute;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeMinute;
 
@@ -15,10 +16,10 @@ public class CreateTimeMinuteByListUseCase(
     ISyncTrMetaUseCase syncTrMetaUseCase
 ) : ICreateTimeMinuteByListUseCase
 {
-    public async Task<Result<List<Domain.Entities.MinuteRecord>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId)
+    public async Task<ICustomResult<List<MinuteRecord>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId)
     {
-        var result = new Result<List<Domain.Entities.MinuteRecord>>();
-        List<Domain.Entities.MinuteRecord> list = [];
+        var result = new CustomResult<List<MinuteRecord>>();
+        List<MinuteRecord> list = [];
 
         var user = await userRepository.FindById(userId);
         if (user is null) return result.SetError(TimeRecordMessageErrors.NotFound);
@@ -27,7 +28,7 @@ public class CreateTimeMinuteByListUseCase(
         if (timeRecord is null) return result.SetError(TimeRecordMessageErrors.NotFound);
 
         foreach (var minutes in dto.Minutes)
-            list.Add(new Domain.Entities.MinuteRecord
+            list.Add(new MinuteRecord
             {
                 UserId = userId,
                 RecordId = timeRecordId,

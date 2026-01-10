@@ -24,14 +24,14 @@ public class TimeRecordController(
 ) : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<TimeRecordOutDto>>> Index([FromQuery] PaginationQuery paginationQuery)
+    public async Task<ActionResult<IPagination<TimeRecordOutDto>>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(await getPaginatedTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("history/{timeRecordId:int}")]
-    public async Task<ActionResult<Pagination<TimeRecordHistoryDayOutDto>>> HistoryIndex([FromRoute] int timeRecordId,
+    public async Task<ActionResult<IPagination<TimeRecordHistoryDayOutDto>>> HistoryIndex([FromRoute] int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
@@ -40,7 +40,7 @@ public class TimeRecordController(
 
     [HttpGet]
     [Route("search")]
-    public async Task<ActionResult<List<SearchTimeRecordItem>>> Search([FromQuery] string? value)
+    public async Task<ActionResult<IList<SearchTimeRecordItem>>> Search([FromQuery] string? value)
     {
         return HandleResponse(await searchTimeRecordUseCase.Handle(value ?? "", UserClaims.Id(User)));
     }

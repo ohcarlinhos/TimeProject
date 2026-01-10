@@ -8,6 +8,7 @@ using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auth;
@@ -20,9 +21,9 @@ public class LoginGithubUseCase(
 )
     : ILoginGithubUseCase
 {
-    public async Task<Result<JwtResult>> Handle(LoginGithubDto dto, UserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(LoginGithubDto dto, UserAccessLog ac)
     {
-        var result = new Result<JwtResult>();
+        var result = new CustomResult<JwtResult>();
 
         try
         {

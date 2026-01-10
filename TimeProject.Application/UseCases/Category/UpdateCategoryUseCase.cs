@@ -9,9 +9,9 @@ namespace TimeProject.Application.UseCases.Category;
 
 public class UpdateCategoryUseCase(ICategoryRepository repo) : IUpdateCategoryUseCase
 {
-    public async Task<IResult<Domain.Entities.Category>> Handle(int id, ICategoryDto dto, int userId)
+    public async Task<ICustomResult<Domain.Entities.Category>> Handle(int id, ICategoryDto dto, int userId)
     {
-        var result = new Result<Domain.Entities.Category>();
+        var result = new CustomResult<Domain.Entities.Category>();
         var category = await repo.FindById(id);
 
         if (category == null) return result.SetError(CategoryMessageErrors.NotFound);

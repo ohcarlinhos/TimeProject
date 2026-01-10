@@ -1,10 +1,10 @@
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeMinute;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.TimeMinute;
 
 public interface ICreateTimeMinuteByListUseCase
 {
-    Task<Result<List<Entities.MinuteRecord>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId);
+    Task<ICustomResult<List<MinuteRecord>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId);
 }

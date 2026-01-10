@@ -1,8 +1,8 @@
-﻿using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Code;
 
 public interface ISetIsUsedConfirmCodeUseCase
 {
-    Task<Result<bool>> Handle(string id);
+    Task<ICustomResult<bool>> Handle(string id);
 }

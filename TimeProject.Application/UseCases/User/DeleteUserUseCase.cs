@@ -6,8 +6,8 @@ namespace TimeProject.Application.UseCases.User;
 
 public class DeleteUserUseCase(IUserRepository repo) : IDeleteUserUseCase
 {
-    public async Task<Result<bool>> Handle(int id)
+    public async Task<CustomResult<bool>> Handle(int id)
     {
-        return new Result<bool> { Data = await repo.Delete(id) };
+        return new CustomResult<bool> { Data = await repo.Delete(id) };
     }
 }

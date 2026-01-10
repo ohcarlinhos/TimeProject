@@ -5,7 +5,7 @@ namespace TimeProject.Domain.Utils;
 
 public interface ITimePeriodValidateUtil
 {
-    void ValidateStartAndEnd<T>(DateTime start, DateTime end, Result<T> result);
+    void ValidateStartAndEnd<T>(DateTime start, DateTime end, CustomResult<T> customResult);
 
     bool HasMinSize(TimePeriodDto dto);
 }

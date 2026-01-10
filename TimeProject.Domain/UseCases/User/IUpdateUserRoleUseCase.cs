@@ -1,9 +1,9 @@
 ﻿using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.User;
 
 public interface IUpdateUserRoleUseCase
 {
-    Task<Result<UserOutDto>> Handle(int id, UpdateRoleDto dto);
+    Task<ICustomResult<UserOutDto>> Handle(int id, UpdateRoleDto dto);
 }

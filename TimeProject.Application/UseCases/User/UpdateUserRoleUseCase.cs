@@ -5,14 +5,15 @@ using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
 public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
 {
-    public async Task<Result<UserOutDto>> Handle(int id, UpdateRoleDto dto)
+    public async Task<ICustomResult<UserOutDto>> Handle(int id, UpdateRoleDto dto)
     {
-        var result = new Result<UserOutDto>();
+        var result = new CustomResult<UserOutDto>();
         var user = await repo.FindById(id);
 
         if (user == null)

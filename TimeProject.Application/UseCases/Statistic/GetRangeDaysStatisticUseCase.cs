@@ -5,6 +5,7 @@ using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Statistic;
 
@@ -16,7 +17,7 @@ public class GetRangeDaysStatisticUseCase(
 )
     : IGetRangeDaysStatisticUseCase
 {
-    public async Task<Result<RangeStatistic>> Handle(
+    public async Task<ICustomResult<RangeStatistic>> Handle(
         int userId,
         DateTime? start = null,
         DateTime? end = null,
@@ -24,12 +25,12 @@ public class GetRangeDaysStatisticUseCase(
         bool skipRangeProgress = false
     )
     {
-        return new Result<RangeStatistic>().SetData(
+        return new CustomResult<RangeStatistic>().SetData(
             (await _handle(userId, start, end, timeRecordId, skipRangeProgress)).Statistic
         );
     }
 
-    public async Task<Result<RangeStatisticsWithDays>> Handle(int userId, DateTime start, DateTime end)
+    public async Task<ICustomResult<RangeStatisticsWithDays>> Handle(int userId, DateTime start, DateTime end)
     {
         var daysFromRange = new List<DateTime> { start };
         var daysStatistics = new List<RangeStatistic>();
@@ -79,7 +80,7 @@ public class GetRangeDaysStatisticUseCase(
         );
 
 
-        return new Result<RangeStatisticsWithDays>().SetData(new RangeStatisticsWithDays
+        return new CustomResult<RangeStatisticsWithDays>().SetData(new RangeStatisticsWithDays
         {
             Total = rangeStatistics,
             Days = daysStatistics.OrderByDescending(e => e.StartDay).ToList()

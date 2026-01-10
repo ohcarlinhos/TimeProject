@@ -1,0 +1,11 @@
+﻿using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+using TimeProject.Domain.RemoveDependencies.Dtos.User;
+
+namespace TimeProject.Application.ObjectValues;
+
+public class CreateUserResult : ICreateUserResult
+{
+    public UserOutDto User { get; set; } = null!;
+    public JwtResult Jwt { get; set; } = null!;
+}

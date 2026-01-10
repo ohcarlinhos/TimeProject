@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.General;
 
-public class Result<T> : IResult<T>
+public class CustomResult<T> : ICustomResult<T>
 {
     public T? Data { get; set; }
     public bool IsValid => !HasError;
@@ -10,14 +10,14 @@ public class Result<T> : IResult<T>
     public string? Message { get; set; }
     public string? ActionName { get; set; }
 
-    public Result<T> SetError(string? message)
+    public ICustomResult<T> SetError(string? message)
     {
         HasError = true;
         Message = message;
         return this;
     }
 
-    public Result<T> SetData(T data)
+    public ICustomResult<T> SetData(T data)
     {
         Data = data;
         return this;

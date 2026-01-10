@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface ISyncAllTrMetaUseCase
 {
-    Task<Result<IEnumerable<RecordMeta>>> Handle();
+    Task<CustomResult<IEnumerable<RecordMeta>>> Handle();
 }

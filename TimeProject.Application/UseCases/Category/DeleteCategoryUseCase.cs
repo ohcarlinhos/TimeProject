@@ -8,9 +8,9 @@ namespace TimeProject.Application.UseCases.Category;
 
 public class DeleteCategoryUseCase(ICategoryRepository repo) : IDeleteCategoryUseCase
 {
-    public async Task<IResult<bool>> Handle(int id, int userId)
+    public async Task<ICustomResult<bool>> Handle(int id, int userId)
     {
-        var result = new Result<bool>();
+        var result = new CustomResult<bool>();
         var category = await repo.FindById(id);
 
         if (category == null) return result.SetError(CategoryMessageErrors.NotFound);

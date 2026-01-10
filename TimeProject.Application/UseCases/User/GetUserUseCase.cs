@@ -4,6 +4,7 @@ using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
@@ -13,9 +14,9 @@ public class GetUserUseCase(
     IUserMapDataUtil mapper
 ) : IGetUserUseCase
 {
-    public async Task<Result<UserOutDto>> Handle(int id)
+    public async Task<ICustomResult<UserOutDto>> Handle(int id)
     {
-        var result = new Result<UserOutDto>();
+        var result = new CustomResult<UserOutDto>();
         var user = await userRepository.FindById(id);
 
         if (user == null)

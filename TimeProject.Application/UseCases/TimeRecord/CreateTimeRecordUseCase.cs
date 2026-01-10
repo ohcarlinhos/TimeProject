@@ -7,6 +7,7 @@ using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
@@ -19,9 +20,9 @@ public class CreateTimeRecordUseCase(
     ProjectContext db)
     : ICreateTimeRecordUseCase
 {
-    public async Task<Result<TimeRecordOutDto>> Handle(CreateTimeRecordDto dto, int userId)
+    public async Task<ICustomResult<TimeRecordOutDto>> Handle(CreateTimeRecordDto dto, int userId)
     {
-        var result = new Result<TimeRecordOutDto>();
+        var result = new CustomResult<TimeRecordOutDto>();
         var transaction = await db.Database.BeginTransactionAsync();
 
         if (dto.CategoryId != null)

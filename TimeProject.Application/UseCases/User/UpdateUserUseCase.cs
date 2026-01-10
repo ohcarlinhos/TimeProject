@@ -4,24 +4,25 @@ using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
 public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserUseCase
 {
-    public async Task<Result<UserOutDto>> Handle(int id, UpdateUserDto dto)
+    public async Task<ICustomResult<UserOutDto>> Handle(int id, UpdateUserDto dto)
     {
         return await _update(id, dto, null);
     }
 
-    public async Task<Result<UserOutDto>> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config)
+    public async Task<ICustomResult<UserOutDto>> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config)
     {
         return await _update(id, dto, config);
     }
 
-    private async Task<Result<UserOutDto>> _update(int id, UpdateUserDto dto, IUpdateUserOptions? config)
+    private async Task<ICustomResult<UserOutDto>> _update(int id, UpdateUserDto dto, IUpdateUserOptions? config)
     {
-        var result = new Result<UserOutDto>();
+        var result = new CustomResult<UserOutDto>();
         var user = await repo.FindById(id);
 
         if (user == null) return result.SetError(UserMessageErrors.NotFound);

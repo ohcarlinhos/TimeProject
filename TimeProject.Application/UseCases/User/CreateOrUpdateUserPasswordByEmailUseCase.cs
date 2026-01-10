@@ -3,15 +3,16 @@ using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
 public class CreateOrUpdateUserPasswordByEmailUseCase(IUserPasswordRepository repo, IUserRepository userRepository)
     : ICreateOrUpdateUserPasswordByEmailUseCase
 {
-    public async Task<Result<bool>> Handle(string email, string password)
+    public async Task<ICustomResult<bool>> Handle(string email, string password)
     {
-        var result = new Result<bool>();
+        var result = new CustomResult<bool>();
         var user = await userRepository.FindByEmail(email);
 
         if (user == null)

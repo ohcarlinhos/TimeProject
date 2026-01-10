@@ -1,8 +1,8 @@
-﻿using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.User;
 
 public interface ICreateOrUpdateUserPasswordByEmailUseCase
 {
-    Task<Result<bool>> Handle(string email, string password);
+    Task<ICustomResult<bool>> Handle(string email, string password);
 }

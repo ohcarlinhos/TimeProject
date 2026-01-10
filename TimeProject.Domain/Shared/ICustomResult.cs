@@ -2,13 +2,13 @@
 
 namespace TimeProject.Domain.Shared;
 
-public interface IResult<T>
+public interface ICustomResult<T>
 {
     public T? Data { get; }
     bool IsValid { get; }
     bool HasError { get; set; }
     string? Message { get; set; }
     string? ActionName { get; set; }
-    Result<T> SetError(string? message);
-    Result<T> SetData(T data);
+    ICustomResult<T> SetError(string? message);
+    ICustomResult<T> SetData(T data);
 }

@@ -6,6 +6,7 @@ using TimeProject.Domain.UseCases.Login;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auth;
@@ -17,9 +18,9 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public async Task<Result<JwtResult>> Handle(LoginDto dto, UserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(LoginDto dto, UserAccessLog ac)
     {
-        var result = new Result<JwtResult>();
+        var result = new CustomResult<JwtResult>();
 
         var findUserPasswordResult = await getUserPasswordByEmailUseCase.Handle(dto.Email);
         if (findUserPasswordResult.HasError) return result.SetError(findUserPasswordResult.Message);

@@ -1,9 +1,8 @@
-﻿// using Shared.General;
-//
-// namespace TimeProject.Domain.User.UseCases;
-//
-// public interface IVerifyUserUseCase
-// {
-//     Task<Result<bool>> Handle(int id, string email, string code);
-// }
+﻿using TimeProject.Domain.Shared;
 
+namespace TimeProject.Domain.UseCases.User;
+
+public interface IVerifyUserUseCase
+{
+    Task<ICustomResult<bool>> Handle(int id, string email, string code);
+}
