@@ -6,7 +6,7 @@ namespace TimeProject.Core.Domain.Repositories;
 
 public interface ITimeRecordRepository
 {
-    Task<IndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId);
+    Task<IIndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId);
     Task<List<SearchTimeRecordItem>> SearchTimeRecord(string search, int userId);
     Task<TimeRecordEntity> Create(TimeRecordEntity entity);
     Task<TimeRecordEntity> Update(TimeRecordEntity entity);

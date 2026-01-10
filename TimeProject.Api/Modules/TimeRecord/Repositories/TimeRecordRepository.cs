@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Api.Database;
+using TimeProject.Api.Infrastructure.Repositories;
 using TimeProject.Core.Application.General.Pagination;
 using TimeProject.Core.Application.General.Repositories;
 using TimeProject.Core.Domain.Entities;
@@ -10,7 +11,7 @@ namespace TimeProject.Api.Modules.TimeRecord.Repositories;
 
 public class TimeRecordRepository(ProjectContext dbContext) : ITimeRecordRepository
 {
-    public async Task<IndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId)
+    public async Task<IIndexRepositoryResult<TimeRecordEntity>> Index(PaginationQuery paginationQuery, int userId)
     {
         var query = dbContext.TimeRecords.AsQueryable();
 

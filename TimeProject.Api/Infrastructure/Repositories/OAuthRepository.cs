@@ -3,7 +3,7 @@ using TimeProject.Api.Database;
 using TimeProject.Core.Domain.Entities;
 using TimeProject.Core.Domain.Repositories;
 
-namespace TimeProject.Api.Modules.Auth.Repositories;
+namespace TimeProject.Api.Infrastructure.Repositories;
 
 public class OAuthRepository(ProjectContext dbContext) : IOAuthRepository
 {
