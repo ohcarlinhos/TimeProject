@@ -1,13 +1,13 @@
 using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Record;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
@@ -16,7 +16,7 @@ public class GetTimeRecordHistoryUseCase(
     IUserRepository userRepository,
     ITimeRecordMapDataUtil mapDataUtil) : IGetTimeRecordHistoryUseCase
 {
-    public ICustomResult<IPagination<ITimeRecordHistoryDayOutDto>> Handle(
+    public ICustomResult<IPagination<IRecordHistoryDayOutDto>> Handle(
         int timeRecordId,
         int userId,
         PaginationQuery paginationQuery
@@ -25,7 +25,7 @@ public class GetTimeRecordHistoryUseCase(
         var user = userRepository.FindById(userId);
         if (user == null)
         {
-            return new CustomResult<IPagination<ITimeRecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
+            return new CustomResult<IPagination<IRecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
         }
 
         // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
@@ -35,7 +35,7 @@ public class GetTimeRecordHistoryUseCase(
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage);
 
-        var historyDays = new List<TimeRecordHistoryDay>();
+        var historyDays = new List<RecordHistoryDay>();
 
         foreach (var dateItem in dates)
         {
@@ -49,20 +49,20 @@ public class GetTimeRecordHistoryUseCase(
 
             if (tpList.Count == 0 && tsList.Count == 0 && tmList.Count == 0) continue;
 
-            historyDays.Add(new TimeRecordHistoryDay
+            historyDays.Add(new RecordHistoryDay
             {
                 Date = initDate,
                 InitDate = initDate,
                 EndDate = endDate,
-                TimePeriods = tpList,
-                TimeMinutes = tmList,
-                TimerSessions = tsList
+                Periods = tpList,
+                Minutes = tmList,
+                Sessions = tsList
             });
         }
 
-        return new CustomResult<IPagination<ITimeRecordHistoryDayOutDto>>
+        return new CustomResult<IPagination<IRecordHistoryDayOutDto>>
         {
-            Data = Pagination<ITimeRecordHistoryDayOutDto>
+            Data = Pagination<IRecordHistoryDayOutDto>
                 .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)
         };
     }

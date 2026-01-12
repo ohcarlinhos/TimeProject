@@ -1,5 +1,6 @@
 ﻿using TimeProject.Application.UseCases.User.Factories;
-using TimeProject.Domain.RemoveDependencies.Dtos.Handlers.Email;
+using TimeProject.Infrastructure.Handlers;
+using TimeProject.Infrastructure.ObjectValues.Email;
 
 namespace TimeProject.Infrastructure.Factories;
 

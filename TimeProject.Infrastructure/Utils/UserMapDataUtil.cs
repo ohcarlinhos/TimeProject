@@ -2,6 +2,7 @@ using AutoMapper;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.Utils;
+using TimeProject.Infrastructure.ObjectValues.User;
 
 namespace TimeProject.Infrastructure.Utils;
 

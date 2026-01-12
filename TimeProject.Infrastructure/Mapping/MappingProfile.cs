@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
-using TimeProject.Domain.RemoveDependencies.Dtos.Category;
-using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Category;
 using TimeProject.Infrastructure.ObjectValues.Code;
-using TimeProject.Infrastructure.ObjectValues.PeriodRecord;
+using TimeProject.Infrastructure.ObjectValues.Period;
 using TimeProject.Infrastructure.ObjectValues.Record;
 using TimeProject.Infrastructure.ObjectValues.RecordSession;
+using TimeProject.Infrastructure.ObjectValues.User;
 
 namespace TimeProject.Infrastructure.Mapping;
 
@@ -19,11 +15,11 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<User, UserOutDto>();
-        CreateMap<Record, TimeRecordOutDto>();
-        CreateMap<PeriodRecord, TimePeriodOutDto>();
+        CreateMap<Record, RecordOutDto>();
+        CreateMap<Period, PeriodOutDto>();
         CreateMap<Category, CategoryOutDto>();
-        CreateMap<TimeRecordHistoryDay, TimeRecordHistoryDayOutDto>();
-        CreateMap<RecordSession, TimerSessionOutDto>();
+        CreateMap<RecordHistoryDay, RecordHistoryDayOutDto>();
+        CreateMap<Session, SessionOutDto>();
         CreateMap<ConfirmCode, ConfirmCodeOutDto>();
     }
 }

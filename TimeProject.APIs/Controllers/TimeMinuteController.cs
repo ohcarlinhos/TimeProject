@@ -3,8 +3,8 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimeMinute;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeMinute;
 using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Infrastructure.ObjectValues.Minute;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -16,7 +16,7 @@ public class TimeMinuteController(
 {
     [HttpPost]
     [Route("list/{id:int}")]
-    public ActionResult<IList<IMinuteRecord>> Create([FromBody] CreateTimeMinuteListDto dto, int id)
+    public ActionResult<IList<IMinute>> Create([FromBody] CreateMinuteListDto dto, int id)
     {
         var result = createTimeMinuteByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);

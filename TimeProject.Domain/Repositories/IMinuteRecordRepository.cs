@@ -4,8 +4,8 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IMinuteRecordRepository
 {
-    IMinuteRecord Create(IMinuteRecord entity);
-    IList<IMinuteRecord> CreateByList(IList<IMinuteRecord> entities);
-    IMinuteRecord? FindById(int id, int userId);
-    bool Delete(IMinuteRecord entity);
+    IMinute Create(IMinute entity);
+    IList<IMinute> CreateByList(IList<IMinute> entities);
+    IMinute? FindById(int id, int userId);
+    bool Delete(IMinute entity);
 }

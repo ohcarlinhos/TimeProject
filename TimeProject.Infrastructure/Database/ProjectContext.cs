@@ -8,13 +8,13 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Record> Records { get; set; }
-    public DbSet<PeriodRecord> PeriodRecords { get; set; }
+    public DbSet<Period> PeriodRecords { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<RecordMeta> RecordMetas { get; set; }
-    public DbSet<RecordSession> RecordSessions { get; set; }
+    public DbSet<Session> RecordSessions { get; set; }
     public DbSet<ConfirmCode> ConfirmCodes { get; set; }
     public DbSet<UserPassword> UserPasswords { get; set; }
-    public DbSet<MinuteRecord> MinuteRecords { get; set; }
+    public DbSet<Minute> MinuteRecords { get; set; }
     public DbSet<OAuth> OAuths { get; set; }
     public DbSet<UserAccessLog> UserAccessLogs { get; set; }
 

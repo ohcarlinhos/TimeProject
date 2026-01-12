@@ -8,11 +8,11 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
 {
-    public IRecordSession Create(IRecordSession entity)
+    public ISession Create(ISession entity)
     {
         var now = DateTime.Now.ToUniversalTime();
 
-        var recordSession = (RecordSession)entity;
+        var recordSession = (Session)entity;
         recordSession.CreatedAt = now;
         recordSession.UpdatedAt = now;
 
@@ -21,16 +21,16 @@ public class TimerSessionRepository(ProjectContext db) : ITimerSessionRepository
         return recordSession;
     }
 
-    public IRecordSession? FindById(int id, int userId)
+    public ISession? FindById(int id, int userId)
     {
         return db.RecordSessions
             .Include(e => e.PeriodRecords)
             .FirstOrDefault(e => e.Id == id && e.UserId == userId);
     }
 
-    public bool Delete(IRecordSession entity)
+    public bool Delete(ISession entity)
     {
-        db.RecordSessions.Remove((RecordSession)entity);
+        db.RecordSessions.Remove((Session)entity);
         db.SaveChanges();
         return true;
     }

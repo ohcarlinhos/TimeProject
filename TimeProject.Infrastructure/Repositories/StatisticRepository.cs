@@ -8,7 +8,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class StatisticRepository(ProjectContext db) : IStatisticRepository
 {
-    public IList<IPeriodRecord> GetTimePeriodsByRange(
+    public IList<IPeriod> GetTimePeriodsByRange(
         int userId,
         DateTime initDate,
         DateTime endDate,
@@ -22,10 +22,10 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
         return (query.Where(e => (
                 (e.Start >= initDate && e.Start < endDate) || (e.End > initDate && e.End <= endDate)
             ) && userId == e.UserId)
-            .ToList<IPeriodRecord>());
+            .ToList<IPeriod>());
     }
 
-    public IList<IRecordSession> GetTimerSessionsByRange(
+    public IList<ISession> GetTimerSessionsByRange(
         int userId,
         DateTime initDate,
         DateTime endDate,
@@ -53,10 +53,10 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
                 )
                 && userId == p.UserId)
             .Include(p => p.PeriodRecords!.OrderBy(q => q.Start))
-            .ToList<IRecordSession>();
+            .ToList<ISession>();
     }
 
-    public IList<IMinuteRecord> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
+    public IList<IMinute> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
         int? timeRecord = null)
     {
         var query = db.MinuteRecords.AsQueryable();
@@ -69,7 +69,7 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
                 && tm.Date < endDate
             )
             .OrderBy(tm => tm.Date)
-            .ToList<IMinuteRecord>();
+            .ToList<IMinute>();
     }
 
     public int GetTimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate)

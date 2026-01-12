@@ -8,6 +8,6 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IUpdateUserUseCase
 {
-    ICustomResult<IUserOutDto> Handle(int id, UpdateUserDto dto);
-    ICustomResult<IUserOutDto> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config);
+    ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto);
+    ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto, IUpdateUserOptions config);
 }

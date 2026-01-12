@@ -8,11 +8,11 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class MinuteRecordRepository(ProjectContext db) : IMinuteRecordRepository
 {
-    public IMinuteRecord Create(IMinuteRecord entity)
+    public IMinute Create(IMinute entity)
     {
         var now = DateTime.Now.ToUniversalTime();
 
-        var mr = (MinuteRecord)entity;
+        var mr = (Minute)entity;
         mr.CreatedAt = now;
         mr.UpdatedAt = now;
 
@@ -21,10 +21,10 @@ public class MinuteRecordRepository(ProjectContext db) : IMinuteRecordRepository
         return mr;
     }
 
-    public IList<IMinuteRecord> CreateByList(IList<IMinuteRecord> entities)
+    public IList<IMinute> CreateByList(IList<IMinute> entities)
     {
         var now = DateTime.Now.ToUniversalTime();
-        var list = entities as IList<MinuteRecord> ?? new List<MinuteRecord>();
+        var list = entities as IList<Minute> ?? new List<Minute>();
 
         foreach (var mr in list)
         {
@@ -35,17 +35,17 @@ public class MinuteRecordRepository(ProjectContext db) : IMinuteRecordRepository
         db.MinuteRecords.AddRange(list);
         db.SaveChanges();
 
-        return (list as IList<IMinuteRecord>)!;
+        return (list as IList<IMinute>)!;
     }
 
-    public IMinuteRecord? FindById(int id, int userId)
+    public IMinute? FindById(int id, int userId)
     {
         return db.MinuteRecords.FirstOrDefault(e => e.Id == id && e.UserId == userId);
     }
 
-    public bool Delete(IMinuteRecord entity)
+    public bool Delete(IMinute entity)
     {
-        db.MinuteRecords.Remove((MinuteRecord)entity);
+        db.MinuteRecords.Remove((Minute)entity);
         db.SaveChanges();
         return true;
     }

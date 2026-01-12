@@ -4,6 +4,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
 using TimeProject.Domain.Repositories;
+using TimeProject.Infrastructure.ObjectValues.Statistic;
 
 namespace TimeProject.UnitTests.UseCases;
 
@@ -27,19 +28,19 @@ public class GetRangeDaysStatisticUseCaseTests
         _staticRepository
             .Setup(v => v
                 .GetTimePeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(timePeriods as IList<IPeriodRecord>);
+            .Returns(timePeriods as IList<IPeriod>);
 
         _staticRepository
             .Setup(v => v.GetTimerSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(recordSessions as IList<IRecordSession>);
+            .Returns(recordSessions as IList<ISession>);
     }
 
-    private static List<PeriodRecord> CreateRecordPeriodList(DateTime today, int userId, int timeRecordId)
+    private static List<Period> CreateRecordPeriodList(DateTime today, int userId, int timeRecordId)
     {
         return
         [
             // will be removed
-            new PeriodRecord
+            new Period
             {
                 Start = today.AddHours(-3),
                 End = today.AddHours(-3).AddMinutes(15),
@@ -47,7 +48,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 TimerSessionId = null,
                 RecordId = timeRecordId
             },
-            new PeriodRecord
+            new Period
             {
                 Start = today,
                 End = today.AddMinutes(15).AddSeconds(10),
@@ -55,7 +56,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 TimerSessionId = null,
                 RecordId = timeRecordId
             },
-            new PeriodRecord
+            new Period
             {
                 Start = today.AddMinutes(20),
                 End = today.AddMinutes(45),
@@ -64,7 +65,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 RecordId = timeRecordId
             },
             // will be removed
-            new PeriodRecord
+            new Period
             {
                 Start = today.AddDays(1).AddMinutes(20),
                 End = today.AddDays(1).AddMinutes(45),
@@ -75,17 +76,17 @@ public class GetRangeDaysStatisticUseCaseTests
         ];
     }
 
-    private static List<RecordSession> CreateTimerSessionList(DateTime today, int userId, int timeRecordId)
+    private static List<Session> CreateTimerSessionList(DateTime today, int userId, int timeRecordId)
     {
         return
         [
-            new RecordSession
+            new Session
             {
                 Id = 1,
                 UserId = userId,
                 RecordId = timeRecordId,
                 Type = "timer",
-                PeriodRecords = new List<PeriodRecord>
+                PeriodRecords = new List<Period>
                 {
                     new()
                     {
@@ -99,13 +100,13 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new RecordSession
+            new Session
             {
                 Id = 2,
                 UserId = userId,
                 RecordId = timeRecordId,
                 Type = "pomodoro",
-                PeriodRecords = new List<PeriodRecord>
+                PeriodRecords = new List<Period>
                 {
                     new()
                     {
@@ -119,13 +120,13 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new RecordSession
+            new Session
             {
                 Id = 3,
                 UserId = userId,
                 RecordId = timeRecordId,
                 Type = "break",
-                PeriodRecords = new List<PeriodRecord>
+                PeriodRecords = new List<Period>
                 {
                     new()
                     {
@@ -134,13 +135,13 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new RecordSession
+            new Session
             {
                 Id = 4,
                 UserId = userId,
                 RecordId = timeRecordId,
                 Type = "timer",
-                PeriodRecords = new List<PeriodRecord>()
+                PeriodRecords = new List<Period>()
             }
         ];
     }
@@ -149,7 +150,7 @@ public class GetRangeDaysStatisticUseCaseTests
     {
         data.Should().NotBeNull();
 
-        data!.TimePeriodCount.Should().Be(7);
+        data!.PeriodCount.Should().Be(7);
         data.SessionCount.Should().Be(4);
 
         data.IsolatedPeriodCount.Should().Be(2);

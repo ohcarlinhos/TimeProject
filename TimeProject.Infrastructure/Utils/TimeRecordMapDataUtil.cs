@@ -1,7 +1,7 @@
 using AutoMapper;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Domain.Utils;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Record;
@@ -10,18 +10,18 @@ namespace TimeProject.Infrastructure.Utils;
 
 public class TimeRecordMapDataUtil(IMapper mapper) : ITimeRecordMapDataUtil
 {
-    public IEnumerable<ITimeRecordHistoryDayOutDto> Handle(IEnumerable<TimeRecordHistoryDay> entity)
+    public IEnumerable<IRecordHistoryDayOutDto> Handle(IEnumerable<IRecordHistoryDay> entity)
     {
-        return mapper.Map<IEnumerable<TimeRecordHistoryDay>, IEnumerable<TimeRecordHistoryDayOutDto>>(entity);
+        return mapper.Map<IEnumerable<IRecordHistoryDay>, IEnumerable<RecordHistoryDayOutDto>>(entity);
     }
 
-    public ITimeRecordOutDto Handle(IRecord entity)
+    public IRecordOutDto Handle(IRecord entity)
     {
-        return mapper.Map<IRecord, TimeRecordOutDto>(entity);
+        return mapper.Map<IRecord, RecordOutDto>(entity);
     }
 
-    public IEnumerable<ITimeRecordOutDto> Handle(IEnumerable<IRecord> entities)
+    public IEnumerable<IRecordOutDto> Handle(IEnumerable<IRecord> entities)
     {
-        return mapper.Map<IEnumerable<IRecord>, IEnumerable<ITimeRecordOutDto>>(entities);
+        return mapper.Map<IEnumerable<IRecord>, IEnumerable<RecordOutDto>>(entities);
     }
 }

@@ -7,22 +7,23 @@ using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.User;
 
 namespace TimeProject.Application.UseCases.User;
 
 public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserUseCase
 {
-    public ICustomResult<IUserOutDto> Handle(int id, UpdateUserDto dto)
+    public ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto)
     {
         return _update(id, dto, null);
     }
 
-    public ICustomResult<IUserOutDto> Handle(int id, UpdateUserDto dto, IUpdateUserOptions config)
+    public ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto, IUpdateUserOptions config)
     {
         return _update(id, dto, config);
     }
 
-    private ICustomResult<IUserOutDto> _update(int id, UpdateUserDto dto, IUpdateUserOptions? config)
+    private ICustomResult<IUserOutDto> _update(int id, IUpdateUserDto dto, IUpdateUserOptions? config)
     {
         var result = new CustomResult<IUserOutDto>();
         var user = repo.FindById(id);

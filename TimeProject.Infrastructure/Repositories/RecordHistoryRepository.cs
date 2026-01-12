@@ -30,7 +30,7 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
             .ToList();
     }
 
-    public IList<IPeriodRecord> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
+    public IList<IPeriod> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
         DateTime initDate, DateTime endDate)
     {
         return TimePeriodQuery(timeRecordId, userId)
@@ -43,7 +43,7 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
             .ToList();
     }
 
-    public IList<IMinuteRecord> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
+    public IList<IMinute> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate)
     {
         return TimeMinuteQuery(timeRecordId, userId)
@@ -52,7 +52,7 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
             .ToList();
     }
 
-    public IList<IRecordSession> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
+    public IList<ISession> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate)
     {
         return TimerSessionQuery(timeRecordId, userId)
@@ -61,24 +61,24 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
                 && e.PeriodRecords!.FirstOrDefault()!.Start < endDate
             )
             .Include(e => e.PeriodRecords!.OrderBy(tp => tp.Start))
-            .ToList<IRecordSession>();
+            .ToList<ISession>();
     }
 
-    private IQueryable<IPeriodRecord> TimePeriodQuery(int timeRecordId, int userId)
+    private IQueryable<IPeriod> TimePeriodQuery(int timeRecordId, int userId)
     {
         return db.PeriodRecords
             .Where(e => e.UserId == userId && e.RecordId == timeRecordId)
             .AsQueryable();
     }
 
-    private IQueryable<IMinuteRecord> TimeMinuteQuery(int timeRecordId, int userId)
+    private IQueryable<IMinute> TimeMinuteQuery(int timeRecordId, int userId)
     {
         return db.MinuteRecords
             .Where(e => e.UserId == userId && e.RecordId == timeRecordId)
             .AsQueryable();
     }
 
-    private IQueryable<RecordSession> TimerSessionQuery(int timeRecordId, int userId)
+    private IQueryable<Session> TimerSessionQuery(int timeRecordId, int userId)
     {
         return db.RecordSessions
             .Where(e =>

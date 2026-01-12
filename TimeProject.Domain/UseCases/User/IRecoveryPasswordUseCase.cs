@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IRecoveryPasswordUseCase
 {
-    ICustomResult<bool> Handle(RecoveryPasswordDto dto);
+    ICustomResult<bool> Handle(IRecoveryPasswordDto dto);
 }

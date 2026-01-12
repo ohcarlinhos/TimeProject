@@ -1,0 +1,14 @@
+﻿using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+
+namespace TimeProject.Infrastructure.ObjectValues.Record;
+
+public class RecordHistoryDay : IRecordHistoryDay
+{
+    public DateTime Date { get; set; }
+    public DateTime InitDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public IEnumerable<IPeriod>? Periods { get; set; }
+    public IEnumerable<IMinute>? Minutes { get; set; }
+    public IEnumerable<ISession>? Sessions { get; set; }
+}

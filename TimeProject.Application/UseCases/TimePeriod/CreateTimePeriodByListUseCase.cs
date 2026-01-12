@@ -1,12 +1,13 @@
 ﻿using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.Dtos.Period;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimePeriod;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.Record;
 
 namespace TimeProject.Application.UseCases.TimePeriod;
 
@@ -17,19 +18,19 @@ public class CreateTimePeriodByListUseCase(
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : ICreateTimePeriodByListUseCase
 {
-    public ICustomResult<IList<IPeriodRecord>> Handle(TimePeriodListDto dto, int timeRecordId, int userId)
+    public ICustomResult<IList<IPeriod>> Handle(IPeriodListDto dto, int timeRecordId, int userId)
     {
-        var result = new CustomResult<IList<IPeriodRecord>>();
-        List<PeriodRecord> list = [];
+        var result = new CustomResult<IList<IPeriod>>();
+        List<Period> list = [];
 
-        foreach (var timePeriod in dto.TimePeriods)
+        foreach (var timePeriod in dto.Periods)
         {
             timePeriodValidateUtil.ValidateStartAndEnd(timePeriod.Start, timePeriod.End, result);
             if (result.HasError)
                 break;
 
             if (timePeriodValidateUtil.HasMinSize(timePeriod))
-                list.Add(new PeriodRecord
+                list.Add(new Period
                 {
                     UserId = userId,
                     RecordId = timeRecordId,
@@ -41,13 +42,13 @@ public class CreateTimePeriodByListUseCase(
         if (result.HasError) return result;
         if (list.Count == 0) return result.SetData([]);
 
-        var timerSession = timerSessionRepo.Create(new RecordSession()
+        var timerSession = timerSessionRepo.Create(new Session()
             { RecordId = timeRecordId, UserId = userId, Type = dto.Type, From = dto.From }
         );
 
         list.ForEach(i => { i.TimerSessionId = timerSession.Id; });
 
-        var data = repo.CreateByList(list as IList<IPeriodRecord>);
+        var data = repo.CreateByList(list as IList<IPeriod>);
         syncTrMetaUseCase.Handle(timeRecordId);
 
         return result.SetData(data);

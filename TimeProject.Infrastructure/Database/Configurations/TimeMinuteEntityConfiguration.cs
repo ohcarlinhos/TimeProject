@@ -5,9 +5,9 @@ using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimeMinuteEntityConfiguration : IEntityTypeConfiguration<MinuteRecord>
+public class TimeMinuteEntityConfiguration : IEntityTypeConfiguration<Minute>
 {
-    public void Configure(EntityTypeBuilder<MinuteRecord> builder)
+    public void Configure(EntityTypeBuilder<Minute> builder)
     {
         builder.HasKey(e => e.Id);
 

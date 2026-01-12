@@ -1,4 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
+﻿using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 
@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface ICreateTimeRecordUseCase
 {
-    ICustomResult<ITimeRecordOutDto> Handle(ICreateTimeRecordDto dto, int userId);
+    ICustomResult<IRecordOutDto> Handle(ICreateRecordDto dto, int userId);
 }

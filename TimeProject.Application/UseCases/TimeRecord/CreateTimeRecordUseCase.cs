@@ -1,15 +1,17 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimePeriod;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database;
+using TimeProject.Infrastructure.ObjectValues.Period;
+using TimeProject.Infrastructure.ObjectValues.Record;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
@@ -21,9 +23,9 @@ public class CreateTimeRecordUseCase(
     ProjectContext db)
     : ICreateTimeRecordUseCase
 {
-    public ICustomResult<ITimeRecordOutDto> Handle(ICreateTimeRecordDto dto, int userId)
+    public ICustomResult<IRecordOutDto> Handle(ICreateRecordDto dto, int userId)
     {
-        var result = new CustomResult<ITimeRecordOutDto>();
+        var result = new CustomResult<IRecordOutDto>();
         var transaction = db.Database.BeginTransaction();
 
         if (dto.CategoryId != null)
@@ -52,14 +54,14 @@ public class CreateTimeRecordUseCase(
 
         try
         {
-            if (dto.TimePeriods != null)
+            if (dto.Periods != null)
             {
                 var timePeriodsResult = createTimePeriodByListUseCase
                     .Handle(
-                        new TimePeriodListDto
+                        new PeriodListDto
                         {
-                            TimePeriods = (dto.TimePeriods as List<TimePeriodDto>)!, Type = dto.TimerSessionType,
-                            From = dto.TimerSessionFrom
+                            Periods = (dto.Periods as List<IPeriodDto>)!, Type = dto.SessionType,
+                            From = dto.SessionFrom
                         },
                         timeRecord.Id, userId);
 

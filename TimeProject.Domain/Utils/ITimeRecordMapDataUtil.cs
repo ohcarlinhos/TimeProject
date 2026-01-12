@@ -1,15 +1,15 @@
 using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 
 namespace TimeProject.Domain.Utils;
 
 public interface ITimeRecordMapDataUtil
 {
-    IEnumerable<ITimeRecordHistoryDayOutDto> Handle(IEnumerable<TimeRecordHistoryDay> entity);
+    IEnumerable<IRecordHistoryDayOutDto> Handle(IEnumerable<IRecordHistoryDay> entity);
 
-    ITimeRecordOutDto Handle(IRecord entity);
+    IRecordOutDto Handle(IRecord entity);
 
-    IEnumerable<ITimeRecordOutDto> Handle(IEnumerable<IRecord> entities);
+    IEnumerable<IRecordOutDto> Handle(IEnumerable<IRecord> entities);
 }

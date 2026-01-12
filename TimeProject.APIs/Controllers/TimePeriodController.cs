@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.Dtos.Period;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimePeriod;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Infrastructure.ObjectValues.Period;
+using TimeProject.Infrastructure.ObjectValues.Record;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -24,7 +26,7 @@ public class TimePeriodController(
 {
     [HttpGet]
     [Route("{timeRecordId:int}")]
-    public ActionResult<IPagination<ITimePeriodOutDto>> Index(int timeRecordId,
+    public ActionResult<IPagination<IPeriodOutDto>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
@@ -32,7 +34,7 @@ public class TimePeriodController(
     }
 
     [HttpPost]
-    public ActionResult<IPeriodRecord> Create([FromBody] CreateTimePeriodDto dto)
+    public ActionResult<IPeriod> Create([FromBody] CreatePeriodDto dto)
     {
         var result = createTimePeriodUseCase.Handle(dto, UserClaims.Id(User));
         result.ActionName = nameof(Create);
@@ -41,7 +43,7 @@ public class TimePeriodController(
 
     [HttpPost]
     [Route("list/{id:int}")]
-    public ActionResult<IList<IPeriodRecord>> Create([FromBody] TimePeriodListDto dto, int id)
+    public ActionResult<IList<IPeriod>> Create([FromBody] PeriodListDto dto, int id)
     {
         var result = createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);
@@ -50,7 +52,7 @@ public class TimePeriodController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public ActionResult<IPeriodRecord> Update(int id, [FromBody] TimePeriodDto dto)
+    public ActionResult<IPeriod> Update(int id, [FromBody] PeriodDto dto)
     {
         return HandleResponse(updateTimePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
     }

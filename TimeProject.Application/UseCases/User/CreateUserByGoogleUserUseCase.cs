@@ -7,6 +7,7 @@ using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.User;
 
 namespace TimeProject.Application.UseCases.User;
 
@@ -15,7 +16,7 @@ public class CreateUserByGoogleUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGoogleUserUseCase
 {
-    public ICustomResult<IUser> Handle(CreateUserOAtuhDto dto, string email)
+    public ICustomResult<IUser> Handle(ICreateUserOAtuhDto dto, string email)
     {
         var result = new CustomResult<IUser>();
 

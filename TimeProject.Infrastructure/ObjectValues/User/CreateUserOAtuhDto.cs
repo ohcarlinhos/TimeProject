@@ -1,0 +1,11 @@
+﻿using System.ComponentModel.DataAnnotations;
+using TimeProject.Domain.RemoveDependencies.Dtos.User;
+
+namespace TimeProject.Infrastructure.ObjectValues.User;
+
+public class CreateUserOAtuhDto : ICreateUserOAtuhDto
+{
+    [MinLength(2)] [MaxLength(120)] public string Name { get; set; } = string.Empty;
+    [Required] public string UserProviderId { get; set; } = string.Empty;
+    [Required] [Range(-12, 13)] public int Utc { get; set; } = -3;
+}

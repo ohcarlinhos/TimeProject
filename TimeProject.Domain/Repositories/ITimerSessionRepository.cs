@@ -4,7 +4,7 @@ namespace TimeProject.Domain.Repositories;
 
 public interface ITimerSessionRepository
 {
-    IRecordSession Create(IRecordSession entity);
-    IRecordSession? FindById(int id, int userId);
-    bool Delete(IRecordSession entity);
+    ISession Create(ISession entity);
+    ISession? FindById(int id, int userId);
+    bool Delete(ISession entity);
 }

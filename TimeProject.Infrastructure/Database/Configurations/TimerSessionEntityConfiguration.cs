@@ -4,9 +4,9 @@ using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<RecordSession>
+public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<Session>
 {
-    public void Configure(EntityTypeBuilder<RecordSession> builder)
+    public void Configure(EntityTypeBuilder<Session> builder)
     {
         builder.HasKey(e => e.Id);
 

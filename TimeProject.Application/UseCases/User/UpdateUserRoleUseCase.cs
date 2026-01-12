@@ -1,19 +1,17 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;
 
 public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
 {
-    public ICustomResult<IUserOutDto> Handle(int id, UpdateRoleDto dto)
+    public ICustomResult<IUserOutDto> Handle(int id, IUpdateRoleDto dto)
     {
         var result = new CustomResult<IUserOutDto>();
         var user = repo.FindById(id);

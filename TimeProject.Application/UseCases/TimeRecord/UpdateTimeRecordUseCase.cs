@@ -1,9 +1,9 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.ObjectValues;
@@ -18,9 +18,9 @@ public class UpdateTimeRecordUseCase(
 )
     : IUpdateTimeRecordUseCase
 {
-    public ICustomResult<ITimeRecordOutDto> Handle(int id, IUpdateTimeRecordDto dto, int userId)
+    public ICustomResult<IRecordOutDto> Handle(int id, IUpdateRecordDto dto, int userId)
     {
-        var result = new CustomResult<ITimeRecordOutDto>();
+        var result = new CustomResult<IRecordOutDto>();
 
         var timeRecord = repo.FindById(id, userId);
 

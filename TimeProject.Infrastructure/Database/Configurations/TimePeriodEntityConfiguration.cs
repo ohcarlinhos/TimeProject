@@ -5,9 +5,9 @@ using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimePeriodEntityConfiguration : IEntityTypeConfiguration<PeriodRecord>
+public class TimePeriodEntityConfiguration : IEntityTypeConfiguration<Period>
 {
-    public void Configure(EntityTypeBuilder<PeriodRecord> builder)
+    public void Configure(EntityTypeBuilder<Period> builder)
     {
         builder.HasKey(e => e.Id);
 
@@ -28,7 +28,7 @@ public class TimePeriodEntityConfiguration : IEntityTypeConfiguration<PeriodReco
             .WithMany(e => e.PeriodRecords)
             .HasForeignKey(e => e.RecordId);
 
-        builder.HasOne<RecordSession>(e => e.TimerSession)
+        builder.HasOne<Session>(e => e.TimerSession)
             .WithMany(e => e.PeriodRecords)
             .HasForeignKey(e => e.TimerSessionId);
     }

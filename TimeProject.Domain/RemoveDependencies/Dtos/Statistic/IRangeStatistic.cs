@@ -17,9 +17,9 @@ public interface IRangeStatistic
     string PomodoroHours { get; set; }
     string BreakHours { get; set; }
     string ManualHours { get; set; }
-    string TimeMinuteHours { get; set; }
+    string MinuteHours { get; set; }
     TimeSpan TotalTimeSpan { get; set; }
-    TimeSpan TimeMinutesTimeSpan { get; set; }
+    TimeSpan MinutesTimeSpan { get; set; }
     TimeSpan IsolatedPeriodsTimeSpan { get; set; }
     TimeSpan SessionsTimeSpan { get; set; }
     int TimerCount { get; set; }
@@ -27,8 +27,8 @@ public interface IRangeStatistic
     int BreakCount { get; set; }
     int IsolatedPeriodCount { get; set; }
     int SessionCount { get; set; }
-    int TimePeriodCount { get; set; }
-    int TimeMinuteCount { get; set; }
+    int PeriodCount { get; set; }
+    int MinuteCount { get; set; }
     int ManualCount { get; set; }
-    IList<ITimeRecordRangeProgress>? TimeRecordRangeProgress { get; set; }
+    IList<IRecordRangeProgress>? RecordRangeProgress { get; set; }
 }

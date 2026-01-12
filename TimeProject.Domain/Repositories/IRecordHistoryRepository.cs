@@ -6,12 +6,12 @@ public interface IRecordHistoryRepository
 {
     IList<DateTime> GetDistinctDates(int timeRecordId, int userId, int addHours = 0);
 
-    IList<IPeriodRecord> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
+    IList<IPeriod> GetTimePeriodsWithoutTimerSession(int timeRecordId, int userId,
         DateTime initDate, DateTime endDate);
 
-    IList<IMinuteRecord> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
+    IList<IMinute> GetTimeMinutes(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate);
 
-    IList<IRecordSession> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
+    IList<ISession> GetTimerSessions(int timeRecordId, int userId, DateTime initDate,
         DateTime endDate);
 }

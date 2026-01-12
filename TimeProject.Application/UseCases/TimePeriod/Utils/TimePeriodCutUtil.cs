@@ -6,9 +6,9 @@ namespace TimeProject.Application.UseCases.TimePeriod.Utils;
 
 public class TimePeriodCutUtil : ITimePeriodCutUtil
 {
-    public PeriodRecord Handle(PeriodRecord entity, DateTime initDate, DateTime endDate)
+    public Period Handle(Period entity, DateTime initDate, DateTime endDate)
     {
-        var timePeriod = new PeriodRecord { RecordId = entity.RecordId, TimerSessionId = entity.TimerSessionId };
+        var timePeriod = new Period { RecordId = entity.RecordId, TimerSessionId = entity.TimerSessionId };
 
         timePeriod.Start = entity.Start > initDate ? entity.Start : initDate;
         timePeriod.End = entity.End > endDate ? entity.End = endDate.AddMilliseconds(-1) : entity.End;
@@ -20,7 +20,7 @@ public class TimePeriodCutUtil : ITimePeriodCutUtil
         return timePeriod;
     }
 
-    public IList<PeriodRecord> Handle(IList<PeriodRecord> list, DateTime initDate, DateTime endDate)
+    public IList<Period> Handle(IList<Period> list, DateTime initDate, DateTime endDate)
     {
         return list
             .Select(e => Handle(e, initDate, endDate))

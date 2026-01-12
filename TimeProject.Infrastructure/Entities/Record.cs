@@ -16,7 +16,7 @@ public class Record : IRecord
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public IEnumerable<PeriodRecord>? PeriodRecords { get; set; }
+    public IEnumerable<Period>? PeriodRecords { get; set; }
 
     public Category? Category { get; set; }
     public RecordMeta? Meta { get; set; }

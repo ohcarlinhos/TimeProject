@@ -8,14 +8,14 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class PeriodRecordRepository(ProjectContext db) : IPeriodRecordRepository
 {
-    public IList<IPeriodRecord> Index(int timeRecordId, int userId, IPaginationQuery paginationQuery)
+    public IList<IPeriod> Index(int timeRecordId, int userId, IPaginationQuery paginationQuery)
     {
         return db.PeriodRecords
             .Where(timePeriod => timePeriod.RecordId == timeRecordId && timePeriod.UserId == userId)
             .OrderByDescending(tp => tp.Start)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
-            .ToList<IPeriodRecord>();
+            .ToList<IPeriod>();
     }
 
     public int GetTotalItems(int timeRecordId, IPaginationQuery paginationQuery, int userId)
@@ -24,11 +24,11 @@ public class PeriodRecordRepository(ProjectContext db) : IPeriodRecordRepository
             .Count(timePeriod => timePeriod.RecordId == timeRecordId && timePeriod.UserId == userId);
     }
 
-    public IPeriodRecord Create(IPeriodRecord entity)
+    public IPeriod Create(IPeriod entity)
     {
         var now = DateTime.Now.ToUniversalTime();
 
-        var periodRecord = (PeriodRecord)entity;
+        var periodRecord = (Period)entity;
         periodRecord.CreatedAt = now;
         periodRecord.UpdatedAt = now;
 
@@ -38,10 +38,10 @@ public class PeriodRecordRepository(ProjectContext db) : IPeriodRecordRepository
         return periodRecord;
     }
 
-    public IList<IPeriodRecord> CreateByList(IList<IPeriodRecord> entities)
+    public IList<IPeriod> CreateByList(IList<IPeriod> entities)
     {
         var now = DateTime.Now.ToUniversalTime();
-        var list = entities as IList<PeriodRecord> ?? new List<PeriodRecord>();
+        var list = entities as IList<Period> ?? new List<Period>();
 
         foreach (var pr in list)
         {
@@ -51,12 +51,12 @@ public class PeriodRecordRepository(ProjectContext db) : IPeriodRecordRepository
 
         db.PeriodRecords.AddRange(list);
         db.SaveChanges();
-        return (list as IList<IPeriodRecord>)!;
+        return (list as IList<IPeriod>)!;
     }
 
-    public IPeriodRecord Update(IPeriodRecord entity)
+    public IPeriod Update(IPeriod entity)
     {
-        var periodRecord = (PeriodRecord)entity;
+        var periodRecord = (Period)entity;
         periodRecord.UpdatedAt = DateTime.Now.ToUniversalTime();
 
         db.PeriodRecords.Update(periodRecord);
@@ -64,21 +64,21 @@ public class PeriodRecordRepository(ProjectContext db) : IPeriodRecordRepository
         return periodRecord;
     }
 
-    public bool Delete(IPeriodRecord entity)
+    public bool Delete(IPeriod entity)
     {
-        db.PeriodRecords.Remove((PeriodRecord)entity);
+        db.PeriodRecords.Remove((Period)entity);
         db.SaveChanges();
         return true;
     }
 
-    public bool DeleteByList(IList<IPeriodRecord> entityList)
+    public bool DeleteByList(IList<IPeriod> entityList)
     {
-        db.PeriodRecords.RemoveRange((entityList as IList<PeriodRecord>)!);
+        db.PeriodRecords.RemoveRange((entityList as IList<Period>)!);
         db.SaveChanges();
         return true;
     }
 
-    public IPeriodRecord? FindById(int id, int userId)
+    public IPeriod? FindById(int id, int userId)
     {
         return db.PeriodRecords
             .FirstOrDefault(timePeriod => timePeriod.Id == id && timePeriod.UserId == userId);

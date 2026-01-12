@@ -17,12 +17,12 @@ public class DeleteTimerSessionUseCase(
     public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var entity = (RecordSession)repo.FindById(id, userId);
+        var entity = (Session)repo.FindById(id, userId);
 
         if (entity == null)
             return result.SetError(TimerSessionMessageErrors.NotFound);
 
-        tpRepo.DeleteByList(entity.PeriodRecords as IList<IPeriodRecord>);
+        tpRepo.DeleteByList(entity.PeriodRecords as IList<IPeriod>);
         var timeRecordId = entity.RecordId;
 
         repo.Delete(entity);

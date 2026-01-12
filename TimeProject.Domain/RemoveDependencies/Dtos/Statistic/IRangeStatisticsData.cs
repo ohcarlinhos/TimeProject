@@ -5,7 +5,7 @@ namespace TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
 public interface IRangeStatisticsData
 {
     IRangeStatistic Statistic { get; set; }
-    IList<IPeriodRecord> TimePeriods { get; set; }
-    IList<IMinuteRecord> TimeMinutes { get; set; }
-    IList<IRecordSession> Sessions { get; set; }
+    IList<IPeriod> Periods { get; set; }
+    IList<IMinute> Minutes { get; set; }
+    IList<ISession> Sessions { get; set; }
 }

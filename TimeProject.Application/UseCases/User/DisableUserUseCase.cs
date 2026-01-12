@@ -5,12 +5,13 @@ using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues.User;
 
 namespace TimeProject.Application.UseCases.User;
 
 public class DisableUserUseCase(IUserRepository repo) : IDisableUserUseCase
 {
-    public ICustomResult<bool> Handle(int id, DisableUserDto dto)
+    public ICustomResult<bool> Handle(int id, IDisableUserDto dto)
     {
         var result = new CustomResult<bool>();
         var user = repo.FindById(id);

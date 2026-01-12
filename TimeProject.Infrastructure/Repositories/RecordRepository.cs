@@ -80,7 +80,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
         return query
             .Select(e => new SearchRecordItem(e.Id, e.Code, e.Title))
             .Take(10)
-            .ToList();
+            .ToList<SearchRecordItem>();
     }
 
     public IRecord Create(IRecord entity)
