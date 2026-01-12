@@ -16,21 +16,21 @@ public class SessionRepository(ProjectContext db) : ISessionRepository
         recordSession.CreatedAt = now;
         recordSession.UpdatedAt = now;
 
-        db.RecordSessions.Add(recordSession);
+        db.Sessions.Add(recordSession);
         db.SaveChanges();
         return recordSession;
     }
 
     public ISession? FindById(int id, int userId)
     {
-        return db.RecordSessions
+        return db.Sessions
             .Include(e => e.PeriodRecords)
             .FirstOrDefault(e => e.Id == id && e.UserId == userId);
     }
 
     public bool Delete(ISession entity)
     {
-        db.RecordSessions.Remove((Session)entity);
+        db.Sessions.Remove((Session)entity);
         db.SaveChanges();
         return true;
     }

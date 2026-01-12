@@ -66,21 +66,21 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
 
     private IQueryable<IPeriod> PeriodQuery(int recordId, int userId)
     {
-        return db.PeriodRecords
+        return db.Periods
             .Where(e => e.UserId == userId && e.RecordId == recordId)
             .AsQueryable();
     }
 
     private IQueryable<IMinute> MinuteQuery(int recordId, int userId)
     {
-        return db.MinuteRecords
+        return db.Minutes
             .Where(e => e.UserId == userId && e.RecordId == recordId)
             .AsQueryable();
     }
 
     private IQueryable<Session> SessionQuery(int recordId, int userId)
     {
-        return db.RecordSessions
+        return db.Sessions
             .Where(e =>
                 e.UserId == userId
                 && e.RecordId == recordId

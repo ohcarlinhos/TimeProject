@@ -15,7 +15,7 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
         int? recordId = null
     )
     {
-        var query = db.PeriodRecords.AsQueryable();
+        var query = db.Periods.AsQueryable();
 
         if (recordId != null) query = query.Where(i => i.RecordId == recordId);
 
@@ -32,7 +32,7 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
         int? recordId = null
     )
     {
-        var query = db.RecordSessions.AsQueryable();
+        var query = db.Sessions.AsQueryable();
 
         if (recordId != null) query = query.Where(i => i.RecordId == recordId);
 
@@ -59,7 +59,7 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
     public IList<IMinute> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
         int? recordId = null)
     {
-        var query = db.MinuteRecords.AsQueryable();
+        var query = db.Minutes.AsQueryable();
 
         if (recordId != null) query = query.Where(i => i.RecordId == recordId);
 

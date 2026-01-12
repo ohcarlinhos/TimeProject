@@ -16,7 +16,7 @@ public class MinuteRepository(ProjectContext db) : IMinuteRepository
         mr.CreatedAt = now;
         mr.UpdatedAt = now;
 
-        db.MinuteRecords.Add(mr);
+        db.Minutes.Add(mr);
         db.SaveChanges();
         return mr;
     }
@@ -32,7 +32,7 @@ public class MinuteRepository(ProjectContext db) : IMinuteRepository
             mr.UpdatedAt = now;
         }
 
-        db.MinuteRecords.AddRange(list);
+        db.Minutes.AddRange(list);
         db.SaveChanges();
 
         return (list as IList<IMinute>)!;
@@ -40,12 +40,12 @@ public class MinuteRepository(ProjectContext db) : IMinuteRepository
 
     public IMinute? FindById(int id, int userId)
     {
-        return db.MinuteRecords.FirstOrDefault(e => e.Id == id && e.UserId == userId);
+        return db.Minutes.FirstOrDefault(e => e.Id == id && e.UserId == userId);
     }
 
     public bool Delete(IMinute entity)
     {
-        db.MinuteRecords.Remove((Minute)entity);
+        db.Minutes.Remove((Minute)entity);
         db.SaveChanges();
         return true;
     }

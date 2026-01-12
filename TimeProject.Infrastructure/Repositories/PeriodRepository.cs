@@ -10,7 +10,7 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
 {
     public IList<IPeriod> Index(int recordId, int userId, IPaginationQuery paginationQuery)
     {
-        return db.PeriodRecords
+        return db.Periods
             .Where(period => period.RecordId == recordId && period.UserId == userId)
             .OrderByDescending(period => period.Start)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
@@ -20,7 +20,7 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
 
     public int GetTotalItems(int recordId, IPaginationQuery paginationQuery, int userId)
     {
-        return db.PeriodRecords
+        return db.Periods
             .Count(period => period.RecordId == recordId && period.UserId == userId);
     }
 
@@ -32,7 +32,7 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
         periodRecord.CreatedAt = now;
         periodRecord.UpdatedAt = now;
 
-        db.PeriodRecords.Add(periodRecord);
+        db.Periods.Add(periodRecord);
         db.SaveChanges();
 
         return periodRecord;
@@ -49,7 +49,7 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
             pr.UpdatedAt = now;
         }
 
-        db.PeriodRecords.AddRange(list);
+        db.Periods.AddRange(list);
         db.SaveChanges();
         return (list as IList<IPeriod>)!;
     }
@@ -59,28 +59,28 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
         var periodRecord = (Period)entity;
         periodRecord.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        db.PeriodRecords.Update(periodRecord);
+        db.Periods.Update(periodRecord);
         db.SaveChanges();
         return periodRecord;
     }
 
     public bool Delete(IPeriod entity)
     {
-        db.PeriodRecords.Remove((Period)entity);
+        db.Periods.Remove((Period)entity);
         db.SaveChanges();
         return true;
     }
 
     public bool DeleteByList(IList<IPeriod> entityList)
     {
-        db.PeriodRecords.RemoveRange((entityList as IList<Period>)!);
+        db.Periods.RemoveRange((entityList as IList<Period>)!);
         db.SaveChanges();
         return true;
     }
 
     public IPeriod? FindById(int id, int userId)
     {
-        return db.PeriodRecords
+        return db.Periods
             .FirstOrDefault(period => period.Id == id && period.UserId == userId);
     }
 }

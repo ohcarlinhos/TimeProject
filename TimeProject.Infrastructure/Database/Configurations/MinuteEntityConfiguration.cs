@@ -1,11 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimeMinuteEntityConfiguration : IEntityTypeConfiguration<Minute>
+public class MinuteEntityConfiguration : IEntityTypeConfiguration<Minute>
 {
     public void Configure(EntityTypeBuilder<Minute> builder)
     {

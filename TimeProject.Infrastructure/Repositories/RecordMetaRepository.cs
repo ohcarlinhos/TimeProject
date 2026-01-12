@@ -33,12 +33,12 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
     {
         var entity = dbContext.RecordMetas.FirstOrDefault(e => e.RecordId == record.Id);
 
-        var periods = dbContext.PeriodRecords
+        var periods = dbContext.Periods
             .Where(e => e.RecordId == record.Id)
             .OrderBy(e => e.Start)
             .ToList();
 
-        var timeMinutes = dbContext.MinuteRecords
+        var timeMinutes = dbContext.Minutes
             .Where(e => e.RecordId == record.Id)
             .OrderBy(e => e.Date)
             .ToList();
