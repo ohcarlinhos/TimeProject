@@ -1,11 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 
-namespace TimeProject.Domain.RemoveDependencies.Dtos.Auth;
-
-public interface ILoginGoogleDto
-{
-    string AccessToken { get; set; }
-}
+namespace TimeProject.Infrastructure.ObjectValues.Auth;
 
 public class LoginGoogleDto : ILoginGoogleDto
 {

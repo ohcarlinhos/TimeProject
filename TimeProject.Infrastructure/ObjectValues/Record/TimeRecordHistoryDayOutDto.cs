@@ -3,7 +3,7 @@ using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Infrastructure.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues.Record;
 
 public class TimeRecordHistoryDayOutDto : ITimeRecordHistoryDayOutDto
 {

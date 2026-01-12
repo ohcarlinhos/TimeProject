@@ -2,7 +2,7 @@
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Infrastructure.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues.RecordSession;
 
 public class TimerSessionOutDto : ITimerSessionOutDto
 {

@@ -11,7 +11,7 @@ public interface ITimeRecordOutDto
     string? Description { get; set; }
     string Code { get; set; }
     string? ExternalLink { get; set; }
-    CategoryOutDto? Category { get; set; }
+    ICategoryOutDto? Category { get; set; }
     string? CategoryName { get; }
     int? CategoryId { get; set; }
     IRecordMeta? Meta { get; set; }

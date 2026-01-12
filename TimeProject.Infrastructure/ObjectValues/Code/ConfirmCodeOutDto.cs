@@ -1,7 +1,7 @@
-﻿using TimeProject.Infrastructure.Entities;
+﻿using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
 using TimeProject.Infrastructure.Entities.Enums;
 
-namespace TimeProject.Domain.RemoveDependencies.Dtos.Codes;
+namespace TimeProject.Infrastructure.ObjectValues.Code;
 
 public class ConfirmCodeOutDto : IConfirmCodeOutDto
 {

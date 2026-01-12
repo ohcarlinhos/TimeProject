@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Infrastructure.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues.PeriodRecord;
 
 public class TimePeriodOutDto : ITimePeriodOutDto
 {

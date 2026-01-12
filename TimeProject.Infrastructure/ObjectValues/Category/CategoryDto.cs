@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TimeProject.Domain.RemoveDependencies.Dtos.Category;
 
-namespace TimeProject.Domain.RemoveDependencies.Dtos.Category;
+namespace TimeProject.Infrastructure.ObjectValues.Category;
 
 public class CategoryDto : ICategoryDto
 {

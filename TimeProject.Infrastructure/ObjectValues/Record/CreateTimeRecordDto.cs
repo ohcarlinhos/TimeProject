@@ -2,7 +2,7 @@
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 
-namespace TimeProject.Infrastructure.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues.Record;
 
 public class CreateTimeRecordDto : ICreateTimeRecordDto
 {

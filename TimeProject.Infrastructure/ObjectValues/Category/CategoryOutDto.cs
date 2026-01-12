@@ -1,4 +1,6 @@
-﻿namespace TimeProject.Domain.RemoveDependencies.Dtos.Category;
+﻿using TimeProject.Domain.RemoveDependencies.Dtos.Category;
+
+namespace TimeProject.Infrastructure.ObjectValues.Category;
 
 public class CategoryOutDto : ICategoryOutDto
 {

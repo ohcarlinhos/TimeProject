@@ -7,6 +7,7 @@ using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Infrastructure.Interfaces;
+using TimeProject.Infrastructure.ObjectValues.Auth;
 using TimeProject.Infrastructure.Settings;
 
 namespace TimeProject.Infrastructure.Handlers;

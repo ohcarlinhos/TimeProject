@@ -1,8 +1,9 @@
 ﻿using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Infrastructure.ObjectValues.Category;
 
-namespace TimeProject.Infrastructure.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues.Record;
 
 public class TimeRecordOutDto : ITimeRecordOutDto
 {
@@ -14,7 +15,7 @@ public class TimeRecordOutDto : ITimeRecordOutDto
     public string Code { get; set; } = string.Empty;
     public string? ExternalLink { get; set; }
 
-    public CategoryOutDto? Category { get; set; }
+    public ICategoryOutDto? Category { get; set; }
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 

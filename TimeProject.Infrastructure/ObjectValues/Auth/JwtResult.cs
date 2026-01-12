@@ -1,4 +1,6 @@
-namespace TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+
+namespace TimeProject.Infrastructure.ObjectValues.Auth;
 
 public class JwtResult : IJwtResult
 {

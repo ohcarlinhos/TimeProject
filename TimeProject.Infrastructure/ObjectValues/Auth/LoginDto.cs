@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 
-namespace TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+namespace TimeProject.Infrastructure.ObjectValues.Auth;
 
 public class LoginDto : ILoginDto
 {
