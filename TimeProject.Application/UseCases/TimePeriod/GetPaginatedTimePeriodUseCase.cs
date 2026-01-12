@@ -9,18 +9,18 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimePeriod;
 
-public class GetPaginatedTimePeriodUseCase(ITimePeriodRepository repo, ITimePeriodMapDataUtil mapDataUtil)
+public class GetPaginatedTimePeriodUseCase(IPeriodRecordRepository repo, ITimePeriodMapDataUtil mapDataUtil)
     : IGetPaginatedTimePeriodUseCase
 {
-    public async Task<ICustomResult<IPagination<TimePeriodOutDto>>> Handle(int timeRecordId, int userId,
+    public ICustomResult<IPagination<ITimePeriodOutDto>> Handle(int timeRecordId, int userId,
         PaginationQuery paginationQuery)
     {
-        var totalItems = await repo.GetTotalItems(timeRecordId, paginationQuery, userId);
+        var totalItems = repo.GetTotalItems(timeRecordId, paginationQuery, userId);
         var data = mapDataUtil.Handle(repo.Index(timeRecordId, userId, paginationQuery));
 
-        return new CustomResult<IPagination<TimePeriodOutDto>>
+        return new CustomResult<IPagination<ITimePeriodOutDto>>
         {
-            Data = Pagination<TimePeriodOutDto>.Handle(
+            Data = Pagination<ITimePeriodOutDto>.Handle(
                 data,
                 paginationQuery,
                 totalItems

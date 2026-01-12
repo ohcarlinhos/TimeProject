@@ -1,16 +1,6 @@
-using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
-
 namespace TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
 
-public class TimeRecordRangeProgress
-{
-    public TimeRecordOutDto? TimeRecord { get; set; }
-    public string TotalHours { get; set; } = "";
-    public TimeSpan TotalTimeSpan { get; set; }
-}
-
-public class RangeStatistic
+public class RangeStatistic : IRangeStatistic
 {
     public DateTime StartDay { get; set; }
     public DateTime EndDay { get; set; }
@@ -49,19 +39,5 @@ public class RangeStatistic
     public int TimeMinuteCount { get; set; }
     public int ManualCount { get; set; }
 
-    public List<TimeRecordRangeProgress>? TimeRecordRangeProgress { get; set; }
-}
-
-public class RangeStatisticsData
-{
-    public RangeStatistic Statistic { get; set; } = new();
-    public List<Entities.PeriodRecord> TimePeriods { get; set; } = [];
-    public List<Entities.MinuteRecord> TimeMinutes { get; set; } = [];
-    public List<TimerSession> Sessions { get; set; } = [];
-}
-
-public class RangeStatisticsWithDays
-{
-    public RangeStatistic Total { get; set; } = new();
-    public List<RangeStatistic> Days { get; set; } = [];
+    public IList<ITimeRecordRangeProgress>? TimeRecordRangeProgress { get; set; }
 }

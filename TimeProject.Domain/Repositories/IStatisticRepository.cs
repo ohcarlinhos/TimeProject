@@ -1,18 +1,19 @@
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Domain.Repositories;
 
 public interface IStatisticRepository
 {
-    Task<List<PeriodRecord>> GetTimePeriodsByRange(int userId, DateTime initDate, DateTime endDate,
+    IList<IPeriodRecord> GetTimePeriodsByRange(int userId, DateTime initDate, DateTime endDate,
         int? timeRecord = null);
 
-    Task<List<TimerSession>> GetTimerSessionsByRange(int userId, DateTime initDate, DateTime endDate,
+    IList<IRecordSession> GetTimerSessionsByRange(int userId, DateTime initDate, DateTime endDate,
         int? timeRecord = null);
 
-    Task<List<MinuteRecord>> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
+    IList<IMinuteRecord> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
         int? timeRecord = null);
 
-    Task<int> GetTimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate);
-    Task<int> GetTimeRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate);
+    int GetTimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate);
+    int GetTimeRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate);
 }

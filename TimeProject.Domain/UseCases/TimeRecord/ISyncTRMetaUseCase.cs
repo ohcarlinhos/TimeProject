@@ -4,9 +4,7 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface ISyncTrMetaUseCase
 {
-    Task<RecordMeta?> Handle(int id, bool saveChanges = true);
-    Task<RecordMeta?> Handle(Record record, bool saveChanges = false);
-
-    Task<IEnumerable<RecordMeta>> Handle(IEnumerable<Record> timeRecordEntities,
-        bool saveChanges = false);
+    IRecordMeta? Handle(int id, bool saveChanges = true);
+    IRecordMeta? Handle(IRecord record, bool saveChanges = false);
+    IEnumerable<IRecordMeta> Handle(IEnumerable<IRecord> entities, bool saveChanges = false);
 }

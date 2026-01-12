@@ -14,7 +14,7 @@ public static class TimeFormat
                 { Start = p.Start, End = p.End }).ToList());
     }
 
-    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<PeriodRecord>? timePeriods)
+    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<IPeriodRecord>? timePeriods)
     {
         if (timePeriods == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
@@ -24,7 +24,7 @@ public static class TimeFormat
                 current.Add(timePeriod.End.Subtract(timePeriod.Start)));
     }
 
-    public static TimeSpan TimeSpanFromTimeMinutes(IEnumerable<MinuteRecord>? timeMinutes)
+    public static TimeSpan TimeSpanFromTimeMinutes(IEnumerable<IMinuteRecord>? timeMinutes)
     {
         if (timeMinutes == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
@@ -41,7 +41,7 @@ public static class TimeFormat
         return total;
     }
 
-    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<TimerSession>? timerSessions)
+    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<IRecordSession>? timerSessions)
     {
         var total = TimeSpan.Zero;
 
@@ -81,12 +81,12 @@ public static class TimeFormat
         ));
     }
 
-    public static string StringFromTimePeriods(IEnumerable<PeriodRecord>? timePeriods)
+    public static string StringFromTimePeriods(IEnumerable<IPeriodRecord>? timePeriods)
     {
         return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods?.ToList()));
     }
 
-    public static string StringFromTimerSessions(IEnumerable<TimerSession>? timerSessions)
+    public static string StringFromTimerSessions(IEnumerable<IRecordSession>? timerSessions)
     {
         return StringFromTimeSpan(TimeSpanFromTimerSessions(timerSessions));
     }

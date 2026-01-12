@@ -1,4 +1,5 @@
-﻿using TimeProject.Domain.Entities;
+﻿using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Entities.Enums;
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.User;
 
@@ -7,11 +8,11 @@ public class UserOutDto
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
-    public UserRole UserRole { get; set; }
-    public string UserRoleLabel => UserRole.ToString();
+    public UserRoleType UserRoleType { get; set; }
+    public string UserRoleLabel => UserRoleType.ToString();
 
     public bool IsActive { get; set; }
-    public bool IsAdmin => UserRole == UserRole.Admin;
+    public bool IsAdmin => UserRoleType == UserRoleType.Admin;
 
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

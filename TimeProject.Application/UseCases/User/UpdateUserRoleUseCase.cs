@@ -1,6 +1,7 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.Utils;
@@ -20,10 +21,10 @@ public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
 
-        if (Enum.TryParse(typeof(UserRole), dto.Role, out var userRole) == false)
+        if (Enum.TryParse(typeof(UserRoleType), dto.Role, out var userRole) == false)
             return result.SetError(UserMessageErrors.RoleNotFound);
 
-        user.UserRole = (UserRole)userRole;
+        user.UserRole = (UserRoleType)userRole;
 
         var entity = await repo.Update(user);
         result.Data = mapper.Handle(entity);

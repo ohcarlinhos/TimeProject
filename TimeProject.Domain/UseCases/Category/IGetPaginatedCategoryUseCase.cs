@@ -7,5 +7,5 @@ namespace TimeProject.Domain.UseCases.Category;
 
 public interface IGetPaginatedCategoryUseCase
 {
-    Task<ICustomResult<IPagination<CategoryOutDto>>> Handle(IPaginationQuery paginationQuery, int userId);
+    ICustomResult<IPagination<ICategoryOutDto>> Handle(IPaginationQuery paginationQuery, int userId);
 }

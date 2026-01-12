@@ -1,6 +1,7 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.CustomLog;
 using TimeProject.Domain.UseCases.Login;
 using TimeProject.Domain.UseCases.User;
@@ -18,7 +19,7 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public async Task<ICustomResult<JwtResult>> Handle(LoginDto dto, UserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(LoginDto dto, IUserAccessLog ac)
     {
         var result = new CustomResult<JwtResult>();
 
@@ -31,7 +32,7 @@ public class LoginUseCase(
         if (!passwordMatch) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
 
         ac.UserId = data.User.Id;
-        await createUserAccessLogUseCase.Handle(ac);
+        createUserAccessLogUseCase.Handle(ac);
 
         return result.SetData(jwtHandler.Generate(data.User));
     }

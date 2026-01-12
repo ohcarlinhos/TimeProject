@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
@@ -40,7 +41,7 @@ public class TimeRecordController(
 
     [HttpGet]
     [Route("search")]
-    public async Task<ActionResult<IList<SearchTimeRecordItem>>> Search([FromQuery] string? value)
+    public async Task<ActionResult<IList<SearchRecordItem>>> Search([FromQuery] string? value)
     {
         return HandleResponse(await searchTimeRecordUseCase.Handle(value ?? "", UserClaims.Id(User)));
     }

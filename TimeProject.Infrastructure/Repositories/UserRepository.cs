@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Infrastructure.Database;
@@ -8,7 +9,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserRepository(ProjectContext dbContext) : IUserRepository
 {
-    public IList<User> Index(IPaginationQuery paginationQuery)
+    public IList<IUser> Index(IPaginationQuery paginationQuery)
     {
         IQueryable<User> query = dbContext.Users;
 
@@ -23,7 +24,7 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         return query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
-            .ToList();
+            .ToList<IUser>();
     }
 
     public int GetTotalItems(IPaginationQuery paginationQuery)
@@ -36,51 +37,52 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         return query.Count();
     }
 
-    public async Task<User> Create(User entity)
+    public IUser Create(IUser entity)
     {
         var now = DateTime.Now.ToUniversalTime();
-        entity.CreatedAt = now;
-        entity.UpdatedAt = now;
+        
+        var user = (User)entity;
+        user.CreatedAt = now;
+        user.UpdatedAt = now;
 
-        dbContext.Users.Add(entity);
-        await dbContext.SaveChangesAsync();
+        dbContext.Users.Add(user);
+        dbContext.SaveChanges();
+        return user;
+    }
+
+    public IUser Update(IUser entity)
+    {
+        var user = (User)entity;
+        user.UpdatedAt = DateTime.Now.ToUniversalTime();
+
+        dbContext.Users.Update(user);
+        dbContext.SaveChanges();
         return entity;
     }
 
-    public async Task<User> Update(User entity)
+    public bool Delete(int id)
     {
-        entity.UpdatedAt = DateTime.Now.ToUniversalTime();
-
-        dbContext.Users.Update(entity);
-        await dbContext.SaveChangesAsync();
-        return entity;
-    }
-
-    public async Task<bool> Delete(int id)
-    {
-        var entity = await FindById(id);
+        var entity = FindById(id);
         if (entity == null) return true;
 
-        dbContext.Users.Remove(entity);
-        await dbContext.SaveChangesAsync();
+        dbContext.Users.Remove((User)entity);
+        dbContext.SaveChanges();
         return true;
     }
 
-    public async Task<User?> FindById(int id)
+    public IUser? FindById(int id)
     {
-        return await dbContext.Users.FirstOrDefaultAsync(i => i.Id == id);
+        return dbContext.Users.FirstOrDefault(i => i.Id == id);
     }
 
-    public async Task<User?> FindByEmail(string email)
+    public IUser? FindByEmail(string email)
     {
-        return await dbContext.Users
-            .Where(u => u.Email == email)
-            .FirstOrDefaultAsync();
+        return dbContext.Users.FirstOrDefault(u => u.Email == email);
     }
 
-    public async Task<bool> EmailIsAvailable(string email)
+    public bool EmailIsAvailable(string email)
     {
-        return await FindByEmail(email) == null;
+        return FindByEmail(email) == null;
     }
 
     private static IQueryable<User> SearchWhereConditional(IQueryable<User> query, string search)

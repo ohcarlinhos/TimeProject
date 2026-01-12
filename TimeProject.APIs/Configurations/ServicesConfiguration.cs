@@ -28,7 +28,6 @@ using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.UseCases.TimerSession;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.Utils;
-using TimeProject.Domain.TimeRecord.Repositories;
 using TimeProject.Infrastructure.Handlers;
 using TimeProject.Infrastructure.Integrations;
 using TimeProject.Infrastructure.Interfaces;
@@ -134,9 +133,9 @@ public static class ServicesConfiguration
 
         #region TimeRecord
 
-        builder.Services.AddScoped<ITimeRecordRepository, TimeRecordRepository>();
-        builder.Services.AddScoped<ITimeRecordMetaRepository, TimeRecordMetaRepository>();
-        builder.Services.AddScoped<ITimeRecordHistoryRepository, TimeRecordHistoryRepository>();
+        builder.Services.AddScoped<IRecordRepository, RecordRepository>();
+        builder.Services.AddScoped<IRecordMetaRepository, RecordMetaRepository>();
+        builder.Services.AddScoped<IRecordHistoryRepository, RecordHistoryRepository>();
 
         builder.Services.AddScoped<ITimeRecordMapDataUtil, TimeRecordMapDataUtil>();
 
@@ -164,7 +163,7 @@ public static class ServicesConfiguration
 
         #region TimePeriod
 
-        builder.Services.AddScoped<ITimePeriodRepository, TimePeriodRepository>();
+        builder.Services.AddScoped<IPeriodRecordRepository, PeriodRecordRepository>();
 
         builder.Services.AddScoped<ITimePeriodMapDataUtil, TimePeriodMapDataUtil>();
         builder.Services.AddScoped<ITimePeriodCutUtil, TimePeriodCutUtil>();
@@ -219,7 +218,7 @@ public static class ServicesConfiguration
 
         #region TimeMinute
 
-        builder.Services.AddScoped<ITimeMinuteRepository, TimeMinuteRepository>();
+        builder.Services.AddScoped<IMinuteRecordRepository, MinuteRecordRepository>();
         builder.Services.AddScoped<ICreateTimeMinuteByListUseCase, CreateTimeMinuteByListUseCase>();
         builder.Services.AddScoped<IDeleteTimeMinuteUseCase, DeleteTimeMinuteUseCase>();
 

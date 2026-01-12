@@ -4,5 +4,5 @@ namespace TimeProject.Domain.UseCases.TimeMinute;
 
 public interface IDeleteTimeMinuteUseCase
 {
-    public Task<ICustomResult<bool>> Handle(int id, int userId);
+    public ICustomResult<bool> Handle(int id, int userId);
 }

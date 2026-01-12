@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
@@ -23,7 +24,9 @@ public class TimeRecordEntityConfiguration : IEntityTypeConfiguration<Record>
         builder.Property(e => e.UpdatedAt).IsRequired();
 
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
-        builder.HasOne(e => e.Category).WithMany().HasForeignKey(e => e.CategoryId)
+        builder.HasOne(e => e.Category)
+            .WithMany()
+            .HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasMany(e => e.PeriodRecords).WithOne(e => e.Record);

@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Entities.Enums;
 
 namespace TimeProject.Domain.RemoveDependencies.Util;
 
@@ -27,7 +28,7 @@ public static class UserClaims
 
     public static string Role(ClaimsPrincipal p)
     {
-        return GetValue(p, ClaimTypes.Role) ?? UserRole.Normal.ToString();
+        return GetValue(p, ClaimTypes.Role) ?? UserRoleType.Normal.ToString();
     }
 
     private static string? GetValue(ClaimsPrincipal p, string type)

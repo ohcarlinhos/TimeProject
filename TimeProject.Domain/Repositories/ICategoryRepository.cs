@@ -1,17 +1,17 @@
-﻿using TimeProject.Domain.RemoveDependencies.General.Pagination;
-using TimeProject.Domain.Entities;
+﻿using TimeProject.Domain.Entities;
+using TimeProject.Domain.RemoveDependencies.General.Pagination;
 
 namespace TimeProject.Domain.Repositories;
 
 public interface ICategoryRepository
 {
-    IList<Category> Index(int userId, bool onlyWithData);
-    IList<Category> Index(IPaginationQuery paginationQuery, int userId);
-    Task<int> GetTotalItems(IPaginationQuery paginationQuery, int userId);
-    Task<Category> Create(Category entity);
-    Task<Category> Update(Category entity);
-    Task<bool> Delete(Category entity);
-    Task<Category?> FindById(int id);
-    Task<Category?> FindById(int id, int userId);
-    Task<Category?> FindByName(string name, int userId);
+    IList<ICategory> Index(int userId, bool onlyWithData);
+    IList<ICategory> Index(IPaginationQuery paginationQuery, int userId);
+    int GetTotalItems(IPaginationQuery paginationQuery, int userId);
+    ICategory Create(ICategory entity);
+    ICategory Update(ICategory entity);
+    bool Delete(ICategory entity);
+    ICategory? FindById(int id);
+    ICategory? FindById(int id, int userId);
+    ICategory? FindByName(string name, int userId);
 }

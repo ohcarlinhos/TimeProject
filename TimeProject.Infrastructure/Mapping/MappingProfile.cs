@@ -4,7 +4,7 @@ using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Mapping;
 
@@ -17,7 +17,7 @@ public class MappingProfile : Profile
         CreateMap<PeriodRecord, TimePeriodOutDto>();
         CreateMap<Category, CategoryOutDto>();
         CreateMap<TimeRecordHistoryDay, TimeRecordHistoryDayOutDto>();
-        CreateMap<TimerSession, TimerSessionOutDto>();
+        CreateMap<RecordSession, TimerSessionOutDto>();
         CreateMap<ConfirmCode, ConfirmCodeOutDto>();
     }
 }

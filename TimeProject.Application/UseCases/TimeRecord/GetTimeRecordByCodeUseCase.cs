@@ -9,7 +9,7 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
-public class GetTimeRecordByCodeUseCase(ITimeRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
+public class GetTimeRecordByCodeUseCase(IRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
     : IGetTimeRecordByCodeUseCase
 {
     public async Task<ICustomResult<TimeRecordOutDto>> Handle(string code, int userId)

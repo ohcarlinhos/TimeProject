@@ -1,6 +1,7 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimePeriod;
 using TimeProject.Domain.UseCases.TimeRecord;
@@ -12,26 +13,26 @@ using TimeProject.Domain.Shared;
 namespace TimeProject.Application.UseCases.TimePeriod;
 
 public class UpdateTimePeriodUseCase(
-    ITimePeriodRepository repo,
+    IPeriodRecordRepository repo,
     ISyncTrMetaUseCase syncTrMetaUseCase,
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : IUpdateTimePeriodUseCase
 {
-    public async Task<ICustomResult<PeriodRecord>> Handle(int id, TimePeriodDto dto, int userId)
+    public ICustomResult<IPeriodRecord> Handle(int id, TimePeriodDto dto, int userId)
     {
-        var result = new CustomResult<PeriodRecord>();
+        var result = new CustomResult<IPeriodRecord>();
 
         timePeriodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;
 
-        var timePeriod = await repo.FindById(id, userId);
+        var timePeriod = repo.FindById(id, userId);
         if (timePeriod == null) return result.SetError(TimePeriodMessageErrors.NotFound);
 
         timePeriod.Start = dto.Start;
         timePeriod.End = dto.End;
 
-        var data = await repo.Update(timePeriod);
-        await syncTrMetaUseCase.Handle(data.RecordId);
+        var data = repo.Update(timePeriod);
+        syncTrMetaUseCase.Handle(data.RecordId);
 
         return result.SetData(data);
     }

@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 
-public class TimePeriodOutDto
+public class TimePeriodOutDto : ITimePeriodOutDto
 {
     public int Id { get; set; }
     public int TimeRecordId { get; set; }

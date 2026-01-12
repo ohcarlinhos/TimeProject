@@ -10,7 +10,7 @@ using TimeProject.Domain.Shared;
 namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class UpdateTimeRecordUseCase(
-    ITimeRecordRepository repo,
+    IRecordRepository repo,
     ITimeRecordMapDataUtil mapDataUtil,
     ICategoryRepository categoryRepo,
     ISyncTrMetaUseCase syncTrMetaUseCase

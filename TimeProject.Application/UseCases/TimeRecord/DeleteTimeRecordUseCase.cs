@@ -7,7 +7,7 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
-public class DeleteTimeRecordUseCase(ITimeRecordRepository repo) : IDeleteTimeRecordUseCase
+public class DeleteTimeRecordUseCase(IRecordRepository repo) : IDeleteTimeRecordUseCase
 {
     public async Task<ICustomResult<bool>> Handle(int id, int userId)
     {

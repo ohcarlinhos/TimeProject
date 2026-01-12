@@ -1,6 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;

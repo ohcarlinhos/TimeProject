@@ -1,5 +1,5 @@
 using AutoMapper;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
@@ -13,13 +13,13 @@ public class TimeRecordMapDataUtil(IMapper mapper) : ITimeRecordMapDataUtil
         return mapper.Map<IEnumerable<TimeRecordHistoryDay>, IEnumerable<TimeRecordHistoryDayOutDto>>(entity);
     }
 
-    public TimeRecordOutDto Handle(Domain.Entities.Record entity)
+    public TimeRecordOutDto Handle(Infrastructure.Entities.Record entity)
     {
-        return mapper.Map<Domain.Entities.Record, TimeRecordOutDto>(entity);
+        return mapper.Map<Infrastructure.Entities.Record, TimeRecordOutDto>(entity);
     }
 
-    public IEnumerable<TimeRecordOutDto> Handle(IEnumerable<Domain.Entities.Record> entities)
+    public IEnumerable<TimeRecordOutDto> Handle(IEnumerable<Infrastructure.Entities.Record> entities)
     {
-        return mapper.Map<IEnumerable<Domain.Entities.Record>, IEnumerable<TimeRecordOutDto>>(entities);
+        return mapper.Map<IEnumerable<Infrastructure.Entities.Record>, IEnumerable<TimeRecordOutDto>>(entities);
     }
 }

@@ -12,12 +12,12 @@ namespace TimeProject.Application.UseCases.Category;
 public class GetPaginatedCategoryUseCase(ICategoryRepository repo, ICategoryMapDataUtil mapper)
     : IGetPaginatedCategoryUseCase
 {
-    public async Task<ICustomResult<IPagination<CategoryOutDto>>> Handle(IPaginationQuery paginationQuery, int userId)
+    public ICustomResult<IPagination<ICategoryOutDto>> Handle(IPaginationQuery paginationQuery, int userId)
     {
         var data = mapper.Handle(repo.Index(paginationQuery, userId));
-        var totalItems = await repo.GetTotalItems(paginationQuery, userId);
+        var totalItems = repo.GetTotalItems(paginationQuery, userId);
 
-        return new CustomResult<IPagination<CategoryOutDto>>
-            { Data = Pagination<CategoryOutDto>.Handle(data, paginationQuery, totalItems) };
+        return new CustomResult<IPagination<ICategoryOutDto>>
+            { Data = Pagination<ICategoryOutDto>.Handle(data, paginationQuery, totalItems) };
     }
 }

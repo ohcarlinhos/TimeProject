@@ -1,4 +1,5 @@
 ﻿using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.UseCases.User;
 
@@ -6,6 +7,6 @@ namespace TimeProject.Application.ObjectValues;
 
 public class GetUserPasswordByEmailResult : IGetUserPasswordByEmailResult
 {
-    public UserPassword UserPassword { get; set; } = null!;
-    public Domain.Entities.User User { get; set; } = null!;
+    public IUserPassword UserPassword { get; set; } = null!;
+    public IUser User { get; set; } = null!;
 }

@@ -1,5 +1,6 @@
 ﻿using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.CustomLog;
 using TimeProject.Domain.RemoveDependencies.General;
@@ -9,8 +10,8 @@ namespace TimeProject.Application.UseCases.CustomLog;
 
 public class CreateUserAccessLogUseCase(IUserAccessLogRepository repository) : ICreateUserAccessLogUseCase
 {
-    public async Task<ICustomResult<UserAccessLog>> Handle(UserAccessLog entity)
+    public ICustomResult<IUserAccessLog> Handle(IUserAccessLog entity)
     {
-        return new CustomResult<UserAccessLog>().SetData(await repository.Create(entity));
+        return new CustomResult<IUserAccessLog>().SetData(repository.Create(entity));
     }
 }

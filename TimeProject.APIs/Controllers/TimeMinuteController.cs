@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimeMinute;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeMinute;
 using TimeProject.Domain.RemoveDependencies.Util;

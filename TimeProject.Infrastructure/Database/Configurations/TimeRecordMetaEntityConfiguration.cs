@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
@@ -20,7 +20,8 @@ public class TimeRecordMetaEntityConfiguration : IEntityTypeConfiguration<Record
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
-        builder.HasOne<Record>().WithOne(e => e.Meta)
+        builder.HasOne<Record>()
+            .WithOne(e => e.Meta)
             .HasForeignKey<RecordMeta>(e => e.RecordId);
     }
 }

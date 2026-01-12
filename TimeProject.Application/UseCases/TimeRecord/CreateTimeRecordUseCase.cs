@@ -1,6 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimePeriod;
 using TimeProject.Domain.UseCases.TimeRecord;
@@ -14,32 +14,32 @@ using TimeProject.Infrastructure.Database;
 namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class CreateTimeRecordUseCase(
-    ITimeRecordRepository repo,
+    IRecordRepository repo,
     ITimeRecordMapDataUtil mapDataUtil,
     ICategoryRepository categoryRepo,
     ICreateTimePeriodByListUseCase createTimePeriodByListUseCase,
     ProjectContext db)
     : ICreateTimeRecordUseCase
 {
-    public async Task<ICustomResult<TimeRecordOutDto>> Handle(CreateTimeRecordDto dto, int userId)
+    public ICustomResult<TimeRecordOutDto> Handle(CreateTimeRecordDto dto, int userId)
     {
         var result = new CustomResult<TimeRecordOutDto>();
-        var transaction = await db.Database.BeginTransactionAsync();
+        var transaction = db.Database.BeginTransaction();
 
         if (dto.CategoryId != null)
         {
-            var category = await categoryRepo.FindById((int)dto.CategoryId, userId);
+            var category = categoryRepo.FindById((int)dto.CategoryId, userId);
             if (category == null) return result.SetError(TimeRecordMessageErrors.CategoryNotFound);
         }
 
         if (string.IsNullOrEmpty(dto.Code) == false)
         {
-            var trByCode = await repo.FindByCode(dto.Code!, userId);
+            var trByCode = repo.FindByCode(dto.Code!, userId);
             if (trByCode != null) return result.SetError(TimeRecordMessageErrors.CodeAlreadyInUse);
         }
 
-        var timeRecord = await repo
-            .Create(new Domain.Entities.Record
+        var timeRecord = repo
+            .Create(new Record
                 {
                     UserId = userId,
                     CategoryId = dto.CategoryId,
@@ -54,7 +54,7 @@ public class CreateTimeRecordUseCase(
         {
             if (dto.TimePeriods != null)
             {
-                var timePeriodsResult = await createTimePeriodByListUseCase
+                var timePeriodsResult = createTimePeriodByListUseCase
                     .Handle(
                         new TimePeriodListDto
                             { TimePeriods = dto.TimePeriods, Type = dto.TimerSessionType, From = dto.TimerSessionFrom },
@@ -66,11 +66,11 @@ public class CreateTimeRecordUseCase(
         }
         catch (Exception error)
         {
-            await transaction.RollbackAsync();
+            transaction.Rollback();
             return result.SetError(error.Message);
         }
 
-        await transaction.CommitAsync();
+        transaction.Commit();
         return result.SetData(mapDataUtil.Handle(timeRecord));
     }
 }

@@ -7,5 +7,5 @@ namespace TimeProject.Domain.UseCases.TimePeriod;
 
 public interface IGetPaginatedTimePeriodUseCase
 {
-    Task<ICustomResult<IPagination<TimePeriodOutDto>>> Handle(int timeRecordId, int userId, PaginationQuery paginationQuery);
+    ICustomResult<IPagination<ITimePeriodOutDto>> Handle(int timeRecordId, int userId, PaginationQuery paginationQuery);
 }

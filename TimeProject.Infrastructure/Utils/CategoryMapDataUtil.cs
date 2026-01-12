@@ -1,19 +1,19 @@
 using AutoMapper;
+using TimeProject.Domain.Entities;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
-using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Utils;
 
 public class CategoryMapDataUtil(IMapper mapper) : ICategoryMapDataUtil
 {
-    public IList<CategoryOutDto> Handle(IList<Category> entities)
+    public IList<ICategoryOutDto> Handle(IList<ICategory> entities)
     {
-        return mapper.Map<IList<Category>, IList<CategoryOutDto>>(entities);
+        return mapper.Map<IList<ICategory>, IList<ICategoryOutDto>>(entities);
     }
 
-    public CategoryOutDto Handle(Category entity)
+    public ICategoryOutDto Handle(ICategory entity)
     {
-        return mapper.Map<Category, CategoryOutDto>(entity);
+        return mapper.Map<ICategory, ICategoryOutDto>(entity);
     }
 }

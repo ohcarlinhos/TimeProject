@@ -1,9 +1,10 @@
 ﻿using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 
-public class TimeRecordOutDto
+public class TimeRecordOutDto : ITimeRecordOutDto
 {
     public int Id { get; set; }
     public int UserId { get; set; }
@@ -17,5 +18,5 @@ public class TimeRecordOutDto
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
-    public RecordMeta? Meta { get; set; }
+    public IRecordMeta? Meta { get; set; }
 }

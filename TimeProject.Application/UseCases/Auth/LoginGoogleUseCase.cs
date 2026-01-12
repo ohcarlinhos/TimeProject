@@ -1,8 +1,8 @@
-﻿using System.Text.Json.Serialization;
-using RestSharp;
+﻿using RestSharp;
 using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.CustomLog;
 using TimeProject.Domain.UseCases.Login;
 using TimeProject.Domain.UseCases.User;
@@ -14,15 +14,6 @@ using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auth;
 
-public class LoginGoogleResponse
-{
-    public string Id { get; set; }
-    public string Email { get; set; }
-    public string Name { get; set; }
-    public string Picture { get; set; }
-    [JsonPropertyName("verified_email")] public bool VerifiedEmail { get; set; }
-}
-
 public class LoginGoogleUseCase(
     IJwtHandler jwtHandler,
     IGetUserByOAtuhProviderIdUseCase getUserByOAtuhProviderIdUseCase,
@@ -33,7 +24,7 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<ICustomResult<JwtResult>> Handle(LoginGoogleDto dto, UserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(LoginGoogleDto dto, IUserAccessLog ac)
     {
         var result = new CustomResult<JwtResult>();
 
@@ -51,7 +42,7 @@ public class LoginGoogleUseCase(
             if (getUserByPIdResult is { Data: not null })
             {
                 ac.UserId = getUserByPIdResult.Data.Id;
-                await createUserAccessLogUseCase.Handle(ac);
+                createUserAccessLogUseCase.Handle(ac);
                 return result.SetData(jwtHandler.Generate(getUserByPIdResult.Data));
             }
 
@@ -71,7 +62,7 @@ public class LoginGoogleUseCase(
             if (!createIsSuccess) result.SetError(createUserResult.Message);
 
             ac.UserId = createUserResult.Data!.Id;
-            await createUserAccessLogUseCase.Handle(ac);
+            createUserAccessLogUseCase.Handle(ac);
 
             return result.SetData(jwtHandler.Generate(createUserResult.Data));
         }

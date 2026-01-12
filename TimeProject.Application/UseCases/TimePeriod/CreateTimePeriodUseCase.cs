@@ -1,6 +1,7 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimePeriod;
 using TimeProject.Domain.UseCases.TimeRecord;
@@ -12,15 +13,15 @@ using TimeProject.Domain.Shared;
 namespace TimeProject.Application.UseCases.TimePeriod;
 
 public class CreateTimePeriodUseCase(
-    ITimePeriodRepository repo,
+    IPeriodRecordRepository repo,
     IGetTimeRecordByIdUseCase getTimeRecordByIdUseCase,
     ISyncTrMetaUseCase syncTrMetaUseCase,
     ITimePeriodValidateUtil timePeriodValidateUtil
 ) : ICreateTimePeriodUseCase
 {
-    public async Task<ICustomResult<PeriodRecord>> Handle(CreateTimePeriodDto dto, int userId)
+    public ICustomResult<IPeriodRecord> Handle(CreateTimePeriodDto dto, int userId)
     {
-        var result = new CustomResult<PeriodRecord>();
+        var result = new CustomResult<IPeriodRecord>();
 
         timePeriodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;
@@ -28,11 +29,11 @@ public class CreateTimePeriodUseCase(
         if (dto.Start.CompareTo(dto.End) > 0)
             return result.SetError(TimePeriodMessageErrors.EndDateIsBiggerThenStartDate);
 
-        var findTrResult = await getTimeRecordByIdUseCase.Handle(dto.TimeRecordId, userId);
+        var findTrResult = getTimeRecordByIdUseCase.Handle(dto.TimeRecordId, userId);
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);
 
-        var data = await repo
-            .Create(new Domain.Entities.PeriodRecord
+        var data = repo
+            .Create(new PeriodRecord
                 {
                     UserId = userId,
                     RecordId = dto.TimeRecordId,
@@ -41,7 +42,7 @@ public class CreateTimePeriodUseCase(
                 }
             );
 
-        await syncTrMetaUseCase.Handle(data.RecordId);
+        syncTrMetaUseCase.Handle(data.RecordId);
 
         return result.SetData(data);
     }

@@ -1,9 +1,10 @@
 ﻿using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 
 namespace TimeProject.Infrastructure.Interfaces;
 
 public interface IJwtHandler
 {
-    JwtResult Generate(User user);
+    JwtResult Generate(IUser user);
 }

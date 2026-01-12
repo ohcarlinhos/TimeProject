@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.UseCases.Login;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 

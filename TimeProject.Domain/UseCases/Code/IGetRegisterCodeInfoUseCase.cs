@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.Code;
 
 public interface IGetRegisterCodeInfoUseCase
 {
-    Task<ICustomResult<ConfirmCodeOutDto>> Handle(int userId);
+    ICustomResult<IConfirmCodeOutDto> Handle(int userId);
 }

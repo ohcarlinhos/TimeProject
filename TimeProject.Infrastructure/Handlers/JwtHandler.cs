@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Settings;
@@ -11,7 +13,7 @@ namespace TimeProject.Infrastructure.Handlers;
 
 public class JwtHandler(JwtSettings jwtSettings) : IJwtHandler
 {
-    public JwtResult Generate(User user)
+    public JwtResult Generate(IUser user)
     {
         var subject = new ClaimsIdentity([
             new Claim("id", user.Id.ToString()),
@@ -20,7 +22,7 @@ public class JwtHandler(JwtSettings jwtSettings) : IJwtHandler
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.UserRole.ToString()),
 
-            new Claim("isAdmin", user.UserRole == UserRole.Admin ? "True" : "False"),
+            new Claim("isAdmin", user.UserRole == UserRoleType.Admin ? "True" : "False"),
             new Claim("isActive", user.IsActive.ToString())
         ]);
 

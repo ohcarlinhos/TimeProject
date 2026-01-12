@@ -9,16 +9,16 @@ namespace TimeProject.Application.UseCases.Code;
 
 public class SetIsUsedConfirmCodeUseCase(IConfirmCodeRepository repo) : ISetIsUsedConfirmCodeUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(string id)
+    public ICustomResult<bool> Handle(string id)
     {
         var result = new CustomResult<bool>();
-        var recoveryCode = await repo.FindById(id);
+        var recoveryCode = repo.FindById(id);
 
         if (recoveryCode == null)
             return result.SetError(ConfirmCodeMessageErrors.NotFound);
 
         recoveryCode.IsUsed = true;
-        await repo.Update(recoveryCode);
+        repo.Update(recoveryCode);
 
         return result.SetData(true);
     }

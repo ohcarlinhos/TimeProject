@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
@@ -7,29 +8,29 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserAccessLogRepository(ProjectContext dbContext) : IUserAccessLogRepository
 {
-    public async Task<UserAccessLog> Create(UserAccessLog entity)
+    public IUserAccessLog Create(IUserAccessLog entity)
     {
         var now = DateTime.Now.ToUniversalTime();
         entity.AccessAt = now;
 
-        dbContext.UserAccessLogs.Add(entity);
-        await dbContext.SaveChangesAsync();
-        return entity;
+        var accessLog = (UserAccessLog)entity;
+        dbContext.UserAccessLogs.Add(accessLog);
+        dbContext.SaveChanges();
+        return accessLog;
     }
 
-    public Task<UserAccessLog?> GetLastAccessByUserId(int id)
+    public IUserAccessLog? GetLastAccessByUserId(int id)
     {
         var maxAccessAt = dbContext.UserAccessLogs
             .Where(e => e.UserId == id)
             .Max(e => e.AccessAt);
 
-        return dbContext.UserAccessLogs.Where(e => e.UserId == id && e.AccessAt == maxAccessAt)
-            .FirstOrDefaultAsync();
+        return dbContext.UserAccessLogs.FirstOrDefault(e => e.UserId == id && e.AccessAt == maxAccessAt);
     }
 
-    public List<UserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
+    public IList<IUserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
     {
-        var list = new List<UserAccessLog>();
+        var list = new List<IUserAccessLog>();
 
         foreach (var id in idList)
         {

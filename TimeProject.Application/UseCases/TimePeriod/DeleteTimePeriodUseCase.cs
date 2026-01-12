@@ -8,19 +8,19 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimePeriod;
 
-public class DeleteTimePeriodUseCase(ITimePeriodRepository repo, ISyncTrMetaUseCase syncTrMetaUseCase)
+public class DeleteTimePeriodUseCase(IPeriodRecordRepository repo, ISyncTrMetaUseCase syncTrMetaUseCase)
     : IDeleteTimePeriodUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(int id, int userId)
+    public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var timePeriod = await repo.FindById(id, userId);
+        var timePeriod = repo.FindById(id, userId);
 
         if (timePeriod == null)
             return result.SetError(TimePeriodMessageErrors.NotFound);
 
-        var data = await repo.Delete(timePeriod);
-        await syncTrMetaUseCase.Handle(timePeriod.RecordId);
+        var data = repo.Delete(timePeriod);
+        syncTrMetaUseCase.Handle(timePeriod.RecordId);
 
         return result.SetData(data);
     }

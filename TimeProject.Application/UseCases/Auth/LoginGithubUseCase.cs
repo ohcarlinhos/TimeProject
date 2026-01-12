@@ -2,6 +2,7 @@
 using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.CustomLog;
 using TimeProject.Domain.UseCases.Login;
 using TimeProject.Domain.UseCases.User;
@@ -21,7 +22,7 @@ public class LoginGithubUseCase(
 )
     : ILoginGithubUseCase
 {
-    public async Task<ICustomResult<JwtResult>> Handle(LoginGithubDto dto, UserAccessLog ac)
+    public async Task<ICustomResult<JwtResult>> Handle(LoginGithubDto dto, IUserAccessLog ac)
     {
         var result = new CustomResult<JwtResult>();
 
@@ -39,7 +40,7 @@ public class LoginGithubUseCase(
             if (getUserByPIdResult is { Data: not null })
             {
                 ac.UserId = getUserByPIdResult.Data.Id;
-                await createUserAccessLogUseCase.Handle(ac);
+                createUserAccessLogUseCase.Handle(ac);
                 return result.SetData(jwtHandler.Generate(getUserByPIdResult.Data));
             }
 
@@ -58,7 +59,7 @@ public class LoginGithubUseCase(
             if (!createIsSuccess) result.SetError(createUserResult.Message);
 
             ac.UserId = createUserResult.Data!.Id;
-            await createUserAccessLogUseCase.Handle(ac);
+            createUserAccessLogUseCase.Handle(ac);
 
             return result.SetData(jwtHandler.Generate(createUserResult.Data));
         }

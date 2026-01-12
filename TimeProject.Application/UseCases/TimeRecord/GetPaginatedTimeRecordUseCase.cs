@@ -9,7 +9,7 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
-public class GetPaginatedTimeRecordUseCase(ITimeRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
+public class GetPaginatedTimeRecordUseCase(IRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
     : IGetPaginatedTimeRecordUseCase
 {
     public async Task<ICustomResult<IPagination<TimeRecordOutDto>>> Handle(PaginationQuery paginationQuery, int userId)

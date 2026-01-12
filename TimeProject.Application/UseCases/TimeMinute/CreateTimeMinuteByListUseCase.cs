@@ -1,31 +1,31 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeMinute;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeMinute;
-using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeMinute;
 
 public class CreateTimeMinuteByListUseCase(
-    ITimeMinuteRepository repository,
-    ITimeRecordRepository timeRecordRepository,
+    IMinuteRecordRepository mrRepository,
+    IRecordRepository recordRepository,
     IUserRepository userRepository,
     ISyncTrMetaUseCase syncTrMetaUseCase
 ) : ICreateTimeMinuteByListUseCase
 {
-    public async Task<ICustomResult<List<MinuteRecord>>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId)
+    public ICustomResult<IList<IMinuteRecord>> Handle(CreateTimeMinuteListDto dto, int timeRecordId, int userId)
     {
-        var result = new CustomResult<List<MinuteRecord>>();
-        List<MinuteRecord> list = [];
+        var result = new CustomResult<IList<IMinuteRecord>>();
+        IList<IMinuteRecord> list = [];
 
-        var user = await userRepository.FindById(userId);
+        var user = userRepository.FindById(userId);
         if (user is null) return result.SetError(TimeRecordMessageErrors.NotFound);
 
-        var timeRecord = await timeRecordRepository.FindById(timeRecordId, userId);
+        var timeRecord = recordRepository.FindById(timeRecordId, userId);
         if (timeRecord is null) return result.SetError(TimeRecordMessageErrors.NotFound);
 
         foreach (var minutes in dto.Minutes)
@@ -37,8 +37,8 @@ public class CreateTimeMinuteByListUseCase(
                 Date = dto.Date.AddHours(user.Utc * -1).ToUniversalTime()
             });
 
-        var data = await repository.CreateByList(list);
-        await syncTrMetaUseCase.Handle(timeRecordId);
+        var data = mrRepository.CreateByList(list);
+        syncTrMetaUseCase.Handle(timeRecordId);
 
         return result.SetData(data);
     }

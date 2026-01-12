@@ -4,6 +4,6 @@ namespace TimeProject.Domain.ObjectValues;
 
 public interface IGetUserPasswordByEmailResult
 {
-    UserPassword UserPassword { get; set; }
-    Entities.User User { get; set; }
+    IUserPassword UserPassword { get; set; }
+    IUser User { get; set; }
 }

@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Moq;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
 using TimeProject.Domain.Repositories;
 
@@ -14,10 +15,10 @@ public class GetRangeDaysStatisticUseCaseTests
     {
         const int timeRecordId = 1;
 
-        var timePeriods = CreateTimePeriodList(today, userId, timeRecordId);
-        var timerSessions = CreateTimerSessionList(today, userId, timeRecordId);
+        var timePeriods = CreateRecordPeriodList(today, userId, timeRecordId);
+        var recordSessions = CreateTimerSessionList(today, userId, timeRecordId);
 
-        foreach (var session in timerSessions)
+        foreach (var session in recordSessions)
         {
             if (session.PeriodRecords == null || !session.PeriodRecords.Any()) continue;
             timePeriods.AddRange(session.PeriodRecords);
@@ -26,14 +27,14 @@ public class GetRangeDaysStatisticUseCaseTests
         _staticRepository
             .Setup(v => v
                 .GetTimePeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(Task.FromResult(timePeriods));
+            .Returns(timePeriods as IList<IPeriodRecord>);
 
         _staticRepository
             .Setup(v => v.GetTimerSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(Task.FromResult(timerSessions));
+            .Returns(recordSessions as IList<IRecordSession>);
     }
 
-    private static List<PeriodRecord> CreateTimePeriodList(DateTime today, int userId, int timeRecordId)
+    private static List<PeriodRecord> CreateRecordPeriodList(DateTime today, int userId, int timeRecordId)
     {
         return
         [
@@ -74,11 +75,11 @@ public class GetRangeDaysStatisticUseCaseTests
         ];
     }
 
-    private static List<TimerSession> CreateTimerSessionList(DateTime today, int userId, int timeRecordId)
+    private static List<RecordSession> CreateTimerSessionList(DateTime today, int userId, int timeRecordId)
     {
         return
         [
-            new TimerSession
+            new RecordSession
             {
                 Id = 1,
                 UserId = userId,
@@ -98,7 +99,7 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new TimerSession
+            new RecordSession
             {
                 Id = 2,
                 UserId = userId,
@@ -118,7 +119,7 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new TimerSession
+            new RecordSession
             {
                 Id = 3,
                 UserId = userId,
@@ -133,7 +134,7 @@ public class GetRangeDaysStatisticUseCaseTests
                     }
                 }
             },
-            new TimerSession
+            new RecordSession
             {
                 Id = 4,
                 UserId = userId,

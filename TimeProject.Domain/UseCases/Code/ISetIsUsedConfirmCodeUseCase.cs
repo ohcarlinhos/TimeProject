@@ -4,5 +4,5 @@ namespace TimeProject.Domain.UseCases.Code;
 
 public interface ISetIsUsedConfirmCodeUseCase
 {
-    Task<ICustomResult<bool>> Handle(string id);
+    ICustomResult<bool> Handle(string id);
 }

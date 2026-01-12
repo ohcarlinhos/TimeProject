@@ -5,7 +5,7 @@ using TimeProject.Domain.UseCases.Category;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.RemoveDependencies.Util;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.APIs.Controllers;
 

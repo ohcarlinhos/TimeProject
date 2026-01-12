@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<TimerSession>
+public class TimerSessionEntityConfiguration : IEntityTypeConfiguration<RecordSession>
 {
-    public void Configure(EntityTypeBuilder<TimerSession> builder)
+    public void Configure(EntityTypeBuilder<RecordSession> builder)
     {
         builder.HasKey(e => e.Id);
 

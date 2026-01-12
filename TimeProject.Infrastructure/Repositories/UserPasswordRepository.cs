@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 
@@ -7,38 +8,41 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRepository
 {
-    public async Task<bool> Create(UserPassword entity)
+    public bool Create(IUserPassword entity)
     {
         var now = DateTime.Now.ToUniversalTime();
-        entity.CreatedAt = now;
-        entity.UpdatedAt = now;
+        
+        var userPassword = (UserPassword)entity;
+        userPassword.CreatedAt = now;
+        userPassword.UpdatedAt = now;
 
-        dbContext.UserPasswords.Add(entity);
-        await dbContext.SaveChangesAsync();
+        dbContext.UserPasswords.Add(userPassword);
+        dbContext.SaveChanges();
         return true;
     }
 
-    public async Task<bool> Update(UserPassword entity)
+    public bool Update(IUserPassword entity)
     {
-        entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+        var userPassword = (UserPassword)entity;
+        userPassword.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        dbContext.UserPasswords.Update(entity);
-        await dbContext.SaveChangesAsync();
+        dbContext.UserPasswords.Update(userPassword);
+        dbContext.SaveChanges();
         return true;
     }
 
-    public async Task<bool> Delete(int id)
+    public bool Delete(int id)
     {
-        var entity = await FindByUserId(id);
+        var entity = FindByUserId(id);
         if (entity == null) return true;
 
-        dbContext.UserPasswords.Remove(entity);
-        await dbContext.SaveChangesAsync();
+        dbContext.UserPasswords.Remove((UserPassword)entity);
+        dbContext.SaveChanges();
         return true;
     }
 
-    public async Task<UserPassword?> FindByUserId(int userId)
+    public IUserPassword? FindByUserId(int userId)
     {
-        return await dbContext.UserPasswords.FirstOrDefaultAsync(i => i.UserId == userId);
+        return dbContext.UserPasswords.FirstOrDefault(i => i.UserId == userId);
     }
 }

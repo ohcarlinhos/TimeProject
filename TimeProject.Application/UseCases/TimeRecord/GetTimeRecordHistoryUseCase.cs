@@ -7,12 +7,11 @@ using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.Shared;
-using TimeProject.Domain.TimeRecord.Repositories;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class GetTimeRecordHistoryUseCase(
-    ITimeRecordHistoryRepository repository,
+    IRecordHistoryRepository repository,
     IUserRepository userRepository,
     ITimeRecordMapDataUtil mapDataUtil) : IGetTimeRecordHistoryUseCase
 {

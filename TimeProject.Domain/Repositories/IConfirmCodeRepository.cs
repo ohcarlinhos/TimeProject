@@ -1,14 +1,16 @@
 ﻿using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Entities.Enums;
 
 namespace TimeProject.Domain.Repositories;
 
 public interface IConfirmCodeRepository
 {
-    Task<ConfirmCode> Create(ConfirmCode entity);
-    Task<ConfirmCode> Update(ConfirmCode entity);
-    Task<ConfirmCode?> FindById(string id);
-    Task<ConfirmCode?> FindByIdAndEmail(string id, string email);
-    Task<IList<ConfirmCode>> FindByUserId(int userId);
-    Task<IList<ConfirmCode>> FindByUserId(int userId, ConfirmCodeType type);
-    Task<IList<ConfirmCode>> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type);
+    IConfirmCode Create(IConfirmCode entity);
+    IConfirmCode Update(IConfirmCode entity);
+    IConfirmCode? FindById(string id);
+    IConfirmCode? FindByIdAndEmail(string id, string email);
+    IList<IConfirmCode> FindByUserId(int userId);
+    IList<IConfirmCode> FindByUserId(int userId, ConfirmCodeType type);
+    IList<IConfirmCode> FindByUserIdThatIsNotExpiredOrUsed(int userId, ConfirmCodeType type);
 }

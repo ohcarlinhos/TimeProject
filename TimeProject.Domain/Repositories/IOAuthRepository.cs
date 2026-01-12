@@ -4,8 +4,8 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IOAuthRepository
 {
-    public Task<OAuth> Create(OAuth entity);
+    public Task<IOAuth> Create(IOAuth entity);
     public Task<bool> Delete(int id);
-    public Task<OAuth?> FindByUserId(int userId);
-    public Task<OAuth?> FindByUserProviderId(string provider, string id);
+    public Task<IOAuth?> FindByUserId(int userId);
+    public Task<IOAuth?> FindByUserProviderId(string provider, string id);
 }

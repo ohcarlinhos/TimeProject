@@ -10,8 +10,8 @@ namespace TimeProject.Application.UseCases.Category;
 
 public class GetAllCategoryUseCase(ICategoryRepository repo, ICategoryMapDataUtil mapper) : IGetAllCategoryUseCase
 {
-    public ICustomResult<IList<CategoryOutDto>> Handle(int userId, bool onlyWithData)
+    public ICustomResult<IList<ICategoryOutDto>> Handle(int userId, bool onlyWithData)
     {
-        return new CustomResult<IList<CategoryOutDto>> { Data = mapper.Handle(repo.Index(userId, onlyWithData)) };
+        return new CustomResult<IList<ICategoryOutDto>> { Data = mapper.Handle(repo.Index(userId, onlyWithData)) };
     }
 }

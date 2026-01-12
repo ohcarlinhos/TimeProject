@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;

@@ -1,11 +1,13 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Application.UseCases.User.Factories;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.UseCases.Code;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.Factories;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.User;

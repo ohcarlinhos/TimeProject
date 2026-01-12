@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.Category;
 
 public interface IGetAllCategoryUseCase
 {
-    ICustomResult<IList<CategoryOutDto>> Handle(int userId, bool onlyWithData);
+    ICustomResult<IList<ICategoryOutDto>> Handle(int userId, bool onlyWithData);
 }

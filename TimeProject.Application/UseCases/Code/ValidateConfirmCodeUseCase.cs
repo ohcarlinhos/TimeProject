@@ -9,11 +9,11 @@ namespace TimeProject.Application.UseCases.Code;
 
 public class ValidateConfirmCodeUseCase(IConfirmCodeRepository repo) : IValidateConfirmCodeUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(string id, string email)
+    public ICustomResult<bool> Handle(string id, string email)
     {
         var result = new CustomResult<bool>();
 
-        var code = await repo.FindByIdAndEmail(id, email);
+        var code = repo.FindByIdAndEmail(id, email);
 
         if (code == null) return result.SetError(ConfirmCodeMessageErrors.NotFound);
 

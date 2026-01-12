@@ -1,6 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
@@ -14,9 +14,9 @@ public class CreateUserByGoogleUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGoogleUserUseCase
 {
-    public async Task<ICustomResult<Domain.Entities.User>> Handle(CreateUserOAtuhDto dto, string email)
+    public async Task<ICustomResult<Infrastructure.Entities.User>> Handle(CreateUserOAtuhDto dto, string email)
     {
-        var result = new CustomResult<Domain.Entities.User>();
+        var result = new CustomResult<Infrastructure.Entities.User>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId)) return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
 
@@ -35,7 +35,7 @@ public class CreateUserByGoogleUserUseCase(
         }
 
         var userEntity = await repository
-            .Create(new Domain.Entities.User
+            .Create(new Infrastructure.Entities.User
             {
                 Name = dto.Name,
                 Email = email,

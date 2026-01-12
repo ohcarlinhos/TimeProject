@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface ICreateTimeRecordUseCase
 {
-    Task<ICustomResult<TimeRecordOutDto>> Handle(CreateTimeRecordDto dto, int userId);
+    ICustomResult<TimeRecordOutDto> Handle(CreateTimeRecordDto dto, int userId);
 }

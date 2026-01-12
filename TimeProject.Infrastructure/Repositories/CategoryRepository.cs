@@ -1,29 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
 public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 {
-    public IList<Category> Index(int userId, bool onlyWithData)
+    public IList<ICategory> Index(int userId, bool onlyWithData)
     {
         return onlyWithData
-            ? dbContext.TimeRecords
+            ? dbContext.Records
                 .Where(e => e.Category != null && e.UserId == userId)
                 .Select(e => e.Category)
-                .Distinct()
-                .ToList()!
+                .Distinct()!
+                .ToList<ICategory>()
             : dbContext.Categories
                 .Where(category => category.UserId == userId)
-                .ToList();
+                .ToList<ICategory>();
     }
 
-    public IList<Category> Index(IPaginationQuery paginationQuery, int userId)
+    public IList<ICategory> Index(IPaginationQuery paginationQuery, int userId)
     {
-        IQueryable<Category> query = dbContext.Categories;
+        IQueryable<ICategory> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
@@ -40,62 +41,63 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
             .ToList();
     }
 
-    public Task<int> GetTotalItems(IPaginationQuery paginationQuery, int userId)
+    public int GetTotalItems(IPaginationQuery paginationQuery, int userId)
     {
-        IQueryable<Category> query = dbContext.Categories;
+        IQueryable<ICategory> query = dbContext.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
             query = SearchWhereConditional(query, paginationQuery.Search);
 
-        return query.CountAsync();
+        return query.Count();
     }
 
-    public async Task<Category> Create(Category entity)
+    public ICategory Create(ICategory entity)
     {
         var now = DateTime.Now.ToUniversalTime();
-        entity.CreatedAt = now;
-        entity.UpdatedAt = now;
+        var category = (Category)entity;
 
-        dbContext.Categories.Add(entity);
-        await dbContext.SaveChangesAsync();
-        return entity;
+        category.CreatedAt = now;
+        category.UpdatedAt = now;
+
+        dbContext.Categories.Add(category);
+        dbContext.SaveChanges();
+        return category;
     }
 
-    public async Task<Category> Update(Category entity)
+    public ICategory Update(ICategory entity)
     {
-        entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+        var category = (Category)entity;
+        category.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        dbContext.Categories.Update(entity);
-        await dbContext.SaveChangesAsync();
-        return entity;
+        dbContext.Categories.Update(category);
+        dbContext.SaveChanges();
+        return category;
     }
 
-    public async Task<bool> Delete(Category entity)
+    public bool Delete(ICategory entity)
     {
-        dbContext.Categories.Remove(entity);
-        await dbContext.SaveChangesAsync();
+        dbContext.Categories.Remove((Category)entity);
+        dbContext.SaveChanges();
         return true;
     }
 
-    public async Task<Category?> FindById(int id)
+    public ICategory? FindById(int id)
     {
-        return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+        return dbContext.Categories.FirstOrDefault(c => c.Id == id);
     }
 
-    public async Task<Category?> FindById(int id, int userId)
+    public ICategory? FindById(int id, int userId)
     {
-        return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+        return dbContext.Categories.FirstOrDefault(c => c.Id == id && c.UserId == userId);
     }
 
-    public async Task<Category?> FindByName(string name, int userId)
+    public ICategory? FindByName(string name, int userId)
     {
-        return await dbContext.Categories
-            .Where(category => category.Name == name && category.UserId == userId)
-            .FirstOrDefaultAsync();
+        return dbContext.Categories.FirstOrDefault(category => category.Name == name && category.UserId == userId);
     }
 
-    private static IQueryable<Category> SearchWhereConditional(IQueryable<Category> query, string search)
+    private static IQueryable<ICategory> SearchWhereConditional(IQueryable<ICategory> query, string search)
     {
         return query.Where(c =>
             EF.Functions.Like(

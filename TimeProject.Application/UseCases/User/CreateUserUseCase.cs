@@ -1,6 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
@@ -28,7 +28,7 @@ public class CreateUserUseCase(
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
         var entity = await repository
-            .Create(new Domain.Entities.User
+            .Create(new Infrastructure.Entities.User
             {
                 Name = dto.Name,
                 Email = dto.Email,
