@@ -15,7 +15,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
     {
         var query = dbContext.Records.AsQueryable();
 
-        query = query.Where(tr => tr.UserId == userId);
+        query = query.Where(record => record.UserId == userId);
         query = SearchWhereConditional(query, paginationQuery.Search);
 
         if (paginationQuery.Filters != null)
@@ -26,7 +26,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
                 if (split[0] == "category")
                 {
                     var id = int.Parse(split[^1]);
-                    query = query.Where(tr => tr.CategoryId == id);
+                    query = query.Where(record => record.CategoryId == id);
                 }
             }
 
@@ -35,20 +35,20 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
         query = paginationQuery.SortProp switch
         {
             "title" => paginationQuery.Sort == "asc"
-                ? query.OrderBy(tr => tr.Title)
-                : query.OrderByDescending(tr => tr.Title),
+                ? query.OrderBy(record => record.Title)
+                : query.OrderByDescending(record => record.Title),
 
             "code" => paginationQuery.Sort == "asc"
-                ? query.OrderBy(tr => tr.Code)
-                : query.OrderByDescending(tr => tr.Code),
+                ? query.OrderBy(record => record.Code)
+                : query.OrderByDescending(record => record.Code),
 
             "timeOnSeconds" => paginationQuery.Sort == "asc"
-                ? query.OrderBy(tr => tr.Meta == null).ThenBy(p => p.Meta!.TimeOnSeconds)
-                : query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.TimeOnSeconds),
+                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.TimeOnSeconds)
+                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.TimeOnSeconds),
 
             _ => paginationQuery.Sort == "asc" // Padrão: Último Progresso
-                ? query.OrderBy(tr => tr.Meta == null).ThenBy(p => p.Meta!.LastTimeDate)
-                : query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimeDate)
+                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.LastTimeDate)
+                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastTimeDate)
         };
 
 
@@ -69,12 +69,12 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
     public IList<SearchRecordItem> SearchRecord(string search, int userId)
     {
         var query = dbContext.Records.AsQueryable();
-        query = query.Where(tr => tr.UserId == userId);
+        query = query.Where(record => record.UserId == userId);
 
         if (string.IsNullOrEmpty(search) == false)
             query = SearchWhereConditional(query, search);
 
-        query = query.OrderBy(tr => tr.Meta == null).ThenByDescending(tr => tr.Meta!.LastTimeDate);
+        query = query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastTimeDate);
 
         return query
             .Select(e => new SearchRecordItem(e.Id, e.Code, e.Title))
@@ -145,13 +145,13 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
     {
         if (string.IsNullOrWhiteSpace(search)) return query;
 
-        return query.Where(tr =>
+        return query.Where(record =>
             EF.Functions.Like(
-                tr.Code.ToLower(),
+                record.Code.ToLower(),
                 $"%{search.ToLower()}%") ||
-            (tr.Title != null &&
+            (record.Title != null &&
              EF.Functions.Like(
-                 tr.Title!.ToLower(),
+                 record.Title!.ToLower(),
                  $"%{search.ToLower()}%"))
         );
     }

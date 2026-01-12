@@ -8,13 +8,13 @@ using TimeProject.Infrastructure.ObjectValues;
 
 namespace TimeProject.Application.UseCases.Categories;
 
-public class GetPaginatedCategoryUseCase(ICategoryRepository repo, ICategoryMapDataUtil mapper)
+public class GetPaginatedCategoryUseCase(ICategoryRepository repository, ICategoryMapDataUtil mapper)
     : IGetPaginatedCategoryUseCase
 {
     public ICustomResult<IPagination<ICategoryOutDto>> Handle(IPaginationQuery paginationQuery, int userId)
     {
-        var data = mapper.Handle(repo.Index(paginationQuery, userId));
-        var totalItems = repo.GetTotalItems(paginationQuery, userId);
+        var data = mapper.Handle(repository.Index(paginationQuery, userId));
+        var totalItems = repository.GetTotalItems(paginationQuery, userId);
 
         return new CustomResult<IPagination<ICategoryOutDto>>
             { Data = Pagination<ICategoryOutDto>.Handle(data, paginationQuery, totalItems) };

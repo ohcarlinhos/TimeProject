@@ -11,22 +11,22 @@ using TimeProject.Infrastructure.Errors;
 namespace TimeProject.Application.UseCases.Sessions;
 
 public class DeleteSessionUseCase(
-    ISessionRepository repo,
-    IPeriodRepository tpRepo,
+    ISessionRepository repository,
+    IPeriodRepository periodRepository,
     ISyncRecordMetaUseCase syncRecordMetaUseCase) : IDeleteSessionUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var entity = (Session)repo.FindById(id, userId);
+        var entity = (Session)repository.FindById(id, userId);
 
         if (entity == null)
             return result.SetError(SessionMessageErrors.NotFound);
 
-        tpRepo.DeleteByList(entity.PeriodRecords as IList<IPeriod>);
+        periodRepository.DeleteByList(entity.PeriodRecords as IList<IPeriod>);
         var recordId = entity.RecordId;
 
-        repo.Delete(entity);
+        repository.Delete(entity);
         syncRecordMetaUseCase.Handle(recordId);
 
         return result.SetData(true);

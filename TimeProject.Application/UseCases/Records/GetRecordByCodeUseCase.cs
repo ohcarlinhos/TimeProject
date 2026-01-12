@@ -8,13 +8,13 @@ using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Records;
 
-public class GetRecordByCodeUseCase(IRecordRepository repo, IRecordMapDataUtil mapDataUtil)
+public class GetRecordByCodeUseCase(IRecordRepository repository, IRecordMapDataUtil mapDataUtil)
     : IGetRecordByCodeUseCase
 {
     public ICustomResult<IRecordOutDto> Handle(string code, int userId)
     {
         var result = new CustomResult<IRecordOutDto>();
-        var entity = repo.Details(code, userId);
+        var entity = repository.Details(code, userId);
 
         return entity == null
             ? result.SetError(RecordMessageErrors.NotFound)

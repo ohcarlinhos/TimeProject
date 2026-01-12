@@ -39,7 +39,8 @@ public static class TimeFormatUtil
         if (sessions == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
 
-        foreach (var ts in sessions) total = total.Add(TimeSpanFromPeriods(ts.Periods));
+        foreach (var session in sessions)
+            total = total.Add(TimeSpanFromPeriods(session.Periods));
 
         return total;
     }

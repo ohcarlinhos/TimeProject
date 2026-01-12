@@ -6,18 +6,18 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Categories;
 
-public class DeleteCategoryUseCase(ICategoryRepository repo) : IDeleteCategoryUseCase
+public class DeleteCategoryUseCase(ICategoryRepository repository) : IDeleteCategoryUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var category = repo.FindById(id);
+        var category = repository.FindById(id);
 
         if (category == null) return result.SetError(CategoryMessageErrors.NotFound);
 
         if (category.UserId != userId) return result.SetError(GeneralMessageErrors.Unauthorized);
 
-        result.Data = repo.Delete(category);
+        result.Data = repository.Delete(category);
         return result;
     }
 }

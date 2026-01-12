@@ -10,7 +10,7 @@ using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserUseCase
+public class UpdateUserUseCase(IUserRepository repository, IUserMapDataUtil mapper) : IUpdateUserUseCase
 {
     public ICustomResult<IUserOutDto> Handle(int id, IUpdateUserDto dto)
     {
@@ -25,13 +25,13 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : 
     private ICustomResult<IUserOutDto> _update(int id, IUpdateUserDto dto, IUpdateUserOptions? config)
     {
         var result = new CustomResult<IUserOutDto>();
-        var user = repo.FindById(id);
+        var user = repository.FindById(id);
 
         if (user == null) return result.SetError(UserMessageErrors.NotFound);
 
         if (!string.IsNullOrWhiteSpace(dto.Email) && user.Email != dto.Email && config?.UpdateFromAdmin == true)
         {
-            var emailAvailable = repo.EmailIsAvailable(dto.Email);
+            var emailAvailable = repository.EmailIsAvailable(dto.Email);
             if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
             user.Email = dto.Email;
@@ -41,7 +41,7 @@ public class UpdateUserUseCase(IUserRepository repo, IUserMapDataUtil mapper) : 
 
         if (dto.Utc.HasValue) user.Utc = dto.Utc.Value;
 
-        var entity = repo.Update(user);
+        var entity = repository.Update(user);
 
         result.Data = mapper.Handle(entity);
         return result;

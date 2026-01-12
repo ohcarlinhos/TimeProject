@@ -5,10 +5,10 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class DeleteUserUseCase(IUserRepository repo) : IDeleteUserUseCase
+public class DeleteUserUseCase(IUserRepository repository) : IDeleteUserUseCase
 {
     public ICustomResult<bool> Handle(int id)
     {
-        return new CustomResult<bool> { Data = repo.Delete(id) };
+        return new CustomResult<bool> { Data = repository.Delete(id) };
     }
 }

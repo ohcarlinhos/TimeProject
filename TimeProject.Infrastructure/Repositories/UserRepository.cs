@@ -17,9 +17,9 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
             query = SearchWhereConditional(query, paginationQuery.Search);
 
         if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
-            query = query.OrderByDescending(tr => tr.CreatedAt);
+            query = query.OrderByDescending(user => user.CreatedAt);
         else
-            query = query.OrderBy(tr => tr.CreatedAt);
+            query = query.OrderBy(user => user.CreatedAt);
 
         return query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)

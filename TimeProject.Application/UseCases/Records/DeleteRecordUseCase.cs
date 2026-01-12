@@ -6,15 +6,15 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Records;
 
-public class DeleteRecordUseCase(IRecordRepository repo) : IDeleteRecordUseCase
+public class DeleteRecordUseCase(IRecordRepository repository) : IDeleteRecordUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var entity = repo.FindById(id, userId);
+        var entity = repository.FindById(id, userId);
 
         return entity == null
             ? result.SetError(RecordMessageErrors.NotFound)
-            : result.SetData(repo.Delete(entity));
+            : result.SetData(repository.Delete(entity));
     }
 }

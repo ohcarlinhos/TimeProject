@@ -6,18 +6,18 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Codes;
 
-public class SetIsUsedConfirmCodeUseCase(IConfirmCodeRepository repo) : ISetIsUsedConfirmCodeUseCase
+public class SetIsUsedConfirmCodeUseCase(IConfirmCodeRepository repository) : ISetIsUsedConfirmCodeUseCase
 {
     public ICustomResult<bool> Handle(string id)
     {
         var result = new CustomResult<bool>();
-        var recoveryCode = repo.FindById(id);
+        var recoveryCode = repository.FindById(id);
 
         if (recoveryCode == null)
             return result.SetError(ConfirmCodeMessageErrors.NotFound);
 
         recoveryCode.IsUsed = true;
-        repo.Update(recoveryCode);
+        repository.Update(recoveryCode);
 
         return result.SetData(true);
     }

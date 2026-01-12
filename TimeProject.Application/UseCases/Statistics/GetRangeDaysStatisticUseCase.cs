@@ -233,14 +233,14 @@ public class GetRangeDaysStatisticUseCase(
     {
         var rangeProgressList = new List<IRecordRangeProgress>();
 
-        foreach (var tr in records)
+        foreach (var record in records)
         {
             var periods = allPeriods
-                .Where(e => e.RecordId == tr.Id)
+                .Where(e => e.RecordId == record.Id)
                 .ToList();
 
             var minutes = allMinutes
-                .Where(e => e.RecordId == tr.Id)
+                .Where(e => e.RecordId == record.Id)
                 .ToList();
 
             var periodsTimeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods);
@@ -249,7 +249,7 @@ public class GetRangeDaysStatisticUseCase(
 
             rangeProgressList.Add(new RecordRangeProgress
             {
-                Record = mapDataUtil.Handle(tr),
+                Record = mapDataUtil.Handle(record),
                 TotalHours = TimeFormatUtil.StringFromTimeSpan(totalHoursTimeSpan),
                 TotalTimeSpan = totalHoursTimeSpan
             });

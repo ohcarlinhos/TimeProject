@@ -6,13 +6,13 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Codes;
 
-public class ValidateConfirmCodeUseCase(IConfirmCodeRepository repo) : IValidateConfirmCodeUseCase
+public class ValidateConfirmCodeUseCase(IConfirmCodeRepository repository) : IValidateConfirmCodeUseCase
 {
     public ICustomResult<bool> Handle(string id, string email)
     {
         var result = new CustomResult<bool>();
 
-        var code = repo.FindByIdAndEmail(id, email);
+        var code = repository.FindByIdAndEmail(id, email);
 
         if (code == null) return result.SetError(ConfirmCodeMessageErrors.NotFound);
 

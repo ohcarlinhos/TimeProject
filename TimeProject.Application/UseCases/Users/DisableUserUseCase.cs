@@ -8,18 +8,18 @@ using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class DisableUserUseCase(IUserRepository repo) : IDisableUserUseCase
+public class DisableUserUseCase(IUserRepository repository) : IDisableUserUseCase
 {
     public ICustomResult<bool> Handle(int id, IDisableUserDto dto)
     {
         var result = new CustomResult<bool>();
-        var user = repo.FindById(id);
+        var user = repository.FindById(id);
 
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
 
         user.IsActive = dto.IsActive;
-        repo.Update(user);
+        repository.Update(user);
 
         result.Data = user.IsActive;
 

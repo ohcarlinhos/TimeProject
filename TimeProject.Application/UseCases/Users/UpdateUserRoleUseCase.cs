@@ -9,12 +9,12 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
+public class UpdateUserRoleUseCase(IUserRepository repository, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
 {
     public ICustomResult<IUserOutDto> Handle(int id, IUpdateRoleDto dto)
     {
         var result = new CustomResult<IUserOutDto>();
-        var user = repo.FindById(id);
+        var user = repository.FindById(id);
 
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
@@ -24,7 +24,7 @@ public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper
 
         user.UserRole = (UserRoleType)userRole;
 
-        var entity = repo.Update(user);
+        var entity = repository.Update(user);
         result.Data = mapper.Handle(entity);
         return result;
     }

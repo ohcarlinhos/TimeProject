@@ -7,7 +7,7 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class CreateOrUpdateUserPasswordByEmailUseCase(IUserPasswordRepository repo, IUserRepository userRepository)
+public class CreateOrUpdateUserPasswordByEmailUseCase(IUserPasswordRepository repository, IUserRepository userRepository)
     : ICreateOrUpdateUserPasswordByEmailUseCase
 {
     public ICustomResult<bool> Handle(string email, string password)
@@ -18,16 +18,16 @@ public class CreateOrUpdateUserPasswordByEmailUseCase(IUserPasswordRepository re
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
 
-        var userPassword = repo.FindByUserId(user.Id);
+        var userPassword = repository.FindByUserId(user.Id);
 
         if (userPassword != null)
         {
             userPassword.Password = BCrypt.Net.BCrypt.HashPassword(password);
-            repo.Update(userPassword);
+            repository.Update(userPassword);
         }
         else
         {
-            repo.Create(new UserPassword { Password = BCrypt.Net.BCrypt.HashPassword(password) });
+            repository.Create(new UserPassword { Password = BCrypt.Net.BCrypt.HashPassword(password) });
         }
 
         result.Data = true;

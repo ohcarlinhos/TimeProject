@@ -12,7 +12,7 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
     {
         return db.PeriodRecords
             .Where(period => period.RecordId == recordId && period.UserId == userId)
-            .OrderByDescending(tp => tp.Start)
+            .OrderByDescending(period => period.Start)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
             .ToList<IPeriod>();

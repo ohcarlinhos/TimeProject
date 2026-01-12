@@ -8,12 +8,12 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class GetUserByEmailUseCase(IUserRepository repo) : IGetUserByEmailUseCase
+public class GetUserByEmailUseCase(IUserRepository repository) : IGetUserByEmailUseCase
 {
     public ICustomResult<IUser> Handle(string email)
     {
         var result = new CustomResult<IUser>();
-        var user = repo.FindByEmail(email);
+        var user = repository.FindByEmail(email);
 
         return user == null ? result.SetError(UserMessageErrors.NotFound) : result.SetData(user);
     }

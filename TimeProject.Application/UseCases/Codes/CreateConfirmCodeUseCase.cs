@@ -8,16 +8,16 @@ using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Application.UseCases.Codes;
 
-public class CreateConfirmCodeUseCase(IConfirmCodeRepository repo) : ICreateConfirmCodeUseCase
+public class CreateConfirmCodeUseCase(IConfirmCodeRepository repository) : ICreateConfirmCodeUseCase
 {
     public ICustomResult<IConfirmCode> Handle(int userId, ConfirmCodeType type)
     {
         var result = new CustomResult<IConfirmCode>();
-        var codes = repo.FindByUserIdThatIsNotExpiredOrUsed(userId, type);
+        var codes = repository.FindByUserIdThatIsNotExpiredOrUsed(userId, type);
 
         return codes.Count > 0
             ? result.SetData(codes.First())
-            : result.SetData(repo.Create(new ConfirmCode
+            : result.SetData(repository.Create(new ConfirmCode
             {
                 UserId = userId,
                 ExpireDate = DateTime.Now.AddMinutes(15).ToUniversalTime(),

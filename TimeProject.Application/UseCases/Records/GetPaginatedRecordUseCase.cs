@@ -8,12 +8,12 @@ using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Records;
 
-public class GetPaginatedRecordUseCase(IRecordRepository repo, IRecordMapDataUtil mapDataUtil)
+public class GetPaginatedRecordUseCase(IRecordRepository repository, IRecordMapDataUtil mapDataUtil)
     : IGetPaginatedRecordUseCase
 {
     public ICustomResult<IPagination<IRecordOutDto>> Handle(IPaginationQuery paginationQuery, int userId)
     {
-        var result = repo.Index(paginationQuery, userId);
+        var result = repository.Index(paginationQuery, userId);
 
         return new CustomResult<IPagination<IRecordOutDto>>
         {

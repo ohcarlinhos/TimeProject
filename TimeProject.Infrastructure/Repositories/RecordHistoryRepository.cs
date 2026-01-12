@@ -39,7 +39,7 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
                 && e.Start >= initDate
                 && e.Start < endDate
             )
-            .OrderBy(tp => tp.Start)
+            .OrderBy(period => period.Start)
             .ToList();
     }
 
@@ -60,7 +60,7 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
                 e.PeriodRecords!.FirstOrDefault()!.Start >= initDate
                 && e.PeriodRecords!.FirstOrDefault()!.Start < endDate
             )
-            .Include(e => e.PeriodRecords!.OrderBy(tp => tp.Start))
+            .Include(e => e.PeriodRecords!.OrderBy(period => period.Start))
             .ToList<ISession>();
     }
 

@@ -8,12 +8,12 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Records;
 
-public class GetRecordByIdUseCase(IRecordRepository repo) : IGetRecordByIdUseCase
+public class GetRecordByIdUseCase(IRecordRepository repository) : IGetRecordByIdUseCase
 {
     public ICustomResult<IRecord> Handle(int id, int userId)
     {
         var result = new CustomResult<IRecord>();
-        var entity = repo.FindById(id, userId);
+        var entity = repository.FindById(id, userId);
 
         return entity == null
             ? result.SetError(RecordMessageErrors.NotFound)

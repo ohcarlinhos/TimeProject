@@ -9,7 +9,7 @@ using TimeProject.Infrastructure.Utils.Interfaces;
 namespace TimeProject.Application.UseCases.Records;
 
 public class UpdateRecordUseCase(
-    IRecordRepository repo,
+    IRecordRepository repository,
     IRecordMapDataUtil mapDataUtil,
     ICategoryRepository categoryRepo,
     ISyncRecordMetaUseCase syncRecordMetaUseCase
@@ -20,7 +20,7 @@ public class UpdateRecordUseCase(
     {
         var result = new CustomResult<IRecordOutDto>();
 
-        var record = repo.FindById(id, userId);
+        var record = repository.FindById(id, userId);
 
         if (record == null)
             return result.SetError(RecordMessageErrors.NotFound);
@@ -37,7 +37,7 @@ public class UpdateRecordUseCase(
 
         if (record.Code != dto.Code)
         {
-            var trByCode = repo.FindByCode(dto.Code, userId);
+            var trByCode = repository.FindByCode(dto.Code, userId);
             if (trByCode != null) return result.SetError(RecordMessageErrors.AlreadyInUse);
         }
 
@@ -49,6 +49,6 @@ public class UpdateRecordUseCase(
 
         syncRecordMetaUseCase.Handle(record.Id);
 
-        return result.SetData(mapDataUtil.Handle(repo.Update(record)));
+        return result.SetData(mapDataUtil.Handle(repository.Update(record)));
     }
 }

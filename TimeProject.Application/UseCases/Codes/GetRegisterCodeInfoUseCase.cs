@@ -9,12 +9,12 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Codes;
 
-public class GetRegisterCodeInfoUseCase(IConfirmCodeRepository repo, IMapper mapper) : IGetRegisterCodeInfoUseCase
+public class GetRegisterCodeInfoUseCase(IConfirmCodeRepository repository, IMapper mapper) : IGetRegisterCodeInfoUseCase
 {
     public ICustomResult<IConfirmCodeOutDto> Handle(int userId)
     {
         var result = new CustomResult<IConfirmCodeOutDto>();
-        var codes = repo.FindByUserIdThatIsNotExpiredOrUsed(userId, ConfirmCodeType.Register);
+        var codes = repository.FindByUserIdThatIsNotExpiredOrUsed(userId, ConfirmCodeType.Register);
 
         return codes.Count != 0
             ? result.SetData(mapper.Map<IConfirmCode, IConfirmCodeOutDto>(codes.First()))

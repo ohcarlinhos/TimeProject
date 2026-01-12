@@ -7,17 +7,17 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Categories;
 
-public class CreateCategoryUseCase(ICategoryRepository repo) : ICreateCategoryUseCase
+public class CreateCategoryUseCase(ICategoryRepository repository) : ICreateCategoryUseCase
 {
     public ICustomResult<ICategory> Handle(ICategoryDto dto, int userId)
     {
         var result = new CustomResult<ICategory>();
-        var category = repo.FindByName(dto.Name, userId);
+        var category = repository.FindByName(dto.Name, userId);
 
         if (category != null)
             return result.SetData(category);
 
-        result.Data = repo.Create(new Infrastructure.Database.Entities.Category
+        result.Data = repository.Create(new Infrastructure.Database.Entities.Category
         {
             UserId = userId,
             Name = dto.Name

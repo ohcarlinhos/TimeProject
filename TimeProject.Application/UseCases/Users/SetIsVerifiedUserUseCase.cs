@@ -6,18 +6,18 @@
 //
 // namespace TimeProject.Api.Modules.User.UseCases;
 //
-// public class SetIsVerifiedUserUseCase(IUserRepository repo) : ISetIsVerifiedUserUseCase
+// public class SetIsVerifiedUserUseCase(IUserRepository repository) : ISetIsVerifiedUserUseCase
 // {
 //     public async Task<Result<bool>> Handle(int id, bool isVerified)
 //     {
 //         var result = new Result<bool>();
-//         var user = await repo.FindById(id);
+//         var user = await repository.FindById(id);
 //
 //         if (user == null)
 //             return result.SetError(UserMessageErrors.NotFound);
 //
 //         user.IsVerified = isVerified;
-//         await repo.Update(user);
+//         await repository.Update(user);
 //
 //         result.Data = user.IsVerified;
 //

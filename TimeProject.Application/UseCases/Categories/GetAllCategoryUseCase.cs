@@ -7,10 +7,10 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Categories;
 
-public class GetAllCategoryUseCase(ICategoryRepository repo, ICategoryMapDataUtil mapper) : IGetAllCategoryUseCase
+public class GetAllCategoryUseCase(ICategoryRepository repository, ICategoryMapDataUtil mapper) : IGetAllCategoryUseCase
 {
     public ICustomResult<IList<ICategoryOutDto>> Handle(int userId, bool onlyWithData)
     {
-        return new CustomResult<IList<ICategoryOutDto>> { Data = mapper.Handle(repo.Index(userId, onlyWithData)) };
+        return new CustomResult<IList<ICategoryOutDto>> { Data = mapper.Handle(repository.Index(userId, onlyWithData)) };
     }
 }
