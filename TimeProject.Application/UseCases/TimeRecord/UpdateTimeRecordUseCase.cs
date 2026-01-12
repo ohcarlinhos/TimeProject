@@ -6,6 +6,7 @@ using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues;
 
 namespace TimeProject.Application.UseCases.TimeRecord;
 
@@ -17,7 +18,7 @@ public class UpdateTimeRecordUseCase(
 )
     : IUpdateTimeRecordUseCase
 {
-    public ICustomResult<ITimeRecordOutDto> Handle(int id, UpdateTimeRecordDto dto, int userId)
+    public ICustomResult<ITimeRecordOutDto> Handle(int id, IUpdateTimeRecordDto dto, int userId)
     {
         var result = new CustomResult<ITimeRecordOutDto>();
 

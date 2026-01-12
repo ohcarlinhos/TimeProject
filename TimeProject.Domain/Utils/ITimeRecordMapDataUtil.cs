@@ -11,5 +11,5 @@ public interface ITimeRecordMapDataUtil
 
     ITimeRecordOutDto Handle(IRecord entity);
 
-    IEnumerable<TimeRecordOutDto> Handle(IEnumerable<IRecord> entities);
+    IEnumerable<ITimeRecordOutDto> Handle(IEnumerable<IRecord> entities);
 }

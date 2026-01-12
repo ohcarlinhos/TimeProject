@@ -1,14 +1,16 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
+using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
+namespace TimeProject.Infrastructure.ObjectValues;
 
 public class TimeRecordHistoryDayOutDto : ITimeRecordHistoryDayOutDto
 {
     public DateTime Date { get; set; }
 
-    public IEnumerable<TimePeriodOutDto>? TimePeriods { get; set; }
-    public IEnumerable<TimerSessionOutDto>? TimerSessions { get; set; }
+    public IEnumerable<ITimePeriodOutDto>? TimePeriods { get; set; }
+    public IEnumerable<ITimerSessionOutDto>? TimerSessions { get; set; }
     public IEnumerable<IMinuteRecord>? TimeMinutes { get; set; }
 
     private TimeSpan TimeSpanTimePeriods => TimeFormat.TimeSpanFromTimePeriods(TimePeriods);

@@ -1,4 +1,5 @@
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
+using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.Shared;
 

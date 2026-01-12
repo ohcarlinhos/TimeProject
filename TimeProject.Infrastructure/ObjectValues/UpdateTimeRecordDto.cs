@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 
-namespace TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
+namespace TimeProject.Infrastructure.ObjectValues;
 
 public class UpdateTimeRecordDto : IUpdateTimeRecordDto
 {

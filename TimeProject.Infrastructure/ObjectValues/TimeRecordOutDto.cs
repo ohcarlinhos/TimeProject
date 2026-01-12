@@ -1,8 +1,8 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
+using TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 
-namespace TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
+namespace TimeProject.Infrastructure.ObjectValues;
 
 public class TimeRecordOutDto : ITimeRecordOutDto
 {
