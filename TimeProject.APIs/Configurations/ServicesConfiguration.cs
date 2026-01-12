@@ -130,7 +130,7 @@ public static class ServicesConfiguration
 
         #endregion
 
-        #region TimeRecord
+        #region Records
 
         builder.Services.AddScoped<IRecordRepository, RecordRepository>();
         builder.Services.AddScoped<IRecordMetaRepository, RecordMetaRepository>();
@@ -156,7 +156,7 @@ public static class ServicesConfiguration
         #region TimerSession
 
         builder.Services.AddScoped<ISessionRepository, SessionRepository>();
-        builder.Services.AddScoped<IDeleteTimerSessionUseCase, DeleteTimerSessionUseCase>();
+        builder.Services.AddScoped<IDeleteSessionUseCase, DeleteSessionUseCase>();
 
         #endregion
 
@@ -218,8 +218,8 @@ public static class ServicesConfiguration
         #region TimeMinute
 
         builder.Services.AddScoped<IMinuteRepository, MinuteRepository>();
-        builder.Services.AddScoped<ICreateTimeMinuteByListUseCase, CreateTimeMinuteByListUseCase>();
-        builder.Services.AddScoped<IDeleteTimeMinuteUseCase, DeleteTimeMinuteUseCase>();
+        builder.Services.AddScoped<ICreateMinuteByListUseCase, CreateMinuteByListUseCase>();
+        builder.Services.AddScoped<IDeleteMinuteUseCase, DeleteMinuteUseCase>();
 
         #endregion
 

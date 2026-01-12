@@ -5,7 +5,7 @@ using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimeRecordEntityConfiguration : IEntityTypeConfiguration<Record>
+public class RecordEntityConfiguration : IEntityTypeConfiguration<Record>
 {
     public void Configure(EntityTypeBuilder<Record> builder)
     {

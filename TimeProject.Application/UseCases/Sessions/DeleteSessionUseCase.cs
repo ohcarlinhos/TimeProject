@@ -9,10 +9,10 @@ using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Application.UseCases.Sessions;
 
-public class DeleteTimerSessionUseCase(
+public class DeleteSessionUseCase(
     ISessionRepository repo,
     IPeriodRepository tpRepo,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase) : IDeleteTimerSessionUseCase
+    ISyncRecordMetaUseCase syncRecordMetaUseCase) : IDeleteSessionUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
     {
@@ -23,10 +23,10 @@ public class DeleteTimerSessionUseCase(
             return result.SetError(TimerSessionMessageErrors.NotFound);
 
         tpRepo.DeleteByList(entity.PeriodRecords as IList<IPeriod>);
-        var timeRecordId = entity.RecordId;
+        var recordId = entity.RecordId;
 
         repo.Delete(entity);
-        syncRecordMetaUseCase.Handle(timeRecordId);
+        syncRecordMetaUseCase.Handle(recordId);
 
         return result.SetData(true);
     }

@@ -6,7 +6,7 @@ namespace TimeProject.Domain.Repositories;
 public interface IRecordRepository
 {
     IIndexRepositoryResult<IRecord> Index(IPaginationQuery paginationQuery, int userId);
-    IList<SearchRecordItem> SearchTimeRecord(string search, int userId);
+    IList<SearchRecordItem> SearchRecord(string search, int userId);
     IRecord Create(IRecord entity);
     IRecord Update(IRecord entity);
     bool Delete(IRecord entity);

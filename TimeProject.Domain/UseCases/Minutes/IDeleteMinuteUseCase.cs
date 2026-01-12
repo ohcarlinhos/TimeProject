@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.UseCases.Minutes;
 
-public interface IDeleteTimeMinuteUseCase
+public interface IDeleteMinuteUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId);
 }

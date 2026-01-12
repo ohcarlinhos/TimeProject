@@ -14,7 +14,7 @@ namespace TimeProject.APIs.Controllers;
 [ApiController]
 [Route("api/records")]
 [Authorize(Policy = "IsActive")]
-public class TimeRecordController(
+public class RecordController(
     IGetPaginatedRecordUseCase getPaginatedRecordUseCase,
     IGetRecordHistoryUseCase getRecordHistoryUseCase,
     ICreateRecordUseCase createRecordUseCase,
@@ -31,12 +31,12 @@ public class TimeRecordController(
     }
 
     [HttpGet]
-    [Route("history/{timeRecordId:int}")]
-    public ActionResult<IPagination<IRecordHistoryDayOutDto>> HistoryIndex([FromRoute] int timeRecordId,
+    [Route("history/{recordId:int}")]
+    public ActionResult<IPagination<IRecordHistoryDayOutDto>> HistoryIndex([FromRoute] int recordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            getRecordHistoryUseCase.Handle(timeRecordId, UserClaimsUtil.Id(User), paginationQuery));
+            getRecordHistoryUseCase.Handle(recordId, UserClaimsUtil.Id(User), paginationQuery));
     }
 
     [HttpGet]

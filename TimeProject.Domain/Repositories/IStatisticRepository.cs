@@ -6,14 +6,14 @@ namespace TimeProject.Domain.Repositories;
 public interface IStatisticRepository
 {
     IList<IPeriod> GetTimePeriodsByRange(int userId, DateTime initDate, DateTime endDate,
-        int? timeRecord = null);
+        int? recordId = null);
 
     IList<ISession> GetTimerSessionsByRange(int userId, DateTime initDate, DateTime endDate,
-        int? timeRecord = null);
+        int? recordId = null);
 
     IList<IMinute> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
-        int? timeRecord = null);
+        int? recordId = null);
 
-    int GetTimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate);
-    int GetTimeRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate);
+    int GetRecordCreatedCount(int userId, DateTime initDate, DateTime endDate);
+    int GetRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate);
 }

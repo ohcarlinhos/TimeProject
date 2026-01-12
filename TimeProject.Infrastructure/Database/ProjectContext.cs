@@ -21,10 +21,10 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     protected override void OnModelCreating(ModelBuilder mb)
     {
         mb.ApplyConfiguration(new UserEntityConfiguration());
-        mb.ApplyConfiguration(new TimeRecordEntityConfiguration());
+        mb.ApplyConfiguration(new RecordEntityConfiguration());
         mb.ApplyConfiguration(new TimePeriodEntityConfiguration());
         mb.ApplyConfiguration(new CategoryEntityConfiguration());
-        mb.ApplyConfiguration(new TimeRecordMetaEntityConfiguration());
+        mb.ApplyConfiguration(new RecordMetaEntityConfiguration());
         mb.ApplyConfiguration(new TimerSessionEntityConfiguration());
         mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
         mb.ApplyConfiguration(new UserPasswordEntityConfiguration());

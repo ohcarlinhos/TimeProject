@@ -11,14 +11,14 @@ namespace TimeProject.APIs.Controllers;
 [ApiController]
 [Route("api/minutes")]
 public class TimeMinuteController(
-    ICreateTimeMinuteByListUseCase createTimeMinuteByListUseCase,
-    IDeleteTimeMinuteUseCase deleteTimeMinuteUseCase) : CustomController
+    ICreateMinuteByListUseCase createMinuteByListUseCase,
+    IDeleteMinuteUseCase deleteMinuteUseCase) : CustomController
 {
     [HttpPost]
     [Route("list/{id:int}")]
     public ActionResult<IList<IMinute>> Create([FromBody] CreateMinuteListDto dto, int id)
     {
-        var result = createTimeMinuteByListUseCase.Handle(dto, id, UserClaimsUtil.Id(User));
+        var result = createMinuteByListUseCase.Handle(dto, id, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -27,6 +27,6 @@ public class TimeMinuteController(
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deleteTimeMinuteUseCase.Handle(id, UserClaimsUtil.Id(User)));
+        return HandleResponse(deleteMinuteUseCase.Handle(id, UserClaimsUtil.Id(User)));
     }
 }

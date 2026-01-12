@@ -16,9 +16,9 @@ public class SyncRecordMetaUseCase(IRecordMetaRepository repo) : ISyncRecordMeta
         return repo.CreateOrUpdate(record, saveChanges);
     }
 
-    public IEnumerable<IRecordMeta> Handle(IEnumerable<IRecord> timeRecordEntities,
+    public IEnumerable<IRecordMeta> Handle(IEnumerable<IRecord> recordEntities,
         bool saveChanges = false)
     {
-        return repo.CreateOrUpdateList(timeRecordEntities, saveChanges);
+        return repo.CreateOrUpdateList(recordEntities, saveChanges);
     }
 }

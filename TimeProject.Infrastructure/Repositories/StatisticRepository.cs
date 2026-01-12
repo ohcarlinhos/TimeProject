@@ -12,12 +12,12 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
         int userId,
         DateTime initDate,
         DateTime endDate,
-        int? timeRecord = null
+        int? recordId = null
     )
     {
         var query = db.PeriodRecords.AsQueryable();
 
-        if (timeRecord != null) query = query.Where(i => i.RecordId == timeRecord);
+        if (recordId != null) query = query.Where(i => i.RecordId == recordId);
 
         return (query.Where(e => (
                 (e.Start >= initDate && e.Start < endDate) || (e.End > initDate && e.End <= endDate)
@@ -29,12 +29,12 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
         int userId,
         DateTime initDate,
         DateTime endDate,
-        int? timeRecord = null
+        int? recordId = null
     )
     {
         var query = db.RecordSessions.AsQueryable();
 
-        if (timeRecord != null) query = query.Where(i => i.RecordId == timeRecord);
+        if (recordId != null) query = query.Where(i => i.RecordId == recordId);
 
         return query
             .Where(p =>
@@ -57,11 +57,11 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
     }
 
     public IList<IMinute> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
-        int? timeRecord = null)
+        int? recordId = null)
     {
         var query = db.MinuteRecords.AsQueryable();
 
-        if (timeRecord != null) query = query.Where(i => i.RecordId == timeRecord);
+        if (recordId != null) query = query.Where(i => i.RecordId == recordId);
 
         return query.Where(tm =>
                 tm.UserId == userId
@@ -72,12 +72,12 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
             .ToList<IMinute>();
     }
 
-    public int GetTimeRecordCreatedCount(int userId, DateTime initDate, DateTime endDate)
+    public int GetRecordCreatedCount(int userId, DateTime initDate, DateTime endDate)
     {
         return db.Records.Count(e => e.CreatedAt >= initDate && e.CreatedAt < endDate && userId == e.UserId);
     }
 
-    public int GetTimeRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate)
+    public int GetRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate)
     {
         return db.Records
             .Count(e => e.UpdatedAt >= initDate

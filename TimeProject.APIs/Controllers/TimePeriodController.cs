@@ -26,12 +26,11 @@ public class TimePeriodController(
     : CustomController
 {
     [HttpGet]
-    [Route("{timeRecordId:int}")]
-    public ActionResult<IPagination<IPeriodOutDto>> Index(int timeRecordId,
-        [FromQuery] PaginationQuery paginationQuery)
+    [Route("{recordId:int}")]
+    public ActionResult<IPagination<IPeriodOutDto>> Index(int recordId, [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            getPaginatedPeriodUseCase.Handle(timeRecordId, UserClaimsUtil.Id(User), paginationQuery));
+            getPaginatedPeriodUseCase.Handle(recordId, UserClaimsUtil.Id(User), paginationQuery));
     }
 
     [HttpPost]

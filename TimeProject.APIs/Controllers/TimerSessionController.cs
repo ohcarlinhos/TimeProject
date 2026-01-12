@@ -9,12 +9,12 @@ namespace TimeProject.APIs.Controllers;
 [ApiController]
 [Route("api/sessions")]
 [Authorize(Policy = "IsActive")]
-public class TimerSessionController(IDeleteTimerSessionUseCase deleteTimerSessionUseCase) : CustomController
+public class TimerSessionController(IDeleteSessionUseCase deleteSessionUseCase) : CustomController
 {
     [HttpDelete]
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deleteTimerSessionUseCase.Handle(id, UserClaimsUtil.Id(User)));
+        return HandleResponse(deleteSessionUseCase.Handle(id, UserClaimsUtil.Id(User)));
     }
 }

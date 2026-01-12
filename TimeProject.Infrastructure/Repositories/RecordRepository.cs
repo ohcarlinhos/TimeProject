@@ -66,7 +66,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
         };
     }
 
-    public IList<SearchRecordItem> SearchTimeRecord(string search, int userId)
+    public IList<SearchRecordItem> SearchRecord(string search, int userId)
     {
         var query = dbContext.Records.AsQueryable();
         query = query.Where(tr => tr.UserId == userId);
@@ -110,7 +110,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
         return dbContext.Records
             .Include(r => r.Category)
             .Include(r => r.Meta)
-            .FirstOrDefault(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
+            .FirstOrDefault(record => record.Code == code && record.UserId == userId);
     }
 
     public bool Delete(IRecord entity)
@@ -123,7 +123,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
     public IRecord? FindById(int id, int userId)
     {
         return dbContext.Records
-            .FirstOrDefault(timeRecord => timeRecord.Id == id && timeRecord.UserId == userId);
+            .FirstOrDefault(record => record.Id == id && record.UserId == userId);
     }
 
     public IList<IRecord> FindByIdList(IList<int> idList, int userId)
@@ -137,7 +137,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
     public IRecord? FindByCode(string code, int userId)
     {
         return dbContext.Records
-            .FirstOrDefault(timeRecord => timeRecord.Code == code && timeRecord.UserId == userId);
+            .FirstOrDefault(record => record.Code == code && record.UserId == userId);
     }
 
     private static IQueryable<Record> SearchWhereConditional(IQueryable<Record> query,

@@ -17,7 +17,7 @@ public class GetRecordByCodeUseCase(IRecordRepository repo, IRecordMapDataUtil m
         var entity = repo.Details(code, userId);
 
         return entity == null
-            ? result.SetError(TimeRecordMessageErrors.NotFound)
+            ? result.SetError(RecordMessageErrors.NotFound)
             : result.SetData(mapDataUtil.Handle(entity));
     }
 }

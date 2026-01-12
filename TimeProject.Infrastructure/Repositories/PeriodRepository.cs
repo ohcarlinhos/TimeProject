@@ -8,20 +8,20 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class PeriodRepository(ProjectContext db) : IPeriodRepository
 {
-    public IList<IPeriod> Index(int timeRecordId, int userId, IPaginationQuery paginationQuery)
+    public IList<IPeriod> Index(int recordId, int userId, IPaginationQuery paginationQuery)
     {
         return db.PeriodRecords
-            .Where(timePeriod => timePeriod.RecordId == timeRecordId && timePeriod.UserId == userId)
+            .Where(timePeriod => timePeriod.RecordId == recordId && timePeriod.UserId == userId)
             .OrderByDescending(tp => tp.Start)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
             .ToList<IPeriod>();
     }
 
-    public int GetTotalItems(int timeRecordId, IPaginationQuery paginationQuery, int userId)
+    public int GetTotalItems(int recordId, IPaginationQuery paginationQuery, int userId)
     {
         return db.PeriodRecords
-            .Count(timePeriod => timePeriod.RecordId == timeRecordId && timePeriod.UserId == userId);
+            .Count(timePeriod => timePeriod.RecordId == recordId && timePeriod.UserId == userId);
     }
 
     public IPeriod Create(IPeriod entity)

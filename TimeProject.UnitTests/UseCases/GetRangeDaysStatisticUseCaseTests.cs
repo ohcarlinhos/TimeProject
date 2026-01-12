@@ -14,10 +14,10 @@ public class GetRangeDaysStatisticUseCaseTests
 
     private void SetupStaticRepository(int userId, DateTime today)
     {
-        const int timeRecordId = 1;
+        const int recordId = 1;
 
-        var timePeriods = CreateRecordPeriodList(today, userId, timeRecordId);
-        var recordSessions = CreateTimerSessionList(today, userId, timeRecordId);
+        var timePeriods = CreateRecordPeriodList(today, userId, recordId);
+        var recordSessions = CreateTimerSessionList(today, userId, recordId);
 
         foreach (var session in recordSessions)
         {
@@ -35,7 +35,7 @@ public class GetRangeDaysStatisticUseCaseTests
             .Returns(recordSessions as IList<ISession>);
     }
 
-    private static List<Period> CreateRecordPeriodList(DateTime today, int userId, int timeRecordId)
+    private static List<Period> CreateRecordPeriodList(DateTime today, int userId, int recordId)
     {
         return
         [
@@ -46,7 +46,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 End = today.AddHours(-3).AddMinutes(15),
                 UserId = userId,
                 TimerSessionId = null,
-                RecordId = timeRecordId
+                RecordId = recordId
             },
             new Period
             {
@@ -54,7 +54,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 End = today.AddMinutes(15).AddSeconds(10),
                 UserId = userId,
                 TimerSessionId = null,
-                RecordId = timeRecordId
+                RecordId = recordId
             },
             new Period
             {
@@ -62,7 +62,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 End = today.AddMinutes(45),
                 UserId = userId,
                 TimerSessionId = null,
-                RecordId = timeRecordId
+                RecordId = recordId
             },
             // will be removed
             new Period
@@ -71,12 +71,12 @@ public class GetRangeDaysStatisticUseCaseTests
                 End = today.AddDays(1).AddMinutes(45),
                 UserId = userId,
                 TimerSessionId = null,
-                RecordId = timeRecordId
+                RecordId = recordId
             }
         ];
     }
 
-    private static List<Session> CreateTimerSessionList(DateTime today, int userId, int timeRecordId)
+    private static List<Session> CreateTimerSessionList(DateTime today, int userId, int recordId)
     {
         return
         [
@@ -84,7 +84,7 @@ public class GetRangeDaysStatisticUseCaseTests
             {
                 Id = 1,
                 UserId = userId,
-                RecordId = timeRecordId,
+                RecordId = recordId,
                 Type = "timer",
                 PeriodRecords = new List<Period>
                 {
@@ -104,7 +104,7 @@ public class GetRangeDaysStatisticUseCaseTests
             {
                 Id = 2,
                 UserId = userId,
-                RecordId = timeRecordId,
+                RecordId = recordId,
                 Type = "pomodoro",
                 PeriodRecords = new List<Period>
                 {
@@ -124,7 +124,7 @@ public class GetRangeDaysStatisticUseCaseTests
             {
                 Id = 3,
                 UserId = userId,
-                RecordId = timeRecordId,
+                RecordId = recordId,
                 Type = "break",
                 PeriodRecords = new List<Period>
                 {
@@ -139,7 +139,7 @@ public class GetRangeDaysStatisticUseCaseTests
             {
                 Id = 4,
                 UserId = userId,
-                RecordId = timeRecordId,
+                RecordId = recordId,
                 Type = "timer",
                 PeriodRecords = new List<Period>()
             }
@@ -170,8 +170,8 @@ public class GetRangeDaysStatisticUseCaseTests
     // public async void Given_Date_When_IsToday_Then_ShouldReturnDayStatistic()
     // {
     //     // Arrange
-    //     var getDayStatistics = new GetDayStatisticUseCase(_staticRepository.Object, _timeRecordRepository.Object,
-    //         new TimePeriodCutUtil(), new TimeRecordMapDataUtil());
+    //     var getDayStatistics = new GetDayStatisticUseCase(_staticRepository.Object, _recordRepository.Object,
+    //         new PeriodCutUtil(), new RecordMapDataUtil());
     //
     //     const int userId = 1;
     //     var today = DateTime.Today;

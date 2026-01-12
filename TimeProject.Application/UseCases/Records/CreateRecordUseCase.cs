@@ -29,13 +29,13 @@ public class CreateRecordUseCase(
         if (dto.CategoryId != null)
         {
             var category = categoryRepository.FindById((int)dto.CategoryId, userId);
-            if (category == null) return result.SetError(TimeRecordMessageErrors.CategoryNotFound);
+            if (category == null) return result.SetError(RecordMessageErrors.CategoryNotFound);
         }
 
         if (string.IsNullOrEmpty(dto.Code) == false)
         {
             var trByCode = repository.FindByCode(dto.Code!, userId);
-            if (trByCode != null) return result.SetError(TimeRecordMessageErrors.CodeAlreadyInUse);
+            if (trByCode != null) return result.SetError(RecordMessageErrors.CodeAlreadyInUse);
         }
 
         var record = repository

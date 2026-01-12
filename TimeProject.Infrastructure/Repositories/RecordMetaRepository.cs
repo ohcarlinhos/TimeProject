@@ -8,19 +8,19 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaRepository
 {
-    public IRecordMeta? CreateOrUpdate(int timeRecordId, bool saveChanges = true)
+    public IRecordMeta? CreateOrUpdate(int recordId, bool saveChanges = true)
     {
-        var timeRecord = dbContext.Records.FirstOrDefault(e => e.Id == timeRecordId);
-        return timeRecord == null ? null : CreateOrUpdate(timeRecord, saveChanges);
+        var record = dbContext.Records.FirstOrDefault(e => e.Id == recordId);
+        return record == null ? null : CreateOrUpdate(record, saveChanges);
     }
 
     public IEnumerable<IRecordMeta> CreateOrUpdateList(IEnumerable<IRecord> recordEntities, bool saveChanges = false)
     {
         var list = new List<IRecordMeta>();
 
-        foreach (var timeRecordEntity in recordEntities)
+        foreach (var recordEntity in recordEntities)
         {
-            var meta = CreateOrUpdate(timeRecordEntity, saveChanges);
+            var meta = CreateOrUpdate(recordEntity, saveChanges);
             if (meta != null) list.Add(meta);
         }
 

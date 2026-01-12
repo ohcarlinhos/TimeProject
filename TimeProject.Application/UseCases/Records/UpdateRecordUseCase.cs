@@ -20,35 +20,35 @@ public class UpdateRecordUseCase(
     {
         var result = new CustomResult<IRecordOutDto>();
 
-        var timeRecord = repo.FindById(id, userId);
+        var record = repo.FindById(id, userId);
 
-        if (timeRecord == null)
-            return result.SetError(TimeRecordMessageErrors.NotFound);
+        if (record == null)
+            return result.SetError(RecordMessageErrors.NotFound);
 
         if (dto.CategoryId != null)
         {
             var category = categoryRepo.FindById((int)dto.CategoryId, userId);
-            if (category == null) return result.SetError(TimeRecordMessageErrors.CategoryNotFound);
-            timeRecord.CategoryId = dto.CategoryId;
+            if (category == null) return result.SetError(RecordMessageErrors.CategoryNotFound);
+            record.CategoryId = dto.CategoryId;
         }
 
         if (string.IsNullOrEmpty(dto.Code))
-            return result.SetError(TimeRecordMessageErrors.CodeMustValue);
+            return result.SetError(RecordMessageErrors.CodeMustValue);
 
-        if (timeRecord.Code != dto.Code)
+        if (record.Code != dto.Code)
         {
             var trByCode = repo.FindByCode(dto.Code, userId);
-            if (trByCode != null) return result.SetError(TimeRecordMessageErrors.AlreadyInUse);
+            if (trByCode != null) return result.SetError(RecordMessageErrors.AlreadyInUse);
         }
 
-        timeRecord.Code = dto.Code;
+        record.Code = dto.Code;
 
-        timeRecord.Title = dto.Title;
-        timeRecord.Description = dto.Description;
-        timeRecord.ExternalLink = dto.ExternalLink;
+        record.Title = dto.Title;
+        record.Description = dto.Description;
+        record.ExternalLink = dto.ExternalLink;
 
-        syncRecordMetaUseCase.Handle(timeRecord.Id);
+        syncRecordMetaUseCase.Handle(record.Id);
 
-        return result.SetData(mapDataUtil.Handle(repo.Update(timeRecord)));
+        return result.SetData(mapDataUtil.Handle(repo.Update(record)));
     }
 }

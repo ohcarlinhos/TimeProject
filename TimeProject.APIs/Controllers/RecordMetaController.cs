@@ -10,7 +10,7 @@ namespace TimeProject.APIs.Controllers;
 [ApiController]
 [Route("api/records/meta")]
 [Authorize(Policy = "IsAdmin")]
-public class TimeRecordMetaController(
+public class RecordMetaController(
     ISyncAllRecordMetaUseCase syncAllRecordMetaUseCase
 ) : CustomController
 {

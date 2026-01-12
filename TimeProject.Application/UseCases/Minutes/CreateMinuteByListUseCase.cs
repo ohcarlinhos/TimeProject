@@ -10,35 +10,35 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Minutes;
 
-public class CreateTimeMinuteByListUseCase(
+public class CreateMinuteByListUseCase(
     IMinuteRepository mrRepository,
     IRecordRepository recordRepository,
     IUserRepository userRepository,
     ISyncRecordMetaUseCase syncRecordMetaUseCase
-) : ICreateTimeMinuteByListUseCase
+) : ICreateMinuteByListUseCase
 {
-    public ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int timeRecordId, int userId)
+    public ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int recordId, int userId)
     {
         var result = new CustomResult<IList<IMinute>>();
         IList<IMinute> list = [];
 
         var user = userRepository.FindById(userId);
-        if (user is null) return result.SetError(TimeRecordMessageErrors.NotFound);
+        if (user is null) return result.SetError(RecordMessageErrors.NotFound);
 
-        var timeRecord = recordRepository.FindById(timeRecordId, userId);
-        if (timeRecord is null) return result.SetError(TimeRecordMessageErrors.NotFound);
+        var record = recordRepository.FindById(recordId, userId);
+        if (record is null) return result.SetError(RecordMessageErrors.NotFound);
 
         foreach (var minutes in dto.Minutes)
             list.Add(new Minute
             {
                 UserId = userId,
-                RecordId = timeRecordId,
+                RecordId = recordId,
                 Minutes = minutes,
                 Date = dto.Date.AddHours(user.Utc * -1).ToUniversalTime()
             });
 
         var data = mrRepository.CreateByList(list);
-        syncRecordMetaUseCase.Handle(timeRecordId);
+        syncRecordMetaUseCase.Handle(recordId);
 
         return result.SetData(data);
     }

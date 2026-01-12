@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.UseCases.Sessions;
 
-public interface IDeleteTimerSessionUseCase
+public interface IDeleteSessionUseCase
 {
     ICustomResult<bool> Handle(int id, int userId);
 }

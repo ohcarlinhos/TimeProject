@@ -11,6 +11,6 @@ public class SearchRecordUseCase(IRecordRepository repo) : ISearchRecordUseCase
     public ICustomResult<IList<SearchRecordItem>> Handle(string search, int userId)
     {
         var result = new CustomResult<IList<SearchRecordItem>>();
-        return result.SetData(repo.SearchTimeRecord(search, userId));
+        return result.SetData(repo.SearchRecord(search, userId));
     }
 }

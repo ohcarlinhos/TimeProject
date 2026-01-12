@@ -4,7 +4,7 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Minutes;
 
-public interface ICreateTimeMinuteByListUseCase
+public interface ICreateMinuteByListUseCase
 {
-    ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int timeRecordId, int userId);
+    ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int recordId, int userId);
 }

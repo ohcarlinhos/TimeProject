@@ -20,10 +20,10 @@ public class StatisticController(IGetRangeDaysStatisticUseCase getRangeDaysStati
     }
 
     [HttpGet]
-    [Route("{timeRecordId:int}/day")]
-    public ActionResult<IRangeStatistic> Day(int timeRecordId, [FromQuery] DateTime? date)
+    [Route("{recordId:int}/day")]
+    public ActionResult<IRangeStatistic> Day(int recordId, [FromQuery] DateTime? date)
     {
-        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), date, null, timeRecordId));
+        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaimsUtil.Id(User), date, null, recordId));
     }
 
     [HttpGet]

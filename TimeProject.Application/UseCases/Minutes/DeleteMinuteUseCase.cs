@@ -7,10 +7,10 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Minutes;
 
-public class DeleteTimeMinuteUseCase(
+public class DeleteMinuteUseCase(
     IMinuteRepository repository,
     ISyncRecordMetaUseCase syncRecordMetaUseCase
-) : IDeleteTimeMinuteUseCase
+) : IDeleteMinuteUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
     {

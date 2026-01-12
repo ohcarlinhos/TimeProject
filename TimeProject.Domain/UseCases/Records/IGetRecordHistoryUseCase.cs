@@ -6,6 +6,6 @@ namespace TimeProject.Domain.UseCases.Records;
 
 public interface IGetRecordHistoryUseCase
 {
-    public ICustomResult<IPagination<IRecordHistoryDayOutDto>> Handle(int timeRecordId, int userId,
+    public ICustomResult<IPagination<IRecordHistoryDayOutDto>> Handle(int recordId, int userId,
         IPaginationQuery paginationQuery);
 }
