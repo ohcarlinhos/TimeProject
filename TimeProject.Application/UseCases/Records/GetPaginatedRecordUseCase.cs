@@ -1,6 +1,6 @@
 ﻿using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;

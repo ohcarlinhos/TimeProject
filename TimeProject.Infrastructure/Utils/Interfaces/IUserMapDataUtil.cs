@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Dtos.Users;
 
 namespace TimeProject.Infrastructure.Utils.Interfaces;
 

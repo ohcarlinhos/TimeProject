@@ -3,7 +3,7 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.UseCases.Logins;
-using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Auths;
 

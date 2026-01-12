@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.Category;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.Dtos.Categories;
+using TimeProject.Domain.Dtos.Records;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 

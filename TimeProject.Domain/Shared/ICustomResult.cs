@@ -1,5 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.General;
-
+﻿
 namespace TimeProject.Domain.Shared;
 
 public interface ICustomResult<T>

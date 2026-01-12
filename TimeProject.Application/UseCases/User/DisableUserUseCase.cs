@@ -2,8 +2,7 @@
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Users;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.ObjectValues.Users;
 

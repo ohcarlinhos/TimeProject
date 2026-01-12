@@ -1,9 +1,8 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;
-using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Utils.Interfaces;
 

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.Codes;
-using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
+using TimeProject.Domain.Dtos.Codes;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;

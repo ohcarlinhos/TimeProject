@@ -1,4 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
+﻿using TimeProject.Domain.Dtos.Codes;
 using TimeProject.Infrastructure.Entities.Enums;
 
 namespace TimeProject.Infrastructure.ObjectValues.Codes;

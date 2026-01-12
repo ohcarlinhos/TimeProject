@@ -1,5 +1,5 @@
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Utils.Interfaces;

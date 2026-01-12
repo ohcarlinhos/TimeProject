@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Dtos.Auths;
+using TimeProject.Domain.Dtos.Users;
 
 namespace TimeProject.Application.ObjectValues;
 

@@ -1,5 +1,5 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.Category;
+using TimeProject.Domain.Dtos.Categories;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Categories;

@@ -1,6 +1,6 @@
 using AutoMapper;
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Infrastructure.ObjectValues.Users;
 

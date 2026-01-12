@@ -1,4 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.Category;
+﻿using TimeProject.Domain.Dtos.Categories;
 
 namespace TimeProject.Infrastructure.ObjectValues.Categories;
 

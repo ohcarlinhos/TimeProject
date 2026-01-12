@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Infrastructure.ObjectValues;

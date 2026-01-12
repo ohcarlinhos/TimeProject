@@ -1,5 +1,5 @@
 ﻿using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Periods;

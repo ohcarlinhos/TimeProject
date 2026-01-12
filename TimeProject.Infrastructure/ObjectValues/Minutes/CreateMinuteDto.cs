@@ -1,4 +1,4 @@
-using TimeProject.Domain.RemoveDependencies.Dtos.Minute;
+using TimeProject.Domain.Dtos.Minutes;
 
 namespace TimeProject.Infrastructure.ObjectValues.Minutes;
 

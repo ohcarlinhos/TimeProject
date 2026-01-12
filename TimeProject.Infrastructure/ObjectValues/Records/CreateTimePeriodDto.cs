@@ -1,4 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+﻿using TimeProject.Domain.Dtos.Periods;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 

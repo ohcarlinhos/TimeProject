@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Dtos.Users;
 
 namespace TimeProject.Infrastructure.ObjectValues.Users;
 

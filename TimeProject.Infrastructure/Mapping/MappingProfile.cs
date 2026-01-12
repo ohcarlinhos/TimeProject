@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
+using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.ObjectValues.Categories;
 using TimeProject.Infrastructure.ObjectValues.Codes;

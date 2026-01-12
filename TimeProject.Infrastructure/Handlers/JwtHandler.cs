@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
-using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues.Auths;
 using TimeProject.Infrastructure.Settings;

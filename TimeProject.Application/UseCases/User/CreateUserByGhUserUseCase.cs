@@ -4,8 +4,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Users;
-using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.User;

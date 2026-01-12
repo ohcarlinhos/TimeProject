@@ -1,5 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.Period;
-using TimeProject.Domain.RemoveDependencies.General;
+﻿using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Infrastructure.Utils.Interfaces;

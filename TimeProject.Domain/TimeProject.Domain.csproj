@@ -7,9 +7,4 @@
         <PackageId>TimeProject.Domain</PackageId>
     </PropertyGroup>
 
-    <ItemGroup>
-        <Folder Include="RemoveDependencies\"/>
-        <Folder Include="RemoveDependencies\General\Pagination\" />
-    </ItemGroup>
-
 </Project>

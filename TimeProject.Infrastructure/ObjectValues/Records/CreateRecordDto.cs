@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.RemoveDependencies.Dtos.Period;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.Dtos.Periods;
+using TimeProject.Domain.Dtos.Records;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 

@@ -4,7 +4,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Codes;
-using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
+using TimeProject.Domain.Dtos.Codes;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Code;

@@ -1,4 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.User;
+﻿using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.Entities.Enums;
 
 namespace TimeProject.Infrastructure.ObjectValues.Users;

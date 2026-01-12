@@ -1,7 +1,7 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Period;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.Dtos.Periods;
+using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;

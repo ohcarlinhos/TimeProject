@@ -1,5 +1,4 @@
-using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
-using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Statistics;

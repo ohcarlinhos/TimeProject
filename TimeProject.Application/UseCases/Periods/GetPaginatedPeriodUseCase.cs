@@ -1,6 +1,6 @@
 ﻿using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Period;
+using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;

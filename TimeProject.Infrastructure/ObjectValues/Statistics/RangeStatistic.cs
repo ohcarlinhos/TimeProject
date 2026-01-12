@@ -1,4 +1,4 @@
-using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
+using TimeProject.Domain.Dtos.Statistics;
 
 namespace TimeProject.Infrastructure.ObjectValues.Statistics;
 

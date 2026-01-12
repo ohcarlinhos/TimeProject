@@ -1,5 +1,5 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.Period;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+﻿using TimeProject.Domain.Dtos.Periods;
+using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Infrastructure.ObjectValues.Sessions;

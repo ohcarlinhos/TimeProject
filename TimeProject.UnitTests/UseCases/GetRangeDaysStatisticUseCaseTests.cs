@@ -2,7 +2,7 @@ using FluentAssertions;
 using Moq;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
+using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.ObjectValues.Statistics;
 

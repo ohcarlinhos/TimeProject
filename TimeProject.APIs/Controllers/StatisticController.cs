@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.Statistics;
-using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
+using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;

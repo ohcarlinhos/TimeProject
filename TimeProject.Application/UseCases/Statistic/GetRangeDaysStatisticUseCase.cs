@@ -2,7 +2,7 @@ using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Statistics;
-using TimeProject.Domain.RemoveDependencies.Dtos.Statistic;
+using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.ObjectValues.Statistics;

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
+using TimeProject.Domain.Dtos.Feedbacks;
 
 namespace TimeProject.Infrastructure.ObjectValues.Feedbacks;
 

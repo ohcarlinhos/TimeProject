@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
+using TimeProject.Domain.Dtos.Auths;
 
 namespace TimeProject.Infrastructure.ObjectValues.Auths;
 

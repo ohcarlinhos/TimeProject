@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.Period;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.Dtos.Periods;
+using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.ObjectValues;
 

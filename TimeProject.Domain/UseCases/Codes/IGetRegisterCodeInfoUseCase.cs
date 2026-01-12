@@ -1,4 +1,4 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
+﻿using TimeProject.Domain.Dtos.Codes;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Codes;

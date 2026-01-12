@@ -1,5 +1,5 @@
 using TimeProject.Domain.Entities;
-using TimeProject.Domain.RemoveDependencies.Dtos.Minute;
+using TimeProject.Domain.Dtos.Minutes;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Minutes;

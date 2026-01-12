@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Infrastructure.ObjectValues;
