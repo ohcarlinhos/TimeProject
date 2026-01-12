@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.ObjectValues;
 
-namespace TimeProject.Infrastructure.ObjectValues.Users;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Users;
 
 public class UpdateUserOptions : IUpdateUserOptions
 {

@@ -4,7 +4,7 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
 
 namespace TimeProject.Application.UseCases.Periods;
 

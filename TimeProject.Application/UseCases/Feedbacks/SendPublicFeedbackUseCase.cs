@@ -1,5 +1,5 @@
 ﻿using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
 using TimeProject.Domain.UseCases.Feedbacks;
 using TimeProject.Domain.Dtos.Feedbacks;
 using TimeProject.Domain.Shared;

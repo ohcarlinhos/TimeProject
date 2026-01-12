@@ -1,5 +1,5 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Minutes;
 using TimeProject.Infrastructure.Database.Entities;

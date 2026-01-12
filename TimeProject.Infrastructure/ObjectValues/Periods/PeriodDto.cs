@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Dtos.Periods;
 
-namespace TimeProject.Infrastructure.ObjectValues.Periods;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Periods;
 
 public class PeriodDto : IPeriodDto
 {

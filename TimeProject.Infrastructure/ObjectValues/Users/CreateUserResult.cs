@@ -2,7 +2,7 @@
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.ObjectValues;
 
-namespace TimeProject.Infrastructure.ObjectValues.Users;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Users;
 
 public class CreateUserResult : ICreateUserResult
 {

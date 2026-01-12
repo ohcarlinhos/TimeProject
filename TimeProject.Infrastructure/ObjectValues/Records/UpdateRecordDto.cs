@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TimeProject.Domain.Dtos.Records;
 
-namespace TimeProject.Infrastructure.ObjectValues.Records;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Records;
 
 public class UpdateRecordDto : IUpdateRecordDto
 {

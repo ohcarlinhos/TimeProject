@@ -7,8 +7,8 @@ using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Infrastructure.ObjectValues.Users;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 

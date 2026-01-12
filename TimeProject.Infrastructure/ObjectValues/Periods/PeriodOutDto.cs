@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Infrastructure.ObjectValues.Periods;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Periods;
 
 public class PeriodOutDto : IPeriodOutDto
 {

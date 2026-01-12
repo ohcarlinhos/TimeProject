@@ -1,6 +1,6 @@
 using TimeProject.Domain.ObjectValues;
 
-namespace TimeProject.Infrastructure.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination;
 
 public class IndexRepositoryResult<T> : IIndexRepositoryResult<T>
 {

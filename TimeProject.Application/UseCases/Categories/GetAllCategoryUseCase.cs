@@ -1,4 +1,4 @@
-﻿using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Infrastructure.ObjectValues.Pagination;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Categories;
 using TimeProject.Infrastructure.Utils.Interfaces;

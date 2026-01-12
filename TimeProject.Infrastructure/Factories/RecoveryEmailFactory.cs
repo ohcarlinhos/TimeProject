@@ -1,6 +1,6 @@
 ﻿using TimeProject.Application.UseCases.Users.Factories;
 using TimeProject.Infrastructure.Handlers;
-using TimeProject.Infrastructure.ObjectValues.Emails;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Emails;
 
 namespace TimeProject.Infrastructure.Factories;
 

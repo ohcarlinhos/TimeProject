@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Dtos.Statistics;
 
-namespace TimeProject.Infrastructure.ObjectValues.Statistics;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Statistics;
 
 public class RangeStatisticsWithDays : IRangeStatisticsWithDays
 {

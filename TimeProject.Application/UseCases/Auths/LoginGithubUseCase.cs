@@ -7,8 +7,8 @@ using TimeProject.Domain.UseCases.CustomLogs;
 using TimeProject.Domain.UseCases.Logins;
 using TimeProject.Domain.UseCases.Users;
 using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Infrastructure.ObjectValues.Users;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Users;
 
 namespace TimeProject.Application.UseCases.Auths;
 

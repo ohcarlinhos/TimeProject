@@ -2,7 +2,7 @@
 using TimeProject.Domain.Dtos.Categories;
 using TimeProject.Domain.Dtos.Records;
 
-namespace TimeProject.Infrastructure.ObjectValues.Records;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Records;
 
 public class RecordOutDto : IRecordOutDto
 {

@@ -1,5 +1,5 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;

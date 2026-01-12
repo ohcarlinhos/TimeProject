@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Infrastructure.ObjectValues.Emails;
+﻿namespace TimeProject.Infrastructure.ObjectValues.Pagination.Emails;
 
 public class EmailPayload
 {

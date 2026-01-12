@@ -4,7 +4,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Repositories;
-using TimeProject.Infrastructure.ObjectValues.Statistics;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Statistics;
 
 namespace TimeProject.UnitTests.UseCases;
 

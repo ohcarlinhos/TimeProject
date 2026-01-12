@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Infrastructure.ObjectValues.Categories;
-using TimeProject.Infrastructure.ObjectValues.Codes;
-using TimeProject.Infrastructure.ObjectValues.Periods;
-using TimeProject.Infrastructure.ObjectValues.Records;
-using TimeProject.Infrastructure.ObjectValues.Sessions;
-using TimeProject.Infrastructure.ObjectValues.Users;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Categories;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Codes;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Periods;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Records;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Sessions;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Users;
 
 namespace TimeProject.Infrastructure.Mapping;
 

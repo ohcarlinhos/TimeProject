@@ -4,8 +4,8 @@ using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.UseCases.Logins;
 using TimeProject.Domain.Dtos.Auths;
-using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Infrastructure.ObjectValues.Auths;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Auths;
 
 namespace TimeProject.APIs.Controllers;
 

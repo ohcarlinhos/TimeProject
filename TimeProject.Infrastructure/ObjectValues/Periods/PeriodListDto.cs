@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TimeProject.Domain.Dtos.Periods;
 
-namespace TimeProject.Infrastructure.ObjectValues.Periods;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Periods;
 
 public class PeriodListDto : IPeriodListDto
 {

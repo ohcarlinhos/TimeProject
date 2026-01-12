@@ -1,6 +1,6 @@
 using TimeProject.Domain.Dtos.Minutes;
 
-namespace TimeProject.Infrastructure.ObjectValues.Minutes;
+namespace TimeProject.Infrastructure.ObjectValues.Pagination.Minutes;
 
 public class CreateMinuteDto : ICreateMinuteDto
 {

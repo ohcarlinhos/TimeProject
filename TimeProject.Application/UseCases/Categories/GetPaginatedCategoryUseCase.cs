@@ -4,7 +4,7 @@ using TimeProject.Domain.UseCases.Categories;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.Dtos.Categories;
 using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Pagination;
 
 namespace TimeProject.Application.UseCases.Categories;
 

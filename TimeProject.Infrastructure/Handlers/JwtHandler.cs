@@ -7,7 +7,7 @@ using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues.Auths;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Auths;
 using TimeProject.Infrastructure.Settings;
 
 namespace TimeProject.Infrastructure.Handlers;

@@ -2,7 +2,7 @@ using AutoMapper;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
-using TimeProject.Infrastructure.ObjectValues.Records;
+using TimeProject.Infrastructure.ObjectValues.Pagination.Records;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Infrastructure.Utils;
