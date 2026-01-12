@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class UserAccessLogRepository(ProjectContext dbContext) : IUserAccessLogRepository
+public class UserAccessLogRepository(CustomDbContext db) : IUserAccessLogRepository
 {
     public IUserAccessLog Create(IUserAccessLog entity)
     {
@@ -14,18 +14,18 @@ public class UserAccessLogRepository(ProjectContext dbContext) : IUserAccessLogR
         entity.AccessAt = now;
 
         var accessLog = (UserAccessLog)entity;
-        dbContext.UserAccessLogs.Add(accessLog);
-        dbContext.SaveChanges();
+        db.UserAccessLogs.Add(accessLog);
+        db.SaveChanges();
         return accessLog;
     }
 
     public IUserAccessLog? GetLastAccessByUserId(int id)
     {
-        var maxAccessAt = dbContext.UserAccessLogs
+        var maxAccessAt = db.UserAccessLogs
             .Where(e => e.UserId == id)
             .Max(e => e.AccessAt);
 
-        return dbContext.UserAccessLogs.FirstOrDefault(e => e.UserId == id && e.AccessAt == maxAccessAt);
+        return db.UserAccessLogs.FirstOrDefault(e => e.UserId == id && e.AccessAt == maxAccessAt);
     }
 
     public IList<IUserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
@@ -34,11 +34,11 @@ public class UserAccessLogRepository(ProjectContext dbContext) : IUserAccessLogR
 
         foreach (var id in idList)
         {
-            DateTime? maxAccessAt = dbContext.UserAccessLogs.Any(e => e.UserId == id)
-                ? dbContext.UserAccessLogs.Where(e => e.UserId == id).Max(e => e.AccessAt)
+            DateTime? maxAccessAt = db.UserAccessLogs.Any(e => e.UserId == id)
+                ? db.UserAccessLogs.Where(e => e.UserId == id).Max(e => e.AccessAt)
                 : null;
 
-            var lastAccessByUserId = dbContext.UserAccessLogs
+            var lastAccessByUserId = db.UserAccessLogs
                 .FirstOrDefault(e => e.UserId == id && e.AccessAt == maxAccessAt);
 
             if (lastAccessByUserId is not null)

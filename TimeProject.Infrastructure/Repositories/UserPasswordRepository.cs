@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRepository
+public class UserPasswordRepository(CustomDbContext db) : IUserPasswordRepository
 {
     public bool Create(IUserPassword entity)
     {
@@ -16,8 +16,8 @@ public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRep
         userPassword.CreatedAt = now;
         userPassword.UpdatedAt = now;
 
-        dbContext.UserPasswords.Add(userPassword);
-        dbContext.SaveChanges();
+        db.UserPasswords.Add(userPassword);
+        db.SaveChanges();
         return true;
     }
 
@@ -26,8 +26,8 @@ public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRep
         var userPassword = (UserPassword)entity;
         userPassword.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        dbContext.UserPasswords.Update(userPassword);
-        dbContext.SaveChanges();
+        db.UserPasswords.Update(userPassword);
+        db.SaveChanges();
         return true;
     }
 
@@ -36,13 +36,13 @@ public class UserPasswordRepository(ProjectContext dbContext) : IUserPasswordRep
         var entity = FindByUserId(id);
         if (entity == null) return true;
 
-        dbContext.UserPasswords.Remove((UserPassword)entity);
-        dbContext.SaveChanges();
+        db.UserPasswords.Remove((UserPassword)entity);
+        db.SaveChanges();
         return true;
     }
 
     public IUserPassword? FindByUserId(int userId)
     {
-        return dbContext.UserPasswords.FirstOrDefault(i => i.UserId == userId);
+        return db.UserPasswords.FirstOrDefault(i => i.UserId == userId);
     }
 }

@@ -9,7 +9,7 @@ using TimeProject.Infrastructure.Database;
 namespace TimeProject.Application.UseCases.Records;
 
 public class SyncAllRecordMetaUseCase(
-    ProjectContext db,
+    CustomDbContext db,
     ISyncRecordMetaUseCase syncRecordMetaUseCase
 )
     : ISyncAllRecordMetaUseCase

@@ -7,7 +7,7 @@ using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class ConfirmCodeRepository(ProjectContext db) : IConfirmCodeRepository
+public class ConfirmCodeRepository(CustomDbContext db) : IConfirmCodeRepository
 {
     public IConfirmCode Create(IConfirmCode entity)
     {

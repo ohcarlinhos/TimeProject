@@ -7,7 +7,7 @@ public static class DatabaseConfiguration
 {
     public static void AddDatabaseConfig(this WebApplicationBuilder builder)
     {
-        builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ProjectContext>(options => options
+        builder.Services.AddEntityFrameworkNpgsql().AddDbContext<CustomDbContext>(options => options
             .UseNpgsql(builder.Configuration.GetConnectionString("DataBase"))
         );
     }

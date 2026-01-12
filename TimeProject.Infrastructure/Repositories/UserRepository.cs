@@ -7,11 +7,11 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class UserRepository(ProjectContext dbContext) : IUserRepository
+public class UserRepository(CustomDbContext db) : IUserRepository
 {
     public IList<IUser> Index(IPaginationQuery paginationQuery)
     {
-        IQueryable<User> query = dbContext.Users;
+        IQueryable<User> query = db.Users;
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
             query = SearchWhereConditional(query, paginationQuery.Search);
@@ -29,7 +29,7 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
 
     public int GetTotalItems(IPaginationQuery paginationQuery)
     {
-        IQueryable<User> query = dbContext.Users;
+        IQueryable<User> query = db.Users;
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
             query = SearchWhereConditional(query, paginationQuery.Search);
@@ -45,8 +45,8 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         user.CreatedAt = now;
         user.UpdatedAt = now;
 
-        dbContext.Users.Add(user);
-        dbContext.SaveChanges();
+        db.Users.Add(user);
+        db.SaveChanges();
         return user;
     }
 
@@ -55,8 +55,8 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         var user = (User)entity;
         user.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        dbContext.Users.Update(user);
-        dbContext.SaveChanges();
+        db.Users.Update(user);
+        db.SaveChanges();
         return entity;
     }
 
@@ -65,19 +65,19 @@ public class UserRepository(ProjectContext dbContext) : IUserRepository
         var entity = FindById(id);
         if (entity == null) return true;
 
-        dbContext.Users.Remove((User)entity);
-        dbContext.SaveChanges();
+        db.Users.Remove((User)entity);
+        db.SaveChanges();
         return true;
     }
 
     public IUser? FindById(int id)
     {
-        return dbContext.Users.FirstOrDefault(i => i.Id == id);
+        return db.Users.FirstOrDefault(i => i.Id == id);
     }
 
     public IUser? FindByEmail(string email)
     {
-        return dbContext.Users.FirstOrDefault(u => u.Email == email);
+        return db.Users.FirstOrDefault(u => u.Email == email);
     }
 
     public bool EmailIsAvailable(string email)

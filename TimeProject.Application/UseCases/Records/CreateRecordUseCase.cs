@@ -18,7 +18,7 @@ public class CreateRecordUseCase(
     IRecordMapDataUtil mapDataUtil,
     ICategoryRepository categoryRepository,
     ICreatePeriodByListUseCase createPeriodByListUseCase,
-    ProjectContext db)
+    CustomDbContext db)
     : ICreateRecordUseCase
 {
     public ICustomResult<IRecordOutDto> Handle(ICreateRecordDto dto, int userId)

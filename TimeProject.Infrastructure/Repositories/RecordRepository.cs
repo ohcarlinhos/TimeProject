@@ -9,11 +9,11 @@ using TimeProject.Infrastructure.ObjectValues.Pagination;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class RecordRepository(ProjectContext dbContext) : IRecordRepository
+public class RecordRepository(CustomDbContext db) : IRecordRepository
 {
     public IIndexRepositoryResult<IRecord> Index(IPaginationQuery paginationQuery, int userId)
     {
-        var query = dbContext.Records.AsQueryable();
+        var query = db.Records.AsQueryable();
 
         query = query.Where(record => record.UserId == userId);
         query = SearchWhereConditional(query, paginationQuery.Search);
@@ -68,7 +68,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
 
     public IList<SearchRecordItem> SearchRecord(string search, int userId)
     {
-        var query = dbContext.Records.AsQueryable();
+        var query = db.Records.AsQueryable();
         query = query.Where(record => record.UserId == userId);
 
         if (string.IsNullOrEmpty(search) == false)
@@ -90,8 +90,8 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
         record.CreatedAt = now;
         record.UpdatedAt = now;
 
-        dbContext.Records.Add(record);
-        dbContext.SaveChanges();
+        db.Records.Add(record);
+        db.SaveChanges();
         return entity;
     }
 
@@ -100,14 +100,14 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
         var record = (Record)entity;
         record.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        dbContext.Records.Update(record);
-        dbContext.SaveChanges();
+        db.Records.Update(record);
+        db.SaveChanges();
         return record;
     }
 
     public IRecord? Details(string code, int userId)
     {
-        return dbContext.Records
+        return db.Records
             .Include(r => r.Category)
             .Include(r => r.Meta)
             .FirstOrDefault(record => record.Code == code && record.UserId == userId);
@@ -115,20 +115,20 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
 
     public bool Delete(IRecord entity)
     {
-        dbContext.Records.Remove((Record)entity);
-        dbContext.SaveChanges();
+        db.Records.Remove((Record)entity);
+        db.SaveChanges();
         return true;
     }
 
     public IRecord? FindById(int id, int userId)
     {
-        return dbContext.Records
+        return db.Records
             .FirstOrDefault(record => record.Id == id && record.UserId == userId);
     }
 
     public IList<IRecord> FindByIdList(IList<int> idList, int userId)
     {
-        return dbContext.Records.Where(e => idList.Contains(e.Id))
+        return db.Records.Where(e => idList.Contains(e.Id))
             .Include(e => e.Category)
             .Include(e => e.Meta)
             .ToList<IRecord>();
@@ -136,7 +136,7 @@ public class RecordRepository(ProjectContext dbContext) : IRecordRepository
 
     public IRecord? FindByCode(string code, int userId)
     {
-        return dbContext.Records
+        return db.Records
             .FirstOrDefault(record => record.Code == code && record.UserId == userId);
     }
 

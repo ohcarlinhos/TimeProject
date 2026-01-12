@@ -7,24 +7,24 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
+public class CategoryRepository(CustomDbContext db) : ICategoryRepository
 {
     public IList<ICategory> Index(int userId, bool onlyWithData)
     {
         return onlyWithData
-            ? dbContext.Records
+            ? db.Records
                 .Where(e => e.Category != null && e.UserId == userId)
                 .Select(e => e.Category)
                 .Distinct()!
                 .ToList<ICategory>()
-            : dbContext.Categories
+            : db.Categories
                 .Where(category => category.UserId == userId)
                 .ToList<ICategory>();
     }
 
     public IList<ICategory> Index(IPaginationQuery paginationQuery, int userId)
     {
-        IQueryable<ICategory> query = dbContext.Categories;
+        IQueryable<ICategory> query = db.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
@@ -43,7 +43,7 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
 
     public int GetTotalItems(IPaginationQuery paginationQuery, int userId)
     {
-        IQueryable<ICategory> query = dbContext.Categories;
+        IQueryable<ICategory> query = db.Categories;
         query = query.Where(c => c.UserId == userId);
 
         if (!string.IsNullOrWhiteSpace(paginationQuery.Search))
@@ -60,8 +60,8 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
         category.CreatedAt = now;
         category.UpdatedAt = now;
 
-        dbContext.Categories.Add(category);
-        dbContext.SaveChanges();
+        db.Categories.Add(category);
+        db.SaveChanges();
         return category;
     }
 
@@ -70,31 +70,31 @@ public class CategoryRepository(ProjectContext dbContext) : ICategoryRepository
         var category = (Category)entity;
         category.UpdatedAt = DateTime.Now.ToUniversalTime();
 
-        dbContext.Categories.Update(category);
-        dbContext.SaveChanges();
+        db.Categories.Update(category);
+        db.SaveChanges();
         return category;
     }
 
     public bool Delete(ICategory entity)
     {
-        dbContext.Categories.Remove((Category)entity);
-        dbContext.SaveChanges();
+        db.Categories.Remove((Category)entity);
+        db.SaveChanges();
         return true;
     }
 
     public ICategory? FindById(int id)
     {
-        return dbContext.Categories.FirstOrDefault(c => c.Id == id);
+        return db.Categories.FirstOrDefault(c => c.Id == id);
     }
 
     public ICategory? FindById(int id, int userId)
     {
-        return dbContext.Categories.FirstOrDefault(c => c.Id == id && c.UserId == userId);
+        return db.Categories.FirstOrDefault(c => c.Id == id && c.UserId == userId);
     }
 
     public ICategory? FindByName(string name, int userId)
     {
-        return dbContext.Categories.FirstOrDefault(category => category.Name == name && category.UserId == userId);
+        return db.Categories.FirstOrDefault(category => category.Name == name && category.UserId == userId);
     }
 
     private static IQueryable<ICategory> SearchWhereConditional(IQueryable<ICategory> query, string search)

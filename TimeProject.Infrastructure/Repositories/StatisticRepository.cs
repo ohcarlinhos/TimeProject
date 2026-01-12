@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class StatisticRepository(ProjectContext db) : IStatisticRepository
+public class StatisticRepository(CustomDbContext db) : IStatisticRepository
 {
     public IList<IPeriod> GetPeriodsByRange(
         int userId,

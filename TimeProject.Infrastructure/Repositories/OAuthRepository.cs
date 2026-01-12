@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class OAuthRepository(ProjectContext dbContext) : IOAuthRepository
+public class OAuthRepository(CustomDbContext db) : IOAuthRepository
 {
     public IOAuth Create(IOAuth entity)
     {
@@ -16,8 +16,8 @@ public class OAuthRepository(ProjectContext dbContext) : IOAuthRepository
         iOAuth.CreatedAt = now;
         iOAuth.UpdatedAt = now;
 
-        dbContext.OAuths.Add(iOAuth);
-        dbContext.SaveChanges();
+        db.OAuths.Add(iOAuth);
+        db.SaveChanges();
         return iOAuth;
     }
 
@@ -26,18 +26,18 @@ public class OAuthRepository(ProjectContext dbContext) : IOAuthRepository
         var entity = FindByUserId(id);
         if (entity == null) return true;
 
-        dbContext.OAuths.Remove((OAuth)entity);
-        dbContext.SaveChanges();
+        db.OAuths.Remove((OAuth)entity);
+        db.SaveChanges();
         return true;
     }
 
     public IOAuth? FindByUserId(int id)
     {
-        return dbContext.OAuths.FirstOrDefault(i => i.UserId == id);
+        return db.OAuths.FirstOrDefault(i => i.UserId == id);
     }
 
     public IOAuth? FindByUserProviderId(string provider, string id)
     {
-        return dbContext.OAuths.FirstOrDefault(i => i.Provider == provider && i.UserProviderId == id);
+        return db.OAuths.FirstOrDefault(i => i.Provider == provider && i.UserProviderId == id);
     }
 }

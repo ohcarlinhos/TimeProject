@@ -6,11 +6,11 @@ using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaRepository
+public class RecordMetaRepository(CustomDbContext db) : IRecordMetaRepository
 {
     public IRecordMeta? CreateOrUpdate(int recordId, bool saveChanges = true)
     {
-        var record = dbContext.Records.FirstOrDefault(e => e.Id == recordId);
+        var record = db.Records.FirstOrDefault(e => e.Id == recordId);
         return record == null ? null : CreateOrUpdate(record, saveChanges);
     }
 
@@ -24,21 +24,21 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
             if (meta != null) list.Add(meta);
         }
 
-        dbContext.SaveChanges();
+        db.SaveChanges();
 
         return list;
     }
 
     public IRecordMeta? CreateOrUpdate(IRecord record, bool saveChanges = true)
     {
-        var entity = dbContext.RecordMetas.FirstOrDefault(e => e.RecordId == record.Id);
+        var entity = db.RecordMetas.FirstOrDefault(e => e.RecordId == record.Id);
 
-        var periods = dbContext.Periods
+        var periods = db.Periods
             .Where(e => e.RecordId == record.Id)
             .OrderBy(e => e.Start)
             .ToList();
 
-        var timeMinutes = dbContext.Minutes
+        var timeMinutes = db.Minutes
             .Where(e => e.RecordId == record.Id)
             .OrderBy(e => e.Date)
             .ToList();
@@ -80,7 +80,7 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
                 UpdatedAt = now
             };
 
-            dbContext.Add(entity);
+            db.Add(entity);
         }
         else
         {
@@ -92,7 +92,7 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
             entity.UpdatedAt = now;
         }
 
-        if (saveChanges) dbContext.SaveChanges();
+        if (saveChanges) db.SaveChanges();
 
         return entity;
     }

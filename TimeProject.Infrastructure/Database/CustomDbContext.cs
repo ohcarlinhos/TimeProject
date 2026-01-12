@@ -4,7 +4,7 @@ using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Infrastructure.Database;
 
-public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContext(options)
+public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Record> Records { get; set; }

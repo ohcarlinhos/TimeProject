@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryRepository
+public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryRepository
 {
     public IList<DateTime> GetDistinctDates(int recordId, int userId, int addHours = 0)
     {

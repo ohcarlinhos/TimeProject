@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class SessionRepository(ProjectContext db) : ISessionRepository
+public class SessionRepository(CustomDbContext db) : ISessionRepository
 {
     public ISession Create(ISession entity)
     {
