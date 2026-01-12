@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Domain.UseCases.TimeRecord;
+using TimeProject.Domain.UseCases.Records;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -11,13 +11,13 @@ namespace TimeProject.APIs.Controllers;
 [Route("api/records/meta")]
 [Authorize(Policy = "IsAdmin")]
 public class TimeRecordMetaController(
-    ISyncAllTrMetaUseCase syncAllTrMetaUseCase
+    ISyncAllRecordMetaUseCase syncAllRecordMetaUseCase
 ) : CustomController
 {
     [HttpPost]
     [Route("sync/all")]
     public ActionResult<IEnumerable<IRecordMeta>> SyncAll()
     {
-        return HandleResponse(syncAllTrMetaUseCase.Handle());
+        return HandleResponse(syncAllRecordMetaUseCase.Handle());
     }
 }

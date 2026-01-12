@@ -5,7 +5,7 @@ using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Factories;
-using TimeProject.Infrastructure.ObjectValues.Feedback;
+using TimeProject.Infrastructure.ObjectValues.Feedbacks;
 
 namespace TimeProject.Application.UseCases.Feedback;
 

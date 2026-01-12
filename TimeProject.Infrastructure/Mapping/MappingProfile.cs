@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Infrastructure.ObjectValues.Category;
-using TimeProject.Infrastructure.ObjectValues.Code;
-using TimeProject.Infrastructure.ObjectValues.Period;
-using TimeProject.Infrastructure.ObjectValues.Record;
-using TimeProject.Infrastructure.ObjectValues.RecordSession;
-using TimeProject.Infrastructure.ObjectValues.User;
+using TimeProject.Infrastructure.ObjectValues.Categories;
+using TimeProject.Infrastructure.ObjectValues.Codes;
+using TimeProject.Infrastructure.ObjectValues.Periods;
+using TimeProject.Infrastructure.ObjectValues.Records;
+using TimeProject.Infrastructure.ObjectValues.Sessions;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Infrastructure.Mapping;
 

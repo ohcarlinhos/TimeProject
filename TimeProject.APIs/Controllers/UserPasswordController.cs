@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.User;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Infrastructure.ObjectValues.User;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.APIs.Controllers;
 

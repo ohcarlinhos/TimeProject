@@ -5,7 +5,7 @@ using TimeProject.Domain.RemoveDependencies.Dtos.Minute;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeMinute;
-using TimeProject.Domain.UseCases.TimeRecord;
+using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeMinute;
@@ -14,7 +14,7 @@ public class CreateTimeMinuteByListUseCase(
     IMinuteRecordRepository mrRepository,
     IRecordRepository recordRepository,
     IUserRepository userRepository,
-    ISyncTrMetaUseCase syncTrMetaUseCase
+    ISyncRecordMetaUseCase syncRecordMetaUseCase
 ) : ICreateTimeMinuteByListUseCase
 {
     public ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int timeRecordId, int userId)
@@ -38,7 +38,7 @@ public class CreateTimeMinuteByListUseCase(
             });
 
         var data = mrRepository.CreateByList(list);
-        syncTrMetaUseCase.Handle(timeRecordId);
+        syncRecordMetaUseCase.Handle(timeRecordId);
 
         return result.SetData(data);
     }

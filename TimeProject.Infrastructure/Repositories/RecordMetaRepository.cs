@@ -45,9 +45,9 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
             .ToList();
 
         var now = DateTime.Now.ToUniversalTime();
-        var timeSpan = TimeFormat.TimeSpanFromTimePeriods(timePeriods)
-            .Add(TimeFormat.TimeSpanFromTimeMinutes(timeMinutes));
-        var formattedTime = TimeFormat.StringFromTimeSpan(timeSpan);
+        var timeSpan = TimeFormatUtil.TimeSpanFromTimePeriods(timePeriods)
+            .Add(TimeFormatUtil.TimeSpanFromTimeMinutes(timeMinutes));
+        var formattedTime = TimeFormatUtil.StringFromTimeSpan(timeSpan);
 
         var firstList = new List<DateTime>();
         var lastList = new List<DateTime>();

@@ -2,14 +2,14 @@
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeMinute;
-using TimeProject.Domain.UseCases.TimeRecord;
+using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.TimeMinute;
 
 public class DeleteTimeMinuteUseCase(
     IMinuteRecordRepository recordRepository,
-    ISyncTrMetaUseCase syncTrMetaUseCase
+    ISyncRecordMetaUseCase syncRecordMetaUseCase
 ) : IDeleteTimeMinuteUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
@@ -20,7 +20,7 @@ public class DeleteTimeMinuteUseCase(
         if (timeMinute == null) return result.SetError(TimeMinuteMessageErrors.NotFound);
 
         var data = recordRepository.Delete(timeMinute);
-        syncTrMetaUseCase.Handle(timeMinute.RecordId);
+        syncRecordMetaUseCase.Handle(timeMinute.RecordId);
 
         return result.SetData(data);
     }

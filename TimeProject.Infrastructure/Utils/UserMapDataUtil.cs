@@ -1,8 +1,8 @@
 using AutoMapper;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.Utils;
-using TimeProject.Infrastructure.ObjectValues.User;
+using TimeProject.Infrastructure.Utils.Interfaces;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Infrastructure.Utils;
 

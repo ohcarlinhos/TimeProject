@@ -4,7 +4,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimeMinute;
 using TimeProject.Domain.RemoveDependencies.Util;
-using TimeProject.Infrastructure.ObjectValues.Minute;
+using TimeProject.Infrastructure.ObjectValues.Minutes;
 
 namespace TimeProject.APIs.Controllers;
 

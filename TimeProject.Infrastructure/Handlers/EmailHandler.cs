@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues.Email;
+using TimeProject.Infrastructure.ObjectValues.Emails;
 
 namespace TimeProject.Infrastructure.Handlers;
 

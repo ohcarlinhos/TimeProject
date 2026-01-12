@@ -3,11 +3,11 @@ using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
-using TimeProject.Domain.Utils;
+using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.ObjectValues.User;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.User;
 

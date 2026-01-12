@@ -4,11 +4,11 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.TimeRecord;
+using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.RemoveDependencies.Util;
 using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Infrastructure.ObjectValues.Record;
+using TimeProject.Infrastructure.ObjectValues.Records;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -16,19 +16,19 @@ namespace TimeProject.APIs.Controllers;
 [Route("api/records")]
 [Authorize(Policy = "IsActive")]
 public class TimeRecordController(
-    IGetPaginatedTimeRecordUseCase getPaginatedTimeRecordUseCase,
-    IGetTimeRecordHistoryUseCase getTimeRecordHistoryUseCase,
-    ICreateTimeRecordUseCase createTimeRecordUseCase,
-    IUpdateTimeRecordUseCase updateTimeRecordUseCase,
-    IGetTimeRecordByCodeUseCase getTimeRecordByCodeUseCase,
-    IDeleteTimeRecordUseCase deleteTimeRecordUseCase,
-    ISearchTimeRecordUseCase searchTimeRecordUseCase
+    IGetPaginatedRecordUseCase getPaginatedRecordUseCase,
+    IGetRecordHistoryUseCase getRecordHistoryUseCase,
+    ICreateRecordUseCase createRecordUseCase,
+    IUpdateRecordUseCase updateRecordUseCase,
+    IGetRecordByCodeUseCase getRecordByCodeUseCase,
+    IDeleteRecordUseCase deleteRecordUseCase,
+    ISearchRecordUseCase searchRecordUseCase
 ) : CustomController
 {
     [HttpGet]
     public ActionResult<IPagination<IRecordOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(getPaginatedTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
+        return HandleResponse(getPaginatedRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet]
@@ -37,20 +37,20 @@ public class TimeRecordController(
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            getTimeRecordHistoryUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
+            getRecordHistoryUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
 
     [HttpGet]
     [Route("search")]
     public ActionResult<IList<SearchRecordItem>> Search([FromQuery] string? value)
     {
-        return HandleResponse(searchTimeRecordUseCase.Handle(value ?? "", UserClaims.Id(User)));
+        return HandleResponse(searchRecordUseCase.Handle(value ?? "", UserClaims.Id(User)));
     }
 
     [HttpPost]
     public ActionResult<IRecordOutDto> Create([FromBody] CreateRecordDto dto)
     {
-        var result = createTimeRecordUseCase.Handle(dto, UserClaims.Id(User));
+        var result = createRecordUseCase.Handle(dto, UserClaims.Id(User));
 
         result.ActionName = nameof(Create);
         return HandleResponse(result);
@@ -60,20 +60,20 @@ public class TimeRecordController(
     [Route("{id:int}")]
     public ActionResult<IRecordOutDto> Update(int id, [FromBody] UpdateRecordDto dto)
     {
-        return HandleResponse(updateTimeRecordUseCase.Handle(id, dto, UserClaims.Id(User)));
+        return HandleResponse(updateRecordUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("{code}")]
     public ActionResult<IRecordOutDto> Get(string code)
     {
-        return HandleResponse(getTimeRecordByCodeUseCase.Handle(code, UserClaims.Id(User)));
+        return HandleResponse(getRecordByCodeUseCase.Handle(code, UserClaims.Id(User)));
     }
 
     [HttpDelete]
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deleteTimeRecordUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deleteRecordUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

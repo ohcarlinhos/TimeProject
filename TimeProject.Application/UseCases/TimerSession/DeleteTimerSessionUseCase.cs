@@ -2,7 +2,7 @@
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.TimeRecord;
+using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.UseCases.TimerSession;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Entities;
@@ -12,7 +12,7 @@ namespace TimeProject.Application.UseCases.TimerSession;
 public class DeleteTimerSessionUseCase(
     ITimerSessionRepository repo,
     IPeriodRecordRepository tpRepo,
-    ISyncTrMetaUseCase syncTrMetaUseCase) : IDeleteTimerSessionUseCase
+    ISyncRecordMetaUseCase syncRecordMetaUseCase) : IDeleteTimerSessionUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
     {
@@ -26,7 +26,7 @@ public class DeleteTimerSessionUseCase(
         var timeRecordId = entity.RecordId;
 
         repo.Delete(entity);
-        syncTrMetaUseCase.Handle(timeRecordId);
+        syncRecordMetaUseCase.Handle(timeRecordId);
 
         return result.SetData(true);
     }

@@ -1,0 +1,11 @@
+using TimeProject.Domain.RemoveDependencies.Dtos.Record;
+using TimeProject.Domain.RemoveDependencies.General.Pagination;
+using TimeProject.Domain.Shared;
+
+namespace TimeProject.Domain.UseCases.Records;
+
+public interface IGetRecordHistoryUseCase
+{
+    public ICustomResult<IPagination<IRecordHistoryDayOutDto>> Handle(int timeRecordId, int userId,
+        IPaginationQuery paginationQuery);
+}

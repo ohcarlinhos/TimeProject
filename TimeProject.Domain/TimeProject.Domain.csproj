@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <Folder Include="RemoveDependencies\"/>
+        <Folder Include="Utils\" />
     </ItemGroup>
 
 </Project>

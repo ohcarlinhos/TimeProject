@@ -5,7 +5,7 @@ using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.UseCases.Login;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Infrastructure.ObjectValues;
-using TimeProject.Infrastructure.ObjectValues.Auth;
+using TimeProject.Infrastructure.ObjectValues.Auths;
 
 namespace TimeProject.APIs.Controllers;
 

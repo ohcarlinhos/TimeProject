@@ -8,9 +8,8 @@ using TimeProject.Application.UseCases.CustomLog;
 using TimeProject.Application.UseCases.Feedback;
 using TimeProject.Application.UseCases.Statistic;
 using TimeProject.Application.UseCases.TimeMinute;
-using TimeProject.Application.UseCases.TimePeriod;
-using TimeProject.Application.UseCases.TimePeriod.Utils;
-using TimeProject.Application.UseCases.TimeRecord;
+using TimeProject.Application.UseCases.Periods;
+using TimeProject.Application.UseCases.Records;
 using TimeProject.Application.UseCases.TimerSession;
 using TimeProject.Application.UseCases.User;
 using TimeProject.Domain.ObjectValues;
@@ -22,11 +21,10 @@ using TimeProject.Domain.UseCases.Feedback;
 using TimeProject.Domain.UseCases.Login;
 using TimeProject.Domain.UseCases.Statistic;
 using TimeProject.Domain.UseCases.TimeMinute;
-using TimeProject.Domain.UseCases.TimePeriod;
-using TimeProject.Domain.UseCases.TimeRecord;
+using TimeProject.Domain.UseCases.Periods;
+using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.UseCases.TimerSession;
 using TimeProject.Domain.UseCases.User;
-using TimeProject.Domain.Utils;
 using TimeProject.Infrastructure.Handlers;
 using TimeProject.Infrastructure.Integrations;
 using TimeProject.Infrastructure.Interfaces;
@@ -34,6 +32,7 @@ using TimeProject.Infrastructure.Mapping;
 using TimeProject.Infrastructure.Repositories;
 using TimeProject.Infrastructure.Settings;
 using TimeProject.Infrastructure.Utils;
+using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.APIs.Configurations;
 
@@ -136,20 +135,20 @@ public static class ServicesConfiguration
         builder.Services.AddScoped<IRecordMetaRepository, RecordMetaRepository>();
         builder.Services.AddScoped<IRecordHistoryRepository, RecordHistoryRepository>();
 
-        builder.Services.AddScoped<ITimeRecordMapDataUtil, TimeRecordMapDataUtil>();
+        builder.Services.AddScoped<IRecordMapDataUtil, RecordMapDataUtil>();
 
-        builder.Services.AddScoped<IGetTimeRecordHistoryUseCase, GetTimeRecordHistoryUseCase>();
+        builder.Services.AddScoped<IGetRecordHistoryUseCase, GetRecordHistoryUseCase>();
 
-        builder.Services.AddScoped<IGetPaginatedTimeRecordUseCase, GetPaginatedTimeRecordUseCase>();
-        builder.Services.AddScoped<IGetTimeRecordByCodeUseCase, GetTimeRecordByCodeUseCase>();
-        builder.Services.AddScoped<IGetTimeRecordByIdUseCase, GetTimeRecordByIdUseCase>();
-        builder.Services.AddScoped<ICreateTimeRecordUseCase, CreateTimeRecordUseCase>();
-        builder.Services.AddScoped<IUpdateTimeRecordUseCase, UpdateTimeRecordUseCase>();
-        builder.Services.AddScoped<IDeleteTimeRecordUseCase, DeleteTimeRecordUseCase>();
-        builder.Services.AddScoped<ISearchTimeRecordUseCase, SearchTimeRecordUseCase>();
+        builder.Services.AddScoped<IGetPaginatedRecordUseCase, GetPaginatedRecordUseCase>();
+        builder.Services.AddScoped<IGetRecordByCodeUseCase, GetRecordByCodeUseCase>();
+        builder.Services.AddScoped<IGetRecordByIdUseCase, GetRecordByIdUseCase>();
+        builder.Services.AddScoped<ICreateRecordUseCase, CreateRecordUseCase>();
+        builder.Services.AddScoped<IUpdateRecordUseCase, UpdateRecordUseCase>();
+        builder.Services.AddScoped<IDeleteRecordUseCase, DeleteRecordUseCase>();
+        builder.Services.AddScoped<ISearchRecordUseCase, SearchRecordUseCase>();
 
-        builder.Services.AddScoped<ISyncTrMetaUseCase, SyncTrMetaUseCase>();
-        builder.Services.AddScoped<ISyncAllTrMetaUseCase, SyncAllTrMetaUseCase>();
+        builder.Services.AddScoped<ISyncRecordMetaUseCase, SyncRecordMetaUseCase>();
+        builder.Services.AddScoped<ISyncAllRecordMetaUseCase, SyncAllRecordMetaUseCase>();
 
         #endregion
 
@@ -164,15 +163,15 @@ public static class ServicesConfiguration
 
         builder.Services.AddScoped<IPeriodRecordRepository, PeriodRecordRepository>();
 
-        builder.Services.AddScoped<ITimePeriodMapDataUtil, TimePeriodMapDataUtil>();
-        builder.Services.AddScoped<ITimePeriodCutUtil, TimePeriodCutUtil>();
-        builder.Services.AddScoped<ITimePeriodValidateUtil, TimePeriodValidateUtil>();
+        builder.Services.AddScoped<IPeriodMapDataUtil, PeriodMapDataUtil>();
+        builder.Services.AddScoped<IPeriodCutUtil, PeriodCutUtil>();
+        builder.Services.AddScoped<IPeriodValidateUtil, PeriodValidateUtil>();
 
-        builder.Services.AddScoped<IGetPaginatedTimePeriodUseCase, GetPaginatedTimePeriodUseCase>();
-        builder.Services.AddScoped<ICreateTimePeriodByListUseCase, CreateTimePeriodByListUseCase>();
-        builder.Services.AddScoped<ICreateTimePeriodUseCase, CreateTimePeriodUseCase>();
-        builder.Services.AddScoped<IUpdateTimePeriodUseCase, UpdateTimePeriodUseCase>();
-        builder.Services.AddScoped<IDeleteTimePeriodUseCase, DeleteTimePeriodUseCase>();
+        builder.Services.AddScoped<IGetPaginatedPeriodUseCase, GetPaginatedPeriodUseCase>();
+        builder.Services.AddScoped<ICreatePeriodByListUseCase, CreatePeriodByListUseCase>();
+        builder.Services.AddScoped<ICreatePeriodUseCase, CreatePeriodUseCase>();
+        builder.Services.AddScoped<IUpdatePeriodUseCase, UpdatePeriodUseCase>();
+        builder.Services.AddScoped<IDeletePeriodUseCase, DeletePeriodUseCase>();
 
         #endregion
 

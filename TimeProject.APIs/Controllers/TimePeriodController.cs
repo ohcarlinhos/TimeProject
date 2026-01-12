@@ -4,11 +4,11 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Period;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Domain.UseCases.TimePeriod;
+using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.RemoveDependencies.Util;
-using TimeProject.Infrastructure.ObjectValues.Period;
-using TimeProject.Infrastructure.ObjectValues.Record;
+using TimeProject.Infrastructure.ObjectValues.Periods;
+using TimeProject.Infrastructure.ObjectValues.Records;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -16,11 +16,11 @@ namespace TimeProject.APIs.Controllers;
 [Route("api/periods")]
 [Authorize(Policy = "IsActive")]
 public class TimePeriodController(
-    IGetPaginatedTimePeriodUseCase getPaginatedTimePeriodUseCase,
-    ICreateTimePeriodUseCase createTimePeriodUseCase,
-    ICreateTimePeriodByListUseCase createTimePeriodByListUseCase,
-    IUpdateTimePeriodUseCase updateTimePeriodUseCase,
-    IDeleteTimePeriodUseCase deleteTimePeriodUseCase
+    IGetPaginatedPeriodUseCase getPaginatedPeriodUseCase,
+    ICreatePeriodUseCase createPeriodUseCase,
+    ICreatePeriodByListUseCase createPeriodByListUseCase,
+    IUpdatePeriodUseCase updatePeriodUseCase,
+    IDeletePeriodUseCase deletePeriodUseCase
 )
     : CustomController
 {
@@ -30,13 +30,13 @@ public class TimePeriodController(
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            getPaginatedTimePeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
+            getPaginatedPeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
 
     [HttpPost]
     public ActionResult<IPeriod> Create([FromBody] CreatePeriodDto dto)
     {
-        var result = createTimePeriodUseCase.Handle(dto, UserClaims.Id(User));
+        var result = createPeriodUseCase.Handle(dto, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -45,7 +45,7 @@ public class TimePeriodController(
     [Route("list/{id:int}")]
     public ActionResult<IList<IPeriod>> Create([FromBody] PeriodListDto dto, int id)
     {
-        var result = createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
+        var result = createPeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -54,13 +54,13 @@ public class TimePeriodController(
     [Route("{id:int}")]
     public ActionResult<IPeriod> Update(int id, [FromBody] PeriodDto dto)
     {
-        return HandleResponse(updateTimePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
+        return HandleResponse(updatePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpDelete]
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deleteTimePeriodUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deletePeriodUseCase.Handle(id, UserClaims.Id(User)));
     }
 }
