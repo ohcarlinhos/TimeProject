@@ -24,9 +24,9 @@ public class LoginGoogleUseCase(
 {
     private readonly RestClient _client = new("https://www.googleapis.com/oauth2/v1/userinfo");
 
-    public async Task<ICustomResult<JwtResult>> Handle(LoginGoogleDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<IJwtResult>> Handle(ILoginGoogleDto dto, IUserAccessLog ac)
     {
-        var result = new CustomResult<JwtResult>();
+        var result = new CustomResult<IJwtResult>();
 
         try
         {
@@ -37,7 +37,7 @@ public class LoginGoogleUseCase(
 
             if (userFromProvider is null) return result.SetError(AuthMessageErrors.AuthProviderError);
 
-            var getUserByPIdResult = await getUserByOAtuhProviderIdUseCase.Handle("google", userFromProvider.Id);
+            var getUserByPIdResult = getUserByOAtuhProviderIdUseCase.Handle("google", userFromProvider.Id);
 
             if (getUserByPIdResult is { Data: not null })
             {
@@ -49,7 +49,7 @@ public class LoginGoogleUseCase(
             if (userFromProvider.VerifiedEmail == false)
                 return result.SetError(UserMessageErrors.UserEmailProviderNotVerified);
 
-            var createUserResult = await createUserByGoogleUserUseCase
+            var createUserResult = createUserByGoogleUserUseCase
                 .Handle(
                     new CreateUserOAtuhDto
                         { Name = userFromProvider.Name, UserProviderId = userFromProvider.Id },

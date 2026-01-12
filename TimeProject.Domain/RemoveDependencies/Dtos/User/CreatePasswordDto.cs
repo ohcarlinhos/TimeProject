@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.User;
 
-public class CreatePasswordDto
+public class CreatePasswordDto : ICreatePasswordDto
 {
     [MinLength(8)]
     [MaxLength(48)]

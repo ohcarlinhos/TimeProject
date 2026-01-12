@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface ISendRegisterEmailUseCase
 {
-    public Task<ICustomResult<bool>> Handle(string email, string verifyUrl);
+    public ICustomResult<bool> Handle(string email, string verifyUrl);
 }

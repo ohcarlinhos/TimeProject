@@ -8,5 +8,5 @@ namespace TimeProject.Domain.UseCases.Login;
 
 public interface ILoginUseCase
 {
-    Task<ICustomResult<JwtResult>> Handle(LoginDto dto, IUserAccessLog ac);
+    ICustomResult<IJwtResult> Handle(ILoginDto dto, IUserAccessLog ac);
 }

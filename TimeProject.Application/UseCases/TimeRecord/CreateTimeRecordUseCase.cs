@@ -21,9 +21,9 @@ public class CreateTimeRecordUseCase(
     ProjectContext db)
     : ICreateTimeRecordUseCase
 {
-    public ICustomResult<TimeRecordOutDto> Handle(CreateTimeRecordDto dto, int userId)
+    public ICustomResult<ITimeRecordOutDto> Handle(ICreateTimeRecordDto dto, int userId)
     {
-        var result = new CustomResult<TimeRecordOutDto>();
+        var result = new CustomResult<ITimeRecordOutDto>();
         var transaction = db.Database.BeginTransaction();
 
         if (dto.CategoryId != null)
@@ -57,7 +57,10 @@ public class CreateTimeRecordUseCase(
                 var timePeriodsResult = createTimePeriodByListUseCase
                     .Handle(
                         new TimePeriodListDto
-                            { TimePeriods = dto.TimePeriods, Type = dto.TimerSessionType, From = dto.TimerSessionFrom },
+                        {
+                            TimePeriods = (dto.TimePeriods as List<TimePeriodDto>)!, Type = dto.TimerSessionType,
+                            From = dto.TimerSessionFrom
+                        },
                         timeRecord.Id, userId);
 
                 if (timePeriodsResult.HasError)

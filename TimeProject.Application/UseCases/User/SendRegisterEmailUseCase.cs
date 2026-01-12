@@ -20,16 +20,16 @@ public class SendRegisterEmailUseCase(
     IHookHandler hookHandler
 ) : ISendRegisterEmailUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(string email, string verifyUrl)
+    public ICustomResult<bool> Handle(string email, string verifyUrl)
     {
         var result = new CustomResult<bool>();
 
-        var findUserResult = await getUserByEmailUseCase.Handle(email);
+        var findUserResult = getUserByEmailUseCase.Handle(email);
         if (findUserResult.HasError) return result.SetError(findUserResult.Message);
 
         var user = findUserResult.Data!;
 
-        var registerCodeResult = await createConfirmCodeUseCase.Handle(user.Id, ConfirmCodeType.Register);
+        var registerCodeResult = createConfirmCodeUseCase.Handle(user.Id, ConfirmCodeType.Register);
         if (registerCodeResult.HasError) return result.SetError(registerCodeResult.Message);
 
         var registerCode = registerCodeResult.Data!;
@@ -43,11 +43,11 @@ public class SendRegisterEmailUseCase(
                 registerCode.ExpireDate
             ));
 
-            await setWasSentConfirmCodeUseCase.Handle(registerCode.Id);
+            setWasSentConfirmCodeUseCase.Handle(registerCode.Id);
         }
         catch
         {
-            await hookHandler.SendError($"Não foi possível enviar o e-mail de verificação para:\n<b>{user.Email}</b>");
+            hookHandler.SendError($"Não foi possível enviar o e-mail de verificação para:\n<b>{user.Email}</b>");
             return result.SetError(AuthMessageErrors.SendEmailError);
         }
 

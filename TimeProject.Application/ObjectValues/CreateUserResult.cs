@@ -6,6 +6,6 @@ namespace TimeProject.Application.ObjectValues;
 
 public class CreateUserResult : ICreateUserResult
 {
-    public UserOutDto User { get; set; } = null!;
+    public IUserOutDto User { get; set; } = null!;
     public JwtResult Jwt { get; set; } = null!;
 }

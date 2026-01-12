@@ -12,22 +12,22 @@ namespace TimeProject.Application.UseCases.User;
 public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository userPasswordRepository)
     : ICreateOrUpdateUserPasswordUseCase
 {
-    public Task<ICustomResult<bool>> Handle(int userId, CreatePasswordDto dto)
+    public ICustomResult<bool> Handle(int userId, ICreatePasswordDto dto)
     {
         return _handle(userId, dto.Password);
     }
 
-    public Task<ICustomResult<bool>> Handle(int userId, UpdatePasswordDto dto)
+    public ICustomResult<bool> Handle(int userId, IUpdatePasswordDto dto)
     {
         return _handle(userId, dto.Password, dto.OldPassword);
     }
 
-    public Task<ICustomResult<bool>> Handle(int userId, UpdateByAdminPasswordDto dto)
+    public ICustomResult<bool> Handle(int userId, IUpdateByAdminPasswordDto dto)
     {
         return _handle(userId, dto.Password, "", true);
     }
 
-    private async Task<ICustomResult<bool>> _handle(
+    private ICustomResult<bool> _handle(
         int userId,
         string password,
         string oldPassword = "",
@@ -35,7 +35,7 @@ public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository userPassw
     )
     {
         var result = new CustomResult<bool>();
-        var entity = await userPasswordRepository.FindByUserId(userId);
+        var entity = userPasswordRepository.FindByUserId(userId);
 
         if (entity != null && (!string.IsNullOrEmpty(oldPassword) || skipOldPasswordCompare))
         {
@@ -43,11 +43,11 @@ public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository userPassw
                 return result.SetError(UserMessageErrors.DifferentPassword);
 
             entity.Password = BCrypt.Net.BCrypt.HashPassword(password);
-            await userPasswordRepository.Update(entity);
+            userPasswordRepository.Update(entity);
         }
         else
         {
-            await userPasswordRepository.Create(new UserPassword
+            userPasswordRepository.Create(new UserPassword
             {
                 UserId = userId,
                 Password = BCrypt.Net.BCrypt.HashPassword(password)

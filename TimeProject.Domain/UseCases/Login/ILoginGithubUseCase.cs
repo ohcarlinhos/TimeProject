@@ -8,5 +8,5 @@ namespace TimeProject.Domain.UseCases.Login;
 
 public interface ILoginGithubUseCase
 {
-    Task<ICustomResult<JwtResult>> Handle(LoginGithubDto dto, IUserAccessLog ac);
+    Task<ICustomResult<IJwtResult>> Handle(ILoginGithubDto dto, IUserAccessLog ac);
 }

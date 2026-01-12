@@ -5,6 +5,6 @@ namespace TimeProject.Domain.ObjectValues;
 
 public interface ICreateUserResult
 {
-    UserOutDto User { get; set; }
+    IUserOutDto User { get; set; }
     JwtResult Jwt { get; set; }
 }

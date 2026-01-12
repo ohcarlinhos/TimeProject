@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IGetUserPasswordByEmailUseCase
 {
-    Task<ICustomResult<IGetUserPasswordByEmailResult>> Handle(string email);
+    ICustomResult<IGetUserPasswordByEmailResult> Handle(string email);
 }

@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface IGetPaginatedTimeRecordUseCase
 {
-    Task<ICustomResult<IPagination<TimeRecordOutDto>>> Handle(PaginationQuery paginationQuery, int userId);
+    ICustomResult<IPagination<ITimeRecordOutDto>> Handle(PaginationQuery paginationQuery, int userId);
 }

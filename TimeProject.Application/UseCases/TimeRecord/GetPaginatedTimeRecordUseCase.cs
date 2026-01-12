@@ -12,14 +12,14 @@ namespace TimeProject.Application.UseCases.TimeRecord;
 public class GetPaginatedTimeRecordUseCase(IRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
     : IGetPaginatedTimeRecordUseCase
 {
-    public async Task<ICustomResult<IPagination<TimeRecordOutDto>>> Handle(PaginationQuery paginationQuery, int userId)
+    public ICustomResult<IPagination<ITimeRecordOutDto>> Handle(PaginationQuery paginationQuery, int userId)
     {
-        var result = await repo.Index(paginationQuery, userId);
+        var result = repo.Index(paginationQuery, userId);
 
-        return new CustomResult<IPagination<TimeRecordOutDto>>
+        return new CustomResult<IPagination<ITimeRecordOutDto>>
         {
-            Data = Pagination<TimeRecordOutDto>.Handle(mapDataUtil.Handle(result.Entities), paginationQuery,
-                result.Count)
+            Data = Pagination<ITimeRecordOutDto>
+                .Handle(mapDataUtil.Handle(result.Entities), paginationQuery, result.Count)
         };
     }
 }

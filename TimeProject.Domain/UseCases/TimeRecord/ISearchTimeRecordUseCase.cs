@@ -7,5 +7,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface ISearchTimeRecordUseCase
 {
-    Task<ICustomResult<IList<SearchRecordItem>>> Handle(string search, int userId);
+    ICustomResult<IList<SearchRecordItem>> Handle(string search, int userId);
 }

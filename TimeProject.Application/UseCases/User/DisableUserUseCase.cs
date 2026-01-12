@@ -10,16 +10,16 @@ namespace TimeProject.Application.UseCases.User;
 
 public class DisableUserUseCase(IUserRepository repo) : IDisableUserUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(int id, DisableUserDto dto)
+    public ICustomResult<bool> Handle(int id, DisableUserDto dto)
     {
         var result = new CustomResult<bool>();
-        var user = await repo.FindById(id);
+        var user = repo.FindById(id);
 
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
 
         user.IsActive = dto.IsActive;
-        await repo.Update(user);
+        repo.Update(user);
 
         result.Data = user.IsActive;
 

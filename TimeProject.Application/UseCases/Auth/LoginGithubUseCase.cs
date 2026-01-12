@@ -22,9 +22,9 @@ public class LoginGithubUseCase(
 )
     : ILoginGithubUseCase
 {
-    public async Task<ICustomResult<JwtResult>> Handle(LoginGithubDto dto, IUserAccessLog ac)
+    public async Task<ICustomResult<IJwtResult>> Handle(ILoginGithubDto dto, IUserAccessLog ac)
     {
-        var result = new CustomResult<JwtResult>();
+        var result = new CustomResult<IJwtResult>();
 
         try
         {
@@ -35,7 +35,7 @@ public class LoginGithubUseCase(
 
             var userFromProvider = await client.User.Current();
             var getUserByPIdResult =
-                await getUserByOAtuhProviderIdUseCase.Handle("github", userFromProvider.Id.ToString());
+                getUserByOAtuhProviderIdUseCase.Handle("github", userFromProvider.Id.ToString());
 
             if (getUserByPIdResult is { Data: not null })
             {
@@ -46,7 +46,7 @@ public class LoginGithubUseCase(
 
             var emailList = await client.User.Email.GetAll();
 
-            var createUserResult = await createUserByGhUserUseCase
+            var createUserResult = createUserByGhUserUseCase
                 .Handle(
                     new CreateUserOAtuhDto
                         { Name = userFromProvider.Name, UserProviderId = userFromProvider.Id.ToString() },

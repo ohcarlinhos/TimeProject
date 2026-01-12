@@ -9,9 +9,9 @@ namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class SearchTimeRecordUseCase(IRecordRepository repo) : ISearchTimeRecordUseCase
 {
-    public async Task<ICustomResult<IList<SearchRecordItem>>> Handle(string search, int userId)
+    public ICustomResult<IList<SearchRecordItem>> Handle(string search, int userId)
     {
         var result = new CustomResult<IList<SearchRecordItem>>();
-        return result.SetData(await repo.SearchTimeRecord(search, userId));
+        return result.SetData(repo.SearchTimeRecord(search, userId));
     }
 }

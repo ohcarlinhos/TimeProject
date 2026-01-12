@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 
-public class UpdateTimeRecordDto
+public class UpdateTimeRecordDto : IUpdateTimeRecordDto
 {
     [MaxLength(120)] public string? Title { get; set; }
     [MaxLength(240)] public string? Description { get; set; }

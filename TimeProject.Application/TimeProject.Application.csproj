@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <Folder Include="UseCases\"/>
-        <Folder Include="UseCases\User\Factories\" />
+        <Folder Include="UseCases\TimeRecord\Utils\" />
     </ItemGroup>
 
     <ItemGroup>

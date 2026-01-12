@@ -19,11 +19,11 @@ public class LoginUseCase(
 )
     : ILoginUseCase
 {
-    public async Task<ICustomResult<JwtResult>> Handle(LoginDto dto, IUserAccessLog ac)
+    public ICustomResult<IJwtResult> Handle(ILoginDto dto, IUserAccessLog ac)
     {
-        var result = new CustomResult<JwtResult>();
+        var result = new CustomResult<IJwtResult>();
 
-        var findUserPasswordResult = await getUserPasswordByEmailUseCase.Handle(dto.Email);
+        var findUserPasswordResult = getUserPasswordByEmailUseCase.Handle(dto.Email);
         if (findUserPasswordResult.HasError) return result.SetError(findUserPasswordResult.Message);
 
         var data = findUserPasswordResult.Data!;

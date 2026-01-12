@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.RemoveDependencies.General;
@@ -14,9 +15,9 @@ public class SyncAllTrMetaUseCase(
 )
     : ISyncAllTrMetaUseCase
 {
-    public async Task<ICustomResult<IEnumerable<RecordMeta>>> Handle()
+    public ICustomResult<IEnumerable<IRecordMeta>> Handle()
     {
-        IEnumerable<Infrastructure.Entities.Record> list = await db.Records.ToListAsync();
-        return new CustomResult<IEnumerable<RecordMeta>> { Data = await syncTrMetaUseCase.Handle(list, true) };
+        var list = db.Records.ToList();
+        return new CustomResult<IEnumerable<IRecordMeta>> { Data = syncTrMetaUseCase.Handle(list, true) };
     }
 }

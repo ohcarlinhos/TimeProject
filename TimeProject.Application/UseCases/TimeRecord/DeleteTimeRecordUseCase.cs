@@ -9,13 +9,13 @@ namespace TimeProject.Application.UseCases.TimeRecord;
 
 public class DeleteTimeRecordUseCase(IRecordRepository repo) : IDeleteTimeRecordUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(int id, int userId)
+    public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var entity = await repo.FindById(id, userId);
+        var entity = repo.FindById(id, userId);
 
         return entity == null
             ? result.SetError(TimeRecordMessageErrors.NotFound)
-            : result.SetData(await repo.Delete(entity));
+            : result.SetData(repo.Delete(entity));
     }
 }

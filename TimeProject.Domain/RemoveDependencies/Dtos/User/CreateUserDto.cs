@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.User;
 
-public class CreateUserDto
+public class CreateUserDto : ICreateUserDto
 {
     [MinLength(2)] [MaxLength(120)] public string Name { get; set; } = string.Empty;
     [EmailAddress] [MaxLength(64)] public string Email { get; set; } = string.Empty;

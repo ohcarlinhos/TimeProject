@@ -7,9 +7,9 @@ namespace TimeProject.Domain.Utils;
 
 public interface ITimeRecordMapDataUtil
 {
-    IEnumerable<TimeRecordHistoryDayOutDto> Handle(IEnumerable<TimeRecordHistoryDay> entity);
+    IEnumerable<ITimeRecordHistoryDayOutDto> Handle(IEnumerable<TimeRecordHistoryDay> entity);
 
-    TimeRecordOutDto Handle(IRecord entity);
+    ITimeRecordOutDto Handle(IRecord entity);
 
     IEnumerable<TimeRecordOutDto> Handle(IEnumerable<IRecord> entities);
 }

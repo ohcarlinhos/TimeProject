@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IGetUserByEmailUseCase
 {
-    Task<ICustomResult<IUser>> Handle(string email);
+    ICustomResult<IUser> Handle(string email);
 }

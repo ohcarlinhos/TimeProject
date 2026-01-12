@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Domain.Utils;
+﻿namespace TimeProject.Domain.ObjectValues;
 
 public interface IUpdateUserOptions
 {

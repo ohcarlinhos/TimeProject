@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IGetUserByOAtuhProviderIdUseCase
 {
-    Task<ICustomResult<IUser>> Handle(string provider, string id);
+    ICustomResult<IUser> Handle(string provider, string id);
 }

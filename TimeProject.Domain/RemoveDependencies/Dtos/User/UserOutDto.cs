@@ -3,7 +3,7 @@ using TimeProject.Infrastructure.Entities.Enums;
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.User;
 
-public class UserOutDto
+public class UserOutDto : IUserOutDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

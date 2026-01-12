@@ -13,10 +13,10 @@ namespace TimeProject.Application.UseCases.User;
 
 public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
 {
-    public async Task<ICustomResult<UserOutDto>> Handle(int id, UpdateRoleDto dto)
+    public ICustomResult<IUserOutDto> Handle(int id, UpdateRoleDto dto)
     {
-        var result = new CustomResult<UserOutDto>();
-        var user = await repo.FindById(id);
+        var result = new CustomResult<IUserOutDto>();
+        var user = repo.FindById(id);
 
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
@@ -26,7 +26,7 @@ public class UpdateUserRoleUseCase(IUserRepository repo, IUserMapDataUtil mapper
 
         user.UserRole = (UserRoleType)userRole;
 
-        var entity = await repo.Update(user);
+        var entity = repo.Update(user);
         result.Data = mapper.Handle(entity);
         return result;
     }

@@ -1,6 +1,6 @@
-﻿using TimeProject.Domain.Utils;
+﻿using TimeProject.Domain.ObjectValues;
 
-namespace TimeProject.Application.UseCases.User.General;
+namespace TimeProject.Application.ObjectValues;
 
 public class UpdateUserOptions : IUpdateUserOptions
 {

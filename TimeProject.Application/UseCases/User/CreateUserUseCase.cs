@@ -20,14 +20,14 @@ public class CreateUserUseCase(
     ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase
 {
-    public async Task<ICustomResult<ICreateUserResult>> Handle(CreateUserDto dto)
+    public ICustomResult<ICreateUserResult> Handle(ICreateUserDto dto)
     {
         var result = new CustomResult<ICreateUserResult>();
-        var emailAvailable = await repository.EmailIsAvailable(dto.Email);
+        var emailAvailable = repository.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
-        var entity = await repository
+        var entity = repository
             .Create(new Infrastructure.Entities.User
             {
                 Name = dto.Name,
@@ -35,7 +35,7 @@ public class CreateUserUseCase(
                 Utc = dto.Utc
             });
 
-        await createUserPasswordUseCase
+        createUserPasswordUseCase
             .Handle(entity.Id, new CreatePasswordDto { Password = dto.Password });
 
         result.Data = new CreateUserResult
@@ -44,7 +44,7 @@ public class CreateUserUseCase(
             Jwt = jwtHandler.Generate(entity)
         };
 
-        await hookHandler.Send(HookTo.Users,
+        hookHandler.Send(HookTo.Users,
             $"<b>{dto.Name}</b> acabou de criar uma conta com o email:\n<b>{dto.Email}</b>");
 
         return result;

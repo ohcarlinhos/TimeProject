@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IUpdateUserRoleUseCase
 {
-    Task<ICustomResult<UserOutDto>> Handle(int id, UpdateRoleDto dto);
+    ICustomResult<IUserOutDto> Handle(int id, UpdateRoleDto dto);
 }

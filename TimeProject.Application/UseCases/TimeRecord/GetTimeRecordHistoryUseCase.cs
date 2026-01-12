@@ -4,7 +4,6 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.TimeRecord;
 using TimeProject.Domain.Utils;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
-using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.Shared;
 
@@ -15,21 +14,20 @@ public class GetTimeRecordHistoryUseCase(
     IUserRepository userRepository,
     ITimeRecordMapDataUtil mapDataUtil) : IGetTimeRecordHistoryUseCase
 {
-    public async Task<ICustomResult<IPagination<TimeRecordHistoryDayOutDto>>> Handle(
+    public ICustomResult<IPagination<ITimeRecordHistoryDayOutDto>> Handle(
         int timeRecordId,
         int userId,
         PaginationQuery paginationQuery
     )
     {
-        var user = await userRepository.FindById(userId);
+        var user = userRepository.FindById(userId);
         if (user == null)
         {
-            return new CustomResult<IPagination<TimeRecordHistoryDayOutDto>>()
-                .SetError(UserMessageErrors.NotFound);
+            return new CustomResult<IPagination<ITimeRecordHistoryDayOutDto>>().SetError(UserMessageErrors.NotFound);
         }
 
         // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
-        var distinctDates = await repository.GetDistinctDates(timeRecordId, userId, user.Utc);
+        var distinctDates = repository.GetDistinctDates(timeRecordId, userId, user.Utc);
 
         var dates = distinctDates
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
@@ -43,9 +41,9 @@ public class GetTimeRecordHistoryUseCase(
             var initDate = dateItem.AddHours(user.Utc * -1);
             var endDate = initDate.AddDays(1);
 
-            var tpList = await repository.GetTimePeriodsWithoutTimerSession(timeRecordId, userId, initDate, endDate);
-            var tsList = await repository.GetTimerSessions(timeRecordId, userId, initDate, endDate);
-            var tmList = await repository.GetTimeMinutes(timeRecordId, userId, initDate, endDate);
+            var tpList = repository.GetTimePeriodsWithoutTimerSession(timeRecordId, userId, initDate, endDate);
+            var tsList = repository.GetTimerSessions(timeRecordId, userId, initDate, endDate);
+            var tmList = repository.GetTimeMinutes(timeRecordId, userId, initDate, endDate);
 
             if (tpList.Count == 0 && tsList.Count == 0 && tmList.Count == 0) continue;
 
@@ -60,9 +58,9 @@ public class GetTimeRecordHistoryUseCase(
             });
         }
 
-        return new CustomResult<IPagination<TimeRecordHistoryDayOutDto>>
+        return new CustomResult<IPagination<ITimeRecordHistoryDayOutDto>>
         {
-            Data = Pagination<TimeRecordHistoryDayOutDto>
+            Data = Pagination<ITimeRecordHistoryDayOutDto>
                 .Handle(mapDataUtil.Handle(historyDays), paginationQuery, distinctDates.Count)
         };
     }

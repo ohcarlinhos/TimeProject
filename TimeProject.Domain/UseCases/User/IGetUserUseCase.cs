@@ -5,5 +5,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IGetUserUseCase
 {
-    Task<ICustomResult<UserOutDto>> Handle(int id);
+    ICustomResult<IUserOutDto> Handle(int id);
 }

@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 
-public class LoginDto
+public class LoginDto : ILoginDto
 {
     [Required] [EmailAddress] public string Email { get; set; } = string.Empty;
 

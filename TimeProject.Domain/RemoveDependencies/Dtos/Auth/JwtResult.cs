@@ -1,6 +1,6 @@
 namespace TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 
-public class JwtResult
+public class JwtResult : IJwtResult
 {
     public string Token { get; set; } = string.Empty;
     public string Refresh { get; set; } = string.Empty;

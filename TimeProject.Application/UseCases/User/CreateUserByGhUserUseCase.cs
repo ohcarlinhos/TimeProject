@@ -1,5 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
@@ -14,9 +15,9 @@ public class CreateUserByGhUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGhUserUseCase
 {
-    public async Task<ICustomResult<Infrastructure.Entities.User>> Handle(CreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
+    public ICustomResult<IUser> Handle(ICreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
     {
-        var result = new CustomResult<Infrastructure.Entities.User>();
+        var result = new CustomResult<IUser>();
 
         if (string.IsNullOrEmpty(dto.UserProviderId)) return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
 
@@ -25,11 +26,11 @@ public class CreateUserByGhUserUseCase(
 
         if (filtredEmails.Count != 0 && primaryEmail != null)
         {
-            var userWithPrimaryEmail = await repository.FindByEmail(primaryEmail.Email);
+            var userWithPrimaryEmail = repository.FindByEmail(primaryEmail.Email);
 
             if (userWithPrimaryEmail != null)
             {
-                await oAuthRepository.Create(new OAuth
+                oAuthRepository.Create(new OAuth
                 {
                     UserId = userWithPrimaryEmail.Id,
                     Provider = "github",
@@ -43,10 +44,10 @@ public class CreateUserByGhUserUseCase(
 
             foreach (var secondaryEmail in filtredEmails)
             {
-                var userWithSecondaryEmail = await repository.FindByEmail(secondaryEmail.Email);
+                var userWithSecondaryEmail = repository.FindByEmail(secondaryEmail.Email);
                 if (userWithSecondaryEmail == null) continue;
 
-                await oAuthRepository.Create(new OAuth
+                oAuthRepository.Create(new OAuth
                 {
                     UserId = userWithSecondaryEmail.Id,
                     Provider = "github",
@@ -57,7 +58,7 @@ public class CreateUserByGhUserUseCase(
             }
         }
 
-        var userEntity = await repository
+        var userEntity = repository
             .Create(new Infrastructure.Entities.User
             {
                 Name = dto.Name,
@@ -65,7 +66,7 @@ public class CreateUserByGhUserUseCase(
                 Utc = dto.Utc
             });
 
-        await oAuthRepository.Create(new OAuth
+        oAuthRepository.Create(new OAuth
         {
             UserId = userEntity.Id,
             Provider = "github",

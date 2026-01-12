@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IDisableUserUseCase
 {
-    Task<ICustomResult<bool>> Handle(int id, DisableUserDto dto);
+    ICustomResult<bool> Handle(int id, DisableUserDto dto);
 }

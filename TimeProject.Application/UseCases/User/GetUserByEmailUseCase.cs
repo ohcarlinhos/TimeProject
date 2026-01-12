@@ -1,5 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
@@ -10,10 +11,10 @@ namespace TimeProject.Application.UseCases.User;
 
 public class GetUserByEmailUseCase(IUserRepository repo) : IGetUserByEmailUseCase
 {
-    public async Task<ICustomResult<Infrastructure.Entities.User>> Handle(string email)
+    public ICustomResult<IUser> Handle(string email)
     {
-        var result = new CustomResult<Infrastructure.Entities.User>();
-        var user = await repo.FindByEmail(email);
+        var result = new CustomResult<IUser>();
+        var user = repo.FindByEmail(email);
 
         return user == null ? result.SetError(UserMessageErrors.NotFound) : result.SetData(user);
     }

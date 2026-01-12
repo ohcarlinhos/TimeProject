@@ -20,16 +20,16 @@ public class SendRecoveryEmailUseCase(
     IHookHandler hookHandler
 ) : ISendRecoveryEmailUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(string email, string recoveryUrl)
+    public ICustomResult<bool> Handle(string email, string recoveryUrl)
     {
         var result = new CustomResult<bool>();
 
-        var findUserResult = await getUserByEmailUseCase.Handle(email);
+        var findUserResult = getUserByEmailUseCase.Handle(email);
         if (findUserResult.HasError) return result.SetError(findUserResult.Message);
 
         var user = findUserResult.Data!;
 
-        var createRecoveryCodeResult = await createConfirmCodeUseCase.Handle(user.Id, ConfirmCodeType.Recovery);
+        var createRecoveryCodeResult = createConfirmCodeUseCase.Handle(user.Id, ConfirmCodeType.Recovery);
 
         var recoveryCode = createRecoveryCodeResult.Data!;
         if (recoveryCode.WasSent) return result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox);
@@ -42,11 +42,11 @@ public class SendRecoveryEmailUseCase(
                 recoveryCode.ExpireDate
             ));
 
-            await setWasSentConfirmCodeUseCase.Handle(recoveryCode.Id);
+            setWasSentConfirmCodeUseCase.Handle(recoveryCode.Id);
         }
         catch
         {
-            await hookHandler.SendError($"Não foi possível enviar o e-mail de recuperação para:\n<b>{user.Email}</b>");
+            hookHandler.SendError($"Não foi possível enviar o e-mail de recuperação para:\n<b>{user.Email}</b>");
             return result.SetError(AuthMessageErrors.SendEmailError);
         }
 

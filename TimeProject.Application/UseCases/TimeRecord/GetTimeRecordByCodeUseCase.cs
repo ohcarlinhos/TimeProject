@@ -12,10 +12,10 @@ namespace TimeProject.Application.UseCases.TimeRecord;
 public class GetTimeRecordByCodeUseCase(IRecordRepository repo, ITimeRecordMapDataUtil mapDataUtil)
     : IGetTimeRecordByCodeUseCase
 {
-    public async Task<ICustomResult<TimeRecordOutDto>> Handle(string code, int userId)
+    public ICustomResult<ITimeRecordOutDto> Handle(string code, int userId)
     {
-        var result = new CustomResult<TimeRecordOutDto>();
-        var entity = await repo.Details(code, userId);
+        var result = new CustomResult<ITimeRecordOutDto>();
+        var entity = repo.Details(code, userId);
 
         return entity == null
             ? result.SetError(TimeRecordMessageErrors.NotFound)

@@ -4,5 +4,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface IDeleteUserUseCase
 {
-    Task<ICustomResult<bool>> Handle(int id);
+    ICustomResult<bool> Handle(int id);
 }

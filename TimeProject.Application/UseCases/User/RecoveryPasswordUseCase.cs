@@ -13,17 +13,17 @@ public class RecoveryPasswordUseCase(
     IValidateConfirmCodeUseCase validateConfirmCodeUseCase
 ) : IRecoveryPasswordUseCase
 {
-    public async Task<ICustomResult<bool>> Handle(RecoveryPasswordDto dto)
+    public ICustomResult<bool> Handle(RecoveryPasswordDto dto)
     {
         var result = new CustomResult<bool>();
 
-        var validateConfirmCodeResult = await validateConfirmCodeUseCase.Handle(dto.Code, dto.Email);
+        var validateConfirmCodeResult = validateConfirmCodeUseCase.Handle(dto.Code, dto.Email);
         if (validateConfirmCodeResult.HasError) return result.SetError(validateConfirmCodeResult.Message);
 
-        var updatePasswordResult = await createOrUpdateUserPasswordByEmailUseCase.Handle(dto.Email, dto.Password);
+        var updatePasswordResult = createOrUpdateUserPasswordByEmailUseCase.Handle(dto.Email, dto.Password);
         if (updatePasswordResult.HasError) return result.SetError(updatePasswordResult.Message);
 
-        await setIsUsedConfirmCodeUseCase.Handle(dto.Code);
+        setIsUsedConfirmCodeUseCase.Handle(dto.Code);
 
         return result.SetData(true);
     }

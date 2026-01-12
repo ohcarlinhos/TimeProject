@@ -11,14 +11,14 @@ namespace TimeProject.Application.UseCases.User;
 public class GetUserPasswordByEmailUseCase(IUserPasswordRepository repository, IUserRepository userRepository)
     : IGetUserPasswordByEmailUseCase
 {
-    public async Task<ICustomResult<IGetUserPasswordByEmailResult>> Handle(string email)
+    public ICustomResult<IGetUserPasswordByEmailResult> Handle(string email)
     {
         var result = new CustomResult<IGetUserPasswordByEmailResult>();
 
-        var user = await userRepository.FindByEmail(email);
+        var user = userRepository.FindByEmail(email);
         if (user == null) return result.SetError(UserMessageErrors.NotFound);
 
-        var userPassword = await repository.FindByUserId(user.Id);
+        var userPassword = repository.FindByUserId(user.Id);
         return userPassword == null
             ? result.SetError(UserMessageErrors.PasswordNotAllowed)
             : result.SetData(new GetUserPasswordByEmailResult

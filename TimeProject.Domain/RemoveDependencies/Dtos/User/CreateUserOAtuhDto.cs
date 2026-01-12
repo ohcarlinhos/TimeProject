@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.User;
 
-public class CreateUserOAtuhDto
+public class CreateUserOAtuhDto : ICreateUserOAtuhDto
 {
     [MinLength(2)] [MaxLength(120)] public string Name { get; set; } = string.Empty;
     [Required] public string UserProviderId { get; set; } = string.Empty;

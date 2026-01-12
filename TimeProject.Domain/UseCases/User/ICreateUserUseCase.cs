@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface ICreateUserUseCase
 {
-    Task<ICustomResult<ICreateUserResult>> Handle(CreateUserDto dto);
+    ICustomResult<ICreateUserResult> Handle(ICreateUserDto dto);
 }

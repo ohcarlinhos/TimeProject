@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface IUpdateTimeRecordUseCase
 {
-    Task<ICustomResult<TimeRecordOutDto>> Handle(int id, UpdateTimeRecordDto dto, int userId);
+    ICustomResult<ITimeRecordOutDto> Handle(int id, UpdateTimeRecordDto dto, int userId);
 }

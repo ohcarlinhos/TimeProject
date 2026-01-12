@@ -17,18 +17,18 @@ public class UpdateTimeRecordUseCase(
 )
     : IUpdateTimeRecordUseCase
 {
-    public async Task<ICustomResult<TimeRecordOutDto>> Handle(int id, UpdateTimeRecordDto dto, int userId)
+    public ICustomResult<ITimeRecordOutDto> Handle(int id, UpdateTimeRecordDto dto, int userId)
     {
-        var result = new CustomResult<TimeRecordOutDto>();
+        var result = new CustomResult<ITimeRecordOutDto>();
 
-        var timeRecord = await repo.FindById(id, userId);
+        var timeRecord = repo.FindById(id, userId);
 
         if (timeRecord == null)
             return result.SetError(TimeRecordMessageErrors.NotFound);
 
         if (dto.CategoryId != null)
         {
-            var category = await categoryRepo.FindById((int)dto.CategoryId, userId);
+            var category = categoryRepo.FindById((int)dto.CategoryId, userId);
             if (category == null) return result.SetError(TimeRecordMessageErrors.CategoryNotFound);
             timeRecord.CategoryId = dto.CategoryId;
         }
@@ -38,7 +38,7 @@ public class UpdateTimeRecordUseCase(
 
         if (timeRecord.Code != dto.Code)
         {
-            var trByCode = await repo.FindByCode(dto.Code, userId);
+            var trByCode = repo.FindByCode(dto.Code, userId);
             if (trByCode != null) return result.SetError(TimeRecordMessageErrors.AlreadyInUse);
         }
 
@@ -48,8 +48,8 @@ public class UpdateTimeRecordUseCase(
         timeRecord.Description = dto.Description;
         timeRecord.ExternalLink = dto.ExternalLink;
 
-        await syncTrMetaUseCase.Handle(timeRecord.Id);
+        syncTrMetaUseCase.Handle(timeRecord.Id);
 
-        return result.SetData(mapDataUtil.Handle(await repo.Update(timeRecord)));
+        return result.SetData(mapDataUtil.Handle(repo.Update(timeRecord)));
     }
 }

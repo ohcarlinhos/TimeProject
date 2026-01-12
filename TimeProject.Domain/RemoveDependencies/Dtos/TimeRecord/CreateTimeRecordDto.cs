@@ -3,7 +3,7 @@ using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.TimeRecord;
 
-public class CreateTimeRecordDto
+public class CreateTimeRecordDto : ICreateTimeRecordDto
 {
     [MaxLength(120)] public string? Title { get; set; }
     [MaxLength(240)] public string? Description { get; set; }
@@ -15,5 +15,5 @@ public class CreateTimeRecordDto
 
     public int? CategoryId { get; set; }
 
-    [Required] public List<TimePeriodDto>? TimePeriods { get; set; }
+    [Required] public IList<ITimePeriodDto>? TimePeriods { get; set; }
 }

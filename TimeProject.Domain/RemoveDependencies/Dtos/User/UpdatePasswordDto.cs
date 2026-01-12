@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.User;
 
-public class UpdatePasswordDto
+public class UpdatePasswordDto : IUpdatePasswordDto
 {
     [MinLength(8)]
     [MaxLength(48)]

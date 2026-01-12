@@ -5,7 +5,7 @@ namespace TimeProject.Domain.UseCases.User;
 
 public interface ICreateOrUpdateUserPasswordUseCase
 {
-    public Task<ICustomResult<bool>> Handle(int userId, CreatePasswordDto dto);
-    public Task<ICustomResult<bool>> Handle(int userId, UpdatePasswordDto dto);
-    public Task<ICustomResult<bool>> Handle(int userId, UpdateByAdminPasswordDto dto);
+    public ICustomResult<bool> Handle(int userId, ICreatePasswordDto dto);
+    public ICustomResult<bool> Handle(int userId, IUpdatePasswordDto dto);
+    public ICustomResult<bool> Handle(int userId, IUpdateByAdminPasswordDto dto);
 }

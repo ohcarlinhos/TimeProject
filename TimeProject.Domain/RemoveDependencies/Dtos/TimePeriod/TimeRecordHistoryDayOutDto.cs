@@ -3,7 +3,7 @@ using TimeProject.Domain.RemoveDependencies.Util;
 
 namespace TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
 
-public class TimeRecordHistoryDayOutDto
+public class TimeRecordHistoryDayOutDto : ITimeRecordHistoryDayOutDto
 {
     public DateTime Date { get; set; }
 

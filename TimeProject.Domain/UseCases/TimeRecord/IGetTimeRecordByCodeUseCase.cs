@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.TimeRecord;
 
 public interface IGetTimeRecordByCodeUseCase
 {
-    Task<ICustomResult<TimeRecordOutDto>> Handle(string code, int userId);
+    ICustomResult<ITimeRecordOutDto> Handle(string code, int userId);
 }

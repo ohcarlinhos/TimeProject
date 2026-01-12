@@ -1,5 +1,6 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.User;
@@ -14,17 +15,18 @@ public class CreateUserByGoogleUserUseCase(
     IOAuthRepository oAuthRepository
 ) : ICreateUserByGoogleUserUseCase
 {
-    public async Task<ICustomResult<Infrastructure.Entities.User>> Handle(CreateUserOAtuhDto dto, string email)
+    public ICustomResult<IUser> Handle(CreateUserOAtuhDto dto, string email)
     {
-        var result = new CustomResult<Infrastructure.Entities.User>();
+        var result = new CustomResult<IUser>();
 
-        if (string.IsNullOrEmpty(dto.UserProviderId)) return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
+        if (string.IsNullOrEmpty(dto.UserProviderId)) 
+            return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
 
-        var userWithEmail = await repository.FindByEmail(email);
+        var userWithEmail = repository.FindByEmail(email);
 
         if (userWithEmail != null)
         {
-            await oAuthRepository.Create(new OAuth
+            oAuthRepository.Create(new OAuth
             {
                 UserId = userWithEmail.Id,
                 Provider = "google",
@@ -34,7 +36,7 @@ public class CreateUserByGoogleUserUseCase(
             return result.SetData(userWithEmail);
         }
 
-        var userEntity = await repository
+        var userEntity = repository
             .Create(new Infrastructure.Entities.User
             {
                 Name = dto.Name,
@@ -42,7 +44,7 @@ public class CreateUserByGoogleUserUseCase(
                 Utc = dto.Utc
             });
 
-        await oAuthRepository.Create(new OAuth
+        oAuthRepository.Create(new OAuth
         {
             UserId = userEntity.Id,
             Provider = "google",
