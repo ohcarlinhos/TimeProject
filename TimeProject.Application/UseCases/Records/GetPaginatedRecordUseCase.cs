@@ -1,10 +1,10 @@
 ﻿using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.RemoveDependencies.Dtos.Record;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;
-using TimeProject.Domain.RemoveDependencies.General;
-using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Records;
@@ -12,7 +12,7 @@ namespace TimeProject.Application.UseCases.Records;
 public class GetPaginatedRecordUseCase(IRecordRepository repo, IRecordMapDataUtil mapDataUtil)
     : IGetPaginatedRecordUseCase
 {
-    public ICustomResult<IPagination<IRecordOutDto>> Handle(PaginationQuery paginationQuery, int userId)
+    public ICustomResult<IPagination<IRecordOutDto>> Handle(IPaginationQuery paginationQuery, int userId)
     {
         var result = repo.Index(paginationQuery, userId);
 

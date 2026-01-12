@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.Codes;
 using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
-using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -16,6 +16,6 @@ public class ConfirmCodeController(IGetRegisterCodeInfoUseCase getRegisterCodeIn
     [Authorize]
     public ActionResult<IConfirmCodeOutDto> HasVerifyCodeActive()
     {
-        return HandleResponse(getRegisterCodeInfoUseCase.Handle(UserClaims.Id(User)));
+        return HandleResponse(getRegisterCodeInfoUseCase.Handle(UserClaimsUtil.Id(User)));
     }
 }

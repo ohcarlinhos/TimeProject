@@ -1,10 +1,9 @@
 ﻿using System.Security.Claims;
-using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 
-namespace TimeProject.Domain.RemoveDependencies.Util;
+namespace TimeProject.Infrastructure.Utils;
 
-public static class UserClaims
+public static class UserClaimsUtil
 {
     public static int Id(ClaimsPrincipal p)
     {

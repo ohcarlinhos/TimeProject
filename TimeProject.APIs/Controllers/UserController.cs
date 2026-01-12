@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.RemoveDependencies.General.Pagination;
-using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Users;
+using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -74,7 +75,7 @@ public class UserController(
     [Authorize(Policy = "IsActive")]
     public ActionResult<IUserOutDto> Myself()
     {
-        return HandleResponse(getUserUseCase.Handle(UserClaims.Id(User)));
+        return HandleResponse(getUserUseCase.Handle(UserClaimsUtil.Id(User)));
     }
 
     // [HttpPost, Route("recovery")]

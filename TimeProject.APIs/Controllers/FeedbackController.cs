@@ -4,8 +4,8 @@ using TimeProject.APIs.Controllers.Attributes;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.Feedbacks;
 using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
-using TimeProject.Domain.RemoveDependencies.Util;
 using TimeProject.Infrastructure.ObjectValues.Feedbacks;
+using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -21,7 +21,7 @@ public class FeedbackController(
     public ActionResult<bool> Send(FeedbackDto feedbackDto)
     {
         return HandleResponse(sendFeedbackUseCase
-            .Handle(feedbackDto, UserClaims.Name(User), UserClaims.Email(User), UserClaims.IsVerified(User)));
+            .Handle(feedbackDto, UserClaimsUtil.Name(User), UserClaimsUtil.Email(User), UserClaimsUtil.IsVerified(User)));
     }
 
     [HttpPost("public")]

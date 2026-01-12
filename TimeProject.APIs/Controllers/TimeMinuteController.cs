@@ -3,8 +3,8 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.Minutes;
-using TimeProject.Domain.RemoveDependencies.Util;
 using TimeProject.Infrastructure.ObjectValues.Minutes;
+using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -18,7 +18,7 @@ public class TimeMinuteController(
     [Route("list/{id:int}")]
     public ActionResult<IList<IMinute>> Create([FromBody] CreateMinuteListDto dto, int id)
     {
-        var result = createTimeMinuteByListUseCase.Handle(dto, id, UserClaims.Id(User));
+        var result = createTimeMinuteByListUseCase.Handle(dto, id, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -27,6 +27,6 @@ public class TimeMinuteController(
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deleteTimeMinuteUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deleteTimeMinuteUseCase.Handle(id, UserClaimsUtil.Id(User)));
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.UseCases.Sessions;
-using TimeProject.Domain.RemoveDependencies.Util;
+using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -15,6 +15,6 @@ public class TimerSessionController(IDeleteTimerSessionUseCase deleteTimerSessio
     [Route("{id:int}")]
     public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(deleteTimerSessionUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deleteTimerSessionUseCase.Handle(id, UserClaimsUtil.Id(User)));
     }
 }

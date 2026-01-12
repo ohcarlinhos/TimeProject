@@ -1,11 +1,11 @@
 ﻿using TimeProject.Application.ObjectValues;
+using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Categories;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
-using TimeProject.Domain.RemoveDependencies.General;
-using TimeProject.Domain.RemoveDependencies.General.Pagination;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.ObjectValues;
 
 namespace TimeProject.Application.UseCases.Category;
 

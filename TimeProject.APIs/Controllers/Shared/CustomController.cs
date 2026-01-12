@@ -2,8 +2,8 @@
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.RemoveDependencies.General;
-using TimeProject.Domain.RemoveDependencies.Util;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers.Shared;
 
@@ -31,12 +31,12 @@ public class CustomController : ControllerBase
 
     protected bool IsAdmin()
     {
-        return UserRoleType.Admin.ToString() == UserClaims.Role(User);
+        return UserRoleType.Admin.ToString() == UserClaimsUtil.Role(User);
     }
 
     protected bool HasAuthorization(int id)
     {
-        return UserClaims.Id(User) == id || IsAdmin();
+        return UserClaimsUtil.Id(User) == id || IsAdmin();
     }
 
     public string? GetClientIpAddress(HttpContext context)

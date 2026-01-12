@@ -1,4 +1,6 @@
-﻿namespace TimeProject.Domain.RemoveDependencies.General.Pagination;
+﻿using TimeProject.Domain.ObjectValues;
+
+namespace TimeProject.Infrastructure.ObjectValues;
 
 public class PaginationQuery : IPaginationQuery
 {

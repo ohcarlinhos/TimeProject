@@ -1,6 +1,5 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.Category;
-using TimeProject.Domain.RemoveDependencies.General;
-using TimeProject.Domain.RemoveDependencies.General.Pagination;
+﻿using TimeProject.Domain.ObjectValues;
+using TimeProject.Domain.RemoveDependencies.Dtos.Category;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Categories;
