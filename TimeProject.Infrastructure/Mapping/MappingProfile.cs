@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using TimeProject.Domain.Dtos.Users;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.ObjectValues.Categories;
 using TimeProject.Infrastructure.ObjectValues.Codes;
 using TimeProject.Infrastructure.ObjectValues.Periods;

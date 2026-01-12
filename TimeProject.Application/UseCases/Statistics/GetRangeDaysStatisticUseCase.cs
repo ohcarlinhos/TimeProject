@@ -4,7 +4,7 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Statistics;
 using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.ObjectValues.Statistics;
 using TimeProject.Infrastructure.Utils;
 using TimeProject.Infrastructure.Utils.Interfaces;
@@ -117,7 +117,7 @@ public class GetRangeDaysStatisticUseCase(
 
         var timeMinutes = statisticRepository.GetTimeMinutesByRange(userId, initDate, endDate, recordId) as List<Minute>;
 
-        var records = new List<TimeProject.Infrastructure.Entities.Record>();
+        var records = new List<Infrastructure.Database.Entities.Record>();
         if (recordId == null && !skipRangeProgress)
         {
             var trIdList = new List<int>();

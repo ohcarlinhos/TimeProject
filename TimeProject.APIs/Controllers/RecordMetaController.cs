@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.UseCases.Records;
 
 namespace TimeProject.APIs.Controllers;

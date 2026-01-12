@@ -2,7 +2,7 @@
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Domain.UseCases.Records;

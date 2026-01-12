@@ -1,4 +1,4 @@
-﻿using TimeProject.Infrastructure.Entities.Enums;
+﻿using TimeProject.Infrastructure.Database.Entities.Enums;
 
 namespace TimeProject.Domain.Dtos.Users;
 

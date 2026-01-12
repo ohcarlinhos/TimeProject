@@ -5,7 +5,7 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.UseCases.Sessions;
 using TimeProject.Domain.Shared;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Sessions;

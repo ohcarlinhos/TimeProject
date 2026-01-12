@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.UseCases.Minutes;
 using TimeProject.Infrastructure.ObjectValues.Minutes;
 using TimeProject.Infrastructure.Utils;

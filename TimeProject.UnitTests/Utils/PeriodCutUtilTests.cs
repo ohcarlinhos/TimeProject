@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.UnitTests.Utils;

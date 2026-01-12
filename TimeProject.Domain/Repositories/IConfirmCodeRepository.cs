@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Entities;
-using TimeProject.Infrastructure.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Infrastructure.Database.Entities.Enums;
 
 namespace TimeProject.Domain.Repositories;
 

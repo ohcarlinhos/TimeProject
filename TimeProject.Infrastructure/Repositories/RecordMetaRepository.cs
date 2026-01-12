@@ -1,5 +1,5 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.Database;
 using TimeProject.Infrastructure.Utils;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TimeProject.Infrastructure.Entities;
-using TimeProject.Infrastructure.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Utils;
 

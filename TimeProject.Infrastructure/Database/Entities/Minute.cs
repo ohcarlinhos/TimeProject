@@ -1,6 +1,6 @@
 using TimeProject.Domain.Entities;
 
-namespace TimeProject.Infrastructure.Entities;
+namespace TimeProject.Infrastructure.Database.Entities;
 
 public class Minute : IMinute
 {

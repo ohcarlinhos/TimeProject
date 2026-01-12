@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.ObjectValues;
 
 namespace TimeProject.Infrastructure.Utils;

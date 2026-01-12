@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using TimeProject.Infrastructure.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities.Enums;
 
 namespace TimeProject.Infrastructure.Utils;
 

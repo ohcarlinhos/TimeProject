@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Codes;
 using TimeProject.Domain.Dtos.Codes;

@@ -5,7 +5,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.UseCases.Categories;
 using TimeProject.Domain.Dtos.Categories;
-using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Categories;
 using TimeProject.Infrastructure.Utils;

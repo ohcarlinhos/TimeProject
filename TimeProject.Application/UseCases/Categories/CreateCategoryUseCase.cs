@@ -17,7 +17,7 @@ public class CreateCategoryUseCase(ICategoryRepository repo) : ICreateCategoryUs
         if (category != null)
             return result.SetData(category);
 
-        result.Data = repo.Create(new Infrastructure.Entities.Category
+        result.Data = repo.Create(new Infrastructure.Database.Entities.Category
         {
             UserId = userId,
             Name = dto.Name

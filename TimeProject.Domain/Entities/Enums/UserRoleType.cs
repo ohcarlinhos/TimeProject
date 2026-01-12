@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Infrastructure.Entities.Enums;
+﻿namespace TimeProject.Infrastructure.Database.Entities.Enums;
 
 public enum UserRoleType
 {

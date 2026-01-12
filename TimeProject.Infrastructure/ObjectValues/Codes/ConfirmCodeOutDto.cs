@@ -1,5 +1,5 @@
 ﻿using TimeProject.Domain.Dtos.Codes;
-using TimeProject.Infrastructure.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities.Enums;
 
 namespace TimeProject.Infrastructure.ObjectValues.Codes;
 

@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities.Enums;
 
-namespace TimeProject.Infrastructure.Entities;
+namespace TimeProject.Infrastructure.Database.Entities;
 
 public class User : IUser
 {
