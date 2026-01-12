@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 using TimeProject.APIs.Controllers.Middlewares;
-using TimeProject.Application.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Application.UseCases.Auth;
 using TimeProject.Application.UseCases.Category;
 using TimeProject.Application.UseCases.Code;
@@ -29,6 +29,7 @@ using TimeProject.Infrastructure.Handlers;
 using TimeProject.Infrastructure.Integrations;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.Mapping;
+using TimeProject.Infrastructure.ObjectValues.Users;
 using TimeProject.Infrastructure.Repositories;
 using TimeProject.Infrastructure.Settings;
 using TimeProject.Infrastructure.Utils;

@@ -1,8 +1,8 @@
-﻿using TimeProject.Domain.ObjectValues;
-using TimeProject.Domain.Dtos.Auths;
+﻿using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Dtos.Users;
+using TimeProject.Domain.ObjectValues;
 
-namespace TimeProject.Application.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues.Users;
 
 public class CreateUserResult : ICreateUserResult
 {

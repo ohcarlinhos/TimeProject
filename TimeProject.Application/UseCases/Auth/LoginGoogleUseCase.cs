@@ -1,6 +1,5 @@
 ﻿using RestSharp;
 using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.CustomLogs;
@@ -11,6 +10,7 @@ using TimeProject.Domain.Dtos.Users;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Auths;
 using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Auth;

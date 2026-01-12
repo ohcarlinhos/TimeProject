@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Shared;
 
-namespace TimeProject.Application.ObjectValues;
+namespace TimeProject.Infrastructure.ObjectValues;
 
 public class CustomResult<T> : ICustomResult<T>
 {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TimeProject.Application.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.Repositories;

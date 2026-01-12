@@ -1,5 +1,5 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Application.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
