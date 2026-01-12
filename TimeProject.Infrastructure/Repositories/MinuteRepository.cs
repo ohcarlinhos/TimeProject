@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class MinuteRecordRepository(ProjectContext db) : IMinuteRecordRepository
+public class MinuteRepository(ProjectContext db) : IMinuteRepository
 {
     public IMinute Create(IMinute entity)
     {

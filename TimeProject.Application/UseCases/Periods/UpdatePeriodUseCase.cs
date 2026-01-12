@@ -7,14 +7,13 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.ObjectValues.Records;
 
 namespace TimeProject.Application.UseCases.Periods;
 
 public class UpdatePeriodUseCase(
-    IPeriodRecordRepository repository,
+    IPeriodRepository repository,
     ISyncRecordMetaUseCase syncRecordMetaUseCase,
     IPeriodValidateUtil periodValidateUtil
 ) : IUpdatePeriodUseCase

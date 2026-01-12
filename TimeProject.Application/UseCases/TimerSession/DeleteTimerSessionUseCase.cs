@@ -10,8 +10,8 @@ using TimeProject.Infrastructure.Entities;
 namespace TimeProject.Application.UseCases.TimerSession;
 
 public class DeleteTimerSessionUseCase(
-    ITimerSessionRepository repo,
-    IPeriodRecordRepository tpRepo,
+    ISessionRepository repo,
+    IPeriodRepository tpRepo,
     ISyncRecordMetaUseCase syncRecordMetaUseCase) : IDeleteTimerSessionUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)

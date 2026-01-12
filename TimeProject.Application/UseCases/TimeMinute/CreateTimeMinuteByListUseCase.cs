@@ -11,7 +11,7 @@ using TimeProject.Domain.Shared;
 namespace TimeProject.Application.UseCases.TimeMinute;
 
 public class CreateTimeMinuteByListUseCase(
-    IMinuteRecordRepository mrRepository,
+    IMinuteRepository mrRepository,
     IRecordRepository recordRepository,
     IUserRepository userRepository,
     ISyncRecordMetaUseCase syncRecordMetaUseCase

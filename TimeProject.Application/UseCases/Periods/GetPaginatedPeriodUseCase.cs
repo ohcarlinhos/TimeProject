@@ -9,7 +9,7 @@ using TimeProject.Infrastructure.ObjectValues;
 
 namespace TimeProject.Application.UseCases.Periods;
 
-public class GetPaginatedPeriodUseCase(IPeriodRecordRepository repository, IPeriodMapDataUtil mapDataUtil)
+public class GetPaginatedPeriodUseCase(IPeriodRepository repository, IPeriodMapDataUtil mapDataUtil)
     : IGetPaginatedPeriodUseCase
 {
     public ICustomResult<IPagination<IPeriodOutDto>> Handle(int recordId, int userId,

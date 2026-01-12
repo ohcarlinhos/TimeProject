@@ -12,8 +12,8 @@ using TimeProject.Infrastructure.ObjectValues.Records;
 namespace TimeProject.Application.UseCases.Periods;
 
 public class CreatePeriodByListUseCase(
-    IPeriodRecordRepository repository,
-    ITimerSessionRepository sessionRepository,
+    IPeriodRepository repository,
+    ISessionRepository sessionRepository,
     ISyncRecordMetaUseCase syncRecordMetaUseCase,
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodByListUseCase

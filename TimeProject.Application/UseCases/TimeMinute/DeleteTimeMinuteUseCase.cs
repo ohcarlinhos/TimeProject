@@ -8,7 +8,7 @@ using TimeProject.Domain.Shared;
 namespace TimeProject.Application.UseCases.TimeMinute;
 
 public class DeleteTimeMinuteUseCase(
-    IMinuteRecordRepository recordRepository,
+    IMinuteRepository repository,
     ISyncRecordMetaUseCase syncRecordMetaUseCase
 ) : IDeleteTimeMinuteUseCase
 {
@@ -16,10 +16,10 @@ public class DeleteTimeMinuteUseCase(
     {
         var result = new CustomResult<bool>();
 
-        var timeMinute = recordRepository.FindById(id, userId);
+        var timeMinute = repository.FindById(id, userId);
         if (timeMinute == null) return result.SetError(TimeMinuteMessageErrors.NotFound);
 
-        var data = recordRepository.Delete(timeMinute);
+        var data = repository.Delete(timeMinute);
         syncRecordMetaUseCase.Handle(timeMinute.RecordId);
 
         return result.SetData(data);

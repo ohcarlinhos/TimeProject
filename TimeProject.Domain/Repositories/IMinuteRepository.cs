@@ -2,7 +2,7 @@ using TimeProject.Domain.Entities;
 
 namespace TimeProject.Domain.Repositories;
 
-public interface IMinuteRecordRepository
+public interface IMinuteRepository
 {
     IMinute Create(IMinute entity);
     IList<IMinute> CreateByList(IList<IMinute> entities);

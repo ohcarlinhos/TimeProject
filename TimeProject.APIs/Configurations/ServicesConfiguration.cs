@@ -154,14 +154,14 @@ public static class ServicesConfiguration
 
         #region TimerSession
 
-        builder.Services.AddScoped<ITimerSessionRepository, TimerSessionRepository>();
+        builder.Services.AddScoped<ISessionRepository, SessionRepository>();
         builder.Services.AddScoped<IDeleteTimerSessionUseCase, DeleteTimerSessionUseCase>();
 
         #endregion
 
         #region TimePeriod
 
-        builder.Services.AddScoped<IPeriodRecordRepository, PeriodRecordRepository>();
+        builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
 
         builder.Services.AddScoped<IPeriodMapDataUtil, PeriodMapDataUtil>();
         builder.Services.AddScoped<IPeriodCutUtil, PeriodCutUtil>();
@@ -216,7 +216,7 @@ public static class ServicesConfiguration
 
         #region TimeMinute
 
-        builder.Services.AddScoped<IMinuteRecordRepository, MinuteRecordRepository>();
+        builder.Services.AddScoped<IMinuteRepository, MinuteRepository>();
         builder.Services.AddScoped<ICreateTimeMinuteByListUseCase, CreateTimeMinuteByListUseCase>();
         builder.Services.AddScoped<IDeleteTimeMinuteUseCase, DeleteTimeMinuteUseCase>();
 

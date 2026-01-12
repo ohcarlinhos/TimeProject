@@ -6,7 +6,7 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Infrastructure.Repositories;
 
-public class PeriodRecordRepository(ProjectContext db) : IPeriodRecordRepository
+public class PeriodRepository(ProjectContext db) : IPeriodRepository
 {
     public IList<IPeriod> Index(int timeRecordId, int userId, IPaginationQuery paginationQuery)
     {

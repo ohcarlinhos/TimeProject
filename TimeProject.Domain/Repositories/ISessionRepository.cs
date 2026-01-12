@@ -2,7 +2,7 @@
 
 namespace TimeProject.Domain.Repositories;
 
-public interface ITimerSessionRepository
+public interface ISessionRepository
 {
     ISession Create(ISession entity);
     ISession? FindById(int id, int userId);

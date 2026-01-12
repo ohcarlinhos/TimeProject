@@ -7,13 +7,12 @@ using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 
 namespace TimeProject.Application.UseCases.Periods;
 
 public class CreatePeriodUseCase(
-    IPeriodRecordRepository repository,
+    IPeriodRepository repository,
     IGetRecordByIdUseCase getRecordByIdUseCase,
     ISyncRecordMetaUseCase syncRecordMetaUseCase,
     IPeriodValidateUtil periodValidateUtil
