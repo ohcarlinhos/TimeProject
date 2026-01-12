@@ -27,7 +27,7 @@ public class AuthController(
 
     [HttpPost]
     [Route("login/github")]
-    public async Task<ActionResult<JwtResult>> LoginGithub([FromBody] LoginGithubDto dto)
+    public async Task<ActionResult<IJwtResult>> LoginGithub([FromBody] LoginGithubDto dto)
     {
         return HandleResponse(await loginGithubUseCase.Handle(dto, new UserAccessLog
         {
@@ -40,7 +40,7 @@ public class AuthController(
 
     [HttpPost]
     [Route("login/google")]
-    public async Task<ActionResult<JwtResult>> LoginGoogle([FromBody] LoginGoogleDto dto)
+    public async Task<ActionResult<IJwtResult>> LoginGoogle([FromBody] LoginGoogleDto dto)
     {
         return HandleResponse(await loginGoogleUseCase.Handle(dto, new UserAccessLog
         {

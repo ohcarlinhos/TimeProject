@@ -13,8 +13,8 @@ public class TimerSessionController(IDeleteTimerSessionUseCase deleteTimerSessio
 {
     [HttpDelete]
     [Route("{id:int}")]
-    public async Task<ActionResult<bool>> Delete(int id)
+    public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(await deleteTimerSessionUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deleteTimerSessionUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

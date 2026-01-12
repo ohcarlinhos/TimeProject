@@ -21,78 +21,78 @@ public class UserController(
 {
     [HttpGet]
     [Authorize(Policy = "IsAdmin")]
-    public ActionResult<IPagination<UserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<IPagination<IUserOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }
 
     // [HttpPost, UserChallenge]
-    // public async Task<ActionResult<CreateUserResult>> Create([FromBody] CreateUserDto dto)
+    // public ActionResult<CreateUserResult>> Create([FromBody] CreateUserDto dto)
     // {
-    //     var result = await createUserUseCase.Handle(dto);
+    //     var result =  createUserUseCase.Handle(dto);
     //     result.ActionName = nameof(Create);
     //     return HandleResponse(result);
     // }
 
     [HttpPut("{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<UserOutDto>> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
+    public ActionResult<IUserOutDto> Update([FromRoute] int id, [FromBody] UpdateUserDto dto)
     {
-        return HasAuthorization(id) ? HandleResponse(await updateUserUseCase.Handle(id, dto)) : Forbid();
+        return HasAuthorization(id) ? HandleResponse(updateUserUseCase.Handle(id, dto)) : Forbid();
     }
 
     [HttpPut("role/{id:int}")]
     [Authorize(Policy = "IsAdmin")]
-    public async Task<ActionResult<UserOutDto>> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
+    public ActionResult<IUserOutDto> UpdateRole([FromRoute] int id, [FromBody] UpdateRoleDto dto)
     {
-        return HandleResponse(await updateUserRoleUseCase.Handle(id, dto));
+        return HandleResponse(updateUserRoleUseCase.Handle(id, dto));
     }
 
     [HttpPost("disable/{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<bool>> Disable([FromRoute] int id, [FromBody] DisableUserDto dto)
+    public ActionResult<bool> Disable([FromRoute] int id, [FromBody] DisableUserDto dto)
     {
-        return HasAuthorization(id) ? HandleResponse(await disableUserUseCase.Handle(id, dto)) : Forbid();
+        return HasAuthorization(id) ? HandleResponse(disableUserUseCase.Handle(id, dto)) : Forbid();
     }
 
     [HttpDelete("{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<bool>> Delete([FromRoute] int id)
+    public ActionResult<bool> Delete([FromRoute] int id)
     {
-        return HasAuthorization(id) ? HandleResponse(await deleteUserUseCase.Handle(id)) : Forbid();
+        return HasAuthorization(id) ? HandleResponse(deleteUserUseCase.Handle(id)) : Forbid();
     }
 
     [HttpGet("{id:int}")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<UserOutDto>> Get(int id)
+    public ActionResult<IUserOutDto> Get(int id)
     {
-        return HasAuthorization(id) ? HandleResponse(await getUserUseCase.Handle(id)) : Forbid();
+        return HasAuthorization(id) ? HandleResponse(getUserUseCase.Handle(id)) : Forbid();
     }
 
     [HttpGet("myself")]
     [Authorize(Policy = "IsActive")]
-    public async Task<ActionResult<UserOutDto>> Myself()
+    public ActionResult<IUserOutDto> Myself()
     {
-        return HandleResponse(await getUserUseCase.Handle(UserClaims.Id(User)));
+        return HandleResponse(getUserUseCase.Handle(UserClaims.Id(User)));
     }
 
     // [HttpPost, Route("recovery")]
-    // public async Task<ActionResult<bool>> Recovery([FromBody] RecoveryDto dto)
+    // public ActionResult<bool>> Recovery([FromBody] RecoveryDto dto)
     // {
-    //     return HandleResponse(await sendRecoveryEmailUseCase.Handle(dto.Email));
+    //     return HandleResponse( sendRecoveryEmailUseCase.Handle(dto.Email));
     // }
 
     // [HttpPost, Route("verify")]
     // [Authorize(Policy = "IsActive")]
-    // public async Task<ActionResult<bool>> Verify()
+    // public ActionResult<bool>> Verify()
     // {
-    //     return HandleResponse(await sendRegisterEmailUseCase.Handle(UserClaims.Email(User)));
+    //     return HandleResponse( sendRegisterEmailUseCase.Handle(UserClaims.Email(User)));
     // }
 
     // [HttpPost, Route("verify/{code}")]
     // [Authorize(Policy = "IsActive")]
-    // public async Task<ActionResult<bool>> VerifyUser(string code)
+    // public ActionResult<bool>> VerifyUser(string code)
     // {
-    //     return HandleResponse(await verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
+    //     return HandleResponse( verifyUserUseCase.Handle(UserClaims.Id(User), UserClaims.Email(User), code));
     // }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimeRecord;
 
@@ -15,8 +16,8 @@ public class TimeRecordMetaController(
 {
     [HttpPost]
     [Route("sync/all")]
-    public async Task<ActionResult<IEnumerable<RecordMeta>>> SyncAll()
+    public ActionResult<IEnumerable<IRecordMeta>> SyncAll()
     {
-        return HandleResponse(await syncAllTrMetaUseCase.Handle());
+        return HandleResponse(syncAllTrMetaUseCase.Handle());
     }
 }

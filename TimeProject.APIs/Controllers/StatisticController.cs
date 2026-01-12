@@ -14,22 +14,22 @@ public class StatisticController(IGetRangeDaysStatisticUseCase getRangeDaysStati
 {
     [HttpGet]
     [Route("day")]
-    public async Task<ActionResult<RangeStatistic>> Day([FromQuery] DateTime? date)
+    public ActionResult<IRangeStatistic> Day([FromQuery] DateTime? date)
     {
-        return HandleResponse(await getRangeDaysStatisticUseCase.Handle(UserClaims.Id(User), date));
+        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaims.Id(User), date));
     }
 
     [HttpGet]
     [Route("{timeRecordId:int}/day")]
-    public async Task<ActionResult<RangeStatistic>> Day(int timeRecordId, [FromQuery] DateTime? date)
+    public ActionResult<IRangeStatistic> Day(int timeRecordId, [FromQuery] DateTime? date)
     {
-        return HandleResponse(await getRangeDaysStatisticUseCase.Handle(UserClaims.Id(User), date, null, timeRecordId));
+        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaims.Id(User), date, null, timeRecordId));
     }
 
     [HttpGet]
     [Route("range")]
-    public async Task<ActionResult<RangeStatisticsWithDays>> Range([FromQuery] DateTime start, [FromQuery] DateTime end)
+    public ActionResult<IRangeStatisticsWithDays> Range([FromQuery] DateTime start, [FromQuery] DateTime end)
     {
-        return HandleResponse(await getRangeDaysStatisticUseCase.Handle(UserClaims.Id(User), start, end));
+        return HandleResponse(getRangeDaysStatisticUseCase.Handle(UserClaims.Id(User), start, end));
     }
 }

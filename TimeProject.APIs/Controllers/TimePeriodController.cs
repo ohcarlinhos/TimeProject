@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimePeriod;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimePeriod;
@@ -23,41 +24,41 @@ public class TimePeriodController(
 {
     [HttpGet]
     [Route("{timeRecordId:int}")]
-    public async Task<ActionResult<IPagination<TimePeriodOutDto>>> Index(int timeRecordId,
+    public ActionResult<IPagination<ITimePeriodOutDto>> Index(int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            await getPaginatedTimePeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
+            getPaginatedTimePeriodUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
 
     [HttpPost]
-    public async Task<ActionResult<PeriodRecord>> Create([FromBody] CreateTimePeriodDto dto)
+    public ActionResult<IPeriodRecord> Create([FromBody] CreateTimePeriodDto dto)
     {
-        var result = await createTimePeriodUseCase.Handle(dto, UserClaims.Id(User));
+        var result = createTimePeriodUseCase.Handle(dto, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
 
     [HttpPost]
     [Route("list/{id:int}")]
-    public async Task<ActionResult<IList<PeriodRecord>>> Create([FromBody] TimePeriodListDto dto, int id)
+    public ActionResult<IList<IPeriodRecord>> Create([FromBody] TimePeriodListDto dto, int id)
     {
-        var result = await createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
+        var result = createTimePeriodByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
 
     [HttpPut]
     [Route("{id:int}")]
-    public async Task<ActionResult<PeriodRecord>> Update(int id, [FromBody] TimePeriodDto dto)
+    public ActionResult<IPeriodRecord> Update(int id, [FromBody] TimePeriodDto dto)
     {
-        return HandleResponse(await updateTimePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
+        return HandleResponse(updateTimePeriodUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpDelete]
     [Route("{id:int}")]
-    public async Task<ActionResult<bool>> Delete(int id)
+    public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(await deleteTimePeriodUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deleteTimePeriodUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

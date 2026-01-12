@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.UseCases.TimeMinute;
 using TimeProject.Domain.RemoveDependencies.Dtos.TimeMinute;
@@ -15,17 +16,17 @@ public class TimeMinuteController(
 {
     [HttpPost]
     [Route("list/{id:int}")]
-    public async Task<ActionResult<List<MinuteRecord>>> Create([FromBody] CreateTimeMinuteListDto dto, int id)
+    public ActionResult<IList<IMinuteRecord>> Create([FromBody] CreateTimeMinuteListDto dto, int id)
     {
-        var result = await createTimeMinuteByListUseCase.Handle(dto, id, UserClaims.Id(User));
+        var result = createTimeMinuteByListUseCase.Handle(dto, id, UserClaims.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
 
     [HttpDelete]
     [Route("{id:int}")]
-    public async Task<ActionResult<bool>> Delete(int id)
+    public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(await deleteTimeMinuteUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deleteTimeMinuteUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

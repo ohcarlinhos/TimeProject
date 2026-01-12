@@ -25,31 +25,31 @@ public class TimeRecordController(
 ) : CustomController
 {
     [HttpGet]
-    public async Task<ActionResult<IPagination<TimeRecordOutDto>>> Index([FromQuery] PaginationQuery paginationQuery)
+    public ActionResult<IPagination<ITimeRecordOutDto>> Index([FromQuery] PaginationQuery paginationQuery)
     {
-        return HandleResponse(await getPaginatedTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
+        return HandleResponse(getPaginatedTimeRecordUseCase.Handle(paginationQuery, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("history/{timeRecordId:int}")]
-    public async Task<ActionResult<IPagination<TimeRecordHistoryDayOutDto>>> HistoryIndex([FromRoute] int timeRecordId,
+    public ActionResult<IPagination<ITimeRecordHistoryDayOutDto>> HistoryIndex([FromRoute] int timeRecordId,
         [FromQuery] PaginationQuery paginationQuery)
     {
         return HandleResponse(
-            await getTimeRecordHistoryUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
+            getTimeRecordHistoryUseCase.Handle(timeRecordId, UserClaims.Id(User), paginationQuery));
     }
 
     [HttpGet]
     [Route("search")]
-    public async Task<ActionResult<IList<SearchRecordItem>>> Search([FromQuery] string? value)
+    public ActionResult<IList<SearchRecordItem>> Search([FromQuery] string? value)
     {
-        return HandleResponse(await searchTimeRecordUseCase.Handle(value ?? "", UserClaims.Id(User)));
+        return HandleResponse(searchTimeRecordUseCase.Handle(value ?? "", UserClaims.Id(User)));
     }
 
     [HttpPost]
-    public async Task<ActionResult<TimeRecordOutDto>> Create([FromBody] CreateTimeRecordDto dto)
+    public ActionResult<ITimeRecordOutDto> Create([FromBody] CreateTimeRecordDto dto)
     {
-        var result = await createTimeRecordUseCase.Handle(dto, UserClaims.Id(User));
+        var result = createTimeRecordUseCase.Handle(dto, UserClaims.Id(User));
 
         result.ActionName = nameof(Create);
         return HandleResponse(result);
@@ -57,22 +57,22 @@ public class TimeRecordController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public async Task<ActionResult<TimeRecordOutDto>> Update(int id, [FromBody] UpdateTimeRecordDto dto)
+    public ActionResult<ITimeRecordOutDto> Update(int id, [FromBody] UpdateTimeRecordDto dto)
     {
-        return HandleResponse(await updateTimeRecordUseCase.Handle(id, dto, UserClaims.Id(User)));
+        return HandleResponse(updateTimeRecordUseCase.Handle(id, dto, UserClaims.Id(User)));
     }
 
     [HttpGet]
     [Route("{code}")]
-    public async Task<ActionResult<TimeRecordOutDto>> Get(string code)
+    public ActionResult<ITimeRecordOutDto> Get(string code)
     {
-        return HandleResponse(await getTimeRecordByCodeUseCase.Handle(code, UserClaims.Id(User)));
+        return HandleResponse(getTimeRecordByCodeUseCase.Handle(code, UserClaims.Id(User)));
     }
 
     [HttpDelete]
     [Route("{id:int}")]
-    public async Task<ActionResult<bool>> Delete(int id)
+    public ActionResult<bool> Delete(int id)
     {
-        return HandleResponse(await deleteTimeRecordUseCase.Handle(id, UserClaims.Id(User)));
+        return HandleResponse(deleteTimeRecordUseCase.Handle(id, UserClaims.Id(User)));
     }
 }

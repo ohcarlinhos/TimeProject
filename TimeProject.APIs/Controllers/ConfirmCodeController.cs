@@ -14,8 +14,8 @@ public class ConfirmCodeController(IGetRegisterCodeInfoUseCase getRegisterCodeIn
     [HttpGet]
     [Route("register/info")]
     [Authorize]
-    public async Task<ActionResult<ConfirmCodeOutDto>> HasVerifyCodeActive()
+    public ActionResult<IConfirmCodeOutDto> HasVerifyCodeActive()
     {
-        return HandleResponse(await getRegisterCodeInfoUseCase.Handle(UserClaims.Id(User)));
+        return HandleResponse(getRegisterCodeInfoUseCase.Handle(UserClaims.Id(User)));
     }
 }
