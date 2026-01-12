@@ -1,0 +1,20 @@
+﻿using TimeProject.Api.Infrastructure.Errors;
+using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Entities;
+using TimeProject.Domain.Repositories;
+using TimeProject.Domain.UseCases.Users;
+using TimeProject.Domain.Shared;
+
+namespace TimeProject.Application.UseCases.Users;
+
+public class GetUserByEmailUseCase(IUserRepository repo) : IGetUserByEmailUseCase
+{
+    public ICustomResult<IUser> Handle(string email)
+    {
+        var result = new CustomResult<IUser>();
+        var user = repo.FindByEmail(email);
+
+        return user == null ? result.SetError(UserMessageErrors.NotFound) : result.SetData(user);
+    }
+}

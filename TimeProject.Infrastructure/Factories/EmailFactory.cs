@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Application.UseCases.User.Factories;
+﻿namespace TimeProject.Application.UseCases.Users.Factories;
 
 public static class EmailFactory
 {
