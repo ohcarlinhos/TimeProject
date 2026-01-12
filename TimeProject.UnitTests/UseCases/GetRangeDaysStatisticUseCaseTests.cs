@@ -16,22 +16,22 @@ public class GetRangeDaysStatisticUseCaseTests
     {
         const int recordId = 1;
 
-        var timePeriods = CreateRecordPeriodList(today, userId, recordId);
-        var recordSessions = CreateTimerSessionList(today, userId, recordId);
+        var periods = CreateRecordPeriodList(today, userId, recordId);
+        var recordSessions = CreateSessionList(today, userId, recordId);
 
         foreach (var session in recordSessions)
         {
             if (session.PeriodRecords == null || !session.PeriodRecords.Any()) continue;
-            timePeriods.AddRange(session.PeriodRecords);
+            periods.AddRange(session.PeriodRecords);
         }
 
         _staticRepository
             .Setup(v => v
-                .GetTimePeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(timePeriods as IList<IPeriod>);
+                .GetPeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
+            .Returns(periods as IList<IPeriod>);
 
         _staticRepository
-            .Setup(v => v.GetTimerSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
+            .Setup(v => v.GetSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
             .Returns(recordSessions as IList<ISession>);
     }
 
@@ -45,7 +45,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today.AddHours(-3),
                 End = today.AddHours(-3).AddMinutes(15),
                 UserId = userId,
-                TimerSessionId = null,
+                SessionId = null,
                 RecordId = recordId
             },
             new Period
@@ -53,7 +53,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today,
                 End = today.AddMinutes(15).AddSeconds(10),
                 UserId = userId,
-                TimerSessionId = null,
+                SessionId = null,
                 RecordId = recordId
             },
             new Period
@@ -61,7 +61,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today.AddMinutes(20),
                 End = today.AddMinutes(45),
                 UserId = userId,
-                TimerSessionId = null,
+                SessionId = null,
                 RecordId = recordId
             },
             // will be removed
@@ -70,13 +70,13 @@ public class GetRangeDaysStatisticUseCaseTests
                 Start = today.AddDays(1).AddMinutes(20),
                 End = today.AddDays(1).AddMinutes(45),
                 UserId = userId,
-                TimerSessionId = null,
+                SessionId = null,
                 RecordId = recordId
             }
         ];
     }
 
-    private static List<Session> CreateTimerSessionList(DateTime today, int userId, int recordId)
+    private static List<Session> CreateSessionList(DateTime today, int userId, int recordId)
     {
         return
         [
@@ -91,12 +91,12 @@ public class GetRangeDaysStatisticUseCaseTests
                     new()
                     {
                         Start = today.AddHours(3), End = today.AddHours(4).AddMinutes(15),
-                        TimerSessionId = 1
+                        SessionId = 1
                     },
                     new()
                     {
                         Start = today.AddHours(4).AddMinutes(20), End = today.AddHours(4).AddMinutes(40),
-                        TimerSessionId = 1
+                        SessionId = 1
                     }
                 }
             },
@@ -111,12 +111,12 @@ public class GetRangeDaysStatisticUseCaseTests
                     new()
                     {
                         Start = today.AddHours(5), End = today.AddHours(5).AddMinutes(10),
-                        TimerSessionId = 2
+                        SessionId = 2
                     },
                     new()
                     {
                         Start = today.AddHours(5).AddMinutes(15), End = today.AddHours(5).AddMinutes(30),
-                        TimerSessionId = 2
+                        SessionId = 2
                     }
                 }
             },
@@ -131,7 +131,7 @@ public class GetRangeDaysStatisticUseCaseTests
                     new()
                     {
                         Start = today.AddHours(6), End = today.AddHours(6).AddMinutes(15).AddSeconds(5),
-                        TimerSessionId = 3
+                        SessionId = 3
                     }
                 }
             },
@@ -189,7 +189,7 @@ public class GetRangeDaysStatisticUseCaseTests
     // public async void Given_Date_When_DontProvide_Then_ShouldReturnDayStatistic()
     // {
     //     // Arrange
-    //     var getDayStatistics = new GetDayStatisticUseCase(_staticRepository.Object, new TimePeriodCutUtil());
+    //     var getDayStatistics = new GetDayStatisticUseCase(_staticRepository.Object, new PeriodCutUtil());
     //
     //     const int userId = 1;
     //     var today = DateTime.Today;
@@ -207,7 +207,7 @@ public class GetRangeDaysStatisticUseCaseTests
     // public async void Given_Date_When_BrazilUtc_Then_ShouldReturnDayStatistic()
     // {
     //     // Arrange
-    //     var getDayStatistics = new GetDayStatisticUseCase(_staticRepository.Object, new TimePeriodCutUtil());
+    //     var getDayStatistics = new GetDayStatisticUseCase(_staticRepository.Object, new PeriodCutUtil());
     //
     //     const int userId = 1;
     //     const int addHoursOnInitDate = 3;

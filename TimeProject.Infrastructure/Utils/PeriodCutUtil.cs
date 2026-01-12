@@ -7,16 +7,16 @@ public class PeriodCutUtil : IPeriodCutUtil
 {
     public Period Handle(Period entity, DateTime initDate, DateTime endDate)
     {
-        var timePeriod = new Period { RecordId = entity.RecordId, TimerSessionId = entity.TimerSessionId };
+        var period = new Period { RecordId = entity.RecordId, SessionId = entity.SessionId };
 
-        timePeriod.Start = entity.Start > initDate ? entity.Start : initDate;
-        timePeriod.End = entity.End > endDate ? entity.End = endDate.AddMilliseconds(-1) : entity.End;
+        period.Start = entity.Start > initDate ? entity.Start : initDate;
+        period.End = entity.End > endDate ? entity.End = endDate.AddMilliseconds(-1) : entity.End;
 
         // to 0
-        if (timePeriod.Start > timePeriod.End || timePeriod.Start > endDate)
-            timePeriod.End = timePeriod.Start;
+        if (period.Start > period.End || period.Start > endDate)
+            period.End = period.Start;
 
-        return timePeriod;
+        return period;
     }
 
     public IList<Period> Handle(IList<Period> list, DateTime initDate, DateTime endDate)

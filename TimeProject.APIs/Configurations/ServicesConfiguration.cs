@@ -160,7 +160,7 @@ public static class ServicesConfiguration
 
         #endregion
 
-        #region TimePeriod
+        #region Period
 
         builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
 

@@ -6,6 +6,7 @@ using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.UseCases.Sessions;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Entities;
+using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Sessions;
 
@@ -20,7 +21,7 @@ public class DeleteSessionUseCase(
         var entity = (Session)repo.FindById(id, userId);
 
         if (entity == null)
-            return result.SetError(TimerSessionMessageErrors.NotFound);
+            return result.SetError(SessionMessageErrors.NotFound);
 
         tpRepo.DeleteByList(entity.PeriodRecords as IList<IPeriod>);
         var recordId = entity.RecordId;

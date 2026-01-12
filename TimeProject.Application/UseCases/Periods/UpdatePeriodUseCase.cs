@@ -25,13 +25,13 @@ public class UpdatePeriodUseCase(
         periodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
         if (result.HasError) return result;
 
-        var timePeriod = repository.FindById(id, userId);
-        if (timePeriod == null) return result.SetError(TimePeriodMessageErrors.NotFound);
+        var period = repository.FindById(id, userId);
+        if (period == null) return result.SetError(PeriodMessageErrors.NotFound);
 
-        timePeriod.Start = dto.Start;
-        timePeriod.End = dto.End;
+        period.Start = dto.Start;
+        period.End = dto.End;
 
-        var data = repository.Update(timePeriod);
+        var data = repository.Update(period);
         syncRecordMetaUseCase.Handle(data.RecordId);
 
         return result.SetData(data);

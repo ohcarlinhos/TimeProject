@@ -22,10 +22,10 @@ public class ProjectContext(DbContextOptions<ProjectContext> options) : DbContex
     {
         mb.ApplyConfiguration(new UserEntityConfiguration());
         mb.ApplyConfiguration(new RecordEntityConfiguration());
-        mb.ApplyConfiguration(new TimePeriodEntityConfiguration());
+        mb.ApplyConfiguration(new PeriodEntityConfiguration());
         mb.ApplyConfiguration(new CategoryEntityConfiguration());
         mb.ApplyConfiguration(new RecordMetaEntityConfiguration());
-        mb.ApplyConfiguration(new TimerSessionEntityConfiguration());
+        mb.ApplyConfiguration(new SessionEntityConfiguration());
         mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
         mb.ApplyConfiguration(new UserPasswordEntityConfiguration());
         mb.ApplyConfiguration(new TimeMinuteEntityConfiguration());

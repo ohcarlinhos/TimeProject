@@ -11,11 +11,11 @@ public class Period : IPeriod
 
     public int UserId { get; set; }
     public int RecordId { get; set; }
-    public int? TimerSessionId { get; set; }
+    public int? SessionId { get; set; }
 
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
     public Record? Record { get; set; }
-    public Session? TimerSession { get; set; }
+    public Session? Session { get; set; }
 }

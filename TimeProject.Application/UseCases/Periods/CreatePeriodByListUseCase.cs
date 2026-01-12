@@ -23,30 +23,30 @@ public class CreatePeriodByListUseCase(
         var result = new CustomResult<IList<IPeriod>>();
         List<Period> list = [];
 
-        foreach (var timePeriod in dto.Periods)
+        foreach (var period in dto.Periods)
         {
-            periodValidateUtil.ValidateStartAndEnd(timePeriod.Start, timePeriod.End, result);
+            periodValidateUtil.ValidateStartAndEnd(period.Start, period.End, result);
             if (result.HasError)
                 break;
 
-            if (periodValidateUtil.HasMinSize(timePeriod))
+            if (periodValidateUtil.HasMinSize(period))
                 list.Add(new Period
                 {
                     UserId = userId,
                     RecordId = recordId,
-                    Start = timePeriod.Start,
-                    End = timePeriod.End
+                    Start = period.Start,
+                    End = period.End
                 });
         }
 
         if (result.HasError) return result;
         if (list.Count == 0) return result.SetData([]);
 
-        var timerSession = sessionRepository.Create(new Session()
+        var session = sessionRepository.Create(new Session()
             { RecordId = recordId, UserId = userId, Type = dto.Type, From = dto.From }
         );
 
-        list.ForEach(i => { i.TimerSessionId = timerSession.Id; });
+        list.ForEach(i => { i.SessionId = session.Id; });
 
         var data = repository.CreateByList(list as IList<IPeriod>);
         syncRecordMetaUseCase.Handle(recordId);

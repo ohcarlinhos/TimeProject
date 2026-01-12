@@ -54,7 +54,7 @@ public class CreateRecordUseCase(
         {
             if (dto.Periods != null)
             {
-                var timePeriodsResult = createPeriodByListUseCase
+                var periodsResult = createPeriodByListUseCase
                     .Handle(
                         new PeriodListDto
                         {
@@ -63,8 +63,8 @@ public class CreateRecordUseCase(
                         },
                         record.Id, userId);
 
-                if (timePeriodsResult.HasError)
-                    throw new Exception(timePeriodsResult.Message);
+                if (periodsResult.HasError)
+                    throw new Exception(periodsResult.Message);
             }
         }
         catch (Exception error)

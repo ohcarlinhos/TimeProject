@@ -11,7 +11,7 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
     public IList<IPeriod> Index(int recordId, int userId, IPaginationQuery paginationQuery)
     {
         return db.PeriodRecords
-            .Where(timePeriod => timePeriod.RecordId == recordId && timePeriod.UserId == userId)
+            .Where(period => period.RecordId == recordId && period.UserId == userId)
             .OrderByDescending(tp => tp.Start)
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
@@ -21,7 +21,7 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
     public int GetTotalItems(int recordId, IPaginationQuery paginationQuery, int userId)
     {
         return db.PeriodRecords
-            .Count(timePeriod => timePeriod.RecordId == recordId && timePeriod.UserId == userId);
+            .Count(period => period.RecordId == recordId && period.UserId == userId);
     }
 
     public IPeriod Create(IPeriod entity)
@@ -81,6 +81,6 @@ public class PeriodRepository(ProjectContext db) : IPeriodRepository
     public IPeriod? FindById(int id, int userId)
     {
         return db.PeriodRecords
-            .FirstOrDefault(timePeriod => timePeriod.Id == id && timePeriod.UserId == userId);
+            .FirstOrDefault(period => period.Id == id && period.UserId == userId);
     }
 }

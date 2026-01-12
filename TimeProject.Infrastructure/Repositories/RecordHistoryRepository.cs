@@ -12,16 +12,16 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
     {
         var dateList = new List<DateTime>();
 
-        var datesFromTimePeriods = TimePeriodQuery(recordId, userId)
+        var datesFromPeriods = PeriodQuery(recordId, userId)
             .Select(e => e.Start)
             .ToList();
 
-        var datesFromTimeMinutes = TimeMinuteQuery(recordId, userId)
+        var datesFromMinutes = MinuteQuery(recordId, userId)
             .Select(e => e.Date)
             .ToList();
 
-        dateList.AddRange(datesFromTimePeriods);
-        dateList.AddRange(datesFromTimeMinutes);
+        dateList.AddRange(datesFromPeriods);
+        dateList.AddRange(datesFromMinutes);
 
         return dateList
             .Select(e => e.AddHours(addHours).Date)
@@ -30,12 +30,12 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
             .ToList();
     }
 
-    public IList<IPeriod> GetTimePeriodsWithoutTimerSession(int recordId, int userId,
+    public IList<IPeriod> GetPeriodsWithoutSession(int recordId, int userId,
         DateTime initDate, DateTime endDate)
     {
-        return TimePeriodQuery(recordId, userId)
+        return PeriodQuery(recordId, userId)
             .Where(e =>
-                e.TimerSessionId == null
+                e.SessionId == null
                 && e.Start >= initDate
                 && e.Start < endDate
             )
@@ -43,19 +43,19 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
             .ToList();
     }
 
-    public IList<IMinute> GetTimeMinutes(int recordId, int userId, DateTime initDate,
+    public IList<IMinute> GetMinutes(int recordId, int userId, DateTime initDate,
         DateTime endDate)
     {
-        return TimeMinuteQuery(recordId, userId)
+        return MinuteQuery(recordId, userId)
             .Where(e => e.Date >= initDate && e.Date < endDate)
             .OrderBy(e => e.Date)
             .ToList();
     }
 
-    public IList<ISession> GetTimerSessions(int recordId, int userId, DateTime initDate,
+    public IList<ISession> GetSessions(int recordId, int userId, DateTime initDate,
         DateTime endDate)
     {
-        return TimerSessionQuery(recordId, userId)
+        return SessionQuery(recordId, userId)
             .Where(e =>
                 e.PeriodRecords!.FirstOrDefault()!.Start >= initDate
                 && e.PeriodRecords!.FirstOrDefault()!.Start < endDate
@@ -64,21 +64,21 @@ public class RecordHistoryRepository(ProjectContext db) : IRecordHistoryReposito
             .ToList<ISession>();
     }
 
-    private IQueryable<IPeriod> TimePeriodQuery(int recordId, int userId)
+    private IQueryable<IPeriod> PeriodQuery(int recordId, int userId)
     {
         return db.PeriodRecords
             .Where(e => e.UserId == userId && e.RecordId == recordId)
             .AsQueryable();
     }
 
-    private IQueryable<IMinute> TimeMinuteQuery(int recordId, int userId)
+    private IQueryable<IMinute> MinuteQuery(int recordId, int userId)
     {
         return db.MinuteRecords
             .Where(e => e.UserId == userId && e.RecordId == recordId)
             .AsQueryable();
     }
 
-    private IQueryable<Session> TimerSessionQuery(int recordId, int userId)
+    private IQueryable<Session> SessionQuery(int recordId, int userId)
     {
         return db.RecordSessions
             .Where(e =>

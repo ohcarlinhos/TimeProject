@@ -13,16 +13,16 @@ public class RecordHistoryDayOutDto : IRecordHistoryDayOutDto
     public IEnumerable<ISessionOutDto>? Sessions { get; set; }
     public IEnumerable<IMinute>? Minutes { get; set; }
 
-    private TimeSpan TimeSpanTimePeriods => TimeFormatUtil.TimeSpanFromTimePeriods(Periods);
-    private TimeSpan TimeSpanTimerSessions => TimeFormatUtil.TimeSpanFromTimerSessions(Sessions);
-    private TimeSpan TimeSpanTimeMinutes => TimeFormatUtil.TimeSpanFromTimeMinutes(Minutes);
+    private TimeSpan TimeSpanPeriods => TimeFormatUtil.TimeSpanFromPeriods(Periods);
+    private TimeSpan TimeSpanSessions => TimeFormatUtil.TimeSpanFromSessions(Sessions);
+    private TimeSpan TimeSpanMinutes => TimeFormatUtil.TimeSpanFromMinutes(Minutes);
 
-    private TimeSpan TimeSpanSum => TimeSpanTimePeriods.Add(TimeSpanTimerSessions).Add(TimeSpanTimeMinutes);
+    private TimeSpan TimeSpanSum => TimeSpanPeriods.Add(TimeSpanSessions).Add(TimeSpanMinutes);
 
     public string FormattedTime => TimeFormatUtil.StringFromTimeSpan(TimeSpanSum);
     public double TimeInMinutes => TimeFormatUtil.MinutesFromTimeSpan(TimeSpanSum);
     public double TimeInHours => TimeFormatUtil.HoursFromTimeSpan(TimeSpanSum);
-    public string PeriodsFormattedTime => TimeFormatUtil.StringFromTimePeriods(Periods);
-    public string MinutesFormattedTime => TimeFormatUtil.StringFromTimeSpan(TimeSpanTimeMinutes);
-    public string SessionsFormattedTime => TimeFormatUtil.StringFromTimeSpan(TimeSpanTimerSessions);
+    public string PeriodsFormattedTime => TimeFormatUtil.StringFromPeriods(Periods);
+    public string MinutesFormattedTime => TimeFormatUtil.StringFromTimeSpan(TimeSpanMinutes);
+    public string SessionsFormattedTime => TimeFormatUtil.StringFromTimeSpan(TimeSpanSessions);
 }

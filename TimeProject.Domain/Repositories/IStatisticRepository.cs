@@ -5,10 +5,10 @@ namespace TimeProject.Domain.Repositories;
 
 public interface IStatisticRepository
 {
-    IList<IPeriod> GetTimePeriodsByRange(int userId, DateTime initDate, DateTime endDate,
+    IList<IPeriod> GetPeriodsByRange(int userId, DateTime initDate, DateTime endDate,
         int? recordId = null);
 
-    IList<ISession> GetTimerSessionsByRange(int userId, DateTime initDate, DateTime endDate,
+    IList<ISession> GetSessionsByRange(int userId, DateTime initDate, DateTime endDate,
         int? recordId = null);
 
     IList<IMinute> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,

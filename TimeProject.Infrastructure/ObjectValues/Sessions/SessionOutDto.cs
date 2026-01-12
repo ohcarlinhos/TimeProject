@@ -15,5 +15,5 @@ public class SessionOutDto : ISessionOutDto
 
     public IEnumerable<IPeriodOutDto>? Periods { get; set; }
 
-    public string FormattedTime => TimeFormatUtil.StringFromTimePeriods(Periods);
+    public string FormattedTime => TimeFormatUtil.StringFromPeriods(Periods);
 }

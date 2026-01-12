@@ -42,9 +42,9 @@ public class GetRecordHistoryUseCase(
             var initDate = dateItem.AddHours(user.Utc * -1);
             var endDate = initDate.AddDays(1);
 
-            var tpList = repository.GetTimePeriodsWithoutTimerSession(recordId, userId, initDate, endDate);
-            var tsList = repository.GetTimerSessions(recordId, userId, initDate, endDate);
-            var tmList = repository.GetTimeMinutes(recordId, userId, initDate, endDate);
+            var tpList = repository.GetPeriodsWithoutSession(recordId, userId, initDate, endDate);
+            var tsList = repository.GetSessions(recordId, userId, initDate, endDate);
+            var tmList = repository.GetMinutes(recordId, userId, initDate, endDate);
 
             if (tpList.Count == 0 && tsList.Count == 0 && tmList.Count == 0) continue;
 

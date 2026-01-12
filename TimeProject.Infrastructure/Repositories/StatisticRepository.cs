@@ -8,7 +8,7 @@ namespace TimeProject.Infrastructure.Repositories;
 
 public class StatisticRepository(ProjectContext db) : IStatisticRepository
 {
-    public IList<IPeriod> GetTimePeriodsByRange(
+    public IList<IPeriod> GetPeriodsByRange(
         int userId,
         DateTime initDate,
         DateTime endDate,
@@ -25,7 +25,7 @@ public class StatisticRepository(ProjectContext db) : IStatisticRepository
             .ToList<IPeriod>());
     }
 
-    public IList<ISession> GetTimerSessionsByRange(
+    public IList<ISession> GetSessionsByRange(
         int userId,
         DateTime initDate,
         DateTime endDate,

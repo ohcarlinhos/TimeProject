@@ -11,7 +11,7 @@ public class PeriodCutUtilTests
     {
         #region Arrange
 
-        var timePeriodCutUtil = new PeriodCutUtil();
+        var periodCutUtil = new PeriodCutUtil();
 
         var initDate = DateTime.Today;
         var endDate = DateTime.Today.AddDays(1);
@@ -52,7 +52,7 @@ public class PeriodCutUtilTests
 
         #region Act
 
-        var result = timePeriodCutUtil.Handle(list, initDate, endDate);
+        var result = periodCutUtil.Handle(list, initDate, endDate);
 
         #endregion
 

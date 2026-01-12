@@ -13,13 +13,13 @@ public class DeletePeriodUseCase(IPeriodRepository repository, ISyncRecordMetaUs
     public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var timePeriod = repository.FindById(id, userId);
+        var period = repository.FindById(id, userId);
 
-        if (timePeriod == null)
-            return result.SetError(TimePeriodMessageErrors.NotFound);
+        if (period == null)
+            return result.SetError(PeriodMessageErrors.NotFound);
 
-        var data = repository.Delete(timePeriod);
-        syncRecordMetaUseCase.Handle(timePeriod.RecordId);
+        var data = repository.Delete(period);
+        syncRecordMetaUseCase.Handle(period.RecordId);
 
         return result.SetData(data);
     }

@@ -8,50 +8,50 @@ namespace TimeProject.Infrastructure.Utils;
 
 public static class TimeFormatUtil
 {
-    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<IPeriodOutDto>? timePeriods)
+    public static TimeSpan TimeSpanFromPeriods(IEnumerable<IPeriodOutDto>? periods)
     {
-        if (timePeriods == null) return TimeSpan.Zero;
+        if (periods == null) return TimeSpan.Zero;
 
-        return TimeSpanFromTimePeriods(timePeriods
+        return TimeSpanFromPeriods(periods
             .Select(p => new Period()
                 { Start = p.Start, End = p.End }).ToList());
     }
 
-    public static TimeSpan TimeSpanFromTimePeriods(IEnumerable<IPeriod>? timePeriods)
+    public static TimeSpan TimeSpanFromPeriods(IEnumerable<IPeriod>? periods)
     {
-        if (timePeriods == null) return TimeSpan.Zero;
+        if (periods == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
 
-        return timePeriods
-            .Aggregate(total, (current, timePeriod) =>
-                current.Add(timePeriod.End.Subtract(timePeriod.Start)));
+        return periods
+            .Aggregate(total, (current, period) =>
+                current.Add(period.End.Subtract(period.Start)));
     }
 
-    public static TimeSpan TimeSpanFromTimeMinutes(IEnumerable<IMinute>? timeMinutes)
+    public static TimeSpan TimeSpanFromMinutes(IEnumerable<IMinute>? timeMinutes)
     {
         if (timeMinutes == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
         return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Minutes, 0)));
     }
 
-    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<ISessionOutDto>? timerSessions)
+    public static TimeSpan TimeSpanFromSessions(IEnumerable<ISessionOutDto>? sessions)
     {
-        if (timerSessions == null) return TimeSpan.Zero;
+        if (sessions == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
 
-        foreach (var ts in timerSessions) total = total.Add(TimeSpanFromTimePeriods(ts.Periods));
+        foreach (var ts in sessions) total = total.Add(TimeSpanFromPeriods(ts.Periods));
 
         return total;
     }
 
-    public static TimeSpan TimeSpanFromTimerSessions(IEnumerable<ISession>? recordSessions)
+    public static TimeSpan TimeSpanFromSessions(IEnumerable<ISession>? recordSessions)
     {
         var total = TimeSpan.Zero;
         if (recordSessions == null) return total;
 
         foreach (var rs in (recordSessions as IList<Session>)!)
             if (rs.PeriodRecords != null && rs.PeriodRecords.Any())
-                total = total.Add(TimeSpanFromTimePeriods(rs.PeriodRecords.ToList()));
+                total = total.Add(TimeSpanFromPeriods(rs.PeriodRecords.ToList()));
 
         return total;
     }
@@ -73,24 +73,24 @@ public static class TimeFormatUtil
         return string.IsNullOrEmpty(result) ? "0s" : result;
     }
 
-    public static string StringFromTimePeriods(IEnumerable<IPeriodOutDto>? timePeriods)
+    public static string StringFromPeriods(IEnumerable<IPeriodOutDto>? periods)
     {
-        if (timePeriods == null) return "0s";
+        if (periods == null) return "0s";
 
-        return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods
+        return StringFromTimeSpan(TimeSpanFromPeriods(periods
             .Select(p => new Period
                 { Start = p.Start, End = p.End }).ToList()
         ));
     }
 
-    public static string StringFromTimePeriods(IEnumerable<IPeriod>? timePeriods)
+    public static string StringFromPeriods(IEnumerable<IPeriod>? periods)
     {
-        return StringFromTimeSpan(TimeSpanFromTimePeriods(timePeriods?.ToList()));
+        return StringFromTimeSpan(TimeSpanFromPeriods(periods?.ToList()));
     }
 
-    public static string StringFromTimerSessions(IEnumerable<ISession>? timerSessions)
+    public static string StringFromSessions(IEnumerable<ISession>? sessions)
     {
-        return StringFromTimeSpan(TimeSpanFromTimerSessions(timerSessions));
+        return StringFromTimeSpan(TimeSpanFromSessions(sessions));
     }
 
     public static double MinutesFromTimeSpan(TimeSpan timeSpan)

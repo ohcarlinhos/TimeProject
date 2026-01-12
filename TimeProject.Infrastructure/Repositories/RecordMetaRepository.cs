@@ -33,7 +33,7 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
     {
         var entity = dbContext.RecordMetas.FirstOrDefault(e => e.RecordId == record.Id);
 
-        var timePeriods = dbContext.PeriodRecords
+        var periods = dbContext.PeriodRecords
             .Where(e => e.RecordId == record.Id)
             .OrderBy(e => e.Start)
             .ToList();
@@ -44,17 +44,17 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
             .ToList();
 
         var now = DateTime.Now.ToUniversalTime();
-        var timeSpan = TimeFormatUtil.TimeSpanFromTimePeriods(timePeriods)
-            .Add(TimeFormatUtil.TimeSpanFromTimeMinutes(timeMinutes));
+        var timeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods)
+            .Add(TimeFormatUtil.TimeSpanFromMinutes(timeMinutes));
         var formattedTime = TimeFormatUtil.StringFromTimeSpan(timeSpan);
 
         var firstList = new List<DateTime>();
         var lastList = new List<DateTime>();
 
-        if (timePeriods.Count > 0)
+        if (periods.Count > 0)
         {
-            firstList.Add(timePeriods[0].Start);
-            lastList.Add(timePeriods[^1].Start);
+            firstList.Add(periods[0].Start);
+            lastList.Add(periods[^1].Start);
         }
 
         if (timeMinutes.Count > 0)
@@ -71,7 +71,7 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
             entity = new RecordMeta
             {
                 RecordId = record.Id,
-                TimeCount = timePeriods.Count + timeMinutes.Count,
+                TimeCount = periods.Count + timeMinutes.Count,
                 FormattedTime = formattedTime,
                 TimeOnSeconds = timeSpan.TotalSeconds,
                 FirstTimeDate = first,
@@ -84,7 +84,7 @@ public class RecordMetaRepository(ProjectContext dbContext) : IRecordMetaReposit
         }
         else
         {
-            entity.TimeCount = timePeriods.Count + timeMinutes.Count;
+            entity.TimeCount = periods.Count + timeMinutes.Count;
             entity.TimeOnSeconds = timeSpan.TotalSeconds;
             entity.FormattedTime = formattedTime;
             entity.FirstTimeDate = first;

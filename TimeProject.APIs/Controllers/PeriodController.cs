@@ -16,7 +16,7 @@ namespace TimeProject.APIs.Controllers;
 [ApiController]
 [Route("api/periods")]
 [Authorize(Policy = "IsActive")]
-public class TimePeriodController(
+public class PeriodController(
     IGetPaginatedPeriodUseCase getPaginatedPeriodUseCase,
     ICreatePeriodUseCase createPeriodUseCase,
     ICreatePeriodByListUseCase createPeriodByListUseCase,

@@ -1,35 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class TimePeriodEntityConfiguration : IEntityTypeConfiguration<Period>
+public class SessionEntityConfiguration : IEntityTypeConfiguration<Session>
 {
-    public void Configure(EntityTypeBuilder<Period> builder)
+    public void Configure(EntityTypeBuilder<Session> builder)
     {
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(e => e.Start).IsRequired();
-        builder.Property(e => e.End).IsRequired();
-
-        builder.Property(e => e.UserId).IsRequired();
         builder.Property(e => e.RecordId).IsRequired();
-        builder.Property(e => e.TimerSessionId);
+        builder.Property(e => e.Type).HasMaxLength(10);
+        builder.Property(e => e.From).HasMaxLength(15);
 
         builder.Property(e => e.CreatedAt).IsRequired();
         builder.Property(e => e.UpdatedAt).IsRequired();
 
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
 
-        builder.HasOne(e => e.Record)
-            .WithMany(e => e.PeriodRecords)
+        builder.HasOne<Record>(e => e.Record)
+            .WithMany()
             .HasForeignKey(e => e.RecordId);
 
-        builder.HasOne<Session>(e => e.TimerSession)
-            .WithMany(e => e.PeriodRecords)
-            .HasForeignKey(e => e.TimerSessionId);
+        builder.HasMany(e => e.PeriodRecords)
+            .WithOne(e => e.Session)
+            .HasForeignKey(e => e.SessionId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }
