@@ -2,7 +2,7 @@
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.CustomLog;
+using TimeProject.Domain.UseCases.CustomLogs;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 

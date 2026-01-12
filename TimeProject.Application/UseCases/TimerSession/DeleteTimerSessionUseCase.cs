@@ -3,7 +3,7 @@ using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;
-using TimeProject.Domain.UseCases.TimerSession;
+using TimeProject.Domain.UseCases.Sessions;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Entities;
 

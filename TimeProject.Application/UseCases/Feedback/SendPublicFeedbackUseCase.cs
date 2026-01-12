@@ -1,6 +1,6 @@
 ﻿using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Application.ObjectValues;
-using TimeProject.Domain.UseCases.Feedback;
+using TimeProject.Domain.UseCases.Feedbacks;
 using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;

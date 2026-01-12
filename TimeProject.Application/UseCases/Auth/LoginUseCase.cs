@@ -2,9 +2,9 @@
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
-using TimeProject.Domain.UseCases.CustomLog;
-using TimeProject.Domain.UseCases.Login;
-using TimeProject.Domain.UseCases.User;
+using TimeProject.Domain.UseCases.CustomLogs;
+using TimeProject.Domain.UseCases.Logins;
+using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.RemoveDependencies.Dtos.Auth;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;

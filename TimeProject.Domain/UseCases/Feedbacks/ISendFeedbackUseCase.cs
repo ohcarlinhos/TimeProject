@@ -1,0 +1,10 @@
+﻿using TimeProject.Domain.RemoveDependencies.Dtos.Feedback;
+using TimeProject.Domain.RemoveDependencies.General;
+using TimeProject.Domain.Shared;
+
+namespace TimeProject.Domain.UseCases.Feedbacks;
+
+public interface ISendFeedbackUseCase
+{
+    ICustomResult<bool> Handle(IFeedbackDto feedbackDto, string name, string email, bool isVerified);
+}

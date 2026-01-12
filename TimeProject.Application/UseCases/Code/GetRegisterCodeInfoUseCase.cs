@@ -3,7 +3,7 @@ using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities.Enums;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Code;
+using TimeProject.Domain.UseCases.Codes;
 using TimeProject.Domain.RemoveDependencies.Dtos.Codes;
 using TimeProject.Domain.Shared;
 

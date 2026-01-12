@@ -1,7 +1,7 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.TimeMinute;
+using TimeProject.Domain.UseCases.Minutes;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
 

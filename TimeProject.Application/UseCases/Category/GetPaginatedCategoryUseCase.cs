@@ -1,6 +1,6 @@
 ﻿using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.Category;
+using TimeProject.Domain.UseCases.Categories;
 using TimeProject.Infrastructure.Utils.Interfaces;
 using TimeProject.Domain.RemoveDependencies.Dtos.Category;
 using TimeProject.Domain.RemoveDependencies.General;

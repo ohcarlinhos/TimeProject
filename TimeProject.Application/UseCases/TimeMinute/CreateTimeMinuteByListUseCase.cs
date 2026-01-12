@@ -4,7 +4,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Domain.RemoveDependencies.Dtos.Minute;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.TimeMinute;
+using TimeProject.Domain.UseCases.Minutes;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
 

@@ -3,7 +3,7 @@ using TimeProject.Application.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Entities;
 using TimeProject.Domain.Repositories;
-using TimeProject.Domain.UseCases.User;
+using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.RemoveDependencies.General;
 using TimeProject.Domain.Shared;
 

@@ -1,9 +1,0 @@
-﻿using TimeProject.Domain.RemoveDependencies.Dtos.User;
-using TimeProject.Domain.Shared;
-
-namespace TimeProject.Domain.UseCases.User;
-
-public interface IGetUserUseCase
-{
-    ICustomResult<IUserOutDto> Handle(int id);
-}
