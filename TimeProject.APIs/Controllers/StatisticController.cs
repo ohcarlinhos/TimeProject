@@ -8,7 +8,7 @@ using TimeProject.Infrastructure.Utils;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/statistics")]
+[Route("statistics")]
 [Authorize(Policy = "IsActive")]
 public class StatisticController(IGetRangeDaysStatisticUseCase getRangeDaysStatisticUseCase) : CustomController
 {

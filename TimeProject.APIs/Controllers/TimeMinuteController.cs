@@ -9,7 +9,7 @@ using TimeProject.Infrastructure.Utils;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/minutes")]
+[Route("minutes")]
 public class TimeMinuteController(
     ICreateMinuteByListUseCase createMinuteByListUseCase,
     IDeleteMinuteUseCase deleteMinuteUseCase) : CustomController

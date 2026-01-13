@@ -8,7 +8,7 @@ using TimeProject.Domain.UseCases.Records;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/records/meta")]
+[Route("records/meta")]
 [Authorize(Policy = "IsAdmin")]
 public class RecordMetaController(
     ISyncAllRecordMetaUseCase syncAllRecordMetaUseCase

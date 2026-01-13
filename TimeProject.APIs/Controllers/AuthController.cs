@@ -4,28 +4,30 @@ using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.UseCases.Logins;
 using TimeProject.Domain.Dtos.Auths;
-using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Auths;
+using TimeProject.APIs.Controllers.Attributes;
 
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/auth")]
+[Route("auth")]
 public class AuthController(
+    ILoginUseCase loginUseCase,
     ILoginGithubUseCase loginGithubUseCase,
     ILoginGoogleUseCase loginGoogleUseCase
 ) : CustomController
 {
-    // [HttpPost, Route("login"), UserChallenge]
-    // public async Task<ActionResult<JwtData>> Login([FromBody] LoginDto dto)
-    // {
-    //     return HandleResponse(await loginUseCase.Handle(dto, new UserAccessLogEntity
-    //     {
-    //         IpAddress = GetClientIpAddress(HttpContext) ?? "",
-    //         UserAgent = Request.Headers.UserAgent.ToString(),
-    //         AccessType = AccessType.Password
-    //     }));
-    // }
+    [HttpPost, Route("login")]
+    // [UserChallenge]
+    public ActionResult<IJwtResult> Login([FromBody] LoginDto dto)
+    {
+        return HandleResponse(loginUseCase.Handle(dto, new UserAccessLog
+        {
+            IpAddress = GetClientIpAddress(HttpContext) ?? "",
+            UserAgent = Request.Headers.UserAgent.ToString(),
+            AccessType = AccessType.Password
+        }));
+    }
 
     [HttpPost]
     [Route("login/github")]

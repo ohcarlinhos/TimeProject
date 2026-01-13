@@ -13,7 +13,7 @@ using TimeProject.Infrastructure.Utils;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/records")]
+[Route("records")]
 [Authorize(Policy = "IsActive")]
 public class RecordController(
     IGetPaginatedRecordUseCase getPaginatedRecordUseCase,

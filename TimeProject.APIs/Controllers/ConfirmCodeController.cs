@@ -8,7 +8,7 @@ using TimeProject.Infrastructure.Utils;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/codes")]
+[Route("codes")]
 public class ConfirmCodeController(IGetRegisterCodeInfoUseCase getRegisterCodeInfoUseCase) : CustomController
 {
     [HttpGet]

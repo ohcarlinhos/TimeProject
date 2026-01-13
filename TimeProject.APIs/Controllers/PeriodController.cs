@@ -13,7 +13,7 @@ using TimeProject.Infrastructure.Utils;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/periods")]
+[Route("periods")]
 [Authorize(Policy = "IsActive")]
 public class PeriodController(
     IGetPaginatedPeriodUseCase getPaginatedPeriodUseCase,

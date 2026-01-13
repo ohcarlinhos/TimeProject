@@ -7,7 +7,7 @@ using TimeProject.Infrastructure.Utils;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/sessions")]
+[Route("sessions")]
 [Authorize(Policy = "IsActive")]
 public class SessionController(IDeleteSessionUseCase deleteSessionUseCase) : CustomController
 {

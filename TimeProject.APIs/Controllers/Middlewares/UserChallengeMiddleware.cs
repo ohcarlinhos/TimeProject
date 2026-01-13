@@ -19,7 +19,7 @@ public class UserChallengeMiddleware(IUserChallenge userChallenge) : IMiddleware
 
         if (controllerAction?.MethodInfo
                 .GetCustomAttributes(typeof(UserChallengeAttribute), false)
-                .FirstOrDefault() is UserChallengeAttribute { IgnoreAdmin: false } userChallengeAttrubute
+                .FirstOrDefault() is UserChallengeAttribute { IgnoreAdmin: false }
            )
         {
             context.Request.Headers.TryGetValue("UserChallengeToken", out var token);

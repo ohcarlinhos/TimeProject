@@ -8,7 +8,7 @@ using TimeProject.Infrastructure.ObjectValues.Users;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/user/password")]
+[Route("user/password")]
 public class UserPasswordController(
     IUpdateUserUseCase updateUserUseCase,
     ICreateOrUpdateUserPasswordUseCase createOrUpdateUserPasswordUseCase,

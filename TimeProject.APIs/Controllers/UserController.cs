@@ -8,12 +8,14 @@ using TimeProject.Infrastructure.ObjectValues.General;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Users;
 using TimeProject.Infrastructure.Utils;
+using TimeProject.APIs.Controllers.Attributes;
 
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/users")]
+[Route("users")]
 public class UserController(
+    ICreateUserUseCase createUserUseCase,
     IUpdateUserUseCase updateUserUseCase,
     IUpdateUserRoleUseCase updateUserRoleUseCase,
     IDisableUserUseCase disableUserUseCase,
@@ -29,13 +31,14 @@ public class UserController(
         return HandleResponse(getPaginatedUserUseCase.Handle(paginationQuery));
     }
 
-    // [HttpPost, UserChallenge]
-    // public ActionResult<CreateUserResult>> Create([FromBody] CreateUserDto dto)
-    // {
-    //     var result =  createUserUseCase.Handle(dto);
-    //     result.ActionName = nameof(Create);
-    //     return HandleResponse(result);
-    // }
+    [HttpPost]
+    [UserChallenge]
+    public ActionResult<ICreateUserResult> Create([FromBody] CreateUserDto dto)
+    {
+        var result =  createUserUseCase.Handle(dto);
+        result.ActionName = nameof(Create);
+        return HandleResponse(result);
+    }
 
     [HttpPut("{id:int}")]
     [Authorize(Policy = "IsActive")]
