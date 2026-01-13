@@ -57,10 +57,10 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
     {
         return SessionQuery(recordId, userId)
             .Where(e =>
-                e.PeriodRecords!.FirstOrDefault()!.Start >= initDate
-                && e.PeriodRecords!.FirstOrDefault()!.Start < endDate
+                e.Periods!.FirstOrDefault()!.Start >= initDate
+                && e.Periods!.FirstOrDefault()!.Start < endDate
             )
-            .Include(e => e.PeriodRecords!.OrderBy(period => period.Start))
+            .Include(e => e.Periods!.OrderBy(period => period.Start))
             .ToList<ISession>();
     }
 
@@ -84,8 +84,8 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
             .Where(e =>
                 e.UserId == userId
                 && e.RecordId == recordId
-                && e.PeriodRecords != null
-                && e.PeriodRecords.Any()
+                && e.Periods != null
+                && e.Periods.Any()
             )
             .AsQueryable();
     }

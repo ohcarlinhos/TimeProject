@@ -7,12 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 const string customCorsName = "_customCors";
 builder.AddCorsConfiguration(customCorsName);
 
-// Injeção de todos os serviços.
 builder.AddServicesConfig();
 builder.AddCustomAuthorizationConfiguration();
 
-builder.Services.AddControllers().AddJsonOptions(x =>
-    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 
 builder.AddSwaggerConfig();

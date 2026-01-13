@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
@@ -25,11 +24,11 @@ public class PeriodEntityConfiguration : IEntityTypeConfiguration<Period>
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
 
         builder.HasOne(e => e.Record)
-            .WithMany(e => e.PeriodRecords)
+            .WithMany(e => e.Periods)
             .HasForeignKey(e => e.RecordId);
 
         builder.HasOne<Session>(e => e.Session)
-            .WithMany(e => e.PeriodRecords)
+            .WithMany(e => e.Periods)
             .HasForeignKey(e => e.SessionId);
     }
 }

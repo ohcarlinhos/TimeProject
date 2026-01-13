@@ -110,7 +110,7 @@ public class GetRangeDaysStatisticUseCase(
                 recordId) as List<Session>)
             .Select(e =>
             {
-                e.PeriodRecords = periodCutUtil.Handle(e.PeriodRecords!, initDate, endDate);
+                e.Periods = periodCutUtil.Handle(e.Periods!, initDate, endDate);
                 return e;
             })
             .ToList();

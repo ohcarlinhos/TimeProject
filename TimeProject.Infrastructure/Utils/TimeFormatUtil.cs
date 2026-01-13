@@ -51,8 +51,8 @@ public static class TimeFormatUtil
         if (recordSessions == null) return total;
 
         foreach (var rs in (recordSessions as IList<Session>)!)
-            if (rs.PeriodRecords != null && rs.PeriodRecords.Any())
-                total = total.Add(TimeSpanFromPeriods(rs.PeriodRecords.ToList()));
+            if (rs.Periods != null && rs.Periods.Any())
+                total = total.Add(TimeSpanFromPeriods(rs.Periods.ToList()));
 
         return total;
     }

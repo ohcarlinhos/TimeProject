@@ -16,5 +16,5 @@ public class Session : ISession
 
     public Record Record { get; set; } = null!;
     
-    public IList<Period>? PeriodRecords { get; set; }
+    public IList<Period>? Periods { get; set; }
 }

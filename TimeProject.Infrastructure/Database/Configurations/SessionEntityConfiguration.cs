@@ -24,7 +24,7 @@ public class SessionEntityConfiguration : IEntityTypeConfiguration<Session>
             .WithMany()
             .HasForeignKey(e => e.RecordId);
 
-        builder.HasMany(e => e.PeriodRecords)
+        builder.HasMany(e => e.Periods)
             .WithOne(e => e.Session)
             .HasForeignKey(e => e.SessionId)
             .OnDelete(DeleteBehavior.SetNull);

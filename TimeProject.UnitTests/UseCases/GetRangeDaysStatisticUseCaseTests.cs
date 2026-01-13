@@ -21,8 +21,8 @@ public class GetRangeDaysStatisticUseCaseTests
 
         foreach (var session in recordSessions)
         {
-            if (session.PeriodRecords == null || !session.PeriodRecords.Any()) continue;
-            periods.AddRange(session.PeriodRecords);
+            if (session.Periods == null || !session.Periods.Any()) continue;
+            periods.AddRange(session.Periods);
         }
 
         _staticRepository
@@ -86,7 +86,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 UserId = userId,
                 RecordId = recordId,
                 Type = "timer",
-                PeriodRecords = new List<Period>
+                Periods = new List<Period>
                 {
                     new()
                     {
@@ -106,7 +106,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 UserId = userId,
                 RecordId = recordId,
                 Type = "pomodoro",
-                PeriodRecords = new List<Period>
+                Periods = new List<Period>
                 {
                     new()
                     {
@@ -126,7 +126,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 UserId = userId,
                 RecordId = recordId,
                 Type = "break",
-                PeriodRecords = new List<Period>
+                Periods = new List<Period>
                 {
                     new()
                     {
@@ -141,7 +141,7 @@ public class GetRangeDaysStatisticUseCaseTests
                 UserId = userId,
                 RecordId = recordId,
                 Type = "timer",
-                PeriodRecords = new List<Period>()
+                Periods = new List<Period>()
             }
         ];
     }

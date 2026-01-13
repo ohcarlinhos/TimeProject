@@ -29,6 +29,6 @@ public class RecordEntityConfiguration : IEntityTypeConfiguration<Record>
             .HasForeignKey(e => e.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.HasMany(e => e.PeriodRecords).WithOne(e => e.Record);
+        builder.HasMany(e => e.Periods).WithOne(e => e.Record);
     }
 }

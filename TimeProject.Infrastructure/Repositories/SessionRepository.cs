@@ -24,7 +24,7 @@ public class SessionRepository(CustomDbContext db) : ISessionRepository
     public ISession? FindById(int id, int userId)
     {
         return db.Sessions
-            .Include(e => e.PeriodRecords)
+            .Include(e => e.Periods)
             .FirstOrDefault(e => e.Id == id && e.UserId == userId);
     }
 

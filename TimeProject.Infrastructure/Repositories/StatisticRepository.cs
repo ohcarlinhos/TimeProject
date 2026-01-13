@@ -40,19 +40,19 @@ public class StatisticRepository(CustomDbContext db) : IStatisticRepository
             .Where(p =>
                 (
                     (
-                        p.PeriodRecords!.Count(e => e.Start >= initDate) > 0
+                        p.Periods!.Count(e => e.Start >= initDate) > 0
                         &&
-                        p.PeriodRecords!.Count(e => e.Start < endDate) > 0
+                        p.Periods!.Count(e => e.Start < endDate) > 0
                     )
                     ||
                     (
-                        p.PeriodRecords!.Count(e => e.End > initDate) > 0
+                        p.Periods!.Count(e => e.End > initDate) > 0
                         &&
-                        p.PeriodRecords!.Count(e => e.End <= endDate) > 0
+                        p.Periods!.Count(e => e.End <= endDate) > 0
                     )
                 )
                 && userId == p.UserId)
-            .Include(p => p.PeriodRecords!.OrderBy(q => q.Start))
+            .Include(p => p.Periods!.OrderBy(q => q.Start))
             .ToList<ISession>();
     }
 
