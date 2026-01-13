@@ -1,8 +1,7 @@
-﻿using TimeProject.Domain.Dtos.Periods;
-
+﻿
 namespace TimeProject.Domain.Dtos.Records;
 
-public interface ICreateRecordDto
+public interface ICreateRecordData
 {
     string? Title { get; set; }
     string? Description { get; set; }
@@ -11,5 +10,4 @@ public interface ICreateRecordDto
     string? SessionType { get; set; }
     string? SessionFrom { get; set; }
     int? CategoryId { get; set; }
-    IList<IPeriodDto>? Periods { get; set; }
 }

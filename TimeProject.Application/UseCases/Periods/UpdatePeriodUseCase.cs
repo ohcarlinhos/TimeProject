@@ -18,22 +18,22 @@ public class UpdatePeriodUseCase(
     IPeriodValidateUtil periodValidateUtil
 ) : IUpdatePeriodUseCase
 {
-    public ICustomResult<IPeriod> Handle(int id, IPeriodDto dto, int userId)
+    public ICustomResult<IPeriod> Handle(int id, IPeriodData data, int userId)
     {
         var result = new CustomResult<IPeriod>();
 
-        periodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
+        periodValidateUtil.ValidateStartAndEnd(data.Start, data.End, result);
         if (result.HasError) return result;
 
         var period = repository.FindById(id, userId);
         if (period == null) return result.SetError(PeriodMessageErrors.NotFound);
 
-        period.Start = dto.Start;
-        period.End = dto.End;
+        period.Start = data.Start;
+        period.End = data.End;
 
-        var data = repository.Update(period);
-        syncRecordMetaUseCase.Handle(data.RecordId);
+        repository.Update(period);
+        syncRecordMetaUseCase.Handle(period.RecordId);
 
-        return result.SetData(data);
+        return result.SetData(period);
     }
 }

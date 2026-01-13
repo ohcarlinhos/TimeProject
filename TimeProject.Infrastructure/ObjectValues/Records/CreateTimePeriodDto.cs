@@ -2,7 +2,7 @@
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-public class CreatePeriodDto : ICreatePeriodDto
+public class CreatePeriodDto : ICreatePeriodData
 {
     public int RecordId { get; set; }
     public DateTime Start { get; set; }

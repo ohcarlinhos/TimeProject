@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Dtos.Records;
-using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Infrastructure.ObjectValues.General;
-using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Records;
 using TimeProject.Infrastructure.Utils;
 
@@ -50,7 +48,7 @@ public class RecordController(
     [HttpPost]
     public ActionResult<IRecordOutDto> Create([FromBody] CreateRecordDto dto)
     {
-        var result = createRecordUseCase.Handle(dto, UserClaimsUtil.Id(User));
+        var result = createRecordUseCase.Handle(dto, dto.Periods as IList<Domain.Dtos.Periods.IPeriodData>, UserClaimsUtil.Id(User));
 
         result.ActionName = nameof(Create);
         return HandleResponse(result);

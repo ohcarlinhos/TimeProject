@@ -18,31 +18,31 @@ public class CreatePeriodUseCase(
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodUseCase
 {
-    public ICustomResult<IPeriod> Handle(ICreatePeriodDto dto, int userId)
+    public ICustomResult<IPeriod> Handle(ICreatePeriodData data, int userId)
     {
         var result = new CustomResult<IPeriod>();
 
-        periodValidateUtil.ValidateStartAndEnd(dto.Start, dto.End, result);
+        periodValidateUtil.ValidateStartAndEnd(data.Start, data.End, result);
         if (result.HasError) return result;
 
-        if (dto.Start.CompareTo(dto.End) > 0)
+        if (data.Start.CompareTo(data.End) > 0)
             return result.SetError(PeriodMessageErrors.EndDateIsBiggerThenStartDate);
 
-        var findTrResult = getRecordByIdUseCase.Handle(dto.RecordId, userId);
+        var findTrResult = getRecordByIdUseCase.Handle(data.RecordId, userId);
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);
 
-        var data = repository
+        var period = repository
             .Create(new Period
                 {
                     UserId = userId,
-                    RecordId = dto.RecordId,
-                    Start = dto.Start,
-                    End = dto.End
+                    RecordId = data.RecordId,
+                    Start = data.Start,
+                    End = data.End
                 }
             );
 
-        syncRecordMetaUseCase.Handle(data.RecordId);
+        syncRecordMetaUseCase.Handle(period.RecordId);
 
-        return result.SetData(data);
+        return result.SetData(period);
     }
 }

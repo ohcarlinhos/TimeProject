@@ -21,20 +21,20 @@ public class CreateRecordUseCase(
     CustomDbContext db)
     : ICreateRecordUseCase
 {
-    public ICustomResult<IRecordOutDto> Handle(ICreateRecordDto dto, int userId)
+    public ICustomResult<IRecordOutDto> Handle(ICreateRecordData data, IList<IPeriodData>? periods, int userId)
     {
         var result = new CustomResult<IRecordOutDto>();
         var transaction = db.Database.BeginTransaction();
 
-        if (dto.CategoryId != null)
+        if (data.CategoryId != null)
         {
-            var category = categoryRepository.FindById((int)dto.CategoryId, userId);
+            var category = categoryRepository.FindById((int)data.CategoryId, userId);
             if (category == null) return result.SetError(RecordMessageErrors.CategoryNotFound);
         }
 
-        if (string.IsNullOrEmpty(dto.Code) == false)
+        if (string.IsNullOrEmpty(data.Code) == false)
         {
-            var trByCode = repository.FindByCode(dto.Code!, userId);
+            var trByCode = repository.FindByCode(data.Code!, userId);
             if (trByCode != null) return result.SetError(RecordMessageErrors.CodeAlreadyInUse);
         }
 
@@ -42,24 +42,24 @@ public class CreateRecordUseCase(
             .Create(new Record
                 {
                     UserId = userId,
-                    CategoryId = dto.CategoryId,
-                    Title = dto.Title,
-                    Description = dto.Description,
-                    Code = string.IsNullOrEmpty(dto.Code) == false ? dto.Code! : Guid.NewGuid().ToString(),
-                    ExternalLink = dto.ExternalLink
+                    CategoryId = data.CategoryId,
+                    Title = data.Title,
+                    Description = data.Description,
+                    Code = string.IsNullOrEmpty(data.Code) == false ? data.Code! : Guid.NewGuid().ToString(),
+                    ExternalLink = data.ExternalLink
                 }
             );
 
         try
         {
-            if (dto.Periods != null)
+            if (periods != null)
             {
                 var periodsResult = createPeriodByListUseCase
                     .Handle(
                         new PeriodListDto
                         {
-                            Periods = (dto.Periods as List<IPeriodDto>)!, Type = dto.SessionType,
-                            From = dto.SessionFrom
+                            Periods = (periods as List<IPeriodData>)!, Type = data.SessionType,
+                            From = data.SessionFrom
                         },
                         record.Id, userId);
 

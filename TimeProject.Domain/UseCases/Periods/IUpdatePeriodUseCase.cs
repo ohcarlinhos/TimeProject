@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.Periods;
 
 public interface IUpdatePeriodUseCase
 {
-    ICustomResult<IPeriod> Handle(int id, IPeriodDto dto, int userId);
+    ICustomResult<IPeriod> Handle(int id, IPeriodData data, int userId);
 }

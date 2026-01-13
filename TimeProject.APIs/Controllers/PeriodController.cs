@@ -33,9 +33,9 @@ public class PeriodController(
     }
 
     [HttpPost]
-    public ActionResult<IPeriod> Create([FromBody] CreatePeriodDto dto)
+    public ActionResult<IPeriod> Create([FromBody] CreatePeriodDto data)
     {
-        var result = createPeriodUseCase.Handle(dto, UserClaimsUtil.Id(User));
+        var result = createPeriodUseCase.Handle(data, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }
@@ -51,9 +51,9 @@ public class PeriodController(
 
     [HttpPut]
     [Route("{id:int}")]
-    public ActionResult<IPeriod> Update(int id, [FromBody] PeriodDto dto)
+    public ActionResult<IPeriod> Update(int id, [FromBody] PeriodDto data)
     {
-        return HandleResponse(updatePeriodUseCase.Handle(id, dto, UserClaimsUtil.Id(User)));
+        return HandleResponse(updatePeriodUseCase.Handle(id, data, UserClaimsUtil.Id(User)));
     }
 
     [HttpDelete]

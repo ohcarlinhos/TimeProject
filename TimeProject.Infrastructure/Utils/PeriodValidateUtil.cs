@@ -17,9 +17,9 @@ public class PeriodValidateUtil : IPeriodValidateUtil
             customResult.SetError(PeriodMessageErrors.EndDateIsBiggerThenStartDate);
     }
 
-    public bool HasMinSize(IPeriodDto dto)
+    public bool HasMinSize(IPeriodData data)
     {
-        var time = dto.End.Subtract(dto.Start);
+        var time = data.End.Subtract(data.Start);
         return time.TotalSeconds > 2;
     }
 }

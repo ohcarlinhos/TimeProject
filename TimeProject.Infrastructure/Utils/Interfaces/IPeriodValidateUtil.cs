@@ -7,5 +7,5 @@ public interface IPeriodValidateUtil
 {
     void ValidateStartAndEnd<T>(DateTime start, DateTime end, ICustomResult<T> customResult);
 
-    bool HasMinSize(IPeriodDto dto);
+    bool HasMinSize(IPeriodData data);
 }

@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
-public class CreateRecordDto : ICreateRecordDto
+public class CreateRecordDto : ICreateRecordData
 {
     [MaxLength(120)] public string? Title { get; set; }
     [MaxLength(240)] public string? Description { get; set; }
@@ -16,5 +15,5 @@ public class CreateRecordDto : ICreateRecordDto
 
     public int? CategoryId { get; set; }
 
-    [Required] public IList<IPeriodDto>? Periods { get; set; }
+    [Required] public IList<Periods.PeriodDto>? Periods { get; set; }
 }
