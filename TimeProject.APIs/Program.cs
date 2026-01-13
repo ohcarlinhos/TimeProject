@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Scalar.AspNetCore;
 using TimeProject.APIs.Configurations;
 using TimeProject.APIs.Controllers.Middlewares;
 
@@ -14,7 +15,8 @@ builder.Services.AddControllers()
     .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 
-builder.AddSwaggerConfig();
+// builder.AddSwaggerConfig();
+builder.Services.AddOpenApi();
 builder.AddDatabaseConfig();
 
 var app = builder.Build();
@@ -22,8 +24,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // app.UseSwagger();
+    // app.UseSwaggerUI();
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 else
 {
