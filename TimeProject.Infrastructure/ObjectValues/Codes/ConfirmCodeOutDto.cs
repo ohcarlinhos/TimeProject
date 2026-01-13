@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.Dtos.Codes;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Codes;
+namespace TimeProject.Infrastructure.ObjectValues.Codes;
 
 public class ConfirmCodeOutDto : IConfirmCodeOutDto
 {

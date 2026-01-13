@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using TimeProject.Domain.Dtos.Minutes;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Minutes;
+namespace TimeProject.Infrastructure.ObjectValues.Minutes;
 
 public class CreateMinuteListDto : ICreateMinuteListDto
 {

@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Shared;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination;
+namespace TimeProject.Infrastructure.ObjectValues;
 
 public class CustomResult<T> : ICustomResult<T>
 {

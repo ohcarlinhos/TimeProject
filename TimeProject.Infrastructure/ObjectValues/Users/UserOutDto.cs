@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Users;
+namespace TimeProject.Infrastructure.ObjectValues.Users;
 
 public class UserOutDto : IUserOutDto
 {

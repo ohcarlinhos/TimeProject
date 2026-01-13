@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Auths;
+namespace TimeProject.Infrastructure.ObjectValues.Auths;
 
 public class LoginGoogleResponse
 {

@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.ObjectValues;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination;
+namespace TimeProject.Infrastructure.ObjectValues.General;
 
 public class Pagination<T> : IPagination<T>
 {

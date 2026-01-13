@@ -4,8 +4,9 @@ using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.Dtos.Users;
-using TimeProject.Infrastructure.ObjectValues.Pagination;
-using TimeProject.Infrastructure.ObjectValues.Pagination.Users;
+using TimeProject.Infrastructure.ObjectValues.General;
+using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Users;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;

@@ -1,10 +1,10 @@
 ﻿using TimeProject.Infrastructure.Interfaces;
-using TimeProject.Infrastructure.ObjectValues.Pagination;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.UseCases.Feedbacks;
 using TimeProject.Domain.Dtos.Feedbacks;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Factories;
-using TimeProject.Infrastructure.ObjectValues.Pagination.Feedbacks;
+using TimeProject.Infrastructure.ObjectValues.Feedbacks;
 
 namespace TimeProject.Application.UseCases.Feedbacks;
 

@@ -1,5 +1,5 @@
 ﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues.Pagination;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Database.Entities;
@@ -8,7 +8,7 @@ using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database;
-using TimeProject.Infrastructure.ObjectValues.Pagination.Periods;
+using TimeProject.Infrastructure.ObjectValues.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Application.UseCases.Records;

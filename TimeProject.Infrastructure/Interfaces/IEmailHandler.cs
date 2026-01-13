@@ -1,5 +1,5 @@
 ﻿using TimeProject.Infrastructure.Handlers;
-using TimeProject.Infrastructure.ObjectValues.Pagination.Emails;
+using TimeProject.Infrastructure.ObjectValues.Emails;
 
 namespace TimeProject.Infrastructure.Interfaces;
 

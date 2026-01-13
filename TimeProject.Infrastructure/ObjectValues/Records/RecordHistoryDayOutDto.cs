@@ -3,7 +3,7 @@ using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Records;
+namespace TimeProject.Infrastructure.ObjectValues.Records;
 
 public class RecordHistoryDayOutDto : IRecordHistoryDayOutDto
 {

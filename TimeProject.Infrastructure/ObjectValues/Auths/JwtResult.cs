@@ -1,6 +1,6 @@
 using TimeProject.Domain.Dtos.Auths;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Auths;
+namespace TimeProject.Infrastructure.ObjectValues.Auths;
 
 public class JwtResult : IJwtResult
 {

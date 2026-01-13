@@ -6,8 +6,9 @@ using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.UseCases.Categories;
 using TimeProject.Domain.Dtos.Categories;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Infrastructure.ObjectValues.Pagination;
-using TimeProject.Infrastructure.ObjectValues.Pagination.Categories;
+using TimeProject.Infrastructure.ObjectValues.General;
+using TimeProject.Infrastructure.ObjectValues;
+using TimeProject.Infrastructure.ObjectValues.Categories;
 using TimeProject.Infrastructure.Utils;
 
 namespace TimeProject.APIs.Controllers;

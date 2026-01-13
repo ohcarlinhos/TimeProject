@@ -1,11 +1,11 @@
-using TimeProject.Infrastructure.ObjectValues.Pagination;
+using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Statistics;
 using TimeProject.Domain.Dtos.Statistics;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Infrastructure.ObjectValues.Pagination.Statistics;
+using TimeProject.Infrastructure.ObjectValues.Statistics;
 using TimeProject.Infrastructure.Utils;
 using TimeProject.Infrastructure.Utils.Interfaces;
 

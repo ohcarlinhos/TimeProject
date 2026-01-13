@@ -2,7 +2,7 @@ using AutoMapper;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.Utils.Interfaces;
-using TimeProject.Infrastructure.ObjectValues.Pagination.Users;
+using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Infrastructure.Utils;
 

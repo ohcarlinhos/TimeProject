@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.Entities;
 using TimeProject.Domain.ObjectValues;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Users;
+namespace TimeProject.Infrastructure.ObjectValues.Users;
 
 public class GetUserPasswordByEmailResult : IGetUserPasswordByEmailResult
 {

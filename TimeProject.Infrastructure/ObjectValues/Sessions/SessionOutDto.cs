@@ -2,7 +2,7 @@
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Utils;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Sessions;
+namespace TimeProject.Infrastructure.ObjectValues.Sessions;
 
 public class SessionOutDto : ISessionOutDto
 {

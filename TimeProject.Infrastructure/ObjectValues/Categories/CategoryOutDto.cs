@@ -1,6 +1,6 @@
 ﻿using TimeProject.Domain.Dtos.Categories;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Categories;
+namespace TimeProject.Infrastructure.ObjectValues.Categories;
 
 public class CategoryOutDto : ICategoryOutDto
 {

@@ -1,7 +1,7 @@
 ﻿using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Statistics;
 
-namespace TimeProject.Infrastructure.ObjectValues.Pagination.Statistics;
+namespace TimeProject.Infrastructure.ObjectValues.Statistics;
 
 public class RangeStatisticsData : IRangeStatisticsData
 {

@@ -2,7 +2,7 @@
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Database.Entities;
-using TimeProject.Infrastructure.ObjectValues.Pagination;
+using TimeProject.Infrastructure.ObjectValues;
 
 namespace TimeProject.Infrastructure.Utils;
 
