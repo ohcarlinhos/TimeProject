@@ -1,4 +1,4 @@
-﻿// using Microsoft.OpenApi.Models;
+﻿// using Microsoft.OpenApi;
 //
 // namespace TimeProject.APIs.Configurations;
 //
@@ -8,7 +8,7 @@
 //     {
 //         builder.Services.AddSwaggerGen(options =>
 //         {
-//             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+//             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
 //             {
 //                 Name = "Authorization",
 //                 In = ParameterLocation.Header,
@@ -16,10 +16,10 @@
 //                 Scheme = "Bearer"
 //             });
 //
-//             options.AddSecurityRequirement(new OpenApiSecurityRequirement
+//             options.AddSecurityRequirement(new OpenApiSecurityRequirement()
 //             {
 //                 {
-//                     new OpenApiSecurityScheme
+//                     new OpenApiSecurityScheme()
 //                     {
 //                         Reference = new OpenApiReference
 //                         {

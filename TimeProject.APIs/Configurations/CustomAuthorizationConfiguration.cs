@@ -9,31 +9,24 @@ public static class CustomAuthorizationConfiguration
 {
     public static void AddCustomAuthorizationConfiguration(this WebApplicationBuilder builder)
     {
-        var settings = builder.Configuration.GetRequiredSection("Jwt").Get<JwtSettings>();
+        var jwtSettings = builder.Configuration.GetRequiredSection("JwtSettings").Get<JwtSettings>();
 
-        builder.Services
-            .AddAuthentication(authOptions =>
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(bearerOptions =>
+        {
+            bearerOptions.TokenValidationParameters = new TokenValidationParameters
             {
-                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(bearerOptions =>
-            {
-                bearerOptions.RequireHttpsMetadata = false;
-                bearerOptions.SaveToken = true;
-                bearerOptions.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(settings!.Secret))
-                };
-            });
-
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings!.Secret))
+            };
+        });
+        
         builder.Services.AddAuthorizationBuilder()
-            .AddPolicy("IsAdmin", p =>
-                p.RequireClaim("isAdmin", "True"))
-            .AddPolicy("IsActive", p =>
-                p.RequireClaim("isActive", "True"));
+            .AddPolicy("IsAdmin", cp =>
+                cp.RequireClaim("IsAdmin", "True"))
+            .AddPolicy("IsActive", cp =>
+                cp.RequireClaim("IsActive", "True"));
     }
 }

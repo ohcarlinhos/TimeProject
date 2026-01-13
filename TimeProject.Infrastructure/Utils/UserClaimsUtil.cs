@@ -7,7 +7,7 @@ public static class UserClaimsUtil
 {
     public static int Id(ClaimsPrincipal p)
     {
-        return int.Parse(GetValue(p, "id") ?? "-1");
+        return int.Parse(GetValue(p, "Id") ?? "-1");
     }
 
     public static string Name(ClaimsPrincipal p)
@@ -22,7 +22,7 @@ public static class UserClaimsUtil
 
     public static bool IsVerified(ClaimsPrincipal p)
     {
-        return bool.Parse(GetValue(p, "isVerified") ?? "False");
+        return bool.Parse(GetValue(p, "IsVerified") ?? "False");
     }
 
     public static string Role(ClaimsPrincipal p)

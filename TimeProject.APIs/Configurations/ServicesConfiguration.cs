@@ -43,7 +43,7 @@ public static class ServicesConfiguration
     {
         #region Settings
 
-        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
         builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
 
         builder.Services.Configure<TelegramSettings>(builder.Configuration.GetSection("Telegram"));

@@ -17,14 +17,12 @@ public class JwtHandler(JwtSettings jwtSettings) : IJwtHandler
     public JwtResult Generate(IUser user)
     {
         var subject = new ClaimsIdentity([
-            new Claim("id", user.Id.ToString()),
-
+            new Claim("Id", user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.UserRole.ToString()),
-
-            new Claim("isAdmin", user.UserRole == UserRoleType.Admin ? "True" : "False"),
-            new Claim("isActive", user.IsActive.ToString())
+            new Claim("IsAdmin", user.UserRole == UserRoleType.Admin ? "True" : "False"),
+            new Claim("IsActive", user.IsActive.ToString())
         ]);
 
         var expires = DateTime.UtcNow.AddHours(jwtSettings.ExpiresAt).ToUniversalTime();

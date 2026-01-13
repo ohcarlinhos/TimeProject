@@ -6,17 +6,21 @@ using TimeProject.APIs.Controllers.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 const string customCorsName = "_customCors";
-builder.AddCorsConfiguration(customCorsName);
+// builder.AddCorsConfiguration(customCorsName);
 
 builder.AddServicesConfig();
 builder.AddCustomAuthorizationConfiguration();
 
 builder.Services.AddControllers()
     .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddEndpointsApiExplorer();
 
-// builder.AddSwaggerConfig();
-builder.Services.AddOpenApi();
+builder.Services
+    .AddOpenApi(o => o
+        .AddDocumentTransformer<BearerSecuritySchemeTransformer>()
+        .AddScalarTransformers());
+
 builder.AddDatabaseConfig();
 
 var app = builder.Build();
@@ -24,8 +28,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error-development");
-    // app.UseSwagger();
-    // app.UseSwaggerUI();
+    
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
@@ -34,7 +37,7 @@ else
     app.UseExceptionHandler("/error");
 }
 
-app.UseCors(customCorsName);
+// app.UseCors(customCorsName);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
