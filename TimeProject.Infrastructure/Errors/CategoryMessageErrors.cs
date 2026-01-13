@@ -1,4 +1,4 @@
-﻿namespace TimeProject.Api.Infrastructure.Errors;
+﻿namespace TimeProject.Infrastructure.Errors;
 
 public static class CategoryMessageErrors
 {

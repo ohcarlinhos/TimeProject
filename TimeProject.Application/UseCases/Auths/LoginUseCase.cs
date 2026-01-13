@@ -1,5 +1,4 @@
-﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.UseCases.CustomLogs;
@@ -7,6 +6,7 @@ using TimeProject.Domain.UseCases.Logins;
 using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 
 namespace TimeProject.Application.UseCases.Auths;

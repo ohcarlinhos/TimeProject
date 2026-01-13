@@ -1,11 +1,11 @@
 ﻿using Octokit;
-using TimeProject.Api.Infrastructure.Errors;
 using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Shared;
 using TimeProject.Domain.UseCases.CustomLogs;
 using TimeProject.Domain.UseCases.Logins;
 using TimeProject.Domain.UseCases.Users;
+using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Infrastructure.ObjectValues.Users;

@@ -1,6 +1,6 @@
-﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Domain.Dtos.Periods;
+﻿using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Infrastructure.Utils;

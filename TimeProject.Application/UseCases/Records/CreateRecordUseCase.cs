@@ -1,5 +1,4 @@
-﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Domain.Dtos.Records;
 using TimeProject.Infrastructure.Database.Entities;
@@ -8,6 +7,7 @@ using TimeProject.Domain.UseCases.Periods;
 using TimeProject.Domain.UseCases.Records;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database;
+using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.ObjectValues.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;
 

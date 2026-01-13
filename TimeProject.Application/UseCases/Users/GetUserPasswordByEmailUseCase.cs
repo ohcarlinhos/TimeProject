@@ -1,9 +1,9 @@
-﻿using TimeProject.Api.Infrastructure.Errors;
-using TimeProject.Infrastructure.ObjectValues;
+﻿using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.ObjectValues;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Users;
 using TimeProject.Domain.Shared;
+using TimeProject.Infrastructure.Errors;
 using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
