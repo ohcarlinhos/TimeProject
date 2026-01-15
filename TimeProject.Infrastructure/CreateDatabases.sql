@@ -52,7 +52,7 @@ create table if not exists user_passwords
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
     constraint pk_user_passwords primary key (password_id),
-    constraint fk_user_passwords_users foreign key (user_id) references users (user_id)
+    constraint fk_user_passwords_users foreign key (user_id) references users (user_id) on delete cascade
 );
 
 create index idx_user_passwords_user_id on user_passwords (user_id);
@@ -71,7 +71,7 @@ create table if not exists user_providers
     user_id              int         not null,
     created_at           timestamptz not null default now(),
     updated_at           timestamptz not null default now(),
-    constraint fk_user_providers_users foreign key (user_id) references users (user_id),
+    constraint fk_user_providers_users foreign key (user_id) references users (user_id) on delete cascade,
     constraint uq_user_providers_user_id_provider unique (user_id, provider)
 );
 
@@ -89,12 +89,12 @@ create table if not exists user_access_logs
     provider    varchar(15) not null,
     client_ip   inet        not null,
     user_agent  text        not null,
-    user_id     int         not null,
+    user_id     int,
     accessed_at timestamptz not null default now(),
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
     constraint pk_user_access_logs primary key (log_id),
-    constraint fk_user_access_logs_users foreign key (user_id) references users (user_id)
+    constraint fk_user_access_logs_users foreign key (user_id) references users (user_id) on delete set null
 );
 
 create index idx_user_access_logs_user_id on user_access_logs (user_id);
@@ -117,7 +117,7 @@ create table if not exists confirm_codes
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now(),
     constraint pk_confirm_codes primary key (code_id),
-    constraint fk_confirm_codes_users foreign key (user_id) references users (user_id)
+    constraint fk_confirm_codes_users foreign key (user_id) references users (user_id) on delete cascade
 );
 
 create index idx_confirm_codes_user_id_type on confirm_codes (user_id, type);
@@ -137,7 +137,7 @@ create table if not exists categories
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
     constraint pk_categories primary key (category_id),
-    constraint fk_categories_users foreign key (user_id) references users (user_id)
+    constraint fk_categories_users foreign key (user_id) references users (user_id) on delete cascade
 );
 
 create or replace trigger categories_update_timestamp_trigger
@@ -159,8 +159,8 @@ create table if not exists records
     created_at    timestamptz not null default now(),
     updated_at    timestamptz not null default now(),
     constraint pk_records primary key (record_id),
-    constraint fk_records_users foreign key (user_id) references users (user_id),
-    constraint fk_records_categories foreign key (category_id) references categories (category_id)
+    constraint fk_records_users foreign key (user_id) references users (user_id) on delete cascade,
+    constraint fk_records_categories foreign key (category_id) references categories (category_id) on delete set null
 );
 
 create index idx_records_user_id_code on records (user_id, code);
@@ -184,8 +184,8 @@ create table if not exists record_resumes
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now(),
     constraint pk_record_resumes primary key (record_id),
-    constraint fk_record_resumes_users foreign key (user_id) references users (user_id),
-    constraint fk_record_resumes_records foreign key (record_id) references records (record_id)
+    constraint fk_record_resumes_users foreign key (user_id) references users (user_id) on delete cascade,
+    constraint fk_record_resumes_records foreign key (record_id) references records (record_id) on delete cascade
 );
 
 create index idx_record_resumes_user_id_record_id on record_resumes (user_id, record_id);
@@ -209,9 +209,9 @@ create table if not exists sessions
     created_at   timestamptz not null default now(),
     updated_at   timestamptz not null default now(),
     constraint pk_sessions primary key (session_id),
-    constraint fk_sessions_users foreign key (user_id) references users (user_id),
-    constraint fk_sessions_records foreign key (record_id) references records (record_id),
-    constraint fk_sessions_categories foreign key (category_id) references categories (category_id)
+    constraint fk_sessions_users foreign key (user_id) references users (user_id) on delete cascade,
+    constraint fk_sessions_records foreign key (record_id) references records (record_id) on delete cascade,
+    constraint fk_sessions_categories foreign key (category_id) references categories (category_id) on delete set null
 );
 
 create index idx_sessions_user_id on sessions (user_id);
@@ -237,10 +237,10 @@ create table if not exists periods
     created_at   timestamptz not null default now(),
     updated_at   timestamptz not null default now(),
     constraint pk_periods primary key (period_id),
-    constraint fk_periods_users foreign key (user_id) references users (user_id),
-    constraint fk_periods_records foreign key (record_id) references records (record_id),
-    constraint fk_periods_sessions foreign key (session_id) references sessions (session_id),
-    constraint fk_periods_categories foreign key (category_id) references categories (category_id)
+    constraint fk_periods_users foreign key (user_id) references users (user_id) on delete cascade,
+    constraint fk_periods_records foreign key (record_id) references records (record_id) on delete set null,
+    constraint fk_periods_sessions foreign key (session_id) references sessions (session_id) on delete set null,
+    constraint fk_periods_categories foreign key (category_id) references categories (category_id) on delete set null
 );
 
 create index idx_periods_user_id on periods (user_id);
@@ -267,10 +267,10 @@ create table if not exists minutes
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
     constraint pk_minutes primary key (minute_id),
-    constraint fk_minutes_users foreign key (user_id) references users (user_id),
-    constraint fk_minutes_records foreign key (record_id) references records (record_id),
-    constraint fk_minutes_sessions foreign key (session_id) references sessions (session_id),
-    constraint fk_minutes_categories foreign key (category_id) references categories (category_id)
+    constraint fk_minutes_users foreign key (user_id) references users (user_id) on delete cascade,
+    constraint fk_minutes_records foreign key (record_id) references records (record_id) on delete set null,
+    constraint fk_minutes_sessions foreign key (session_id) references sessions (session_id) on delete set null,
+    constraint fk_minutes_categories foreign key (category_id) references categories (category_id) on delete set null
 );
 
 create index idx_minutes_user_id on minutes (user_id);
@@ -283,3 +283,12 @@ create or replace trigger minutes_update_timestamp_trigger
     on minutes
     for each row
 execute procedure update_timestamp();
+
+/* 
+    TODO: Criar um trigger para: "periods" e "minutes" 
+    para serem excluídos quando não houverem referência 
+    para nenhum "record" ou "category".
+    
+    Talvez posso implementar isso como uma rotina para 
+    evitar a exclusão automática "não intencional".
+*/
