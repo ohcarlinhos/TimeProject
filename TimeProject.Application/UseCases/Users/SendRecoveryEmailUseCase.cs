@@ -29,7 +29,7 @@ public class SendRecoveryEmailUseCase(
 
         var user = findUserResult.Data!;
 
-        var createRecoveryCodeResult = createConfirmCodeUseCase.Handle(user.Id, ConfirmCodeType.Recovery);
+        var createRecoveryCodeResult = createConfirmCodeUseCase.Handle(user.UserId, ConfirmCodeType.Recovery);
 
         var recoveryCode = createRecoveryCodeResult.Data!;
         if (recoveryCode.WasSent) return result.SetError(ConfirmCodeMessageErrors.CheckYourEmailInbox);

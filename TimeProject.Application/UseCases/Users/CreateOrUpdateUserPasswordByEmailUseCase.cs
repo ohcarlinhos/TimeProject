@@ -18,7 +18,7 @@ public class CreateOrUpdateUserPasswordByEmailUseCase(IUserPasswordRepository re
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
 
-        var userPassword = repository.FindByUserId(user.Id);
+        var userPassword = repository.FindByUserId((int)user.UserId!);
 
         if (userPassword != null)
         {

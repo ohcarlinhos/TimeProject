@@ -18,7 +18,7 @@ public class GetUserPasswordByEmailUseCase(IUserPasswordRepository repository, I
         var user = userRepository.FindByEmail(email);
         if (user == null) return result.SetError(UserMessageErrors.NotFound);
 
-        var userPassword = repository.FindByUserId(user.Id);
+        var userPassword = repository.FindByUserId(user.UserId);
         return userPassword == null
             ? result.SetError(UserMessageErrors.PasswordNotAllowed)
             : result.SetData(new GetUserPasswordByEmailResult

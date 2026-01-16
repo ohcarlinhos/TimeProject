@@ -27,7 +27,7 @@ public class CreateUserByGoogleUserUseCase(
         {
             userProviderRepository.Create(new UserProvider
             {
-                UserId = userWithEmail.Id,
+                UserId = userWithEmail.UserId,
                 Provider = "google",
                 UserProviderId = dto.UserProviderId
             });
@@ -36,16 +36,16 @@ public class CreateUserByGoogleUserUseCase(
         }
 
         var userEntity = repository
-            .Create(new Infrastructure.Database.Entities.User
+            .Create(new User
             {
                 Name = dto.Name,
                 Email = email,
-                Utc = dto.Utc
+                Timezone = ""
             });
 
         userProviderRepository.Create(new UserProvider
         {
-            UserId = userEntity.Id,
+            UserId = (int)userEntity.UserId!,
             Provider = "google",
             UserProviderId = dto.UserProviderId
         });

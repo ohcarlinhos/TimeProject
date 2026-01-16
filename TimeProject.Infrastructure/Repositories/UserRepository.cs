@@ -39,12 +39,7 @@ public class UserRepository(CustomDbContext db) : IUserRepository
 
     public IUser Create(IUser entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-        
         var user = (User)entity;
-        user.CreatedAt = now;
-        user.UpdatedAt = now;
-
         db.Users.Add(user);
         db.SaveChanges();
         return user;
@@ -72,7 +67,7 @@ public class UserRepository(CustomDbContext db) : IUserRepository
 
     public IUser? FindById(int id)
     {
-        return db.Users.FirstOrDefault(i => i.Id == id);
+        return db.Users.FirstOrDefault(i => i.UserId == id);
     }
 
     public IUser? FindByEmail(string email)

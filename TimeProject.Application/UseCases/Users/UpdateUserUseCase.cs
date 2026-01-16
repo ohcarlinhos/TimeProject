@@ -39,7 +39,7 @@ public class UpdateUserUseCase(IUserRepository repository, IUserMapDataUtil mapp
 
         if (!string.IsNullOrWhiteSpace(dto.Name) && user.Name != dto.Name) user.Name = dto.Name;
 
-        if (dto.Utc.HasValue) user.Utc = dto.Utc.Value;
+        if (!string.IsNullOrEmpty(dto.Timezone)) user.Timezone = dto.Timezone;
 
         var entity = repository.Update(user);
 

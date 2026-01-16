@@ -37,7 +37,7 @@ public class LoginGithubUseCase(
 
             if (getUserByPIdResult is { Data: not null })
             {
-                ac.UserId = getUserByPIdResult.Data.Id;
+                ac.UserId = (int)getUserByPIdResult.Data.UserId!;
                 createUserAccessLogUseCase.Handle(ac);
                 return result.SetData(jwtHandler.Generate(getUserByPIdResult.Data));
             }
@@ -56,7 +56,7 @@ public class LoginGithubUseCase(
 
             if (!createIsSuccess) result.SetError(createUserResult.Message);
 
-            ac.UserId = createUserResult.Data!.Id;
+            ac.UserId = (int)createUserResult.Data!.UserId!;
             createUserAccessLogUseCase.Handle(ac);
 
             return result.SetData(jwtHandler.Generate(createUserResult.Data));

@@ -34,7 +34,7 @@ public class CreateMinuteByListUseCase(
                 UserId = userId,
                 RecordId = recordId,
                 Total = minutes,
-                Date = dto.Date.AddHours(user.Utc * -1).ToUniversalTime()
+                Date = dto.Date
             });
 
         var data = mrRepository.CreateByList(list);

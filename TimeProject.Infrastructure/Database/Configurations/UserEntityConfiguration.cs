@@ -8,10 +8,10 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.HasKey(e => e.Id);
+        builder.HasKey(e => e.UserId);
         builder.HasIndex(e => e.Email).IsUnique();
 
-        builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(e => e.UserId).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.Name).HasMaxLength(120).IsRequired();
         builder.Property(e => e.Email).HasMaxLength(64).IsRequired();
         builder.Property(e => e.UserRole).IsRequired();

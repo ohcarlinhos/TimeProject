@@ -6,6 +6,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.Dtos.Auths;
+using TimeProject.Domain.Entities.Enums;
 using TimeProject.Infrastructure.Interfaces;
 using TimeProject.Infrastructure.ObjectValues.Auths;
 using TimeProject.Infrastructure.Settings;
@@ -17,7 +18,7 @@ public class JwtHandler(JwtSettings jwtSettings) : IJwtHandler
     public JwtResult Generate(IUser user)
     {
         var subject = new ClaimsIdentity([
-            new Claim("Id", user.Id.ToString()),
+            new Claim("Id", user.UserId.ToString()),
             new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.UserRole.ToString()),

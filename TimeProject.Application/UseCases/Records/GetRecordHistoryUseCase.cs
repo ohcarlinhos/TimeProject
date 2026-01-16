@@ -29,7 +29,7 @@ public class GetRecordHistoryUseCase(
         }
 
         // É passado um int referente ao UTC entre -12 e 13, para que consigamos saber as datas do UTC do usuário.
-        var distinctDates = repository.GetDistinctDates(recordId, userId, user.Utc);
+        var distinctDates = repository.GetDistinctDates(recordId, userId, -3);
 
         var dates = distinctDates
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
@@ -40,7 +40,7 @@ public class GetRecordHistoryUseCase(
         foreach (var dateItem in dates)
         {
             // initDate pega a data que já subtraimos a diferênça de utc e somamos novamente para fazer a busca correnta.
-            var initDate = dateItem.AddHours(user.Utc * -1);
+            var initDate = dateItem.AddHours(-3);
             var endDate = initDate.AddDays(1);
 
             var tpList = repository.GetPeriodsWithoutSession(recordId, userId, initDate, endDate);

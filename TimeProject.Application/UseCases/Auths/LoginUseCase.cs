@@ -30,7 +30,7 @@ public class LoginUseCase(
         var passwordMatch = BCrypt.Net.BCrypt.Verify(dto.Password, data.UserPassword.Password);
         if (!passwordMatch) return result.SetError(AuthMessageErrors.WrongEmailOrPassword);
 
-        ac.UserId = data.User.Id;
+        ac.UserId = (int)data.User.UserId!;
         createUserAccessLogUseCase.Handle(ac);
 
         return result.SetData(jwtHandler.Generate(data.User));

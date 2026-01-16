@@ -10,7 +10,7 @@ namespace TimeProject.APIs.Controllers;
 [ApiController]
 [Route("user/password")]
 public class UserPasswordController(
-    IUpdateUserUseCase updateUserUseCase,
+    // IUpdateUserUseCase updateUserUseCase,
     ICreateOrUpdateUserPasswordUseCase createOrUpdateUserPasswordUseCase,
     IRecoveryPasswordUseCase recoveryPasswordUseCase
 ) : CustomController

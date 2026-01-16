@@ -31,7 +31,7 @@ public class CreateUserByGhUserUseCase(
             {
                 userProviderRepository.Create(new UserProvider
                 {
-                    UserId = userWithPrimaryEmail.Id,
+                    UserId = (int)userWithPrimaryEmail.UserId!,
                     Provider = "github",
                     UserProviderId = dto.UserProviderId
                 });
@@ -48,7 +48,7 @@ public class CreateUserByGhUserUseCase(
 
                 userProviderRepository.Create(new UserProvider
                 {
-                    UserId = userWithSecondaryEmail.Id,
+                    UserId = (int)userWithSecondaryEmail.UserId!,
                     Provider = "github",
                     UserProviderId = dto.UserProviderId
                 });
@@ -58,16 +58,16 @@ public class CreateUserByGhUserUseCase(
         }
 
         var userEntity = repository
-            .Create(new Infrastructure.Database.Entities.User
+            .Create(new User
             {
                 Name = dto.Name,
                 Email = primaryEmail?.Email ?? "",
-                Utc = dto.Utc
+                Timezone = ""
             });
 
         userProviderRepository.Create(new UserProvider
         {
-            UserId = userEntity.Id,
+            UserId = userEntity.UserId,
             Provider = "github",
             UserProviderId = dto.UserProviderId
         });

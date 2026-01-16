@@ -29,7 +29,7 @@ public class SendRegisterEmailUseCase(
 
         var user = findUserResult.Data!;
 
-        var registerCodeResult = createConfirmCodeUseCase.Handle(user.Id, ConfirmCodeType.Register);
+        var registerCodeResult = createConfirmCodeUseCase.Handle((int)user.UserId!, ConfirmCodeType.Register);
         if (registerCodeResult.HasError) return result.SetError(registerCodeResult.Message);
 
         var registerCode = registerCodeResult.Data!;

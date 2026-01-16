@@ -10,13 +10,7 @@ public class UserPasswordRepository(CustomDbContext db) : IUserPasswordRepositor
 {
     public bool Create(IUserPassword entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-        
-        var userPassword = (UserPassword)entity;
-        userPassword.CreatedAt = now;
-        userPassword.UpdatedAt = now;
-
-        db.UserPasswords.Add(userPassword);
+        db.UserPasswords.Add((UserPassword)entity);
         db.SaveChanges();
         return true;
     }
