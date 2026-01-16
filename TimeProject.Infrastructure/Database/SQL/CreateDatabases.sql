@@ -46,9 +46,9 @@ execute procedure update_timestamp();
 create table if not exists user_passwords
 (
     password_id serial,
-    user_id     int         not null,
     password    varchar(72) not null,
     is_active   bool        not null,
+    user_id     int         not null,
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
     constraint pk_user_passwords primary key (password_id),
@@ -66,7 +66,7 @@ execute procedure update_timestamp();
 /* user_providers */
 create table if not exists user_providers
 (
-    provider             varchar(15) not null,
+    provider             int         not null,
     provider_external_id varchar(72) not null,
     user_id              int         not null,
     created_at           timestamptz not null default now(),
@@ -108,7 +108,7 @@ execute procedure update_timestamp();
 /* confirm_codes */
 create table if not exists confirm_codes
 (
-    code_id    serial,
+    code_id    uuid        not null default gen_random_uuid(),
     type       int         not null,
     is_used    bool        not null default false,
     was_sent   bool        not null default false,
@@ -151,8 +151,8 @@ execute procedure update_timestamp();
 create table if not exists records
 (
     record_id     serial,
-    code          varchar(36) not null,
-    title         varchar(120),
+    code          varchar(36) not null default gen_random_uuid(),
+    name          varchar(120),
     description   varchar(240),
     external_link varchar(120),
     user_id       int         not null,
@@ -202,12 +202,12 @@ execute procedure update_timestamp();
 create table if not exists sessions
 (
     session_id   serial,
-    user_id      int         not null,
-    record_id    int,
-    category_id  int,
     type         int         not null,
     date         timestamptz not null default now(),
     session_from varchar(20),
+    user_id      int         not null,
+    record_id    int,
+    category_id  int,
     created_at   timestamptz not null default now(),
     updated_at   timestamptz not null default now(),
     constraint pk_sessions primary key (session_id),
