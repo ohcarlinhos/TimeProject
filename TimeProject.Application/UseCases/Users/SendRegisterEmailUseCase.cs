@@ -1,5 +1,6 @@
 ﻿using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Application.UseCases.Users.Factories;
+using TimeProject.Domain.Entities.Enums;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
 using TimeProject.Domain.UseCases.Codes;

@@ -1,4 +1,5 @@
-﻿using TimeProject.Infrastructure.Database.Entities.Enums;
+﻿using TimeProject.Domain.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities.Enums;
 
 namespace TimeProject.Domain.Entities;
 
