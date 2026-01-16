@@ -27,7 +27,7 @@ create table if not exists users
     name       varchar(120) not null,
     email      varchar(64)  not null unique,
     user_role  int          not null,
-    utc        int          not null,
+    timezone   varchar(64)  not null,
     is_active  bool         not null,
     created_at timestamptz  not null default now(),
     updated_at timestamptz  not null default now(),
@@ -137,7 +137,8 @@ create table if not exists categories
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
     constraint pk_categories primary key (category_id),
-    constraint fk_categories_users foreign key (user_id) references users (user_id) on delete cascade
+    constraint fk_categories_users foreign key (user_id) references users (user_id) on delete cascade,
+    constraint uq_categories_users_name unique (user_id, name)
 );
 
 create or replace trigger categories_update_timestamp_trigger
@@ -164,6 +165,7 @@ create table if not exists records
 );
 
 create index idx_records_user_id_code on records (user_id, code);
+create index idx_records_code on records (code);
 
 create or replace trigger records_update_timestamp_trigger
     before update
@@ -176,11 +178,11 @@ create table if not exists record_resumes
 (
     record_id  int         not null unique,
     user_id    int         not null,
-    seconds    float8,
+    seconds    float8 check (seconds >= 0),
     formatted  varchar(24),
     first_date timestamptz          default now(),
     last_date  timestamptz          default now(),
-    count      int4,
+    count      int4 check (count >= 0),
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now(),
     constraint pk_record_resumes primary key (record_id),
@@ -203,7 +205,7 @@ create table if not exists sessions
     user_id      int         not null,
     record_id    int,
     category_id  int,
-    type         varchar(20),
+    type         int         not null,
     date         timestamptz not null default now(),
     session_from varchar(20),
     created_at   timestamptz not null default now(),
@@ -229,7 +231,7 @@ create table if not exists periods
 (
     period_id    serial,
     start_period timestamptz not null,
-    end_period   timestamptz,
+    end_period   timestamptz check (end_period is null or end_period > start_period),
     user_id      int         not null,
     record_id    int,
     session_id   int,
@@ -259,7 +261,7 @@ create table if not exists minutes
 (
     minute_id   serial,
     date        timestamptz not null,
-    total       int         not null,
+    total       int         not null check (total >= 0),
     user_id     int         not null,
     record_id   int,
     session_id  int,
