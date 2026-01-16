@@ -9,9 +9,9 @@ public class CategoryEntityConfiguration : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        builder.HasKey(e => e.Id);
+        builder.HasKey(e => e.CategoryId);
 
-        builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(e => e.CategoryId).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.Name).HasMaxLength(20).IsRequired();
 
         builder.Property(e => e.UserId).IsRequired();

@@ -8,7 +8,7 @@ using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class GetUserByOAtuhProviderIdUseCase(IUserRepository repository, IOAuthRepository oAtuhRepository)
+public class GetUserByOAtuhProviderIdUseCase(IUserRepository repository, IUserProviderRepository oAtuhRepository)
     : IGetUserByOAtuhProviderIdUseCase
 {
     public ICustomResult<IUser> Handle(string provider, string id)

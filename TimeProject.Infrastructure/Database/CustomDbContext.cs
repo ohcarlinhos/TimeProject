@@ -15,7 +15,7 @@ public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbCont
     public DbSet<ConfirmCode> ConfirmCodes { get; set; }
     public DbSet<UserPassword> UserPasswords { get; set; }
     public DbSet<Minute> Minutes { get; set; }
-    public DbSet<OAuth> OAuths { get; set; }
+    public DbSet<UserProvider> UserProviders { get; set; }
     public DbSet<UserAccessLog> UserAccessLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder mb)
@@ -29,7 +29,7 @@ public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbCont
         mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
         mb.ApplyConfiguration(new UserPasswordEntityConfiguration());
         mb.ApplyConfiguration(new MinuteEntityConfiguration());
-        mb.ApplyConfiguration(new OAuthEntityConfiguration());
+        mb.ApplyConfiguration(new UserProviderEntityConfiguration());
         mb.ApplyConfiguration(new UserAccessLogEntityConfiguration());
     }
 }

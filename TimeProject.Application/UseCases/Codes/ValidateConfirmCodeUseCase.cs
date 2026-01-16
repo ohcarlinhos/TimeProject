@@ -16,7 +16,7 @@ public class ValidateConfirmCodeUseCase(IConfirmCodeRepository repository) : IVa
 
         if (code == null) return result.SetError(ConfirmCodeMessageErrors.NotFound);
 
-        if (code is { IsUsed: true } || DateTime.Now.ToUniversalTime() > code.ExpireDate)
+        if (code is { IsUsed: true } || DateTime.Now.ToUniversalTime() > code.Expiration)
             return result.SetError(ConfirmCodeMessageErrors.IsUsedOrExpired);
 
         return result.SetData(true);

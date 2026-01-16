@@ -1,10 +1,10 @@
-﻿namespace TimeProject.Domain.Entities;
+﻿using TimeProject.Domain.Entities.Shared;
 
-public interface IMinute
+namespace TimeProject.Domain.Entities;
+
+public interface IMinute : IMultipleTimeRelationsEntity, IWithOwnerEntity
 {
-    int Id { get; set; }
-    int RecordId { get; set; }
-    int Minutes { get; set; }
+    int MinuteId { get; set; }
+    int Total { get; set; }
     DateTime Date { get; set; }
-    int UserId { get; set; }
 }

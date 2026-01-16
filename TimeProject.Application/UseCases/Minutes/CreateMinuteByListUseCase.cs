@@ -33,7 +33,7 @@ public class CreateMinuteByListUseCase(
             {
                 UserId = userId,
                 RecordId = recordId,
-                Minutes = minutes,
+                Total = minutes,
                 Date = dto.Date.AddHours(user.Utc * -1).ToUniversalTime()
             });
 

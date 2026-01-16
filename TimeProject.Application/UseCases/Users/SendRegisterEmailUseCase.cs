@@ -39,11 +39,11 @@ public class SendRegisterEmailUseCase(
         {
             emailHandler.Send(RegisterEmailFactory.Create(
                 email,
-                verifyUrl + registerCode.Id,
-                registerCode.ExpireDate
+                verifyUrl + registerCode.CodeId,
+                registerCode.Expiration
             ));
 
-            setWasSentConfirmCodeUseCase.Handle(registerCode.Id);
+            setWasSentConfirmCodeUseCase.Handle(registerCode.CodeId);
         }
         catch
         {

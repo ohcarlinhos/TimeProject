@@ -1,18 +1,16 @@
-﻿using TimeProject.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class RecordMeta : IRecordMeta
+[Table("record_resumes")]
+public class RecordMeta : WithOwnerEntity, IRecordMeta
 {
-    public int RecordId { get; set; }
-
-    public string FormattedTime { get; set; } = string.Empty;
-    public double TimeOnSeconds { get; set; }
-    public int TimeCount { get; set; }
-
-    public DateTime? FirstTimeDate { get; set; }
-    public DateTime? LastTimeDate { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    [Column("record_id")] public int RecordId { get; set; }
+    [Column("formatted")] public string FormattedTime { get; set; } = string.Empty;
+    [Column("seconds")] public double TimeOnSeconds { get; set; }
+    [Column("first_date")] public DateTime? FirstTimeDate { get; set; }
+    [Column("last_date")] public DateTime? LastTimeDate { get; set; }
+    [Column("count")] public int TimeCount { get; set; }
 }

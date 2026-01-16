@@ -38,11 +38,11 @@ public class SendRecoveryEmailUseCase(
         {
             emailHandler.Send(RecoveryEmailFactory.Create(
                 email,
-                recoveryUrl + recoveryCode.Id,
-                recoveryCode.ExpireDate
+                recoveryUrl + recoveryCode.CodeId,
+                recoveryCode.Expiration
             ));
 
-            setWasSentConfirmCodeUseCase.Handle(recoveryCode.Id);
+            setWasSentConfirmCodeUseCase.Handle(recoveryCode.CodeId);
         }
         catch
         {

@@ -1,20 +1,18 @@
-﻿using TimeProject.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class ConfirmCode : IConfirmCode
+[Table("confirm_codes")]
+public class ConfirmCode : WithOwnerEntity, IConfirmCode
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
-    public DateTime ExpireDate { get; set; }
-    public bool IsUsed { get; set; }
-    public bool WasSent { get; set; }
-    public int UserId { get; set; }
-    public ConfirmCodeType Type { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    [Column("code_id")] public string CodeId { get; set; } = null!;
+    [Column("type")] public ConfirmCodeType Type { get; set; }
+    [Column("is_used")] public bool IsUsed { get; set; }
+    [Column("was_sent")] public bool WasSent { get; set; }
+    [Column("expitation")] public DateTime Expiration { get; set; }
 
     public User? User { get; set; }
 }

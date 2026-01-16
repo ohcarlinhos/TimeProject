@@ -21,7 +21,7 @@ public class CreateConfirmCodeUseCase(IConfirmCodeRepository repository) : ICrea
             : result.SetData(repository.Create(new ConfirmCode
             {
                 UserId = userId,
-                ExpireDate = DateTime.Now.AddMinutes(15).ToUniversalTime(),
+                Expiration = DateTime.Now.AddMinutes(15).ToUniversalTime(),
                 Type = type
             }));
     }

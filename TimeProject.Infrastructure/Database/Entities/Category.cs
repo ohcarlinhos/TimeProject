@@ -1,14 +1,12 @@
-﻿using TimeProject.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class Category : ICategory
+[Table("categories")]
+public class Category : WithOwnerEntity, ICategory
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-
-    public int UserId { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    [Column("category_id")] public int CategoryId { get; set; }
+    [Column("name")] public string Name { get; set; } = string.Empty;
 }

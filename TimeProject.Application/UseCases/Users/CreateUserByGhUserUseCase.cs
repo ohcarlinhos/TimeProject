@@ -11,7 +11,7 @@ namespace TimeProject.Application.UseCases.Users;
 
 public class CreateUserByGhUserUseCase(
     IUserRepository repository,
-    IOAuthRepository oAuthRepository
+    IUserProviderRepository userProviderRepository
 ) : ICreateUserByGhUserUseCase
 {
     public ICustomResult<IUser> Handle(ICreateUserOAtuhDto dto, IEnumerable<EmailGh> emails)
@@ -29,7 +29,7 @@ public class CreateUserByGhUserUseCase(
 
             if (userWithPrimaryEmail != null)
             {
-                oAuthRepository.Create(new OAuth
+                userProviderRepository.Create(new UserProvider
                 {
                     UserId = userWithPrimaryEmail.Id,
                     Provider = "github",
@@ -46,7 +46,7 @@ public class CreateUserByGhUserUseCase(
                 var userWithSecondaryEmail = repository.FindByEmail(secondaryEmail.Email);
                 if (userWithSecondaryEmail == null) continue;
 
-                oAuthRepository.Create(new OAuth
+                userProviderRepository.Create(new UserProvider
                 {
                     UserId = userWithSecondaryEmail.Id,
                     Provider = "github",
@@ -65,7 +65,7 @@ public class CreateUserByGhUserUseCase(
                 Utc = dto.Utc
             });
 
-        oAuthRepository.Create(new OAuth
+        userProviderRepository.Create(new UserProvider
         {
             UserId = userEntity.Id,
             Provider = "github",

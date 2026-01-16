@@ -37,7 +37,7 @@ public class ConfirmCodeRepository(CustomDbContext db) : IConfirmCodeRepository
     public IConfirmCode? FindByIdAndEmail(string id, string email)
     {
         return db.ConfirmCodes.Include(e => e.User)
-            .FirstOrDefault(e => e.Id == id && e.User!.Email == email);
+            .FirstOrDefault(e => e.CodeId == id && e.User!.Email == email);
     }
 
     public IList<IConfirmCode> FindByUserId(int userId)
@@ -58,12 +58,12 @@ public class ConfirmCodeRepository(CustomDbContext db) : IConfirmCodeRepository
     {
         var now = DateTime.Now.ToUniversalTime();
         return db.ConfirmCodes
-            .Where(e => e.UserId == userId && e.Type == type && now < e.ExpireDate && e.IsUsed == false)
+            .Where(e => e.UserId == userId && e.Type == type && now < e.Expiration && e.IsUsed == false)
             .ToList<IConfirmCode>();
     }
 
     public IConfirmCode? FindById(string id)
     {
-        return db.ConfirmCodes.FirstOrDefault(e => e.Id == id);
+        return db.ConfirmCodes.FirstOrDefault(e => e.CodeId == id);
     }
 }

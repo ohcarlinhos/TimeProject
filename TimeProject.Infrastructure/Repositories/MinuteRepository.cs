@@ -40,7 +40,7 @@ public class MinuteRepository(CustomDbContext db) : IMinuteRepository
 
     public IMinute? FindById(int id, int userId)
     {
-        return db.Minutes.FirstOrDefault(e => e.Id == id && e.UserId == userId);
+        return db.Minutes.FirstOrDefault(e => e.MinuteId == id && e.UserId == userId);
     }
 
     public bool Delete(IMinute entity)

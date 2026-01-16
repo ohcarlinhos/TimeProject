@@ -1,14 +1,12 @@
-﻿using TimeProject.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class Customer : ICustomer
+[Table("customers")]
+public class Customer : WithOwnerEntity, ICustomer
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-
-    public int UserId { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    [Column("customer_id")] public int CustomerId { get; set; }
+    [Column("name")] public string Name { get; set; } = string.Empty;
 }

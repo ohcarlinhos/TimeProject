@@ -5,9 +5,9 @@ using TimeProject.Infrastructure.Database.Entities;
 
 namespace TimeProject.Infrastructure.Database.Configurations;
 
-public class OAuthEntityConfiguration : IEntityTypeConfiguration<OAuth>
+public class UserProviderEntityConfiguration : IEntityTypeConfiguration<UserProvider>
 {
-    public void Configure(EntityTypeBuilder<OAuth> builder)
+    public void Configure(EntityTypeBuilder<UserProvider> builder)
     {
         builder.HasKey(e => new { e.UserId, e.Provider });
 

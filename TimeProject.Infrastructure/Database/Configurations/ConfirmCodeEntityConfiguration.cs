@@ -9,10 +9,10 @@ public class ConfirmCodeEntityConfiguration : IEntityTypeConfiguration<ConfirmCo
 {
     public void Configure(EntityTypeBuilder<ConfirmCode> builder)
     {
-        builder.HasKey(e => e.Id);
+        builder.HasKey(e => e.CodeId);
 
-        builder.Property(e => e.Id).HasMaxLength(36).IsRequired();
-        builder.Property(e => e.ExpireDate).IsRequired();
+        builder.Property(e => e.CodeId).HasMaxLength(36).IsRequired();
+        builder.Property(e => e.Expiration).IsRequired();
         builder.Property(e => e.IsUsed).IsRequired();
         builder.Property(e => e.WasSent).IsRequired();
         builder.Property(e => e.UserId).IsRequired();

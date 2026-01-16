@@ -1,14 +1,13 @@
 ﻿using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities.Enums;
+using TimeProject.Domain.Entities.Shared;
 
 namespace TimeProject.Domain.Entities;
 
-public interface IConfirmCode
+public interface IConfirmCode : IWithOwnerEntity
 {
-    string Id { get; set; }
-    DateTime ExpireDate { get; set; }
+    string CodeId { get; set; }
+    DateTime Expiration { get; set; }
     bool IsUsed { get; set; }
     bool WasSent { get; set; }
-    int UserId { get; set; }
     ConfirmCodeType Type { get; set; }
 }

@@ -1,18 +1,15 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class Minute : IMinute
+[Table("minutes")]
+public class Minute : MultipleTimeRelationsEntity, IMinute
 {
-    public int Id { get; set; }
-    public int RecordId { get; set; }
-    public int Minutes { get; set; }
-    public DateTime Date { get; set; }
-
-    public int UserId { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    [Column("minute_id")] public int MinuteId { get; set; }
+    [Column("date")] public DateTime Date { get; set; }
+    [Column("total")] public int Total { get; set; }
 
     public Record? Record { get; set; }
 }

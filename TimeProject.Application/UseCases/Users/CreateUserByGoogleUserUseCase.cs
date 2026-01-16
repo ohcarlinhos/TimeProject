@@ -11,7 +11,7 @@ namespace TimeProject.Application.UseCases.Users;
 
 public class CreateUserByGoogleUserUseCase(
     IUserRepository repository,
-    IOAuthRepository oAuthRepository
+    IUserProviderRepository userProviderRepository
 ) : ICreateUserByGoogleUserUseCase
 {
     public ICustomResult<IUser> Handle(ICreateUserOAtuhDto dto, string email)
@@ -25,7 +25,7 @@ public class CreateUserByGoogleUserUseCase(
 
         if (userWithEmail != null)
         {
-            oAuthRepository.Create(new OAuth
+            userProviderRepository.Create(new UserProvider
             {
                 UserId = userWithEmail.Id,
                 Provider = "google",
@@ -43,7 +43,7 @@ public class CreateUserByGoogleUserUseCase(
                 Utc = dto.Utc
             });
 
-        oAuthRepository.Create(new OAuth
+        userProviderRepository.Create(new UserProvider
         {
             UserId = userEntity.Id,
             Provider = "google",

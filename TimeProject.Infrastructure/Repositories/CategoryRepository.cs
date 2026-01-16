@@ -84,12 +84,12 @@ public class CategoryRepository(CustomDbContext db) : ICategoryRepository
 
     public ICategory? FindById(int id)
     {
-        return db.Categories.FirstOrDefault(c => c.Id == id);
+        return db.Categories.FirstOrDefault(c => c.CategoryId == id);
     }
 
     public ICategory? FindById(int id, int userId)
     {
-        return db.Categories.FirstOrDefault(c => c.Id == id && c.UserId == userId);
+        return db.Categories.FirstOrDefault(c => c.CategoryId == id && c.UserId == userId);
     }
 
     public ICategory? FindByName(string name, int userId)

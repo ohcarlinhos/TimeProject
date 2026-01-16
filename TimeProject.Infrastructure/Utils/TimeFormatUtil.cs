@@ -31,7 +31,7 @@ public static class TimeFormatUtil
     {
         if (timeMinutes == null) return TimeSpan.Zero;
         var total = TimeSpan.Zero;
-        return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Minutes, 0)));
+        return timeMinutes.Aggregate(total, (current, tm) => current.Add(new TimeSpan(0, tm.Total, 0)));
     }
 
     public static TimeSpan TimeSpanFromSessions(IEnumerable<ISessionOutDto>? sessions)

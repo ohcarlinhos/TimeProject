@@ -1,6 +1,6 @@
 ﻿namespace TimeProject.Domain.Entities;
 
-public interface IOAuth
+public interface IUserProvider
 {
     int UserId { get; set; }
     string Provider { get; set; }

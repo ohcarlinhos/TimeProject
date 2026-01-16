@@ -8,11 +8,11 @@ public class MinuteEntityConfiguration : IEntityTypeConfiguration<Minute>
 {
     public void Configure(EntityTypeBuilder<Minute> builder)
     {
-        builder.HasKey(e => e.Id);
+        builder.HasKey(e => e.MinuteId);
 
-        builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
+        builder.Property(e => e.MinuteId).ValueGeneratedOnAdd().IsRequired();
         builder.Property(e => e.RecordId).IsRequired();
-        builder.Property(e => e.Minutes);
+        builder.Property(e => e.Total);
         builder.Property(e => e.Date);
 
         builder.Property(e => e.CreatedAt).IsRequired();

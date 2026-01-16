@@ -1,12 +1,13 @@
-﻿using TimeProject.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class UserPassword : IUserPassword
+[Table("user_passwords")]
+public class UserPassword : WithOwnerEntity, IUserPassword
 {
-    public int UserId { get; set; }
-    public string Password { get; set; } = string.Empty;
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    [Column("password_id")] public int PasswordId { get; set; }
+    [Column("password")] public string Password { get; set; } = string.Empty;
+    [Column("is_active")] public bool IsActive { get; set; }
 }

@@ -1,18 +1,17 @@
-﻿using TimeProject.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class User : IUser
+[Table("users")]
+public class User : BaseEntity, IUser
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Email { get; set; } = null!;
-    public UserRoleType UserRole { get; set; } = UserRoleType.Normal;
-    public int Utc { get; set; }
-
-    public bool IsActive { get; set; } = true;
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    [Column("user_id")] public int Id { get; set; }
+    [Column("name")] public string Name { get; set; } = null!;
+    [Column("email")] public string Email { get; set; } = null!;
+    [Column("user_role")] public UserRoleType UserRole { get; set; } = UserRoleType.Normal;
+    [Column("timezone")] public int Utc { get; set; }
+    [Column("is_active")] public bool IsActive { get; set; } = true;
 }

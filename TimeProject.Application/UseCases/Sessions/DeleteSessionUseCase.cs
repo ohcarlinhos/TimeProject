@@ -26,7 +26,9 @@ public class DeleteSessionUseCase(
         var recordId = entity.RecordId;
 
         repository.Delete(entity);
-        syncRecordMetaUseCase.Handle(recordId);
+
+        if (recordId != null)
+            syncRecordMetaUseCase.Handle((int)recordId);
 
         return result.SetData(true);
     }

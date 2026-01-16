@@ -1,8 +1,9 @@
-﻿namespace TimeProject.Domain.Entities;
+﻿using TimeProject.Domain.Entities.Shared;
 
-public interface ICustomer
+namespace TimeProject.Domain.Entities;
+
+public interface ICustomer : IWithOwnerEntity
 {
-    int Id { get; set; }
+    int CustomerId { get; set; }
     string Name { get; set; }
-    int UserId { get; set; }
 }

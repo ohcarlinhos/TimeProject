@@ -19,7 +19,9 @@ public class DeletePeriodUseCase(IPeriodRepository repository, ISyncRecordMetaUs
             return result.SetError(PeriodMessageErrors.NotFound);
 
         var data = repository.Delete(period);
-        syncRecordMetaUseCase.Handle(period.RecordId);
+        
+        if (period.RecordId != null)
+            syncRecordMetaUseCase.Handle((int)period.RecordId);
 
         return result.SetData(data);
     }

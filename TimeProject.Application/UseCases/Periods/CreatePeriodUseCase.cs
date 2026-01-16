@@ -41,7 +41,8 @@ public class CreatePeriodUseCase(
                 }
             );
 
-        syncRecordMetaUseCase.Handle(period.RecordId);
+        if (period.RecordId != null)
+            syncRecordMetaUseCase.Handle((int)period.RecordId);
 
         return result.SetData(period);
     }

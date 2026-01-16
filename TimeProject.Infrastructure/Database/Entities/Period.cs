@@ -1,20 +1,19 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class Period : IPeriod
+[Table("periods")]
+public class Period : MultipleTimeRelationsEntity, IPeriod
 {
+    [Column("period_id")]
     public int Id { get; set; }
+    
+    [Column("start_period")]
     public DateTime Start { get; set; }
+    [Column("end_period")]
     public DateTime End { get; set; }
-
-    public int UserId { get; set; }
-    public int RecordId { get; set; }
-    public int? SessionId { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
 
     public Record? Record { get; set; }
     public Session? Session { get; set; }

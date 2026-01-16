@@ -124,7 +124,7 @@ public static class ServicesConfiguration
 
         #region OAuth
 
-        builder.Services.AddScoped<IOAuthRepository, OAuthRepository>();
+        builder.Services.AddScoped<IUserProviderRepository, UserProviderRepository>();
         builder.Services.AddScoped<ILoginGithubUseCase, LoginGithubUseCase>();
         builder.Services.AddScoped<ILoginGoogleUseCase, LoginGoogleUseCase>();
 

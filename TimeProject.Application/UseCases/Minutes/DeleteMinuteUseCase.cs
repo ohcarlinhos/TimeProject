@@ -20,7 +20,8 @@ public class DeleteMinuteUseCase(
         if (timeMinute == null) return result.SetError(MinuteMessageErrors.NotFound);
 
         var data = repository.Delete(timeMinute);
-        syncRecordMetaUseCase.Handle(timeMinute.RecordId);
+        if (timeMinute.RecordId != null)
+            syncRecordMetaUseCase.Handle((int)timeMinute.RecordId);
 
         return result.SetData(data);
     }
