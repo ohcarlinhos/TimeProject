@@ -46,8 +46,8 @@ public class RecordResumeRepository(CustomDbContext dbContext) : IRecordResumeRe
         var timeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods).Add(TimeFormatUtil.TimeSpanFromMinutes(timeMinutes));
         var formattedTime = TimeFormatUtil.StringFromTimeSpan(timeSpan);
 
-        var firstList = new List<DateTime>();
-        var lastList = new List<DateTime>();
+        var firstList = new List<DateTimeOffset>();
+        var lastList = new List<DateTimeOffset>();
 
         if (periods.Count > 0)
         {
@@ -61,8 +61,8 @@ public class RecordResumeRepository(CustomDbContext dbContext) : IRecordResumeRe
             lastList.Add(timeMinutes[^1].Date);
         }
 
-        DateTime? first = firstList.Count > 0 ? firstList.OrderBy(i => i).First() : null;
-        DateTime? last = lastList.Count > 0 ? lastList.OrderByDescending(i => i).First() : null;
+        DateTimeOffset? first = firstList.Count > 0 ? firstList.OrderBy(i => i).First() : null;
+        DateTimeOffset? last = lastList.Count > 0 ? lastList.OrderByDescending(i => i).First() : null;
 
         if (entity == null)
         {

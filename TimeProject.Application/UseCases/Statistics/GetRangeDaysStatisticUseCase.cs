@@ -104,11 +104,11 @@ public class GetRangeDaysStatisticUseCase(
         var periodsByRange = statisticRepository
             .GetPeriodsByRange(userId, initDate, endDate, recordId);
 
-        var periods = periodCutUtil.Handle(periodsByRange as List<Period>, initDate, endDate);
+        var periods = periodCutUtil.Handle(periodsByRange.OfType<Period>().ToList(), initDate, endDate);
 
         var sessions =
             (statisticRepository.GetSessionsByRange(userId, initDate, endDate,
-                recordId) as List<Session>)
+                recordId).OfType<Session>().ToList())
             .Select(e =>
             {
                 e.Periods = periodCutUtil.Handle(e.Periods!, initDate, endDate);
@@ -116,15 +116,16 @@ public class GetRangeDaysStatisticUseCase(
             })
             .ToList();
 
-        var timeMinutes = statisticRepository.GetTimeMinutesByRange(userId, initDate, endDate, recordId) as List<Minute>;
+        var timeMinutes = statisticRepository
+            .GetTimeMinutesByRange(userId, initDate, endDate, recordId).OfType<Minute>().ToList();
 
-        var records = new List<Infrastructure.Database.Entities.Record>();
+        var records = new List<Record>();
         if (recordId == null && !skipRangeProgress)
         {
             var trIdList = new List<int>();
-            trIdList.AddRange(periods.Where(e => e.RecordId is not null).Select(e => (int)e.RecordId!));
-            trIdList.AddRange(timeMinutes.Where(e => e.RecordId is not null).Select(e => (int)e.RecordId!));
-            records.AddRange(recordRepository.FindByIdList(trIdList.Distinct().ToList(), userId) as List<Record>);
+            trIdList.AddRange(periods.Select(e => (int)e.RecordId!));
+            trIdList.AddRange(timeMinutes.Select(e => (int)e.RecordId!));
+            records.AddRange(recordRepository.FindByIdList(trIdList.Distinct().ToList(), userId).OfType<Record>());
         }
 
         return MakeRangeStatisticDatas(
@@ -265,9 +266,14 @@ public class GetRangeDaysStatisticUseCase(
         IList<Minute> minutes
     )
     {
-        var trIdList = new List<int>();
-        trIdList.AddRange(periods.Where(e => e.RecordId is not null).Select(e => (int)e.RecordId!));
-        trIdList.AddRange(minutes.Where(e => e.RecordId is not null).Select(e => (int)e.RecordId!));
-        return recordRepository.FindByIdList(trIdList.Distinct().ToList(), userId) as List<Record>;
+        var trIdList = new List<int?>();
+        trIdList.AddRange(periods.Select(e => e.RecordId));
+        trIdList.AddRange(minutes.Select(e => e.RecordId));
+
+        var filtredIdList = from id in trIdList
+            where id is not null
+            select (int)id;
+
+        return recordRepository.FindByIdList(filtredIdList.Distinct().ToList(), userId).OfType<Record>().ToList();
     }
 }

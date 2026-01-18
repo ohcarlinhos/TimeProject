@@ -5,9 +5,9 @@ namespace TimeProject.Domain.Dtos.Records;
 
 public interface IRecordOutDto
 {
-    int Id { get; set; }
+    int RecordId { get; set; }
     int UserId { get; set; }
-    string? Title { get; set; }
+    string? Name { get; set; }
     string? Description { get; set; }
     string Code { get; set; }
     string? ExternalLink { get; set; }

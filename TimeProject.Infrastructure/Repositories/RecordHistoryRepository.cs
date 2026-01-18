@@ -10,7 +10,7 @@ public class RecordHistoryRepository(CustomDbContext db) : IRecordHistoryReposit
 {
     public IList<DateTime> GetDistinctDates(int recordId, int userId, int addHours = 0)
     {
-        var dateList = new List<DateTime>();
+        var dateList = new List<DateTimeOffset>();
 
         var datesFromPeriods = PeriodQuery(recordId, userId)
             .Select(e => e.Start)

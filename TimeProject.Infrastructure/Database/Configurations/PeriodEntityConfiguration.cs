@@ -11,8 +11,10 @@ public class PeriodEntityConfiguration : IEntityTypeConfiguration<Period>
         builder.ToTable("periods");
         builder.HasKey(e => e.PeriodId);
         builder.Property(e => e.PeriodId).HasColumnName("period_id");
-        builder.Property(e => e.Start).HasColumnName("start_period");
-        builder.Property(e => e.End).HasColumnName("end_period");
+        builder.Property(e => e.Start).HasColumnName("start_period")
+            .HasConversion(v => v.ToUniversalTime(), v => v);
+        builder.Property(e => e.End).HasColumnName("end_period")
+            .HasConversion(v => v.ToUniversalTime(), v => v);
         builder.Property(e => e.RecordId).HasColumnName("record_id");
         builder.Property(e => e.SessionId).HasColumnName("session_id");
         builder.Property(e => e.CategoryId).HasColumnName("category_id");

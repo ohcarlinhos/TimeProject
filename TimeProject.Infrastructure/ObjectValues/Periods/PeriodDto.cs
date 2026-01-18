@@ -5,6 +5,6 @@ namespace TimeProject.Infrastructure.ObjectValues.Periods;
 
 public class PeriodDto : IPeriodData
 {
-    [Required] public DateTime Start { get; set; }
-    [Required] public DateTime End { get; set; }
+    [Required] public DateTimeOffset Start { get; set; }
+    [Required] public DateTimeOffset End { get; set; }
 }

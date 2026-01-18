@@ -5,7 +5,7 @@ namespace TimeProject.Infrastructure.Utils.Interfaces;
 
 public interface IPeriodValidateUtil
 {
-    void ValidateStartAndEnd<T>(DateTime start, DateTime end, ICustomResult<T> customResult);
+    void ValidateStartAndEnd<T>(DateTimeOffset start, DateTimeOffset end, ICustomResult<T> customResult);
 
     bool HasMinSize(IPeriodData data);
 }

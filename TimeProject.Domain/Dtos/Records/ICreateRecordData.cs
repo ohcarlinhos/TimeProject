@@ -5,7 +5,7 @@ namespace TimeProject.Domain.Dtos.Records;
 
 public interface ICreateRecordData
 {
-    string? Title { get; set; }
+    string? Name { get; set; }
     string? Description { get; set; }
     string? ExternalLink { get; set; }
     string? Code { get; set; }

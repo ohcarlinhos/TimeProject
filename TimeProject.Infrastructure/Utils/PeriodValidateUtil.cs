@@ -8,8 +8,8 @@ namespace TimeProject.Infrastructure.Utils;
 public class PeriodValidateUtil : IPeriodValidateUtil
 {
     public void ValidateStartAndEnd<T>(
-        DateTime start,
-        DateTime end,
+        DateTimeOffset start,
+        DateTimeOffset end,
         ICustomResult<T> customResult
     )
     {

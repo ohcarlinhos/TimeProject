@@ -6,6 +6,6 @@ public interface IRecordResume
     string Formatted { get; set; }
     double Seconds { get; set; }
     int Count { get; set; }
-    DateTime? FirstDate { get; set; }
-    DateTime? LastDate { get; set; }
+    DateTimeOffset? FirstDate { get; set; }
+    DateTimeOffset? LastDate { get; set; }
 }

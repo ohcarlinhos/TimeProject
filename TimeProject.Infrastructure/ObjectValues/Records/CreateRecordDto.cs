@@ -7,7 +7,7 @@ namespace TimeProject.Infrastructure.ObjectValues.Records;
 
 public class CreateRecordDto : ICreateRecordData
 {
-    [MaxLength(120)] public string? Title { get; set; }
+    [MaxLength(120)] public string? Name { get; set; }
     [MaxLength(240)] public string? Description { get; set; }
     [MaxLength(120)] public string? ExternalLink { get; set; }
     [MaxLength(36)] public string? Code { get; set; }

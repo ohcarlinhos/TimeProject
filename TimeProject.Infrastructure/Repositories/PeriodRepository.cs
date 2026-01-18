@@ -33,8 +33,7 @@ public class PeriodRepository(CustomDbContext db) : IPeriodRepository
 
     public IList<IPeriod> CreateByList(IList<IPeriod> entities)
     {
-        var now = DateTime.Now.ToUniversalTime();
-        var list = entities as IList<Period> ?? new List<Period>(); // TODO: corrigir, aqui tá zoando.
+        var list = entities.OfType<Period>().ToList();
         db.Periods.AddRange(list);
         db.SaveChanges();
         return entities;

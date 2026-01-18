@@ -29,11 +29,11 @@ public class GetRangeDaysStatisticUseCaseTests
         _staticRepository
             .Setup(v => v
                 .GetPeriodsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(periods as IList<IPeriod>);
+            .Returns(periods.OfType<IPeriod>().ToList());
 
         _staticRepository
             .Setup(v => v.GetSessionsByRange(userId, It.IsAny<DateTime>(), It.IsAny<DateTime>(), null))
-            .Returns(recordSessions as IList<ISession>);
+            .Returns(recordSessions.OfType<ISession>().ToList());
     }
 
     private static List<Period> CreateRecordPeriodList(DateTime today, int userId, int recordId)

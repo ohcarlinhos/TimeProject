@@ -6,10 +6,10 @@ namespace TimeProject.Infrastructure.ObjectValues.Records;
 
 public class RecordOutDto : IRecordOutDto
 {
-    public int Id { get; set; }
+    public int RecordId { get; set; }
     public int UserId { get; set; }
 
-    public string? Title { get; set; }
+    public string? Name { get; set; }
     public string? Description { get; set; }
     public string Code { get; set; } = string.Empty;
     public string? ExternalLink { get; set; }

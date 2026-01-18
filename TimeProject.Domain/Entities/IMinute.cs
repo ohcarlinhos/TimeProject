@@ -6,5 +6,5 @@ public interface IMinute : IMultipleTimeRelationsEntity, IWithOwnerEntity
 {
     int MinuteId { get; set; }
     int Total { get; set; }
-    DateTime Date { get; set; }
+    DateTimeOffset Date { get; set; }
 }

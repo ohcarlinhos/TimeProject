@@ -43,7 +43,7 @@ public class CreateRecordUseCase(
                 {
                     UserId = userId,
                     CategoryId = data.CategoryId,
-                    Name = data.Title,
+                    Name = data.Name,
                     Description = data.Description,
                     Code = string.IsNullOrEmpty(data.Code) == false ? data.Code! : Guid.NewGuid().ToString(),
                     ExternalLink = data.ExternalLink

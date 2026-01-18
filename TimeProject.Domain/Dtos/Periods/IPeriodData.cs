@@ -2,6 +2,6 @@
 
 public interface IPeriodData
 {
-    DateTime Start { get; set; }
-    DateTime End { get; set; }
+    DateTimeOffset Start { get; set; }
+    DateTimeOffset End { get; set; }
 }

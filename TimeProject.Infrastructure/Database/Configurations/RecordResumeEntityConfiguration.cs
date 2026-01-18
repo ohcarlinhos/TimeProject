@@ -14,8 +14,10 @@ public class RecordResumeEntityConfiguration : IEntityTypeConfiguration<RecordRe
         builder.Property(e => e.Formatted).HasColumnName("formatted");
         builder.Property(e => e.Seconds).HasColumnName("seconds");
         builder.Property(e => e.Count).HasColumnName("count");
-        builder.Property(e => e.FirstDate).HasColumnName("first_date");
-        builder.Property(e => e.LastDate).HasColumnName("last_date");
+        builder.Property(e => e.FirstDate).HasColumnName("first_date")
+            .HasConversion(v => v.HasValue ? v.Value.ToUniversalTime() : v, v => v);
+        builder.Property(e => e.LastDate).HasColumnName("last_date")
+            .HasConversion(v => v.HasValue ? v.Value.ToUniversalTime() : v, v => v);
         builder.Property(e => e.UserId).HasColumnName("user_id");
 
         builder.HasOne<Record>().WithOne(e => e.Meta).HasForeignKey<RecordResume>(e => e.RecordId);
