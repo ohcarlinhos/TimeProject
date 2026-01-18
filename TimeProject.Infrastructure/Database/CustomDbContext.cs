@@ -10,7 +10,7 @@ public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbCont
     public DbSet<Record> Records { get; set; }
     public DbSet<Period> Periods { get; set; }
     public DbSet<Category> Categories { get; set; }
-    public DbSet<RecordMeta> RecordMetas { get; set; }
+    public DbSet<RecordResume> RecordResumes { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<ConfirmCode> ConfirmCodes { get; set; }
     public DbSet<UserPassword> UserPasswords { get; set; }
@@ -27,7 +27,7 @@ public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbCont
         mb.ApplyConfiguration(new RecordEntityConfiguration());
         mb.ApplyConfiguration(new PeriodEntityConfiguration());
         mb.ApplyConfiguration(new CategoryEntityConfiguration());
-        mb.ApplyConfiguration(new RecordMetaEntityConfiguration());
+        mb.ApplyConfiguration(new RecordResumeEntityConfiguration());
         mb.ApplyConfiguration(new SessionEntityConfiguration());
         mb.ApplyConfiguration(new MinuteEntityConfiguration());
         mb.ApplyConfiguration(new UserAccessLogEntityConfiguration());

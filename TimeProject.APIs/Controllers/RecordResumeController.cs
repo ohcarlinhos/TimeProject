@@ -10,14 +10,14 @@ namespace TimeProject.APIs.Controllers;
 [ApiController]
 [Route("records/meta")]
 [Authorize(Policy = "IsAdmin")]
-public class RecordMetaController(
-    ISyncAllRecordMetaUseCase syncAllRecordMetaUseCase
+public class RecordResumeController(
+    ISyncAllRecordResumeUseCase syncAllRecordResumeUseCase
 ) : CustomController
 {
     [HttpPost]
     [Route("sync/all")]
-    public ActionResult<IEnumerable<IRecordMeta>> SyncAll()
+    public ActionResult<IEnumerable<IRecordResume>> SyncAll()
     {
-        return HandleResponse(syncAllRecordMetaUseCase.Handle());
+        return HandleResponse(syncAllRecordResumeUseCase.Handle());
     }
 }

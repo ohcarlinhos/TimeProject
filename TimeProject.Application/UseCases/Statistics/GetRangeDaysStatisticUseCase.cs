@@ -3,6 +3,7 @@ using TimeProject.Domain.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Statistics;
 using TimeProject.Domain.Dtos.Statistics;
+using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Shared;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.ObjectValues.Statistics;
@@ -149,9 +150,9 @@ public class GetRangeDaysStatisticUseCase(
     {
         var isolatedPeriods = periods.Where(e => e.SessionId == null).ToList();
 
-        var timerSessions = sessions.Where(e => e.Type == "timer").ToList();
-        var pomodoroSessions = sessions.Where(e => e.Type == "pomodoro").ToList();
-        var breakSessions = sessions.Where(e => e.Type == "break").ToList();
+        var timerSessions = sessions.Where(e => e.Type == SessionType.Timer).ToList();
+        var pomodoroSessions = sessions.Where(e => e.Type == SessionType.Pomodoro).ToList();
+        var breakSessions = sessions.Where(e => e.Type == SessionType.Break).ToList();
 
         var allPeriodsTimeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods);
         var isolatedPeriodsTimeSpan = TimeFormatUtil.TimeSpanFromPeriods(isolatedPeriods);
@@ -236,11 +237,11 @@ public class GetRangeDaysStatisticUseCase(
         foreach (var record in records)
         {
             var periods = allPeriods
-                .Where(e => e.RecordId == record.Id)
+                .Where(e => e.RecordId == record.RecordId)
                 .ToList();
 
             var minutes = allMinutes
-                .Where(e => e.RecordId == record.Id)
+                .Where(e => e.RecordId == record.RecordId)
                 .ToList();
 
             var periodsTimeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods);

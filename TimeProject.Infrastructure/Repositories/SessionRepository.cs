@@ -10,22 +10,16 @@ public class SessionRepository(CustomDbContext db) : ISessionRepository
 {
     public ISession Create(ISession entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-
-        var recordSession = (Session)entity;
-        recordSession.CreatedAt = now;
-        recordSession.UpdatedAt = now;
-
-        db.Sessions.Add(recordSession);
+        db.Sessions.Add((Session)entity);
         db.SaveChanges();
-        return recordSession;
+        return entity;
     }
 
     public ISession? FindById(int id, int userId)
     {
         return db.Sessions
             .Include(e => e.Periods)
-            .FirstOrDefault(e => e.Id == id && e.UserId == userId);
+            .FirstOrDefault(e => e.SessionId == id && e.UserId == userId);
     }
 
     public bool Delete(ISession entity)

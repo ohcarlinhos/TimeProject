@@ -14,5 +14,5 @@ public interface IRecordOutDto
     ICategoryOutDto? Category { get; set; }
     string? CategoryName { get; }
     int? CategoryId { get; set; }
-    IRecordMeta? Meta { get; set; }
+    IRecordResume? Meta { get; set; }
 }

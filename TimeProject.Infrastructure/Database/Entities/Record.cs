@@ -1,20 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities.Shared;
+﻿using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-[Table("records")]
-public class Record : WithOwnerEntity, IRecord
+public class Record : IRecord
 {
-    [Column("record_id")] public int Id { get; set; }
-    [Column("code")] public string Code { get; set; } = string.Empty;
-    [Column("name")] public string? Title { get; set; }
-    [Column("description")] public string? Description { get; set; }
-    [Column("external_link")] public string? ExternalLink { get; set; }
-    [Column("category_id")] public int? CategoryId { get; set; }
-    public IEnumerable<Period>? Periods { get; set; }
+    public int RecordId { get; set; }
+    public string Code { get; set; } = string.Empty;
+    public string? Name { get; set; }
+    public string? Description { get; set; }
+    public string? ExternalLink { get; set; }
+    public int? CategoryId { get; set; }
+    public int UserId { get; set; }
 
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
+    
+    public IEnumerable<Period>? Periods { get; set; }
     public Category? Category { get; set; }
-    public RecordMeta? Meta { get; set; }
+    public RecordResume? Meta { get; set; }
 }

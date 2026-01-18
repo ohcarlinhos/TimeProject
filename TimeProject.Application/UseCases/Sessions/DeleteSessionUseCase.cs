@@ -12,7 +12,7 @@ namespace TimeProject.Application.UseCases.Sessions;
 public class DeleteSessionUseCase(
     ISessionRepository repository,
     IPeriodRepository periodRepository,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase) : IDeleteSessionUseCase
+    ISyncRecordResumeUseCase syncRecordResumeUseCase) : IDeleteSessionUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
     {
@@ -28,7 +28,7 @@ public class DeleteSessionUseCase(
         repository.Delete(entity);
 
         if (recordId != null)
-            syncRecordMetaUseCase.Handle((int)recordId);
+            syncRecordResumeUseCase.Handle((int)recordId);
 
         return result.SetData(true);
     }

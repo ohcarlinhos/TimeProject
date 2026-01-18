@@ -14,7 +14,7 @@ public class CreateMinuteByListUseCase(
     IMinuteRepository mrRepository,
     IRecordRepository recordRepository,
     IUserRepository userRepository,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase
+    ISyncRecordResumeUseCase syncRecordResumeUseCase
 ) : ICreateMinuteByListUseCase
 {
     public ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int recordId, int userId)
@@ -38,7 +38,7 @@ public class CreateMinuteByListUseCase(
             });
 
         var data = mrRepository.CreateByList(list);
-        syncRecordMetaUseCase.Handle(recordId);
+        syncRecordResumeUseCase.Handle(recordId);
 
         return result.SetData(data);
     }

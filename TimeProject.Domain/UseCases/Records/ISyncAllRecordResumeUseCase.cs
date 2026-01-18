@@ -3,7 +3,7 @@ using TimeProject.Domain.Shared;
 
 namespace TimeProject.Domain.UseCases.Records;
 
-public interface ISyncAllRecordMetaUseCase
+public interface ISyncAllRecordResumeUseCase
 {
-    ICustomResult<IEnumerable<IRecordMeta>> Handle();
+    ICustomResult<IEnumerable<IRecordResume>> Handle();
 }

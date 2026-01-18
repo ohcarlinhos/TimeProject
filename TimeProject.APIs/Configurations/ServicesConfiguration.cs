@@ -133,7 +133,7 @@ public static class ServicesConfiguration
         #region Records
 
         builder.Services.AddScoped<IRecordRepository, RecordRepository>();
-        builder.Services.AddScoped<IRecordMetaRepository, RecordMetaRepository>();
+        builder.Services.AddScoped<IRecordResumeRepository, RecordResumeRepository>();
         builder.Services.AddScoped<IRecordHistoryRepository, RecordHistoryRepository>();
 
         builder.Services.AddScoped<IRecordMapDataUtil, RecordMapDataUtil>();
@@ -148,8 +148,8 @@ public static class ServicesConfiguration
         builder.Services.AddScoped<IDeleteRecordUseCase, DeleteRecordUseCase>();
         builder.Services.AddScoped<ISearchRecordUseCase, SearchRecordUseCase>();
 
-        builder.Services.AddScoped<ISyncRecordMetaUseCase, SyncRecordMetaUseCase>();
-        builder.Services.AddScoped<ISyncAllRecordMetaUseCase, SyncAllRecordMetaUseCase>();
+        builder.Services.AddScoped<ISyncRecordResumeUseCase, SyncRecordResumeUseCase>();
+        builder.Services.AddScoped<ISyncAllRecordResumeUseCase, SyncAllRecordResumeUseCase>();
 
         #endregion
 

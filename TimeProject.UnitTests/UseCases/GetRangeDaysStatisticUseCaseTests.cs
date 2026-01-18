@@ -3,6 +3,7 @@ using Moq;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Dtos.Statistics;
+using TimeProject.Domain.Entities.Enums;
 using TimeProject.Domain.Repositories;
 using TimeProject.Infrastructure.ObjectValues.Statistics;
 
@@ -82,10 +83,10 @@ public class GetRangeDaysStatisticUseCaseTests
         [
             new Session
             {
-                Id = 1,
+                SessionId = 1,
                 UserId = userId,
                 RecordId = recordId,
-                Type = "timer",
+                Type = SessionType.Timer,
                 Periods = new List<Period>
                 {
                     new()
@@ -102,10 +103,10 @@ public class GetRangeDaysStatisticUseCaseTests
             },
             new Session
             {
-                Id = 2,
+                SessionId = 2,
                 UserId = userId,
                 RecordId = recordId,
-                Type = "pomodoro",
+                Type = SessionType.Pomodoro,
                 Periods = new List<Period>
                 {
                     new()
@@ -122,10 +123,10 @@ public class GetRangeDaysStatisticUseCaseTests
             },
             new Session
             {
-                Id = 3,
+                SessionId = 3,
                 UserId = userId,
                 RecordId = recordId,
-                Type = "break",
+                Type = SessionType.Break,
                 Periods = new List<Period>
                 {
                     new()
@@ -137,10 +138,10 @@ public class GetRangeDaysStatisticUseCaseTests
             },
             new Session
             {
-                Id = 4,
+                SessionId = 4,
                 UserId = userId,
                 RecordId = recordId,
-                Type = "timer",
+                Type = SessionType.Timer,
                 Periods = new List<Period>()
             }
         ];

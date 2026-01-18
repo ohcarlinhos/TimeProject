@@ -9,7 +9,7 @@ namespace TimeProject.Application.UseCases.Minutes;
 
 public class DeleteMinuteUseCase(
     IMinuteRepository repository,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase
+    ISyncRecordResumeUseCase syncRecordResumeUseCase
 ) : IDeleteMinuteUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
@@ -21,7 +21,7 @@ public class DeleteMinuteUseCase(
 
         var data = repository.Delete(timeMinute);
         if (timeMinute.RecordId != null)
-            syncRecordMetaUseCase.Handle((int)timeMinute.RecordId);
+            syncRecordResumeUseCase.Handle((int)timeMinute.RecordId);
 
         return result.SetData(data);
     }

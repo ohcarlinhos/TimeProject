@@ -18,5 +18,5 @@ public class RecordOutDto : IRecordOutDto
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
-    public IRecordMeta? Meta { get; set; }
+    public IRecordResume? Meta { get; set; }
 }

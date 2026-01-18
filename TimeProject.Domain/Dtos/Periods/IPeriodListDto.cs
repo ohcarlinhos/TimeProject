@@ -1,8 +1,10 @@
-﻿namespace TimeProject.Domain.Dtos.Periods;
+﻿using TimeProject.Domain.Entities.Enums;
+
+namespace TimeProject.Domain.Dtos.Periods;
 
 public interface IPeriodListDto
 {
-    string? Type { get; set; }
+    SessionType? Type { get; set; }
     string? From { get; set; }
     IList<IPeriodData> Periods { get; set; }
 }

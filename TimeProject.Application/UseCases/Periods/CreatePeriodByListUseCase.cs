@@ -1,6 +1,7 @@
 ﻿using TimeProject.Infrastructure.ObjectValues;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Periods;
+using TimeProject.Domain.Entities.Enums;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Domain.Repositories;
 using TimeProject.Domain.UseCases.Periods;
@@ -14,7 +15,7 @@ namespace TimeProject.Application.UseCases.Periods;
 public class CreatePeriodByListUseCase(
     IPeriodRepository repository,
     ISessionRepository sessionRepository,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase,
+    ISyncRecordResumeUseCase syncRecordResumeUseCase,
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodByListUseCase
 {
@@ -42,14 +43,22 @@ public class CreatePeriodByListUseCase(
         if (result.HasError) return result;
         if (list.Count == 0) return result.SetData([]);
 
-        var session = sessionRepository.Create(new Session()
-            { RecordId = recordId, UserId = userId, Type = dto.Type, From = dto.From }
-        );
 
-        list.ForEach(i => { i.SessionId = session.Id; });
+        var session = sessionRepository
+            .Create(new Session
+                {
+                    RecordId = recordId,
+                    UserId = userId,
+                    Type = dto.Type ?? SessionType.Default,
+                    From = dto.From
+                }
+            );
 
-        var data = repository.CreateByList(list as IList<IPeriod>);
-        syncRecordMetaUseCase.Handle(recordId);
+
+        list.ForEach(i => { i.SessionId = session.SessionId; });
+
+        var data = repository.CreateByList(list.ToList<IPeriod>());
+        syncRecordResumeUseCase.Handle(recordId);
 
         return result.SetData(data);
     }

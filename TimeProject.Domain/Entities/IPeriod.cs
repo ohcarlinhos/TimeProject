@@ -2,7 +2,7 @@
 
 public interface IPeriod
 {
-    int Id { get; set; }
+    int PeriodId { get; set; }
     DateTime Start { get; set; }
     DateTime End { get; set; }
     int UserId { get; set; }

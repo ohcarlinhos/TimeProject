@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TimeProject.Domain.Dtos.Records;
+using TimeProject.Domain.Entities.Enums;
+using TimeProject.Infrastructure.ObjectValues.Periods;
 
 namespace TimeProject.Infrastructure.ObjectValues.Records;
 
@@ -10,10 +12,10 @@ public class CreateRecordDto : ICreateRecordData
     [MaxLength(120)] public string? ExternalLink { get; set; }
     [MaxLength(36)] public string? Code { get; set; }
 
-    [MaxLength(10)] public string? SessionType { get; set; }
+    [MaxLength(10)] public SessionType? SessionType { get; set; }
     [MaxLength(15)] public string? SessionFrom { get; set; }
 
     public int? CategoryId { get; set; }
 
-    [Required] public IList<Periods.PeriodDto>? Periods { get; set; }
+    [Required] public IList<PeriodDto>? Periods { get; set; }
 }

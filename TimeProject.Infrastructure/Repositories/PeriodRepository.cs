@@ -26,42 +26,25 @@ public class PeriodRepository(CustomDbContext db) : IPeriodRepository
 
     public IPeriod Create(IPeriod entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-
-        var periodRecord = (Period)entity;
-        periodRecord.CreatedAt = now;
-        periodRecord.UpdatedAt = now;
-
-        db.Periods.Add(periodRecord);
+        db.Periods.Add((Period)entity);
         db.SaveChanges();
-
-        return periodRecord;
+        return entity;
     }
 
     public IList<IPeriod> CreateByList(IList<IPeriod> entities)
     {
         var now = DateTime.Now.ToUniversalTime();
-        var list = entities as IList<Period> ?? new List<Period>();
-
-        foreach (var pr in list)
-        {
-            pr.CreatedAt = now;
-            pr.UpdatedAt = now;
-        }
-
+        var list = entities as IList<Period> ?? new List<Period>(); // TODO: corrigir, aqui tá zoando.
         db.Periods.AddRange(list);
         db.SaveChanges();
-        return (list as IList<IPeriod>)!;
+        return entities;
     }
 
     public IPeriod Update(IPeriod entity)
     {
-        var periodRecord = (Period)entity;
-        periodRecord.UpdatedAt = DateTime.Now.ToUniversalTime();
-
-        db.Periods.Update(periodRecord);
+        db.Periods.Update((Period)entity);
         db.SaveChanges();
-        return periodRecord;
+        return entity;
     }
 
     public bool Delete(IPeriod entity)
@@ -81,6 +64,6 @@ public class PeriodRepository(CustomDbContext db) : IPeriodRepository
     public IPeriod? FindById(int id, int userId)
     {
         return db.Periods
-            .FirstOrDefault(period => period.Id == id && period.UserId == userId);
+            .FirstOrDefault(period => period.PeriodId == id && period.UserId == userId);
     }
 }

@@ -2,8 +2,8 @@
 
 public interface IRecord
 {
-    int Id { get; set; }
-    string? Title { get; set; }
+    int RecordId { get; set; }
+    string? Name { get; set; }
     string? Description { get; set; }
     string? ExternalLink { get; set; }
     int UserId { get; set; }

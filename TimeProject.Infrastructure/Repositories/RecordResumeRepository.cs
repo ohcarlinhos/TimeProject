@@ -1,0 +1,95 @@
+﻿using TimeProject.Domain.Entities;
+using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Domain.Repositories;
+using TimeProject.Infrastructure.Database;
+using TimeProject.Infrastructure.Utils;
+
+namespace TimeProject.Infrastructure.Repositories;
+
+public class RecordResumeRepository(CustomDbContext dbContext) : IRecordResumeRepository
+{
+    public IRecordResume? CreateOrUpdate(int recordId, bool saveChanges = true)
+    {
+        var record = dbContext.Records.FirstOrDefault(e => e.RecordId == recordId);
+        return record == null ? null : CreateOrUpdate(record, saveChanges);
+    }
+
+    public IEnumerable<IRecordResume> CreateOrUpdateList(IEnumerable<IRecord> recordEntities, bool saveChanges = false)
+    {
+        var list = new List<IRecordResume>();
+
+        foreach (var recordEntity in recordEntities)
+        {
+            var meta = CreateOrUpdate(recordEntity, saveChanges);
+            if (meta != null) list.Add(meta);
+        }
+
+        dbContext.SaveChanges();
+
+        return list;
+    }
+
+    public IRecordResume? CreateOrUpdate(IRecord record, bool saveChanges = true)
+    {
+        var entity = dbContext.RecordResumes.FirstOrDefault(e => e.RecordId == record.RecordId);
+
+        var periods = dbContext.Periods
+            .Where(e => e.RecordId == record.RecordId)
+            .OrderBy(e => e.Start)
+            .ToList();
+
+        var timeMinutes = dbContext.Minutes
+            .Where(e => e.RecordId == record.RecordId)
+            .OrderBy(e => e.Date)
+            .ToList();
+
+        var timeSpan = TimeFormatUtil.TimeSpanFromPeriods(periods).Add(TimeFormatUtil.TimeSpanFromMinutes(timeMinutes));
+        var formattedTime = TimeFormatUtil.StringFromTimeSpan(timeSpan);
+
+        var firstList = new List<DateTime>();
+        var lastList = new List<DateTime>();
+
+        if (periods.Count > 0)
+        {
+            firstList.Add(periods[0].Start);
+            lastList.Add(periods[^1].Start);
+        }
+
+        if (timeMinutes.Count > 0)
+        {
+            firstList.Add(timeMinutes[0].Date);
+            lastList.Add(timeMinutes[^1].Date);
+        }
+
+        DateTime? first = firstList.Count > 0 ? firstList.OrderBy(i => i).First() : null;
+        DateTime? last = lastList.Count > 0 ? lastList.OrderByDescending(i => i).First() : null;
+
+        if (entity == null)
+        {
+            entity = new RecordResume
+            {
+                RecordId = record.RecordId,
+                Count = periods.Count + timeMinutes.Count,
+                Formatted = formattedTime,
+                Seconds = timeSpan.TotalSeconds,
+                FirstDate = first,
+                LastDate = last,
+                UserId = record.UserId
+            };
+
+            dbContext.Add(entity);
+        }
+        else
+        {
+            entity.Count = periods.Count + timeMinutes.Count;
+            entity.Seconds = timeSpan.TotalSeconds;
+            entity.Formatted = formattedTime;
+            entity.FirstDate = first;
+            entity.LastDate = last;
+        }
+
+        if (saveChanges) dbContext.SaveChanges();
+
+        return entity;
+    }
+}

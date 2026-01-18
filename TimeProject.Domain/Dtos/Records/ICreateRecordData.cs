@@ -1,4 +1,6 @@
 ﻿
+using TimeProject.Domain.Entities.Enums;
+
 namespace TimeProject.Domain.Dtos.Records;
 
 public interface ICreateRecordData
@@ -7,7 +9,7 @@ public interface ICreateRecordData
     string? Description { get; set; }
     string? ExternalLink { get; set; }
     string? Code { get; set; }
-    string? SessionType { get; set; }
+    SessionType? SessionType { get; set; }
     string? SessionFrom { get; set; }
     int? CategoryId { get; set; }
 }

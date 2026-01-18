@@ -36,20 +36,20 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
         query = paginationQuery.SortProp switch
         {
             "title" => paginationQuery.Sort == "asc"
-                ? query.OrderBy(record => record.Title)
-                : query.OrderByDescending(record => record.Title),
+                ? query.OrderBy(record => record.Name)
+                : query.OrderByDescending(record => record.Name),
 
             "code" => paginationQuery.Sort == "asc"
                 ? query.OrderBy(record => record.Code)
                 : query.OrderByDescending(record => record.Code),
 
             "timeOnSeconds" => paginationQuery.Sort == "asc"
-                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.TimeOnSeconds)
-                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.TimeOnSeconds),
+                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.Seconds)
+                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.Seconds),
 
             _ => paginationQuery.Sort == "asc" // Padrão: Último Progresso
-                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.LastTimeDate)
-                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastTimeDate)
+                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.LastDate)
+                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastDate)
         };
 
 
@@ -75,23 +75,17 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
         if (string.IsNullOrEmpty(search) == false)
             query = SearchWhereConditional(query, search);
 
-        query = query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastTimeDate);
+        query = query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastDate);
 
         return query
-            .Select(e => new SearchRecordItem(e.Id, e.Code, e.Title))
+            .Select(e => new SearchRecordItem(e.RecordId, e.Code, e.Name))
             .Take(10)
             .ToList<SearchRecordItem>();
     }
 
     public IRecord Create(IRecord entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-
-        var record = (Record)entity;
-        record.CreatedAt = now;
-        record.UpdatedAt = now;
-
-        db.Records.Add(record);
+        db.Records.Add((Record)entity);
         db.SaveChanges();
         return entity;
     }
@@ -99,8 +93,6 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
     public IRecord Update(IRecord entity)
     {
         var record = (Record)entity;
-        record.UpdatedAt = DateTime.Now.ToUniversalTime();
-
         db.Records.Update(record);
         db.SaveChanges();
         return record;
@@ -124,12 +116,12 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
     public IRecord? FindById(int id, int userId)
     {
         return db.Records
-            .FirstOrDefault(record => record.Id == id && record.UserId == userId);
+            .FirstOrDefault(record => record.RecordId == id && record.UserId == userId);
     }
 
     public IList<IRecord> FindByIdList(IList<int> idList, int userId)
     {
-        return db.Records.Where(e => idList.Contains(e.Id))
+        return db.Records.Where(e => idList.Contains(e.RecordId))
             .Include(e => e.Category)
             .Include(e => e.Meta)
             .ToList<IRecord>();
@@ -150,9 +142,9 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             EF.Functions.Like(
                 record.Code.ToLower(),
                 $"%{search.ToLower()}%") ||
-            (record.Title != null &&
+            (record.Name != null &&
              EF.Functions.Like(
-                 record.Title!.ToLower(),
+                 record.Name!.ToLower(),
                  $"%{search.ToLower()}%"))
         );
     }

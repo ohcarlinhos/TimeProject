@@ -14,7 +14,7 @@ namespace TimeProject.Application.UseCases.Periods;
 public class CreatePeriodUseCase(
     IPeriodRepository repository,
     IGetRecordByIdUseCase getRecordByIdUseCase,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase,
+    ISyncRecordResumeUseCase syncRecordResumeUseCase,
     IPeriodValidateUtil periodValidateUtil
 ) : ICreatePeriodUseCase
 {
@@ -31,18 +31,17 @@ public class CreatePeriodUseCase(
         var findTrResult = getRecordByIdUseCase.Handle(data.RecordId, userId);
         if (findTrResult.HasError) return result.SetError(findTrResult.Message);
 
-        var period = repository
-            .Create(new Period
-                {
-                    UserId = userId,
-                    RecordId = data.RecordId,
-                    Start = data.Start,
-                    End = data.End
-                }
-            );
+        var period = repository.Create(new Period
+            {
+                UserId = userId,
+                RecordId = data.RecordId,
+                Start = data.Start,
+                End = data.End
+            }
+        );
 
         if (period.RecordId != null)
-            syncRecordMetaUseCase.Handle((int)period.RecordId);
+            syncRecordResumeUseCase.Handle((int)period.RecordId);
 
         return result.SetData(period);
     }

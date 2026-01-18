@@ -43,7 +43,7 @@ public class CreateRecordUseCase(
                 {
                     UserId = userId,
                     CategoryId = data.CategoryId,
-                    Title = data.Title,
+                    Name = data.Title,
                     Description = data.Description,
                     Code = string.IsNullOrEmpty(data.Code) == false ? data.Code! : Guid.NewGuid().ToString(),
                     ExternalLink = data.ExternalLink
@@ -58,10 +58,11 @@ public class CreateRecordUseCase(
                     .Handle(
                         new PeriodListDto
                         {
-                            Periods = (periods as List<IPeriodData>)!, Type = data.SessionType,
+                            Periods = periods, 
+                            Type = data.SessionType,
                             From = data.SessionFrom
                         },
-                        record.Id, userId);
+                        record.RecordId, userId);
 
                 if (periodsResult.HasError)
                     throw new Exception(periodsResult.Message);

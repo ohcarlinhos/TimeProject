@@ -4,19 +4,19 @@ using TimeProject.Domain.UseCases.Records;
 
 namespace TimeProject.Application.UseCases.Records;
 
-public class SyncRecordMetaUseCase(IRecordMetaRepository repository) : ISyncRecordMetaUseCase
+public class SyncRecordResumeUseCase(IRecordResumeRepository repository) : ISyncRecordResumeUseCase
 {
-    public IRecordMeta? Handle(int id, bool saveChanges = true)
+    public IRecordResume? Handle(int id, bool saveChanges = true)
     {
         return repository.CreateOrUpdate(id, saveChanges);
     }
 
-    public IRecordMeta? Handle(IRecord record, bool saveChanges = false)
+    public IRecordResume? Handle(IRecord record, bool saveChanges = false)
     {
         return repository.CreateOrUpdate(record, saveChanges);
     }
 
-    public IEnumerable<IRecordMeta> Handle(IEnumerable<IRecord> recordEntities,
+    public IEnumerable<IRecordResume> Handle(IEnumerable<IRecord> recordEntities,
         bool saveChanges = false)
     {
         return repository.CreateOrUpdateList(recordEntities, saveChanges);

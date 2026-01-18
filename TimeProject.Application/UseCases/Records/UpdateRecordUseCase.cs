@@ -12,7 +12,7 @@ public class UpdateRecordUseCase(
     IRecordRepository repository,
     IRecordMapDataUtil mapDataUtil,
     ICategoryRepository categoryRepo,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase
+    ISyncRecordResumeUseCase syncRecordResumeUseCase
 )
     : IUpdateRecordUseCase
 {
@@ -43,11 +43,11 @@ public class UpdateRecordUseCase(
 
         record.Code = dto.Code;
 
-        record.Title = dto.Title;
+        record.Name = dto.Title;
         record.Description = dto.Description;
         record.ExternalLink = dto.ExternalLink;
 
-        syncRecordMetaUseCase.Handle(record.Id);
+        syncRecordResumeUseCase.Handle(record.RecordId);
 
         return result.SetData(mapDataUtil.Handle(repository.Update(record)));
     }

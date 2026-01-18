@@ -8,15 +8,15 @@ using TimeProject.Infrastructure.Database;
 
 namespace TimeProject.Application.UseCases.Records;
 
-public class SyncAllRecordMetaUseCase(
+public class SyncAllRecordResumeUseCase(
     CustomDbContext db,
-    ISyncRecordMetaUseCase syncRecordMetaUseCase
+    ISyncRecordResumeUseCase syncRecordResumeUseCase
 )
-    : ISyncAllRecordMetaUseCase
+    : ISyncAllRecordResumeUseCase
 {
-    public ICustomResult<IEnumerable<IRecordMeta>> Handle()
+    public ICustomResult<IEnumerable<IRecordResume>> Handle()
     {
         var list = db.Records.ToList();
-        return new CustomResult<IEnumerable<IRecordMeta>> { Data = syncRecordMetaUseCase.Handle(list, true) };
+        return new CustomResult<IEnumerable<IRecordResume>> { Data = syncRecordResumeUseCase.Handle(list, true) };
     }
 }

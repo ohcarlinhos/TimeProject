@@ -7,7 +7,7 @@ using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Periods;
 
-public class DeletePeriodUseCase(IPeriodRepository repository, ISyncRecordMetaUseCase syncRecordMetaUseCase)
+public class DeletePeriodUseCase(IPeriodRepository repository, ISyncRecordResumeUseCase syncRecordResumeUseCase)
     : IDeletePeriodUseCase
 {
     public ICustomResult<bool> Handle(int id, int userId)
@@ -21,7 +21,7 @@ public class DeletePeriodUseCase(IPeriodRepository repository, ISyncRecordMetaUs
         var data = repository.Delete(period);
         
         if (period.RecordId != null)
-            syncRecordMetaUseCase.Handle((int)period.RecordId);
+            syncRecordResumeUseCase.Handle((int)period.RecordId);
 
         return result.SetData(data);
     }
