@@ -12,7 +12,8 @@ public class SessionEntityConfiguration : IEntityTypeConfiguration<Session>
         builder.HasKey(e => e.SessionId);
         builder.Property(e => e.SessionId).HasColumnName("session_id");
         builder.Property(e => e.Type).HasColumnName("type");
-        builder.Property(e => e.Date).HasColumnName("date");
+        builder.Property(e => e.Date).HasColumnName("date")
+            .HasConversion(v => v.ToUniversalTime(), v => v.ToUniversalTime());
         builder.Property(e => e.From).HasColumnName("session_from");
         builder.Property(e => e.RecordId).HasColumnName("record_id");
         builder.Property(e => e.CategoryId).HasColumnName("category_id");
