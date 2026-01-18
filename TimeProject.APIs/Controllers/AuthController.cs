@@ -6,6 +6,7 @@ using TimeProject.Domain.UseCases.Logins;
 using TimeProject.Domain.Dtos.Auths;
 using TimeProject.Infrastructure.ObjectValues.Auths;
 using TimeProject.APIs.Controllers.Attributes;
+using TimeProject.Domain.Entities.Enums;
 
 namespace TimeProject.APIs.Controllers;
 
@@ -23,9 +24,9 @@ public class AuthController(
     {
         return HandleResponse(loginUseCase.Handle(dto, new UserAccessLog
         {
-            IpAddress = GetClientIpAddress(HttpContext) ?? "",
+            ClientIp = GetClientIpAddress(HttpContext),
             UserAgent = Request.Headers.UserAgent.ToString(),
-            AccessType = AccessType.Password
+            Type = AccessType.Password
         }));
     }
 
@@ -35,10 +36,10 @@ public class AuthController(
     {
         return HandleResponse(await loginGithubUseCase.Handle(dto, new UserAccessLog
         {
-            IpAddress = GetClientIpAddress(HttpContext) ?? "",
+            ClientIp = GetClientIpAddress(HttpContext),
             UserAgent = Request.Headers.UserAgent.ToString(),
-            AccessType = AccessType.Provider,
-            Provider = "github"
+            Type = AccessType.Provider,
+            Provider = ProviderType.Github
         }));
     }
 
@@ -48,10 +49,10 @@ public class AuthController(
     {
         return HandleResponse(await loginGoogleUseCase.Handle(dto, new UserAccessLog
         {
-            IpAddress = GetClientIpAddress(HttpContext) ?? "",
+            ClientIp = GetClientIpAddress(HttpContext),
             UserAgent = Request.Headers.UserAgent.ToString(),
-            AccessType = AccessType.Provider,
-            Provider = "google"
+            Type = AccessType.Provider,
+            Provider = ProviderType.Google
         }));
     }
 }

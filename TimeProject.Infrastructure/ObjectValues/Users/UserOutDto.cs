@@ -15,10 +15,7 @@ public class UserOutDto : IUserOutDto
     public bool IsActive { get; set; }
     public bool IsAdmin => UserRoleType == UserRoleType.Admin;
 
-    public DateTime CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
-
-    public DateTime? LastUserAccess { get; set; }
-    public string? LastUserAccessType { get; set; }
-    public string? LastUserAccessProvider { get; set; }
+    public DateTime? LastAccess { get; set; }
+    public string? LastAccessType { get; set; }
+    public string? LastAccessProvider { get; set; }
 }

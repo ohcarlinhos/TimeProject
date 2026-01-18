@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using TimeProject.Domain.Entities.Enums;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.Database.Entities.Enums;
@@ -26,12 +27,13 @@ public class CustomController : ControllerBase
         if (code.Contains("not_found")) return NotFound(errorResponse);
         if (code.Contains("unauthorized")) return Unauthorized();
         if (code.Contains("server_error")) return StatusCode(500, errorResponse);
+
         return BadRequest(errorResponse);
     }
 
     protected bool IsAdmin()
     {
-        return UserRoleType.Admin.ToString() == UserClaimsUtil.Role(User);
+        return nameof(UserRoleType.Admin) == UserClaimsUtil.Role(User);
     }
 
     protected bool HasAuthorization(int id)
@@ -39,14 +41,22 @@ public class CustomController : ControllerBase
         return UserClaimsUtil.Id(User) == id || IsAdmin();
     }
 
-    public string? GetClientIpAddress(HttpContext context)
+    public IPAddress? GetClientIpAddress(HttpContext context)
     {
         var headers = new[] { "X-Forwarded-For", "X-Real-IP", "CF-Connecting-IP" };
 
         foreach (var header in headers)
-            if (context.Request.Headers.TryGetValue(header, out var headerValue))
-                return headerValue.FirstOrDefault()?.Split(',').FirstOrDefault()?.Trim();
+        {
+            if (!context.Request.Headers.TryGetValue(header, out var headerValue)) continue;
+            var ip = headerValue.FirstOrDefault()?.Split(',').FirstOrDefault()?.Trim();
+            if (string.IsNullOrEmpty(ip)) continue;
 
-        return context.Connection.RemoteIpAddress?.ToString();
+            if (IPAddress.TryParse(ip, out var address))
+            {
+                return address;
+            }
+        }
+
+        return context.Connection.RemoteIpAddress;
     }
 }

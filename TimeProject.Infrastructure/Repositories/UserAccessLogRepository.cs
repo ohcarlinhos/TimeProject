@@ -10,22 +10,19 @@ public class UserAccessLogRepository(CustomDbContext db) : IUserAccessLogReposit
 {
     public IUserAccessLog Create(IUserAccessLog entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-        entity.AccessAt = now;
-
-        var accessLog = (UserAccessLog)entity;
-        db.UserAccessLogs.Add(accessLog);
+        entity.AccessedAt = DateTime.Now.ToUniversalTime();
+        db.UserAccessLogs.Add((UserAccessLog)entity);
         db.SaveChanges();
-        return accessLog;
+        return entity;
     }
 
     public IUserAccessLog? GetLastAccessByUserId(int id)
     {
         var maxAccessAt = db.UserAccessLogs
             .Where(e => e.UserId == id)
-            .Max(e => e.AccessAt);
+            .Max(e => e.AccessedAt);
 
-        return db.UserAccessLogs.FirstOrDefault(e => e.UserId == id && e.AccessAt == maxAccessAt);
+        return db.UserAccessLogs.FirstOrDefault(e => e.UserId == id && e.AccessedAt == maxAccessAt);
     }
 
     public IList<IUserAccessLog> GetLastAccessByUserIdList(IEnumerable<int> idList)
@@ -35,11 +32,11 @@ public class UserAccessLogRepository(CustomDbContext db) : IUserAccessLogReposit
         foreach (var id in idList)
         {
             DateTime? maxAccessAt = db.UserAccessLogs.Any(e => e.UserId == id)
-                ? db.UserAccessLogs.Where(e => e.UserId == id).Max(e => e.AccessAt)
+                ? db.UserAccessLogs.Where(e => e.UserId == id).Max(e => e.AccessedAt)
                 : null;
 
             var lastAccessByUserId = db.UserAccessLogs
-                .FirstOrDefault(e => e.UserId == id && e.AccessAt == maxAccessAt);
+                .FirstOrDefault(e => e.UserId == id && e.AccessedAt == maxAccessAt);
 
             if (lastAccessByUserId is not null)
                 list.Add(lastAccessByUserId);

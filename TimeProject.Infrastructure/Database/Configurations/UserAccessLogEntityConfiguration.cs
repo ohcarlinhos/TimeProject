@@ -8,14 +8,15 @@ public class UserAccessLogEntityConfiguration : IEntityTypeConfiguration<UserAcc
 {
     public void Configure(EntityTypeBuilder<UserAccessLog> builder)
     {
-        builder.HasKey(e => e.Id);
-
-        builder.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
-        builder.Property(e => e.UserId).IsRequired();
-        builder.Property(e => e.IpAddress).IsRequired().HasMaxLength(45);
-        builder.Property(e => e.UserAgent).IsRequired();
-        builder.Property(e => e.AccessType).IsRequired();
-        builder.Property(e => e.AccessAt).IsRequired();
+        builder.ToTable("user_access_logs");
+        builder.HasKey(e => e.LogId);
+        builder.Property(e => e.LogId).HasColumnName("log_id");
+        builder.Property(e => e.UserId).HasColumnName("user_id");
+        builder.Property(e => e.ClientIp).HasColumnName("client_ip");
+        builder.Property(e => e.UserAgent).HasColumnName("user_agent");
+        builder.Property(e => e.Type).HasColumnName("type");
+        builder.Property(e => e.Provider).HasColumnName("provider");
+        builder.Property(e => e.AccessedAt).HasColumnName("accessed_at");
 
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
     }

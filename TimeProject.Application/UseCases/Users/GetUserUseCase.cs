@@ -27,9 +27,9 @@ public class GetUserUseCase(
         var lastAccess = userAccessLogRepository.GetLastAccessByUserId(id);
         if (lastAccess is null) return result.SetData(userMapped);
 
-        userMapped.LastUserAccess = lastAccess.AccessAt;
-        userMapped.LastUserAccessType = lastAccess.AccessType.ToString();
-        userMapped.LastUserAccessProvider = lastAccess.Provider;
+        userMapped.LastAccess = lastAccess.AccessedAt;
+        userMapped.LastAccessType = lastAccess.Type.ToString();
+        userMapped.LastAccessProvider = lastAccess.Provider.ToString();
 
         return result.SetData(userMapped);
     }

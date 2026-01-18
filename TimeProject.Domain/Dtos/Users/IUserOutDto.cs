@@ -12,9 +12,7 @@ public interface IUserOutDto
     string UserRoleLabel { get; }
     bool IsActive { get; set; }
     bool IsAdmin { get; }
-    DateTime CreatedAt { get; set; }
-    DateTime? UpdatedAt { get; set; }
-    DateTime? LastUserAccess { get; set; }
-    string? LastUserAccessType { get; set; }
-    string? LastUserAccessProvider { get; set; }
+    DateTime? LastAccess { get; set; }
+    string? LastAccessType { get; set; }
+    string? LastAccessProvider { get; set; }
 }

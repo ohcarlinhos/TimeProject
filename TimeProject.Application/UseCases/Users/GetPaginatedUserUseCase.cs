@@ -25,9 +25,9 @@ public class GetPaginatedUserUseCase(
             var lastUserAccess = lastAccess?.FirstOrDefault(e => e.UserId == user.Id);
             if (lastUserAccess is null) continue;
 
-            user.LastUserAccess = lastUserAccess.AccessAt;
-            user.LastUserAccessType = lastUserAccess.AccessType.ToString();
-            user.LastUserAccessProvider = lastUserAccess.Provider;
+            user.LastAccess = lastUserAccess.AccessedAt;
+            user.LastAccessType = lastUserAccess.Type.ToString();
+            user.LastAccessProvider = lastUserAccess.Provider.ToString();
         }
 
         return new CustomResult<IPagination<IUserOutDto>>

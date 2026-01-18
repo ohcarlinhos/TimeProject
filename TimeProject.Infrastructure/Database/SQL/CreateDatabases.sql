@@ -88,10 +88,10 @@ create table if not exists user_access_logs
 (
     log_id      serial,
     type        int         not null,
-    provider    varchar(15) not null,
     client_ip   inet        not null,
     user_agent  text        not null,
-    user_id     int,
+    provider    int,
+    user_id     int         not null,
     accessed_at timestamptz not null default now(),
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
