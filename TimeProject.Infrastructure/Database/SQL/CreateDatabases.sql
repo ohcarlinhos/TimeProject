@@ -26,7 +26,7 @@ create table if not exists users
     user_id    serial,
     name       varchar(120) not null,
     email      varchar(64)  not null unique,
-    user_role  int          not null,
+    role       int          not null,
     timezone   varchar(64)  not null,
     is_active  bool         not null,
     created_at timestamptz  not null default now(),
@@ -66,11 +66,13 @@ execute procedure update_timestamp();
 /* user_providers */
 create table if not exists user_providers
 (
-    provider             int         not null,
-    provider_external_id varchar(72) not null,
-    user_id              int         not null,
-    created_at           timestamptz not null default now(),
-    updated_at           timestamptz not null default now(),
+    provider_id serial,
+    provider    int         not null,
+    external_id varchar(72) not null,
+    user_id     int         not null,
+    created_at  timestamptz not null default now(),
+    updated_at  timestamptz not null default now(),
+    constraint pk_user_providers primary key (provider_id),
     constraint fk_user_providers_users foreign key (user_id) references users (user_id) on delete cascade,
     constraint uq_user_providers_user_id_provider unique (user_id, provider)
 );
