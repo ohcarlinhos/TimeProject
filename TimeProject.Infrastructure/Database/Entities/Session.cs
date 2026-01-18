@@ -5,7 +5,7 @@ using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-public class Session : WithOwnerEntity, ISession
+public class Session : ISession
 {
     public int SessionId { get; set; }
     public SessionType Type { get; set; }
