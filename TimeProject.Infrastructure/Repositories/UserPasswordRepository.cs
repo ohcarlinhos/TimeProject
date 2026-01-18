@@ -17,10 +17,7 @@ public class UserPasswordRepository(CustomDbContext db) : IUserPasswordRepositor
 
     public bool Update(IUserPassword entity)
     {
-        var userPassword = (UserPassword)entity;
-        userPassword.UpdatedAt = DateTime.Now.ToUniversalTime();
-
-        db.UserPasswords.Update(userPassword);
+        db.UserPasswords.Update((UserPassword)entity);
         db.SaveChanges();
         return true;
     }

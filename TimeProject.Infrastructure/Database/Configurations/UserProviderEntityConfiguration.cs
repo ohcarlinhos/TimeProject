@@ -9,15 +9,12 @@ public class UserProviderEntityConfiguration : IEntityTypeConfiguration<UserProv
 {
     public void Configure(EntityTypeBuilder<UserProvider> builder)
     {
-        builder.HasKey(e => new { e.UserId, e.Provider });
-
-        builder.Property(e => e.UserId).IsRequired();
-        builder.Property(e => e.Provider).HasMaxLength(15).IsRequired();
-        builder.Property(e => e.UserProviderId).HasMaxLength(36).IsRequired();
-
-        builder.Property(e => e.CreatedAt).IsRequired();
-        builder.Property(e => e.UpdatedAt).IsRequired();
-
+        builder.ToTable("user_providers");
+        builder.HasKey(e => e.ProviderId);
+        builder.Property(e => e.ProviderId).HasColumnName("provider_id");
+        builder.Property(e => e.UserId).HasColumnName("user_id");
+        builder.Property(e => e.Provider).HasColumnName("provider");
+        builder.Property(e => e.ExternalId).HasColumnName("external_id");
         builder.HasOne<User>().WithMany().HasForeignKey(e => e.UserId);
     }
 }

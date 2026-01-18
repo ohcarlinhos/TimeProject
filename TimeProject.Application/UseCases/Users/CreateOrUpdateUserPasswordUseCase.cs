@@ -49,7 +49,8 @@ public class CreateOrUpdateUserPasswordUseCase(IUserPasswordRepository userPassw
             userPasswordRepository.Create(new UserPassword
             {
                 UserId = userId,
-                Password = BCrypt.Net.BCrypt.HashPassword(password)
+                Password = BCrypt.Net.BCrypt.HashPassword(password),
+                IsActive = true
             });
         }
 

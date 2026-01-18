@@ -12,13 +12,9 @@ public class UserProviderRepository(CustomDbContext db) : IUserProviderRepositor
     {
         var now = DateTime.Now.ToUniversalTime();
 
-        var userProvider = (UserProvider)entity;
-        userProvider.CreatedAt = now;
-        userProvider.UpdatedAt = now;
-
-        db.UserProviders.Add(userProvider);
+        db.UserProviders.Add((UserProvider)entity);
         db.SaveChanges();
-        return userProvider;
+        return entity;
     }
 
     public bool Delete(int id)
@@ -38,6 +34,6 @@ public class UserProviderRepository(CustomDbContext db) : IUserProviderRepositor
 
     public IUserProvider? FindByUserProviderId(string provider, string id)
     {
-        return db.UserProviders.FirstOrDefault(i => i.Provider == provider && i.UserProviderId == id);
+        return db.UserProviders.FirstOrDefault(i => i.Provider == provider && i.ExternalId == id);
     }
 }

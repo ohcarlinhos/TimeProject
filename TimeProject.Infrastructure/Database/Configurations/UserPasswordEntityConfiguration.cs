@@ -8,13 +8,12 @@ public class UserPasswordEntityConfiguration : IEntityTypeConfiguration<UserPass
 {
     public void Configure(EntityTypeBuilder<UserPassword> builder)
     {
-        // builder.HasKey(e => e.PasswordId);
-        // builder.Property(e => e.UserId).IsRequired();
-        // builder.Property(e => e.Password).HasMaxLength(72).IsRequired();
-        //
-        // builder.Property(e => e.CreatedAt).IsRequired();
-        // builder.Property(e => e.UpdatedAt).IsRequired();
-
-        // builder.HasOne<User>().WithOne().HasForeignKey<UserPassword>(e => e.UserId);
+        builder.ToTable("user_passwords");
+        builder.HasKey(e => e.PasswordId);
+        builder.Property(e => e.PasswordId).HasColumnName("password_id");
+        builder.Property(e => e.UserId).HasColumnName("user_id");
+        builder.Property(e => e.Password).HasColumnName("password");
+        builder.Property(e => e.IsActive).HasColumnName("is_active");
+        builder.HasOne<User>().WithOne().HasForeignKey<UserPassword>(e => e.UserId);
     }
 }

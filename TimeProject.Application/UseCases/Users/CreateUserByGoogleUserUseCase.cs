@@ -29,7 +29,7 @@ public class CreateUserByGoogleUserUseCase(
             {
                 UserId = userWithEmail.UserId,
                 Provider = "google",
-                UserProviderId = dto.UserProviderId
+                ExternalId = dto.UserProviderId
             });
 
             return result.SetData(userWithEmail);
@@ -47,7 +47,7 @@ public class CreateUserByGoogleUserUseCase(
         {
             UserId = (int)userEntity.UserId!,
             Provider = "google",
-            UserProviderId = dto.UserProviderId
+            ExternalId = dto.UserProviderId
         });
 
         return result.SetData(userEntity);

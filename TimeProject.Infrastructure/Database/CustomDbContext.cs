@@ -21,15 +21,15 @@ public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbCont
     protected override void OnModelCreating(ModelBuilder mb)
     {
         mb.ApplyConfiguration(new UserEntityConfiguration());
+        mb.ApplyConfiguration(new UserPasswordEntityConfiguration());
+        mb.ApplyConfiguration(new UserProviderEntityConfiguration());
+        mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
         mb.ApplyConfiguration(new RecordEntityConfiguration());
         mb.ApplyConfiguration(new PeriodEntityConfiguration());
         mb.ApplyConfiguration(new CategoryEntityConfiguration());
         mb.ApplyConfiguration(new RecordMetaEntityConfiguration());
         mb.ApplyConfiguration(new SessionEntityConfiguration());
-        mb.ApplyConfiguration(new ConfirmCodeEntityConfiguration());
-        mb.ApplyConfiguration(new UserPasswordEntityConfiguration());
         mb.ApplyConfiguration(new MinuteEntityConfiguration());
-        mb.ApplyConfiguration(new UserProviderEntityConfiguration());
         mb.ApplyConfiguration(new UserAccessLogEntityConfiguration());
     }
 }

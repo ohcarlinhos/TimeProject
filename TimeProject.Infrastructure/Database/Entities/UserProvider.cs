@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities.Shared;
+﻿using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-[Table("user_providers")]
-public class UserProvider : WithOwnerEntity, IUserProvider
+public class UserProvider : IUserProvider
 {
-    [Column("provider")] public string Provider { get; set; } = string.Empty;
-    [Column("provider_external_id")] public string UserProviderId { get; set; } = string.Empty;
+    public int ProviderId { get; set; }
+    public string Provider { get; set; } = string.Empty;
+    public string ExternalId { get; set; } = string.Empty;
+    public int UserId { get; set; }
 }

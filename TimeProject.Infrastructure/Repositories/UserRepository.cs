@@ -17,9 +17,9 @@ public class UserRepository(CustomDbContext db) : IUserRepository
             query = SearchWhereConditional(query, paginationQuery.Search);
 
         if (string.IsNullOrWhiteSpace(paginationQuery.Sort) || paginationQuery.Sort == "desc")
-            query = query.OrderByDescending(user => user.CreatedAt);
+            query = query.OrderByDescending(user => user.UserId);
         else
-            query = query.OrderBy(user => user.CreatedAt);
+            query = query.OrderBy(user => user.UserId);
 
         return query
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
@@ -47,10 +47,7 @@ public class UserRepository(CustomDbContext db) : IUserRepository
 
     public IUser Update(IUser entity)
     {
-        var user = (User)entity;
-        user.UpdatedAt = DateTime.Now.ToUniversalTime();
-
-        db.Users.Update(user);
+        db.Users.Update((User)entity);
         db.SaveChanges();
         return entity;
     }

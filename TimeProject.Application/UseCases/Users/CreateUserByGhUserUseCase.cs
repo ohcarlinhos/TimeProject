@@ -33,7 +33,7 @@ public class CreateUserByGhUserUseCase(
                 {
                     UserId = (int)userWithPrimaryEmail.UserId!,
                     Provider = "github",
-                    UserProviderId = dto.UserProviderId
+                    ExternalId = dto.UserProviderId
                 });
 
                 return result.SetData(userWithPrimaryEmail);
@@ -50,7 +50,7 @@ public class CreateUserByGhUserUseCase(
                 {
                     UserId = (int)userWithSecondaryEmail.UserId!,
                     Provider = "github",
-                    UserProviderId = dto.UserProviderId
+                    ExternalId = dto.UserProviderId
                 });
 
                 return result.SetData(userWithSecondaryEmail);
@@ -69,7 +69,7 @@ public class CreateUserByGhUserUseCase(
         {
             UserId = userEntity.UserId,
             Provider = "github",
-            UserProviderId = dto.UserProviderId
+            ExternalId = dto.UserProviderId
         });
 
         return result.SetData(userEntity);
