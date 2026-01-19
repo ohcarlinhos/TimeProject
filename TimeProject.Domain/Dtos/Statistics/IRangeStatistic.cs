@@ -2,8 +2,8 @@
 
 public interface IRangeStatistic
 {
-    DateTime StartDay { get; set; }
-    DateTime EndDay { get; set; }
+    DateTimeOffset StartDay { get; set; }
+    DateTimeOffset EndDay { get; set; }
     string TotalHours { get; set; }
     string AverageHours { get; set; }
     string IsolatedPeriodHours { get; set; }

@@ -5,8 +5,8 @@ namespace TimeProject.Domain.UseCases.Statistics;
 
 public interface IGetRangeDaysStatisticUseCase
 {
-    public ICustomResult<IRangeStatistic> Handle(int userId, DateTime? start = null, DateTime? end = null,
+    public ICustomResult<IRangeStatistic> Handle(int userId, DateTimeOffset? start = null, DateTimeOffset? end = null,
         int? recordId = null, bool skipRangeProgress = false);
 
-    public ICustomResult<IRangeStatisticsWithDays> Handle(int userId, DateTime start, DateTime end);
+    public ICustomResult<IRangeStatisticsWithDays> Handle(int userId, DateTimeOffset start, DateTimeOffset end);
 }

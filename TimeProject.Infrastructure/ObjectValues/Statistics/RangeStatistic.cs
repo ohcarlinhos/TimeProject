@@ -4,8 +4,8 @@ namespace TimeProject.Infrastructure.ObjectValues.Statistics;
 
 public class RangeStatistic : IRangeStatistic
 {
-    public DateTime StartDay { get; set; }
-    public DateTime EndDay { get; set; }
+    public DateTimeOffset StartDay { get; set; }
+    public DateTimeOffset EndDay { get; set; }
 
     public string TotalHours { get; set; } = "";
     public string AverageHours { get; set; } = "";

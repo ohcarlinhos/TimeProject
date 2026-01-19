@@ -10,8 +10,8 @@ public class StatisticRepository(CustomDbContext db) : IStatisticRepository
 {
     public IList<IPeriod> GetPeriodsByRange(
         int userId,
-        DateTime initDate,
-        DateTime endDate,
+        DateTimeOffset initDate,
+        DateTimeOffset endDate,
         int? recordId = null
     )
     {
@@ -27,8 +27,8 @@ public class StatisticRepository(CustomDbContext db) : IStatisticRepository
 
     public IList<ISession> GetSessionsByRange(
         int userId,
-        DateTime initDate,
-        DateTime endDate,
+        DateTimeOffset initDate,
+        DateTimeOffset endDate,
         int? recordId = null
     )
     {
@@ -56,7 +56,7 @@ public class StatisticRepository(CustomDbContext db) : IStatisticRepository
             .ToList<ISession>();
     }
 
-    public IList<IMinute> GetTimeMinutesByRange(int userId, DateTime initDate, DateTime endDate,
+    public IList<IMinute> GetTimeMinutesByRange(int userId, DateTimeOffset initDate, DateTimeOffset endDate,
         int? recordId = null)
     {
         var query = db.Minutes.AsQueryable();
@@ -72,12 +72,12 @@ public class StatisticRepository(CustomDbContext db) : IStatisticRepository
             .ToList<IMinute>();
     }
 
-    public int GetRecordCreatedCount(int userId, DateTime initDate, DateTime endDate)
+    public int GetRecordCreatedCount(int userId, DateTimeOffset initDate, DateTimeOffset endDate)
     {
         return db.Records.Count(e => e.CreatedAt >= initDate && e.CreatedAt < endDate && userId == e.UserId);
     }
 
-    public int GetRecordUpdatedCount(int userId, DateTime initDate, DateTime endDate)
+    public int GetRecordUpdatedCount(int userId, DateTimeOffset initDate, DateTimeOffset endDate)
     {
         return db.Records
             .Count(e => e.UpdatedAt >= initDate

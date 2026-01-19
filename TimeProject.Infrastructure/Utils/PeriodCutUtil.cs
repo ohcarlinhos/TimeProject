@@ -5,7 +5,7 @@ namespace TimeProject.Infrastructure.Utils;
 
 public class PeriodCutUtil : IPeriodCutUtil
 {
-    public Period Handle(Period entity, DateTime initDate, DateTime endDate)
+    public Period Handle(Period entity, DateTimeOffset initDate, DateTimeOffset endDate)
     {
         var period = new Period
         {
@@ -21,7 +21,7 @@ public class PeriodCutUtil : IPeriodCutUtil
         return period;
     }
 
-    public IEnumerable<Period> Handle(IEnumerable<Period> list, DateTime initDate, DateTime endDate)
+    public IEnumerable<Period> Handle(IEnumerable<Period> list, DateTimeOffset initDate, DateTimeOffset endDate)
     {
         return list
             .Select(e => Handle(e, initDate, endDate))

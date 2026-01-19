@@ -22,8 +22,8 @@ public class GetRangeDaysStatisticUseCase(
 {
     public ICustomResult<IRangeStatistic> Handle(
         int userId,
-        DateTime? start = null,
-        DateTime? end = null,
+        DateTimeOffset? start = null,
+        DateTimeOffset? end = null,
         int? recordId = null,
         bool skipRangeProgress = false
     )
@@ -33,9 +33,9 @@ public class GetRangeDaysStatisticUseCase(
         );
     }
 
-    public ICustomResult<IRangeStatisticsWithDays> Handle(int userId, DateTime start, DateTime end)
+    public ICustomResult<IRangeStatisticsWithDays> Handle(int userId, DateTimeOffset start, DateTimeOffset end)
     {
-        var daysFromRange = new List<DateTime> { start };
+        var daysFromRange = new List<DateTimeOffset> { start };
         var daysStatistics = new List<IRangeStatistic>();
 
         var periods = new List<Period>();
@@ -92,8 +92,8 @@ public class GetRangeDaysStatisticUseCase(
 
     private RangeStatisticsData _handle(
         int userId,
-        DateTime? start = null,
-        DateTime? end = null,
+        DateTimeOffset? start = null,
+        DateTimeOffset? end = null,
         int? recordId = null,
         bool skipRangeProgress = false
     )
@@ -138,8 +138,8 @@ public class GetRangeDaysStatisticUseCase(
     }
 
     private RangeStatisticsData MakeRangeStatisticDatas(
-        DateTime start,
-        DateTime end,
+        DateTimeOffset start,
+        DateTimeOffset end,
         List<Period> periods,
         List<Minute> minutes,
         List<Session> sessions,
