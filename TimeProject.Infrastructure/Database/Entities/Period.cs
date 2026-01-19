@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using TimeProject.Domain.Entities;
-using TimeProject.Infrastructure.Database.Entities.Shared;
+﻿using TimeProject.Domain.Entities;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 

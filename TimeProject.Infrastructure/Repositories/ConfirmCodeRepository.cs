@@ -12,27 +12,17 @@ public class ConfirmCodeRepository(CustomDbContext db) : IConfirmCodeRepository
 {
     public IConfirmCode Create(IConfirmCode entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-
-        var confirmCode = (ConfirmCode)entity;
-        confirmCode.CreatedAt = now;
-        confirmCode.UpdatedAt = now;
-
-        db.ConfirmCodes.Add(confirmCode);
+        db.ConfirmCodes.Add((ConfirmCode)entity);
         db.SaveChanges();
         return entity;
     }
 
     public IConfirmCode Update(IConfirmCode entity)
     {
-        var confirmCode = (ConfirmCode)entity;
-        confirmCode.UpdatedAt = DateTime.Now.ToUniversalTime();
-
-        db.ConfirmCodes.Update(confirmCode);
+        db.ConfirmCodes.Update((ConfirmCode)entity);
         db.SaveChanges();
         return entity;
     }
-
 
     public IConfirmCode? FindByIdAndEmail(string id, string email)
     {

@@ -2,7 +2,7 @@
 
 public interface IPrice
 {
-    int Id { get; set; }
+    int PriceId { get; set; }
     int? ProjectId { get; set; }
     int? RecordId { get; set; }
     int UserId { get; set; }

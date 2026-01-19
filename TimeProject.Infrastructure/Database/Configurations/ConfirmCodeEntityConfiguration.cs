@@ -17,8 +17,6 @@ public class ConfirmCodeEntityConfiguration : IEntityTypeConfiguration<ConfirmCo
         builder.Property(e => e.WasSent).HasColumnName("was_sent");
         builder.Property(e => e.UserId).HasColumnName("user_id");
         builder.Property(e => e.Type).HasColumnName("type");
-        builder.Property(e => e.CreatedAt).HasColumnName("created_at");
-        builder.Property(e => e.UpdatedAt).HasColumnName("updated_at");
         builder.HasOne<User>(e => e.User).WithMany().HasForeignKey(e => e.UserId);
     }
 }
