@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TimeProject.APIs.Controllers.Shared;
 using TimeProject.Domain.Entities;
@@ -10,7 +11,8 @@ namespace TimeProject.APIs.Controllers;
 
 [ApiController]
 [Route("minutes")]
-public class TimeMinuteController(
+[Authorize(Policy = "IsActive")]
+public class MinuteController(
     ICreateMinuteByListUseCase createMinuteByListUseCase,
     IDeleteMinuteUseCase deleteMinuteUseCase) : CustomController
 {

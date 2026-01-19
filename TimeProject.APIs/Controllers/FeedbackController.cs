@@ -15,7 +15,7 @@ public class FeedbackController(
     ISendPublicFeedbackUseCase sendPublicFeedbackUseCase) : CustomController
 {
     [HttpPost]
-    [Authorize]
+    [Authorize(Policy = "IsActive")]
     [UserChallenge]
     public ActionResult<bool> Send(FeedbackDto feedbackDto)
     {
