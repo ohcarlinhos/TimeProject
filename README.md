@@ -1,6 +1,8 @@
 # Time Project
-Esse projeto se trata de um projeto antigo que se chamava "Registra meu tempo aí!", um produto que desenvolvi no ano de 2024/2025 que hoje está aberto de forma pública.
+Esse projeto se trata de uma ferramenta que desenvolvi chamada "Registra meu tempo aí!", no ano de 2024/2025 que hoje está com o código aberto de como "portfólio".
 
-Por se tratar de um projeto médio o utilizo como referência e para testes de conceitos.
+Volta e meia estou o utilizando para estudos, e por isso há uma grande chance de algo estar quebrado caso tente dar um "run".
 
-Utilize como quiser!
+Tirando isso, caso tenha algum interesse em baixar, fique à vontade. Há um script para gerar o banco de dados (PostgreSQL) em algum lugar dentro do projeto de infra.
+
+Tenha uma boa vida!
