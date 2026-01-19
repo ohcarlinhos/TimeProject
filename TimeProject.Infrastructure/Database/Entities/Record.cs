@@ -17,5 +17,5 @@ public class Record : IRecord
     
     public IEnumerable<Period>? Periods { get; set; }
     public Category? Category { get; set; }
-    public RecordResume? Meta { get; set; }
+    public RecordResume? Resume { get; set; }
 }

@@ -33,8 +33,7 @@ public class PeriodRepository(CustomDbContext db) : IPeriodRepository
 
     public IList<IPeriod> CreateByList(IList<IPeriod> entities)
     {
-        var list = entities.OfType<Period>().ToList();
-        db.Periods.AddRange(list);
+        db.Periods.AddRange(entities.OfType<Period>());
         db.SaveChanges();
         return entities;
     }

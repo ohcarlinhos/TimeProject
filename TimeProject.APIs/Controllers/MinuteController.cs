@@ -17,10 +17,10 @@ public class MinuteController(
     IDeleteMinuteUseCase deleteMinuteUseCase) : CustomController
 {
     [HttpPost]
-    [Route("list/{id:int}")]
-    public ActionResult<IList<IMinute>> Create([FromBody] CreateMinuteListDto dto, int id)
+    [Route("list")]
+    public ActionResult<IList<IMinute>> Create([FromBody] CreateMinuteListDto dto)
     {
-        var result = createMinuteByListUseCase.Handle(dto, id, UserClaimsUtil.Id(User));
+        var result = createMinuteByListUseCase.Handle(dto, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);
         return HandleResponse(result);
     }

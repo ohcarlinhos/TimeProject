@@ -22,6 +22,6 @@ public class RecordResumeEntityConfiguration : IEntityTypeConfiguration<RecordRe
                 v => v.HasValue ? v.Value.ToUniversalTime() : v);
         builder.Property(e => e.UserId).HasColumnName("user_id");
 
-        builder.HasOne<Record>().WithOne(e => e.Meta).HasForeignKey<RecordResume>(e => e.RecordId);
+        builder.HasOne<Record>().WithOne(e => e.Resume).HasForeignKey<RecordResume>(e => e.RecordId);
     }
 }

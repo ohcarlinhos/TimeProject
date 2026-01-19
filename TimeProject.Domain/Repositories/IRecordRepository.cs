@@ -11,7 +11,7 @@ public interface IRecordRepository
     IRecord Update(IRecord entity);
     bool Delete(IRecord entity);
     IRecord? FindById(int id, int userId);
-    IList<IRecord> FindByIdList(IList<int> idList, int userId);
+    IEnumerable<IRecord> FindByIdList(IEnumerable<int> idList, int userId);
     IRecord? FindByCode(string code, int userId);
     IRecord? Details(string code, int userId);
 }

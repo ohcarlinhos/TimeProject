@@ -13,8 +13,8 @@ public class UserMapDataUtil(IMapper mapper) : IUserMapDataUtil
         return mapper.Map<IUser, UserOutDto>(entity);
     }
 
-    public IList<IUserOutDto> Handle(IList<IUser> entity)
+    public IEnumerable<IUserOutDto> Handle(IEnumerable<IUser> entity)
     {
-        return mapper.Map<IList<IUser>, List<IUserOutDto>>(entity);
+        return mapper.Map<IEnumerable<IUser>, IEnumerable<IUserOutDto>>(entity);
     }
 }

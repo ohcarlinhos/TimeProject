@@ -5,9 +5,8 @@ namespace TimeProject.Infrastructure.ObjectValues.Periods;
 
 public class PeriodOutDto : IPeriodOutDto
 {
-    public int Id { get; set; }
-    public int RecordId { get; set; }
-    public DateTime Start { get; set; }
-    public DateTime End { get; set; }
+    public int PeriodId { get; set; }
+    public DateTimeOffset Start { get; set; }
+    public DateTimeOffset End { get; set; }
     public string FormattedTime => TimeFormatUtil.StringFromTimeSpan(End.Subtract(Start));
 }

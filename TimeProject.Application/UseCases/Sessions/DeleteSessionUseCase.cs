@@ -17,16 +17,16 @@ public class DeleteSessionUseCase(
     public ICustomResult<bool> Handle(int id, int userId)
     {
         var result = new CustomResult<bool>();
-        var entity = (Session)repository.FindById(id, userId);
+        var entity = repository.FindById(id, userId);
 
         if (entity == null)
             return result.SetError(SessionMessageErrors.NotFound);
 
-        periodRepository.DeleteByList(entity.Periods as IList<IPeriod>);
-        var recordId = entity.RecordId;
-
+        var periods = ((Session)entity).Periods;
+        periodRepository.DeleteByList((periods as IList<IPeriod>)!);
         repository.Delete(entity);
 
+        var recordId = entity.RecordId;
         if (recordId != null)
             syncRecordResumeUseCase.Handle((int)recordId);
 

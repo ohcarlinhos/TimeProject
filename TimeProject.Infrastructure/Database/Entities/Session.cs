@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using TimeProject.Domain.Entities;
+﻿using TimeProject.Domain.Entities;
 using TimeProject.Domain.Entities.Enums;
-using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
@@ -17,5 +15,5 @@ public class Session : ISession
 
     public Record? Record { get; set; }
     public Category? Category { get; set; }
-    public IList<Period>? Periods { get; set; }
+    public IEnumerable<Period>? Periods { get; set; }
 }

@@ -7,5 +7,5 @@ namespace TimeProject.Infrastructure.Utils.Interfaces;
 public interface IUserMapDataUtil
 {
     IUserOutDto Handle(IUser entity);
-    IList<IUserOutDto> Handle(IList<IUser> entity);
+    IEnumerable<IUserOutDto> Handle(IEnumerable<IUser> entity);
 }

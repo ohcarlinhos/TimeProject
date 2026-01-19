@@ -6,7 +6,6 @@ namespace TimeProject.Domain.Dtos.Records;
 public interface IRecordOutDto
 {
     int RecordId { get; set; }
-    int UserId { get; set; }
     string? Name { get; set; }
     string? Description { get; set; }
     string Code { get; set; }
@@ -14,5 +13,5 @@ public interface IRecordOutDto
     ICategoryOutDto? Category { get; set; }
     string? CategoryName { get; }
     int? CategoryId { get; set; }
-    IRecordResume? Meta { get; set; }
+    IRecordResume? Resume { get; set; }
 }

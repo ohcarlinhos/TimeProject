@@ -9,7 +9,7 @@ using TimeProject.Infrastructure.Utils;
 namespace TimeProject.APIs.Controllers;
 
 [ApiController]
-[Route("api/feedbacks")]
+[Route("feedbacks")]
 public class FeedbackController(
     ISendFeedbackUseCase sendFeedbackUseCase,
     ISendPublicFeedbackUseCase sendPublicFeedbackUseCase) : CustomController

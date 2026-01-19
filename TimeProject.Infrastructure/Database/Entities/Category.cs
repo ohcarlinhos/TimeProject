@@ -4,9 +4,9 @@ using TimeProject.Infrastructure.Database.Entities.Shared;
 
 namespace TimeProject.Infrastructure.Database.Entities;
 
-[Table("categories")]
-public class Category : WithOwnerEntity, ICategory
+public class Category : ICategory
 {
-    [Column("category_id")] public int CategoryId { get; set; }
-    [Column("name")] public string Name { get; set; } = string.Empty;
+    public int CategoryId { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public int UserId { get; set; }
 }

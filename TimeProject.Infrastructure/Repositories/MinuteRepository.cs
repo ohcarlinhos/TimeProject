@@ -10,32 +10,16 @@ public class MinuteRepository(CustomDbContext db) : IMinuteRepository
 {
     public IMinute Create(IMinute entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-
-        var mr = (Minute)entity;
-        mr.CreatedAt = now;
-        mr.UpdatedAt = now;
-
-        db.Minutes.Add(mr);
+        db.Minutes.Add((Minute)entity);
         db.SaveChanges();
-        return mr;
+        return entity;
     }
 
     public IList<IMinute> CreateByList(IList<IMinute> entities)
     {
-        var now = DateTime.Now.ToUniversalTime();
-        var list = entities as IList<Minute> ?? new List<Minute>();
-
-        foreach (var mr in list)
-        {
-            mr.CreatedAt = now;
-            mr.UpdatedAt = now;
-        }
-
-        db.Minutes.AddRange(list);
+        db.Minutes.AddRange(entities.OfType<Minute>());
         db.SaveChanges();
-
-        return (list as IList<IMinute>)!;
+        return entities;
     }
 
     public IMinute? FindById(int id, int userId)

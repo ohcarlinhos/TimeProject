@@ -52,7 +52,7 @@ public class PeriodCutUtilTests
 
         #region Act
 
-        var result = periodCutUtil.Handle(list, initDate, endDate);
+        var result = periodCutUtil.Handle(list, initDate, endDate).ToList();
 
         #endregion
 

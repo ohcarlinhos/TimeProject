@@ -54,25 +54,16 @@ public class CategoryRepository(CustomDbContext db) : ICategoryRepository
 
     public ICategory Create(ICategory entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-        var category = (Category)entity;
-
-        category.CreatedAt = now;
-        category.UpdatedAt = now;
-
-        db.Categories.Add(category);
+        db.Categories.Add((Category)entity);
         db.SaveChanges();
-        return category;
+        return entity;
     }
 
     public ICategory Update(ICategory entity)
     {
-        var category = (Category)entity;
-        category.UpdatedAt = DateTime.Now.ToUniversalTime();
-
-        db.Categories.Update(category);
+        db.Categories.Update((Category)entity);
         db.SaveChanges();
-        return category;
+        return entity;
     }
 
     public bool Delete(ICategory entity)

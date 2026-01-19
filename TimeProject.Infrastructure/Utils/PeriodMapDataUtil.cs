@@ -1,19 +1,21 @@
 using AutoMapper;
 using TimeProject.Domain.Entities;
 using TimeProject.Domain.Dtos.Periods;
+using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Infrastructure.ObjectValues.Periods;
 using TimeProject.Infrastructure.Utils.Interfaces;
 
 namespace TimeProject.Infrastructure.Utils;
 
 public class PeriodMapDataUtil(IMapper mapper) : IPeriodMapDataUtil
 {
-    public IPeriodOutDto Handle(IPeriod entity)
+    public PeriodOutDto Handle(Period entity)
     {
-        return mapper.Map<IPeriod, IPeriodOutDto>(entity);
+        return mapper.Map<Period, PeriodOutDto>(entity);
     }
 
-    public IList<IPeriodOutDto> Handle(IList<IPeriod> entity)
+    public IEnumerable<PeriodOutDto> Handle(IEnumerable<Period> entity)
     {
-        return mapper.Map<IList<IPeriod>, IList<IPeriodOutDto>>(entity);
+        return mapper.Map<IEnumerable<Period>, IEnumerable<PeriodOutDto>>(entity);
     }
 }

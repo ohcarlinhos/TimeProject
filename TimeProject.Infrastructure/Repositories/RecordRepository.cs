@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TimeProject.Domain.Entities;
 using TimeProject.Infrastructure.Database.Entities;
@@ -44,12 +45,12 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
                 : query.OrderByDescending(record => record.Code),
 
             "timeOnSeconds" => paginationQuery.Sort == "asc"
-                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.Seconds)
-                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.Seconds),
+                ? query.OrderBy(record => record.Resume == null).ThenBy(record => record.Resume!.Seconds)
+                : query.OrderBy(record => record.Resume == null).ThenByDescending(record => record.Resume!.Seconds),
 
             _ => paginationQuery.Sort == "asc" // Padrão: Último Progresso
-                ? query.OrderBy(record => record.Meta == null).ThenBy(record => record.Meta!.LastDate)
-                : query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastDate)
+                ? query.OrderBy(record => record.Resume == null).ThenBy(record => record.Resume!.LastDate)
+                : query.OrderBy(record => record.Resume == null).ThenByDescending(record => record.Resume!.LastDate)
         };
 
 
@@ -57,7 +58,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             .Skip((paginationQuery.Page - 1) * paginationQuery.PerPage)
             .Take(paginationQuery.PerPage)
             .Include(r => r.Category)
-            .Include(r => r.Meta)
+            .Include(r => r.Resume)
             .ToList();
 
         return new IndexRepositoryResult<IRecord>
@@ -75,7 +76,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
         if (string.IsNullOrEmpty(search) == false)
             query = SearchWhereConditional(query, search);
 
-        query = query.OrderBy(record => record.Meta == null).ThenByDescending(record => record.Meta!.LastDate);
+        query = query.OrderBy(record => record.Resume == null).ThenByDescending(record => record.Resume!.LastDate);
 
         return query
             .Select(e => new SearchRecordItem(e.RecordId, e.Code, e.Name))
@@ -102,7 +103,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
     {
         return db.Records
             .Include(r => r.Category)
-            .Include(r => r.Meta)
+            .Include(r => r.Resume)
             .FirstOrDefault(record => record.Code == code && record.UserId == userId);
     }
 
@@ -119,12 +120,11 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
             .FirstOrDefault(record => record.RecordId == id && record.UserId == userId);
     }
 
-    public IList<IRecord> FindByIdList(IList<int> idList, int userId)
+    public IEnumerable<IRecord> FindByIdList(IEnumerable<int> idList, int userId)
     {
         return db.Records.Where(e => idList.Contains(e.RecordId))
-            .Include(e => e.Category)
-            .Include(e => e.Meta)
-            .ToList<IRecord>();
+                .Include(e => e.Category)
+                .Include(e => e.Resume);
     }
 
     public IRecord? FindByCode(string code, int userId)

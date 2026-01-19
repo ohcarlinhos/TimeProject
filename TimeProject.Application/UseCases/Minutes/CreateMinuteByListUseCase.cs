@@ -11,34 +11,60 @@ using TimeProject.Infrastructure.Errors;
 namespace TimeProject.Application.UseCases.Minutes;
 
 public class CreateMinuteByListUseCase(
-    IMinuteRepository mrRepository,
+    IMinuteRepository minuteRepository,
     IRecordRepository recordRepository,
+    ICategoryRepository categoryRepository,
     IUserRepository userRepository,
     ISyncRecordResumeUseCase syncRecordResumeUseCase
 ) : ICreateMinuteByListUseCase
 {
-    public ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int recordId, int userId)
+    public ICustomResult<IList<IMinute>> Handle(ICreateMinuteListDto dto, int userId)
     {
         var result = new CustomResult<IList<IMinute>>();
         IList<IMinute> list = [];
 
+        if (dto.RecordId == null && dto.CategoryId == null)
+        {
+            return result.SetError(MinuteMessageErrors.Required);
+        }
+        
         var user = userRepository.FindById(userId);
-        if (user is null) return result.SetError(RecordMessageErrors.NotFound);
+        if (user is null) return result.SetError(UserMessageErrors.NotFound);
 
-        var record = recordRepository.FindById(recordId, userId);
-        if (record is null) return result.SetError(RecordMessageErrors.NotFound);
+        if (dto.RecordId != null)
+        {
+            var record = recordRepository.FindById((int)dto.RecordId, userId);
+            if (record is null) return result.SetError(RecordMessageErrors.NotFound);
 
-        foreach (var minutes in dto.Minutes)
-            list.Add(new Minute
-            {
-                UserId = userId,
-                RecordId = recordId,
-                Total = minutes,
-                Date = dto.Date
-            });
+            foreach (var minutes in dto.Minutes)
+                list.Add(new Minute
+                {
+                    UserId = userId,
+                    RecordId = dto.RecordId,
+                    Total = minutes,
+                    Date = dto.Date
+                });
+        }
+        else if (dto.CategoryId != null)
+        {
+            var category = categoryRepository.FindById((int)dto.CategoryId, userId);
+            if (category is null) return result.SetError(CategoryMessageErrors.NotFound);
 
-        var data = mrRepository.CreateByList(list);
-        syncRecordResumeUseCase.Handle(recordId);
+            foreach (var minutes in dto.Minutes)
+                list.Add(new Minute
+                {
+                    UserId = userId,
+                    CategoryId = dto.CategoryId,
+                    Total = minutes,
+                    Date = dto.Date
+                });
+        }
+
+        var data = minuteRepository.CreateByList(list);
+        if (dto.RecordId != null)
+        {
+            syncRecordResumeUseCase.Handle((int)dto.RecordId);
+        }
 
         return result.SetData(data);
     }

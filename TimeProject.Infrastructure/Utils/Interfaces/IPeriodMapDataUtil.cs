@@ -1,11 +1,10 @@
-using TimeProject.Domain.Entities;
-using TimeProject.Domain.Dtos.Periods;
 using TimeProject.Infrastructure.Database.Entities;
+using TimeProject.Infrastructure.ObjectValues.Periods;
 
 namespace TimeProject.Infrastructure.Utils.Interfaces;
 
 public interface IPeriodMapDataUtil
 {
-    public IPeriodOutDto Handle(IPeriod entity);
-    public IList<IPeriodOutDto> Handle(IList<IPeriod> entity);
+    public PeriodOutDto Handle(Period entity);
+    public IEnumerable<PeriodOutDto> Handle(IEnumerable<Period> entity);
 }

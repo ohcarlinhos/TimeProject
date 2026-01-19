@@ -7,8 +7,6 @@ namespace TimeProject.Infrastructure.ObjectValues.Records;
 public class RecordOutDto : IRecordOutDto
 {
     public int RecordId { get; set; }
-    public int UserId { get; set; }
-
     public string? Name { get; set; }
     public string? Description { get; set; }
     public string Code { get; set; } = string.Empty;
@@ -18,5 +16,5 @@ public class RecordOutDto : IRecordOutDto
     public string? CategoryName => Category?.Name;
     public int? CategoryId { get; set; }
 
-    public IRecordResume? Meta { get; set; }
+    public IRecordResume? Resume { get; set; }
 }
