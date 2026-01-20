@@ -42,12 +42,12 @@ public class GetRangeDaysStatisticUseCase(
         var minutes = new List<Minute>();
         var sessions = new List<Session>();
 
-        var startDate = start.AddDays(1);
+        var dayOnRange = start.AddDays(1);
 
-        while (startDate < end)
+        while (dayOnRange < end)
         {
-            daysFromRange.Add(startDate);
-            startDate = startDate.AddDays(1);
+            daysFromRange.Add(dayOnRange);
+            dayOnRange = dayOnRange.AddDays(1);
         }
 
         daysFromRange.Add(end);
@@ -62,6 +62,7 @@ public class GetRangeDaysStatisticUseCase(
             minutes.AddRange(result.Minutes.OfType<Minute>());
             sessions.AddRange(result.Sessions.OfType<Session>());
             daysStatistics.Add((RangeStatistic)result.Statistic);
+            
             if (result.Statistic.TotalInMinutes > 0) activeDaysCount++;
         }
 
@@ -119,6 +120,7 @@ public class GetRangeDaysStatisticUseCase(
             .GetTimeMinutesByRange(userId, initDate, endDate, recordId).OfType<Minute>().ToList();
 
         var records = new List<Record>();
+        
         if (recordId == null && !skipRangeProgress)
         {
             var trIdList = new List<int>();
