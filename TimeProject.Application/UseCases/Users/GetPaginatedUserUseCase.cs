@@ -18,11 +18,12 @@ public class GetPaginatedUserUseCase(
     {
         var data = mapper.Handle(userRepository.Index(paginationQuery));
         var totalItems = userRepository.GetTotalItems(paginationQuery);
-        var lastAccess = userAccessLogRepository.GetLastAccessByUserIdList(data.Select(e => e.Id).ToList());
+        var lastAccess = userAccessLogRepository
+            .GetLastAccessByUserIdList(data.Select(e => e.UserId).ToList());
 
         foreach (var user in data)
         {
-            var lastUserAccess = lastAccess?.FirstOrDefault(e => e.UserId == user.Id);
+            var lastUserAccess = lastAccess?.FirstOrDefault(e => e.UserId == user.UserId);
             if (lastUserAccess is null) continue;
 
             user.LastAccess = lastUserAccess.AccessedAt;

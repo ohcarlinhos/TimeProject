@@ -37,7 +37,7 @@ public class CategoryController(
     }
 
     [HttpPost]
-    public ActionResult<ICategory> Create([FromBody] CategoryDto dto)
+    public ActionResult<ICategoryOutDto> Create([FromBody] CategoryDto dto)
     {
         var result =  createCategoryUseCase.Handle(dto, UserClaimsUtil.Id(User));
         result.ActionName = nameof(Create);

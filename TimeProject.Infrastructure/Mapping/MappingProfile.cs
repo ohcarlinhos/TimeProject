@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using TimeProject.Domain.Dtos.Categories;
+using TimeProject.Domain.Dtos.Codes;
+using TimeProject.Domain.Dtos.Records;
 using TimeProject.Domain.Dtos.Users;
 using TimeProject.Infrastructure.Database.Entities;
 using TimeProject.Infrastructure.ObjectValues.Categories;
@@ -18,8 +21,13 @@ public class MappingProfile : Profile
         CreateMap<Record, RecordOutDto>();
         CreateMap<Period, PeriodOutDto>();
         CreateMap<Category, CategoryOutDto>();
+        CreateMap<Category, ICategoryOutDto>()
+            .ConstructUsing(src => new CategoryOutDto());
         CreateMap<RecordHistoryDay, RecordHistoryDayOutDto>();
         CreateMap<Session, SessionOutDto>();
         CreateMap<ConfirmCode, ConfirmCodeOutDto>();
+        CreateMap<RecordResume, RecordResumeOutDto>();
+        CreateMap<RecordResume, IRecordResumeOutDto>()
+            .ConstructUsing(src => new RecordResumeOutDto());
     }
 }

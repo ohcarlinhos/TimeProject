@@ -6,5 +6,5 @@ namespace TimeProject.Domain.UseCases.Categories;
 
 public interface ICreateCategoryUseCase
 {
-    ICustomResult<ICategory> Handle(ICategoryDto dto, int userId);
+    ICustomResult<ICategoryOutDto> Handle(ICategoryDto dto, int userId);
 }

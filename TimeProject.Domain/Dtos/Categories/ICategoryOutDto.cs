@@ -2,6 +2,6 @@
 
 public interface ICategoryOutDto
 {
-    int Id { get; set; }
+    int CategoryId { get; set; }
     string Name { get; set; }
 }

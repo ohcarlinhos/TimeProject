@@ -5,7 +5,7 @@ namespace TimeProject.Domain.Dtos.Users;
 
 public interface IUserOutDto
 {
-    int Id { get; set; }
+    int UserId { get; set; }
     string Name { get; set; }
     string Email { get; set; }
     UserRoleType UserRoleType { get; set; }
