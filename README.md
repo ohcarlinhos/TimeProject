@@ -1,8 +1,8 @@
-# Time Project
-Esse projeto se trata de uma ferramenta que desenvolvi no ano de 2024/2025 chamada "Registra meu tempo aí!", e que hoje está como um repositório aberto, uma espécie de "portfólio".
+# Esse projeto...
+Esse projeto se trata de uma ferramenta "ativa" de 2024 até 2025 chamada "Registra meu tempo aí!", que hoje está como um repositório aberto, ou caso ache melhor, uma espécie de "portfólio".
 
-Volta e meia estou o utilizando como projeto de testes, uma espécie de laboratório, um projeto que possa ser quebrado e destruído. Considerando isso, há uma grande chance de algo estar quebrado e ocorra alguns erros ao tentar roda-lo (se rodar, *\*risos\**).
+Volta e meia estrago tudo para fazer alguns testes, ou seja, esse projeto é utilizado como laboratório, um projeto que possa ser quebrado e destruído. Considerando isso, há uma grande chance de algo estar quebrado e ocorra alguns erros ao tentar roda-lo (se rodar).
 
-Tendo isso em mente, caso tenha algum interesse em baixar, fique à vontade. Há um script para gerar o banco de dados (PostgreSQL) em algum lugar dentro do projeto de infraestrutura.
+Tendo isso em mente, caso tenha algum interesse em executa-lo, fique à vontade (há um docker configurado).
 
-Tenha uma boa vida!
+Boa sorte, e tenha uma ótima vida!
