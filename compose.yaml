@@ -1,0 +1,35 @@
+﻿services:
+  postgres:
+    image: postgres:latest
+    container_name: timeproject_postgres
+    environment:
+      POSTGRES_DB: TimeProjectDb
+      POSTGRES_USER: tp_admin
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/scripts:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U tp_admin -d TimeProjectDb" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  apis:
+    image: timeproject.apis
+    container_name: timeproject_apis
+    build:
+      context: .
+      dockerfile: TimeProject.APIs/Dockerfile
+    ports:
+      - "5050:8080"
+      - "5051:8081"
+    environment:
+      - ConnectionStrings__DataBase=Host=postgres;Port=5432;Database=TimeProjectDb;User Id=tp_admin;Password=12345678;
+#      - ASPNETCORE_ENVIRONMENT=Production
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
