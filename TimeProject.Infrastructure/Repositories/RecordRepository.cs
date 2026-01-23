@@ -23,6 +23,7 @@ public class RecordRepository(CustomDbContext db) : IRecordRepository
         if (paginationQuery.Filters != null)
             foreach (var filter in paginationQuery.Filters)
             {
+                if (string.IsNullOrEmpty(filter)) continue;
                 var split = filter.Split("::");
 
                 if (split[0] == "category")
