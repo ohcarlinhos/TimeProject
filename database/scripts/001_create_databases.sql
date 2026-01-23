@@ -1,14 +1,14 @@
-﻿drop table if exists minutes;
-drop table if exists periods;
-drop table if exists sessions;
-drop table if exists record_resumes;
-drop table if exists records;
-drop table if exists categories;
-drop table if exists confirm_codes;
-drop table if exists user_access_logs;
-drop table if exists user_providers;
-drop table if exists user_passwords;
-drop table if exists users;
+﻿-- drop table if exists minutes;
+-- drop table if exists periods;
+-- drop table if exists sessions;
+-- drop table if exists record_resumes;
+-- drop table if exists records;
+-- drop table if exists categories;
+-- drop table if exists confirm_codes;
+-- drop table if exists user_access_logs;
+-- drop table if exists user_providers;
+-- drop table if exists user_passwords;
+-- drop table if exists users;
 
 /* functions */
 create or replace function update_timestamp()
@@ -134,7 +134,7 @@ execute procedure update_timestamp();
 create table if not exists categories
 (
     category_id serial,
-    name        varchar(20) not null,
+    name        varchar(64) not null,
     user_id     int         not null,
     created_at  timestamptz not null default now(),
     updated_at  timestamptz not null default now(),
