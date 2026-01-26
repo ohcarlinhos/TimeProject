@@ -132,7 +132,7 @@ BEGIN
 FOR usuario IN SELECT user_id FROM users WHERE is_active = true ORDER BY user_id
     LOOP
         -- Gerar entre 500-2000 minutes por usuário
-        PERFORM gerar_minutes_usuario(usuario.user_id, 800, 3000);
+        PERFORM gerar_minutes_usuario(usuario.user_id, 300, 1000);
 END LOOP;
     
 RAISE NOTICE 'Todos os minutes foram gerados com sucesso!';
