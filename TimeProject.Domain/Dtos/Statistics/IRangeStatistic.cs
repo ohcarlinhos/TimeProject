@@ -6,7 +6,7 @@ public interface IRangeStatistic
     DateTimeOffset EndDay { get; set; }
     string TotalHours { get; set; }
     string AverageHours { get; set; }
-    string IsolatedPeriodHours { get; set; }
+    string ManualPeriodHours { get; set; }
     double TotalInHours { get; set; }
     double TotalInMinutes { get; set; }
     double AverageInHours { get; set; }
@@ -20,7 +20,7 @@ public interface IRangeStatistic
     string MinuteHours { get; set; }
     TimeSpan TotalTimeSpan { get; set; }
     TimeSpan MinutesTimeSpan { get; set; }
-    TimeSpan IsolatedPeriodsTimeSpan { get; set; }
+    TimeSpan ManualPeriodsTimeSpan { get; set; }
     TimeSpan SessionsTimeSpan { get; set; }
     int TimerCount { get; set; }
     int PomodoroCount { get; set; }

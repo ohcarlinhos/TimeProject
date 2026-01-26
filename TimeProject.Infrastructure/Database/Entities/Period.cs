@@ -6,7 +6,7 @@ public class Period : IPeriod
 {
     public int PeriodId { get; set; }
     public DateTimeOffset Start { get; set; }
-    public DateTimeOffset End { get; set; }
+    public DateTimeOffset? End { get; set; }
     public int? RecordId { get; set; }
     public int? SessionId { get; set; }
     public int? CategoryId { get; set; }

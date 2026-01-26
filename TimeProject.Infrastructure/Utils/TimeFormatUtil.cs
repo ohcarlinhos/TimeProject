@@ -23,8 +23,9 @@ public static class TimeFormatUtil
         var total = TimeSpan.Zero;
 
         return periods
+            .Where(e => e.End.HasValue)
             .Aggregate(total, (current, period) =>
-                current.Add(period.End.Subtract(period.Start)));
+                current.Add(period.End!.Value.Subtract(period.Start)));
     }
 
     public static TimeSpan TimeSpanFromMinutes(IEnumerable<IMinute>? timeMinutes)

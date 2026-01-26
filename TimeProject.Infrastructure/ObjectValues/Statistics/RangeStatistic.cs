@@ -9,7 +9,7 @@ public class RangeStatistic : IRangeStatistic
 
     public string TotalHours { get; set; } = "";
     public string AverageHours { get; set; } = "";
-    public string IsolatedPeriodHours { get; set; } = "";
+    public string ManualPeriodHours { get; set; } = "";
 
     public double TotalInHours { get; set; } = 0;
     public double TotalInMinutes { get; set; } = 0;
@@ -28,7 +28,7 @@ public class RangeStatistic : IRangeStatistic
 
     public TimeSpan TotalTimeSpan { get; set; }
     public TimeSpan MinutesTimeSpan { get; set; }
-    public TimeSpan IsolatedPeriodsTimeSpan { get; set; }
+    public TimeSpan ManualPeriodsTimeSpan { get; set; }
     public TimeSpan SessionsTimeSpan { get; set; }
 
     public int TimerCount { get; set; }

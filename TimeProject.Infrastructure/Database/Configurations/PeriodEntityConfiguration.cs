@@ -14,7 +14,9 @@ public class PeriodEntityConfiguration : IEntityTypeConfiguration<Period>
         builder.Property(e => e.Start).HasColumnName("start_period")
             .HasConversion(v => v.ToUniversalTime(), v => v.ToUniversalTime());
         builder.Property(e => e.End).HasColumnName("end_period")
-            .HasConversion(v => v.ToUniversalTime(), v => v.ToUniversalTime());
+            .HasConversion(
+                v => v.HasValue ? v.Value.ToUniversalTime() : v,
+                v => v.HasValue ? v.Value.ToUniversalTime() : v);
         builder.Property(e => e.RecordId).HasColumnName("record_id");
         builder.Property(e => e.SessionId).HasColumnName("session_id");
         builder.Property(e => e.CategoryId).HasColumnName("category_id");

@@ -161,7 +161,7 @@ public class GetRangeDaysStatisticUseCaseTests
 
         data.TotalHours.Should().Be("2h 55m 15s");
 
-        data.IsolatedPeriodHours.Should().Be("40m 10s");
+        data.ManualPeriodHours.Should().Be("40m 10s");
         data.TimerHours.Should().Be("1h 35m");
         data.PomodoroHours.Should().Be("25m");
         data.BreakHours.Should().Be("15m 5s");
