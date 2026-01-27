@@ -1,0 +1,56 @@
+﻿using TimeProject.Domain.Repositories;
+using TimeProject.Infrastructure.Database;
+
+namespace TimeProject.Infrastructure.Repositories;
+
+public class UnitOfWork(
+    CustomDbContext db,
+    IUserRepository userRepository,
+    IUserPasswordRepository userPasswordRepository,
+    IUserProviderRepository userProviderRepository,
+    IUserAccessLogRepository userAccessLogRepository,
+    IConfirmCodeRepository confirmCodeRepository,
+    ICategoryRepository categoryRepository,
+    ISessionRepository sessionRepository,
+    IRecordRepository recordRepository,
+    IRecordResumeRepository recordResumeRepository,
+    IRecordHistoryRepository recordHistoryRepository,
+    IPeriodRepository periodRepository,
+    IMinuteRepository minuteRepository,
+    IStatisticRepository statisticRepository)
+    : IUnitOfWork, IDisposable, IAsyncDisposable
+{
+    public IUserRepository UserRepository { get; } = userRepository;
+    public IUserPasswordRepository UserPasswordRepository { get; } = userPasswordRepository;
+    public IUserProviderRepository UserProviderRepository { get; } = userProviderRepository;
+    public IUserAccessLogRepository UserAccessLogRepository { get; } = userAccessLogRepository;
+    public IConfirmCodeRepository IConfirmCodeRepository { get; } = confirmCodeRepository;
+    public ICategoryRepository CategoryRepository { get; } = categoryRepository;
+    public ISessionRepository SessionRepository { get; } = sessionRepository;
+    public IRecordRepository RecordRepository { get; } = recordRepository;
+    public IRecordResumeRepository RecordResumeRepository { get; } = recordResumeRepository;
+    public IRecordHistoryRepository RecordHistoryRepository { get; } = recordHistoryRepository;
+    public IPeriodRepository PeriodRepository { get; } = periodRepository;
+    public IMinuteRepository MinuteRepository { get; } = minuteRepository;
+    public IStatisticRepository StatisticRepository { get; } = statisticRepository;
+
+    public void SaveChanges()
+    {
+        db.SaveChanges();
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await db.SaveChangesAsync();
+    }
+
+    public void Dispose()
+    {
+        db.Dispose();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await db.DisposeAsync();
+    }
+}

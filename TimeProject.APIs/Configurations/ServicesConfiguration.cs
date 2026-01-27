@@ -59,6 +59,8 @@ public static class ServicesConfiguration
         builder.Services.AddSingleton(provider => provider.GetRequiredService<IOptions<TelegramSettings>>().Value);
         builder.Services.AddSingleton(provider => provider.GetRequiredService<IOptions<TurnstileSettings>>().Value);
 
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
         #endregion
 
         #region Maps
