@@ -10,10 +10,7 @@ public class UserProviderRepository(CustomDbContext db) : IUserProviderRepositor
 {
     public IUserProvider Create(IUserProvider entity)
     {
-        var now = DateTime.Now.ToUniversalTime();
-
         db.UserProviders.Add((UserProvider)entity);
-        db.SaveChanges();
         return entity;
     }
 
@@ -23,7 +20,6 @@ public class UserProviderRepository(CustomDbContext db) : IUserProviderRepositor
         if (entity == null) return true;
 
         db.UserProviders.Remove((UserProvider)entity);
-        db.SaveChanges();
         return true;
     }
 

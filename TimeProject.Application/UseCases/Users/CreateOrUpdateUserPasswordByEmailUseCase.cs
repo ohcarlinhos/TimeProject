@@ -7,28 +7,31 @@ using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class CreateOrUpdateUserPasswordByEmailUseCase(IUserPasswordRepository repository, IUserRepository userRepository)
+public class CreateOrUpdateUserPasswordByEmailUseCase(IUnitOfWork unitOfWork)
     : ICreateOrUpdateUserPasswordByEmailUseCase
 {
     public ICustomResult<bool> Handle(string email, string password)
     {
         var result = new CustomResult<bool>();
-        var user = userRepository.FindByEmail(email);
+        var user = unitOfWork.UserRepository.FindByEmail(email);
 
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
 
-        var userPassword = repository.FindByUserId((int)user.UserId!);
+        var userPassword = unitOfWork.UserPasswordRepository.FindByUserId(user.UserId);
 
         if (userPassword != null)
         {
             userPassword.Password = BCrypt.Net.BCrypt.HashPassword(password);
-            repository.Update(userPassword);
+            unitOfWork.UserPasswordRepository.Update(userPassword);
         }
         else
         {
-            repository.Create(new UserPassword { Password = BCrypt.Net.BCrypt.HashPassword(password) });
+            unitOfWork.UserPasswordRepository
+                .Create(new UserPassword { Password = BCrypt.Net.BCrypt.HashPassword(password) });
         }
+
+        unitOfWork.SaveChanges();
 
         result.Data = true;
         return result;

@@ -5,7 +5,7 @@ namespace TimeProject.Domain.UseCases.Users;
 
 public interface ICreateOrUpdateUserPasswordUseCase
 {
-    public ICustomResult<bool> Handle(int userId, ICreatePasswordDto dto);
-    public ICustomResult<bool> Handle(int userId, IUpdatePasswordDto dto);
-    public ICustomResult<bool> Handle(int userId, IUpdateByAdminPasswordDto dto);
+    public ICustomResult<bool> Handle(int userId, ICreatePasswordDto dto, bool saveChanges = true);
+    public ICustomResult<bool> Handle(int userId, IUpdatePasswordDto dto, bool saveChanges = true);
+    public ICustomResult<bool> Handle(int userId, IUpdateByAdminPasswordDto dto, bool saveChanges = true);
 }

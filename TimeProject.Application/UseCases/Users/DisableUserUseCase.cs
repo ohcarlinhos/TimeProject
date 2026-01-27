@@ -8,21 +8,21 @@ using TimeProject.Infrastructure.ObjectValues.Users;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class DisableUserUseCase(IUserRepository repository) : IDisableUserUseCase
+public class DisableUserUseCase(IUnitOfWork unitOfWork) : IDisableUserUseCase
 {
     public ICustomResult<bool> Handle(int id, IDisableUserDto dto)
     {
         var result = new CustomResult<bool>();
-        var user = repository.FindById(id);
+        var user = unitOfWork.UserRepository.FindById(id);
 
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
 
         user.IsActive = dto.IsActive;
-        repository.Update(user);
+        unitOfWork.UserRepository.Update(user);
+        unitOfWork.SaveChanges();
 
         result.Data = user.IsActive;
-
         return result;
     }
 }

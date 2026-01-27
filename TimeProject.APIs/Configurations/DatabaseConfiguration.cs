@@ -10,8 +10,8 @@ public static class DatabaseConfiguration
         builder.Services.AddEntityFrameworkNpgsql()
             .AddDbContext<CustomDbContext>(options => options
                 .UseNpgsql(
-                    builder.Configuration.GetConnectionString("DataBase"),
-                    b => b.MigrationsAssembly("TimeProject.APIs")
+                    builder.Configuration.GetConnectionString("DataBase")
+                    // b => b.MigrationsAssembly("TimeProject.APIs")
                 )
             );
     }

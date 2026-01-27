@@ -13,9 +13,8 @@ using TimeProject.Infrastructure.ObjectValues.Users;
 namespace TimeProject.Application.UseCases.Users;
 
 public class CreateUserUseCase(
-    IUserRepository repository,
+    IUnitOfWork unitOfWork,
     IUserMapDataUtil mapper,
-    // IHookHandler hookHandler,
     IJwtHandler jwtHandler,
     ICreateOrUpdateUserPasswordUseCase createUserPasswordUseCase
 ) : ICreateUserUseCase
@@ -23,20 +22,25 @@ public class CreateUserUseCase(
     public ICustomResult<ICreateUserResult> Handle(ICreateUserDto dto)
     {
         var result = new CustomResult<ICreateUserResult>();
-        var emailAvailable = repository.EmailIsAvailable(dto.Email);
+        var emailAvailable = unitOfWork.UserRepository.EmailIsAvailable(dto.Email);
 
         if (emailAvailable == false) return result.SetError(UserMessageErrors.EmailAlreadyInUse);
 
-        var entity = repository
-            .Create(new User
-            {
-                Name = dto.Name,
-                Email = dto.Email,
-                Timezone = dto.Timezone
-            });
+        var entity = unitOfWork.UserRepository.Create(new User
+        {
+            Name = dto.Name,
+            Email = dto.Email,
+            Timezone = dto.Timezone
+        });
 
-        createUserPasswordUseCase.Handle(entity.UserId, new CreatePasswordDto { Password = dto.Password });
+        unitOfWork.SaveChanges();
 
+        createUserPasswordUseCase.Handle(entity.UserId,
+            new CreatePasswordDto { Password = dto.Password },
+            saveChanges: false);
+
+        unitOfWork.SaveChanges();
+        
         result.Data = new CreateUserResult
         {
             User = mapper.Handle(entity),

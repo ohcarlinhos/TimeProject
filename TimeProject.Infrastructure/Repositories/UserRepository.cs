@@ -41,14 +41,12 @@ public class UserRepository(CustomDbContext db) : IUserRepository
     {
         var user = (User)entity;
         db.Users.Add(user);
-        db.SaveChanges();
         return user;
     }
 
     public IUser Update(IUser entity)
     {
         db.Users.Update((User)entity);
-        db.SaveChanges();
         return entity;
     }
 
@@ -56,9 +54,7 @@ public class UserRepository(CustomDbContext db) : IUserRepository
     {
         var entity = FindById(id);
         if (entity == null) return true;
-
         db.Users.Remove((User)entity);
-        db.SaveChanges();
         return true;
     }
 

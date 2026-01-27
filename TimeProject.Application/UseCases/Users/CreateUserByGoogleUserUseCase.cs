@@ -9,33 +9,32 @@ using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class CreateUserByGoogleUserUseCase(
-    IUserRepository repository,
-    IUserProviderRepository userProviderRepository
-) : ICreateUserByGoogleUserUseCase
+public class CreateUserByGoogleUserUseCase(IUnitOfWork unitOfWork) : ICreateUserByGoogleUserUseCase
 {
     public ICustomResult<IUser> Handle(ICreateUserOAtuhDto dto, string email)
     {
         var result = new CustomResult<IUser>();
 
-        if (string.IsNullOrEmpty(dto.UserProviderId)) 
+        if (string.IsNullOrEmpty(dto.UserProviderId))
             return result.SetError(UserMessageErrors.OAuthWithoutProviderId);
 
-        var userWithEmail = repository.FindByEmail(email);
+        var userWithEmail = unitOfWork.UserRepository.FindByEmail(email);
 
         if (userWithEmail != null)
         {
-            userProviderRepository.Create(new UserProvider
+            unitOfWork.UserProviderRepository.Create(new UserProvider
             {
                 UserId = userWithEmail.UserId,
                 Provider = "google",
                 ExternalId = dto.UserProviderId
             });
 
+            unitOfWork.SaveChanges();
+
             return result.SetData(userWithEmail);
         }
 
-        var userEntity = repository
+        var userEntity = unitOfWork.UserRepository
             .Create(new User
             {
                 Name = dto.Name,
@@ -43,12 +42,16 @@ public class CreateUserByGoogleUserUseCase(
                 Timezone = ""
             });
 
-        userProviderRepository.Create(new UserProvider
+        unitOfWork.SaveChanges();
+
+        unitOfWork.UserProviderRepository.Create(new UserProvider
         {
-            UserId = (int)userEntity.UserId!,
+            UserId = userEntity.UserId,
             Provider = "google",
             ExternalId = dto.UserProviderId
         });
+
+        unitOfWork.SaveChanges();
 
         return result.SetData(userEntity);
     }

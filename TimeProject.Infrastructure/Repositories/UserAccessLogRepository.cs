@@ -12,7 +12,6 @@ public class UserAccessLogRepository(CustomDbContext db) : IUserAccessLogReposit
     {
         entity.AccessedAt = DateTime.Now.ToUniversalTime();
         db.UserAccessLogs.Add((UserAccessLog)entity);
-        db.SaveChanges();
         return entity;
     }
 

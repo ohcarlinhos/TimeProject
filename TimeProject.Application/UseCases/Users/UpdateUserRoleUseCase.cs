@@ -10,12 +10,12 @@ using TimeProject.Infrastructure.Errors;
 
 namespace TimeProject.Application.UseCases.Users;
 
-public class UpdateUserRoleUseCase(IUserRepository repository, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
+public class UpdateUserRoleUseCase(IUnitOfWork unitOfWork, IUserMapDataUtil mapper) : IUpdateUserRoleUseCase
 {
     public ICustomResult<IUserOutDto> Handle(int id, IUpdateRoleDto dto)
     {
         var result = new CustomResult<IUserOutDto>();
-        var user = repository.FindById(id);
+        var user = unitOfWork.UserRepository.FindById(id);
 
         if (user == null)
             return result.SetError(UserMessageErrors.NotFound);
@@ -25,7 +25,8 @@ public class UpdateUserRoleUseCase(IUserRepository repository, IUserMapDataUtil 
 
         user.UserRole = (UserRoleType)userRole;
 
-        var entity = repository.Update(user);
+        var entity = unitOfWork.UserRepository.Update(user);
+        unitOfWork.SaveChanges();
         result.Data = mapper.Handle(entity);
         return result;
     }
