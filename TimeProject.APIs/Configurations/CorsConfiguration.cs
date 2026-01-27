@@ -2,11 +2,13 @@
 
 public static class CorsConfiguration
 {
-    public static void AddCorsConfiguration(this WebApplicationBuilder builder, string customCors)
+    public static IServiceCollection AddCorsConfiguration(this IServiceCollection services, string customCors)
     {
-        builder.Services.AddCors(options =>
+        services.AddCors(options =>
         {
             options.AddPolicy(customCors, policy => { policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
         });
+
+        return services;
     }
 }

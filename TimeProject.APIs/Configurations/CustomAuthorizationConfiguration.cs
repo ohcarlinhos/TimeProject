@@ -7,11 +7,11 @@ namespace TimeProject.APIs.Configurations;
 
 public static class CustomAuthorizationConfiguration
 {
-    public static void AddCustomAuthorizationConfiguration(this WebApplicationBuilder builder)
+    public static IServiceCollection AddCustomAuthorizationConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSettings = builder.Configuration.GetRequiredSection("JwtSettings").Get<JwtSettings>();
+        var jwtSettings = configuration.GetRequiredSection("JwtSettings").Get<JwtSettings>();
 
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(bearerOptions =>
         {
             bearerOptions.TokenValidationParameters = new TokenValidationParameters
@@ -23,10 +23,12 @@ public static class CustomAuthorizationConfiguration
             };
         });
         
-        builder.Services.AddAuthorizationBuilder()
+        services.AddAuthorizationBuilder()
             .AddPolicy("IsAdmin", cp =>
                 cp.RequireClaim("IsAdmin", "True"))
             .AddPolicy("IsActive", cp =>
                 cp.RequireClaim("IsActive", "True"));
+
+        return services;
     }
 }

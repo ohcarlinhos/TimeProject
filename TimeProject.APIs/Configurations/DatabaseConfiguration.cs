@@ -5,14 +5,15 @@ namespace TimeProject.APIs.Configurations;
 
 public static class DatabaseConfiguration
 {
-    public static void AddDatabaseConfig(this WebApplicationBuilder builder)
+    public static IServiceCollection AddDatabaseConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        builder.Services.AddEntityFrameworkNpgsql()
+        services.AddEntityFrameworkNpgsql()
             .AddDbContext<CustomDbContext>(options => options
                 .UseNpgsql(
-                    builder.Configuration.GetConnectionString("PostgresConnection")
+                    configuration.GetConnectionString("PostgresConnection")
                     // b => b.MigrationsAssembly("TimeProject.APIs")
                 )
             );
+        return services;
     }
 }

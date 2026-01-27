@@ -43,203 +43,205 @@ namespace TimeProject.APIs.Configurations;
 
 public static class ServicesConfiguration
 {
-    public static void AddServicesConfig(this WebApplicationBuilder builder)
+    public static IServiceCollection AddServicesConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         #region Settings
 
-        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-        builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
+        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+        services.Configure<SmtpSettings>(configuration.GetSection("Smtp"));
 
-        builder.Services.Configure<TelegramSettings>(builder.Configuration.GetSection("Telegram"));
-        builder.Services.Configure<TurnstileSettings>(builder.Configuration.GetSection("Turnstile"));
+        services.Configure<TelegramSettings>(configuration.GetSection("Telegram"));
+        services.Configure<TurnstileSettings>(configuration.GetSection("Turnstile"));
 
-        builder.Services.AddSingleton(provider => provider.GetRequiredService<IOptions<JwtSettings>>().Value);
-        builder.Services.AddSingleton(provider => provider.GetRequiredService<IOptions<SmtpSettings>>().Value);
+        services.AddSingleton(provider => provider.GetRequiredService<IOptions<JwtSettings>>().Value);
+        services.AddSingleton(provider => provider.GetRequiredService<IOptions<SmtpSettings>>().Value);
 
-        builder.Services.AddSingleton(provider => provider.GetRequiredService<IOptions<TelegramSettings>>().Value);
-        builder.Services.AddSingleton(provider => provider.GetRequiredService<IOptions<TurnstileSettings>>().Value);
+        services.AddSingleton(provider => provider.GetRequiredService<IOptions<TelegramSettings>>().Value);
+        services.AddSingleton(provider => provider.GetRequiredService<IOptions<TurnstileSettings>>().Value);
 
-        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         #endregion
 
         #region Maps
 
-        builder.Services.AddAutoMapper(typeof(MappingProfile));
+        services.AddAutoMapper(typeof(MappingProfile));
 
         #endregion
 
         #region Integrations
 
-        builder.Services.AddScoped<ICustomSmtp, CustomSmtp>();
-        builder.Services.AddSingleton<ICustomBot, CustomBot>();
-        builder.Services.AddSingleton<IUserChallenge, UserChallenge>();
+        services.AddScoped<ICustomSmtp, CustomSmtp>();
+        services.AddSingleton<ICustomBot, CustomBot>();
+        services.AddSingleton<IUserChallenge, UserChallenge>();
 
         #endregion
 
         #region Handlers
 
-        builder.Services.AddScoped<IEmailHandler, EmailHandler>();
-        builder.Services.AddScoped<IHookHandler, HookHandler>();
+        services.AddScoped<IEmailHandler, EmailHandler>();
+        services.AddScoped<IHookHandler, HookHandler>();
 
         #endregion
 
         #region Jwt
 
-        builder.Services.AddSingleton<IJwtHandler, JwtHandler>();
+        services.AddSingleton<IJwtHandler, JwtHandler>();
 
         #endregion
 
         #region User
 
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
-        builder.Services.AddScoped<IUserPasswordRepository, UserPasswordRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserPasswordRepository, UserPasswordRepository>();
 
-        builder.Services.AddScoped<IUserMapDataUtil, UserMapDataUtil>();
-        builder.Services.AddScoped<IUpdateUserOptions, UpdateUserOptions>();
+        services.AddScoped<IUserMapDataUtil, UserMapDataUtil>();
+        services.AddScoped<IUpdateUserOptions, UpdateUserOptions>();
 
-        builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
-        builder.Services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
-        builder.Services.AddScoped<ICreateUserByGhUserUseCase, CreateUserByGhUserUseCase>();
-        builder.Services.AddScoped<ICreateUserByGoogleUserUseCase, CreateUserByGoogleUserUseCase>();
-        builder.Services.AddScoped<IUpdateUserRoleUseCase, UpdateUserRoleUseCase>();
-        builder.Services
+        services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
+        services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+        services.AddScoped<ICreateUserByGhUserUseCase, CreateUserByGhUserUseCase>();
+        services.AddScoped<ICreateUserByGoogleUserUseCase, CreateUserByGoogleUserUseCase>();
+        services.AddScoped<IUpdateUserRoleUseCase, UpdateUserRoleUseCase>();
+        services
             .AddScoped<ICreateOrUpdateUserPasswordByEmailUseCase, CreateOrUpdateUserPasswordByEmailUseCase>();
-        builder.Services.AddScoped<IDisableUserUseCase, DisableUserUseCase>();
-        builder.Services.AddScoped<IGetUserUseCase, GetUserUseCase>();
-        builder.Services.AddScoped<IGetUserByEmailUseCase, GetUserByEmailUseCase>();
-        builder.Services.AddScoped<IGetUserPasswordByEmailUseCase, GetUserPasswordByEmailUseCase>();
-        builder.Services.AddScoped<IGetUserByOAtuhProviderIdUseCase, GetUserByOAtuhProviderIdUseCase>();
-        builder.Services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
-        builder.Services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();
-        // builder.Services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();
+        services.AddScoped<IDisableUserUseCase, DisableUserUseCase>();
+        services.AddScoped<IGetUserUseCase, GetUserUseCase>();
+        services.AddScoped<IGetUserByEmailUseCase, GetUserByEmailUseCase>();
+        services.AddScoped<IGetUserPasswordByEmailUseCase, GetUserPasswordByEmailUseCase>();
+        services.AddScoped<IGetUserByOAtuhProviderIdUseCase, GetUserByOAtuhProviderIdUseCase>();
+        services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
+        services.AddScoped<IGetPaginatedUserUseCase, GetPaginatedUserUseCase>();
+        // services.AddScoped<ISetIsVerifiedUserUseCase, SetIsVerifiedUserUseCase>();
 
-        builder.Services.AddScoped<ICreateOrUpdateUserPasswordUseCase, CreateOrUpdateUserPasswordUseCase>();
+        services.AddScoped<ICreateOrUpdateUserPasswordUseCase, CreateOrUpdateUserPasswordUseCase>();
 
         #endregion
 
         #region Auth
 
-        builder.Services.AddScoped<ILoginUseCase, LoginUseCase>();
-        builder.Services.AddScoped<ISendRecoveryEmailUseCase, SendRecoveryEmailUseCase>();
-        builder.Services.AddScoped<IRecoveryPasswordUseCase, RecoveryPasswordUseCase>();
-        builder.Services.AddScoped<ISendRegisterEmailUseCase, SendRegisterEmailUseCase>();
-        // builder.Services.AddScoped<IVerifyUserUseCase, VerifyUserUseCase>();
+        services.AddScoped<ILoginUseCase, LoginUseCase>();
+        services.AddScoped<ISendRecoveryEmailUseCase, SendRecoveryEmailUseCase>();
+        services.AddScoped<IRecoveryPasswordUseCase, RecoveryPasswordUseCase>();
+        services.AddScoped<ISendRegisterEmailUseCase, SendRegisterEmailUseCase>();
+        // services.AddScoped<IVerifyUserUseCase, VerifyUserUseCase>();
 
         #endregion
 
         #region OAuth
 
-        builder.Services.AddScoped<IUserProviderRepository, UserProviderRepository>();
-        builder.Services.AddScoped<ILoginGithubUseCase, LoginGithubUseCase>();
-        builder.Services.AddScoped<ILoginGoogleUseCase, LoginGoogleUseCase>();
+        services.AddScoped<IUserProviderRepository, UserProviderRepository>();
+        services.AddScoped<ILoginGithubUseCase, LoginGithubUseCase>();
+        services.AddScoped<ILoginGoogleUseCase, LoginGoogleUseCase>();
 
         #endregion
 
         #region Records
 
-        builder.Services.AddScoped<IRecordRepository, RecordRepository>();
-        builder.Services.AddScoped<IRecordResumeRepository, RecordResumeRepository>();
-        builder.Services.AddScoped<IRecordHistoryRepository, RecordHistoryRepository>();
+        services.AddScoped<IRecordRepository, RecordRepository>();
+        services.AddScoped<IRecordResumeRepository, RecordResumeRepository>();
+        services.AddScoped<IRecordHistoryRepository, RecordHistoryRepository>();
 
-        builder.Services.AddScoped<IRecordMapDataUtil, RecordMapDataUtil>();
+        services.AddScoped<IRecordMapDataUtil, RecordMapDataUtil>();
 
-        builder.Services.AddScoped<IGetRecordHistoryUseCase, GetRecordHistoryUseCase>();
+        services.AddScoped<IGetRecordHistoryUseCase, GetRecordHistoryUseCase>();
 
-        builder.Services.AddScoped<IGetPaginatedRecordUseCase, GetPaginatedRecordUseCase>();
-        builder.Services.AddScoped<IGetRecordByCodeUseCase, GetRecordByCodeUseCase>();
-        builder.Services.AddScoped<IGetRecordByIdUseCase, GetRecordByIdUseCase>();
-        builder.Services.AddScoped<ICreateRecordUseCase, CreateRecordUseCase>();
-        builder.Services.AddScoped<IUpdateRecordUseCase, UpdateRecordUseCase>();
-        builder.Services.AddScoped<IDeleteRecordUseCase, DeleteRecordUseCase>();
-        builder.Services.AddScoped<ISearchRecordUseCase, SearchRecordUseCase>();
+        services.AddScoped<IGetPaginatedRecordUseCase, GetPaginatedRecordUseCase>();
+        services.AddScoped<IGetRecordByCodeUseCase, GetRecordByCodeUseCase>();
+        services.AddScoped<IGetRecordByIdUseCase, GetRecordByIdUseCase>();
+        services.AddScoped<ICreateRecordUseCase, CreateRecordUseCase>();
+        services.AddScoped<IUpdateRecordUseCase, UpdateRecordUseCase>();
+        services.AddScoped<IDeleteRecordUseCase, DeleteRecordUseCase>();
+        services.AddScoped<ISearchRecordUseCase, SearchRecordUseCase>();
 
-        builder.Services.AddScoped<ISyncRecordResumeUseCase, SyncRecordResumeUseCase>();
-        builder.Services.AddScoped<ISyncAllRecordResumeUseCase, SyncAllRecordResumeUseCase>();
+        services.AddScoped<ISyncRecordResumeUseCase, SyncRecordResumeUseCase>();
+        services.AddScoped<ISyncAllRecordResumeUseCase, SyncAllRecordResumeUseCase>();
 
         #endregion
 
         #region TimerSession
 
-        builder.Services.AddScoped<ISessionRepository, SessionRepository>();
-        builder.Services.AddScoped<IDeleteSessionUseCase, DeleteSessionUseCase>();
+        services.AddScoped<ISessionRepository, SessionRepository>();
+        services.AddScoped<IDeleteSessionUseCase, DeleteSessionUseCase>();
 
         #endregion
 
         #region Period
 
-        builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
+        services.AddScoped<IPeriodRepository, PeriodRepository>();
 
-        builder.Services.AddScoped<IPeriodMapDataUtil, PeriodMapDataUtil>();
-        builder.Services.AddScoped<IPeriodCutUtil, PeriodCutUtil>();
-        builder.Services.AddScoped<IPeriodValidateUtil, PeriodValidateUtil>();
+        services.AddScoped<IPeriodMapDataUtil, PeriodMapDataUtil>();
+        services.AddScoped<IPeriodCutUtil, PeriodCutUtil>();
+        services.AddScoped<IPeriodValidateUtil, PeriodValidateUtil>();
 
-        builder.Services.AddScoped<IGetPaginatedPeriodUseCase, GetPaginatedPeriodUseCase>();
-        builder.Services.AddScoped<ICreatePeriodByListUseCase, CreatePeriodByListUseCase>();
-        builder.Services.AddScoped<ICreatePeriodUseCase, CreatePeriodUseCase>();
-        builder.Services.AddScoped<IUpdatePeriodUseCase, UpdatePeriodUseCase>();
-        builder.Services.AddScoped<IDeletePeriodUseCase, DeletePeriodUseCase>();
+        services.AddScoped<IGetPaginatedPeriodUseCase, GetPaginatedPeriodUseCase>();
+        services.AddScoped<ICreatePeriodByListUseCase, CreatePeriodByListUseCase>();
+        services.AddScoped<ICreatePeriodUseCase, CreatePeriodUseCase>();
+        services.AddScoped<IUpdatePeriodUseCase, UpdatePeriodUseCase>();
+        services.AddScoped<IDeletePeriodUseCase, DeletePeriodUseCase>();
 
         #endregion
 
         #region Category
 
-        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-        builder.Services.AddScoped<ICategoryMapDataUtil, CategoryMapDataUtil>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ICategoryMapDataUtil, CategoryMapDataUtil>();
 
-        builder.Services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
-        builder.Services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
-        builder.Services.AddScoped<IGetAllCategoryUseCase, GetAllCategoryUseCase>();
-        builder.Services.AddScoped<IGetPaginatedCategoryUseCase, GetPaginatedCategoryUseCase>();
-        builder.Services.AddScoped<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
+        services.AddScoped<ICreateCategoryUseCase, CreateCategoryUseCase>();
+        services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
+        services.AddScoped<IGetAllCategoryUseCase, GetAllCategoryUseCase>();
+        services.AddScoped<IGetPaginatedCategoryUseCase, GetPaginatedCategoryUseCase>();
+        services.AddScoped<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
 
         #endregion
 
         #region Code
 
-        builder.Services.AddScoped<IConfirmCodeRepository, ConfirmCodeRepository>();
+        services.AddScoped<IConfirmCodeRepository, ConfirmCodeRepository>();
 
-        builder.Services.AddScoped<ICreateConfirmCodeUseCase, CreateConfirmCodeUseCase>();
-        builder.Services.AddScoped<IValidateConfirmCodeUseCase, ValidateConfirmCodeUseCase>();
-        builder.Services.AddScoped<ISetIsUsedConfirmCodeUseCase, SetIsUsedConfirmCodeUseCase>();
-        builder.Services.AddScoped<ISetWasSentConfirmCodeUseCase, SetWasSentConfirmCodeUseCase>();
-        builder.Services.AddScoped<IGetRegisterCodeInfoUseCase, GetRegisterCodeInfoUseCase>();
+        services.AddScoped<ICreateConfirmCodeUseCase, CreateConfirmCodeUseCase>();
+        services.AddScoped<IValidateConfirmCodeUseCase, ValidateConfirmCodeUseCase>();
+        services.AddScoped<ISetIsUsedConfirmCodeUseCase, SetIsUsedConfirmCodeUseCase>();
+        services.AddScoped<ISetWasSentConfirmCodeUseCase, SetWasSentConfirmCodeUseCase>();
+        services.AddScoped<IGetRegisterCodeInfoUseCase, GetRegisterCodeInfoUseCase>();
 
         #endregion
 
         #region Statistics
 
-        builder.Services.AddScoped<IStatisticRepository, StatisticRepository>();
-        builder.Services.AddScoped<IGetRangeDaysStatisticUseCase, GetRangeDaysStatisticUseCase>();
+        services.AddScoped<IStatisticRepository, StatisticRepository>();
+        services.AddScoped<IGetRangeDaysStatisticUseCase, GetRangeDaysStatisticUseCase>();
 
         #endregion
 
         #region Feedback
 
-        builder.Services.AddScoped<ISendFeedbackUseCase, SendFeedbackUseCase>();
-        builder.Services.AddScoped<ISendPublicFeedbackUseCase, SendPublicFeedbackUseCase>();
+        services.AddScoped<ISendFeedbackUseCase, SendFeedbackUseCase>();
+        services.AddScoped<ISendPublicFeedbackUseCase, SendPublicFeedbackUseCase>();
 
         #endregion
 
         #region TimeMinute
 
-        builder.Services.AddScoped<IMinuteRepository, MinuteRepository>();
-        builder.Services.AddScoped<ICreateMinuteByListUseCase, CreateMinuteByListUseCase>();
-        builder.Services.AddScoped<IDeleteMinuteUseCase, DeleteMinuteUseCase>();
+        services.AddScoped<IMinuteRepository, MinuteRepository>();
+        services.AddScoped<ICreateMinuteByListUseCase, CreateMinuteByListUseCase>();
+        services.AddScoped<IDeleteMinuteUseCase, DeleteMinuteUseCase>();
 
         #endregion
 
         #region Logs
 
-        builder.Services.AddScoped<IUserAccessLogRepository, UserAccessLogRepository>();
-        builder.Services.AddScoped<ICreateUserAccessLogUseCase, CreateUserAccessLogUseCase>();
+        services.AddScoped<IUserAccessLogRepository, UserAccessLogRepository>();
+        services.AddScoped<ICreateUserAccessLogUseCase, CreateUserAccessLogUseCase>();
 
         #endregion
 
         #region Middlewares
 
-        builder.Services.AddSingleton<UserChallengeMiddleware>();
+        services.AddSingleton<UserChallengeMiddleware>();
 
         #endregion
+
+        return services;
     }
 }
