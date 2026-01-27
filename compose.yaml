@@ -24,10 +24,10 @@
       context: .
       dockerfile: TimeProject.APIs/Dockerfile
     ports:
-      - "5050:8080"
-      - "5051:8081"
+      - 5050:8080
+      - 5051:8081
     environment:
-      - ConnectionStrings__DataBase=Host=postgres;Port=5432;Database=TimeProjectDb;User Id=tp_admin;Password=12345678;
+      - ConnectionStrings__PostgresConnection=Host=postgres;Port=5432;Database=TimeProjectDb;User Id=tp_admin;Password=12345678;
 #      - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
       postgres:

@@ -10,7 +10,7 @@ public static class DatabaseConfiguration
         builder.Services.AddEntityFrameworkNpgsql()
             .AddDbContext<CustomDbContext>(options => options
                 .UseNpgsql(
-                    builder.Configuration.GetConnectionString("DataBase")
+                    builder.Configuration.GetConnectionString("PostgresConnection")
                     // b => b.MigrationsAssembly("TimeProject.APIs")
                 )
             );
